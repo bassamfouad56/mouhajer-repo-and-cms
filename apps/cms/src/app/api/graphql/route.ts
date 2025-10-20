@@ -6,17 +6,20 @@ import { typeDefs } from '@/graphql/schema';
 import { resolvers } from '@/graphql/resolvers';
 import { createContext, GraphQLContext } from '@/graphql/context';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const server = new ApolloServer<GraphQLContext>({
   typeDefs,
   resolvers,
-  introspection: true, // Enable introspection for playground
-  plugins: [
-    // Enable Apollo Sandbox in development
-    ApolloServerPluginLandingPageLocalDefault({
-      embed: true,
-      includeCookies: true,
-    }),
-  ],
+  introspection: !isProduction, // disable in production
+  plugins: isProduction
+    ? []
+    : [
+        ApolloServerPluginLandingPageLocalDefault({
+          embed: true,
+          includeCookies: true,
+        }),
+      ],
 });
 
 const handler = startServerAndCreateNextHandler<NextRequest, GraphQLContext>(
