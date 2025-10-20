@@ -1,11 +1,9 @@
-"use client";
-import React, { useRef, useState } from "react";
-import Engineer1 from "../public/images/333333.jpg";
-import ViewOne from "../public/images/333333.jpg";
-import EngineerDiscussion from "../public/images/333333.jpg";
-import RightArrowCircle from "./SVG/RightArrowCircle";
-import TwoImagesCarousel from "./TwoImagesCarousel";
-import { useLocale } from "next-intl";
+'use client';
+import React, { useRef, useState } from 'react';
+import { ABOUT_IMAGES } from '@/lib/cms-images';
+import RightArrowCircle from './SVG/RightArrowCircle';
+import TwoImagesCarousel from './TwoImagesCarousel';
+import { useLocale } from 'next-intl';
 
 type Props = {
   gallery?: any[];
@@ -19,15 +17,14 @@ type Props = {
 const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp }: Props) => {
   const localeFromHook = useLocale();
   const local = localeProp || localeFromHook;
-  
+
   // Use CMS gallery images or fallback to default images
-  const carouselImages = gallery.length > 0 
-    ? gallery.map(img => img.url || img)
-    : [Engineer1, ViewOne, EngineerDiscussion, ViewOne];
-  
+  const carouselImages = gallery.length > 0 ? gallery.map((img) => img.url || img) : ABOUT_IMAGES;
+
   // Use CMS stats or fallback to defaults
   const yearsOfExperience = stats?.years || '22';
-  const experienceLabel = stats?.label || (local === 'en' ? 'Years of experience' : 'عاماً من الخبرة');
+  const experienceLabel =
+    stats?.label || (local === 'en' ? 'Years of experience' : 'عاماً من الخبرة');
   const [toggleSecondImage, setToggleSecondImage] = useState(0);
   const nextSlide = useRef(null);
   const previousSlide = useRef(null);
@@ -41,7 +38,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               previousSlide={previousSlide}
               nextSlide={nextSlide}
               height="h-[50rem] "
-              width={"w-[36rem]"}
+              width={'w-[36rem]'}
               img={carouselImages.slice(0, 4)}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
@@ -52,7 +49,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               previousSlide={previousSlide}
               nextSlide={nextSlide}
               height="h-[50rem]"
-              width={"w-[50rem]"}
+              width={'w-[50rem]'}
               img={carouselImages.slice(1, 5)}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
@@ -63,8 +60,8 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               previousSlide={previousSlide}
               nextSlide={nextSlide}
               height="h-[38rem]"
-              width={"w-[40rem]"}
-              img={[Engineer1, EngineerDiscussion, ViewOne, ViewOne, ViewOne]}
+              width={'w-[40rem]'}
+              img={ABOUT_IMAGES}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
             />
@@ -74,14 +71,8 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               previousSlide={previousSlide}
               nextSlide={nextSlide}
               height="h-[20rem]"
-              width={"w-[24rem]"}
-              img={[
-                EngineerDiscussion,
-                EngineerDiscussion,
-                ViewOne,
-                ViewOne,
-                ViewOne,
-              ]}
+              width={'w-[24rem]'}
+              img={ABOUT_IMAGES}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
             />
@@ -108,9 +99,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
         </div>
         <div className="absolute right-[50%] translate-x-[-100%] top-[59rem] ">
           <div
-            className={`w-full flex items-center gap-5 ${
-              local === "en" ? "" : "flex-row-reverse"
-            }`}
+            className={`w-full flex items-center gap-5 ${local === 'en' ? '' : 'flex-row-reverse'}`}
           >
             <p className="font-SchnyderS font-light text-7xl text-black">{yearsOfExperience}</p>
             <p className="font-Satoshi text-base font-normal max-w-[94px] text-start uppercase">
@@ -125,8 +114,8 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             previousSlide={previousSlide}
             nextSlide={nextSlide}
             height="h-full"
-            width={"w-full"}
-            img={[EngineerDiscussion, ViewOne, ViewOne, ViewOne]}
+            width={'w-full'}
+            img={ABOUT_IMAGES}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
           />
@@ -136,7 +125,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             previousSlide={previousSlide}
             nextSlide={nextSlide}
             height="h-full"
-            width={"w-full"}
+            width={'w-full'}
             img={[Engineer1, EngineerDiscussion, ViewOne, ViewOne, ViewOne]}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
@@ -146,8 +135,8 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               previousSlide={previousSlide}
               nextSlide={nextSlide}
               height="h-full"
-              width={"w-full"}
-              img={[Engineer1, EngineerDiscussion, ViewOne, ViewOne, ViewOne]}
+              width={'w-full'}
+              img={ABOUT_IMAGES}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
             />
@@ -158,7 +147,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             previousSlide={previousSlide}
             nextSlide={nextSlide}
             height="h-full"
-            width={"w-full"}
+            width={'w-full'}
             img={[Engineer1, EngineerDiscussion, ViewOne, ViewOne, ViewOne]}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
@@ -176,14 +165,14 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
                 setToggleSecondImage(toggleSecondImage - 1);
               }}
             >
-              <RightArrowCircle width={"38"} height={"28.39"} />
+              <RightArrowCircle width={'38'} height={'28.39'} />
             </div>
             <div
               ref={nextSlide}
               className="next-el"
               onClick={() => setToggleSecondImage(toggleSecondImage + 1)}
             >
-              <RightArrowCircle width={"38"} height={"28.39"} />
+              <RightArrowCircle width={'38'} height={'28.39'} />
             </div>
           </div>
         </div>

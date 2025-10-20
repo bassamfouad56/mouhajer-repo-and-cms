@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import ProjectsLinkImage from '../public/images/333333.jpg';
+import { PROJECT_IMAGES } from '@/lib/cms-images';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
@@ -98,7 +98,7 @@ const HeroBanner = ({
           </video>
         ) : (
           <Image
-            src={heroImage || HomeBannerIamge || ProjectsLinkImage}
+            src={heroImage || HomeBannerIamge || PROJECT_IMAGES.arumaila}
             alt={title || 'Mouhajer International Design - Luxury Interior Design in Dubai'}
             fill
             className="absolute w-full h-full object-cover"

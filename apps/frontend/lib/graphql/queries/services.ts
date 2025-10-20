@@ -1,5 +1,36 @@
 import { gql } from '@apollo/client';
 
+// String version for server-side fetching
+export const GET_SERVICES_STRING = `
+  query GetServices($filter: ServiceFilterInput, $limit: Int, $offset: Int) {
+    services(filter: $filter, limit: $limit, offset: $offset) {
+      services {
+        id
+        titleEn
+        titleAr
+        slugEn
+        slugAr
+        descriptionEn
+        descriptionAr
+        shortDescriptionEn
+        shortDescriptionAr
+        icon
+        images
+        featuresEn
+        featuresAr
+        price
+        duration
+        featured
+        status
+        createdAt
+        updatedAt
+      }
+      total
+      hasMore
+    }
+  }
+`;
+
 export const GET_SERVICES = gql`
   query GetServices($filter: ServiceFilterInput, $limit: Int, $offset: Int) {
     services(filter: $filter, limit: $limit, offset: $offset) {

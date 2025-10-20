@@ -1,5 +1,6 @@
 import { queryGraphQL } from './graphql/server-client';
 import { GET_PROJECTS, GET_BLOG_POSTS, GET_SETTINGS } from './graphql/queries/homepage';
+import { GET_SERVICES_STRING } from './graphql/queries/services';
 import type { Project, BlogPost, Settings, Media, Service } from './cms-types';
 
 // Transform flat GraphQL response to nested structure
@@ -42,6 +43,25 @@ function transformSettings(settings: any): Settings {
   };
 }
 
+function transformService(service: any): Service {
+  return {
+    id: service.id,
+    title: { en: service.titleEn, ar: service.titleAr },
+    slug: { en: service.slugEn, ar: service.slugAr },
+    description: { en: service.descriptionEn, ar: service.descriptionAr },
+    shortDescription: { en: service.shortDescriptionEn, ar: service.shortDescriptionAr },
+    icon: service.icon,
+    images: service.images || [],
+    features: { en: service.featuresEn || [], ar: service.featuresAr || [] },
+    price: service.price,
+    duration: service.duration,
+    featured: service.featured,
+    status: service.status,
+    createdAt: service.createdAt,
+    updatedAt: service.updatedAt,
+  };
+}
+
 export const graphqlClient = {
   async getProjects(featured?: boolean, category?: string, limit?: number): Promise<Project[]> {
     const data = await queryGraphQL({
@@ -74,9 +94,23 @@ export const graphqlClient = {
     return transformSettings(data.settings);
   },
 
-  async getServices(): Promise<Service[]> {
-    // Services endpoint - return empty array for now
-    return [];
+  async getServices(featured?: boolean, status?: string, limit?: number): Promise<Service[]> {
+    try {
+      const data = await queryGraphQL({
+        query: GET_SERVICES_STRING,
+        variables: {
+          filter: {
+            featured,
+            status: status || 'published'
+          },
+          limit
+        },
+      });
+      return (data.services?.services || []).map(transformService);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+      return [];
+    }
   },
 
   async getMedia(tags?: string[], limit?: number): Promise<Media[]> {

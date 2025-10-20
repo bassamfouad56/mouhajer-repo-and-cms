@@ -242,6 +242,13 @@ export const crmTypeDefs = `#graphql
   # ==========================================
   # CRM ACTIVITY
   # ==========================================
+  type ActivityUser {
+    id: ID!
+    name: String!
+    email: String!
+    avatar: String
+  }
+
   type CrmActivity {
     id: ID!
     type: String!
@@ -253,6 +260,9 @@ export const crmTypeDefs = `#graphql
     contactId: String
     dealId: String
     userId: String!
+    user: ActivityUser!
+    stage: String
+    metadata: JSON
     duration: Int
     outcome: String
     activityDate: String!
@@ -265,8 +275,16 @@ export const crmTypeDefs = `#graphql
     description: String
     relatedTo: String!
     relatedId: String!
+    stage: String
+    metadata: JSON
     duration: Int
     outcome: String
+  }
+
+  input AddDealNoteInput {
+    dealId: ID!
+    stage: String!
+    note: String!
   }
 
   # ==========================================
@@ -324,6 +342,7 @@ export const crmTypeDefs = `#graphql
 
     # Activities
     createActivity(input: CreateActivityInput!): CrmActivity!
+    addDealNote(input: AddDealNoteInput!): CrmActivity!
     logCall(contactId: String, leadId: String, dealId: String, duration: Int, notes: String!): CrmActivity!
     logEmail(contactId: String, leadId: String, dealId: String, subject: String!, body: String): CrmActivity!
     logMeeting(contactId: String, leadId: String, dealId: String, duration: Int, notes: String!): CrmActivity!

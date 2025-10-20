@@ -46,7 +46,19 @@
       "Bash(node scripts/seed-team.js)",
       "Bash(node scripts/seed-pricing.js)",
       "Bash(node scripts/seed-case-studies.js)",
-      "Bash(dir \"d:\\Desktop\\wbsite\\mouhajer-repo-and-cms\\apps\\frontend\\app\" /b)"
+      "Bash(dir \"d:\\Desktop\\wbsite\\mouhajer-repo-and-cms\\apps\\frontend\\app\" /b)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(npx prisma db push:*)",
+      "Bash(lsof:*)",
+      "Bash(npx prisma db seed:*)",
+      "Bash(npm run seed:*)",
+      "Bash(npx tsx:*)",
+      "Read(//private/tmp/**)",
+      "Bash(npm run:*)",
+      "Bash(chmod:*)",
+      "Bash(./dev-start.sh:*)",
+      "Bash(dos2unix:*)",
+      "Bash(npx prisma generate:*)"
     ],
     "deny": [],
     "ask": []

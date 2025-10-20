@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme inline {
   /* shadcn/ui color palette */
@@ -70,7 +70,9 @@
 
 body {
   background-color: hsl(var(--color-background));
-  color: hsl(var(--color-foreground));
+  /* color: hsl(var(--color-foreground));
+   */
+  color: black;
 }
 
 @keyframes slide-in-right {

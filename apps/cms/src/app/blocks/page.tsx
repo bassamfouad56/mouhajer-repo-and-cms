@@ -7,6 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import BlockEditor from '@/components/BlockEditor';
 
 interface BlockType {
   id: string;
@@ -63,6 +64,7 @@ export default function BlockBuilderPage() {
   const [loading, setLoading] = useState(true);
   const [isCreating, setIsCreating] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [editingBlock, setEditingBlock] = useState<BlockType | null>(null);
 
   // New block form state
   const [newBlock, setNewBlock] = useState({
@@ -130,6 +132,47 @@ export default function BlockBuilderPage() {
   const filteredBlocks = selectedCategory === 'all' 
     ? blockTypes 
     : blockTypes.filter(block => block.category === selectedCategory);
+
+  const handleEditBlock = (blockType: BlockType) => {
+    setEditingBlock(blockType);
+  };
+  
+  const getBlockData = (blockTypeId: string) => {
+    try {
+      const existingBlocks = JSON.parse(localStorage.getItem('blockInstances') || '{}');
+      return existingBlocks[blockTypeId]?.data || {};
+    } catch {
+      return {};
+    }
+  };
+
+  const handleCloseEditor = () => {
+    setEditingBlock(null);
+  };
+
+  const handleSaveBlock = async (updatedBlock: any) => {
+    try {
+      // Save block data to localStorage for now (you can implement API later)
+      const blockData = {
+        id: editingBlock?.id,
+        type: editingBlock?.id,
+        data: updatedBlock.data,
+        updatedAt: new Date().toISOString()
+      };
+      
+      // Store in localStorage
+      const existingBlocks = JSON.parse(localStorage.getItem('blockInstances') || '{}');
+      existingBlocks[editingBlock?.id || ''] = blockData;
+      localStorage.setItem('blockInstances', JSON.stringify(existingBlocks));
+      
+      console.log('Block saved successfully:', blockData);
+      alert('Block saved successfully!');
+      setEditingBlock(null);
+    } catch (error) {
+      console.error('Error saving block:', error);
+      alert('Error saving block. Please try again.');
+    }
+  };
 
   if (loading) {
     return (
@@ -401,18 +444,40 @@ export default function BlockBuilderPage() {
                     <div className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <span className="text-purple-600 font-bold">
-                              {blockType.name.charAt(0)}
-                            </span>
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                            blockType.id === 'featured_in' || blockType.id === 'our_clients'
+                              ? 'bg-blue-100'
+                              : 'bg-purple-100'
+                          }`}>
+                            {blockType.id === 'featured_in' || blockType.id === 'our_clients' ? (
+                              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                              </svg>
+                            ) : (
+                              <span className="text-purple-600 font-bold">
+                                {blockType.name.charAt(0)}
+                              </span>
+                            )}
                           </div>
                           <div>
                             <h3 className="font-medium text-gray-900">{blockType.name}</h3>
-                            {blockType.isCustom && (
-                              <span className="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">
-                                Custom
-                              </span>
-                            )}
+                            <div className="flex items-center space-x-2">
+                              {blockType.isCustom && (
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">
+                                  Custom
+                                </span>
+                              )}
+                              {(blockType.id === 'featured_in' || blockType.id === 'our_clients') && (
+                                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded">
+                                  Gallery
+                                </span>
+                              )}
+                              {Object.keys(getBlockData(blockType.id)).length > 0 && (
+                                <span className="text-xs bg-orange-100 text-orange-800 px-2 py-0.5 rounded">
+                                  Has Data
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -428,12 +493,23 @@ export default function BlockBuilderPage() {
                         <div className="text-xs text-gray-500">
                           <strong>Fields:</strong> {Object.keys(blockType.fields).length}
                         </div>
+                        {(blockType.id === 'featured_in' || blockType.id === 'our_clients') && (
+                          <div className="text-xs text-blue-600 font-medium flex items-center">
+                            <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            Media Gallery Ready
+                          </div>
+                        )}
                       </div>
                     </div>
                     
                     <div className="px-6 py-3 bg-gray-50 border-t flex justify-between">
-                      <button className="text-sm text-purple-600 hover:text-purple-700">
-                        Edit
+                      <button 
+                        onClick={() => handleEditBlock(blockType)}
+                        className="text-sm text-purple-600 hover:text-purple-700 font-medium"
+                      >
+                        Edit Block
                       </button>
                       <button className="text-sm text-gray-500 hover:text-gray-700">
                         Preview
@@ -446,6 +522,21 @@ export default function BlockBuilderPage() {
           )}
         </main>
       </div>
+
+      {/* Block Editor Modal */}
+      {editingBlock && (
+        <BlockEditor
+          block={{
+            id: 'temp-' + editingBlock.id,
+            type: editingBlock.id,
+            data: getBlockData(editingBlock.id),
+            order: 0
+          }}
+          blockType={editingBlock}
+          onSave={handleSaveBlock}
+          onClose={handleCloseEditor}
+        />
+      )}
     </div>
   );
 }

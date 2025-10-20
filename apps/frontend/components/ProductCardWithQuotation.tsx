@@ -1,9 +1,9 @@
-"use client";
-import Image from "next/image";
-import React, { useRef } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
-import { useLocale } from "next-intl";
-import quotes from "@/public/images/quotes.png";
+'use client';
+import Image from 'next/image';
+import React, { useRef } from 'react';
+import { useScroll, useTransform, motion } from 'framer-motion';
+import { useLocale } from 'next-intl';
+import { MISC_IMAGES } from '@/lib/cms-images';
 type Props = {
   quote_title: string;
   big_image_quote: string;
@@ -26,17 +26,9 @@ const ProductCardWithQuotation = ({
     target: targetRef,
   });
 
-  const transfomrImage = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["-30%", "-10%"]
-  );
+  const transfomrImage = useTransform(scrollYProgress, [0, 1], ['-30%', '-10%']);
 
-  const opacityAnimation = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["0%", "100%"]
-  );
+  const opacityAnimation = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
   return (
     <div className="" ref={targetRef}>
       <div className="flex items-center justify-center">
@@ -54,8 +46,8 @@ const ProductCardWithQuotation = ({
               style={{
                 // opacity: opacityAnimation,
                 bottom: transfomrImage,
-                transition: "linear",
-                transitionDuration: "1000ms",
+                transition: 'linear',
+                transitionDuration: '1000ms',
               }}
               className="hidden 2xl:block absolute w-[35%] 2xl:w-[25%] h-[40%] z-[1] right-0 2xl:translate-x-[20%] "
             >
@@ -83,24 +75,24 @@ const ProductCardWithQuotation = ({
             className="mt-4 p-4 2xl:mt-0 2xl:p-0  2xl:translate-x-[-35px]"
             style={{
               // opacity: opacityAnimation,
-              transition: "ease-in-out",
-              transitionDuration: "1000ms",
+              transition: 'ease-in-out',
+              transitionDuration: '1000ms',
             }}
           >
             <div className="max-w-5xl">
               <div className="h-14 w-1/4 2xl:h-24 2xl:w-24 relative" aria-hidden="true">
                 <Image
-                  src={quotes}
+                  src={MISC_IMAGES.quotes}
                   alt=""
                   fill
                   className="absolute w-full h-full object-contain"
                 />
               </div>
               <h4 className="font-SchnyderS text-2xl mb-12">
-                {locale === "en" ? quote_title : quote_title_arabic}
+                {locale === 'en' ? quote_title : quote_title_arabic}
               </h4>
               <div className="font-Satoshi opacity-60">
-                {locale === "en"
+                {locale === 'en'
                   ? !!quote_bottmo_description.length &&
                     quote_bottmo_description?.map((el, i) => (
                       <p key={i + el.text} className="mb-4">

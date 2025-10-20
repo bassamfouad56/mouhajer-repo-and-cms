@@ -5,6 +5,7 @@ import SearchInput from '@/components/SearchInput';
 import EmptyState, { EmptyStateIcons } from '@/components/EmptyState';
 import Button from '@/components/Button';
 import DealFormModal from '@/components/CRM/DealFormModal';
+import DealActivitiesPanel from '@/components/CRM/DealActivitiesPanel';
 
 interface Deal {
   id: string;
@@ -52,6 +53,9 @@ export default function PipelinePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [showActivitiesPanel, setShowActivitiesPanel] = useState(false);
+  const [activitiesDealId, setActivitiesDealId] = useState<string | null>(null);
+  const [activitiesDealStage, setActivitiesDealStage] = useState<string>('');
 
   useEffect(() => {
     fetchDeals();
@@ -189,8 +193,8 @@ export default function PipelinePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           query: `
-            mutation UpdateDeal($id: ID!, $input: UpdateDealInput!) {
-              updateDeal(id: $id, input: $input) {
+            mutation MoveDealStage($id: ID!, $stage: String!) {
+              moveDealStage(id: $id, stage: $stage) {
                 id
                 stage
                 probability
@@ -199,7 +203,7 @@ export default function PipelinePage() {
           `,
           variables: {
             id: dealId,
-            input: { stage: newStage },
+            stage: newStage,
           },
         }),
       });
@@ -388,6 +392,21 @@ export default function PipelinePage() {
                         </div>
                       )}
 
+                      {/* View Activities Button */}
+                      <button
+                        onClick={() => {
+                          setActivitiesDealId(deal.id);
+                          setActivitiesDealStage(stage.id);
+                          setShowActivitiesPanel(true);
+                        }}
+                        className="w-full mb-2 px-3 py-2 text-xs font-medium text-purple-700 bg-purple-50 rounded hover:bg-purple-100 transition-colors flex items-center justify-center gap-1"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        View Notes & Activity
+                      </button>
+
                       {/* Stage Change Buttons */}
                       <div className="flex gap-2">
                         {stage.id !== 'initial_consultation' && (
@@ -462,6 +481,19 @@ export default function PipelinePage() {
         deal={selectedDeal}
         isSaving={isSaving}
       />
+
+      {showActivitiesPanel && activitiesDealId && (
+        <DealActivitiesPanel
+          dealId={activitiesDealId}
+          currentStage={activitiesDealStage}
+          onClose={() => {
+            setShowActivitiesPanel(false);
+            setActivitiesDealId(null);
+            setActivitiesDealStage('');
+            fetchDeals(); // Refresh to show updated deal info
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -4,12 +4,12 @@ This document explains the port configuration for the Mouhajer monorepo.
 
 ## Port Allocation
 
-| Service | Port | URL | Description |
-|---------|------|-----|-------------|
-| **Frontend** | 3007 | http://localhost:3007 | Public website (EN/AR) |
-| **CMS** | 3010 | http://localhost:3010 | Admin panel & API |
-| **Prisma Studio** | 5555 | http://localhost:5555 | Database UI |
-| **PostgreSQL** | 5432 | localhost:5432 | Database server |
+| Service           | Port | URL                   | Description            |
+| ----------------- | ---- | --------------------- | ---------------------- |
+| **Frontend**      | 3007 | http://localhost:3007 | Public website (EN/AR) |
+| **CMS**           | 3010 | http://localhost:3010 | Admin panel & API      |
+| **Prisma Studio** | 5555 | http://localhost:5555 | Database UI            |
+| **PostgreSQL**    | 5432 | localhost:5432        | Database server        |
 
 ## Why Port 3007?
 
@@ -29,11 +29,13 @@ npm run dev
 ```
 
 This will start:
+
 - ✅ CMS on port 3010
 - ✅ Frontend on port 3007
 - ✅ Both running concurrently with colored output
 
 **Output:**
+
 ```
 [CMS]      ▲ Next.js 14.2.18
 [CMS]      - Local:        http://localhost:3010
@@ -45,6 +47,7 @@ This will start:
 ### Option 2: Run Individually
 
 **CMS Only:**
+
 ```bash
 npm run dev:cms
 # or
@@ -52,6 +55,7 @@ cd apps/cms && npm run dev:cms-only
 ```
 
 **Frontend Only:**
+
 ```bash
 npm run dev:frontend
 # or
@@ -67,6 +71,7 @@ docker-compose up
 ```
 
 Access:
+
 - Frontend: http://localhost:3007
 - CMS: http://localhost:3010
 - Prisma Studio: http://localhost:5555
@@ -96,6 +101,7 @@ If you need to use different ports:
 ### Change Frontend Port
 
 1. **Update package.json:**
+
    ```json
    // apps/frontend/package.json
    "scripts": {
@@ -105,6 +111,7 @@ If you need to use different ports:
    ```
 
 2. **Update environment files:**
+
    ```env
    # apps/cms/.env
    NEXT_PUBLIC_FRONTEND_URL=http://localhost:YOUR_PORT
@@ -117,7 +124,7 @@ If you need to use different ports:
    ```yaml
    frontend:
      ports:
-       - "YOUR_PORT:YOUR_PORT"
+       - 'YOUR_PORT:YOUR_PORT'
      environment:
        NEXT_PUBLIC_SITE_URL: http://localhost:YOUR_PORT
    ```
@@ -125,6 +132,7 @@ If you need to use different ports:
 ### Change CMS Port
 
 1. **Update package.json:**
+
    ```json
    // apps/cms/package.json
    "scripts": {
@@ -133,6 +141,7 @@ If you need to use different ports:
    ```
 
 2. **Update environment files:**
+
    ```env
    # apps/cms/.env
    PORT=YOUR_PORT
@@ -148,7 +157,7 @@ If you need to use different ports:
    ```yaml
    cms:
      ports:
-       - "YOUR_PORT:YOUR_PORT"
+       - 'YOUR_PORT:YOUR_PORT'
      environment:
        PORT: YOUR_PORT
        NEXTAUTH_URL: http://localhost:YOUR_PORT
@@ -159,6 +168,7 @@ If you need to use different ports:
 ### Port Already in Use
 
 **Error:**
+
 ```
 Error: listen EADDRINUSE: address already in use :::3007
 ```
@@ -166,6 +176,7 @@ Error: listen EADDRINUSE: address already in use :::3007
 **Solutions:**
 
 1. **Kill process on port:**
+
    ```bash
    # Kill specific ports
    npx kill-port 3007 3010
@@ -179,6 +190,7 @@ Error: listen EADDRINUSE: address already in use :::3007
    ```
 
 2. **Use different port temporarily:**
+
    ```bash
    # Frontend
    cd apps/frontend
@@ -192,12 +204,14 @@ Error: listen EADDRINUSE: address already in use :::3007
 ### Can't Access Frontend
 
 **Check:**
+
 1. Frontend is running: `http://localhost:3007`
 2. CMS is running: `http://localhost:3010`
 3. Environment variables are correct
 4. No firewall blocking ports
 
 **Test:**
+
 ```bash
 # Check if ports are listening
 netstat -an | grep 3007
@@ -209,6 +223,7 @@ netstat -an | grep 3010
 If you see CORS errors in browser console:
 
 1. **Check CMS environment:**
+
    ```env
    # apps/cms/.env
    NEXT_PUBLIC_FRONTEND_URL=http://localhost:3007
@@ -224,12 +239,14 @@ If you see CORS errors in browser console:
 In production, update URLs to your actual domains:
 
 **CMS (.env.production):**
+
 ```env
 NEXT_PUBLIC_FRONTEND_URL=https://mahermouhajer.com
 NEXTAUTH_URL=https://cms.mahermouhajer.com
 ```
 
 **Frontend (.env.production):**
+
 ```env
 NEXT_PUBLIC_CMS_URL=https://cms.mahermouhajer.com
 NEXT_PUBLIC_SITE_URL=https://mahermouhajer.com
@@ -264,6 +281,7 @@ docker-compose down
 ## Access URLs
 
 ### Development
+
 - 🌐 **Frontend**: http://localhost:3007
   - English: http://localhost:3007/en
   - Arabic: http://localhost:3007/ar
@@ -273,6 +291,7 @@ docker-compose down
 - 🔧 **GraphQL Playground**: http://localhost:3010/playground
 
 ### Production
+
 - 🌐 **Frontend**: https://mahermouhajer.com
 - 🔐 **CMS Admin**: https://your-cms-domain.vercel.app
 

@@ -264,7 +264,7 @@ export default function LeadsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           query: `
-            mutation ${mutation === 'createLead' ? 'CreateLead' : 'UpdateLead'}($id: ID, $input: ${mutation === 'createLead' ? 'CreateLeadInput' : 'UpdateLeadInput'}!) {
+            mutation ${mutation === 'createLead' ? 'CreateLead' : 'UpdateLead'}(${mutation === 'updateLead' ? '$id: ID, ' : ''}$input: ${mutation === 'createLead' ? 'CreateLeadInput' : 'UpdateLeadInput'}!) {
               ${mutation}(${mutation === 'updateLead' ? 'id: $id, ' : ''}input: $input) {
                 id
                 name

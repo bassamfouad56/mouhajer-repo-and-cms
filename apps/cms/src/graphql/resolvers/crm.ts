@@ -42,6 +42,21 @@ function calculateLeadScore(lead: any): number {
 }
 
 export const crmResolvers = {
+  CrmActivity: {
+    user: async (parent: any) => {
+      const user = await prisma.user.findUnique({
+        where: { id: parent.userId },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          avatar: true,
+        },
+      });
+      return user;
+    },
+  },
+
   Query: {
     // ========== LEADS ==========
     leads: async (_: any, { filter, limit = 50, offset = 0, orderBy = 'createdAt_desc' }: any) => {
@@ -414,7 +429,17 @@ export const crmResolvers = {
       return await prisma.crmActivity.findMany({
         where: { relatedTo, relatedId },
         take: limit,
-        orderBy: { activityDate: 'desc' },
+        orderBy: { createdAt: 'desc' },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              avatar: true,
+            },
+          },
+        },
       });
     },
 
@@ -710,26 +735,65 @@ export const crmResolvers = {
       return true;
     },
 
-    moveDealStage: async (_: any, { id, stage }: any) => {
+    moveDealStage: async (_: any, { id, stage }: any, context: any) => {
       const probabilityMap: Record<string, number> = {
         initial_consultation: 10,
         site_visit: 20,
-        quotation_sent: 30,
-        quotation_review: 40,
-        proposal: 50,
+        design_proposal: 30,
+        quotation: 40,
         negotiation: 60,
         contract_sent: 80,
+        contract_signed: 90,
         won: 100,
         lost: 0,
       };
 
-      return await prisma.deal.update({
+      // Get current deal to track previous stage
+      const currentDeal = await prisma.deal.findUnique({ where: { id } });
+      const previousStage = currentDeal?.stage;
+
+      // Update deal
+      const deal = await prisma.deal.update({
         where: { id },
         data: {
           stage,
           probability: probabilityMap[stage] || 50,
         },
       });
+
+      // Auto-create activity for stage change
+      if (context.user && previousStage !== stage) {
+        const stageNames: Record<string, string> = {
+          initial_consultation: 'Initial Consultation',
+          site_visit: 'Site Visit',
+          design_proposal: 'Design Proposal',
+          quotation: 'Quotation',
+          negotiation: 'Negotiation',
+          contract_sent: 'Contract Sent',
+          contract_signed: 'Contract Signed',
+          won: 'Won',
+          lost: 'Lost',
+        };
+
+        await prisma.crmActivity.create({
+          data: {
+            type: 'status_change',
+            title: `Deal moved to ${stageNames[stage] || stage}`,
+            description: `Stage changed from ${stageNames[previousStage || ''] || previousStage || 'none'} to ${stageNames[stage] || stage}`,
+            relatedTo: 'deal',
+            relatedId: id,
+            dealId: id,
+            userId: context.user.id,
+            stage: stage,
+            metadata: {
+              previousStage: previousStage,
+              newStage: stage,
+            },
+          },
+        });
+      }
+
+      return deal;
     },
 
     closeDeal: async (_: any, { id, won, reason }: any) => {
@@ -792,6 +856,28 @@ export const crmResolvers = {
           leadId: input.relatedTo === 'lead' ? input.relatedId : undefined,
           contactId: input.relatedTo === 'contact' ? input.relatedId : undefined,
           dealId: input.relatedTo === 'deal' ? input.relatedId : undefined,
+        },
+      });
+    },
+
+    addDealNote: async (_: any, { input }: any, context: any) => {
+      const userId = context.user?.id;
+      if (!userId) throw new Error('Not authenticated');
+
+      return await prisma.crmActivity.create({
+        data: {
+          type: 'note',
+          title: 'Note added',
+          description: input.note,
+          relatedTo: 'deal',
+          relatedId: input.dealId,
+          dealId: input.dealId,
+          userId,
+          stage: input.stage,
+          metadata: {
+            noteType: 'phase_note',
+            phase: input.stage,
+          },
         },
       });
     },

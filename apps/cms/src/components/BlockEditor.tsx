@@ -8,6 +8,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { PageBlock } from '@/lib/db';
 import { translateText, debounce } from '@/lib/translate';
+import MediaPicker from '@/components/MediaPicker';
 
 interface BlockType {
   id: string;
@@ -30,6 +31,8 @@ export default function BlockEditor({ block, blockType, onSave, onClose }: Block
   const [isSaving, setIsSaving] = useState(false);
   const [autoTranslate, setAutoTranslate] = useState(true);
   const [translating, setTranslating] = useState<Record<string, boolean>>({});
+  const [showMediaPicker, setShowMediaPicker] = useState(false);
+  const [currentField, setCurrentField] = useState<{ name: string; type: 'image' | 'gallery'; language?: string } | null>(null);
 
   useEffect(() => {
     setFormData(block.data);
@@ -249,68 +252,138 @@ export default function BlockEditor({ block, blockType, onSave, onClose }: Block
         case 'image':
           return (
             <div className="space-y-2">
-              <input
-                type="text"
-                id={fieldId}
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                className={commonClasses}
-                placeholder="Image URL or path"
-              />
-              <div className="text-xs text-gray-500">
-                <span>Upload image or enter URL</span>
-                <button className="ml-2 text-blue-600 hover:text-blue-700">Browse</button>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  id={fieldId}
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  className={commonClasses}
+                  placeholder="Image URL or path"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCurrentField({ name: fieldName, type: 'image', language: lang });
+                    setShowMediaPicker(true);
+                  }}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 whitespace-nowrap"
+                >
+                  Browse Media
+                </button>
               </div>
               {value && (
-                <div className="mt-2">
+                <div className="mt-2 relative inline-block">
                   <img
                     src={value}
                     alt="Preview"
-                    className="h-20 w-20 object-cover rounded border"
+                    className="h-32 w-auto object-cover rounded border"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                     }}
                   />
+                  <button
+                    type="button"
+                    onClick={() => setValue('')}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+                  >
+                    ×
+                  </button>
                 </div>
               )}
             </div>
           );
 
         case 'gallery':
-          const galleryValue = Array.isArray(value) ? value : [];
+          // Handle both direct array and bilingual object structure
+          let galleryValue: string[] = [];
+          if (bilingual && lang) {
+            const bilingualValue = formData[fieldName] as Record<string, string[]>;
+            galleryValue = Array.isArray(bilingualValue?.[lang]) ? bilingualValue[lang] : [];
+          } else {
+            galleryValue = Array.isArray(value) ? value : [];
+          }
+          
           return (
-            <div className="space-y-2">
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+            <div className="space-y-3">
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
                 <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                   <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <div className="mt-2">
-                  <button className="text-blue-600 hover:text-blue-700 font-medium">
-                    Upload images
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCurrentField({ name: fieldName, type: 'gallery', language: lang });
+                      setShowMediaPicker(true);
+                    }}
+                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Add Images
                   </button>
-                  <p className="text-xs text-gray-500 mt-1">or drag and drop</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    {fieldName === 'logos' ? 'Select company logos and media features' : 
+                     fieldName === 'clients' ? 'Select client logos and testimonials' :
+                     'Select multiple images for this gallery'}
+                  </p>
                 </div>
               </div>
               {galleryValue.length > 0 && (
-                <div className="grid grid-cols-3 gap-2">
-                  {galleryValue.map((img: string, index: number) => (
-                    <div key={index} className="relative">
-                      <img
-                        src={img}
-                        alt={`Gallery ${index + 1}`}
-                        className="h-16 w-full object-cover rounded border"
-                      />
-                      <button
-                        onClick={() => {
-                          const newGallery = galleryValue.filter((_, i) => i !== index);
-                          setValue(newGallery);
-                        }}
-                        className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600"
-                      >
-                        ×
-                      </button>
-                    </div>
-                  ))}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-medium text-gray-700">
+                      {galleryValue.length} image{galleryValue.length !== 1 ? 's' : ''} selected
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCurrentField({ name: fieldName, type: 'gallery', language: lang });
+                        setShowMediaPicker(true);
+                      }}
+                      className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      Add More
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
+                    {galleryValue.map((img: string, index: number) => (
+                      <div key={index} className="relative group aspect-square">
+                        <img
+                          src={img}
+                          alt={`${fieldName} ${index + 1}`}
+                          className="w-full h-full object-cover rounded-lg border border-gray-200 group-hover:border-gray-300 transition-colors"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all rounded-lg flex items-center justify-center">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newGallery = galleryValue.filter((_, i) => i !== index);
+                              if (bilingual && lang) {
+                                handleFieldChange(fieldName, newGallery, lang, false);
+                              } else {
+                                handleFieldChange(fieldName, newGallery, undefined, false);
+                              }
+                            }}
+                            className="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                            title="Remove image"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                        </div>
+                        <div className="absolute bottom-1 left-1 right-1 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                          #{index + 1}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -475,6 +548,34 @@ export default function BlockEditor({ block, blockType, onSave, onClose }: Block
           </div>
         </div>
       </div>
+
+      {/* Media Picker Modal */}
+      {showMediaPicker && currentField && (
+        <MediaPicker
+          multiple={currentField.type === 'gallery'}
+          fileType="image"
+          onSelect={(selectedMedia) => {
+            if (currentField.type === 'gallery') {
+              // Handle gallery selection - replace existing with new selection
+              const urls = Array.isArray(selectedMedia) 
+                ? selectedMedia.map(m => m.url)
+                : [selectedMedia.url];
+              
+              handleFieldChange(currentField.name, urls, currentField.language, false);
+            } else {
+              // Handle single image selection
+              const url = Array.isArray(selectedMedia) ? selectedMedia[0]?.url : selectedMedia.url;
+              handleFieldChange(currentField.name, url, currentField.language, false);
+            }
+            setShowMediaPicker(false);
+            setCurrentField(null);
+          }}
+          onClose={() => {
+            setShowMediaPicker(false);
+            setCurrentField(null);
+          }}
+        />
+      )}
     </div>
   );
 }
