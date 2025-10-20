@@ -1,0 +1,58 @@
+{
+  "totalImages": 200,
+  "lastFetched": "2025-10-10",
+  "note": "Media inventory from live CMS - use this for image replacement mapping",
+  "categories": {
+    "hero_banners": [
+      "villadesign.png",
+      "vv.jpg",
+      "v1.jpg",
+      "v2.jpg",
+      "thumbnail.jpg"
+    ],
+    "whatsapp": [
+      "whts.gif",
+      "whatsapptext.png"
+    ],
+    "projects": [
+      "VSWQ_Arumaila_Ext_G_A_H.Jpg-700-min.webp",
+      "Swimming-pool-61-min.webp",
+      "Royal-Suite1-min.webp",
+      "Reception_University_Project_LOGO-1.webp",
+      "Reception_University_Project_LOGO-2.webp",
+      "Reception_University_Project_LOGO-3.webp",
+      "Reception_University_Project_LOGO-4.webp",
+      "Reception_University_Project_LOGO-5.webp",
+      "Reception_University_Project_LOGO-6.webp",
+      "turn.jpg",
+      "unnamed-file-min.webp"
+    ],
+    "services": [
+      "structure-hotel.jpg",
+      "structural en.jpg",
+      "reesinterior.jpg",
+      "resturant.jpg",
+      "resfitint.jpg",
+      "se1.jpg",
+      "se2.jpg"
+    ],
+    "clients_logos": [
+      "zahra.png",
+      "zawya.png",
+      "winter.png",
+      "sheraton.png",
+      "sbk.png",
+      "Rhapsody.png",
+      "retaj.png",
+      "radison.png"
+    ],
+    "misc": [
+      "viewOne.png",
+      "viewTwo.png",
+      "secondimage.jpg",
+      "small iamge quote.jpg",
+      "quotes.png",
+      "randmo.jpg"
+    ]
+  }
+}

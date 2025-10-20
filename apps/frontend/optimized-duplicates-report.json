@@ -1,0 +1,4544 @@
+{
+  "summary": {
+    "totalOptimized": 206,
+    "totalMain": 865,
+    "exactDuplicates": 0,
+    "optimizedEqualsOriginal": 0,
+    "optimizedVersions": 206
+  },
+  "exactDuplicates": [],
+  "optimizedVersions": [
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\2211111.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\2211111.jpg",
+        "filename": "2211111.jpg",
+        "baseName": "2211111",
+        "hash": "b57d09d9b880fb6db42ca5c16dee6446",
+        "size": 341651,
+        "isOptimized": true
+      },
+      "savings": 283221,
+      "savingsPercent": 45
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\2211111.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\2211111.webp",
+        "filename": "2211111.webp",
+        "baseName": "2211111",
+        "hash": "2635ef0d752b55932d52e17c2696b70f",
+        "size": 276446,
+        "isOptimized": true
+      },
+      "savings": 348426,
+      "savingsPercent": 56
+    },
+    {
+      "original": {
+        "path": "images\\037be84e1e04cd6c46d390efce622562.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\037be84e1e04cd6c46d390efce622562.jpg",
+        "filename": "037be84e1e04cd6c46d390efce622562.jpg",
+        "baseName": "037be84e1e04cd6c46d390efce622562",
+        "hash": "5eeefd7cd7ddd4f2b621c86534a9e09c",
+        "size": 315065,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\7.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\7.jpg",
+        "filename": "7.jpg",
+        "baseName": "7",
+        "hash": "8de68e416f53616067d1884babc99b75",
+        "size": 510519,
+        "isOptimized": true
+      },
+      "savings": -195454,
+      "savingsPercent": -62
+    },
+    {
+      "original": {
+        "path": "images\\037be84e1e04cd6c46d390efce622562.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\037be84e1e04cd6c46d390efce622562.jpg",
+        "filename": "037be84e1e04cd6c46d390efce622562.jpg",
+        "baseName": "037be84e1e04cd6c46d390efce622562",
+        "hash": "5eeefd7cd7ddd4f2b621c86534a9e09c",
+        "size": 315065,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\7.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\7.webp",
+        "filename": "7.webp",
+        "baseName": "7",
+        "hash": "bb88a9c4ba1bdcd108874c761fe2bb7d",
+        "size": 514952,
+        "isOptimized": true
+      },
+      "savings": -199887,
+      "savingsPercent": -63
+    },
+    {
+      "original": {
+        "path": "images\\2.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\2.jpg",
+        "filename": "2.jpg",
+        "baseName": "2",
+        "hash": "d51ab4efb44290c5af79ddeb4dc5cfc8",
+        "size": 69015,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\banner2.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\banner2.jpg",
+        "filename": "banner2.jpg",
+        "baseName": "banner2",
+        "hash": "d6c9ddf9bf70a8a1bbee80001a8318a3",
+        "size": 327895,
+        "isOptimized": true
+      },
+      "savings": -258880,
+      "savingsPercent": -375
+    },
+    {
+      "original": {
+        "path": "images\\2.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\2.jpg",
+        "filename": "2.jpg",
+        "baseName": "2",
+        "hash": "d51ab4efb44290c5af79ddeb4dc5cfc8",
+        "size": 69015,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\banner2.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\banner2.webp",
+        "filename": "banner2.webp",
+        "baseName": "banner2",
+        "hash": "e8fcb3dd7c5238cc9935f491f3b4f433",
+        "size": 293176,
+        "isOptimized": true
+      },
+      "savings": -224161,
+      "savingsPercent": -325
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-11-01-15-27-12.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-11-01-15-27-12.jpg",
+        "filename": "Enscape_2023-11-01-15-27-12.jpg",
+        "baseName": "Enscape_2023-11-01-15-27-12",
+        "hash": "8c8afa49be4f7661cd3ffa38f7a45557",
+        "size": 263556,
+        "isOptimized": true
+      },
+      "savings": -98550,
+      "savingsPercent": -60
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-11-01-15-27-12.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-11-01-15-27-12.webp",
+        "filename": "Enscape_2023-11-01-15-27-12.webp",
+        "baseName": "Enscape_2023-11-01-15-27-12",
+        "hash": "b736d681b42990ff4676c7fb102d6ad7",
+        "size": 206936,
+        "isOptimized": true
+      },
+      "savings": -41930,
+      "savingsPercent": -25
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-11-01-15-41-34.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-11-01-15-41-34.jpg",
+        "filename": "Enscape_2023-11-01-15-41-34.jpg",
+        "baseName": "Enscape_2023-11-01-15-41-34",
+        "hash": "9adb3e8e8a3fb70e6fb6cc6eee79afa4",
+        "size": 595633,
+        "isOptimized": true
+      },
+      "savings": -430627,
+      "savingsPercent": -261
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-11-01-15-41-34.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-11-01-15-41-34.webp",
+        "filename": "Enscape_2023-11-01-15-41-34.webp",
+        "baseName": "Enscape_2023-11-01-15-41-34",
+        "hash": "98c392e6c9c3f7e5025044550e7d750b",
+        "size": 586750,
+        "isOptimized": true
+      },
+      "savings": -421744,
+      "savingsPercent": -256
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-11-01-15-45-52.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-11-01-15-45-52.jpg",
+        "filename": "Enscape_2023-11-01-15-45-52.jpg",
+        "baseName": "Enscape_2023-11-01-15-45-52",
+        "hash": "6c93265a3438d1c3a7f6bccb90bbd0b6",
+        "size": 595962,
+        "isOptimized": true
+      },
+      "savings": -430956,
+      "savingsPercent": -261
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-11-01-15-45-52.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-11-01-15-45-52.webp",
+        "filename": "Enscape_2023-11-01-15-45-52.webp",
+        "baseName": "Enscape_2023-11-01-15-45-52",
+        "hash": "397019839116077bb3910bb67132a9d5",
+        "size": 613224,
+        "isOptimized": true
+      },
+      "savings": -448218,
+      "savingsPercent": -272
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-11-01-15-48-09.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-11-01-15-48-09.jpg",
+        "filename": "Enscape_2023-11-01-15-48-09.jpg",
+        "baseName": "Enscape_2023-11-01-15-48-09",
+        "hash": "e45c226c00e2ef892c04394ad3efbf4c",
+        "size": 598539,
+        "isOptimized": true
+      },
+      "savings": -433533,
+      "savingsPercent": -263
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-11-01-15-48-09.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-11-01-15-48-09.webp",
+        "filename": "Enscape_2023-11-01-15-48-09.webp",
+        "baseName": "Enscape_2023-11-01-15-48-09",
+        "hash": "f26b4f94af8c57136bb621663b0f8d9e",
+        "size": 624090,
+        "isOptimized": true
+      },
+      "savings": -459084,
+      "savingsPercent": -278
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-12-05-44.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-12-05-44.jpg",
+        "filename": "Enscape_2023-12-26-12-05-44.jpg",
+        "baseName": "Enscape_2023-12-26-12-05-44",
+        "hash": "917ee107e8360e49104c5195dce15f35",
+        "size": 243711,
+        "isOptimized": true
+      },
+      "savings": -78705,
+      "savingsPercent": -48
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-12-05-44.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-12-05-44.webp",
+        "filename": "Enscape_2023-12-26-12-05-44.webp",
+        "baseName": "Enscape_2023-12-26-12-05-44",
+        "hash": "11543324407f3f8bbb0a1b7a3fd01329",
+        "size": 197256,
+        "isOptimized": true
+      },
+      "savings": -32250,
+      "savingsPercent": -20
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-12-51-29.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-12-51-29.jpg",
+        "filename": "Enscape_2023-12-26-12-51-29.jpg",
+        "baseName": "Enscape_2023-12-26-12-51-29",
+        "hash": "e3fa1b575d3e5982311bb6cd6f2601b2",
+        "size": 233383,
+        "isOptimized": true
+      },
+      "savings": -68377,
+      "savingsPercent": -41
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-12-51-29.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-12-51-29.webp",
+        "filename": "Enscape_2023-12-26-12-51-29.webp",
+        "baseName": "Enscape_2023-12-26-12-51-29",
+        "hash": "167946c2bd3c0957403e6d8c303180cf",
+        "size": 180918,
+        "isOptimized": true
+      },
+      "savings": -15912,
+      "savingsPercent": -10
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-12-59-57.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-12-59-57.jpg",
+        "filename": "Enscape_2023-12-26-12-59-57.jpg",
+        "baseName": "Enscape_2023-12-26-12-59-57",
+        "hash": "52169198eb275abf537034bd90bc0a65",
+        "size": 331748,
+        "isOptimized": true
+      },
+      "savings": -166742,
+      "savingsPercent": -101
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-12-59-57.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-12-59-57.webp",
+        "filename": "Enscape_2023-12-26-12-59-57.webp",
+        "baseName": "Enscape_2023-12-26-12-59-57",
+        "hash": "e2709231fcc3d87fc388859e909156ae",
+        "size": 295786,
+        "isOptimized": true
+      },
+      "savings": -130780,
+      "savingsPercent": -79
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-13-06-24.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-13-06-24.jpg",
+        "filename": "Enscape_2023-12-26-13-06-24.jpg",
+        "baseName": "Enscape_2023-12-26-13-06-24",
+        "hash": "cb0d384491d619c8f954cf781448e659",
+        "size": 333796,
+        "isOptimized": true
+      },
+      "savings": -168790,
+      "savingsPercent": -102
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-13-06-24.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-13-06-24.webp",
+        "filename": "Enscape_2023-12-26-13-06-24.webp",
+        "baseName": "Enscape_2023-12-26-13-06-24",
+        "hash": "4430edef617551064da8fe4237e17fd4",
+        "size": 296902,
+        "isOptimized": true
+      },
+      "savings": -131896,
+      "savingsPercent": -80
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-16-55-59.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-16-55-59.jpg",
+        "filename": "Enscape_2023-12-26-16-55-59.jpg",
+        "baseName": "Enscape_2023-12-26-16-55-59",
+        "hash": "e5b58de8d72a98858dec313960a03b0f",
+        "size": 242415,
+        "isOptimized": true
+      },
+      "savings": -77409,
+      "savingsPercent": -47
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-16-55-59.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-16-55-59.webp",
+        "filename": "Enscape_2023-12-26-16-55-59.webp",
+        "baseName": "Enscape_2023-12-26-16-55-59",
+        "hash": "a104be1efc740548f46ad1eaa623c050",
+        "size": 195230,
+        "isOptimized": true
+      },
+      "savings": -30224,
+      "savingsPercent": -18
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-16-55-60.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-16-55-60.jpg",
+        "filename": "Enscape_2023-12-26-16-55-60.jpg",
+        "baseName": "Enscape_2023-12-26-16-55-60",
+        "hash": "37f09df12cf8bb96fc7cb2b3e67e8a1e",
+        "size": 222662,
+        "isOptimized": true
+      },
+      "savings": -57656,
+      "savingsPercent": -35
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2023-12-26-16-55-60.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2023-12-26-16-55-60.webp",
+        "filename": "Enscape_2023-12-26-16-55-60.webp",
+        "baseName": "Enscape_2023-12-26-16-55-60",
+        "hash": "6db8d007e94a3b654dfcc82f75277675",
+        "size": 188788,
+        "isOptimized": true
+      },
+      "savings": -23782,
+      "savingsPercent": -14
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-02-06-15-48-00.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-02-06-15-48-00.jpg",
+        "filename": "Enscape_2024-02-06-15-48-00.jpg",
+        "baseName": "Enscape_2024-02-06-15-48-00",
+        "hash": "e08e97ea3f6108ee500cd44038666ff6",
+        "size": 420661,
+        "isOptimized": true
+      },
+      "savings": -255655,
+      "savingsPercent": -155
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-02-06-15-48-00.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-02-06-15-48-00.webp",
+        "filename": "Enscape_2024-02-06-15-48-00.webp",
+        "baseName": "Enscape_2024-02-06-15-48-00",
+        "hash": "28210060a50489ec36c3b8399e64d2a7",
+        "size": 369750,
+        "isOptimized": true
+      },
+      "savings": -204744,
+      "savingsPercent": -124
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-14-56-49.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-14-56-49.jpg",
+        "filename": "Enscape_2024-03-13-14-56-49.jpg",
+        "baseName": "Enscape_2024-03-13-14-56-49",
+        "hash": "372a62b4a663d56597bdd3a59ba0536d",
+        "size": 337701,
+        "isOptimized": true
+      },
+      "savings": -172695,
+      "savingsPercent": -105
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-14-56-49.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-14-56-49.webp",
+        "filename": "Enscape_2024-03-13-14-56-49.webp",
+        "baseName": "Enscape_2024-03-13-14-56-49",
+        "hash": "be4ef4969d1399cd7f2e7831bc7b27e0",
+        "size": 305348,
+        "isOptimized": true
+      },
+      "savings": -140342,
+      "savingsPercent": -85
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-14-57-43.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-14-57-43.jpg",
+        "filename": "Enscape_2024-03-13-14-57-43.jpg",
+        "baseName": "Enscape_2024-03-13-14-57-43",
+        "hash": "6915dc91daaec86c0147af34582087b3",
+        "size": 317591,
+        "isOptimized": true
+      },
+      "savings": -152585,
+      "savingsPercent": -92
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-14-57-43.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-14-57-43.webp",
+        "filename": "Enscape_2024-03-13-14-57-43.webp",
+        "baseName": "Enscape_2024-03-13-14-57-43",
+        "hash": "3c8854c1221ffb9d251e3cefea5c5b85",
+        "size": 252196,
+        "isOptimized": true
+      },
+      "savings": -87190,
+      "savingsPercent": -53
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-06-43.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-06-43.jpg",
+        "filename": "Enscape_2024-03-13-15-06-43.jpg",
+        "baseName": "Enscape_2024-03-13-15-06-43",
+        "hash": "e4f8ad018571a050c9f96702f1479c54",
+        "size": 412721,
+        "isOptimized": true
+      },
+      "savings": -247715,
+      "savingsPercent": -150
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-06-43.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-06-43.webp",
+        "filename": "Enscape_2024-03-13-15-06-43.webp",
+        "baseName": "Enscape_2024-03-13-15-06-43",
+        "hash": "61552ea82964a94a56c916ab4d20c342",
+        "size": 427858,
+        "isOptimized": true
+      },
+      "savings": -262852,
+      "savingsPercent": -159
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-09-03.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-09-03.jpg",
+        "filename": "Enscape_2024-03-13-15-09-03.jpg",
+        "baseName": "Enscape_2024-03-13-15-09-03",
+        "hash": "26ec6868407d1695b6a11836019132ee",
+        "size": 324066,
+        "isOptimized": true
+      },
+      "savings": -159060,
+      "savingsPercent": -96
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-09-03.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-09-03.webp",
+        "filename": "Enscape_2024-03-13-15-09-03.webp",
+        "baseName": "Enscape_2024-03-13-15-09-03",
+        "hash": "b321dfaed5126acef6a0a36046d25411",
+        "size": 270482,
+        "isOptimized": true
+      },
+      "savings": -105476,
+      "savingsPercent": -64
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-11-35.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-11-35.jpg",
+        "filename": "Enscape_2024-03-13-15-11-35.jpg",
+        "baseName": "Enscape_2024-03-13-15-11-35",
+        "hash": "f538aa0b31bbdc77e14257d39d4ee8df",
+        "size": 372951,
+        "isOptimized": true
+      },
+      "savings": -207945,
+      "savingsPercent": -126
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-11-35.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-11-35.webp",
+        "filename": "Enscape_2024-03-13-15-11-35.webp",
+        "baseName": "Enscape_2024-03-13-15-11-35",
+        "hash": "5487f99335199f4368a3c7247ec2a13f",
+        "size": 366340,
+        "isOptimized": true
+      },
+      "savings": -201334,
+      "savingsPercent": -122
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-13-42.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-13-42.jpg",
+        "filename": "Enscape_2024-03-13-15-13-42.jpg",
+        "baseName": "Enscape_2024-03-13-15-13-42",
+        "hash": "9f800d46d55f0e89ee628f86f6fb7329",
+        "size": 451593,
+        "isOptimized": true
+      },
+      "savings": -286587,
+      "savingsPercent": -174
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-13-42.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-13-42.webp",
+        "filename": "Enscape_2024-03-13-15-13-42.webp",
+        "baseName": "Enscape_2024-03-13-15-13-42",
+        "hash": "20ea6171935a496c763a51467fe29168",
+        "size": 490062,
+        "isOptimized": true
+      },
+      "savings": -325056,
+      "savingsPercent": -197
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-15-34.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-15-34.jpg",
+        "filename": "Enscape_2024-03-13-15-15-34.jpg",
+        "baseName": "Enscape_2024-03-13-15-15-34",
+        "hash": "e157facc99ea544f97eb96c62be3f3b7",
+        "size": 315246,
+        "isOptimized": true
+      },
+      "savings": -150240,
+      "savingsPercent": -91
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-15-34.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-15-34.webp",
+        "filename": "Enscape_2024-03-13-15-15-34.webp",
+        "baseName": "Enscape_2024-03-13-15-15-34",
+        "hash": "779ada7afc2ac0422a49495973235957",
+        "size": 322300,
+        "isOptimized": true
+      },
+      "savings": -157294,
+      "savingsPercent": -95
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-16-07.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-16-07.jpg",
+        "filename": "Enscape_2024-03-13-15-16-07.jpg",
+        "baseName": "Enscape_2024-03-13-15-16-07",
+        "hash": "9c93fb83a9fb91b61e2e519090aebef2",
+        "size": 402580,
+        "isOptimized": true
+      },
+      "savings": -237574,
+      "savingsPercent": -144
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-16-07.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-16-07.webp",
+        "filename": "Enscape_2024-03-13-15-16-07.webp",
+        "baseName": "Enscape_2024-03-13-15-16-07",
+        "hash": "7723335b974e9bf0af39493040ea3993",
+        "size": 418524,
+        "isOptimized": true
+      },
+      "savings": -253518,
+      "savingsPercent": -154
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-20-11.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-20-11.jpg",
+        "filename": "Enscape_2024-03-13-15-20-11.jpg",
+        "baseName": "Enscape_2024-03-13-15-20-11",
+        "hash": "aabbcd2d0ada13b0e41e9b3f9f1b5080",
+        "size": 454429,
+        "isOptimized": true
+      },
+      "savings": -289423,
+      "savingsPercent": -175
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-15-20-11.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-15-20-11.webp",
+        "filename": "Enscape_2024-03-13-15-20-11.webp",
+        "baseName": "Enscape_2024-03-13-15-20-11",
+        "hash": "66e4b62622f2ce1d59188b51fbd5791c",
+        "size": 484872,
+        "isOptimized": true
+      },
+      "savings": -319866,
+      "savingsPercent": -194
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-16-02-22.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-16-02-22.jpg",
+        "filename": "Enscape_2024-03-13-16-02-22.jpg",
+        "baseName": "Enscape_2024-03-13-16-02-22",
+        "hash": "c08fb78142d9883991db2437afea5d41",
+        "size": 423132,
+        "isOptimized": true
+      },
+      "savings": -258126,
+      "savingsPercent": -156
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-16-02-22.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-16-02-22.webp",
+        "filename": "Enscape_2024-03-13-16-02-22.webp",
+        "baseName": "Enscape_2024-03-13-16-02-22",
+        "hash": "1a2e8fcd3e5c0bf62a2c5026eb9a6c80",
+        "size": 467212,
+        "isOptimized": true
+      },
+      "savings": -302206,
+      "savingsPercent": -183
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-16-03-25.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-16-03-25.jpg",
+        "filename": "Enscape_2024-03-13-16-03-25.jpg",
+        "baseName": "Enscape_2024-03-13-16-03-25",
+        "hash": "cf8a5bbf7ada871e4d3ec10b2c385945",
+        "size": 363945,
+        "isOptimized": true
+      },
+      "savings": -198939,
+      "savingsPercent": -121
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-16-03-25.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-16-03-25.webp",
+        "filename": "Enscape_2024-03-13-16-03-25.webp",
+        "baseName": "Enscape_2024-03-13-16-03-25",
+        "hash": "c43756ac57e126ae4dc9e4f9513537f1",
+        "size": 321876,
+        "isOptimized": true
+      },
+      "savings": -156870,
+      "savingsPercent": -95
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-16-05-24.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-16-05-24.jpg",
+        "filename": "Enscape_2024-03-13-16-05-24.jpg",
+        "baseName": "Enscape_2024-03-13-16-05-24",
+        "hash": "d5b0d1a3a74822970cb22d30e9d88e96",
+        "size": 402990,
+        "isOptimized": true
+      },
+      "savings": -237984,
+      "savingsPercent": -144
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-13-16-05-24.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-13-16-05-24.webp",
+        "filename": "Enscape_2024-03-13-16-05-24.webp",
+        "baseName": "Enscape_2024-03-13-16-05-24",
+        "hash": "8c7303c9f6e456b68f5817ee4da65d72",
+        "size": 422798,
+        "isOptimized": true
+      },
+      "savings": -257792,
+      "savingsPercent": -156
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-12-03-02.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-12-03-02.jpg",
+        "filename": "Enscape_2024-03-21-12-03-02.jpg",
+        "baseName": "Enscape_2024-03-21-12-03-02",
+        "hash": "008f2b678b27ddd821df672be8fc6f9d",
+        "size": 401633,
+        "isOptimized": true
+      },
+      "savings": -236627,
+      "savingsPercent": -143
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-12-03-02.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-12-03-02.webp",
+        "filename": "Enscape_2024-03-21-12-03-02.webp",
+        "baseName": "Enscape_2024-03-21-12-03-02",
+        "hash": "09b16f5a22f22321fbd1d4662adb78af",
+        "size": 424540,
+        "isOptimized": true
+      },
+      "savings": -259534,
+      "savingsPercent": -157
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-49-43.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-49-43.jpg",
+        "filename": "Enscape_2024-03-21-15-49-43.jpg",
+        "baseName": "Enscape_2024-03-21-15-49-43",
+        "hash": "5857fed2e7a9aff0b339513a16efc935",
+        "size": 282294,
+        "isOptimized": true
+      },
+      "savings": -117288,
+      "savingsPercent": -71
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-49-43.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-49-43.webp",
+        "filename": "Enscape_2024-03-21-15-49-43.webp",
+        "baseName": "Enscape_2024-03-21-15-49-43",
+        "hash": "e254dc199cc9d03585e0b547946537bd",
+        "size": 255764,
+        "isOptimized": true
+      },
+      "savings": -90758,
+      "savingsPercent": -55
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-50-35.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-50-35.jpg",
+        "filename": "Enscape_2024-03-21-15-50-35.jpg",
+        "baseName": "Enscape_2024-03-21-15-50-35",
+        "hash": "78fae39ff66d53fc618ac048205bf1aa",
+        "size": 315170,
+        "isOptimized": true
+      },
+      "savings": -150164,
+      "savingsPercent": -91
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-50-35.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-50-35.webp",
+        "filename": "Enscape_2024-03-21-15-50-35.webp",
+        "baseName": "Enscape_2024-03-21-15-50-35",
+        "hash": "a6c12feadc3fdb616181e886a9cea340",
+        "size": 290400,
+        "isOptimized": true
+      },
+      "savings": -125394,
+      "savingsPercent": -76
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-51-28.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-51-28.jpg",
+        "filename": "Enscape_2024-03-21-15-51-28.jpg",
+        "baseName": "Enscape_2024-03-21-15-51-28",
+        "hash": "1852298b767b5e6acbfa153c569b8ecf",
+        "size": 306958,
+        "isOptimized": true
+      },
+      "savings": -141952,
+      "savingsPercent": -86
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-51-28.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-51-28.webp",
+        "filename": "Enscape_2024-03-21-15-51-28.webp",
+        "baseName": "Enscape_2024-03-21-15-51-28",
+        "hash": "fd4d31ed3a818b5ac128d51bfc404b12",
+        "size": 285542,
+        "isOptimized": true
+      },
+      "savings": -120536,
+      "savingsPercent": -73
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-52-29.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-52-29.jpg",
+        "filename": "Enscape_2024-03-21-15-52-29.jpg",
+        "baseName": "Enscape_2024-03-21-15-52-29",
+        "hash": "12d988d2f6d9578fd0b202fc35bbe0a1",
+        "size": 346574,
+        "isOptimized": true
+      },
+      "savings": -181568,
+      "savingsPercent": -110
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-52-29.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-52-29.webp",
+        "filename": "Enscape_2024-03-21-15-52-29.webp",
+        "baseName": "Enscape_2024-03-21-15-52-29",
+        "hash": "2c62600405b15f56714e6b6a9d984147",
+        "size": 344794,
+        "isOptimized": true
+      },
+      "savings": -179788,
+      "savingsPercent": -109
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-53-56.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-53-56.jpg",
+        "filename": "Enscape_2024-03-21-15-53-56.jpg",
+        "baseName": "Enscape_2024-03-21-15-53-56",
+        "hash": "5b616bfa7bc8b88791a5193f74d56b28",
+        "size": 298625,
+        "isOptimized": true
+      },
+      "savings": -133619,
+      "savingsPercent": -81
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-53-56.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-53-56.webp",
+        "filename": "Enscape_2024-03-21-15-53-56.webp",
+        "baseName": "Enscape_2024-03-21-15-53-56",
+        "hash": "9f704200c3519d76bebd026af24dce95",
+        "size": 262836,
+        "isOptimized": true
+      },
+      "savings": -97830,
+      "savingsPercent": -59
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-54-43.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-54-43.jpg",
+        "filename": "Enscape_2024-03-21-15-54-43.jpg",
+        "baseName": "Enscape_2024-03-21-15-54-43",
+        "hash": "c89f2bd5a910a12b33fe0fe7182abfe8",
+        "size": 370883,
+        "isOptimized": true
+      },
+      "savings": -205877,
+      "savingsPercent": -125
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-54-43.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-54-43.webp",
+        "filename": "Enscape_2024-03-21-15-54-43.webp",
+        "baseName": "Enscape_2024-03-21-15-54-43",
+        "hash": "7b159eb625d5bd4625574a7962078b31",
+        "size": 371880,
+        "isOptimized": true
+      },
+      "savings": -206874,
+      "savingsPercent": -125
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-55-17.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-55-17.jpg",
+        "filename": "Enscape_2024-03-21-15-55-17.jpg",
+        "baseName": "Enscape_2024-03-21-15-55-17",
+        "hash": "fb83816f1c3b93a5d9c77e956db9cc11",
+        "size": 381862,
+        "isOptimized": true
+      },
+      "savings": -216856,
+      "savingsPercent": -131
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-55-17.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-55-17.webp",
+        "filename": "Enscape_2024-03-21-15-55-17.webp",
+        "baseName": "Enscape_2024-03-21-15-55-17",
+        "hash": "985d855734957403f767f074fbf6fcbf",
+        "size": 385786,
+        "isOptimized": true
+      },
+      "savings": -220780,
+      "savingsPercent": -134
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-55-54.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-55-54.jpg",
+        "filename": "Enscape_2024-03-21-15-55-54.jpg",
+        "baseName": "Enscape_2024-03-21-15-55-54",
+        "hash": "2631a2f6c75acf75ac698c07828ce626",
+        "size": 383728,
+        "isOptimized": true
+      },
+      "savings": -218722,
+      "savingsPercent": -133
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-55-54.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-55-54.webp",
+        "filename": "Enscape_2024-03-21-15-55-54.webp",
+        "baseName": "Enscape_2024-03-21-15-55-54",
+        "hash": "10685a86336224fa38184336e1c53d80",
+        "size": 385922,
+        "isOptimized": true
+      },
+      "savings": -220916,
+      "savingsPercent": -134
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-56-33.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-56-33.jpg",
+        "filename": "Enscape_2024-03-21-15-56-33.jpg",
+        "baseName": "Enscape_2024-03-21-15-56-33",
+        "hash": "e5f592136ae5d643940ae2c1b8ae713f",
+        "size": 418561,
+        "isOptimized": true
+      },
+      "savings": -253555,
+      "savingsPercent": -154
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-56-33.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-56-33.webp",
+        "filename": "Enscape_2024-03-21-15-56-33.webp",
+        "baseName": "Enscape_2024-03-21-15-56-33",
+        "hash": "caf05461b034c220f5b4d7745338d2ff",
+        "size": 439264,
+        "isOptimized": true
+      },
+      "savings": -274258,
+      "savingsPercent": -166
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-57-14.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-57-14.jpg",
+        "filename": "Enscape_2024-03-21-15-57-14.jpg",
+        "baseName": "Enscape_2024-03-21-15-57-14",
+        "hash": "1c8b84765a87955a4ec0301d39807801",
+        "size": 340277,
+        "isOptimized": true
+      },
+      "savings": -175271,
+      "savingsPercent": -106
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-57-14.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-57-14.webp",
+        "filename": "Enscape_2024-03-21-15-57-14.webp",
+        "baseName": "Enscape_2024-03-21-15-57-14",
+        "hash": "7c2044dbbe977a054d5aede3821904ad",
+        "size": 329728,
+        "isOptimized": true
+      },
+      "savings": -164722,
+      "savingsPercent": -100
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-57-39.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-57-39.jpg",
+        "filename": "Enscape_2024-03-21-15-57-39.jpg",
+        "baseName": "Enscape_2024-03-21-15-57-39",
+        "hash": "96d252e6ab902fbd88230ca4a3042c66",
+        "size": 315275,
+        "isOptimized": true
+      },
+      "savings": -150269,
+      "savingsPercent": -91
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-57-39.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-57-39.webp",
+        "filename": "Enscape_2024-03-21-15-57-39.webp",
+        "baseName": "Enscape_2024-03-21-15-57-39",
+        "hash": "5a7dde154b00534967a1fb8d1c730e1d",
+        "size": 300534,
+        "isOptimized": true
+      },
+      "savings": -135528,
+      "savingsPercent": -82
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-58-26.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-58-26.jpg",
+        "filename": "Enscape_2024-03-21-15-58-26.jpg",
+        "baseName": "Enscape_2024-03-21-15-58-26",
+        "hash": "807263232f8442aee2c99736c5fb598c",
+        "size": 307495,
+        "isOptimized": true
+      },
+      "savings": -142489,
+      "savingsPercent": -86
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-21-15-58-26.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-21-15-58-26.webp",
+        "filename": "Enscape_2024-03-21-15-58-26.webp",
+        "baseName": "Enscape_2024-03-21-15-58-26",
+        "hash": "2ad516ea036acfc183b1b63b1b7c8260",
+        "size": 290344,
+        "isOptimized": true
+      },
+      "savings": -125338,
+      "savingsPercent": -76
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-23-13-29-01.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-23-13-29-01.jpg",
+        "filename": "Enscape_2024-03-23-13-29-01.jpg",
+        "baseName": "Enscape_2024-03-23-13-29-01",
+        "hash": "34d4d6225bcbc8851b5ce808a43dbc0c",
+        "size": 443499,
+        "isOptimized": true
+      },
+      "savings": -278493,
+      "savingsPercent": -169
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-23-13-29-01.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-23-13-29-01.webp",
+        "filename": "Enscape_2024-03-23-13-29-01.webp",
+        "baseName": "Enscape_2024-03-23-13-29-01",
+        "hash": "83022e42e92803b709dca7c54549bacb",
+        "size": 449336,
+        "isOptimized": true
+      },
+      "savings": -284330,
+      "savingsPercent": -172
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-29-11-17-16.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-29-11-17-16.jpg",
+        "filename": "Enscape_2024-03-29-11-17-16.jpg",
+        "baseName": "Enscape_2024-03-29-11-17-16",
+        "hash": "b76e2fa08d58710b24b7134fe1503d5f",
+        "size": 310908,
+        "isOptimized": true
+      },
+      "savings": -145902,
+      "savingsPercent": -88
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-29-11-17-16.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-29-11-17-16.webp",
+        "filename": "Enscape_2024-03-29-11-17-16.webp",
+        "baseName": "Enscape_2024-03-29-11-17-16",
+        "hash": "44e39cf5c4e2b687a89ee731301f78e2",
+        "size": 277228,
+        "isOptimized": true
+      },
+      "savings": -112222,
+      "savingsPercent": -68
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-29-11-30-11.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-29-11-30-11.jpg",
+        "filename": "Enscape_2024-03-29-11-30-11.jpg",
+        "baseName": "Enscape_2024-03-29-11-30-11",
+        "hash": "0b6b284f9827b6b4744287cbe7cf9101",
+        "size": 566678,
+        "isOptimized": true
+      },
+      "savings": -401672,
+      "savingsPercent": -243
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Enscape_2024-03-29-11-30-11.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Enscape_2024-03-29-11-30-11.webp",
+        "filename": "Enscape_2024-03-29-11-30-11.webp",
+        "baseName": "Enscape_2024-03-29-11-30-11",
+        "hash": "02d684840e6c2833ad3fafa087c91a2c",
+        "size": 542670,
+        "isOptimized": true
+      },
+      "savings": -377664,
+      "savingsPercent": -229
+    },
+    {
+      "original": {
+        "path": "images\\homeBanner.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\homeBanner.jpg",
+        "filename": "homeBanner.jpg",
+        "baseName": "homeBanner",
+        "hash": "568aa27a4507e12d04328189783206c3",
+        "size": 561299,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\homeBanner.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\homeBanner.jpg",
+        "filename": "homeBanner.jpg",
+        "baseName": "homeBanner",
+        "hash": "4f28f7f6145f240994efc95618a76805",
+        "size": 238741,
+        "isOptimized": true
+      },
+      "savings": 322558,
+      "savingsPercent": 57
+    },
+    {
+      "original": {
+        "path": "images\\homeBanner.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\homeBanner.jpg",
+        "filename": "homeBanner.jpg",
+        "baseName": "homeBanner",
+        "hash": "568aa27a4507e12d04328189783206c3",
+        "size": 561299,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\homeBanner.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\homeBanner.webp",
+        "filename": "homeBanner.webp",
+        "baseName": "homeBanner",
+        "hash": "1b21b1e8ec38e4faefaa85201d7cec84",
+        "size": 215948,
+        "isOptimized": true
+      },
+      "savings": 345351,
+      "savingsPercent": 62
+    },
+    {
+      "original": {
+        "path": "images\\Messi Eng Maher.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\Messi Eng Maher.jpg",
+        "filename": "Messi Eng Maher.jpg",
+        "baseName": "Messi Eng Maher",
+        "hash": "939b69e34041d9033c96ec5f46b49bf3",
+        "size": 8559492,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Messi Eng Maher.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Messi Eng Maher.jpg",
+        "filename": "Messi Eng Maher.jpg",
+        "baseName": "Messi Eng Maher",
+        "hash": "a62a74afd1b20e512ce6f64f392fcb0b",
+        "size": 209904,
+        "isOptimized": true
+      },
+      "savings": 8349588,
+      "savingsPercent": 98
+    },
+    {
+      "original": {
+        "path": "images\\Messi Eng Maher.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\Messi Eng Maher.jpg",
+        "filename": "Messi Eng Maher.jpg",
+        "baseName": "Messi Eng Maher",
+        "hash": "939b69e34041d9033c96ec5f46b49bf3",
+        "size": 8559492,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\Messi Eng Maher.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\Messi Eng Maher.webp",
+        "filename": "Messi Eng Maher.webp",
+        "baseName": "Messi Eng Maher",
+        "hash": "58470122fd15518647de6f28b9cd8899",
+        "size": 167040,
+        "isOptimized": true
+      },
+      "savings": 8392452,
+      "savingsPercent": 98
+    },
+    {
+      "original": {
+        "path": "images\\newbanner.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\newbanner.jpg",
+        "filename": "newbanner.jpg",
+        "baseName": "newbanner",
+        "hash": "652c6999258462e07cda512741fa3ff1",
+        "size": 20230532,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\newbanner.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\newbanner.jpg",
+        "filename": "newbanner.jpg",
+        "baseName": "newbanner",
+        "hash": "bfaf78bd6bb57325e8f21cfb86f57648",
+        "size": 578016,
+        "isOptimized": true
+      },
+      "savings": 19652516,
+      "savingsPercent": 97
+    },
+    {
+      "original": {
+        "path": "images\\newbanner.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\newbanner.jpg",
+        "filename": "newbanner.jpg",
+        "baseName": "newbanner",
+        "hash": "652c6999258462e07cda512741fa3ff1",
+        "size": 20230532,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\newbanner.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\newbanner.webp",
+        "filename": "newbanner.webp",
+        "baseName": "newbanner",
+        "hash": "de0bfde5469c6e67d1f02a4b4a202d54",
+        "size": 626504,
+        "isOptimized": true
+      },
+      "savings": 19604028,
+      "savingsPercent": 97
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\villa114.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\villa114.jpg",
+        "filename": "villa114.jpg",
+        "baseName": "villa114",
+        "hash": "1985f4575e4ab4e40d16c792cbac3203",
+        "size": 386664,
+        "isOptimized": true
+      },
+      "savings": 238208,
+      "savingsPercent": 38
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\villa114.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\villa114.webp",
+        "filename": "villa114.webp",
+        "baseName": "villa114",
+        "hash": "9273cad8f02d15f27f3b554ae54c4923",
+        "size": 348030,
+        "isOptimized": true
+      },
+      "savings": 276842,
+      "savingsPercent": 44
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_DSC3504-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_DSC3504-HDR.jpg",
+        "filename": "_DSC3504-HDR.jpg",
+        "baseName": "_DSC3504-HDR",
+        "hash": "a216ba49c926f40726772fec1cf909f8",
+        "size": 474987,
+        "isOptimized": true
+      },
+      "savings": -309981,
+      "savingsPercent": -188
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_DSC3504-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_DSC3504-HDR.webp",
+        "filename": "_DSC3504-HDR.webp",
+        "baseName": "_DSC3504-HDR",
+        "hash": "0a819f55654f8f83711e68fe8d72a88a",
+        "size": 448798,
+        "isOptimized": true
+      },
+      "savings": -283792,
+      "savingsPercent": -172
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0003-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0003-HDR.jpg",
+        "filename": "_MID0003-HDR.jpg",
+        "baseName": "_MID0003-HDR",
+        "hash": "95dbe612fc5bd8fff91d8acc1b0146e1",
+        "size": 436807,
+        "isOptimized": true
+      },
+      "savings": -271801,
+      "savingsPercent": -165
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0003-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0003-HDR.webp",
+        "filename": "_MID0003-HDR.webp",
+        "baseName": "_MID0003-HDR",
+        "hash": "112a923f0d26ee4959b770ee577d8b4b",
+        "size": 438938,
+        "isOptimized": true
+      },
+      "savings": -273932,
+      "savingsPercent": -166
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0008-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0008-HDR.jpg",
+        "filename": "_MID0008-HDR.jpg",
+        "baseName": "_MID0008-HDR",
+        "hash": "c2eb935a1c3b05076e06ec0c8f7ca918",
+        "size": 280589,
+        "isOptimized": true
+      },
+      "savings": -115583,
+      "savingsPercent": -70
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0008-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0008-HDR.webp",
+        "filename": "_MID0008-HDR.webp",
+        "baseName": "_MID0008-HDR",
+        "hash": "fd6ac444f54ce51ef841a4644967a3ad",
+        "size": 226970,
+        "isOptimized": true
+      },
+      "savings": -61964,
+      "savingsPercent": -38
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0013-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0013-HDR.jpg",
+        "filename": "_MID0013-HDR.jpg",
+        "baseName": "_MID0013-HDR",
+        "hash": "7ff9e8e6136a4633f882197766122d88",
+        "size": 267968,
+        "isOptimized": true
+      },
+      "savings": -102962,
+      "savingsPercent": -62
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0013-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0013-HDR.webp",
+        "filename": "_MID0013-HDR.webp",
+        "baseName": "_MID0013-HDR",
+        "hash": "26898c958900947a2d0c5a3c7883a9a8",
+        "size": 230714,
+        "isOptimized": true
+      },
+      "savings": -65708,
+      "savingsPercent": -40
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0026-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0026-HDR.jpg",
+        "filename": "_MID0026-HDR.jpg",
+        "baseName": "_MID0026-HDR",
+        "hash": "0708d7541885f8b09d811ed911060b1b",
+        "size": 395043,
+        "isOptimized": true
+      },
+      "savings": -230037,
+      "savingsPercent": -139
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0026-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0026-HDR.webp",
+        "filename": "_MID0026-HDR.webp",
+        "baseName": "_MID0026-HDR",
+        "hash": "18aaf258aeb1e1737cb80c3d082554b3",
+        "size": 322822,
+        "isOptimized": true
+      },
+      "savings": -157816,
+      "savingsPercent": -96
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0031-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0031-HDR.jpg",
+        "filename": "_MID0031-HDR.jpg",
+        "baseName": "_MID0031-HDR",
+        "hash": "38c69319f0257c88557f67f8e253ad38",
+        "size": 562378,
+        "isOptimized": true
+      },
+      "savings": -397372,
+      "savingsPercent": -241
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0031-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0031-HDR.webp",
+        "filename": "_MID0031-HDR.webp",
+        "baseName": "_MID0031-HDR",
+        "hash": "92cf725eae9aef9620f64d106064f258",
+        "size": 605140,
+        "isOptimized": true
+      },
+      "savings": -440134,
+      "savingsPercent": -267
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0033-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0033-HDR.jpg",
+        "filename": "_MID0033-HDR.jpg",
+        "baseName": "_MID0033-HDR",
+        "hash": "09132196b415218a5bafcb2d0ad5074e",
+        "size": 344431,
+        "isOptimized": true
+      },
+      "savings": -179425,
+      "savingsPercent": -109
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0033-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0033-HDR.webp",
+        "filename": "_MID0033-HDR.webp",
+        "baseName": "_MID0033-HDR",
+        "hash": "fbb8d04cff2abda77f86914eda2ce084",
+        "size": 305202,
+        "isOptimized": true
+      },
+      "savings": -140196,
+      "savingsPercent": -85
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0038-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0038-HDR.jpg",
+        "filename": "_MID0038-HDR.jpg",
+        "baseName": "_MID0038-HDR",
+        "hash": "b432068e3a037bdf04a16f3c0919f785",
+        "size": 316771,
+        "isOptimized": true
+      },
+      "savings": -151765,
+      "savingsPercent": -92
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0038-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0038-HDR.webp",
+        "filename": "_MID0038-HDR.webp",
+        "baseName": "_MID0038-HDR",
+        "hash": "2dfa5854c4f9168ea123201c99b1987f",
+        "size": 249296,
+        "isOptimized": true
+      },
+      "savings": -84290,
+      "savingsPercent": -51
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0053-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0053-HDR.jpg",
+        "filename": "_MID0053-HDR.jpg",
+        "baseName": "_MID0053-HDR",
+        "hash": "6e5d6be05a4ae9491a1e7915ab568f73",
+        "size": 307303,
+        "isOptimized": true
+      },
+      "savings": -142297,
+      "savingsPercent": -86
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0053-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0053-HDR.webp",
+        "filename": "_MID0053-HDR.webp",
+        "baseName": "_MID0053-HDR",
+        "hash": "ea7fbda6ff24d3eada9cb887e6807d36",
+        "size": 248972,
+        "isOptimized": true
+      },
+      "savings": -83966,
+      "savingsPercent": -51
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0066-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0066-HDR.jpg",
+        "filename": "_MID0066-HDR.jpg",
+        "baseName": "_MID0066-HDR",
+        "hash": "b23868d742e18939d71323ba93626d62",
+        "size": 271141,
+        "isOptimized": true
+      },
+      "savings": -106135,
+      "savingsPercent": -64
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0066-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0066-HDR.webp",
+        "filename": "_MID0066-HDR.webp",
+        "baseName": "_MID0066-HDR",
+        "hash": "0059351768b3ebac99f8354be026ae26",
+        "size": 192332,
+        "isOptimized": true
+      },
+      "savings": -27326,
+      "savingsPercent": -17
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0068-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0068-HDR.jpg",
+        "filename": "_MID0068-HDR.jpg",
+        "baseName": "_MID0068-HDR",
+        "hash": "b8de6561c569be544708a09f02bf9861",
+        "size": 373948,
+        "isOptimized": true
+      },
+      "savings": -208942,
+      "savingsPercent": -127
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0068-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0068-HDR.webp",
+        "filename": "_MID0068-HDR.webp",
+        "baseName": "_MID0068-HDR",
+        "hash": "0dd6f1789b453739ce74392014c0910c",
+        "size": 348218,
+        "isOptimized": true
+      },
+      "savings": -183212,
+      "savingsPercent": -111
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0071-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0071-HDR.jpg",
+        "filename": "_MID0071-HDR.jpg",
+        "baseName": "_MID0071-HDR",
+        "hash": "08494ff5963cf3d5b5c63cb26f44f670",
+        "size": 242030,
+        "isOptimized": true
+      },
+      "savings": -77024,
+      "savingsPercent": -47
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0071-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0071-HDR.webp",
+        "filename": "_MID0071-HDR.webp",
+        "baseName": "_MID0071-HDR",
+        "hash": "a5379b5a8c14348ad01fceb827c5d95a",
+        "size": 169778,
+        "isOptimized": true
+      },
+      "savings": -4772,
+      "savingsPercent": -3
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0073-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0073-HDR.jpg",
+        "filename": "_MID0073-HDR.jpg",
+        "baseName": "_MID0073-HDR",
+        "hash": "2032570ff11bef5e90eaf51ae10cf3e2",
+        "size": 228600,
+        "isOptimized": true
+      },
+      "savings": -63594,
+      "savingsPercent": -39
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0073-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0073-HDR.webp",
+        "filename": "_MID0073-HDR.webp",
+        "baseName": "_MID0073-HDR",
+        "hash": "07d079e59c262d4d7390ac367db52c86",
+        "size": 177316,
+        "isOptimized": true
+      },
+      "savings": -12310,
+      "savingsPercent": -7
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0076-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0076-HDR.jpg",
+        "filename": "_MID0076-HDR.jpg",
+        "baseName": "_MID0076-HDR",
+        "hash": "0db892d05e0dac14f956567f6bfceaf5",
+        "size": 268604,
+        "isOptimized": true
+      },
+      "savings": -103598,
+      "savingsPercent": -63
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0076-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0076-HDR.webp",
+        "filename": "_MID0076-HDR.webp",
+        "baseName": "_MID0076-HDR",
+        "hash": "0acf321272d2ccab3a920bd543e9c427",
+        "size": 192754,
+        "isOptimized": true
+      },
+      "savings": -27748,
+      "savingsPercent": -17
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0078-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0078-HDR.jpg",
+        "filename": "_MID0078-HDR.jpg",
+        "baseName": "_MID0078-HDR",
+        "hash": "3b4d8ac093b8468570a727a3c4f251d3",
+        "size": 279586,
+        "isOptimized": true
+      },
+      "savings": -114580,
+      "savingsPercent": -69
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0078-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0078-HDR.webp",
+        "filename": "_MID0078-HDR.webp",
+        "baseName": "_MID0078-HDR",
+        "hash": "13df2838032314d5822e2cb9fd11c42b",
+        "size": 266850,
+        "isOptimized": true
+      },
+      "savings": -101844,
+      "savingsPercent": -62
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0083-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0083-HDR.jpg",
+        "filename": "_MID0083-HDR.jpg",
+        "baseName": "_MID0083-HDR",
+        "hash": "7a8f7abbf02351952085c5e3eb50a97c",
+        "size": 400631,
+        "isOptimized": true
+      },
+      "savings": -235625,
+      "savingsPercent": -143
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0083-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0083-HDR.webp",
+        "filename": "_MID0083-HDR.webp",
+        "baseName": "_MID0083-HDR",
+        "hash": "2800ce0b5a903575991aa06973f43598",
+        "size": 395168,
+        "isOptimized": true
+      },
+      "savings": -230162,
+      "savingsPercent": -139
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0088-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0088-HDR.jpg",
+        "filename": "_MID0088-HDR.jpg",
+        "baseName": "_MID0088-HDR",
+        "hash": "3e32ced615c69ae251410c1ef8cad7a6",
+        "size": 294056,
+        "isOptimized": true
+      },
+      "savings": -129050,
+      "savingsPercent": -78
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0088-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0088-HDR.webp",
+        "filename": "_MID0088-HDR.webp",
+        "baseName": "_MID0088-HDR",
+        "hash": "d37e6d396b502e5d7776729e73074c15",
+        "size": 249552,
+        "isOptimized": true
+      },
+      "savings": -84546,
+      "savingsPercent": -51
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0093-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0093-HDR.jpg",
+        "filename": "_MID0093-HDR.jpg",
+        "baseName": "_MID0093-HDR",
+        "hash": "769025bfc4ae3a1f4479a8001d3ae7b5",
+        "size": 270237,
+        "isOptimized": true
+      },
+      "savings": -105231,
+      "savingsPercent": -64
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0093-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0093-HDR.webp",
+        "filename": "_MID0093-HDR.webp",
+        "baseName": "_MID0093-HDR",
+        "hash": "4c9e0dcbc51b9fb17dbf77de66726c5a",
+        "size": 234472,
+        "isOptimized": true
+      },
+      "savings": -69466,
+      "savingsPercent": -42
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0096-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0096-HDR.jpg",
+        "filename": "_MID0096-HDR.jpg",
+        "baseName": "_MID0096-HDR",
+        "hash": "d023578283ced93cd5f2771b6d8887c7",
+        "size": 264778,
+        "isOptimized": true
+      },
+      "savings": -99772,
+      "savingsPercent": -60
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0096-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0096-HDR.webp",
+        "filename": "_MID0096-HDR.webp",
+        "baseName": "_MID0096-HDR",
+        "hash": "05e334a2963efa83fd9625918247f3f3",
+        "size": 206804,
+        "isOptimized": true
+      },
+      "savings": -41798,
+      "savingsPercent": -25
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0098-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0098-HDR.jpg",
+        "filename": "_MID0098-HDR.jpg",
+        "baseName": "_MID0098-HDR",
+        "hash": "3432f44ac9c19a12da355083eac3826d",
+        "size": 277106,
+        "isOptimized": true
+      },
+      "savings": -112100,
+      "savingsPercent": -68
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0098-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0098-HDR.webp",
+        "filename": "_MID0098-HDR.webp",
+        "baseName": "_MID0098-HDR",
+        "hash": "f18786ffb57c1514bea95d0445a934df",
+        "size": 219392,
+        "isOptimized": true
+      },
+      "savings": -54386,
+      "savingsPercent": -33
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0101-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0101-HDR.jpg",
+        "filename": "_MID0101-HDR.jpg",
+        "baseName": "_MID0101-HDR",
+        "hash": "0f752398a7a9e51f919dcde79229f904",
+        "size": 253638,
+        "isOptimized": true
+      },
+      "savings": -88632,
+      "savingsPercent": -54
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0101-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0101-HDR.webp",
+        "filename": "_MID0101-HDR.webp",
+        "baseName": "_MID0101-HDR",
+        "hash": "d73654901fad52069121850dcf003291",
+        "size": 194592,
+        "isOptimized": true
+      },
+      "savings": -29586,
+      "savingsPercent": -18
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0111-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0111-HDR.jpg",
+        "filename": "_MID0111-HDR.jpg",
+        "baseName": "_MID0111-HDR",
+        "hash": "5a6427409382dbd785a0e28b5e2d1422",
+        "size": 306196,
+        "isOptimized": true
+      },
+      "savings": -141190,
+      "savingsPercent": -86
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0111-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0111-HDR.webp",
+        "filename": "_MID0111-HDR.webp",
+        "baseName": "_MID0111-HDR",
+        "hash": "408e56a33805b51500aa072fc3243292",
+        "size": 236024,
+        "isOptimized": true
+      },
+      "savings": -71018,
+      "savingsPercent": -43
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0116-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0116-HDR.jpg",
+        "filename": "_MID0116-HDR.jpg",
+        "baseName": "_MID0116-HDR",
+        "hash": "1df7d3e468f1af0f34b58b8a390606b4",
+        "size": 311686,
+        "isOptimized": true
+      },
+      "savings": -146680,
+      "savingsPercent": -89
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0116-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0116-HDR.webp",
+        "filename": "_MID0116-HDR.webp",
+        "baseName": "_MID0116-HDR",
+        "hash": "03c93e645db7d08b530254d65a2c25b9",
+        "size": 262620,
+        "isOptimized": true
+      },
+      "savings": -97614,
+      "savingsPercent": -59
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0118-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0118-HDR.jpg",
+        "filename": "_MID0118-HDR.jpg",
+        "baseName": "_MID0118-HDR",
+        "hash": "02f990f7c840b9420956dc73ae262bd1",
+        "size": 258607,
+        "isOptimized": true
+      },
+      "savings": -93601,
+      "savingsPercent": -57
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0118-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0118-HDR.webp",
+        "filename": "_MID0118-HDR.webp",
+        "baseName": "_MID0118-HDR",
+        "hash": "1d486a11145a01fdb3dda4b89b6b6f23",
+        "size": 196786,
+        "isOptimized": true
+      },
+      "savings": -31780,
+      "savingsPercent": -19
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0121-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0121-HDR.jpg",
+        "filename": "_MID0121-HDR.jpg",
+        "baseName": "_MID0121-HDR",
+        "hash": "786f54fd01000e93ca3f86a58fc952a8",
+        "size": 264714,
+        "isOptimized": true
+      },
+      "savings": -99708,
+      "savingsPercent": -60
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0121-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0121-HDR.webp",
+        "filename": "_MID0121-HDR.webp",
+        "baseName": "_MID0121-HDR",
+        "hash": "8301fb8365035436aee43985ee7dc420",
+        "size": 212564,
+        "isOptimized": true
+      },
+      "savings": -47558,
+      "savingsPercent": -29
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0123-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0123-HDR.jpg",
+        "filename": "_MID0123-HDR.jpg",
+        "baseName": "_MID0123-HDR",
+        "hash": "1306ece8f5ce4110db76e58811c8ab07",
+        "size": 398815,
+        "isOptimized": true
+      },
+      "savings": -233809,
+      "savingsPercent": -142
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0123-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0123-HDR.webp",
+        "filename": "_MID0123-HDR.webp",
+        "baseName": "_MID0123-HDR",
+        "hash": "8feea77de856306e57a4f69ca6cab60c",
+        "size": 365720,
+        "isOptimized": true
+      },
+      "savings": -200714,
+      "savingsPercent": -122
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0128-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0128-HDR.jpg",
+        "filename": "_MID0128-HDR.jpg",
+        "baseName": "_MID0128-HDR",
+        "hash": "5382207b81f84f6b5a4c7243092d9932",
+        "size": 377073,
+        "isOptimized": true
+      },
+      "savings": -212067,
+      "savingsPercent": -129
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0128-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0128-HDR.webp",
+        "filename": "_MID0128-HDR.webp",
+        "baseName": "_MID0128-HDR",
+        "hash": "4e42de9d7e7945376891fe146bb97231",
+        "size": 384346,
+        "isOptimized": true
+      },
+      "savings": -219340,
+      "savingsPercent": -133
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0131-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0131-HDR.jpg",
+        "filename": "_MID0131-HDR.jpg",
+        "baseName": "_MID0131-HDR",
+        "hash": "6af513c4e28f7ddb45e024768e8e43da",
+        "size": 392758,
+        "isOptimized": true
+      },
+      "savings": -227752,
+      "savingsPercent": -138
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0131-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0131-HDR.webp",
+        "filename": "_MID0131-HDR.webp",
+        "baseName": "_MID0131-HDR",
+        "hash": "0def7b2842a7d424b7812c18d5401df0",
+        "size": 320914,
+        "isOptimized": true
+      },
+      "savings": -155908,
+      "savingsPercent": -94
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0133-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0133-HDR.jpg",
+        "filename": "_MID0133-HDR.jpg",
+        "baseName": "_MID0133-HDR",
+        "hash": "f364ec6c3c2a8e6bf64947d0f06f043d",
+        "size": 346052,
+        "isOptimized": true
+      },
+      "savings": -181046,
+      "savingsPercent": -110
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0133-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0133-HDR.webp",
+        "filename": "_MID0133-HDR.webp",
+        "baseName": "_MID0133-HDR",
+        "hash": "8cd691418e1114701d2c96d5d1742bb5",
+        "size": 293092,
+        "isOptimized": true
+      },
+      "savings": -128086,
+      "savingsPercent": -78
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0138-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0138-HDR.jpg",
+        "filename": "_MID0138-HDR.jpg",
+        "baseName": "_MID0138-HDR",
+        "hash": "76c78a46781a4aea103d1805bc4f17be",
+        "size": 367978,
+        "isOptimized": true
+      },
+      "savings": -202972,
+      "savingsPercent": -123
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0138-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0138-HDR.webp",
+        "filename": "_MID0138-HDR.webp",
+        "baseName": "_MID0138-HDR",
+        "hash": "e5de9c515bee0361fea25d980ee72960",
+        "size": 341064,
+        "isOptimized": true
+      },
+      "savings": -176058,
+      "savingsPercent": -107
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0146-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0146-HDR.jpg",
+        "filename": "_MID0146-HDR.jpg",
+        "baseName": "_MID0146-HDR",
+        "hash": "b647c1b6d27bad9871877ddf4168bfe5",
+        "size": 324073,
+        "isOptimized": true
+      },
+      "savings": -159067,
+      "savingsPercent": -96
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0146-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0146-HDR.webp",
+        "filename": "_MID0146-HDR.webp",
+        "baseName": "_MID0146-HDR",
+        "hash": "6b50a1abd5d0e6274ba20df0fd5ef10a",
+        "size": 269376,
+        "isOptimized": true
+      },
+      "savings": -104370,
+      "savingsPercent": -63
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0151-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0151-HDR.jpg",
+        "filename": "_MID0151-HDR.jpg",
+        "baseName": "_MID0151-HDR",
+        "hash": "abd73afba828f639cdc47febe301c59f",
+        "size": 321380,
+        "isOptimized": true
+      },
+      "savings": -156374,
+      "savingsPercent": -95
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0151-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0151-HDR.webp",
+        "filename": "_MID0151-HDR.webp",
+        "baseName": "_MID0151-HDR",
+        "hash": "9f958e4e7fcdfbbc98d4dd758562ee2d",
+        "size": 238936,
+        "isOptimized": true
+      },
+      "savings": -73930,
+      "savingsPercent": -45
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0156-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0156-HDR.jpg",
+        "filename": "_MID0156-HDR.jpg",
+        "baseName": "_MID0156-HDR",
+        "hash": "5abd92956978ee23c8144a948d1f75f0",
+        "size": 322685,
+        "isOptimized": true
+      },
+      "savings": -157679,
+      "savingsPercent": -96
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0156-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0156-HDR.webp",
+        "filename": "_MID0156-HDR.webp",
+        "baseName": "_MID0156-HDR",
+        "hash": "5d75b28949afabef6cec7fade2cf40c5",
+        "size": 262574,
+        "isOptimized": true
+      },
+      "savings": -97568,
+      "savingsPercent": -59
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0158-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0158-HDR.jpg",
+        "filename": "_MID0158-HDR.jpg",
+        "baseName": "_MID0158-HDR",
+        "hash": "104239cf08e920448b3a37300d5a0392",
+        "size": 295840,
+        "isOptimized": true
+      },
+      "savings": -130834,
+      "savingsPercent": -79
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0158-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0158-HDR.webp",
+        "filename": "_MID0158-HDR.webp",
+        "baseName": "_MID0158-HDR",
+        "hash": "f503ff225d716893cac2c2562f500ec0",
+        "size": 243982,
+        "isOptimized": true
+      },
+      "savings": -78976,
+      "savingsPercent": -48
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0161-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0161-HDR.jpg",
+        "filename": "_MID0161-HDR.jpg",
+        "baseName": "_MID0161-HDR",
+        "hash": "a12923c2aa6955ada3945ca4c48f9666",
+        "size": 274883,
+        "isOptimized": true
+      },
+      "savings": -109877,
+      "savingsPercent": -67
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0161-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0161-HDR.webp",
+        "filename": "_MID0161-HDR.webp",
+        "baseName": "_MID0161-HDR",
+        "hash": "d2ba707c3443afc39b1ddd0671da33bf",
+        "size": 197018,
+        "isOptimized": true
+      },
+      "savings": -32012,
+      "savingsPercent": -19
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0163-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0163-HDR.jpg",
+        "filename": "_MID0163-HDR.jpg",
+        "baseName": "_MID0163-HDR",
+        "hash": "3833e17a6c0df21571a80eac5c260d5a",
+        "size": 313486,
+        "isOptimized": true
+      },
+      "savings": -148480,
+      "savingsPercent": -90
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0163-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0163-HDR.webp",
+        "filename": "_MID0163-HDR.webp",
+        "baseName": "_MID0163-HDR",
+        "hash": "44ac2c0a8173224b5f37d59cb8e2a940",
+        "size": 272066,
+        "isOptimized": true
+      },
+      "savings": -107060,
+      "savingsPercent": -65
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0166-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0166-HDR.jpg",
+        "filename": "_MID0166-HDR.jpg",
+        "baseName": "_MID0166-HDR",
+        "hash": "943061d8e79c454303c265d872de67ab",
+        "size": 156566,
+        "isOptimized": true
+      },
+      "savings": 8440,
+      "savingsPercent": 5
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0166-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0166-HDR.webp",
+        "filename": "_MID0166-HDR.webp",
+        "baseName": "_MID0166-HDR",
+        "hash": "843120539809457a7f203e495bda7799",
+        "size": 98158,
+        "isOptimized": true
+      },
+      "savings": 66848,
+      "savingsPercent": 41
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0171-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0171-HDR.jpg",
+        "filename": "_MID0171-HDR.jpg",
+        "baseName": "_MID0171-HDR",
+        "hash": "0e1154deef9800f836c0638309d5b2f0",
+        "size": 258327,
+        "isOptimized": true
+      },
+      "savings": -93321,
+      "savingsPercent": -57
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0171-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0171-HDR.webp",
+        "filename": "_MID0171-HDR.webp",
+        "baseName": "_MID0171-HDR",
+        "hash": "631b0f9056d42d7071d235646da9c591",
+        "size": 190436,
+        "isOptimized": true
+      },
+      "savings": -25430,
+      "savingsPercent": -15
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0173-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0173-HDR.jpg",
+        "filename": "_MID0173-HDR.jpg",
+        "baseName": "_MID0173-HDR",
+        "hash": "5b61f7defda3a9ad3d5abb0f00a80121",
+        "size": 407039,
+        "isOptimized": true
+      },
+      "savings": -242033,
+      "savingsPercent": -147
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0173-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0173-HDR.webp",
+        "filename": "_MID0173-HDR.webp",
+        "baseName": "_MID0173-HDR",
+        "hash": "a4318541c4d1870f9cf3f7caa7d83f9e",
+        "size": 386360,
+        "isOptimized": true
+      },
+      "savings": -221354,
+      "savingsPercent": -134
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0178-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0178-HDR.jpg",
+        "filename": "_MID0178-HDR.jpg",
+        "baseName": "_MID0178-HDR",
+        "hash": "c5afd11ecaf17e576d5e2c8613001c9f",
+        "size": 484150,
+        "isOptimized": true
+      },
+      "savings": -319144,
+      "savingsPercent": -193
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0178-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0178-HDR.webp",
+        "filename": "_MID0178-HDR.webp",
+        "baseName": "_MID0178-HDR",
+        "hash": "93e0ca502c98931d2e340e7b83903d43",
+        "size": 502614,
+        "isOptimized": true
+      },
+      "savings": -337608,
+      "savingsPercent": -205
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0181-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0181-HDR.jpg",
+        "filename": "_MID0181-HDR.jpg",
+        "baseName": "_MID0181-HDR",
+        "hash": "0d58bf46723ab478fbac87ecf064eff0",
+        "size": 321454,
+        "isOptimized": true
+      },
+      "savings": -156448,
+      "savingsPercent": -95
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0181-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0181-HDR.webp",
+        "filename": "_MID0181-HDR.webp",
+        "baseName": "_MID0181-HDR",
+        "hash": "8315f06c1c6867552ae2e44b302369f7",
+        "size": 238742,
+        "isOptimized": true
+      },
+      "savings": -73736,
+      "savingsPercent": -45
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0188-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0188-HDR.jpg",
+        "filename": "_MID0188-HDR.jpg",
+        "baseName": "_MID0188-HDR",
+        "hash": "9d642cc06fe727e146695e9085ae30a3",
+        "size": 391419,
+        "isOptimized": true
+      },
+      "savings": -226413,
+      "savingsPercent": -137
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0188-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0188-HDR.webp",
+        "filename": "_MID0188-HDR.webp",
+        "baseName": "_MID0188-HDR",
+        "hash": "db7bae7fc6b7ad799587bf4ff0730c23",
+        "size": 378786,
+        "isOptimized": true
+      },
+      "savings": -213780,
+      "savingsPercent": -130
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0198-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0198-HDR.jpg",
+        "filename": "_MID0198-HDR.jpg",
+        "baseName": "_MID0198-HDR",
+        "hash": "28ac9f0b51c5988b749f1ec6d2ad0547",
+        "size": 361948,
+        "isOptimized": true
+      },
+      "savings": -196942,
+      "savingsPercent": -119
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0198-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0198-HDR.webp",
+        "filename": "_MID0198-HDR.webp",
+        "baseName": "_MID0198-HDR",
+        "hash": "4ea92c2b8f8679fe31cb27a70f802c92",
+        "size": 297510,
+        "isOptimized": true
+      },
+      "savings": -132504,
+      "savingsPercent": -80
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0203-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0203-HDR.jpg",
+        "filename": "_MID0203-HDR.jpg",
+        "baseName": "_MID0203-HDR",
+        "hash": "bd92503214dd9be0f167550e5e1fe550",
+        "size": 407296,
+        "isOptimized": true
+      },
+      "savings": -242290,
+      "savingsPercent": -147
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0203-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0203-HDR.webp",
+        "filename": "_MID0203-HDR.webp",
+        "baseName": "_MID0203-HDR",
+        "hash": "537e1522950345cd15249e09fbd6cee9",
+        "size": 403982,
+        "isOptimized": true
+      },
+      "savings": -238976,
+      "savingsPercent": -145
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0208-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0208-HDR.jpg",
+        "filename": "_MID0208-HDR.jpg",
+        "baseName": "_MID0208-HDR",
+        "hash": "3f56a48f94879a8c945b192a2406ff30",
+        "size": 367920,
+        "isOptimized": true
+      },
+      "savings": -202914,
+      "savingsPercent": -123
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0208-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0208-HDR.webp",
+        "filename": "_MID0208-HDR.webp",
+        "baseName": "_MID0208-HDR",
+        "hash": "00a97ca6110edf0648134f9205ba5e0c",
+        "size": 308346,
+        "isOptimized": true
+      },
+      "savings": -143340,
+      "savingsPercent": -87
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0213-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0213-HDR.jpg",
+        "filename": "_MID0213-HDR.jpg",
+        "baseName": "_MID0213-HDR",
+        "hash": "ebdad3ce0f1467eaaca2354ffb473820",
+        "size": 401594,
+        "isOptimized": true
+      },
+      "savings": -236588,
+      "savingsPercent": -143
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0213-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0213-HDR.webp",
+        "filename": "_MID0213-HDR.webp",
+        "baseName": "_MID0213-HDR",
+        "hash": "a50c87146eaa186be6a8c5e60fdeacbc",
+        "size": 408586,
+        "isOptimized": true
+      },
+      "savings": -243580,
+      "savingsPercent": -148
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0233-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0233-HDR.jpg",
+        "filename": "_MID0233-HDR.jpg",
+        "baseName": "_MID0233-HDR",
+        "hash": "3fa6e3536d6e6622266f283dedcf00fc",
+        "size": 360233,
+        "isOptimized": true
+      },
+      "savings": -195227,
+      "savingsPercent": -118
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0233-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0233-HDR.webp",
+        "filename": "_MID0233-HDR.webp",
+        "baseName": "_MID0233-HDR",
+        "hash": "0b5f174897581298fdd2766b7121da65",
+        "size": 307760,
+        "isOptimized": true
+      },
+      "savings": -142754,
+      "savingsPercent": -87
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0264-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0264-HDR.jpg",
+        "filename": "_MID0264-HDR.jpg",
+        "baseName": "_MID0264-HDR",
+        "hash": "4b8559ff53415eaef2c86ef370c1eb62",
+        "size": 651485,
+        "isOptimized": true
+      },
+      "savings": -486479,
+      "savingsPercent": -295
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0264-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0264-HDR.webp",
+        "filename": "_MID0264-HDR.webp",
+        "baseName": "_MID0264-HDR",
+        "hash": "bd0359869c6dbb35bacf847465914010",
+        "size": 720284,
+        "isOptimized": true
+      },
+      "savings": -555278,
+      "savingsPercent": -337
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0269-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0269-HDR.jpg",
+        "filename": "_MID0269-HDR.jpg",
+        "baseName": "_MID0269-HDR",
+        "hash": "0c76cee364a2637af639b4ba712ff548",
+        "size": 596485,
+        "isOptimized": true
+      },
+      "savings": -431479,
+      "savingsPercent": -261
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID0269-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID0269-HDR.webp",
+        "filename": "_MID0269-HDR.webp",
+        "baseName": "_MID0269-HDR",
+        "hash": "ac978508dccff32dbdd960b13b673ff2",
+        "size": 648394,
+        "isOptimized": true
+      },
+      "savings": -483388,
+      "savingsPercent": -293
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID1778-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID1778-HDR.jpg",
+        "filename": "_MID1778-HDR.jpg",
+        "baseName": "_MID1778-HDR",
+        "hash": "295aadeef2bd1d4e61849811d7086fc4",
+        "size": 428222,
+        "isOptimized": true
+      },
+      "savings": 196650,
+      "savingsPercent": 31
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID1778-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID1778-HDR.webp",
+        "filename": "_MID1778-HDR.webp",
+        "baseName": "_MID1778-HDR",
+        "hash": "e76236c7578cfabdb9ee0e3d43a3ce8c",
+        "size": 397444,
+        "isOptimized": true
+      },
+      "savings": 227428,
+      "savingsPercent": 36
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID1818-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID1818-HDR.jpg",
+        "filename": "_MID1818-HDR.jpg",
+        "baseName": "_MID1818-HDR",
+        "hash": "20bb4045e43dcf41c14affc773b72eac",
+        "size": 385198,
+        "isOptimized": true
+      },
+      "savings": 239674,
+      "savingsPercent": 38
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID1818-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID1818-HDR.webp",
+        "filename": "_MID1818-HDR.webp",
+        "baseName": "_MID1818-HDR",
+        "hash": "d93ec78d571c9432741f4280278a5634",
+        "size": 343018,
+        "isOptimized": true
+      },
+      "savings": 281854,
+      "savingsPercent": 45
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID3905-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID3905-HDR.jpg",
+        "filename": "_MID3905-HDR.jpg",
+        "baseName": "_MID3905-HDR",
+        "hash": "52286870f9ab745979f043a5ed3c8339",
+        "size": 356166,
+        "isOptimized": true
+      },
+      "savings": -191160,
+      "savingsPercent": -116
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID3905-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID3905-HDR.webp",
+        "filename": "_MID3905-HDR.webp",
+        "baseName": "_MID3905-HDR",
+        "hash": "cff85c93e136258df1010a8e766983b9",
+        "size": 331736,
+        "isOptimized": true
+      },
+      "savings": -166730,
+      "savingsPercent": -101
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6138-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6138-HDR.jpg",
+        "filename": "_MID6138-HDR.jpg",
+        "baseName": "_MID6138-HDR",
+        "hash": "f2c2ccdf8ebc8aa3b5136258f6b6fa29",
+        "size": 442829,
+        "isOptimized": true
+      },
+      "savings": 182043,
+      "savingsPercent": 29
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6138-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6138-HDR.webp",
+        "filename": "_MID6138-HDR.webp",
+        "baseName": "_MID6138-HDR",
+        "hash": "f2a4d83327d43d41866f9d96871e72aa",
+        "size": 428518,
+        "isOptimized": true
+      },
+      "savings": 196354,
+      "savingsPercent": 31
+    },
+    {
+      "original": {
+        "path": "images\\2.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\2.jpg",
+        "filename": "2.jpg",
+        "baseName": "2",
+        "hash": "d51ab4efb44290c5af79ddeb4dc5cfc8",
+        "size": 69015,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6228-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6228-HDR.jpg",
+        "filename": "_MID6228-HDR.jpg",
+        "baseName": "_MID6228-HDR",
+        "hash": "edc400b76e1667e2a7724d7961956962",
+        "size": 509699,
+        "isOptimized": true
+      },
+      "savings": -440684,
+      "savingsPercent": -639
+    },
+    {
+      "original": {
+        "path": "images\\2.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\2.jpg",
+        "filename": "2.jpg",
+        "baseName": "2",
+        "hash": "d51ab4efb44290c5af79ddeb4dc5cfc8",
+        "size": 69015,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6228-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6228-HDR.webp",
+        "filename": "_MID6228-HDR.webp",
+        "baseName": "_MID6228-HDR",
+        "hash": "c141b21cf8a6d5621b989ed4dee9d62b",
+        "size": 638050,
+        "isOptimized": true
+      },
+      "savings": -569035,
+      "savingsPercent": -825
+    },
+    {
+      "original": {
+        "path": "images\\2.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\2.jpg",
+        "filename": "2.jpg",
+        "baseName": "2",
+        "hash": "d51ab4efb44290c5af79ddeb4dc5cfc8",
+        "size": 69015,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6238-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6238-HDR.jpg",
+        "filename": "_MID6238-HDR.jpg",
+        "baseName": "_MID6238-HDR",
+        "hash": "f5a2ca4d1e02694909465b785793a2dc",
+        "size": 530236,
+        "isOptimized": true
+      },
+      "savings": -461221,
+      "savingsPercent": -668
+    },
+    {
+      "original": {
+        "path": "images\\2.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\2.jpg",
+        "filename": "2.jpg",
+        "baseName": "2",
+        "hash": "d51ab4efb44290c5af79ddeb4dc5cfc8",
+        "size": 69015,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6238-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6238-HDR.webp",
+        "filename": "_MID6238-HDR.webp",
+        "baseName": "_MID6238-HDR",
+        "hash": "5fd5cb9088278c345908c780ce4e350c",
+        "size": 631560,
+        "isOptimized": true
+      },
+      "savings": -562545,
+      "savingsPercent": -815
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6318-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6318-HDR.jpg",
+        "filename": "_MID6318-HDR.jpg",
+        "baseName": "_MID6318-HDR",
+        "hash": "c4ccc6967d4aa80acf6ed7abd463e416",
+        "size": 492923,
+        "isOptimized": true
+      },
+      "savings": 131949,
+      "savingsPercent": 21
+    },
+    {
+      "original": {
+        "path": "images\\1.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\1.webp",
+        "filename": "1.webp",
+        "baseName": "1",
+        "hash": "36fb195b8808cbbf81ee7bcbb74d84ec",
+        "size": 624872,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6318-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6318-HDR.webp",
+        "filename": "_MID6318-HDR.webp",
+        "baseName": "_MID6318-HDR",
+        "hash": "c3796626070e2bdbdb8399d15d6ccaa9",
+        "size": 537752,
+        "isOptimized": true
+      },
+      "savings": 87120,
+      "savingsPercent": 14
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6403-HDR.jpg",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6403-HDR.jpg",
+        "filename": "_MID6403-HDR.jpg",
+        "baseName": "_MID6403-HDR",
+        "hash": "f1aa69017871eee9dda72900ddaeaa7b",
+        "size": 472524,
+        "isOptimized": true
+      },
+      "savings": -307518,
+      "savingsPercent": -186
+    },
+    {
+      "original": {
+        "path": "images\\0.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\0.webp",
+        "filename": "0.webp",
+        "baseName": "0",
+        "hash": "0cd1fc257cd47c55d6f116fe2d0aee70",
+        "size": 165006,
+        "isOptimized": false
+      },
+      "optimized": {
+        "path": "images\\optimized\\_MID6403-HDR.webp",
+        "fullPath": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized\\_MID6403-HDR.webp",
+        "filename": "_MID6403-HDR.webp",
+        "baseName": "_MID6403-HDR",
+        "hash": "e3f72342d0074e0df18bc0d1027760dc",
+        "size": 535720,
+        "isOptimized": true
+      },
+      "savings": -370714,
+      "savingsPercent": -225
+    }
+  ]
+}

@@ -1,0 +1,920 @@
+[
+  {
+    "id": "home",
+    "title": {
+      "en": "Home",
+      "ar": "الرئيسية"
+    },
+    "slug": {
+      "en": "home",
+      "ar": "الرئيسية"
+    },
+    "description": {
+      "en": "Mouhajer International Design - Premier luxury interior design company in Dubai. Transforming spaces with award-winning design excellence for over 20 years.",
+      "ar": "مهاجر الدولية للتصميم - شركة رائدة في التصميم الداخلي الفاخر في دبي. تحويل المساحات بتميز تصميمي حائز على جوائز لأكثر من 20 عامًا."
+    },
+    "blocks": [
+      {
+        "id": "hero_1",
+        "type": "hero_banner",
+        "order": 1,
+        "data": {
+          "title": {
+            "en": "Excellence in Architecture, Interior Design & Fit-Out Services",
+            "ar": "التميز في الهندسة المعمارية والتصميم الداخلي وخدمات التجهيز"
+          },
+          "subtitle": {
+            "en": "WELCOME TO MOUHAJER INTERNATIONAL DESIGN AND CONTRACTING",
+            "ar": "أهلاً بكم في مهاجر الدولية للتصميم والتعاقد"
+          },
+          "description": {
+            "en": "MOUHAJER INTERNATIONAL DESIGN AND CONTRACTING is a leading provider of architecture, interior design, and fit-out services. Recognized among the top architecture firms in Dubai, we deliver innovative, functional, and aesthetically pleasing solutions.",
+            "ar": "مهاجر الدولية للتصميم والتعاقد هي مزود رائد لخدمات الهندسة المعمارية والتصميم الداخلي والتجهيز. معترف بها من بين أفضل شركات الهندسة المعمارية في دبي، نقدم حلول مبتكرة وعملية وجمالية."
+          },
+          "backgroundImage": "/newbanner.jpg",
+          "backgroundVideo": "https://yuz.beb.mybluehost.me/website_d5ecf311/wp-content/uploads/2024/09/banner-2s.mp4",
+          "maskLayer": true,
+          "ctaButtons": [
+            {
+              "text": { "en": "View Portfolio", "ar": "معرض الأعمال" },
+              "link": "/our-projects",
+              "style": "primary"
+            },
+            {
+              "text": { "en": "Free Consultation", "ar": "استشارة مجانية" },
+              "link": "/contact-us",
+              "style": "secondary"
+            }
+          ]
+        }
+      },
+      {
+        "id": "stats_1",
+        "type": "stats_section",
+        "order": 2,
+        "data": {
+          "stats": [
+            {
+              "number": "500+",
+              "label": { "en": "Projects Completed", "ar": "مشروع منجز" },
+              "icon": "projects"
+            },
+            {
+              "number": "22",
+              "label": { "en": "Years of experience", "ar": "سنة من الخبرة" },
+              "icon": "experience"
+            },
+            {
+              "number": "98%",
+              "label": { "en": "Client Satisfaction", "ar": "رضا العملاء" },
+              "icon": "satisfaction"
+            },
+            {
+              "number": "50+",
+              "label": { "en": "Awards & Recognition", "ar": "جائزة وتقدير" },
+              "icon": "awards"
+            }
+          ],
+          "backgroundColor": "#FFFEF5"
+        }
+      },
+      {
+        "id": "about_1",
+        "type": "company_description_home",
+        "order": 3,
+        "data": {
+          "title": {
+            "en": "Dubai's Premier Interior Design Studio",
+            "ar": "استوديو التصميم الداخلي الرائد في دبي"
+          },
+          "subtitle": {
+            "en": "WHERE LUXURY MEETS INNOVATION",
+            "ar": "حيث تلتقي الفخامة بالابتكار"
+          },
+          "description": {
+            "en": "MOUHAJER INTERNATIONAL DESIGN AND CONTRACTING is a leading provider of architecture, interior design, and fit-out services. Recognized among the top architecture firms in Dubai, we deliver innovative, functional, and aesthetically pleasing solutions. We serve the United Arab Emirates, including Dubai and Abu Dhabi, specializing in residential and commercial projects. Our work creates inspiring spaces designed to endure and meet the highest standards of excellence.",
+            "ar": "مهاجر الدولية للتصميم والتعاقد هي مزود رائد لخدمات الهندسة المعمارية والتصميم الداخلي والتجهيز. معترف بها من بين أفضل شركات الهندسة المعمارية في دبي، نقدم حلول مبتكرة وعملية وجمالية. نخدم الإمارات العربية المتحدة، بما في ذلك دبي وأبوظبي، متخصصون في المشاريع السكنية والتجارية. عملنا يخلق مساحات ملهمة مصممة للبقاء وتلبية أعلى معايير التميز."
+          },
+          "features": [
+            {
+              "title": {
+                "en": "Award-Winning Designs",
+                "ar": "تصاميم حائزة على جوائز"
+              },
+              "description": {
+                "en": "Recognized globally for design excellence and innovation",
+                "ar": "معترف به عالميًا للتميز والابتكار في التصميم"
+              }
+            },
+            {
+              "title": { "en": "Full-Service Solutions", "ar": "حلول متكاملة" },
+              "description": {
+                "en": "From concept to completion, we handle every detail",
+                "ar": "من المفهوم إلى الإنجاز، نتعامل مع كل التفاصيل"
+              }
+            },
+            {
+              "title": { "en": "Premium Quality", "ar": "جودة ممتازة" },
+              "description": {
+                "en": "Only the finest materials and craftsmanship",
+                "ar": "فقط أفضل المواد والحرفية"
+              }
+            },
+            {
+              "title": {
+                "en": "On-Time Delivery",
+                "ar": "التسليم في الوقت المحدد"
+              },
+              "description": {
+                "en": "98% of our projects delivered on or ahead of schedule",
+                "ar": "98% من مشاريعنا يتم تسليمها في الموعد المحدد أو قبله"
+              }
+            }
+          ],
+          "image": "/images/about/mouhajer-studio.jpg",
+          "backgroundColor": "#F8F9FA"
+        }
+      },
+      {
+        "id": "services_1",
+        "type": "services_showcase",
+        "order": 4,
+        "data": {
+          "title": {
+            "en": "Our Services",
+            "ar": "خدماتنا"
+          },
+          "subtitle": {
+            "en": "COMPREHENSIVE DESIGN & BUILD SOLUTIONS",
+            "ar": "حلول شاملة للتصميم والبناء"
+          },
+          "description": {
+            "en": "From initial consultation to final installation, we offer complete interior design and contracting services tailored to your needs.",
+            "ar": "من الاستشارة الأولية إلى التركيب النهائي، نقدم خدمات تصميم داخلي وتعاقد كاملة مصممة خصيصًا لاحتياجاتك."
+          },
+          "services": [
+            {
+              "title": {
+                "en": "Residential Interior Design",
+                "ar": "التصميم الداخلي السكني"
+              },
+              "description": {
+                "en": "Luxury villas, apartments, and penthouses designed to perfection",
+                "ar": "فلل فاخرة وشقق وبنتهاوسات مصممة بالكمال"
+              },
+              "icon": "home",
+              "link": "/services/residential-design"
+            },
+            {
+              "title": { "en": "Commercial Spaces", "ar": "المساحات التجارية" },
+              "description": {
+                "en": "Office fit-outs, retail spaces, and showrooms that inspire",
+                "ar": "تجهيز المكاتب ومساحات البيع بالتجزئة وصالات العرض الملهمة"
+              },
+              "icon": "building",
+              "link": "/services/commercial-design"
+            },
+            {
+              "title": {
+                "en": "Complete Renovations",
+                "ar": "التجديدات الكاملة"
+              },
+              "description": {
+                "en": "Full-scale transformations including MEP and structural work",
+                "ar": "تحولات واسعة النطاق بما في ذلك أعمال الكهرباء والسباكة والهيكلية"
+              },
+              "icon": "renovation",
+              "link": "/services/renovation"
+            },
+            {
+              "title": { "en": "Turnkey Projects", "ar": "مشاريع تسليم مفتاح" },
+              "description": {
+                "en": "Hassle-free complete design and build solutions",
+                "ar": "حلول تصميم وبناء كاملة بدون متاعب"
+              },
+              "icon": "key",
+              "link": "/services/turnkey"
+            }
+          ],
+          "backgroundColor": "#FFFFFF"
+        }
+      },
+      {
+        "id": "portfolio_1",
+        "type": "portfolio_display_home",
+        "order": 5,
+        "data": {
+          "headline": { "en": "OUR PORTFOLIO", "ar": "معرض أعمالنا" }
+        }
+      },
+      {
+        "id": "testimonials_1",
+        "type": "testimonials_section",
+        "order": 6,
+        "data": {
+          "title": {
+            "en": "What Our Clients Say",
+            "ar": "ماذا يقول عملاؤنا"
+          },
+          "subtitle": {
+            "en": "TRUSTED BY DUBAI'S ELITE",
+            "ar": "موثوق به من قبل نخبة دبي"
+          },
+          "testimonials": [
+            {
+              "name": "Mohammed Al Fahim",
+              "title": "Villa Owner, Dubai Marina",
+              "content": {
+                "en": "Mouhajer Design transformed our villa into a stunning masterpiece. Their attention to detail and commitment to quality exceeded all our expectations. The team was professional, responsive, and delivered on time.",
+                "ar": "حولت شركة مهاجر للتصميم فيلتنا إلى تحفة فنية مذهلة. اهتمامهم بالتفاصيل والتزامهم بالجودة تجاوز كل توقعاتنا. كان الفريق محترفًا ومستجيبًا وسلم في الوقت المحدد."
+              },
+              "rating": 5,
+              "image": "/images/testimonials/client-1.jpg"
+            },
+            {
+              "name": "Sarah Johnson",
+              "title": "CEO, Tech Startup - DIFC",
+              "content": {
+                "en": "Our office space went from ordinary to extraordinary. Mouhajer's team understood our brand vision and created an environment that truly reflects our innovative spirit. Highly recommended!",
+                "ar": "انتقلت مساحة مكتبنا من عادية إلى استثنائية. فهم فريق مهاجر رؤية علامتنا التجارية وخلق بيئة تعكس حقًا روحنا المبتكرة. موصى به بشدة!"
+              },
+              "rating": 5,
+              "image": "/images/testimonials/client-2.jpg"
+            },
+            {
+              "name": "Dr. Ahmed Hassan",
+              "title": "Penthouse Owner, Downtown Dubai",
+              "content": {
+                "en": "The level of craftsmanship and sophistication Mouhajer brought to our penthouse is unparalleled. Every corner tells a story of luxury and elegance. Worth every dirham!",
+                "ar": "مستوى الحرفية والرقي الذي أضافته مهاجر إلى بنتهاوس الخاص بنا لا مثيل له. كل زاوية تحكي قصة الفخامة والأناقة. يستحق كل درهم!"
+              },
+              "rating": 5,
+              "image": "/images/testimonials/client-3.jpg"
+            },
+            {
+              "name": "Khalid Al Mansoori",
+              "title": "Property Developer, Emirates Hills",
+              "content": {
+                "en": "Working with Mouhajer on our Emirates Hills mansion was an absolute pleasure. They managed every aspect seamlessly—from permits to final styling. The result? A home that exceeds even our loftiest dreams. Their expertise in luxury residential design is unmatched in Dubai.",
+                "ar": "كان العمل مع مهاجر على قصر تلال الإمارات الخاص بنا متعة مطلقة. أداروا كل جانب بسلاسة—من التصاريح إلى التنسيق النهائي. النتيجة؟ منزل يتجاوز حتى أحلامنا العليا. خبرتهم في التصميم السكني الفاخر لا مثيل لها في دبي."
+              },
+              "rating": 5,
+              "image": "/images/testimonials/client-4.jpg"
+            },
+            {
+              "name": "Elena Rodriguez",
+              "title": "Boutique Hotel Owner, Jumeirah",
+              "content": {
+                "en": "Mouhajer designed our boutique hotel with such elegance and cultural sensitivity. They perfectly blended modern luxury with Arabic heritage, creating a unique guest experience. Our occupancy rates increased by 35% after the redesign. They truly understand hospitality design.",
+                "ar": "صممت مهاجر فندقنا البوتيكي بمثل هذه الأناقة والحساسية الثقافية. مزجوا بشكل مثالي بين الفخامة الحديثة والتراث العربي، مما خلق تجربة ضيوف فريدة. زادت معدلات إشغالنا بنسبة 35٪ بعد إعادة التصميم. إنهم يفهمون حقًا تصميم الضيافة."
+              },
+              "rating": 5,
+              "image": "/images/testimonials/client-5.jpg"
+            },
+            {
+              "name": "James Mitchell",
+              "title": "Managing Director, Investment Firm - DIFC",
+              "content": {
+                "en": "Our new DIFC office is a game-changer for client meetings. Mouhajer created a space that exudes sophistication and confidence—exactly what we needed to represent our brand. The walnut paneling and marble accents are simply stunning. Best investment we've made!",
+                "ar": "مكتبنا الجديد في DIFC يغير قواعد اللعبة لاجتماعات العملاء. أنشأت مهاجر مساحة تنضح بالرقي والثقة—بالضبط ما كنا بحاجة إليه لتمثيل علامتنا التجارية. ألواح الجوز ولمسات الرخام مذهلة ببساطة. أفضل استثمار قمنا به!"
+              },
+              "rating": 5,
+              "image": "/images/testimonials/client-6.jpg"
+            },
+            {
+              "name": "Fatima Al Zarooni",
+              "title": "Villa Owner, Arabian Ranches",
+              "content": {
+                "en": "As a mother of three, I needed a home that was both beautiful and practical. Mouhajer delivered beyond expectations! They created a family-friendly space with durable, easy-to-maintain materials that still looks absolutely luxurious. My kids love their playroom, and I love every room in our home!",
+                "ar": "كأم لثلاثة أطفال، كنت بحاجة إلى منزل جميل وعملي على حد سواء. قدمت مهاجر ما يتجاوز التوقعات! أنشأوا مساحة مناسبة للعائلة مع مواد متينة وسهلة الصيانة لا تزال تبدو فاخرة للغاية. يحب أطفالي غرفة اللعب الخاصة بهم، وأنا أحب كل غرفة في منزلنا!"
+              },
+              "rating": 5,
+              "image": "/images/testimonials/client-7.jpg"
+            },
+            {
+              "name": "Roberto Marchetti",
+              "title": "Restaurant Owner, City Walk",
+              "content": {
+                "en": "Mouhajer transformed our restaurant concept into a breathtaking reality. The fusion of modern design with traditional Levantine elements creates an unforgettable dining atmosphere. Since opening, we've been fully booked every night. Their understanding of restaurant flow and customer psychology is remarkable.",
+                "ar": "حولت مهاجر مفهوم مطعمنا إلى واقع مذهل. يخلق دمج التصميم الحديث مع العناصر الشامية التقليدية جواً لتناول الطعام لا يُنسى. منذ الافتتاح، كنا محجوزين بالكامل كل ليلة. فهمهم لتدفق المطعم وعلم نفس العملاء رائع."
+              },
+              "rating": 5,
+              "image": "/images/testimonials/client-8.jpg"
+            }
+          ],
+          "backgroundColor": "#F8F9FA"
+        }
+      },
+      {
+        "id": "process_1",
+        "type": "process_section",
+        "order": 7,
+        "data": {
+          "title": {
+            "en": "Our Process",
+            "ar": "عمليتنا"
+          },
+          "subtitle": {
+            "en": "FROM CONCEPT TO REALITY",
+            "ar": "من المفهوم إلى الواقع"
+          },
+          "steps": [
+            {
+              "number": "01",
+              "title": {
+                "en": "Initial Consultation",
+                "ar": "الاستشارة الأولية"
+              },
+              "description": {
+                "en": "We meet to understand your vision, requirements, and budget. Our team conducts a thorough site assessment and discusses your style preferences.",
+                "ar": "نلتقي لفهم رؤيتك ومتطلباتك وميزانيتك. يقوم فريقنا بإجراء تقييم شامل للموقع ومناقشة تفضيلات أسلوبك."
+              }
+            },
+            {
+              "number": "02",
+              "title": { "en": "Design Development", "ar": "تطوير التصميم" },
+              "description": {
+                "en": "Our designers create detailed concepts, 3D visualizations, and mood boards. We refine the design based on your feedback until it's perfect.",
+                "ar": "يقوم مصممونا بإنشاء مفاهيم مفصلة وتصورات ثلاثية الأبعاد ولوحات المزاج. نصقل التصميم بناءً على ملاحظاتك حتى يصبح مثاليًا."
+              }
+            },
+            {
+              "number": "03",
+              "title": { "en": "Material Selection", "ar": "اختيار المواد" },
+              "description": {
+                "en": "We help you choose premium materials, furniture, fixtures, and finishes that align with your design aesthetic and quality standards.",
+                "ar": "نساعدك في اختيار المواد والأثاث والتركيبات والتشطيبات الممتازة التي تتماشى مع جماليات التصميم ومعايير الجودة الخاصة بك."
+              }
+            },
+            {
+              "number": "04",
+              "title": { "en": "Implementation", "ar": "التنفيذ" },
+              "description": {
+                "en": "Our skilled contractors bring the design to life with meticulous attention to detail. We manage all aspects of construction and installation.",
+                "ar": "يقوم مقاولونا المهرة بإحياء التصميم مع اهتمام دقيق بالتفاصيل. نحن ندير جميع جوانب البناء والتركيب."
+              }
+            },
+            {
+              "number": "05",
+              "title": { "en": "Final Reveal", "ar": "الكشف النهائي" },
+              "description": {
+                "en": "We complete the finishing touches and conduct a thorough quality check. Your transformed space is ready to be unveiled and enjoyed!",
+                "ar": "نكمل اللمسات الأخيرة ونجري فحصًا شاملاً للجودة. مساحتك المحولة جاهزة للكشف عنها والاستمتاع بها!"
+              }
+            }
+          ],
+          "backgroundColor": "#FFFFFF"
+        }
+      },
+      {
+        "id": "awards_1",
+        "type": "awards_section",
+        "order": 8,
+        "data": {
+          "title": {
+            "en": "Our Awards",
+            "ar": "جوائزنا"
+          }
+        }
+      },
+      {
+        "id": "blog_1",
+        "type": "blog_section",
+        "order": 9,
+        "data": {
+          "title": {
+            "en": "Design Insights & Inspiration",
+            "ar": "رؤى وإلهام التصميم"
+          },
+          "subtitle": {
+            "en": "LATEST FROM OUR BLOG",
+            "ar": "أحدث مدوناتنا"
+          },
+          "description": {
+            "en": "Stay updated with the latest interior design trends, tips, and project showcases from our expert team.",
+            "ar": "ابق على اطلاع بأحدث اتجاهات التصميم الداخلي والنصائح وعروض المشاريع من فريقنا المتخصص."
+          },
+          "layout": "grid",
+          "featured": true,
+          "maxItems": 3,
+          "showExcerpt": true,
+          "showAuthor": true,
+          "showDate": true,
+          "showCategory": true,
+          "ctaText": { "en": "View All Articles", "ar": "عرض جميع المقالات" },
+          "ctaLink": "/blog"
+        }
+      },
+      {
+        "id": "cta_1",
+        "type": "cta_section",
+        "order": 10,
+        "data": {
+          "title": {
+            "en": "Ready to Transform Your Space?",
+            "ar": "هل أنت مستعد لتحويل مساحتك؟"
+          },
+          "description": {
+            "en": "Schedule a free consultation with our design experts today. Let's discuss your vision and create something extraordinary together.",
+            "ar": "حدد موعدًا لاستشارة مجانية مع خبراء التصميم لدينا اليوم. دعنا نناقش رؤيتك ونخلق شيئًا استثنائيًا معًا."
+          },
+          "primaryButton": {
+            "text": {
+              "en": "Book Free Consultation",
+              "ar": "احجز استشارة مجانية"
+            },
+            "link": "/contact-us"
+          },
+          "secondaryButton": {
+            "text": {
+              "en": "Call: +971 XX XXX XXXX",
+              "ar": "اتصل: 971 XX XXX XXXX+"
+            },
+            "link": "tel:+971XXXXXXXXX"
+          },
+          "backgroundColor": "#1a1a1a",
+          "textColor": "#ffffff"
+        }
+      },
+      {
+        "id": "featured_in_1",
+        "type": "featured_in",
+        "order": 11,
+        "data": {
+          "title": {
+            "en": "Featured in",
+            "ar": "مميز في"
+          },
+          "logos": [
+            {
+              "id": 1,
+              "url": "/khaleejitimes.png",
+              "alt": "Khaleej Times"
+            },
+            {
+              "id": 2,
+              "url": "/zawya.png",
+              "alt": "Zawya"
+            },
+            {
+              "id": 3,
+              "url": "/menafn.png",
+              "alt": "MenaFN"
+            },
+            {
+              "id": 4,
+              "url": "/mideast.png",
+              "alt": "Middle East"
+            }
+          ]
+        }
+      },
+      {
+        "id": "contact_1",
+        "type": "contact_form",
+        "order": 12,
+        "data": {
+          "title": {
+            "en": "Get In Touch",
+            "ar": "ابق على تواصل"
+          },
+          "description": {
+            "en": "Have a project in mind? Fill out the form below and our team will get back to you within 24 hours.",
+            "ar": "هل لديك مشروع في ذهنك؟ املأ النموذج أدناه وسيعود فريقنا إليك في غضون 24 ساعة."
+          },
+          "fields": [
+            {
+              "label": { "en": "Full Name", "ar": "الاسم الكامل" },
+              "type": "text",
+              "required": true,
+              "placeholder": {
+                "en": "Enter your full name",
+                "ar": "أدخل اسمك الكامل"
+              }
+            },
+            {
+              "label": {
+                "en": "Email Address",
+                "ar": "عنوان البريد الإلكتروني"
+              },
+              "type": "email",
+              "required": true,
+              "placeholder": { "en": "your@email.com", "ar": "your@email.com" }
+            },
+            {
+              "label": { "en": "Phone Number", "ar": "رقم الهاتف" },
+              "type": "phone",
+              "required": true,
+              "placeholder": {
+                "en": "+971 XX XXX XXXX",
+                "ar": "+971 XX XXX XXXX"
+              }
+            },
+            {
+              "label": { "en": "Project Type", "ar": "نوع المشروع" },
+              "type": "select",
+              "required": true,
+              "options": [
+                { "en": "Residential Villa", "ar": "فيلا سكنية" },
+                { "en": "Apartment", "ar": "شقة" },
+                { "en": "Penthouse", "ar": "بنتهاوس" },
+                { "en": "Commercial Office", "ar": "مكتب تجاري" },
+                { "en": "Retail Space", "ar": "مساحة بيع بالتجزئة" },
+                { "en": "Renovation", "ar": "تجديد" },
+                { "en": "Other", "ar": "آخر" }
+              ]
+            },
+            {
+              "label": {
+                "en": "Tell Us About Your Project",
+                "ar": "أخبرنا عن مشروعك"
+              },
+              "type": "textarea",
+              "required": true,
+              "placeholder": {
+                "en": "Describe your vision, requirements, budget, and timeline",
+                "ar": "صف رؤيتك ومتطلباتك وميزانيتك والجدول الزمني"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "seo": {
+      "metaTitle": {
+        "en": "Luxury Interior Design Dubai | Award-Winning | Mouhajer International Design",
+        "ar": "تصميم داخلي فاخر دبي | حائز على جوائز | مهاجر الدولية للتصميم"
+      },
+      "metaDescription": {
+        "en": "Transform your space with Dubai's #1 interior design company. 20+ years experience, 500+ luxury projects, 98% client satisfaction. Award-winning residential & commercial design. Free consultation!",
+        "ar": "حوّل مساحتك مع شركة التصميم الداخلي رقم 1 في دبي. خبرة أكثر من 20 عامًا، أكثر من 500 مشروع فاخر، رضا العملاء 98%. تصميم سكني وتجاري حائز على جوائز. استشارة مجانية!"
+      },
+      "keywords": [
+        "interior design Dubai",
+        "luxury interior designer Dubai",
+        "villa interior design UAE",
+        "apartment design Dubai",
+        "commercial interior design Dubai",
+        "best interior design company Dubai",
+        "luxury home design UAE",
+        "interior design and contracting Dubai",
+        "Dubai Marina interior design",
+        "Downtown Dubai interior designer",
+        "Palm Jumeirah villa design",
+        "Mouhajer International Design",
+        "تصميم داخلي دبي",
+        "مصمم داخلي فاخر دبي",
+        "تصميم داخلي فيلا الإمارات",
+        "تصميم شقة دبي",
+        "تصميم داخلي تجاري دبي",
+        "أفضل شركة تصميم داخلي دبي",
+        "تصميم منزل فاخر الإمارات",
+        "تصميم داخلي وتعاقد دبي",
+        "تصميم داخلي دبي مارينا",
+        "مصمم داخلي وسط مدينة دبي",
+        "تصميم فيلا نخلة جميرا",
+        "مهاجر الدولية للتصميم"
+      ]
+    },
+    "status": "published",
+    "featured": true,
+    "createdAt": "2024-10-01T12:00:00.000Z",
+    "updatedAt": "2025-10-02T13:30:00.000Z"
+  },
+  {
+    "id": "about",
+    "title": {
+      "en": "About Us",
+      "ar": "من نحن"
+    },
+    "slug": {
+      "en": "about-us",
+      "ar": "من-نحن"
+    },
+    "description": {
+      "en": "Learn about Mouhajer International Design - Dubai's premier interior design and contracting company with over 20 years of excellence.",
+      "ar": "تعرف على مهاجر الدولية للتصميم - شركة التصميم الداخلي والتعاقد الرائدة في دبي مع أكثر من 20 عامًا من التميز."
+    },
+    "blocks": [
+      {
+        "id": "about_hero",
+        "type": "hero_banner",
+        "order": 1,
+        "data": {
+          "title": {
+            "en": "Crafting Extraordinary Spaces Since 2002",
+            "ar": "نصنع مساحات استثنائية منذ عام 2002"
+          },
+          "subtitle": {
+            "en": "ABOUT MOUHAJER INTERNATIONAL DESIGN",
+            "ar": "عن مهاجر الدولية للتصميم"
+          },
+          "description": {
+            "en": "We are a multi-award-winning interior design and contracting firm dedicated to transforming spaces into timeless works of art. Our passion for excellence and innovation has made us one of Dubai's most trusted design partners.",
+            "ar": "نحن شركة تصميم داخلي وتعاقد حائزة على جوائز متعددة مكرسة لتحويل المساحات إلى أعمال فنية خالدة. شغفنا بالتميز والابتكار جعلنا واحدة من أكثر شركاء التصميم الموثوق بهم في دبي."
+          },
+          "backgroundImage": "/images/about/about-hero.jpg",
+          "maskLayer": true
+        }
+      },
+      {
+        "id": "about_story",
+        "type": "text_section",
+        "order": 2,
+        "data": {
+          "title": {
+            "en": "Our Story",
+            "ar": "قصتنا"
+          },
+          "subtitle": {
+            "en": "TWO DECADES OF DESIGN EXCELLENCE",
+            "ar": "عقدان من التميز في التصميم"
+          },
+          "content": {
+            "en": "Founded in 2002 by visionary architect Maher Mouhajer, Mouhajer International Design began with a simple yet powerful mission: to create spaces that inspire, function flawlessly, and stand the test of time.\n\nWhat started as a boutique design studio has evolved into one of the UAE's most respected interior design and contracting firms. Over the past two decades, we've had the privilege of working on more than 500 projects across Dubai, Abu Dhabi, and the wider Emirates, each one a testament to our commitment to excellence.\n\nOur journey has been marked by continuous growth, innovation, and an unwavering dedication to our craft. We've assembled a team of world-class designers, architects, and craftsmen who share our passion for perfection. Together, we've earned numerous international awards and the trust of discerning clients who expect nothing but the best.\n\nToday, Mouhajer International Design stands as a symbol of luxury, quality, and innovation in the Middle East's design landscape. We remain committed to pushing boundaries, embracing new technologies, and creating spaces that not only meet but exceed our clients' wildest dreams.",
+            "ar": "تأسست شركة مهاجر الدولية للتصميم عام 2002 على يد المهندس المعماري صاحب الرؤية ماهر مهاجر، بدأت بمهمة بسيطة لكن قوية: إنشاء مساحات تلهم وتعمل بشكل لا تشوبه شائبة وتصمد أمام اختبار الزمن.\n\nما بدأ كاستوديو تصميم صغير تطور ليصبح واحدًا من أكثر شركات التصميم الداخلي والتعاقد احترامًا في الإمارات. على مدى العقدين الماضيين، كان لدينا امتياز العمل على أكثر من 500 مشروع عبر دبي وأبوظبي والإمارات الأوسع، كل واحد منها شهادة على التزامنا بالتميز.\n\nتميزت رحلتنا بالنمو المستمر والابتكار والتفاني الثابت في حرفتنا. لقد جمعنا فريقًا من المصممين والمهندسين المعماريين والحرفيين من الطراز العالمي الذين يشاركوننا شغفنا بالكمال. معًا، حصلنا على العديد من الجوائز الدولية وثقة العملاء المميزين الذين لا يتوقعون سوى الأفضل.\n\nاليوم، تقف مهاجر الدولية للتصميم كرمز للفخامة والجودة والابتكار في مشهد التصميم في الشرق الأوسط. نبقى ملتزمين بدفع الحدود واحتضان التقنيات الجديدة وخلق مساحات لا تلبي فقط بل تتجاوز أحلام عملائنا الجامحة."
+          },
+          "image": "/images/about/founder.jpg",
+          "backgroundColor": "#F8F9FA"
+        }
+      },
+      {
+        "id": "about_mission",
+        "type": "text_columns",
+        "order": 3,
+        "data": {
+          "columns": [
+            {
+              "title": {
+                "en": "Our Mission",
+                "ar": "مهمتنا"
+              },
+              "content": {
+                "en": "To create exceptional interior spaces that seamlessly blend aesthetics, functionality, and sustainability. We strive to exceed expectations through innovative design solutions, meticulous craftsmanship, and unwavering commitment to quality.",
+                "ar": "إنشاء مساحات داخلية استثنائية تمزج بسلاسة بين الجماليات والوظائف والاستدامة. نسعى لتجاوز التوقعات من خلال حلول التصميم المبتكرة والحرفية الدقيقة والالتزام الثابت بالجودة."
+              },
+              "icon": "target"
+            },
+            {
+              "title": {
+                "en": "Our Vision",
+                "ar": "رؤيتنا"
+              },
+              "content": {
+                "en": "To be recognized as the Middle East's leading interior design firm, setting new standards for luxury, innovation, and client satisfaction. We envision a future where every space we touch becomes a masterpiece that inspires generations.",
+                "ar": "أن نكون معترفًا بنا كشركة التصميم الداخلي الرائدة في الشرق الأوسط، ونضع معايير جديدة للفخامة والابتكار ورضا العملاء. نتصور مستقبلًا حيث كل مساحة نلمسها تصبح تحفة فنية تلهم الأجيال."
+              },
+              "icon": "eye"
+            },
+            {
+              "title": {
+                "en": "Our Values",
+                "ar": "قيمنا"
+              },
+              "content": {
+                "en": "Excellence • Innovation • Integrity • Client-Centricity • Sustainability • Craftsmanship • Collaboration • Continuous Improvement",
+                "ar": "التميز • الابتكار • النزاهة • محورية العميل • الاستدامة • الحرفية • التعاون • التحسين المستمر"
+              },
+              "icon": "heart"
+            }
+          ],
+          "backgroundColor": "#FFFFFF"
+        }
+      },
+      {
+        "id": "about_team",
+        "type": "team_section",
+        "order": 4,
+        "data": {
+          "title": {
+            "en": "Meet Our Team",
+            "ar": "تعرف على فريقنا"
+          },
+          "subtitle": {
+            "en": "THE MINDS BEHIND THE MAGIC",
+            "ar": "العقول وراء السحر"
+          },
+          "description": {
+            "en": "Our team brings together diverse talents, perspectives, and expertise to deliver exceptional results. From award-winning designers to master craftsmen, every member plays a crucial role in bringing your vision to life.",
+            "ar": "يجمع فريقنا مواهب ووجهات نظر وخبرات متنوعة لتقديم نتائج استثنائية. من المصممين الحائزين على جوائز إلى الحرفيين الماهرين، يلعب كل عضو دورًا حاسمًا في إحياء رؤيتك."
+          },
+          "teamMembers": [
+            {
+              "name": "Maher Mouhajer",
+              "title": {
+                "en": "Founder & Creative Director",
+                "ar": "المؤسس والمدير الإبداعي"
+              },
+              "bio": {
+                "en": "With over 25 years of experience in luxury interior design, Maher leads our creative vision with passion and precision. His portfolio spans prestigious projects across the Middle East, earning international recognition for innovative design solutions that blend functionality with timeless elegance.",
+                "ar": "مع أكثر من 25 عامًا من الخبرة في التصميم الداخلي الفاخر، يقود ماهر رؤيتنا الإبداعية بشغف ودقة. تمتد محفظته عبر مشاريع مرموقة في جميع أنحاء الشرق الأوسط، وحصل على اعتراف دولي بحلول التصميم المبتكرة التي تمزج الوظائف مع الأناقة الخالدة."
+              },
+              "image": "/images/team/maher.jpg",
+              "credentials": "B.Arch, LEED AP, RIBA Member"
+            },
+            {
+              "name": "Layla Al-Hashimi",
+              "title": {
+                "en": "Senior Interior Designer",
+                "ar": "مصممة داخلية أقدم"
+              },
+              "bio": {
+                "en": "Layla brings 15 years of expertise in high-end residential design. Specializing in cultural fusion concepts, she seamlessly blends Arabic heritage with contemporary aesthetics. Her meticulous attention to detail and client-centric approach ensure every project exceeds expectations.",
+                "ar": "تجلب ليلى 15 عامًا من الخبرة في التصميم السكني الراقي. متخصصة في مفاهيم الاندماج الثقافي، تمزج بسلاسة بين التراث العربي والجماليات المعاصرة. اهتمامها الدقيق بالتفاصيل والنهج المتمحور حول العميل يضمن أن كل مشروع يتجاوز التوقعات."
+              },
+              "image": "/images/team/layla.jpg",
+              "credentials": "M.A. Interior Design, NCIDQ Certified"
+            },
+            {
+              "name": "David Chen",
+              "title": {
+                "en": "Lead Architect",
+                "ar": "مهندس معماري رئيسي"
+              },
+              "bio": {
+                "en": "David's architectural expertise spans both commercial and residential sectors. With a focus on sustainable design and smart building integration, he ensures our projects are not only beautiful but also environmentally responsible and technologically advanced. His innovative approach has earned multiple industry awards.",
+                "ar": "تمتد خبرة ديفيد المعمارية عبر القطاعين التجاري والسكني. مع التركيز على التصميم المستدام وتكامل المباني الذكية، يضمن أن مشاريعنا ليست جميلة فحسب، بل مسؤولة بيئياً ومتقدمة تقنياً. نهجه المبتكر حصل على جوائز صناعية متعددة."
+              },
+              "image": "/images/team/david.jpg",
+              "credentials": "M.Arch, LEED AP BD+C, AIA Member"
+            },
+            {
+              "name": "Nadia Karimi",
+              "title": {
+                "en": "Project Manager",
+                "ar": "مديرة مشاريع"
+              },
+              "bio": {
+                "en": "Nadia orchestrates the seamless execution of our projects from concept to completion. With a decade of experience in luxury fit-outs and a sharp eye for logistics, she ensures timelines are met, budgets are respected, and quality never compromised. Her organizational prowess keeps every project running smoothly.",
+                "ar": "تنظم نادية التنفيذ السلس لمشاريعنا من المفهوم إلى الإنجاز. مع عقد من الخبرة في التجهيزات الفاخرة ونظرة حادة للوجستيات، تضمن الوفاء بالجداول الزمنية واحترام الميزانيات وعدم المساومة على الجودة أبداً. براعتها التنظيمية تحافظ على سير كل مشروع بسلاسة."
+              },
+              "image": "/images/team/nadia.jpg",
+              "credentials": "PMP, B.Eng Civil, 10+ Years Experience"
+            },
+            {
+              "name": "Marcus Weber",
+              "title": {
+                "en": "Senior Lighting Designer",
+                "ar": "مصمم إضاءة أقدم"
+              },
+              "bio": {
+                "en": "Marcus specializes in creating atmospheric lighting schemes that transform spaces. His technical knowledge combined with artistic sensibility produces stunning results—from sculptural installations to subtle ambient systems. He believes lighting is the jewelry of architecture and approaches each project as a unique canvas.",
+                "ar": "يتخصص ماركوس في إنشاء مخططات إضاءة جوية تحول المساحات. معرفته التقنية جنباً إلى جنب مع الحساسية الفنية تنتج نتائج مذهلة—من التركيبات النحتية إلى أنظمة المحيطة الدقيقة. يعتقد أن الإضاءة هي مجوهرات العمارة ويقترب من كل مشروع كلوحة فريدة."
+              },
+              "image": "/images/team/marcus.jpg",
+              "credentials": "IES Member, Lighting Certified, 12 Years Experience"
+            }
+          ]
+        }
+      },
+      {
+        "id": "about_awards",
+        "type": "awards_section",
+        "order": 5,
+        "data": {
+          "title": {
+            "en": "Awards & Recognition",
+            "ar": "الجوائز والتقدير"
+          },
+          "subtitle": {
+            "en": "CELEBRATING EXCELLENCE",
+            "ar": "احتفال بالتميز"
+          },
+          "description": {
+            "en": "Our work has been recognized by prestigious international design organizations and publications. These accolades reflect our team's dedication, innovation, and pursuit of perfection.",
+            "ar": "تم الاعتراف بعملنا من قبل منظمات ومنشورات التصميم الدولية المرموقة. تعكس هذه الأوسمة تفاني فريقنا وابتكاره وسعيه للكمال."
+          }
+        }
+      },
+      {
+        "id": "about_why_choose",
+        "type": "features_grid",
+        "order": 6,
+        "data": {
+          "title": {
+            "en": "Why Choose Mouhajer?",
+            "ar": "لماذا تختار مهاجر؟"
+          },
+          "features": [
+            {
+              "icon": "award",
+              "title": {
+                "en": "Award-Winning Excellence",
+                "ar": "تميز حائز على جوائز"
+              },
+              "description": {
+                "en": "Multiple international design awards and industry recognition",
+                "ar": "جوائز تصميم دولية متعددة واعتراف من الصناعة"
+              }
+            },
+            {
+              "icon": "clock",
+              "title": {
+                "en": "20+ Years Experience",
+                "ar": "أكثر من 20 عامًا من الخبرة"
+              },
+              "description": {
+                "en": "Two decades of design expertise and successful project delivery",
+                "ar": "عقدان من الخبرة في التصميم والتسليم الناجح للمشاريع"
+              }
+            },
+            {
+              "icon": "users",
+              "title": {
+                "en": "Expert Team",
+                "ar": "فريق خبراء"
+              },
+              "description": {
+                "en": "World-class designers, architects, and master craftsmen",
+                "ar": "مصممون ومهندسون معماريون وحرفيون من الطراز العالمي"
+              }
+            },
+            {
+              "icon": "check",
+              "title": {
+                "en": "98% On-Time Delivery",
+                "ar": "تسليم 98% في الوقت المحدد"
+              },
+              "description": {
+                "en": "Exceptional project management ensures timely completion",
+                "ar": "إدارة مشاريع استثنائية تضمن الإنجاز في الوقت المحدد"
+              }
+            },
+            {
+              "icon": "star",
+              "title": {
+                "en": "Premium Quality",
+                "ar": "جودة ممتازة"
+              },
+              "description": {
+                "en": "Only the finest materials and impeccable craftsmanship",
+                "ar": "فقط أفضل المواد والحرفية التي لا تشوبها شائبة"
+              }
+            },
+            {
+              "icon": "shield",
+              "title": {
+                "en": "Full Warranty",
+                "ar": "ضمان كامل"
+              },
+              "description": {
+                "en": "Comprehensive warranty coverage on all our work",
+                "ar": "تغطية ضمان شاملة على جميع أعمالنا"
+              }
+            }
+          ],
+          "backgroundColor": "#F8F9FA"
+        }
+      },
+      {
+        "id": "about_cta",
+        "type": "cta_section",
+        "order": 7,
+        "data": {
+          "title": {
+            "en": "Let's Create Something Extraordinary Together",
+            "ar": "لنخلق شيئًا استثنائيًا معًا"
+          },
+          "description": {
+            "en": "Ready to start your design journey? Schedule a free consultation with our team today.",
+            "ar": "هل أنت مستعد لبدء رحلة التصميم الخاصة بك؟ حدد موعدًا لاستشارة مجانية مع فريقنا اليوم."
+          },
+          "primaryButton": {
+            "text": {
+              "en": "Book Consultation",
+              "ar": "احجز استشارة"
+            },
+            "link": "/contact-us"
+          },
+          "backgroundColor": "#1a1a1a",
+          "textColor": "#ffffff"
+        }
+      }
+    ],
+    "seo": {
+      "metaTitle": {
+        "en": "About Mouhajer Design | Award-Winning Interior Design Dubai Since 2002",
+        "ar": "عن مهاجر للتصميم | تصميم داخلي حائز على جوائز دبي منذ 2002"
+      },
+      "metaDescription": {
+        "en": "Discover Mouhajer International Design's story: 20+ years of excellence, 500+ luxury projects, award-winning team. Learn why we're Dubai's most trusted interior design firm.",
+        "ar": "اكتشف قصة مهاجر الدولية للتصميم: أكثر من 20 عامًا من التميز، أكثر من 500 مشروع فاخر، فريق حائز على جوائز. تعرف على سبب كوننا شركة التصميم الداخلي الأكثر ثقة في دبي."
+      },
+      "keywords": [
+        "about Mouhajer Design",
+        "interior design company Dubai",
+        "Dubai design firm history",
+        "luxury interior designer UAE",
+        "award-winning design Dubai",
+        "Maher Mouhajer architect",
+        "عن مهاجر للتصميم",
+        "شركة تصميم داخلي دبي",
+        "تاريخ شركة التصميم دبي"
+      ]
+    },
+    "status": "published",
+    "featured": false,
+    "createdAt": "2024-10-01T12:00:00.000Z",
+    "updatedAt": "2025-10-08T12:00:00.000Z"
+  }
+]

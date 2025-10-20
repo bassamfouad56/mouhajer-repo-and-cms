@@ -1,0 +1,105 @@
+[
+  {
+    "id": "ad-001-free-consultation",
+    "type": "popup",
+    "title": {
+      "en": "Free Design Consultation",
+      "ar": "استشارة تصميم مجانية"
+    },
+    "description": {
+      "en": "Book your complimentary consultation with our award-winning design team today!",
+      "ar": "احجز استشارتك المجانية مع فريق التصميم الحائز على جوائز لدينا اليوم!"
+    },
+    "content": {
+      "en": "Transform your space with Dubai's #1 interior design company. Get a free consultation worth AED 2,500 when you book this month. Limited slots available!",
+      "ar": "حوّل مساحتك مع شركة التصميم الداخلي رقم 1 في دبي. احصل على استشارة مجانية بقيمة 2,500 درهم عند الحجز هذا الشهر. فتحات محدودة متاحة!"
+    },
+    "ctaText": {
+      "en": "Book Now",
+      "ar": "احجز الآن"
+    },
+    "ctaLink": "/contact-us",
+    "linkUrl": "/contact-us",
+    "zone": "popup",
+    "image": "/images/ads/free-consultation-popup.jpg",
+    "displayDelay": 5000,
+    "displayFrequency": "once_per_session",
+    "backgroundColor": "#1a1a1a",
+    "textColor": "#ffffff",
+    "active": true,
+    "startDate": "2025-01-01T00:00:00.000Z",
+    "endDate": "2025-12-31T23:59:59.000Z",
+    "priority": 1,
+    "targetPages": ["home", "services"],
+    "createdAt": "2025-01-01T10:00:00.000Z",
+    "updatedAt": "2025-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "ad-002-portfolio-download",
+    "type": "banner",
+    "title": {
+      "en": "Download Our Portfolio",
+      "ar": "تحميل معرض أعمالنا"
+    },
+    "description": {
+      "en": "Explore 50+ luxury projects in our exclusive digital portfolio",
+      "ar": "استكشف أكثر من 50 مشروع فاخر في معرض أعمالنا الرقمي الحصري"
+    },
+    "content": {
+      "en": "Get inspired by our portfolio of luxury villas, penthouses, hotels, and commercial spaces across UAE. Download your free copy now!",
+      "ar": "استلهم من معرض أعمالنا من الفلل الفاخرة والبنتهاوسات والفنادق والمساحات التجارية عبر الإمارات. قم بتنزيل نسختك المجانية الآن!"
+    },
+    "ctaText": {
+      "en": "Download Portfolio",
+      "ar": "تحميل معرض الأعمال"
+    },
+    "ctaLink": "/portfolio-download",
+    "linkUrl": "/portfolio-download",
+    "zone": "header",
+    "image": "/images/ads/portfolio-banner.jpg",
+    "displayPosition": "top",
+    "backgroundColor": "#FFFEF5",
+    "textColor": "#1a1a1a",
+    "active": true,
+    "startDate": "2025-01-01T00:00:00.000Z",
+    "endDate": "2025-12-31T23:59:59.000Z",
+    "priority": 2,
+    "targetPages": ["home", "our-projects"],
+    "createdAt": "2025-01-01T10:00:00.000Z",
+    "updatedAt": "2025-01-10T10:00:00.000Z"
+  },
+  {
+    "id": "ad-003-spring-promotion",
+    "type": "banner",
+    "title": {
+      "en": "Spring Renovation Special",
+      "ar": "عرض تجديد الربيع الخاص"
+    },
+    "description": {
+      "en": "Up to 15% OFF complete villa renovations this season",
+      "ar": "خصم يصل إلى 15٪ على تجديدات الفلل الكاملة هذا الموسم"
+    },
+    "content": {
+      "en": "Limited time offer: Get up to 15% discount on complete villa renovations booked before March 31st. Transform your home with Mouhajer's award-winning design excellence.",
+      "ar": "عرض لفترة محدودة: احصل على خصم يصل إلى 15٪ على تجديدات الفلل الكاملة المحجوزة قبل 31 مارس. حول منزلك بتميز التصميم الحائز على جوائز من مهاجر."
+    },
+    "ctaText": {
+      "en": "Claim Offer",
+      "ar": "احصل على العرض"
+    },
+    "ctaLink": "/contact-us?promo=spring2025",
+    "linkUrl": "/contact-us?promo=spring2025",
+    "zone": "sidebar",
+    "image": "/images/ads/spring-promo-banner.jpg",
+    "displayPosition": "middle",
+    "backgroundColor": "#2563eb",
+    "textColor": "#ffffff",
+    "active": false,
+    "startDate": "2025-02-01T00:00:00.000Z",
+    "endDate": "2025-03-31T23:59:59.000Z",
+    "priority": 3,
+    "targetPages": ["home", "services", "our-projects"],
+    "createdAt": "2025-01-20T10:00:00.000Z",
+    "updatedAt": "2025-01-20T10:00:00.000Z"
+  }
+]

@@ -1,0 +1,30 @@
+# Python Dependencies for AI Room Redesign Feature
+# Flux.1 Schnell Model Inference on Mac mini M2/M3
+
+# PyTorch for Mac (Metal Performance Shaders)
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Hugging Face Diffusers (Flux.1 support)
+diffusers>=0.27.0
+
+# Transformers for tokenizers and text encoders
+transformers>=4.36.0
+
+# Accelerate for optimization
+accelerate>=0.25.0
+
+# Image processing
+pillow>=10.0.0
+
+# Text processing
+sentencepiece>=0.1.99
+protobuf>=4.25.0
+
+# Optional: For faster inference
+# safetensors>=0.4.0
+# xformers>=0.0.23  # Note: xformers may not work on Mac, Metal handles optimization
+
+# Installation command:
+# pip3 install -r requirements.txt

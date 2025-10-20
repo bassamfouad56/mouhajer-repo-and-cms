@@ -1,0 +1,67 @@
+"use client";
+import React from "react";
+import StarSVG from "./SVG/StarSVG";
+import PortfolioCarouselHomepage from "./PortfolioCarouselHomepage";
+import AnimatedHeadLine from "./AnimatedHeadLine";
+import PortfolioCarouselHomepageMobile from "./PortfolioCarouselHomepageMobile";
+import Link from "next/link";
+import DescriptionAbouitMouahjerHomePage from "./DescriptionAbouitMouahjerHomePage";
+import { useLocale } from "next-intl";
+
+type Props = {
+  text: string;
+  projects?: any[];
+  locale?: string;
+  portfolioText?: string;
+};
+
+const PortfolioHomePageDisplay = ({ text, projects = [], locale: localeProp, portfolioText }: Props) => {
+  const local = useLocale();
+  const projectData = projects.length > 0 ? projects : [];
+  return (
+    <div className="bg-[#202020] pt-12 pb-12 2xl:pb-32 overflow-hidden">
+      <div className="flex items-center justify-start   gap-x-52 mb-4 ">
+        <AnimatedHeadLine text={text} />
+        <AnimatedHeadLine text={text} />
+        <AnimatedHeadLine text={text} />
+      </div>
+
+      <div className="px-4 2xl:px-16">
+        {local === "en" ? (
+          <>
+            <div className="w-full h-0.5 bg-opacity-15 bg-[#FFFEF5] mb-8"></div>
+            <DescriptionAbouitMouahjerHomePage />
+          </>
+        ) : (
+          ""
+        )}
+
+        <div className="w-full h-0.5 bg-opacity-15 bg-[#FFFEF5] mb-8"></div>
+        <div className="flex flex-col lg:flex-row items-center  justify-center lg:justify-between text-white text-xl font-normal font-Satoshi mb-16 2xl:pl-44">
+          <div className="uppercase flex items-center gap-2">
+            <p>+400</p>
+            <p>{local === "en" ? "Projects" : "مشروع"}</p>
+          </div>
+          <div className="uppercase flex items-center gap-2">
+            <StarSVG white />
+            <Link href="/our-projects">
+              <p className="">
+                {local === "en"
+                  ? `See All Projects`
+                  : `اطلع على كافة المشاريع `}
+              </p>
+            </Link>
+          </div>
+        </div>
+        <div className="2xl:px-16 hidden lg:block">
+          <PortfolioCarouselHomepage projectData={projectData} />
+        </div>
+        <div className="lg:hidden">
+          <PortfolioCarouselHomepageMobile />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PortfolioHomePageDisplay;

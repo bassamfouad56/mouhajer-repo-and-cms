@@ -1,0 +1,52 @@
+{
+  "siteName": {
+    "en": "Mouhajer International Design",
+    "ar": "مهاجر الدولية للتصميم"
+  },
+  "siteDescription": {
+    "en": "Premier luxury interior design company in Dubai, UAE",
+    "ar": "شركة التصميم الداخلي الفاخر الرائدة في دبي، الإمارات العربية المتحدة"
+  },
+  "contactEmail": "INFO@mouhajerdesign.COM",
+  "contactPhone": "+971 4 431 8426",
+  "address": {
+    "en": "BURJ VISTA TOWER 1, LEVEL 2, MOHAMMED BIN RASHID BOULEVARD, DUBAI - UAE",
+    "ar": "برج بورج فيستا 1، الطابق الثاني، شارع محمد بن راشد، دبي - الإمارات العربية المتحدة"
+  },
+  "socialMedia": {
+    "instagram": "https://instagram.com/mouhajerdesign",
+    "facebook": "https://facebook.com/mouhajerdesign",
+    "linkedin": "https://linkedin.com/company/mouhajerdesign",
+    "twitter": "https://twitter.com/mouhajerdesign"
+  },
+  "seo": {
+    "defaultTitle": {
+      "en": "Luxury Interior Design Dubai | Mouhajer International Design",
+      "ar": "تصميم داخلي فاخر دبي | مهاجر الدولية للتصميم"
+    },
+    "defaultDescription": {
+      "en": "Award-winning luxury interior design company in Dubai. Transform your villa, apartment, or commercial space with our expert designers.",
+      "ar": "شركة التصميم الداخلي الفاخر الحائزة على جوائز في دبي. حول الفيلا أو الشقة أو المساحة التجارية مع مصممينا الخبراء."
+    },
+    "keywords": {
+      "en": [
+        "interior design Dubai",
+        "luxury design UAE",
+        "villa design",
+        "commercial design"
+      ],
+      "ar": [
+        "تصميم داخلي دبي",
+        "تصميم فاخر الإمارات",
+        "تصميم فيلا",
+        "تصميم تجاري"
+      ]
+    }
+  },
+  "appearance": {
+    "primaryColor": "#2563eb",
+    "logo": "/images/logo.png",
+    "favicon": "/images/favicon.ico"
+  },
+  "updatedAt": "2025-10-02T08:15:54.938Z"
+}

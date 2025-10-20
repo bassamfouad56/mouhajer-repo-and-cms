@@ -1,0 +1,242 @@
+[
+  {
+    "id": "award-001",
+    "title": {
+      "en": "Best Interior Design Company Dubai 2024",
+      "ar": "أفضل شركة تصميم داخلي في دبي 2024"
+    },
+    "organization": {
+      "en": "Dubai Design Awards",
+      "ar": "جوائز دبي للتصميم"
+    },
+    "year": 2024,
+    "category": {
+      "en": "Overall Excellence",
+      "ar": "التميز الشامل"
+    },
+    "description": {
+      "en": "Recognized as Dubai's leading interior design firm for innovative luxury residential and commercial projects",
+      "ar": "تم الاعتراف بها كشركة التصميم الداخلي الرائدة في دبي للمشاريع السكنية والتجارية الفاخرة المبتكرة"
+    },
+    "image": "/images/awards/best-interior-design-2024.jpg",
+    "featured": true,
+    "displayOrder": 1,
+    "createdAt": "2024-12-01T10:00:00.000Z"
+  },
+  {
+    "id": "award-002",
+    "title": {
+      "en": "Excellence in Luxury Residential Design 2023",
+      "ar": "التميز في التصميم السكني الفاخر 2023"
+    },
+    "organization": {
+      "en": "Middle East Design Awards",
+      "ar": "جوائز الشرق الأوسط للتصميم"
+    },
+    "year": 2023,
+    "category": {
+      "en": "Residential - Luxury Villa",
+      "ar": "سكني - فيلا فاخرة"
+    },
+    "description": {
+      "en": "Awarded for exceptional design of Emirates Hills mansion featuring sustainable luxury and cultural integration",
+      "ar": "تم منحها لتصميم استثنائي لقصر تلال الإمارات يتميز بالفخامة المستدامة والتكامل الثقافي"
+    },
+    "image": "/images/awards/luxury-residential-2023.jpg",
+    "featured": true,
+    "displayOrder": 2,
+    "createdAt": "2023-11-15T10:00:00.000Z"
+  },
+  {
+    "id": "award-003",
+    "title": {
+      "en": "Best Hospitality Design Project 2023",
+      "ar": "أفضل مشروع تصميم ضيافة 2023"
+    },
+    "organization": {
+      "en": "Gulf Interior Design Awards",
+      "ar": "جوائز الخليج للتصميم الداخلي"
+    },
+    "year": 2023,
+    "category": {
+      "en": "Hospitality - Boutique Hotel",
+      "ar": "ضيافة - فندق بوتيكي"
+    },
+    "description": {
+      "en": "Recognition for innovative boutique hotel lobby design blending Arabian elegance with contemporary luxury",
+      "ar": "تقدير لتصميم لوبي فندق بوتيكي مبتكر يمزج الأناقة العربية مع الفخامة المعاصرة"
+    },
+    "image": "/images/awards/hospitality-design-2023.jpg",
+    "featured": true,
+    "displayOrder": 3,
+    "createdAt": "2023-09-20T10:00:00.000Z"
+  },
+  {
+    "id": "award-004",
+    "title": {
+      "en": "Sustainable Design Excellence Award 2022",
+      "ar": "جائزة التميز في التصميم المستدام 2022"
+    },
+    "organization": {
+      "en": "LEED Awards - U.S. Green Building Council",
+      "ar": "جوائز LEED - مجلس المباني الخضراء الأمريكي"
+    },
+    "year": 2022,
+    "category": {
+      "en": "Sustainable Luxury",
+      "ar": "الفخامة المستدامة"
+    },
+    "description": {
+      "en": "Honored for Al Barari eco-luxury villa achieving LEED Platinum certification without compromising design excellence",
+      "ar": "تم تكريمها لفيلا البراري الفاخرة الصديقة للبيئة التي حققت شهادة LEED البلاتينية دون المساومة على تميز التصميم"
+    },
+    "image": "/images/awards/sustainable-design-2022.jpg",
+    "featured": true,
+    "displayOrder": 4,
+    "createdAt": "2022-10-10T10:00:00.000Z"
+  },
+  {
+    "id": "award-005",
+    "title": {
+      "en": "Innovation in Design Award 2022",
+      "ar": "جائزة الابتكار في التصميم 2022"
+    },
+    "organization": {
+      "en": "International Design Awards (IDA)",
+      "ar": "جوائز التصميم الدولية"
+    },
+    "year": 2022,
+    "category": {
+      "en": "Smart Home Integration",
+      "ar": "تكامل المنزل الذكي"
+    },
+    "description": {
+      "en": "Recognized for pioneering smart home integration in luxury villa design, setting new standards for automated living",
+      "ar": "تم الاعتراف بها لريادة تكامل المنزل الذكي في تصميم الفلل الفاخرة، وضع معايير جديدة للمعيشة الآلية"
+    },
+    "image": "/images/awards/innovation-design-2022.jpg",
+    "featured": false,
+    "displayOrder": 5,
+    "createdAt": "2022-06-15T10:00:00.000Z"
+  },
+  {
+    "id": "award-006",
+    "title": {
+      "en": "Best Commercial Interior Design 2021",
+      "ar": "أفضل تصميم داخلي تجاري 2021"
+    },
+    "organization": {
+      "en": "Dubai Commercial Design Awards",
+      "ar": "جوائز دبي للتصميم التجاري"
+    },
+    "year": 2021,
+    "category": {
+      "en": "Office Design - DIFC",
+      "ar": "تصميم المكتب - DIFC"
+    },
+    "description": {
+      "en": "Awarded for exceptional DIFC executive office design combining functionality with sophisticated aesthetics",
+      "ar": "تم منحها لتصميم مكتب تنفيذي استثنائي في DIFC يجمع بين الوظائف والجماليات المتطورة"
+    },
+    "image": "/images/awards/commercial-design-2021.jpg",
+    "featured": false,
+    "displayOrder": 6,
+    "createdAt": "2021-11-30T10:00:00.000Z"
+  },
+  {
+    "id": "award-007",
+    "title": {
+      "en": "Rising Star Design Firm 2020",
+      "ar": "شركة تصميم نجم صاعد 2020"
+    },
+    "organization": {
+      "en": "Emirates Design Council",
+      "ar": "مجلس الإمارات للتصميم"
+    },
+    "year": 2020,
+    "category": {
+      "en": "Emerging Excellence",
+      "ar": "التميز الناشئ"
+    },
+    "description": {
+      "en": "Recognized as one of UAE's most promising design firms for consistent quality and client satisfaction",
+      "ar": "تم الاعتراف بها كواحدة من شركات التصميم الواعدة في الإمارات للجودة المستمرة ورضا العملاء"
+    },
+    "image": "/images/awards/rising-star-2020.jpg",
+    "featured": false,
+    "displayOrder": 7,
+    "createdAt": "2020-12-10T10:00:00.000Z"
+  },
+  {
+    "id": "award-008",
+    "title": {
+      "en": "Best Use of Natural Materials 2020",
+      "ar": "أفضل استخدام للمواد الطبيعية 2020"
+    },
+    "organization": {
+      "en": "Sustainable Design Forum",
+      "ar": "منتدى التصميم المستدام"
+    },
+    "year": 2020,
+    "category": {
+      "en": "Material Innovation",
+      "ar": "ابتكار المواد"
+    },
+    "description": {
+      "en": "Honored for creative use of sustainable natural materials in luxury spa design, balancing ecology with elegance",
+      "ar": "تم تكريمها للاستخدام الإبداعي للمواد الطبيعية المستدامة في تصميم السبا الفاخر، موازنة البيئة مع الأناقة"
+    },
+    "image": "/images/awards/natural-materials-2020.jpg",
+    "featured": false,
+    "displayOrder": 8,
+    "createdAt": "2020-09-15T10:00:00.000Z"
+  },
+  {
+    "id": "award-009",
+    "title": {
+      "en": "Excellence in Project Management 2019",
+      "ar": "التميز في إدارة المشاريع 2019"
+    },
+    "organization": {
+      "en": "UAE Construction Awards",
+      "ar": "جوائز البناء في الإمارات"
+    },
+    "year": 2019,
+    "category": {
+      "en": "Project Delivery",
+      "ar": "تسليم المشروع"
+    },
+    "description": {
+      "en": "Recognized for outstanding project management achieving 98% on-time delivery rate across all projects",
+      "ar": "تم الاعتراف بها لإدارة المشاريع المتميزة التي حققت معدل تسليم في الوقت المحدد بنسبة 98٪ عبر جميع المشاريع"
+    },
+    "image": "/images/awards/project-management-2019.jpg",
+    "featured": false,
+    "displayOrder": 9,
+    "createdAt": "2019-11-20T10:00:00.000Z"
+  },
+  {
+    "id": "award-010",
+    "title": {
+      "en": "Client Satisfaction Excellence 2018",
+      "ar": "التميز في رضا العملاء 2018"
+    },
+    "organization": {
+      "en": "Dubai Business Excellence Awards",
+      "ar": "جوائز دبي للتميز التجاري"
+    },
+    "year": 2018,
+    "category": {
+      "en": "Customer Service",
+      "ar": "خدمة العملاء"
+    },
+    "description": {
+      "en": "Awarded for maintaining 98% client satisfaction rate and exceptional after-sales service standards",
+      "ar": "تم منحها للحفاظ على معدل رضا العملاء بنسبة 98٪ ومعايير خدمة ما بعد البيع الاستثنائية"
+    },
+    "image": "/images/awards/client-satisfaction-2018.jpg",
+    "featured": false,
+    "displayOrder": 10,
+    "createdAt": "2018-12-05T10:00:00.000Z"
+  }
+]

@@ -1,0 +1,749 @@
+{
+  "timestamp": "2025-10-08T19:29:46.480Z",
+  "config": {
+    "inputDir": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images",
+    "outputDir": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\optimized",
+    "backupDir": "d:\\Desktop\\wbsite\\mouhajer-repo\\public\\images\\originals",
+    "minSizeForOptimization": 2097152,
+    "maxWidth": 1920,
+    "maxHeight": 1920,
+    "quality": 85,
+    "formats": [
+      "webp",
+      "jpg"
+    ]
+  },
+  "summary": {
+    "totalImages": 311,
+    "optimizedCount": 103,
+    "failedCount": 0,
+    "originalSizeMB": "1316.38",
+    "optimizedSizeMB": "33.51",
+    "savedMB": "1282.87",
+    "percentageSaved": "97.5"
+  },
+  "optimized": [
+    {
+      "original": "2211111.jpg",
+      "originalSizeMB": "11.28",
+      "webpSizeMB": "0.26",
+      "jpgSizeMB": "0.33",
+      "savingsMB": "11.01"
+    },
+    {
+      "original": "7.jpg",
+      "originalSizeMB": "14.38",
+      "webpSizeMB": "0.49",
+      "jpgSizeMB": "0.49",
+      "savingsMB": "13.88"
+    },
+    {
+      "original": "banner2.png",
+      "originalSizeMB": "7.31",
+      "webpSizeMB": "0.28",
+      "jpgSizeMB": "0.31",
+      "savingsMB": "7.03"
+    },
+    {
+      "original": "Enscape_2023-11-01-15-27-12.jpg",
+      "originalSizeMB": "4.67",
+      "webpSizeMB": "0.20",
+      "jpgSizeMB": "0.25",
+      "savingsMB": "4.48"
+    },
+    {
+      "original": "Enscape_2023-11-01-15-41-34.jpg",
+      "originalSizeMB": "4.89",
+      "webpSizeMB": "0.56",
+      "jpgSizeMB": "0.57",
+      "savingsMB": "4.33"
+    },
+    {
+      "original": "Enscape_2023-11-01-15-45-52.jpg",
+      "originalSizeMB": "4.90",
+      "webpSizeMB": "0.58",
+      "jpgSizeMB": "0.57",
+      "savingsMB": "4.31"
+    },
+    {
+      "original": "Enscape_2023-11-01-15-48-09.jpg",
+      "originalSizeMB": "4.93",
+      "webpSizeMB": "0.60",
+      "jpgSizeMB": "0.57",
+      "savingsMB": "4.33"
+    },
+    {
+      "original": "Enscape_2023-12-26-12-05-44.jpg",
+      "originalSizeMB": "5.00",
+      "webpSizeMB": "0.19",
+      "jpgSizeMB": "0.23",
+      "savingsMB": "4.82"
+    },
+    {
+      "original": "Enscape_2023-12-26-12-51-29.jpg",
+      "originalSizeMB": "4.47",
+      "webpSizeMB": "0.17",
+      "jpgSizeMB": "0.22",
+      "savingsMB": "4.30"
+    },
+    {
+      "original": "Enscape_2023-12-26-12-59-57.jpg",
+      "originalSizeMB": "5.71",
+      "webpSizeMB": "0.28",
+      "jpgSizeMB": "0.32",
+      "savingsMB": "5.42"
+    },
+    {
+      "original": "Enscape_2023-12-26-13-06-24.jpg",
+      "originalSizeMB": "5.70",
+      "webpSizeMB": "0.28",
+      "jpgSizeMB": "0.32",
+      "savingsMB": "5.41"
+    },
+    {
+      "original": "Enscape_2023-12-26-16-55-59.jpg",
+      "originalSizeMB": "4.89",
+      "webpSizeMB": "0.19",
+      "jpgSizeMB": "0.23",
+      "savingsMB": "4.70"
+    },
+    {
+      "original": "Enscape_2023-12-26-16-55-60.jpg",
+      "originalSizeMB": "4.53",
+      "webpSizeMB": "0.18",
+      "jpgSizeMB": "0.21",
+      "savingsMB": "4.35"
+    },
+    {
+      "original": "Enscape_2024-02-06-15-48-00.jpg",
+      "originalSizeMB": "3.49",
+      "webpSizeMB": "0.35",
+      "jpgSizeMB": "0.40",
+      "savingsMB": "3.14"
+    },
+    {
+      "original": "Enscape_2024-03-13-14-56-49.jpg",
+      "originalSizeMB": "5.89",
+      "webpSizeMB": "0.29",
+      "jpgSizeMB": "0.32",
+      "savingsMB": "5.60"
+    },
+    {
+      "original": "Enscape_2024-03-13-14-57-43.jpg",
+      "originalSizeMB": "5.39",
+      "webpSizeMB": "0.24",
+      "jpgSizeMB": "0.30",
+      "savingsMB": "5.15"
+    },
+    {
+      "original": "Enscape_2024-03-13-15-06-43.jpg",
+      "originalSizeMB": "6.78",
+      "webpSizeMB": "0.41",
+      "jpgSizeMB": "0.39",
+      "savingsMB": "6.37"
+    },
+    {
+      "original": "Enscape_2024-03-13-15-09-03.jpg",
+      "originalSizeMB": "5.49",
+      "webpSizeMB": "0.26",
+      "jpgSizeMB": "0.31",
+      "savingsMB": "5.24"
+    },
+    {
+      "original": "Enscape_2024-03-13-15-11-35.jpg",
+      "originalSizeMB": "6.26",
+      "webpSizeMB": "0.35",
+      "jpgSizeMB": "0.36",
+      "savingsMB": "5.91"
+    },
+    {
+      "original": "Enscape_2024-03-13-15-13-42.jpg",
+      "originalSizeMB": "7.14",
+      "webpSizeMB": "0.47",
+      "jpgSizeMB": "0.43",
+      "savingsMB": "6.68"
+    },
+    {
+      "original": "Enscape_2024-03-13-15-15-34.jpg",
+      "originalSizeMB": "6.41",
+      "webpSizeMB": "0.31",
+      "jpgSizeMB": "0.30",
+      "savingsMB": "6.10"
+    },
+    {
+      "original": "Enscape_2024-03-13-15-16-07.jpg",
+      "originalSizeMB": "6.72",
+      "webpSizeMB": "0.40",
+      "jpgSizeMB": "0.38",
+      "savingsMB": "6.33"
+    },
+    {
+      "original": "Enscape_2024-03-13-15-20-11.jpg",
+      "originalSizeMB": "7.32",
+      "webpSizeMB": "0.46",
+      "jpgSizeMB": "0.43",
+      "savingsMB": "6.86"
+    },
+    {
+      "original": "Enscape_2024-03-13-16-02-22.jpg",
+      "originalSizeMB": "7.10",
+      "webpSizeMB": "0.45",
+      "jpgSizeMB": "0.40",
+      "savingsMB": "6.65"
+    },
+    {
+      "original": "Enscape_2024-03-13-16-03-25.jpg",
+      "originalSizeMB": "5.85",
+      "webpSizeMB": "0.31",
+      "jpgSizeMB": "0.35",
+      "savingsMB": "5.55"
+    },
+    {
+      "original": "Enscape_2024-03-13-16-05-24.jpg",
+      "originalSizeMB": "6.79",
+      "webpSizeMB": "0.40",
+      "jpgSizeMB": "0.38",
+      "savingsMB": "6.39"
+    },
+    {
+      "original": "Enscape_2024-03-21-12-03-02.jpg",
+      "originalSizeMB": "6.68",
+      "webpSizeMB": "0.40",
+      "jpgSizeMB": "0.38",
+      "savingsMB": "6.28"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-49-43.jpg",
+      "originalSizeMB": "5.62",
+      "webpSizeMB": "0.24",
+      "jpgSizeMB": "0.27",
+      "savingsMB": "5.38"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-50-35.jpg",
+      "originalSizeMB": "5.81",
+      "webpSizeMB": "0.28",
+      "jpgSizeMB": "0.30",
+      "savingsMB": "5.53"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-51-28.jpg",
+      "originalSizeMB": "5.87",
+      "webpSizeMB": "0.27",
+      "jpgSizeMB": "0.29",
+      "savingsMB": "5.60"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-52-29.jpg",
+      "originalSizeMB": "6.34",
+      "webpSizeMB": "0.33",
+      "jpgSizeMB": "0.33",
+      "savingsMB": "6.01"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-53-56.jpg",
+      "originalSizeMB": "5.67",
+      "webpSizeMB": "0.25",
+      "jpgSizeMB": "0.28",
+      "savingsMB": "5.41"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-54-43.jpg",
+      "originalSizeMB": "6.39",
+      "webpSizeMB": "0.35",
+      "jpgSizeMB": "0.35",
+      "savingsMB": "6.03"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-55-17.jpg",
+      "originalSizeMB": "6.49",
+      "webpSizeMB": "0.37",
+      "jpgSizeMB": "0.36",
+      "savingsMB": "6.12"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-55-54.jpg",
+      "originalSizeMB": "6.46",
+      "webpSizeMB": "0.37",
+      "jpgSizeMB": "0.37",
+      "savingsMB": "6.09"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-56-33.jpg",
+      "originalSizeMB": "6.77",
+      "webpSizeMB": "0.42",
+      "jpgSizeMB": "0.40",
+      "savingsMB": "6.35"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-57-14.jpg",
+      "originalSizeMB": "5.90",
+      "webpSizeMB": "0.31",
+      "jpgSizeMB": "0.32",
+      "savingsMB": "5.58"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-57-39.jpg",
+      "originalSizeMB": "5.81",
+      "webpSizeMB": "0.29",
+      "jpgSizeMB": "0.30",
+      "savingsMB": "5.52"
+    },
+    {
+      "original": "Enscape_2024-03-21-15-58-26.jpg",
+      "originalSizeMB": "5.59",
+      "webpSizeMB": "0.28",
+      "jpgSizeMB": "0.29",
+      "savingsMB": "5.32"
+    },
+    {
+      "original": "Enscape_2024-03-23-13-29-01.jpg",
+      "originalSizeMB": "6.81",
+      "webpSizeMB": "0.43",
+      "jpgSizeMB": "0.42",
+      "savingsMB": "6.38"
+    },
+    {
+      "original": "Enscape_2024-03-29-11-17-16.jpg",
+      "originalSizeMB": "5.47",
+      "webpSizeMB": "0.26",
+      "jpgSizeMB": "0.30",
+      "savingsMB": "5.21"
+    },
+    {
+      "original": "Enscape_2024-03-29-11-30-11.jpg",
+      "originalSizeMB": "4.83",
+      "webpSizeMB": "0.52",
+      "jpgSizeMB": "0.54",
+      "savingsMB": "4.32"
+    },
+    {
+      "original": "homeBanner.png",
+      "originalSizeMB": "2.28",
+      "webpSizeMB": "0.21",
+      "jpgSizeMB": "0.23",
+      "savingsMB": "2.08"
+    },
+    {
+      "original": "Messi Eng Maher.jpg",
+      "originalSizeMB": "8.16",
+      "webpSizeMB": "0.16",
+      "jpgSizeMB": "0.20",
+      "savingsMB": "8.00"
+    },
+    {
+      "original": "newbanner.jpg",
+      "originalSizeMB": "19.29",
+      "webpSizeMB": "0.60",
+      "jpgSizeMB": "0.55",
+      "savingsMB": "18.70"
+    },
+    {
+      "original": "villa114.jpg",
+      "originalSizeMB": "19.39",
+      "webpSizeMB": "0.33",
+      "jpgSizeMB": "0.37",
+      "savingsMB": "19.06"
+    },
+    {
+      "original": "_DSC3504-HDR.jpg",
+      "originalSizeMB": "15.16",
+      "webpSizeMB": "0.43",
+      "jpgSizeMB": "0.45",
+      "savingsMB": "14.73"
+    },
+    {
+      "original": "_MID0003-HDR.jpg",
+      "originalSizeMB": "19.93",
+      "webpSizeMB": "0.42",
+      "jpgSizeMB": "0.42",
+      "savingsMB": "19.51"
+    },
+    {
+      "original": "_MID0008-HDR.jpg",
+      "originalSizeMB": "13.09",
+      "webpSizeMB": "0.22",
+      "jpgSizeMB": "0.27",
+      "savingsMB": "12.88"
+    },
+    {
+      "original": "_MID0013-HDR.jpg",
+      "originalSizeMB": "16.64",
+      "webpSizeMB": "0.22",
+      "jpgSizeMB": "0.26",
+      "savingsMB": "16.42"
+    },
+    {
+      "original": "_MID0026-HDR.jpg",
+      "originalSizeMB": "12.59",
+      "webpSizeMB": "0.31",
+      "jpgSizeMB": "0.38",
+      "savingsMB": "12.28"
+    },
+    {
+      "original": "_MID0031-HDR.jpg",
+      "originalSizeMB": "18.83",
+      "webpSizeMB": "0.58",
+      "jpgSizeMB": "0.54",
+      "savingsMB": "18.26"
+    },
+    {
+      "original": "_MID0033-HDR.jpg",
+      "originalSizeMB": "14.04",
+      "webpSizeMB": "0.29",
+      "jpgSizeMB": "0.33",
+      "savingsMB": "13.75"
+    },
+    {
+      "original": "_MID0038-HDR.jpg",
+      "originalSizeMB": "17.55",
+      "webpSizeMB": "0.24",
+      "jpgSizeMB": "0.30",
+      "savingsMB": "17.31"
+    },
+    {
+      "original": "_MID0053-HDR.jpg",
+      "originalSizeMB": "17.82",
+      "webpSizeMB": "0.24",
+      "jpgSizeMB": "0.29",
+      "savingsMB": "17.59"
+    },
+    {
+      "original": "_MID0066-HDR.jpg",
+      "originalSizeMB": "9.72",
+      "webpSizeMB": "0.18",
+      "jpgSizeMB": "0.26",
+      "savingsMB": "9.54"
+    },
+    {
+      "original": "_MID0068-HDR.jpg",
+      "originalSizeMB": "18.76",
+      "webpSizeMB": "0.33",
+      "jpgSizeMB": "0.36",
+      "savingsMB": "18.42"
+    },
+    {
+      "original": "_MID0071-HDR.jpg",
+      "originalSizeMB": "10.21",
+      "webpSizeMB": "0.16",
+      "jpgSizeMB": "0.23",
+      "savingsMB": "10.05"
+    },
+    {
+      "original": "_MID0073-HDR.jpg",
+      "originalSizeMB": "15.16",
+      "webpSizeMB": "0.17",
+      "jpgSizeMB": "0.22",
+      "savingsMB": "14.99"
+    },
+    {
+      "original": "_MID0076-HDR.jpg",
+      "originalSizeMB": "9.84",
+      "webpSizeMB": "0.18",
+      "jpgSizeMB": "0.26",
+      "savingsMB": "9.66"
+    },
+    {
+      "original": "_MID0078-HDR.jpg",
+      "originalSizeMB": "18.82",
+      "webpSizeMB": "0.25",
+      "jpgSizeMB": "0.27",
+      "savingsMB": "18.56"
+    },
+    {
+      "original": "_MID0083-HDR.jpg",
+      "originalSizeMB": "19.51",
+      "webpSizeMB": "0.38",
+      "jpgSizeMB": "0.38",
+      "savingsMB": "19.14"
+    },
+    {
+      "original": "_MID0088-HDR.jpg",
+      "originalSizeMB": "15.98",
+      "webpSizeMB": "0.24",
+      "jpgSizeMB": "0.28",
+      "savingsMB": "15.75"
+    },
+    {
+      "original": "_MID0093-HDR.jpg",
+      "originalSizeMB": "16.05",
+      "webpSizeMB": "0.22",
+      "jpgSizeMB": "0.26",
+      "savingsMB": "15.83"
+    },
+    {
+      "original": "_MID0096-HDR.jpg",
+      "originalSizeMB": "10.53",
+      "webpSizeMB": "0.20",
+      "jpgSizeMB": "0.25",
+      "savingsMB": "10.33"
+    },
+    {
+      "original": "_MID0098-HDR.jpg",
+      "originalSizeMB": "15.62",
+      "webpSizeMB": "0.21",
+      "jpgSizeMB": "0.26",
+      "savingsMB": "15.41"
+    },
+    {
+      "original": "_MID0101-HDR.jpg",
+      "originalSizeMB": "10.20",
+      "webpSizeMB": "0.19",
+      "jpgSizeMB": "0.24",
+      "savingsMB": "10.01"
+    },
+    {
+      "original": "_MID0111-HDR.jpg",
+      "originalSizeMB": "10.40",
+      "webpSizeMB": "0.23",
+      "jpgSizeMB": "0.29",
+      "savingsMB": "10.18"
+    },
+    {
+      "original": "_MID0116-HDR.jpg",
+      "originalSizeMB": "10.90",
+      "webpSizeMB": "0.25",
+      "jpgSizeMB": "0.30",
+      "savingsMB": "10.65"
+    },
+    {
+      "original": "_MID0118-HDR.jpg",
+      "originalSizeMB": "17.07",
+      "webpSizeMB": "0.19",
+      "jpgSizeMB": "0.25",
+      "savingsMB": "16.88"
+    },
+    {
+      "original": "_MID0121-HDR.jpg",
+      "originalSizeMB": "9.84",
+      "webpSizeMB": "0.20",
+      "jpgSizeMB": "0.25",
+      "savingsMB": "9.63"
+    },
+    {
+      "original": "_MID0123-HDR.jpg",
+      "originalSizeMB": "19.91",
+      "webpSizeMB": "0.35",
+      "jpgSizeMB": "0.38",
+      "savingsMB": "19.56"
+    },
+    {
+      "original": "_MID0128-HDR.jpg",
+      "originalSizeMB": "20.36",
+      "webpSizeMB": "0.37",
+      "jpgSizeMB": "0.36",
+      "savingsMB": "19.99"
+    },
+    {
+      "original": "_MID0131-HDR.jpg",
+      "originalSizeMB": "12.34",
+      "webpSizeMB": "0.31",
+      "jpgSizeMB": "0.37",
+      "savingsMB": "12.03"
+    },
+    {
+      "original": "_MID0133-HDR.jpg",
+      "originalSizeMB": "17.30",
+      "webpSizeMB": "0.28",
+      "jpgSizeMB": "0.33",
+      "savingsMB": "17.02"
+    },
+    {
+      "original": "_MID0138-HDR.jpg",
+      "originalSizeMB": "18.96",
+      "webpSizeMB": "0.33",
+      "jpgSizeMB": "0.35",
+      "savingsMB": "18.64"
+    },
+    {
+      "original": "_MID0146-HDR.jpg",
+      "originalSizeMB": "10.07",
+      "webpSizeMB": "0.26",
+      "jpgSizeMB": "0.31",
+      "savingsMB": "9.82"
+    },
+    {
+      "original": "_MID0151-HDR.jpg",
+      "originalSizeMB": "10.24",
+      "webpSizeMB": "0.23",
+      "jpgSizeMB": "0.31",
+      "savingsMB": "10.01"
+    },
+    {
+      "original": "_MID0156-HDR.jpg",
+      "originalSizeMB": "10.17",
+      "webpSizeMB": "0.25",
+      "jpgSizeMB": "0.31",
+      "savingsMB": "9.92"
+    },
+    {
+      "original": "_MID0158-HDR.jpg",
+      "originalSizeMB": "17.06",
+      "webpSizeMB": "0.23",
+      "jpgSizeMB": "0.28",
+      "savingsMB": "16.82"
+    },
+    {
+      "original": "_MID0161-HDR.jpg",
+      "originalSizeMB": "9.74",
+      "webpSizeMB": "0.19",
+      "jpgSizeMB": "0.26",
+      "savingsMB": "9.56"
+    },
+    {
+      "original": "_MID0163-HDR.jpg",
+      "originalSizeMB": "16.85",
+      "webpSizeMB": "0.26",
+      "jpgSizeMB": "0.30",
+      "savingsMB": "16.59"
+    },
+    {
+      "original": "_MID0166-HDR.jpg",
+      "originalSizeMB": "8.16",
+      "webpSizeMB": "0.09",
+      "jpgSizeMB": "0.15",
+      "savingsMB": "8.07"
+    },
+    {
+      "original": "_MID0171-HDR.jpg",
+      "originalSizeMB": "9.03",
+      "webpSizeMB": "0.18",
+      "jpgSizeMB": "0.25",
+      "savingsMB": "8.84"
+    },
+    {
+      "original": "_MID0173-HDR.jpg",
+      "originalSizeMB": "21.78",
+      "webpSizeMB": "0.37",
+      "jpgSizeMB": "0.39",
+      "savingsMB": "21.41"
+    },
+    {
+      "original": "_MID0178-HDR.jpg",
+      "originalSizeMB": "22.57",
+      "webpSizeMB": "0.48",
+      "jpgSizeMB": "0.46",
+      "savingsMB": "22.09"
+    },
+    {
+      "original": "_MID0181-HDR.jpg",
+      "originalSizeMB": "9.92",
+      "webpSizeMB": "0.23",
+      "jpgSizeMB": "0.31",
+      "savingsMB": "9.69"
+    },
+    {
+      "original": "_MID0188-HDR.jpg",
+      "originalSizeMB": "20.31",
+      "webpSizeMB": "0.36",
+      "jpgSizeMB": "0.37",
+      "savingsMB": "19.95"
+    },
+    {
+      "original": "_MID0198-HDR.jpg",
+      "originalSizeMB": "19.69",
+      "webpSizeMB": "0.28",
+      "jpgSizeMB": "0.35",
+      "savingsMB": "19.41"
+    },
+    {
+      "original": "_MID0203-HDR.jpg",
+      "originalSizeMB": "22.18",
+      "webpSizeMB": "0.39",
+      "jpgSizeMB": "0.39",
+      "savingsMB": "21.80"
+    },
+    {
+      "original": "_MID0208-HDR.jpg",
+      "originalSizeMB": "19.70",
+      "webpSizeMB": "0.29",
+      "jpgSizeMB": "0.35",
+      "savingsMB": "19.40"
+    },
+    {
+      "original": "_MID0213-HDR.jpg",
+      "originalSizeMB": "21.66",
+      "webpSizeMB": "0.39",
+      "jpgSizeMB": "0.38",
+      "savingsMB": "21.27"
+    },
+    {
+      "original": "_MID0233-HDR.jpg",
+      "originalSizeMB": "18.39",
+      "webpSizeMB": "0.29",
+      "jpgSizeMB": "0.34",
+      "savingsMB": "18.09"
+    },
+    {
+      "original": "_MID0264-HDR.jpg",
+      "originalSizeMB": "23.29",
+      "webpSizeMB": "0.69",
+      "jpgSizeMB": "0.62",
+      "savingsMB": "22.60"
+    },
+    {
+      "original": "_MID0269-HDR.jpg",
+      "originalSizeMB": "24.35",
+      "webpSizeMB": "0.62",
+      "jpgSizeMB": "0.57",
+      "savingsMB": "23.73"
+    },
+    {
+      "original": "_MID1778-HDR.jpg",
+      "originalSizeMB": "28.68",
+      "webpSizeMB": "0.38",
+      "jpgSizeMB": "0.41",
+      "savingsMB": "28.30"
+    },
+    {
+      "original": "_MID1818-HDR.jpg",
+      "originalSizeMB": "26.96",
+      "webpSizeMB": "0.33",
+      "jpgSizeMB": "0.37",
+      "savingsMB": "26.63"
+    },
+    {
+      "original": "_MID3905-HDR.jpg",
+      "originalSizeMB": "17.83",
+      "webpSizeMB": "0.32",
+      "jpgSizeMB": "0.34",
+      "savingsMB": "17.51"
+    },
+    {
+      "original": "_MID6138-HDR.jpg",
+      "originalSizeMB": "30.33",
+      "webpSizeMB": "0.41",
+      "jpgSizeMB": "0.42",
+      "savingsMB": "29.92"
+    },
+    {
+      "original": "_MID6228-HDR.jpg",
+      "originalSizeMB": "35.64",
+      "webpSizeMB": "0.61",
+      "jpgSizeMB": "0.49",
+      "savingsMB": "35.03"
+    },
+    {
+      "original": "_MID6238-HDR.jpg",
+      "originalSizeMB": "35.56",
+      "webpSizeMB": "0.60",
+      "jpgSizeMB": "0.51",
+      "savingsMB": "34.95"
+    },
+    {
+      "original": "_MID6318-HDR.jpg",
+      "originalSizeMB": "32.31",
+      "webpSizeMB": "0.51",
+      "jpgSizeMB": "0.47",
+      "savingsMB": "31.80"
+    },
+    {
+      "original": "_MID6403-HDR.jpg",
+      "originalSizeMB": "31.89",
+      "webpSizeMB": "0.51",
+      "jpgSizeMB": "0.45",
+      "savingsMB": "31.38"
+    }
+  ],
+  "failed": []
+}

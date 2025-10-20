@@ -1,0 +1,476 @@
+[
+  {
+    "id": "service-001-luxury-interior-design",
+    "title": {
+      "en": "Luxury Interior Design & Consultation",
+      "ar": "التصميم الداخلي الفاخر والاستشارات"
+    },
+    "slugEn": "luxury-interior-design-dubai",
+    "slugAr": "تصميم-داخلي-فاخر-دبي",
+    "description": {
+      "en": "Transform your space into a masterpiece of luxury living with our comprehensive interior design services. We specialize in creating bespoke interiors featuring exotic materials like Calacatta marble, Brazilian rosewood, and gold leaf accents. Our designs seamlessly blend modern sophistication with cultural elements including Arabic calligraphy, Islamic geometric patterns, and mashrabiya screens. Each project incorporates smart home technology, sustainable materials, and custom furniture pieces tailored to your lifestyle. From initial concept to final installation, our award-winning team delivers exceptional results that exceed expectations.",
+      "ar": "حوّل مساحتك إلى تحفة فنية من الحياة الفاخرة مع خدمات التصميم الداخلي الشاملة لدينا. نحن متخصصون في إنشاء تصميمات داخلية مخصصة تتميز بمواد فاخرة مثل رخام كالاكاتا، وخشب الورد البرازيلي، ولمسات ورق الذهب. تمزج تصاميمنا بسلاسة بين الرقي الحديث والعناصر الثقافية بما في ذلك الخط العربي، والأنماط الهندسية الإسلامية، وشاشات المشربية. يتضمن كل مشروع تقنية المنزل الذكي، والمواد المستدامة، وقطع الأثاث المخصصة المصممة لأسلوب حياتك."
+    },
+    "shortDescription": {
+      "en": "Bespoke luxury interior design featuring exotic materials, smart technology, and cultural fusion. From concept to installation.",
+      "ar": "تصميم داخلي فاخر مخصص يتميز بمواد فاخرة، وتقنية ذكية، ودمج ثقافي. من المفهوم إلى التنفيذ."
+    },
+    "icon": "✨",
+    "images": [],
+    "featuresEn": [
+      "Exotic Materials (Calacatta Marble, Gold Leaf, Rare Woods)",
+      "Smart Home Integration & Automation",
+      "Custom Furniture & Bespoke Joinery",
+      "3D Visualization & Virtual Reality Walkthroughs",
+      "Cultural Fusion Design (Arabic & Modern Elements)",
+      "Sustainable Luxury Materials",
+      "Sculptural Lighting Design",
+      "Project Management & Coordination"
+    ],
+    "featuresAr": [
+      "مواد فاخرة (رخام كالاكاتا، ورق الذهب، أخشاب نادرة)",
+      "تكامل وأتمتة المنزل الذكي",
+      "أثاث مخصص ونجارة حسب الطلب",
+      "تصور ثلاثي الأبعاد وجولات الواقع الافتراضي",
+      "تصميم الدمج الثقافي (عناصر عربية وحديثة)",
+      "مواد فاخرة مستدامة",
+      "تصميم إضاءة نحتية",
+      "إدارة وتنسيق المشاريع"
+    ],
+    "price": "Starting from AED 25,000",
+    "duration": "4-12 weeks",
+    "featured": true,
+    "status": "published",
+    "seoMetaTitleEn": "Luxury Interior Design Dubai | Premium Design Services UAE",
+    "seoMetaTitleAr": "تصميم داخلي فاخر دبي | خدمات تصميم راقية الإمارات",
+    "seoMetaDescEn": "Award-winning luxury interior design in Dubai. Exotic materials, smart home integration, and cultural fusion. Transform your space into a masterpiece. Call now!",
+    "seoMetaDescAr": "تصميم داخلي فاخر حائز على جوائز في دبي. مواد فاخرة، تكامل منزل ذكي، ودمج ثقافي. حوّل مساحتك إلى تحفة فنية. اتصل الآن!",
+    "seoKeywordsEn": ["luxury interior design Dubai", "high-end interior designer UAE", "bespoke interior design", "smart home design Dubai", "luxury villa design"],
+    "seoKeywordsAr": ["تصميم داخلي فاخر دبي", "مصمم داخلي راقي الإمارات", "تصميم داخلي مخصص", "تصميم منزل ذكي دبي", "تصميم فيلا فاخرة"],
+    "targetLocations": ["Dubai", "Abu Dhabi", "Sharjah", "Palm Jumeirah", "Downtown Dubai", "Emirates Hills", "DIFC"],
+    "serviceArea": ["Palm Jumeirah", "Emirates Hills", "Downtown Dubai", "Dubai Marina", "Business Bay", "Jumeirah", "Arabian Ranches"],
+    "faqs": [
+      {
+        "question": { "en": "What is your design process?", "ar": "ما هي عملية التصميم الخاصة بك؟" },
+        "answer": { "en": "Our process includes: 1) Initial consultation and brief, 2) Concept development with 3D visualizations, 3) Design refinement and material selection, 4) Detailed drawings and specifications, 5) Procurement and project management, 6) Installation and final styling.", "ar": "تتضمن عمليتنا: 1) الاستشارة الأولية والموجز، 2) تطوير المفهوم مع التصورات ثلاثية الأبعاد، 3) تنقيح التصميم واختيار المواد، 4) الرسومات التفصيلية والمواصفات، 5) الشراء وإدارة المشروع، 6) التركيب والتنسيق النهائي." }
+      },
+      {
+        "question": { "en": "How long does a typical project take?", "ar": "كم من الوقت يستغرق المشروع النموذجي؟" },
+        "answer": { "en": "Design phase typically takes 4-8 weeks, while full implementation ranges from 3-6 months depending on project scope and complexity. Rush services available for urgent projects.", "ar": "تستغرق مرحلة التصميم عادةً من 4-8 أسابيع، بينما يتراوح التنفيذ الكامل من 3-6 أشهر حسب نطاق المشروع وتعقيده. خدمات عاجلة متاحة للمشاريع الطارئة." }
+      },
+      {
+        "question": { "en": "Do you work with existing contractors?", "ar": "هل تعملون مع المقاولين الحاليين؟" },
+        "answer": { "en": "Yes, we can collaborate with your existing contractors or provide our trusted network of premium craftsmen and suppliers who specialize in luxury finishes and high-end installations.", "ar": "نعم، يمكننا التعاون مع مقاوليك الحاليين أو توفير شبكتنا الموثوقة من الحرفيين المتميزين والموردين المتخصصين في التشطيبات الفاخرة والتركيبات الراقية." }
+      }
+    ],
+    "relatedServiceIds": [],
+    "viewCount": 0,
+    "averageRating": null,
+    "createdAt": "2024-11-01T10:00:00Z",
+    "updatedAt": "2024-12-01T10:00:00Z"
+  },
+  {
+    "id": "service-002-villa-fitout",
+    "title": {
+      "en": "Luxury Villa Fitout & Renovation",
+      "ar": "تجهيز وتجديد الفلل الفاخرة"
+    },
+    "slugEn": "luxury-villa-fitout-dubai",
+    "slugAr": "تجهيز-فلل-فاخرة-دبي",
+    "description": {
+      "en": "Complete villa fitout and renovation services for prestigious properties across UAE. We handle everything from structural modifications to final decorative touches. Our expertise includes installing Italian marble flooring, custom millwork, gold leaf ceilings, and integrated smart home systems. Each villa is treated as a unique masterpiece, incorporating the finest materials and craftsmanship. We specialize in waterfront properties, palatial estates, and contemporary villas, ensuring every detail meets the highest luxury standards. Our project management ensures on-time delivery with minimal disruption to your lifestyle.",
+      "ar": "خدمات تجهيز وتجديد كاملة للفلل الفاخرة في جميع أنحاء الإمارات. نتولى كل شيء من التعديلات الهيكلية إلى اللمسات الزخرفية النهائية. تشمل خبرتنا تركيب أرضيات رخامية إيطالية، ونجارة مخصصة، وأسقف بورق الذهب، وأنظمة منازل ذكية متكاملة. يتم التعامل مع كل فيلا كتحفة فنية فريدة، مع دمج أفضل المواد والحرفية. نحن متخصصون في العقارات على الواجهة البحرية، والعقارات القصرية، والفلل المعاصرة."
+    },
+    "shortDescription": {
+      "en": "Complete luxury villa fitout from structural work to final styling. Premium materials, smart systems, and expert project management.",
+      "ar": "تجهيز فلل فاخر كامل من الأعمال الهيكلية إلى التنسيق النهائي. مواد متميزة، أنظمة ذكية، وإدارة مشاريع خبيرة."
+    },
+    "icon": "🏰",
+    "images": [],
+    "featuresEn": [
+      "Structural Modifications & Extensions",
+      "Premium Italian Marble Installation",
+      "Custom Millwork & Joinery",
+      "MEP Systems Design & Installation",
+      "Smart Home Automation",
+      "Luxury Bathroom & Kitchen Fitout",
+      "Landscaping Integration",
+      "Full Project Management"
+    ],
+    "featuresAr": [
+      "التعديلات الهيكلية والتوسعات",
+      "تركيب الرخام الإيطالي المتميز",
+      "نجارة وأعمال خشبية مخصصة",
+      "تصميم وتركيب أنظمة MEP",
+      "أتمتة المنزل الذكي",
+      "تجهيز حمامات ومطابخ فاخرة",
+      "تكامل تنسيق الحدائق",
+      "إدارة كاملة للمشاريع"
+    ],
+    "price": "Starting from AED 500,000",
+    "duration": "6-12 months",
+    "featured": true,
+    "status": "published",
+    "seoMetaTitleEn": "Luxury Villa Fitout Dubai | Premium Villa Renovation UAE",
+    "seoMetaTitleAr": "تجهيز فلل فاخرة دبي | تجديد فلل راقي الإمارات",
+    "seoMetaDescEn": "Complete luxury villa fitout services in Dubai. Italian marble, smart systems, custom millwork. Expert renovation for Palm Jumeirah, Emirates Hills villas.",
+    "seoMetaDescAr": "خدمات تجهيز فلل فاخرة كاملة في دبي. رخام إيطالي، أنظمة ذكية، نجارة مخصصة. تجديد خبير لفلل نخلة جميرا وتلال الإمارات.",
+    "seoKeywordsEn": ["villa fitout Dubai", "luxury villa renovation", "Palm Jumeirah villa design", "Emirates Hills fitout", "villa interior design UAE"],
+    "seoKeywordsAr": ["تجهيز فلل دبي", "تجديد فلل فاخرة", "تصميم فلل نخلة جميرا", "تجهيز تلال الإمارات", "تصميم داخلي فلل الإمارات"],
+    "targetLocations": ["Dubai", "Abu Dhabi", "Palm Jumeirah", "Emirates Hills", "Arabian Ranches", "Dubai Hills"],
+    "serviceArea": ["Palm Jumeirah", "Emirates Hills", "Arabian Ranches", "Dubai Hills Estate", "Jumeirah Golf Estates", "The Lakes", "The Meadows"],
+    "faqs": [
+      {
+        "question": { "en": "Can we live in the villa during renovation?", "ar": "هل يمكننا العيش في الفيلا أثناء التجديد؟" },
+        "answer": { "en": "For major renovations, we recommend relocating temporarily. However, we can phase the work to allow partial occupancy. We minimize disruption through careful scheduling and dust control measures.", "ar": "للتجديدات الكبرى، نوصي بالانتقال مؤقتاً. ومع ذلك، يمكننا تقسيم العمل للسماح بالإشغال الجزئي. نقلل من الإزعاج من خلال الجدولة الدقيقة وتدابير مكافحة الغبار." }
+      }
+    ],
+    "relatedServiceIds": ["service-001-luxury-interior-design"],
+    "viewCount": 0,
+    "averageRating": null,
+    "createdAt": "2024-10-15T10:00:00Z",
+    "updatedAt": "2024-11-28T10:00:00Z"
+  },
+  {
+    "id": "service-003-hotel-hospitality-design",
+    "title": {
+      "en": "Hotel & Hospitality Interior Design",
+      "ar": "تصميم داخلي للفنادق والضيافة"
+    },
+    "slugEn": "hotel-hospitality-interior-design-dubai",
+    "slugAr": "تصميم-داخلي-فنادق-ضيافة-دبي",
+    "description": {
+      "en": "Specialized interior design services for 5-star hotels, boutique properties, and hospitality venues. We create memorable guest experiences through stunning lobby designs featuring monumental chandeliers, onyx walls, and custom furniture. Our expertise covers hotel suites, restaurants, spas, and event spaces. Each design incorporates local cultural elements while maintaining international luxury standards. We understand the unique requirements of hospitality design including durability, maintenance, brand consistency, and guest flow optimization. From concept to completion, we deliver spaces that enhance guest satisfaction and operational efficiency.",
+      "ar": "خدمات تصميم داخلي متخصصة للفنادق 5 نجوم، والعقارات البوتيكية، وأماكن الضيافة. نخلق تجارب ضيوف لا تُنسى من خلال تصاميم لوبي مذهلة تتميز بثريات ضخمة، وجدران عقيق، وأثاث مخصص. تغطي خبرتنا أجنحة الفنادق، والمطاعم، والسبا، ومساحات الأحداث. يتضمن كل تصميم عناصر ثقافية محلية مع الحفاظ على معايير الفخامة الدولية."
+    },
+    "shortDescription": {
+      "en": "5-star hotel interior design creating unforgettable guest experiences. Lobbies, suites, restaurants, and spas with cultural elegance.",
+      "ar": "تصميم داخلي للفنادق 5 نجوم يخلق تجارب ضيوف لا تُنسى. ردهات وأجنحة ومطاعم وسبا بأناقة ثقافية."
+    },
+    "icon": "🏨",
+    "images": [],
+    "featuresEn": [
+      "Hotel Lobby & Reception Design",
+      "Presidential Suite Design",
+      "Restaurant & Bar Concepts",
+      "Spa & Wellness Center Design",
+      "Event & Banquet Spaces",
+      "Brand Identity Integration",
+      "Guest Experience Optimization",
+      "FF&E Specification & Procurement"
+    ],
+    "featuresAr": [
+      "تصميم لوبي واستقبال الفندق",
+      "تصميم الأجنحة الرئاسية",
+      "مفاهيم المطاعم والبارات",
+      "تصميم السبا ومركز العافية",
+      "مساحات الأحداث والولائم",
+      "تكامل هوية العلامة التجارية",
+      "تحسين تجربة الضيف",
+      "مواصفات وشراء FF&E"
+    ],
+    "price": "Custom Quote",
+    "duration": "6-18 months",
+    "featured": true,
+    "status": "published",
+    "seoMetaTitleEn": "Hotel Interior Design Dubai | 5-Star Hospitality Design UAE",
+    "seoMetaTitleAr": "تصميم داخلي فنادق دبي | تصميم ضيافة 5 نجوم الإمارات",
+    "seoMetaDescEn": "Award-winning hotel interior design in Dubai. Creating stunning 5-star lobbies, suites, and restaurants. Cultural elegance meets modern luxury.",
+    "seoMetaDescAr": "تصميم داخلي للفنادق حائز على جوائز في دبي. إنشاء ردهات وأجنحة ومطاعم مذهلة 5 نجوم. الأناقة الثقافية تلتقي بالفخامة الحديثة.",
+    "seoKeywordsEn": ["hotel interior design Dubai", "hospitality design UAE", "5-star hotel design", "boutique hotel interior", "restaurant interior design Dubai"],
+    "seoKeywordsAr": ["تصميم داخلي فنادق دبي", "تصميم ضيافة الإمارات", "تصميم فندق 5 نجوم", "تصميم داخلي فندق بوتيكي", "تصميم داخلي مطاعم دبي"],
+    "targetLocations": ["Dubai", "Abu Dhabi", "Jumeirah", "Downtown Dubai", "Ras Al Khaimah"],
+    "serviceArea": ["Jumeirah Beach", "Dubai Marina", "Downtown Dubai", "Business Bay", "JBR", "City Walk"],
+    "faqs": [],
+    "relatedServiceIds": ["service-001-luxury-interior-design"],
+    "viewCount": 0,
+    "averageRating": null,
+    "createdAt": "2024-09-20T10:00:00Z",
+    "updatedAt": "2024-11-20T10:00:00Z"
+  },
+  {
+    "id": "service-004-office-commercial-design",
+    "title": {
+      "en": "Premium Office & Commercial Design",
+      "ar": "تصميم المكاتب والمساحات التجارية الراقية"
+    },
+    "slugEn": "premium-office-commercial-design-dubai",
+    "slugAr": "تصميم-مكاتب-تجارية-راقية-دبي",
+    "description": {
+      "en": "Transform your workspace into a statement of success with our premium office design services. Specializing in executive suites, corporate headquarters, and high-end commercial spaces in DIFC, Business Bay, and Dubai's business districts. Our designs feature walnut paneling, marble accents, brass details, and integrated smart office technology. We create spaces that inspire productivity while reflecting your brand identity. Services include space planning, acoustic design, lighting optimization, and sustainable LEED-certified solutions. From startups to Fortune 500 companies, we deliver functional elegance that impresses clients and motivates teams.",
+      "ar": "حوّل مساحة عملك إلى بيان نجاح مع خدمات تصميم المكاتب المتميزة لدينا. متخصصون في الأجنحة التنفيذية، والمقرات الرئيسية للشركات، والمساحات التجارية الراقية في مركز دبي المالي العالمي، والخليج التجاري، والمناطق التجارية في دبي. تتميز تصاميمنا بألواح الجوز، ولمسات الرخام، والتفاصيل النحاسية، وتقنية المكاتب الذكية المتكاملة."
+    },
+    "shortDescription": {
+      "en": "Executive office design for DIFC & Business Bay. Premium materials, smart technology, and productivity-focused spaces.",
+      "ar": "تصميم مكاتب تنفيذية لمركز دبي المالي والخليج التجاري. مواد متميزة، وتقنية ذكية، ومساحات تركز على الإنتاجية."
+    },
+    "icon": "🏢",
+    "images": [],
+    "featuresEn": [
+      "Executive Suite Design",
+      "Reception & Lobby Areas",
+      "Conference Room Design",
+      "Open Plan Workspaces",
+      "Acoustic & Privacy Solutions",
+      "Smart Office Technology",
+      "LEED Certification Support",
+      "Brand Identity Integration"
+    ],
+    "featuresAr": [
+      "تصميم الأجنحة التنفيذية",
+      "مناطق الاستقبال والردهة",
+      "تصميم غرف المؤتمرات",
+      "مساحات العمل المفتوحة",
+      "حلول الصوتيات والخصوصية",
+      "تقنية المكتب الذكي",
+      "دعم شهادة LEED",
+      "تكامل هوية العلامة التجارية"
+    ],
+    "price": "Starting from AED 150,000",
+    "duration": "3-6 months",
+    "featured": false,
+    "status": "published",
+    "seoMetaTitleEn": "Premium Office Design Dubai | Corporate Interior Design DIFC",
+    "seoMetaTitleAr": "تصميم مكاتب راقية دبي | تصميم داخلي مؤسسات DIFC",
+    "seoMetaDescEn": "Executive office design in DIFC & Business Bay. Premium materials, smart tech, LEED certified. Transform your workspace into a success statement.",
+    "seoMetaDescAr": "تصميم مكاتب تنفيذية في DIFC والخليج التجاري. مواد متميزة، تقنية ذكية، معتمد LEED. حوّل مساحة عملك إلى بيان نجاح.",
+    "seoKeywordsEn": ["office interior design Dubai", "DIFC office design", "Business Bay office fitout", "executive suite design", "commercial interior design UAE"],
+    "seoKeywordsAr": ["تصميم داخلي مكاتب دبي", "تصميم مكاتب DIFC", "تجهيز مكاتب الخليج التجاري", "تصميم أجنحة تنفيذية", "تصميم داخلي تجاري الإمارات"],
+    "targetLocations": ["Dubai", "Abu Dhabi", "DIFC", "Business Bay", "Dubai Marina"],
+    "serviceArea": ["DIFC", "Business Bay", "Dubai Marina", "JLT", "Downtown Dubai", "Sheikh Zayed Road"],
+    "faqs": [],
+    "relatedServiceIds": [],
+    "viewCount": 0,
+    "averageRating": null,
+    "createdAt": "2024-08-10T10:00:00Z",
+    "updatedAt": "2024-10-30T10:00:00Z"
+  },
+  {
+    "id": "service-005-custom-furniture-joinery",
+    "title": {
+      "en": "Custom Furniture & Bespoke Joinery",
+      "ar": "أثاث مخصص ونجارة حسب الطلب"
+    },
+    "slugEn": "custom-furniture-bespoke-joinery-dubai",
+    "slugAr": "أثاث-مخصص-نجارة-حسب-الطلب-دبي",
+    "description": {
+      "en": "Exclusive custom furniture and joinery services creating one-of-a-kind pieces that define luxury living. Our master craftsmen work with rare woods, exotic veneers, gold leaf, mother-of-pearl inlays, and premium fabrics to create furniture that's truly unique. From statement dining tables to built-in wardrobes, entertainment units to bespoke libraries, every piece is designed and crafted to perfection. We collaborate with Italian and local artisans to deliver exceptional quality. Each piece is tailored to your specifications, reflecting your personal style and the architectural character of your space.",
+      "ar": "خدمات أثاث مخصص ونجارة حصرية تخلق قطعاً فريدة من نوعها تحدد الحياة الفاخرة. يعمل حرفيونا الماهرون مع الأخشاب النادرة، والقشرة الفاخرة، وورق الذهب، وتطعيمات عرق اللؤلؤ، والأقمشة المتميزة لإنشاء أثاث فريد حقاً. من طاولات الطعام البارزة إلى خزائن الملابس المدمجة، ووحدات الترفيه إلى المكتبات المخصصة، يتم تصميم وصنع كل قطعة بشكل مثالي."
+    },
+    "shortDescription": {
+      "en": "One-of-a-kind custom furniture with rare woods, gold leaf, and mother-of-pearl. Master craftsmanship meets bespoke design.",
+      "ar": "أثاث مخصص فريد من نوعه بأخشاب نادرة، وورق الذهب، وعرق اللؤلؤ. الحرفية الماهرة تلتقي بالتصميم حسب الطلب."
+    },
+    "icon": "🪑",
+    "images": [],
+    "featuresEn": [
+      "Bespoke Furniture Design",
+      "Rare Wood & Exotic Veneers",
+      "Gold Leaf & Mother-of-Pearl Inlay",
+      "Custom Built-in Wardrobes",
+      "Statement Dining Tables",
+      "Entertainment Units",
+      "Home Libraries & Studies",
+      "Italian Artisan Collaboration"
+    ],
+    "featuresAr": [
+      "تصميم أثاث حسب الطلب",
+      "خشب نادر وقشرة فاخرة",
+      "تطعيم ورق الذهب وعرق اللؤلؤ",
+      "خزائن ملابس مدمجة مخصصة",
+      "طاولات طعام بارزة",
+      "وحدات ترفيه",
+      "مكتبات منزلية ومكاتب دراسة",
+      "تعاون مع حرفيين إيطاليين"
+    ],
+    "price": "Starting from AED 15,000",
+    "duration": "6-12 weeks",
+    "featured": false,
+    "status": "published",
+    "seoMetaTitleEn": "Custom Furniture Dubai | Bespoke Joinery & Luxury Furniture UAE",
+    "seoMetaTitleAr": "أثاث مخصص دبي | نجارة حسب الطلب وأثاث فاخر الإمارات",
+    "seoMetaDescEn": "Bespoke furniture with rare woods, gold leaf, mother-of-pearl. Master craftsmen create unique pieces for luxury Dubai homes. Custom design guaranteed.",
+    "seoMetaDescAr": "أثاث حسب الطلب بأخشاب نادرة، ورق ذهب، عرق لؤلؤ. حرفيون ماهرون يخلقون قطعاً فريدة لمنازل دبي الفاخرة. تصميم مخصص مضمون.",
+    "seoKeywordsEn": ["custom furniture Dubai", "bespoke joinery UAE", "luxury furniture design", "custom wardrobes Dubai", "handcrafted furniture UAE"],
+    "seoKeywordsAr": ["أثاث مخصص دبي", "نجارة حسب الطلب الإمارات", "تصميم أثاث فاخر", "خزائن مخصصة دبي", "أثاث مصنوع يدوياً الإمارات"],
+    "targetLocations": ["Dubai", "Abu Dhabi", "Sharjah", "UAE"],
+    "serviceArea": ["All UAE Emirates"],
+    "faqs": [],
+    "relatedServiceIds": ["service-001-luxury-interior-design"],
+    "viewCount": 0,
+    "averageRating": null,
+    "createdAt": "2024-07-05T10:00:00Z",
+    "updatedAt": "2024-09-15T10:00:00Z"
+  },
+  {
+    "id": "service-006-smart-home-integration",
+    "title": {
+      "en": "Smart Home Integration & Automation",
+      "ar": "تكامل وأتمتة المنزل الذكي"
+    },
+    "slugEn": "smart-home-integration-automation-dubai",
+    "slugAr": "تكامل-أتمتة-منزل-ذكي-دبي",
+    "description": {
+      "en": "Transform your luxury home into an intelligent living space with our comprehensive smart home integration services. We seamlessly incorporate cutting-edge technology while maintaining aesthetic elegance. Our systems control lighting, climate, security, entertainment, and curtains through voice commands or mobile apps. Features include AI-enhanced automation, occupancy sensors, circadian lighting, and energy monitoring. We work with premium brands ensuring reliability and easy operation. From single-room solutions to whole-villa automation, our experts design systems that enhance comfort, security, and energy efficiency while remaining invisible to the design aesthetic.",
+      "ar": "حوّل منزلك الفاخر إلى مساحة معيشة ذكية مع خدمات تكامل المنزل الذكي الشاملة لدينا. ندمج التكنولوجيا المتطورة بسلاسة مع الحفاظ على الأناقة الجمالية. تتحكم أنظمتنا في الإضاءة، والمناخ، والأمن، والترفيه، والستائر من خلال الأوامر الصوتية أو تطبيقات الهاتف المحمول. تشمل الميزات الأتمتة المعززة بالذكاء الاصطناعي، وأجهزة استشعار الإشغال، والإضاءة اليومية، ومراقبة الطاقة."
+    },
+    "shortDescription": {
+      "en": "Voice-controlled smart home systems. Lighting, climate, security, entertainment automation. AI-enhanced, energy-efficient, invisible technology.",
+      "ar": "أنظمة منزل ذكي يتم التحكم فيها بالصوت. إضاءة، مناخ، أمن، أتمتة ترفيه. معزز بالذكاء الاصطناعي، موفر للطاقة، تقنية غير مرئية."
+    },
+    "icon": "🤖",
+    "images": [],
+    "featuresEn": [
+      "Voice & App-Controlled Systems",
+      "Automated Lighting & Climate",
+      "Security & Access Control",
+      "Home Entertainment Integration",
+      "Motorized Curtains & Blinds",
+      "Energy Monitoring & Optimization",
+      "AI-Enhanced Automation",
+      "Seamless Design Integration"
+    ],
+    "featuresAr": [
+      "أنظمة يتم التحكم فيها بالصوت والتطبيق",
+      "إضاءة ومناخ آلي",
+      "الأمن والتحكم في الوصول",
+      "تكامل الترفيه المنزلي",
+      "ستائر وشاشات آلية",
+      "مراقبة وتحسين الطاقة",
+      "أتمتة معززة بالذكاء الاصطناعي",
+      "تكامل تصميم سلس"
+    ],
+    "price": "Starting from AED 75,000",
+    "duration": "4-8 weeks",
+    "featured": false,
+    "status": "published",
+    "seoMetaTitleEn": "Smart Home Dubai | Home Automation Systems UAE | AI Technology",
+    "seoMetaTitleAr": "منزل ذكي دبي | أنظمة أتمتة منزلية الإمارات | تقنية ذكاء اصطناعي",
+    "seoMetaDescEn": "Luxury smart home integration in Dubai. Voice-controlled lighting, climate, security. AI-enhanced automation that's invisible to design. Call today!",
+    "seoMetaDescAr": "تكامل منزل ذكي فاخر في دبي. إضاءة ومناخ وأمن يتم التحكم فيها بالصوت. أتمتة معززة بالذكاء الاصطناعي غير مرئية للتصميم. اتصل اليوم!",
+    "seoKeywordsEn": ["smart home Dubai", "home automation UAE", "AI home systems", "smart villa Dubai", "home automation integration"],
+    "seoKeywordsAr": ["منزل ذكي دبي", "أتمتة منزلية الإمارات", "أنظمة منزل ذكاء اصطناعي", "فيلا ذكية دبي", "تكامل أتمتة منزلية"],
+    "targetLocations": ["Dubai", "Abu Dhabi", "Sharjah", "UAE"],
+    "serviceArea": ["All UAE Emirates"],
+    "faqs": [],
+    "relatedServiceIds": ["service-001-luxury-interior-design", "service-002-villa-fitout"],
+    "viewCount": 0,
+    "averageRating": null,
+    "createdAt": "2024-06-20T10:00:00Z",
+    "updatedAt": "2024-08-30T10:00:00Z"
+  },
+  {
+    "id": "service-007-retail-commercial-fitout",
+    "title": {
+      "en": "Luxury Retail & Boutique Design",
+      "ar": "تصميم التجزئة الفاخرة والبوتيك"
+    },
+    "slugEn": "luxury-retail-boutique-design-dubai",
+    "slugAr": "تصميم-تجزئة-فاخرة-بوتيك-دبي",
+    "description": {
+      "en": "Create an unforgettable shopping experience with our luxury retail and boutique design services. Specializing in high-end fashion stores, jewelry boutiques, and premium retail spaces in Dubai Mall, Mall of Emirates, and exclusive locations. Our designs feature rose gold fixtures, mirrored walls, custom display units, and sophisticated lighting that highlights merchandise while creating intimate shopping atmospheres. We understand luxury retail psychology, creating spaces that encourage browsing, enhance product perception, and elevate brand image. From concept to installation, we deliver retail environments that drive sales and create memorable brand experiences.",
+      "ar": "اخلق تجربة تسوق لا تُنسى مع خدمات تصميم التجزئة الفاخرة والبوتيك لدينا. متخصصون في متاجر الأزياء الراقية، وبوتيكات المجوهرات، ومساحات التجزئة المتميزة في دبي مول، ومول الإمارات، والمواقع الحصرية. تتميز تصاميمنا بتركيبات من الذهب الوردي، وجدران مرآة، ووحدات عرض مخصصة، وإضاءة متطورة تسلط الضوء على البضائع مع خلق أجواء تسوق حميمة."
+    },
+    "shortDescription": {
+      "en": "High-end retail & boutique design for Dubai Mall. Rose gold fixtures, custom displays, lighting that drives sales and brand experience.",
+      "ar": "تصميم تجزئة وبوتيك راقي لدبي مول. تركيبات ذهب وردي، عروض مخصصة، إضاءة تدفع المبيعات وتجربة العلامة التجارية."
+    },
+    "icon": "🛍️",
+    "images": [],
+    "featuresEn": [
+      "Boutique Store Design",
+      "Custom Display Units",
+      "Luxury Lighting Design",
+      "VIP Fitting Rooms",
+      "Brand Identity Expression",
+      "Product Psychology Integration",
+      "Window Display Concepts",
+      "FF&E & Fixture Procurement"
+    ],
+    "featuresAr": [
+      "تصميم متاجر بوتيك",
+      "وحدات عرض مخصصة",
+      "تصميم إضاءة فاخرة",
+      "غرف قياس VIP",
+      "تعبير عن هوية العلامة التجارية",
+      "تكامل علم نفس المنتج",
+      "مفاهيم عرض النوافذ",
+      "شراء FF&E والتركيبات"
+    ],
+    "price": "Starting from AED 100,000",
+    "duration": "2-4 months",
+    "featured": false,
+    "status": "published",
+    "seoMetaTitleEn": "Luxury Retail Design Dubai | Boutique Store Interior Design UAE",
+    "seoMetaTitleAr": "تصميم تجزئة فاخر دبي | تصميم داخلي متاجر بوتيك الإمارات",
+    "seoMetaDescEn": "Premium retail & boutique design for Dubai Mall. Custom displays, luxury lighting, VIP rooms. Create memorable shopping experiences that drive sales.",
+    "seoMetaDescAr": "تصميم تجزئة وبوتيك متميز لدبي مول. عروض مخصصة، إضاءة فاخرة، غرف VIP. اخلق تجارب تسوق لا تُنسى تدفع المبيعات.",
+    "seoKeywordsEn": ["retail interior design Dubai", "boutique store design", "Dubai Mall shop design", "luxury retail fitout", "fashion store interior UAE"],
+    "seoKeywordsAr": ["تصميم داخلي تجزئة دبي", "تصميم متجر بوتيك", "تصميم محل دبي مول", "تجهيز تجزئة فاخر", "تصميم داخلي متجر أزياء الإمارات"],
+    "targetLocations": ["Dubai", "Abu Dhabi", "Sharjah"],
+    "serviceArea": ["Dubai Mall", "Mall of Emirates", "City Walk", "The Dubai Mall", "Marina Mall", "Galleria"],
+    "faqs": [],
+    "relatedServiceIds": [],
+    "viewCount": 0,
+    "averageRating": null,
+    "createdAt": "2024-05-15T10:00:00Z",
+    "updatedAt": "2024-07-25T10:00:00Z"
+  },
+  {
+    "id": "service-008-sustainable-luxury-design",
+    "title": {
+      "en": "Sustainable Luxury Design",
+      "ar": "تصميم فاخر مستدام"
+    },
+    "slugEn": "sustainable-luxury-design-eco-friendly-dubai",
+    "slugAr": "تصميم-فاخر-مستدام-صديق-للبيئة-دبي",
+    "description": {
+      "en": "Luxury and sustainability are no longer mutually exclusive. Our sustainable design services prove that environmental consciousness enhances, rather than compromises, luxury living. We use recycled metals, FSC-certified woods, low-VOC finishes, and energy-efficient systems while maintaining the highest aesthetic standards. Our designs incorporate natural materials like bamboo, reclaimed wood, and sustainable stones. We achieve LEED and WELL Building certifications through smart design choices, solar integration, water conservation, and air quality optimization. Experience guilt-free luxury that's beautiful, responsible, and future-focused.",
+      "ar": "الفخامة والاستدامة لم تعد متنافية. تثبت خدمات التصميم المستدام لدينا أن الوعي البيئي يعزز، بدلاً من التنازل عن، الحياة الفاخرة. نستخدم المعادن المعاد تدويرها، والأخشاب المعتمدة من FSC، والتشطيبات منخفضة المركبات العضوية المتطايرة، والأنظمة الموفرة للطاقة مع الحفاظ على أعلى المعايير الجمالية. تتضمن تصاميمنا مواد طبيعية مثل الخيزران، والخشب المستصلح، والأحجار المستدامة."
+    },
+    "shortDescription": {
+      "en": "LEED-certified sustainable luxury. Recycled materials, energy-efficient systems, eco-friendly finishes without compromising elegance.",
+      "ar": "فخامة مستدامة معتمدة LEED. مواد معاد تدويرها، أنظمة موفرة للطاقة، تشطيبات صديقة للبيئة دون المساس بالأناقة."
+    },
+    "icon": "🌿",
+    "images": [],
+    "featuresEn": [
+      "LEED & WELL Building Certification",
+      "Recycled & Sustainable Materials",
+      "Energy-Efficient Systems",
+      "Solar Integration",
+      "Water Conservation Solutions",
+      "Air Quality Optimization",
+      "Low-VOC Finishes",
+      "FSC-Certified Woods"
+    ],
+    "featuresAr": [
+      "شهادة LEED و WELL Building",
+      "مواد معاد تدويرها ومستدامة",
+      "أنظمة موفرة للطاقة",
+      "تكامل الطاقة الشمسية",
+      "حلول الحفاظ على المياه",
+      "تحسين جودة الهواء",
+      "تشطيبات منخفضة VOC",
+      "أخشاب معتمدة FSC"
+    ],
+    "price": "Premium on standard rates",
+    "duration": "Same as standard projects",
+    "featured": false,
+    "status": "published",
+    "seoMetaTitleEn": "Sustainable Luxury Design Dubai | LEED Certified Interior Design UAE",
+    "seoMetaTitleAr": "تصميم فاخر مستدام دبي | تصميم داخلي معتمد LEED الإمارات",
+    "seoMetaDescEn": "LEED-certified sustainable luxury design in Dubai. Eco-friendly materials, energy-efficient systems. Beautiful, responsible, future-focused living.",
+    "seoMetaDescAr": "تصميم فاخر مستدام معتمد LEED في دبي. مواد صديقة للبيئة، أنظمة موفرة للطاقة. حياة جميلة ومسؤولة ومركزة على المستقبل.",
+    "seoKeywordsEn": ["sustainable interior design Dubai", "LEED certified design UAE", "eco-friendly luxury design", "green building Dubai", "sustainable architecture UAE"],
+    "seoKeywordsAr": ["تصميم داخلي مستدام دبي", "تصميم معتمد LEED الإمارات", "تصميم فاخر صديق للبيئة", "بناء أخضر دبي", "عمارة مستدامة الإمارات"],
+    "targetLocations": ["Dubai", "Abu Dhabi", "UAE"],
+    "serviceArea": ["All UAE Emirates"],
+    "faqs": [],
+    "relatedServiceIds": ["service-001-luxury-interior-design"],
+    "viewCount": 0,
+    "averageRating": null,
+    "createdAt": "2024-04-10T10:00:00Z",
+    "updatedAt": "2024-06-20T10:00:00Z"
+  }
+]

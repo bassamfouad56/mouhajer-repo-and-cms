@@ -1,0 +1,172 @@
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import SEOEnhanced from '@/components/SEOEnhanced';
+import BlockRenderer from '@/components/BlockRenderer';
+import { dataFetcher } from '@/lib/data-fetcher';
+
+const CMS_API_URL = process.env.NEXT_PUBLIC_CMS_API_URL || 'http://localhost:3010';
+
+type Props = {
+  params: { locale: string; slug: string[] };
+};
+
+async function fetchPageBySlug(locale: 'en' | 'ar', slug: string) {
+  try {
+    const response = await fetch(
+      `${CMS_API_URL}/api/pages/slug/${locale}/${slug}`,
+      {
+        next: { revalidate: 300 }, // Revalidate every 5 minutes
+      }
+    );
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        return null;
+      }
+      throw new Error(`Failed to fetch page: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching page by slug:', error);
+    return null;
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const locale = params.locale as 'en' | 'ar';
+  const slug = params.slug.join('/');
+
+  const page = await fetchPageBySlug(locale, slug);
+
+  if (!page) {
+    return {
+      title: 'Page Not Found',
+      description: '',
+    };
+  }
+
+  const title = page.seo?.metaTitle?.[locale] || page.title?.[locale] || 'Mouhajer Interior Design';
+  const description = page.seo?.metaDescription?.[locale] || page.description?.[locale] || 'Luxury Interior Design Dubai';
+
+  return {
+    title,
+    description,
+    keywords: page.seo?.keywords || [],
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      locale: locale === 'ar' ? 'ar_AE' : 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+    alternates: {
+      canonical: `/${locale}/${slug}`,
+      languages: {
+        'en': `/en/${page.slug?.en || slug}`,
+        'ar': `/ar/${page.slug?.ar || slug}`,
+      },
+    },
+  };
+}
+
+export default async function DynamicPage({ params }: Props) {
+  const locale = params.locale as 'en' | 'ar';
+  const slug = params.slug.join('/');
+
+  // Fetch the page data from CMS
+  const page = await fetchPageBySlug(locale, slug);
+
+  if (!page) {
+    notFound();
+  }
+
+  // Fetch additional data needed for blocks
+  const [featuredProjects, featuredBlogs, settings] = await Promise.allSettled([
+    dataFetcher.getFeaturedProjects(6),
+    dataFetcher.getFeaturedBlogs(3),
+    dataFetcher.getSettings(),
+  ]);
+
+  const projects = featuredProjects.status === 'fulfilled' ? featuredProjects.value : [];
+  const blogs = featuredBlogs.status === 'fulfilled' ? featuredBlogs.value : [];
+  const media = []; // Optionally fetch media if needed
+
+  // SEO data from CMS page
+  const seoData = {
+    title: page.seo?.metaTitle?.[locale] || page.title?.[locale],
+    description: page.seo?.metaDescription?.[locale] || page.description?.[locale],
+    keywords: page.seo?.keywords || [],
+    ogType: 'website',
+  };
+
+  return (
+    <main>
+      <SEOEnhanced {...seoData} />
+
+      {/* Page Header (if needed) */}
+      {page.title && (
+        <div className="bg-[#202020] py-20 text-center">
+          <h1 className="text-4xl md:text-6xl font-SchnyderS text-white">
+            {page.title[locale]}
+          </h1>
+          {page.description && (
+            <p className="text-white/70 mt-4 max-w-3xl mx-auto font-Satoshi">
+              {page.description[locale]}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Render page blocks */}
+      {page.blocks && page.blocks.length > 0 ? (
+        <BlockRenderer
+          blocks={page.blocks}
+          locale={locale}
+          featuredProjects={projects}
+          featuredBlogs={blogs}
+          media={media}
+        />
+      ) : (
+        <div className="p-8 text-center min-h-[50vh] flex items-center justify-center">
+          <div>
+            <h2 className="text-2xl font-SchnyderS mb-4">
+              {locale === 'en' ? 'Page Content Coming Soon' : 'محتوى الصفحة قريباً'}
+            </h2>
+            <p className="text-gray-600 font-Satoshi">
+              {locale === 'en'
+                ? 'This page is being built. Check back soon!'
+                : 'يتم بناء هذه الصفحة. تحقق مرة أخرى قريبًا!'}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Child Pages (if any) */}
+      {page.children && page.children.length > 0 && (
+        <div className="bg-gray-50 py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-SchnyderS mb-8 text-center">
+              {locale === 'en' ? 'Explore More' : 'استكشف المزيد'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {page.children.map((child: any) => (
+                <a
+                  key={child.id}
+                  href={`/${locale}/${child.slug[locale]}`}
+                  className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-xl font-SchnyderS mb-2">{child.title[locale]}</h3>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}

@@ -1,0 +1,274 @@
+[
+  {
+    "id": "proj-001-palm-luxury-villa",
+    "title": {
+      "en": "Contemporary Luxury Villa - Palm Jumeirah",
+      "ar": "فيلا فاخرة عصرية - نخلة جميرا"
+    },
+    "description": {
+      "en": "A stunning 12,000 sq ft waterfront villa featuring exotic Calacatta marble, bespoke Italian furniture, and state-of-the-art smart home integration. This masterpiece blends modern luxury with subtle Arabic geometric influences, showcasing gold leaf accents and sculptural lighting throughout. The property includes 6 en-suite bedrooms, a private cinema, spa facilities, and panoramic views of the Dubai skyline. Our design philosophy emphasized sustainable luxury, incorporating energy-efficient systems while maintaining the highest standards of opulence.",
+      "ar": "فيلا مذهلة على الواجهة البحرية بمساحة 12,000 قدم مربع تتميز برخام كالاكاتا الفاخر وأثاث إيطالي مصمم خصيصاً وتكامل منزل ذكي متطور. تمزج هذه التحفة الفنية الفخامة الحديثة مع التأثيرات الهندسية العربية الدقيقة، مع إبراز لمسات ورق الذهب والإضاءة النحتية في جميع أنحاء المنزل. يضم العقار 6 غرف نوم بحمامات خاصة، وسينما خاصة، ومرافق سبا، وإطلالات بانورامية على أفق دبي."
+    },
+    "images": [
+      "/images/projects/villa-1-main.jpg",
+      "/images/projects/villa-1-living.jpg"
+    ],
+    "category": "Luxury Residential",
+    "featured": true,
+    "status": "published",
+    "createdAt": "2024-11-15T10:00:00Z",
+    "updatedAt": "2024-12-01T10:00:00Z"
+  },
+  {
+    "id": "proj-002-downtown-penthouse",
+    "title": {
+      "en": "Ultra-Modern Penthouse - Downtown Dubai",
+      "ar": "بنتهاوس فائق الحداثة - وسط مدينة دبي"
+    },
+    "description": {
+      "en": "A breathtaking 8,500 sq ft penthouse in the heart of Downtown Dubai, featuring floor-to-ceiling windows with Burj Khalifa views. The interior showcases rare Brazilian rosewood, hand-blown Murano glass lighting fixtures, and custom-designed metalwork. Smart automation controls everything from ambient lighting to climate, while maintaining a sophisticated neutral palette of champagne, ivory, and matte black accents.",
+      "ar": "بنتهاوس مذهل بمساحة 8,500 قدم مربع في قلب وسط مدينة دبي، يتميز بنوافذ من الأرض حتى السقف مع إطلالات على برج خليفة. يعرض التصميم الداخلي خشب الورد البرازيلي النادر، وتركيبات إضاءة زجاج مورانو المنفوخ يدوياً، والأعمال المعدنية المصممة خصيصاً."
+    },
+    "images": [
+      "/images/projects/office-1-main.jpg"
+    ],
+    "category": "Luxury Residential",
+    "featured": true,
+    "status": "published",
+    "createdAt": "2024-10-20T10:00:00Z",
+    "updatedAt": "2024-11-25T10:00:00Z"
+  },
+  {
+    "id": "proj-003-five-star-hotel-lobby",
+    "title": {
+      "en": "Boutique Hotel Lobby & Reception - Jumeirah Beach",
+      "ar": "لوبي وإستقبال فندق بوتيكي - شاطئ جميرا"
+    },
+    "description": {
+      "en": "A 5-star boutique hotel lobby spanning 5,000 sq ft, designed to create an unforgettable first impression. Features include a monumental chandelier made of hand-cut crystals, walls clad in onyx with backlit features, and custom furniture pieces that blend Islamic geometric patterns with contemporary silhouettes. The color scheme focuses on rich emerald greens and royal blues against a backdrop of warm gold tones, creating an atmosphere of palatial luxury.",
+      "ar": "لوبي فندق بوتيكي 5 نجوم بمساحة 5,000 قدم مربع، مصمم لخلق انطباع أول لا يُنسى. تشمل المميزات ثريا ضخمة مصنوعة من بلورات مقطوعة يدوياً، وجدران مكسوة بالعقيق مع ميزات مضاءة من الخلف، وقطع أثاث مخصصة تمزج الأنماط الهندسية الإسلامية مع الخطوط المعاصرة."
+    },
+    "images": [
+      "/images/projects/villa-1-main.jpg"
+    ],
+    "category": "Hospitality",
+    "featured": true,
+    "status": "published",
+    "createdAt": "2024-09-10T10:00:00Z",
+    "updatedAt": "2024-11-15T10:00:00Z"
+  },
+  {
+    "id": "proj-004-difc-executive-office",
+    "title": {
+      "en": "Executive Office Suite - DIFC",
+      "ar": "جناح مكتب تنفيذي - مركز دبي المالي العالمي"
+    },
+    "description": {
+      "en": "A 3,500 sq ft executive office in Dubai's premier financial district, designed for a leading investment firm. The space features walnut boiserie panels, marble conference tables, and brass architectural details. Smart office technology includes automated blinds, climate control, and integrated AV systems for seamless presentations. Sustainable elements include energy-efficient LED systems and FSC-certified wood products, achieving LEED Gold certification.",
+      "ar": "مكتب تنفيذي بمساحة 3,500 قدم مربع في المنطقة المالية الرائدة في دبي، مصمم لشركة استثمارية رائدة. يتميز المساحة بألواح خشب الجوز، وطاولات مؤتمرات رخامية، وتفاصيل معمارية نحاسية."
+    },
+    "images": [
+      "/images/projects/office-1-main.jpg"
+    ],
+    "category": "Commercial",
+    "featured": false,
+    "status": "published",
+    "createdAt": "2024-08-05T10:00:00Z",
+    "updatedAt": "2024-10-20T10:00:00Z"
+  },
+  {
+    "id": "proj-005-luxury-restaurant",
+    "title": {
+      "en": "Fine Dining Restaurant - City Walk",
+      "ar": "مطعم فاخر للطعام الراقي - سيتي ووك"
+    },
+    "description": {
+      "en": "An intimate 2,800 sq ft fine dining establishment featuring a fusion of modern luxury and traditional Levantine design elements. Hand-painted Arabic calligraphy adorns the walls, while custom mashrabiya screens create private dining alcoves. The lighting design includes sculptural fixtures that cast dramatic shadows, enhancing the intimate atmosphere. Materials include terrazzo flooring with brass inlays, velvet upholstery, and hand-crafted ceramic tiles.",
+      "ar": "مطعم حميم للطعام الراقي بمساحة 2,800 قدم مربع يتميز بمزيج من الفخامة الحديثة وعناصر التصميم الشامي التقليدي. تزين الخط العربي المرسوم باليد الجدران، بينما تخلق شاشات المشربية المخصصة فتحات طعام خاصة."
+    },
+    "images": [
+      "/images/projects/villa-1-living.jpg"
+    ],
+    "category": "Hospitality",
+    "featured": true,
+    "status": "published",
+    "createdAt": "2024-07-15T10:00:00Z",
+    "updatedAt": "2024-09-30T10:00:00Z"
+  },
+  {
+    "id": "proj-006-emirates-hills-mansion",
+    "title": {
+      "en": "Palatial Estate - Emirates Hills",
+      "ar": "قصر فخم - تلال الإمارات"
+    },
+    "description": {
+      "en": "A magnificent 25,000 sq ft mansion representing the pinnacle of luxury residential design. Features include Italian Statuario marble throughout, hand-carved wooden ceilings with gold leaf detailing, and a double-height entrance hall with a custom Swarovski crystal chandelier. The property includes 8 bedrooms, each with its own unique design theme, a temperature-controlled wine cellar, indoor swimming pool, private spa, and cinema. Smart home integration controls lighting, climate, security, and entertainment across all zones.",
+      "ar": "قصر رائع بمساحة 25,000 قدم مربع يمثل قمة التصميم السكني الفاخر. تشمل المميزات رخام ستاتواريو الإيطالي في جميع الأنحاء، وأسقف خشبية منحوتة يدوياً مع تفاصيل ورق الذهب، وقاعة مدخل بارتفاع مزدوج مع ثريا كريستال سواروفسكي مخصصة."
+    },
+    "images": [
+      "/images/projects/villa-1-main.jpg",
+      "/images/projects/villa-1-living.jpg"
+    ],
+    "category": "Luxury Residential",
+    "featured": true,
+    "status": "published",
+    "createdAt": "2024-06-01T10:00:00Z",
+    "updatedAt": "2024-11-10T10:00:00Z"
+  },
+  {
+    "id": "proj-007-marina-apartment",
+    "title": {
+      "en": "Contemporary Apartment - Dubai Marina",
+      "ar": "شقة عصرية - مرسى دبي"
+    },
+    "description": {
+      "en": "A sophisticated 2,500 sq ft apartment with stunning marina views, designed for a young professional couple. The interior features a monochromatic color scheme with pops of emerald and gold, using sustainable bamboo flooring and recycled glass countertops. Custom-built storage solutions maximize space efficiency, while floor-to-ceiling windows flood the space with natural light. Smart home features include voice-controlled lighting, automated curtains, and a centralized entertainment system.",
+      "ar": "شقة متطورة بمساحة 2,500 قدم مربع مع إطلالات مذهلة على المرسى، مصممة لزوجين محترفين شابين. يتميز التصميم الداخلي بنظام ألوان أحادي اللون مع لمسات من الزمرد والذهب، باستخدام أرضيات من الخيزران المستدام."
+    },
+    "images": [
+      "/images/projects/office-1-main.jpg"
+    ],
+    "category": "Residential",
+    "featured": false,
+    "status": "published",
+    "createdAt": "2024-05-10T10:00:00Z",
+    "updatedAt": "2024-08-25T10:00:00Z"
+  },
+  {
+    "id": "proj-008-luxury-spa",
+    "title": {
+      "en": "Premium Wellness Spa - Jumeirah",
+      "ar": "سبا صحي فاخر - جميرا"
+    },
+    "description": {
+      "en": "A tranquil 4,000 sq ft luxury spa designed to offer a complete wellness experience. Features include treatment rooms with Himalayan salt walls, a hammam with traditional marble heating beds, and a relaxation lounge with water features and aromatic gardens. The design incorporates natural materials: teak wood, limestone, and handmade Moroccan tiles, creating a serene atmosphere. Soft, warm lighting through fiber optic ceiling installations mimics natural daylight patterns, promoting relaxation.",
+      "ar": "سبا فاخر هادئ بمساحة 4,000 قدم مربع مصمم لتقديم تجربة صحية كاملة. تشمل المميزات غرف علاج بجدران ملح الهيمالايا، وحمام تركي بأسرّة تسخين رخامية تقليدية، وصالة استرخاء مع ميزات مائية وحدائق عطرية."
+    },
+    "images": [
+      "/images/projects/villa-1-living.jpg"
+    ],
+    "category": "Hospitality",
+    "featured": false,
+    "status": "published",
+    "createdAt": "2024-04-20T10:00:00Z",
+    "updatedAt": "2024-07-15T10:00:00Z"
+  },
+  {
+    "id": "proj-009-arabian-ranches-villa",
+    "title": {
+      "en": "Modern Family Villa - Arabian Ranches",
+      "ar": "فيلا عائلية حديثة - المرابع العربية"
+    },
+    "description": {
+      "en": "A warm and inviting 7,500 sq ft family villa blending contemporary design with child-friendly functionality. Features include an open-plan living area with floor-to-ceiling windows overlooking the golf course, a gourmet kitchen with German appliances, and 5 spacious bedrooms including a luxurious master suite. The design incorporates durable yet elegant materials suitable for family life, including stain-resistant fabrics, easy-clean quartz surfaces, and rounded furniture edges for safety. A dedicated kids' playroom, home office, and outdoor entertainment area complete this perfect family sanctuary.",
+      "ar": "فيلا عائلية دافئة ومرحبة بمساحة 7,500 قدم مربع تمزج التصميم المعاصر مع الوظائف المناسبة للأطفال. تشمل المميزات منطقة معيشة مفتوحة بنوافذ من الأرض إلى السقف تطل على ملعب الجولف، ومطبخ للذواقة بأجهزة ألمانية، و5 غرف نوم فسيحة بما في ذلك جناح رئيسي فاخر."
+    },
+    "images": [
+      "/images/projects/villa-ranches-main.jpg",
+      "/images/projects/villa-ranches-living.jpg"
+    ],
+    "category": "Residential",
+    "featured": true,
+    "status": "published",
+    "createdAt": "2024-03-15T10:00:00Z",
+    "updatedAt": "2024-06-20T10:00:00Z"
+  },
+  {
+    "id": "proj-010-business-bay-office",
+    "title": {
+      "en": "Tech Startup Headquarters - Business Bay",
+      "ar": "مقر شركة ناشئة تقنية - الخليج التجاري"
+    },
+    "description": {
+      "en": "A dynamic 4,200 sq ft office space designed for a fast-growing tech startup. The design features an open-plan workspace with collaborative zones, phone booths for privacy, and a vibrant breakout area with gaming facilities. Exposed concrete ceilings, Edison bulb lighting, and colorful accent walls create an energetic atmosphere. Smart glass partitions provide flexible meeting spaces, while acoustic panels ensure comfortable sound levels. The pantry includes a barista-quality coffee station, standing desks throughout promote wellness, and the design incorporates the company's brand colors subtly throughout the space.",
+      "ar": "مساحة مكتب ديناميكية بمساحة 4,200 قدم مربع مصممة لشركة ناشئة تقنية سريعة النمو. يتميز التصميم بمساحة عمل مفتوحة مع مناطق تعاونية وكبائن هاتفية للخصوصية ومنطقة استراحة نابضة بالحياة مع مرافق ألعاب."
+    },
+    "images": [
+      "/images/projects/startup-office-main.jpg",
+      "/images/projects/startup-office-workspace.jpg"
+    ],
+    "category": "Commercial",
+    "featured": false,
+    "status": "published",
+    "createdAt": "2024-02-10T10:00:00Z",
+    "updatedAt": "2024-05-15T10:00:00Z"
+  },
+  {
+    "id": "proj-011-jbr-beachfront-apartment",
+    "title": {
+      "en": "Coastal Contemporary Apartment - JBR",
+      "ar": "شقة معاصرة ساحلية - جي بي آر"
+    },
+    "description": {
+      "en": "A breezy 1,800 sq ft beachfront apartment embracing coastal living with a contemporary twist. The design features a palette of whites, soft blues, and natural textures reflecting the sea and sand. Floor-to-ceiling windows maximize natural light and sea views, while sheer curtains create a light, airy atmosphere. Custom built-in storage solutions maximize the compact footprint, and the open kitchen features white lacquer cabinets with brass hardware. The master bedroom opens to a private balcony perfect for morning coffee overlooking the Arabian Gulf.",
+      "ar": "شقة على الشاطئ بمساحة 1,800 قدم مربع تحتضن الحياة الساحلية مع لمسة معاصرة. يتميز التصميم بلوحة من الأبيض والأزرق الناعم والقوام الطبيعي الذي يعكس البحر والرمال."
+    },
+    "images": [
+      "/images/projects/jbr-apartment-main.jpg"
+    ],
+    "category": "Residential",
+    "featured": false,
+    "status": "published",
+    "createdAt": "2024-01-20T10:00:00Z",
+    "updatedAt": "2024-04-10T10:00:00Z"
+  },
+  {
+    "id": "proj-012-luxury-showroom-design-district",
+    "title": {
+      "en": "Automotive Luxury Showroom - Dubai Design District",
+      "ar": "صالة عرض سيارات فاخرة - حي دبي للتصميم"
+    },
+    "description": {
+      "en": "A stunning 6,000 sq ft automotive showroom designed to showcase ultra-luxury vehicles as works of art. The space features polished concrete floors with terrazzo inlays, dramatic overhead lighting with adjustable spotlights, and floor-to-ceiling glass facades. A VIP client lounge offers Italian leather seating, a coffee bar, and private consultation areas. Interactive digital displays provide vehicle specifications and customization options. The design incorporates the brand's signature colors through accent walls and custom furniture, while maintaining a gallery-like atmosphere that elevates the vehicles to sculpture status.",
+      "ar": "صالة عرض سيارات مذهلة بمساحة 6,000 قدم مربع مصممة لعرض المركبات الفاخرة للغاية كأعمال فنية. يتميز المساحة بأرضيات خرسانية مصقولة مع تطعيمات تيرازو، وإضاءة علوية درامية بأضواء قابلة للتعديل، وواجهات زجاجية من الأرض إلى السقف."
+    },
+    "images": [
+      "/images/projects/showroom-luxury-main.jpg"
+    ],
+    "category": "Commercial",
+    "featured": true,
+    "status": "published",
+    "createdAt": "2023-12-05T10:00:00Z",
+    "updatedAt": "2024-03-20T10:00:00Z"
+  },
+  {
+    "id": "proj-013-al-barari-sustainable-villa",
+    "title": {
+      "en": "Eco-Luxury Villa - Al Barari",
+      "ar": "فيلا فاخرة صديقة للبيئة - البراري"
+    },
+    "description": {
+      "en": "A groundbreaking 9,000 sq ft villa achieving LEED Platinum certification without compromising luxury. Features include solar panels integrated into the roof design, rainwater harvesting systems, greywater recycling for irrigation, and triple-glazed windows for superior insulation. The interior showcases FSC-certified teak flooring, low-VOC paints, recycled glass countertops, and organic cotton upholstery. Natural ventilation through strategically placed windows reduces AC dependency, while a living green wall purifies indoor air. The property includes an organic vegetable garden, native drought-resistant landscaping, and an electric vehicle charging station. This project proves sustainable luxury is not only possible but spectacular.",
+      "ar": "فيلا رائدة بمساحة 9,000 قدم مربع تحقق شهادة LEED البلاتينية دون المساومة على الفخامة. تشمل المميزات ألواح شمسية متكاملة في تصميم السقف، وأنظمة حصاد مياه الأمطار، وإعادة تدوير المياه الرمادية للري، ونوافذ ثلاثية الزجاج للعزل الفائق."
+    },
+    "images": [
+      "/images/projects/eco-villa-main.jpg",
+      "/images/projects/eco-villa-garden.jpg"
+    ],
+    "category": "Luxury Residential",
+    "featured": true,
+    "status": "published",
+    "createdAt": "2023-11-10T10:00:00Z",
+    "updatedAt": "2024-02-28T10:00:00Z"
+  },
+  {
+    "id": "proj-014-burj-khalifa-residence",
+    "title": {
+      "en": "Sky-High Luxury Residence - Burj Khalifa",
+      "ar": "مسكن فاخر في السماء - برج خليفة"
+    },
+    "description": {
+      "en": "An exclusive 3,200 sq ft residence on the 100th floor of the world's tallest building, offering unparalleled 360-degree views of Dubai. The design maximizes the breathtaking vistas through floor-to-ceiling windows while creating intimate spaces within the open layout. Italian marble flooring throughout, custom furniture designed specifically for the unique architecture, and integrated smart home systems controlling lighting, climate, and privacy glass. The master suite features a spa-like bathroom with a freestanding tub positioned to enjoy Burj views. A wine display cabinet with LED lighting showcases the owner's collection, while the kitchen features Gaggenau appliances and backlit onyx surfaces. This is urban luxury at its absolute pinnacle.",
+      "ar": "مسكن حصري بمساحة 3,200 قدم مربع في الطابق 100 من أطول مبنى في العالم، يوفر إطلالات بانورامية بزاوية 360 درجة على دبي لا مثيل لها. يزيد التصميم من الإطلالات الخلابة من خلال نوافذ من الأرض إلى السقف مع إنشاء مساحات حميمة داخل التخطيط المفتوح."
+    },
+    "images": [
+      "/images/projects/burj-residence-main.jpg",
+      "/images/projects/burj-residence-view.jpg"
+    ],
+    "category": "Luxury Residential",
+    "featured": true,
+    "status": "published",
+    "createdAt": "2023-10-01T10:00:00Z",
+    "updatedAt": "2024-01-15T10:00:00Z"
+  }
+]

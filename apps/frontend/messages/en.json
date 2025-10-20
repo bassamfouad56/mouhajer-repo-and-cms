@@ -1,0 +1,237 @@
+{
+  "Index": {
+    "title": "ENGLISH"
+  },
+  "RoomRedesign": {
+    "title": "Transform Your Space with AI",
+    "subtitle": "Upload a photo of your room and let our AI reimagine it in any style you choose. See stunning before-and-after comparisons in minutes!",
+    "uploadTitle": "Upload Your Room Photo",
+    "uploadDragText": "Drag and drop your image here, or",
+    "uploadBrowse": "browse",
+    "uploadFormats": "PNG, JPG, WebP up to 10MB",
+    "roomTypeTitle": "Select Room Type",
+    "designStyleTitle": "Choose Design Style",
+    "additionalPromptTitle": "Additional Instructions",
+    "additionalPromptPlaceholder": "E.g., Add more plants, use warm colors, include a fireplace...",
+    "emailTitle": "Your Email Address",
+    "emailPlaceholder": "your@email.com",
+    "emailNote": "We'll send you a secure link to view your before & after comparison",
+    "submitButton": "Generate My Redesign",
+    "processing": "Processing...",
+    "howItWorks": "How it works:",
+    "howItWorksText": "Upload your photo → Our AI generates a redesign (2-5 min) → Check your email for a secure link → View your interactive before/after comparison!",
+    "successTitle": "Processing Your Redesign!",
+    "successMessage": "Our AI is creating your room transformation. This usually takes 2-5 minutes.",
+    "successEmailNote": "Check your email at",
+    "successEmailText": "for a link to view your results.",
+    "createAnother": "Create Another Redesign",
+    "errorFileType": "Please select an image file (JPEG, PNG, WebP)",
+    "errorFileSize": "File size must be less than 10MB",
+    "errorUpload": "Upload failed. Please try again.",
+    "errorNetwork": "Network error. Please check your connection and try again.",
+    "roomTypes": {
+      "living_room": "Living Room",
+      "bedroom": "Bedroom",
+      "kitchen": "Kitchen",
+      "bathroom": "Bathroom",
+      "dining_room": "Dining Room",
+      "office": "Home Office",
+      "entryway": "Entryway",
+      "outdoor": "Outdoor/Patio"
+    },
+    "designStyles": {
+      "modern": {
+        "label": "Modern",
+        "description": "Clean lines, minimalist aesthetic"
+      },
+      "minimalist": {
+        "label": "Minimalist",
+        "description": "Less is more, simple elegance"
+      },
+      "industrial": {
+        "label": "Industrial",
+        "description": "Raw materials, urban edge"
+      },
+      "scandinavian": {
+        "label": "Scandinavian",
+        "description": "Bright, cozy, functional"
+      },
+      "bohemian": {
+        "label": "Bohemian",
+        "description": "Eclectic, colorful, artistic"
+      },
+      "luxury": {
+        "label": "Luxury",
+        "description": "Opulent, sophisticated, high-end"
+      },
+      "traditional": {
+        "label": "Traditional",
+        "description": "Classic, timeless elegance"
+      },
+      "contemporary": {
+        "label": "Contemporary",
+        "description": "Current trends, stylish"
+      }
+    }
+  },
+  "RoomRedesignView": {
+    "title": "Your AI-Powered Room Transformation",
+    "subtitle": "Drag the slider to compare before and after",
+    "loading": "Loading your redesign...",
+    "errorTitle": "Oops!",
+    "errorInvalid": "Invalid access link. Please check your email for the correct link.",
+    "errorExpired": "This link has expired. Links are valid for 24 hours only.",
+    "errorProcessing": "Your redesign is still being processed. Please check again in a few minutes.",
+    "errorFailed": "AI generation failed. Please try uploading your image again.",
+    "errorGeneric": "Redesign not found",
+    "errorLoadFailed": "Failed to load redesign. Please try again later.",
+    "createNew": "Create New Redesign",
+    "beforeLabel": "BEFORE",
+    "beforeSubtitle": "Original Room",
+    "afterLabel": "AFTER",
+    "afterSubtitle": "Style",
+    "viewsLabel": "Views",
+    "processingTimeLabel": "Processing Time",
+    "aiModelLabel": "AI Model",
+    "downloadBoth": "Download Both Images",
+    "share": "Share Result",
+    "rate": "Rate Result",
+    "shareLinkCopied": "Link copied to clipboard!",
+    "downloadFailed": "Failed to download images",
+    "feedbackTitle": "How did we do?",
+    "feedbackRateLabel": "Rate your redesign:",
+    "feedbackTextLabel": "Additional feedback (optional):",
+    "feedbackTextPlaceholder": "Tell us what you think...",
+    "feedbackSubmit": "Submit Feedback",
+    "feedbackSubmitFailed": "Failed to submit feedback",
+    "feedbackThanks": "Thank you for your feedback!",
+    "createAnother": "Create Another Redesign"
+  },
+  "testimonials": {
+    "meta": {
+      "title": "Client Reviews & Testimonials | Mouhajer International Design",
+      "description": "Read what our clients say about their experience with Mouhajer International Design. Discover real testimonials and reviews from satisfied homeowners across the UAE."
+    },
+    "hero": {
+      "title": "Client Testimonials",
+      "subtitle": "Hear from our satisfied clients who trusted us to transform their spaces",
+      "stats": {
+        "rating": "Average Rating",
+        "reviews": "Client Reviews",
+        "satisfaction": "Satisfaction Rate"
+      }
+    },
+    "filters": {
+      "all": "All Reviews",
+      "fiveStar": "5 Star",
+      "fourStar": "4 Star"
+    },
+    "cta": {
+      "title": "Ready to Transform Your Space?",
+      "subtitle": "Join hundreds of satisfied clients and start your design journey today",
+      "button": "Get Free Consultation"
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "Frequently Asked Questions | Interior Design FAQ",
+      "description": "Find answers to common questions about our interior design services, pricing, process, and timelines. Get all the information you need to start your project."
+    },
+    "hero": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Find answers to common questions about our services and process",
+      "searchPlaceholder": "Search for answers..."
+    },
+    "categories": {
+      "general": "General",
+      "process": "Design Process",
+      "pricing": "Pricing & Payment"
+    },
+    "cta": {
+      "title": "Still Have Questions?",
+      "subtitle": "Our team is here to help. Reach out and we'll get back to you within 24 hours.",
+      "button": "Contact Us"
+    }
+  },
+  "team": {
+    "meta": {
+      "title": "Our Design Team | Meet the Experts at Mouhajer",
+      "description": "Meet the talented designers, architects, and project managers behind Mouhajer International Design. Learn about our team's experience and expertise."
+    },
+    "hero": {
+      "title": "Meet Our Team",
+      "subtitle": "Passionate designers and architects dedicated to bringing your vision to life",
+      "stats": {
+        "years": "Years Experience",
+        "members": "Team Members",
+        "projects": "Completed Projects"
+      }
+    },
+    "values": {
+      "sectionTitle": "Our Core Values",
+      "sectionSubtitle": "The principles that guide everything we do",
+      "excellence": {
+        "title": "Excellence",
+        "description": "We strive for perfection in every project, ensuring the highest quality in design and execution."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We embrace new ideas and technologies to create cutting-edge, forward-thinking designs."
+      },
+      "passion": {
+        "title": "Passion",
+        "description": "Our love for design drives us to exceed expectations and create spaces that inspire."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "We build trust through transparency, honesty, and ethical business practices."
+      }
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To transform spaces into exceptional environments that enhance the lives of our clients through innovative design, meticulous craftsmanship, and unwavering commitment to excellence."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the leading interior design firm in the Middle East, renowned for creating timeless spaces that blend cultural heritage with contemporary innovation."
+    },
+    "cta": {
+      "title": "Work With Us",
+      "subtitle": "Ready to collaborate with our talented team on your next project?",
+      "button": "Start Your Project"
+    }
+  },
+  "pricing": {
+    "meta": {
+      "title": "Interior Design Pricing & Packages | Transparent Pricing",
+      "description": "Explore our interior design service packages and pricing. From essential consultations to luxury full-service design, find the perfect package for your project."
+    },
+    "hero": {
+      "title": "Transparent Pricing",
+      "subtitle": "Choose the package that fits your needs and budget",
+      "description": "All packages include professional design expertise, 3D visualizations, and dedicated project support"
+    },
+    "comparison": {
+      "title": "Compare Our Packages",
+      "feature": "Feature",
+      "basic": "Essential",
+      "premium": "Premium",
+      "luxury": "Luxury"
+    },
+    "cta": {
+      "title": "Ready to Transform Your Space?",
+      "subtitle": "Schedule a free consultation to discuss your project and get a custom quote",
+      "button": "Get Free Consultation"
+    }
+  },
+  "caseStudies": {
+    "meta": {
+      "title": "Portfolio & Case Studies | Completed Interior Design Projects",
+      "description": "Explore our portfolio of completed interior design projects. View detailed case studies showcasing our residential, commercial, and luxury design work across the UAE."
+    },
+    "hero": {
+      "title": "Our Portfolio",
+      "subtitle": "Explore our completed projects and see how we bring design visions to life"
+    }
+  }
+}

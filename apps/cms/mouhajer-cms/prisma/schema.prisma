@@ -1,0 +1,217 @@
+// Mouhajer CMS Database Schema
+// Using PostgreSQL with Prisma Accelerate
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
+}
+
+// Projects
+model Project {
+  id          String   @id @default(uuid())
+  titleEn     String   @map("title_en")
+  titleAr     String   @map("title_ar")
+  descriptionEn String @map("description_en") @db.Text
+  descriptionAr String @map("description_ar") @db.Text
+  images      String[] // Array of image URLs
+  category    String
+  featured    Boolean  @default(false)
+  status      String   @default("published") // published, draft
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("projects")
+  @@index([featured])
+  @@index([category])
+  @@index([status])
+}
+
+// Services
+model Service {
+  id          String   @id @default(uuid())
+  titleEn     String   @map("title_en")
+  titleAr     String   @map("title_ar")
+  descriptionEn String @map("description_en") @db.Text
+  descriptionAr String @map("description_ar") @db.Text
+  shortDescriptionEn String @map("short_description_en") @db.Text
+  shortDescriptionAr String @map("short_description_ar") @db.Text
+  icon        String?
+  featuresEn  String[] @map("features_en")
+  featuresAr  String[] @map("features_ar")
+  price       String?
+  duration    String?
+  featured    Boolean  @default(false)
+  status      String   @default("published")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("services")
+  @@index([featured])
+  @@index([status])
+}
+
+// Blog Posts
+model BlogPost {
+  id            String   @id @default(uuid())
+  titleEn       String   @map("title_en")
+  titleAr       String   @map("title_ar")
+  slugEn        String   @unique @map("slug_en")
+  slugAr        String   @unique @map("slug_ar")
+  excerptEn     String   @map("excerpt_en") @db.Text
+  excerptAr     String   @map("excerpt_ar") @db.Text
+  contentEn     String   @map("content_en") @db.Text
+  contentAr     String   @map("content_ar") @db.Text
+  featuredImage String?  @map("featured_image")
+  category      String?
+  tags          String[]
+  author        String?
+  publishedAt   DateTime? @map("published_at")
+  featured      Boolean  @default(false)
+  status        String   @default("draft") // draft, published
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("blog_posts")
+  @@index([slugEn])
+  @@index([slugAr])
+  @@index([featured])
+  @@index([status])
+  @@index([category])
+}
+
+// Pages
+model Page {
+  id                 String      @id @default(uuid())
+  titleEn            String      @map("title_en")
+  titleAr            String      @map("title_ar")
+  slugEn             String      @unique @map("slug_en")
+  slugAr             String      @unique @map("slug_ar")
+  descriptionEn      String      @map("description_en") @db.Text
+  descriptionAr      String      @map("description_ar") @db.Text
+  seoMetaTitleEn     String?     @map("seo_meta_title_en")
+  seoMetaTitleAr     String?     @map("seo_meta_title_ar")
+  seoMetaDescEn      String?     @map("seo_meta_desc_en") @db.Text
+  seoMetaDescAr      String?     @map("seo_meta_desc_ar") @db.Text
+  seoKeywords        String[]    @map("seo_keywords")
+  status             String      @default("draft") // draft, published
+  featured           Boolean     @default(false)
+  createdAt          DateTime    @default(now()) @map("created_at")
+  updatedAt          DateTime    @updatedAt @map("updated_at")
+  blocks             PageBlock[]
+
+  @@map("pages")
+  @@index([slugEn])
+  @@index([slugAr])
+  @@index([status])
+  @@index([featured])
+}
+
+// Page Blocks
+model PageBlock {
+  id        String   @id @default(uuid())
+  pageId    String   @map("page_id")
+  type      String   // hero_banner, about_section, projects_section, etc.
+  data      Json     // Flexible JSON data for block content
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@map("page_blocks")
+  @@index([pageId])
+  @@index([order])
+}
+
+// Media Files
+model MediaFile {
+  id          String   @id @default(uuid())
+  filename    String
+  originalName String  @map("original_name")
+  url         String   @unique // Vercel Blob URL
+  thumbnailUrl String? @map("thumbnail_url")
+  mimeType    String   @map("mime_type")
+  size        Int      // File size in bytes
+  width       Int?
+  height      Int?
+  alt         String?  @db.Text
+  type        String   // image, video, document
+  uploadedAt  DateTime @default(now()) @map("uploaded_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("media_files")
+  @@index([type])
+  @@index([mimeType])
+}
+
+// Settings (Singleton)
+model Settings {
+  id                    String   @id @default("default")
+  siteNameEn            String   @map("site_name_en")
+  siteNameAr            String   @map("site_name_ar")
+  siteDescriptionEn     String   @map("site_description_en") @db.Text
+  siteDescriptionAr     String   @map("site_description_ar") @db.Text
+  contactEmail          String?  @map("contact_email")
+  contactPhone          String?  @map("contact_phone")
+  contactAddressEn      String?  @map("contact_address_en") @db.Text
+  contactAddressAr      String?  @map("contact_address_ar") @db.Text
+  socialFacebook        String?  @map("social_facebook")
+  socialInstagram       String?  @map("social_instagram")
+  socialTwitter         String?  @map("social_twitter")
+  socialLinkedin        String?  @map("social_linkedin")
+  socialYoutube         String?  @map("social_youtube")
+  seoMetaTitleEn        String?  @map("seo_meta_title_en")
+  seoMetaTitleAr        String?  @map("seo_meta_title_ar")
+  seoMetaDescriptionEn  String?  @map("seo_meta_description_en") @db.Text
+  seoMetaDescriptionAr  String?  @map("seo_meta_description_ar") @db.Text
+  seoKeywords           String[] @map("seo_keywords")
+  primaryColor          String?  @map("primary_color")
+  logoUrl               String?  @map("logo_url")
+  faviconUrl            String?  @map("favicon_url")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+
+  @@map("settings")
+}
+
+// Advertisements
+model Advertisement {
+  id                String   @id @default(uuid())
+  titleEn           String   @map("title_en")
+  titleAr           String   @map("title_ar")
+  descriptionEn     String?  @map("description_en") @db.Text
+  descriptionAr     String?  @map("description_ar") @db.Text
+  image             String?
+  videoUrl          String?  @map("video_url")
+  linkUrl           String   @map("link_url")
+  ctaTextEn         String?  @map("cta_text_en")
+  ctaTextAr         String?  @map("cta_text_ar")
+  zone              String   // header, sidebar, footer, inline, popup, banner
+  type              String   // image, video, html
+  htmlContentEn     String?  @map("html_content_en") @db.Text
+  htmlContentAr     String?  @map("html_content_ar") @db.Text
+  startDate         DateTime @map("start_date")
+  endDate           DateTime @map("end_date")
+  alwaysActive      Boolean  @default(false) @map("always_active")
+  pages             String[] // Which pages to show on
+  showOnAllPages    Boolean  @default(false) @map("show_on_all_pages")
+  priority          Int      @default(0)
+  clickCount        Int      @default(0) @map("click_count")
+  impressionCount   Int      @default(0) @map("impression_count")
+  maxImpressions    Int?     @map("max_impressions")
+  active            Boolean  @default(true)
+  featured          Boolean  @default(false)
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  @@map("advertisements")
+  @@index([zone])
+  @@index([active])
+  @@index([featured])
+  @@index([priority])
+  @@index([startDate, endDate])
+}

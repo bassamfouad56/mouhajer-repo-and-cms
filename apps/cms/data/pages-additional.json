@@ -1,0 +1,685 @@
+[
+  {
+    "id": "services",
+    "title": {
+      "en": "Our Services",
+      "ar": "خدماتنا"
+    },
+    "slug": {
+      "en": "our-services",
+      "ar": "خدماتنا"
+    },
+    "description": {
+      "en": "Comprehensive interior design and contracting services - from residential villas to commercial spaces. Turnkey solutions delivered with excellence.",
+      "ar": "خدمات شاملة للتصميم الداخلي والتعاقد - من الفلل السكنية إلى المساحات التجارية. حلول تسليم مفتاح مقدمة بتميز."
+    },
+    "blocks": [
+      {
+        "id": "services_hero",
+        "type": "hero_banner",
+        "order": 1,
+        "data": {
+          "title": {
+            "en": "Comprehensive Design & Build Solutions",
+            "ar": "حلول شاملة للتصميم والبناء"
+          },
+          "subtitle": {
+            "en": "OUR SERVICES",
+            "ar": "خدماتنا"
+          },
+          "description": {
+            "en": "From concept to completion, we deliver exceptional interior design and contracting services tailored to your unique needs. Whether it's a luxury villa, modern apartment, or commercial space, we bring your vision to life with precision and artistry.",
+            "ar": "من المفهوم إلى الإنجاز، نقدم خدمات تصميم داخلي وتعاقد استثنائية مصممة خصيصًا لاحتياجاتك الفريدة. سواء كانت فيلا فاخرة أو شقة حديثة أو مساحة تجارية، نحيي رؤيتك بدقة وفنية."
+          },
+          "backgroundImage": "/images/services/services-hero.jpg",
+          "maskLayer": true
+        }
+      },
+      {
+        "id": "services_overview",
+        "type": "services_grid",
+        "order": 2,
+        "data": {
+          "title": {
+            "en": "What We Offer",
+            "ar": "ما نقدمه"
+          },
+          "subtitle": {
+            "en": "FULL-SERVICE DESIGN & CONTRACTING",
+            "ar": "تصميم وتعاقد متكامل الخدمات"
+          },
+          "services": [
+            {
+              "icon": "home",
+              "title": {
+                "en": "Residential Interior Design",
+                "ar": "التصميم الداخلي السكني"
+              },
+              "description": {
+                "en": "Transform your home into a personalized sanctuary. We specialize in luxury villas, apartments, penthouses, and townhouses across Dubai and Abu Dhabi.",
+                "ar": "حول منزلك إلى ملاذ شخصي. نتخصص في الفلل الفاخرة والشقق والبنتهاوسات والتاون هاوس عبر دبي وأبوظبي."
+              },
+              "features": [
+                "Custom space planning",
+                "3D visualization & mood boards",
+                "Material & furniture selection",
+                "Lighting design",
+                "Complete fit-out & installation",
+                "Project management"
+              ],
+              "link": "/services/residential"
+            },
+            {
+              "icon": "building",
+              "title": {
+                "en": "Commercial Interior Design",
+                "ar": "التصميم الداخلي التجاري"
+              },
+              "description": {
+                "en": "Create inspiring workspaces that boost productivity and reflect your brand identity. Offices, retail stores, showrooms, and hospitality venues.",
+                "ar": "أنشئ مساحات عمل ملهمة تعزز الإنتاجية وتعكس هوية علامتك التجارية. مكاتب ومتاجر تجزئة وصالات عرض وأماكن ضيافة."
+              },
+              "features": [
+                "Office fit-outs",
+                "Retail space design",
+                "Restaurant & café interiors",
+                "Showroom design",
+                "Corporate branding integration",
+                "MEP coordination"
+              ],
+              "link": "/services/commercial"
+            },
+            {
+              "icon": "tools",
+              "title": {
+                "en": "Complete Renovation",
+                "ar": "التجديد الكامل"
+              },
+              "description": {
+                "en": "Breathe new life into existing spaces with full-scale renovations. We handle structural work, MEP upgrades, and complete interior transformations.",
+                "ar": "ابعث حياة جديدة في المساحات الموجودة مع تجديدات واسعة النطاق. نتعامل مع الأعمال الهيكلية وترقيات MEP والتحولات الداخلية الكاملة."
+              },
+              "features": [
+                "Structural modifications",
+                "MEP system upgrades",
+                "Complete interior redesign",
+                "Permits & approvals",
+                "Phased construction",
+                "Minimal disruption approach"
+              ],
+              "link": "/services/renovation"
+            },
+            {
+              "icon": "key",
+              "title": {
+                "en": "Turnkey Projects",
+                "ar": "مشاريع تسليم مفتاح"
+              },
+              "description": {
+                "en": "Hassle-free complete solutions from initial design to final handover. We manage every aspect so you can enjoy a seamless, stress-free experience.",
+                "ar": "حلول كاملة بدون متاعب من التصميم الأولي إلى التسليم النهائي. ندير كل جانب حتى تتمكن من الاستمتاع بتجربة سلسة وخالية من الإجهاد."
+              },
+              "features": [
+                "End-to-end project delivery",
+                "Single point of contact",
+                "Design, procurement & construction",
+                "Quality control throughout",
+                "On-time, on-budget guarantee",
+                "Post-completion support"
+              ],
+              "link": "/services/turnkey"
+            },
+            {
+              "icon": "palette",
+              "title": {
+                "en": "Bespoke Furniture & Joinery",
+                "ar": "أثاث ونجارة حسب الطلب"
+              },
+              "description": {
+                "en": "Custom-made furniture and millwork crafted to perfection. From walk-in wardrobes to kitchen cabinetry, every piece is uniquely yours.",
+                "ar": "أثاث مخصص ونجارة مصنوعة بإتقان. من خزائن الملابس إلى خزائن المطبخ، كل قطعة فريدة من نوعها."
+              },
+              "features": [
+                "Custom wardrobes & closets",
+                "Kitchen cabinetry",
+                "Built-in storage solutions",
+                "Luxury wood finishes",
+                "Premium hardware",
+                "Italian & German systems"
+              ],
+              "link": "/services/furniture"
+            },
+            {
+              "icon": "lightbulb",
+              "title": {
+                "en": "Lighting Design",
+                "ar": "تصميم الإضاءة"
+              },
+              "description": {
+                "en": "Transform spaces with expertly designed lighting schemes. We combine ambient, task, and accent lighting for perfect ambiance and functionality.",
+                "ar": "حول المساحات بمخططات إضاءة مصممة بخبرة. نجمع بين الإضاءة المحيطة والمهام والتركيز للحصول على الأجواء والوظائف المثالية."
+              },
+              "features": [
+                "Lighting concept development",
+                "Smart home integration",
+                "Energy-efficient solutions",
+                "Designer fixtures & fittings",
+                "Accent & mood lighting",
+                "Automation systems"
+              ],
+              "link": "/services/lighting"
+            }
+          ],
+          "backgroundColor": "#F8F9FA"
+        }
+      },
+      {
+        "id": "services_process",
+        "type": "process_section",
+        "order": 3,
+        "data": {
+          "title": {
+            "en": "How We Work",
+            "ar": "كيف نعمل"
+          },
+          "subtitle": {
+            "en": "OUR PROVEN 5-STEP PROCESS",
+            "ar": "عمليتنا المثبتة من 5 خطوات"
+          },
+          "steps": [
+            {
+              "number": "01",
+              "title": {
+                "en": "Discovery & Consultation",
+                "ar": "الاكتشاف والاستشارة"
+              },
+              "description": {
+                "en": "We begin with a comprehensive consultation to understand your vision, lifestyle, budget, and timeline. Our team conducts a detailed site survey and discusses your design preferences.",
+                "ar": "نبدأ باستشارة شاملة لفهم رؤيتك وأسلوب حياتك وميزانيتك والجدول الزمني. يجري فريقنا مسحًا تفصيليًا للموقع ويناقش تفضيلات التصميم الخاصة بك."
+              }
+            },
+            {
+              "number": "02",
+              "title": {
+                "en": "Concept Development",
+                "ar": "تطوير المفهوم"
+              },
+              "description": {
+                "en": "Our designers create detailed floor plans, 3D visualizations, and mood boards. We present multiple design concepts and refine them based on your feedback until perfect.",
+                "ar": "يقوم مصممونا بإنشاء مخططات طابق مفصلة وتصورات ثلاثية الأبعاد ولوحات مزاج. نقدم مفاهيم تصميم متعددة ونصقلها بناءً على ملاحظاتك حتى تصبح مثالية."
+              }
+            },
+            {
+              "number": "03",
+              "title": {
+                "en": "Design Development & Approval",
+                "ar": "تطوير التصميم والموافقة"
+              },
+              "description": {
+                "en": "We finalize all design details including materials, finishes, furniture, and fixtures. Detailed technical drawings are prepared, and necessary approvals obtained from authorities.",
+                "ar": "نحدد جميع تفاصيل التصميم بما في ذلك المواد والتشطيبات والأثاث والتركيبات. يتم إعداد الرسومات الفنية التفصيلية والحصول على الموافقات اللازمة من السلطات."
+              }
+            },
+            {
+              "number": "04",
+              "title": {
+                "en": "Construction & Implementation",
+                "ar": "البناء والتنفيذ"
+              },
+              "description": {
+                "en": "Our skilled contractors bring the design to life with meticulous execution. We manage procurement, coordinate trades, and ensure quality at every stage with regular site supervision.",
+                "ar": "يحيي مقاولونا المهرة التصميم بتنفيذ دقيق. ندير المشتريات ونسق الحرف ونضمن الجودة في كل مرحلة بإشراف منتظم على الموقع."
+              }
+            },
+            {
+              "number": "05",
+              "title": {
+                "en": "Completion & Handover",
+                "ar": "الإنجاز والتسليم"
+              },
+              "description": {
+                "en": "Final finishes are completed, furniture installed, and styling touches added. We conduct thorough quality checks before the official handover and provide comprehensive aftercare support.",
+                "ar": "يتم إكمال اللمسات النهائية وتركيب الأثاث وإضافة لمسات التصميم. نجري فحوصات جودة شاملة قبل التسليم الرسمي ونقدم دعمًا شاملاً بعد الرعاية."
+              }
+            }
+          ],
+          "backgroundColor": "#FFFFFF"
+        }
+      },
+      {
+        "id": "services_why",
+        "type": "text_image_section",
+        "order": 4,
+        "data": {
+          "title": {
+            "en": "Why Choose Mouhajer for Your Project?",
+            "ar": "لماذا تختار مهاجر لمشروعك؟"
+          },
+          "content": {
+            "en": "With over 20 years of experience and 500+ successfully completed projects, Mouhajer International Design has established itself as Dubai's premier interior design and contracting firm.\n\nOur multi-disciplinary team includes award-winning designers, experienced architects, skilled engineers, and master craftsmen - all working together to deliver exceptional results.\n\nWe pride ourselves on our attention to detail, commitment to deadlines, and ability to work within any budget without compromising on quality. Our turnkey approach means you have a single point of contact throughout the project, eliminating the stress of coordinating multiple contractors.\n\nEvery project receives personalized attention from start to finish. We don't believe in cookie-cutter solutions - each design is uniquely crafted to reflect your personality, lifestyle, and aspirations.",
+            "ar": "مع أكثر من 20 عامًا من الخبرة وأكثر من 500 مشروع مكتمل بنجاح، أسست مهاجر الدولية للتصميم نفسها كشركة التصميم الداخلي والتعاقد الرائدة في دبي.\n\nيشمل فريقنا متعدد التخصصات مصممين حائزين على جوائز ومهندسين معماريين ذوي خبرة ومهندسين ماهرين وحرفيين ماهرين - جميعهم يعملون معًا لتقديم نتائج استثنائية.\n\nنفخر باهتمامنا بالتفاصيل والتزامنا بالمواعيد النهائية وقدرتنا على العمل ضمن أي ميزانية دون المساس بالجودة. نهجنا في تسليم المفتاح يعني أن لديك نقطة اتصال واحدة طوال المشروع، مما يلغي ضغط تنسيق مقاولين متعددين.\n\nيتلقى كل مشروع اهتمامًا شخصيًا من البداية إلى النهاية. لا نؤمن بالحلول النمطية - كل تصميم مصنوع بشكل فريد ليعكس شخصيتك وأسلوب حياتك وطموحاتك."
+          },
+          "image": "/images/services/why-choose.jpg",
+          "imagePosition": "right",
+          "backgroundColor": "#F8F9FA"
+        }
+      },
+      {
+        "id": "services_cta",
+        "type": "cta_section",
+        "order": 5,
+        "data": {
+          "title": {
+            "en": "Ready to Start Your Project?",
+            "ar": "هل أنت مستعد لبدء مشروعك؟"
+          },
+          "description": {
+            "en": "Get a free consultation and detailed quote for your interior design project. Our team is ready to bring your vision to life.",
+            "ar": "احصل على استشارة مجانية وعرض أسعار مفصل لمشروع التصميم الداخلي الخاص بك. فريقنا جاهز لإحياء رؤيتك."
+          },
+          "primaryButton": {
+            "text": {
+              "en": "Request Free Consultation",
+              "ar": "اطلب استشارة مجانية"
+            },
+            "link": "/contact-us"
+          },
+          "secondaryButton": {
+            "text": {
+              "en": "View Our Portfolio",
+              "ar": "عرض معرض أعمالنا"
+            },
+            "link": "/our-projects"
+          },
+          "backgroundColor": "#1a1a1a",
+          "textColor": "#ffffff"
+        }
+      }
+    ],
+    "seo": {
+      "metaTitle": {
+        "en": "Interior Design Services Dubai | Residential & Commercial | Mouhajer Design",
+        "ar": "خدمات التصميم الداخلي دبي | سكني وتجاري | مهاجر للتصميم"
+      },
+      "metaDescription": {
+        "en": "Complete interior design & contracting services in Dubai: Residential villas, apartments, commercial offices, turnkey projects. Free consultation. 20+ years experience.",
+        "ar": "خدمات تصميم داخلي وتعاقد كاملة في دبي: فلل سكنية وشقق ومكاتب تجارية ومشاريع تسليم مفتاح. استشارة مجانية. خبرة أكثر من 20 عامًا."
+      },
+      "keywords": [
+        "interior design services Dubai",
+        "residential interior design UAE",
+        "commercial interior design Dubai",
+        "villa interior design",
+        "apartment design Dubai",
+        "office fit-out Dubai",
+        "turnkey interior design",
+        "renovation services Dubai",
+        "خدمات التصميم الداخلي دبي",
+        "تصميم داخلي سكني الإمارات",
+        "تصميم داخلي تجاري دبي"
+      ]
+    },
+    "status": "published",
+    "featured": false,
+    "createdAt": "2024-10-01T12:00:00.000Z",
+    "updatedAt": "2025-10-08T12:00:00.000Z"
+  },
+  {
+    "id": "contact",
+    "title": {
+      "en": "Contact Us",
+      "ar": "اتصل بنا"
+    },
+    "slug": {
+      "en": "contact-us",
+      "ar": "اتصل-بنا"
+    },
+    "description": {
+      "en": "Get in touch with Mouhajer International Design. Schedule a free consultation for your interior design project in Dubai and UAE.",
+      "ar": "تواصل مع مهاجر الدولية للتصميم. حدد موعدًا لاستشارة مجانية لمشروع التصميم الداخلي الخاص بك في دبي والإمارات."
+    },
+    "blocks": [
+      {
+        "id": "contact_hero",
+        "type": "hero_banner",
+        "order": 1,
+        "data": {
+          "title": {
+            "en": "Let's Create Something Beautiful Together",
+            "ar": "لنخلق شيئًا جميلاً معًا"
+          },
+          "subtitle": {
+            "en": "GET IN TOUCH",
+            "ar": "ابق على تواصل"
+          },
+          "description": {
+            "en": "Whether you're planning a new project or renovating an existing space, our team is here to help. Schedule a free consultation and discover how we can transform your vision into reality.",
+            "ar": "سواء كنت تخطط لمشروع جديد أو تجدد مساحة موجودة، فريقنا هنا للمساعدة. حدد موعدًا لاستشارة مجانية واكتشف كيف يمكننا تحويل رؤيتك إلى واقع."
+          },
+          "backgroundImage": "/images/contact/contact-hero.jpg",
+          "maskLayer": true
+        }
+      },
+      {
+        "id": "contact_info",
+        "type": "contact_info_section",
+        "order": 2,
+        "data": {
+          "title": {
+            "en": "Our Office",
+            "ar": "مكتبنا"
+          },
+          "contactDetails": [
+            {
+              "icon": "map-pin",
+              "label": {
+                "en": "Visit Us",
+                "ar": "زرنا"
+              },
+              "value": {
+                "en": "Dubai Design District (d3)\nDubai, United Arab Emirates",
+                "ar": "حي دبي للتصميم (d3)\nدبي، الإمارات العربية المتحدة"
+              }
+            },
+            {
+              "icon": "phone",
+              "label": {
+                "en": "Call Us",
+                "ar": "اتصل بنا"
+              },
+              "value": {
+                "en": "+971 XX XXX XXXX",
+                "ar": "+971 XX XXX XXXX"
+              },
+              "link": "tel:+971XXXXXXXXX"
+            },
+            {
+              "icon": "mail",
+              "label": {
+                "en": "Email Us",
+                "ar": "راسلنا"
+              },
+              "value": {
+                "en": "info@mouhajerdesign.com",
+                "ar": "info@mouhajerdesign.com"
+              },
+              "link": "mailto:info@mouhajerdesign.com"
+            },
+            {
+              "icon": "clock",
+              "label": {
+                "en": "Working Hours",
+                "ar": "ساعات العمل"
+              },
+              "value": {
+                "en": "Sunday - Thursday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM\nFriday: Closed",
+                "ar": "الأحد - الخميس: 9:00 صباحًا - 6:00 مساءً\nالسبت: 10:00 صباحًا - 4:00 مساءً\nالجمعة: مغلق"
+              }
+            }
+          ],
+          "backgroundColor": "#F8F9FA"
+        }
+      },
+      {
+        "id": "contact_form",
+        "type": "contact_form",
+        "order": 3,
+        "data": {
+          "title": {
+            "en": "Request a Free Consultation",
+            "ar": "اطلب استشارة مجانية"
+          },
+          "description": {
+            "en": "Fill out the form below and our team will get back to you within 24 hours to discuss your project requirements.",
+            "ar": "املأ النموذج أدناه وسيعود فريقنا إليك في غضون 24 ساعة لمناقشة متطلبات مشروعك."
+          },
+          "fields": [
+            {
+              "label": {
+                "en": "Full Name",
+                "ar": "الاسم الكامل"
+              },
+              "type": "text",
+              "required": true,
+              "placeholder": {
+                "en": "Enter your full name",
+                "ar": "أدخل اسمك الكامل"
+              }
+            },
+            {
+              "label": {
+                "en": "Email Address",
+                "ar": "عنوان البريد الإلكتروني"
+              },
+              "type": "email",
+              "required": true,
+              "placeholder": {
+                "en": "your@email.com",
+                "ar": "your@email.com"
+              }
+            },
+            {
+              "label": {
+                "en": "Phone Number",
+                "ar": "رقم الهاتف"
+              },
+              "type": "phone",
+              "required": true,
+              "placeholder": {
+                "en": "+971 XX XXX XXXX",
+                "ar": "+971 XX XXX XXXX"
+              }
+            },
+            {
+              "label": {
+                "en": "Project Type",
+                "ar": "نوع المشروع"
+              },
+              "type": "select",
+              "required": true,
+              "options": [
+                {
+                  "en": "Residential Villa",
+                  "ar": "فيلا سكنية"
+                },
+                {
+                  "en": "Apartment",
+                  "ar": "شقة"
+                },
+                {
+                  "en": "Penthouse",
+                  "ar": "بنتهاوس"
+                },
+                {
+                  "en": "Commercial Office",
+                  "ar": "مكتب تجاري"
+                },
+                {
+                  "en": "Retail Space",
+                  "ar": "مساحة بيع بالتجزئة"
+                },
+                {
+                  "en": "Restaurant/Café",
+                  "ar": "مطعم/مقهى"
+                },
+                {
+                  "en": "Renovation",
+                  "ar": "تجديد"
+                },
+                {
+                  "en": "Other",
+                  "ar": "آخر"
+                }
+              ]
+            },
+            {
+              "label": {
+                "en": "Project Budget (AED)",
+                "ar": "ميزانية المشروع (درهم)"
+              },
+              "type": "select",
+              "required": false,
+              "options": [
+                {
+                  "en": "Below 100,000",
+                  "ar": "أقل من 100,000"
+                },
+                {
+                  "en": "100,000 - 250,000",
+                  "ar": "100,000 - 250,000"
+                },
+                {
+                  "en": "250,000 - 500,000",
+                  "ar": "250,000 - 500,000"
+                },
+                {
+                  "en": "500,000 - 1,000,000",
+                  "ar": "500,000 - 1,000,000"
+                },
+                {
+                  "en": "Above 1,000,000",
+                  "ar": "أكثر من 1,000,000"
+                },
+                {
+                  "en": "Prefer not to say",
+                  "ar": "أفضل عدم القول"
+                }
+              ]
+            },
+            {
+              "label": {
+                "en": "Tell Us About Your Project",
+                "ar": "أخبرنا عن مشروعك"
+              },
+              "type": "textarea",
+              "required": true,
+              "placeholder": {
+                "en": "Please describe your project requirements, timeline, and any specific design preferences you have in mind",
+                "ar": "يرجى وصف متطلبات مشروعك والجدول الزمني وأي تفضيلات تصميم محددة لديك في الاعتبار"
+              }
+            }
+          ],
+          "submitButtonText": {
+            "en": "Submit Request",
+            "ar": "إرسال الطلب"
+          },
+          "backgroundColor": "#FFFFFF"
+        }
+      },
+      {
+        "id": "contact_map",
+        "type": "map_section",
+        "order": 4,
+        "data": {
+          "title": {
+            "en": "Find Us",
+            "ar": "اعثر علينا"
+          },
+          "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.1746574773755!2d55.258493!3d25.197139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDExJzQ5LjciTiA1NcKwMTUnMzAuNiJF!5e0!3m2!1sen!2sae!4v1234567890",
+          "backgroundColor": "#F8F9FA"
+        }
+      },
+      {
+        "id": "contact_faq",
+        "type": "faq_section",
+        "order": 5,
+        "data": {
+          "title": {
+            "en": "Frequently Asked Questions",
+            "ar": "الأسئلة المتكررة"
+          },
+          "subtitle": {
+            "en": "QUICK ANSWERS",
+            "ar": "إجابات سريعة"
+          },
+          "faqs": [
+            {
+              "question": {
+                "en": "How long does a typical interior design project take?",
+                "ar": "كم من الوقت يستغرق مشروع التصميم الداخلي النموذجي؟"
+              },
+              "answer": {
+                "en": "Project timelines vary based on scope and complexity. A typical residential villa takes 3-6 months from design to completion, while apartments may take 2-4 months. Commercial projects vary widely. We provide detailed timelines during the consultation phase.",
+                "ar": "تختلف الجداول الزمنية للمشروع بناءً على النطاق والتعقيد. تستغرق الفيلا السكنية النموذجية 3-6 أشهر من التصميم إلى الإنجاز، بينما قد تستغرق الشقق 2-4 أشهر. تختلف المشاريع التجارية على نطاق واسع. نقدم جداول زمنية مفصلة خلال مرحلة الاستشارة."
+              }
+            },
+            {
+              "question": {
+                "en": "Do you provide free consultations?",
+                "ar": "هل تقدمون استشارات مجانية؟"
+              },
+              "answer": {
+                "en": "Yes! We offer complimentary initial consultations where we discuss your project requirements, budget, and timeline. This helps us understand your vision and provide accurate proposals.",
+                "ar": "نعم! نقدم استشارات أولية مجانية حيث نناقش متطلبات مشروعك وميزانيتك والجدول الزمني. هذا يساعدنا على فهم رؤيتك وتقديم مقترحات دقيقة."
+              }
+            },
+            {
+              "question": {
+                "en": "What is your minimum project budget?",
+                "ar": "ما هي الميزانية الدنيا لمشروعك؟"
+              },
+              "answer": {
+                "en": "We work with various budgets depending on project scope. For residential projects, our minimum is typically AED 150,000. However, we're happy to discuss your specific requirements during the consultation.",
+                "ar": "نعمل مع ميزانيات مختلفة اعتمادًا على نطاق المشروع. بالنسبة للمشاريع السكنية، الحد الأدنى لدينا عادة 150,000 درهم. ومع ذلك، يسعدنا مناقشة متطلباتك المحددة أثناء الاستشارة."
+              }
+            },
+            {
+              "question": {
+                "en": "Do you handle permits and approvals?",
+                "ar": "هل تتعاملون مع التصاريح والموافقات؟"
+              },
+              "answer": {
+                "en": "Absolutely! We manage all necessary permits, approvals, and compliance requirements from Dubai Municipality, communities, and building management. This is included in our turnkey service.",
+                "ar": "بالتأكيد! نحن ندير جميع التصاريح والموافقات ومتطلبات الامتثال اللازمة من بلدية دبي والمجتمعات وإدارة المباني. هذا مدرج في خدمة تسليم المفتاح الخاصة بنا."
+              }
+            },
+            {
+              "question": {
+                "en": "Can you work with my existing furniture?",
+                "ar": "هل يمكنك العمل مع أثاثي الموجود؟"
+              },
+              "answer": {
+                "en": "Yes, we can incorporate your existing furniture and décor into the new design. During the consultation, let us know which pieces you'd like to keep, and we'll design around them.",
+                "ar": "نعم، يمكننا دمج أثاثك الحالي وديكورك في التصميم الجديد. أثناء الاستشارة، أخبرنا عن القطع التي ترغب في الاحتفاظ بها، وسنصمم حولها."
+              }
+            },
+            {
+              "question": {
+                "en": "What areas do you serve?",
+                "ar": "ما هي المناطق التي تخدمونها؟"
+              },
+              "answer": {
+                "en": "We primarily serve Dubai and Abu Dhabi, including all major communities and developments. We also undertake select projects across the wider UAE. Contact us to discuss your location.",
+                "ar": "نخدم في المقام الأول دبي وأبوظبي، بما في ذلك جميع المجتمعات والتطويرات الرئيسية. نتعهد أيضًا بمشاريع مختارة عبر الإمارات الأوسع. اتصل بنا لمناقشة موقعك."
+              }
+            }
+          ],
+          "backgroundColor": "#FFFFFF"
+        }
+      }
+    ],
+    "seo": {
+      "metaTitle": {
+        "en": "Contact Mouhajer Design | Free Consultation | Interior Design Dubai",
+        "ar": "اتصل بمهاجر للتصميم | استشارة مجانية | تصميم داخلي دبي"
+      },
+      "metaDescription": {
+        "en": "Get in touch with Mouhajer International Design for your interior design project. Free consultation, Dubai office. Call us or fill the contact form for a quote.",
+        "ar": "تواصل مع مهاجر الدولية للتصميم لمشروع التصميم الداخلي الخاص بك. استشارة مجانية، مكتب دبي. اتصل بنا أو املأ نموذج الاتصال للحصول على عرض أسعار."
+      },
+      "keywords": [
+        "contact interior designer Dubai",
+        "interior design consultation Dubai",
+        "Mouhajer Design contact",
+        "Dubai interior design office",
+        "اتصل بمصمم داخلي دبي",
+        "استشارة تصميم داخلي دبي",
+        "اتصل بمهاجر للتصميم"
+      ]
+    },
+    "status": "published",
+    "featured": false,
+    "createdAt": "2024-10-01T12:00:00.000Z",
+    "updatedAt": "2025-10-08T12:00:00.000Z"
+  }
+]

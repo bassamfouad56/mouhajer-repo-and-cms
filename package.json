@@ -1,0 +1,36 @@
+{
+  "name": "mouhajer-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mouhajer International Design - Monorepo with CMS and Frontend",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:cms\" \"npm run dev:frontend\" --names \"CMS,FRONTEND\" --prefix-colors \"cyan,magenta\"",
+    "dev:cms": "cd apps/cms && npm run dev:cms-only",
+    "dev:frontend": "cd apps/frontend && npm run dev",
+    "dev:turbo": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "build:cms": "turbo run build --filter=@mouhajer/cms",
+    "build:frontend": "turbo run build --filter=@mouhajer/frontend",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "type-check": "turbo run type-check"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "concurrently": "^9.2.1",
+    "prettier": "^3.1.0",
+    "turbo": "^1.11.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "packageManager": "npm@10.2.0"
+}
