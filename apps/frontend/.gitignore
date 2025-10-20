@@ -39,11 +39,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Exclude public directory (images and assets)
-public/
+# Exclude heavy image subfolder only (keep fonts and other assets tracked)
+public/images/
+!public/icons/
 !public/favicon.ico
 !public/logo.svg
-!public/icons/
+!public/fonts/
+!public/fonts/**
 
 # IDE and editor files
 .vscode/
