@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://mahermouhajer.com
+
+# Sitemaps
+Sitemap: https://mahermouhajer.com/sitemap.xml
