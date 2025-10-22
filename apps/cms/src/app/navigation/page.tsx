@@ -11,6 +11,7 @@ interface NavItem {
   labelAr: string;
   url: string | null;
   type: 'link' | 'dropdown' | 'mega_menu';
+  location: 'header' | 'footer';
   icon: string | null;
   target: string;
   parentId: string | null;
@@ -42,6 +43,7 @@ export default function NavigationPage() {
     labelAr: '',
     url: '',
     type: 'link' as 'link' | 'dropdown' | 'mega_menu',
+    location: 'header' as 'header' | 'footer',
     icon: '',
     target: '_self',
     parentId: '',
@@ -84,6 +86,7 @@ export default function NavigationPage() {
       labelAr: '',
       url: '',
       type: 'link',
+      location: 'header',
       icon: '',
       target: '_self',
       parentId: '',
@@ -109,6 +112,7 @@ export default function NavigationPage() {
       labelAr: item.labelAr,
       url: item.url || '',
       type: item.type,
+      location: item.location || 'header',
       icon: item.icon || '',
       target: item.target,
       parentId: item.parentId || '',
@@ -148,6 +152,7 @@ export default function NavigationPage() {
         labelAr: formData.labelAr,
         url: formData.url || null,
         type: formData.type,
+        location: formData.location,
         icon: formData.icon || null,
         target: formData.target,
         parentId: formData.parentId || null,
@@ -232,6 +237,9 @@ export default function NavigationPage() {
                 <span className="font-medium">{item.labelEn}</span>
                 <span className="text-gray-400">|</span>
                 <span className="text-gray-600">{item.labelAr}</span>
+                <span className={`px-2 py-0.5 text-xs rounded ${item.location === 'header' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'}`}>
+                  {item.location === 'header' ? 'Header' : 'Footer'}
+                </span>
                 {item.badge && (
                   <span className={`px-2 py-0.5 text-xs rounded ${item.badgeColor || 'bg-blue-100 text-blue-800'}`}>
                     {item.badge}
@@ -353,18 +361,32 @@ export default function NavigationPage() {
             />
           </div>
 
-          <FormInput
-            type="select"
-            label="Type"
-            name="type"
-            value={formData.type}
-            onChange={(e) => setFormData({ ...formData, type: e.target.value as 'link' | 'dropdown' | 'mega_menu' })}
-            required
-          >
-            <option value="link">Link</option>
-            <option value="dropdown">Dropdown</option>
-            <option value="mega_menu">Mega Menu</option>
-          </FormInput>
+          <div className="grid grid-cols-2 gap-4">
+            <FormInput
+              type="select"
+              label="Type"
+              name="type"
+              value={formData.type}
+              onChange={(e) => setFormData({ ...formData, type: e.target.value as 'link' | 'dropdown' | 'mega_menu' })}
+              required
+            >
+              <option value="link">Link</option>
+              <option value="dropdown">Dropdown</option>
+              <option value="mega_menu">Mega Menu</option>
+            </FormInput>
+
+            <FormInput
+              type="select"
+              label="Location"
+              name="location"
+              value={formData.location}
+              onChange={(e) => setFormData({ ...formData, location: e.target.value as 'header' | 'footer' })}
+              required
+            >
+              <option value="header">Header</option>
+              <option value="footer">Footer</option>
+            </FormInput>
+          </div>
 
           {formData.type === 'link' && (
             <FormInput
