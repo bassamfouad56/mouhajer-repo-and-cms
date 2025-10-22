@@ -368,12 +368,13 @@ export default function NavigationPage() {
               name="type"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value as 'link' | 'dropdown' | 'mega_menu' })}
+              options={[
+                { value: 'link', label: 'Link' },
+                { value: 'dropdown', label: 'Dropdown' },
+                { value: 'mega_menu', label: 'Mega Menu' }
+              ]}
               required
-            >
-              <option value="link">Link</option>
-              <option value="dropdown">Dropdown</option>
-              <option value="mega_menu">Mega Menu</option>
-            </FormInput>
+            />
 
             <FormInput
               type="select"
@@ -381,11 +382,12 @@ export default function NavigationPage() {
               name="location"
               value={formData.location}
               onChange={(e) => setFormData({ ...formData, location: e.target.value as 'header' | 'footer' })}
+              options={[
+                { value: 'header', label: 'Header' },
+                { value: 'footer', label: 'Footer' }
+              ]}
               required
-            >
-              <option value="header">Header</option>
-              <option value="footer">Footer</option>
-            </FormInput>
+            />
           </div>
 
           {formData.type === 'link' && (
@@ -413,10 +415,11 @@ export default function NavigationPage() {
               name="target"
               value={formData.target}
               onChange={(e) => setFormData({ ...formData, target: e.target.value })}
-            >
-              <option value="_self">Same Window</option>
-              <option value="_blank">New Window</option>
-            </FormInput>
+              options={[
+                { value: '_self', label: 'Same Window' },
+                { value: '_blank', label: 'New Window' }
+              ]}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
