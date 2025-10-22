@@ -226,6 +226,10 @@ export function getRandomSocialImage(): string {
   return images[Math.floor(Math.random() * images.length)];
 }
 
+// ==================== Missing Exports ====================
+export const PLACEHOLDER_IMAGE = '/images/placeholder.jpg';
+export const PORTFOLIO_CAROUSEL_IMAGES = COMPONENT_IMAGES.PortfolioCarousel;
+
 // ==================== Statistics ====================
 export const IMAGE_STATS = {
   totalImages: 62,

@@ -1,5 +1,5 @@
 export const GET_HOMEPAGE_DATA = `
-  query GetHomepageData($locale: String!, $mediaLimit: Int) {
+  query GetHomepageData {
     settings {
       id
       siteNameEn
@@ -15,11 +15,13 @@ export const GET_HOMEPAGE_DATA = `
       seoMetaDescriptionAr
       seoKeywords
     }
-    homePage: pages(where: { OR: [{ slug: "home" }, { slug: "Home" }, { title: "Home" }] }) {
+    homePage: pages(where: { slug: "home" }) {
       pages {
         id
-        title
-        slug
+        titleEn
+        titleAr
+        slugEn
+        slugAr
         blocks {
           id
           type
@@ -40,8 +42,10 @@ export const GET_HOMEPAGE_DATA = `
         featured
         status
       }
+      total
+      hasMore
     }
-    featuredBlogs: blogPosts(filter: { featured: true }, limit: 3) {
+    featuredBlogs: blogPosts(filter: { featured: true, status: "published" }, limit: 3) {
       posts {
         id
         titleEn
@@ -56,13 +60,15 @@ export const GET_HOMEPAGE_DATA = `
         publishedAt
         featured
       }
+      total
+      hasMore
     }
   }
 `;
 
 export const GET_PROJECTS = `
-  query GetProjects($featured: Boolean, $category: String, $limit: Int) {
-    projects(filter: { featured: $featured, category: $category }, limit: $limit) {
+  query GetProjects($filter: ProjectFilterInput, $limit: Int) {
+    projects(filter: $filter, limit: $limit) {
       projects {
         id
         titleEn
@@ -75,13 +81,15 @@ export const GET_PROJECTS = `
         status
         createdAt
       }
+      total
+      hasMore
     }
   }
 `;
 
 export const GET_BLOG_POSTS = `
-  query GetBlogPosts($featured: Boolean, $status: String, $limit: Int) {
-    blogPosts(filter: { featured: $featured, status: $status }, limit: $limit) {
+  query GetBlogPosts($filter: BlogPostFilterInput, $limit: Int) {
+    blogPosts(filter: $filter, limit: $limit) {
       posts {
         id
         titleEn
@@ -100,6 +108,8 @@ export const GET_BLOG_POSTS = `
         featured
         status
       }
+      total
+      hasMore
     }
   }
 `;

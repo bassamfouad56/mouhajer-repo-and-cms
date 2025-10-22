@@ -1,96 +1,101 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
- 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+@import 'tailwindcss';
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
- 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
- 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
- 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
- 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
- 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+@theme inline {
+  /* shadcn/ui color palette */
+  --color-background: 0 0% 100%;
+  --color-foreground: 222.2 84% 4.9%;
+  --color-card: 0 0% 100%;
+  --color-card-foreground: 222.2 84% 4.9%;
+  --color-popover: 0 0% 100%;
+  --color-popover-foreground: 222.2 84% 4.9%;
+  --color-primary: 222.2 47.4% 11.2%;
+  --color-primary-foreground: 210 40% 98%;
+  --color-secondary: 210 40% 96.1%;
+  --color-secondary-foreground: 222.2 47.4% 11.2%;
+  --color-muted: 210 40% 96.1%;
+  --color-muted-foreground: 215.4 16.3% 46.9%;
+  --color-accent: 210 40% 96.1%;
+  --color-accent-foreground: 222.2 47.4% 11.2%;
+  --color-destructive: 0 84.2% 60.2%;
+  --color-destructive-foreground: 210 40% 98%;
+  --color-border: 214.3 31.8% 91.4%;
+  --color-input: 214.3 31.8% 91.4%;
+  --color-ring: 222.2 84% 4.9%;
+  --radius: 0.5rem;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
- 
-    --radius: 0.5rem;
-  }
- 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
- 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
- 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+  /* Semantic color tokens for enhanced consistency */
+  --color-text-primary: var(--color-foreground);
+  --color-text-secondary: 215.4 16.3% 46.9%;
+  --color-text-tertiary: 220 8.9% 61%;
+  --color-surface-hover: 210 40% 98%;
+  --color-border-subtle: 214.3 31.8% 91.4%;
+}
+
+/* Dark mode - supports both class-based (next-themes) and system preference */
+.dark,
+@media (prefers-color-scheme: dark) {
+  @theme inline {
+    --color-background: 222.2 84% 4.9%;
+    --color-foreground: 210 40% 98%;
+    --color-card: 222.2 84% 4.9%;
+    --color-card-foreground: 210 40% 98%;
+    --color-popover: 222.2 84% 4.9%;
+    --color-popover-foreground: 210 40% 98%;
+    --color-primary: 210 40% 98%;
+    --color-primary-foreground: 222.2 47.4% 11.2%;
+    --color-secondary: 217.2 32.6% 17.5%;
+    --color-secondary-foreground: 210 40% 98%;
+    --color-muted: 217.2 32.6% 17.5%;
+    --color-muted-foreground: 215 20.2% 65.1%;
+    --color-accent: 217.2 32.6% 17.5%;
+    --color-accent-foreground: 210 40% 98%;
+    --color-destructive: 0 62.8% 30.6%;
+    --color-destructive-foreground: 210 40% 98%;
+    --color-border: 217.2 32.6% 17.5%;
+    --color-input: 217.2 32.6% 17.5%;
+    --color-ring: 212.7 26.8% 83.9%;
+
+    --color-text-primary: var(--color-foreground);
+    --color-text-secondary: 215 20.2% 65.1%;
+    --color-text-tertiary: 217.9 10.6% 64.9%;
+    --color-surface-hover: 217.2 32.6% 20%;
+    --color-border-subtle: 217.2 32.6% 25%;
   }
 }
- 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 
-  /* Enhanced Focus Indicators for Accessibility */
-  *:focus-visible {
-    @apply outline-none ring-2 ring-amber-500 ring-offset-2;
-  }
+* {
+  border-color: hsl(var(--color-border));
+}
 
-  /* Buttons and Links */
-  button:focus-visible,
-  a:focus-visible {
-    @apply outline-none ring-2 ring-amber-500 ring-offset-2 rounded;
-  }
+body {
+  background-color: hsl(var(--color-background));
+  color: hsl(var(--color-foreground));
+}
 
-  /* Input Fields */
-  input:focus-visible,
-  select:focus-visible,
-  textarea:focus-visible {
-    @apply outline-none ring-2 ring-amber-500 ring-offset-0;
-  }
+/* Enhanced Focus Indicators for Accessibility */
+*:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #f59e0b,
+    0 0 0 4px rgba(245, 158, 11, 0.2);
+}
+
+/* Buttons and Links */
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #f59e0b,
+    0 0 0 4px rgba(245, 158, 11, 0.2);
+  border-radius: 0.25rem;
+}
+
+/* Input Fields */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #f59e0b;
 }
 
 /* Reduced Motion Support for Accessibility */
@@ -152,7 +157,9 @@
 }
 
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {
@@ -163,12 +170,12 @@
 .scroll-smooth {
   scroll-behavior: smooth;
 }
-.imageContainer{
+.imageContainer {
   position: relative;
   width: 25vw;
   height: 25vh;
-  img{
-      object-fit: cover;
+  img {
+    object-fit: cover;
   }
 }
 
@@ -213,9 +220,6 @@
   height: 15vh;
 }
 
-
- 
-
 .hollow {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: white;
@@ -230,7 +234,6 @@
   display: none; /* Hide scrollbar for Webkit browsers */
 }
 
-
 @keyframes effect {
   0% {
     transform: rotate(0deg);
@@ -242,13 +245,21 @@
 
 /* Modern Animation Keyframes */
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes wave {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes fadeInUp {
@@ -274,18 +285,33 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 @keyframes pulse-soft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
-  50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.4); }
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+  }
 }
 
 span {
@@ -299,8 +325,6 @@ span {
   color: #fff;
 }
 
-
-
 .main-container {
   padding: 0 6.597vw;
   z-index: 99;
@@ -313,8 +337,7 @@ span {
   padding-top: calc(5.6px * 37.77);
   padding-bottom: 10vh;
   padding-bottom: calc(5.6px * 10);
-z-index: 9;
-
+  z-index: 9;
 }
 
 .title-container h1 {
@@ -323,7 +346,7 @@ z-index: 9;
   line-height: 1.25;
   color: white;
   transition: color 0.1s ease-in-out;
-z-index: 9;
+  z-index: 9;
 }
 
 .title-container:hover h1 {

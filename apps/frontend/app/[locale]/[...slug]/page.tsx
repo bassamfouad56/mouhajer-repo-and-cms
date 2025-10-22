@@ -3,8 +3,9 @@ import { notFound } from 'next/navigation';
 import SEOEnhanced from '@/components/SEOEnhanced';
 import BlockRenderer from '@/components/BlockRenderer';
 import { dataFetcher } from '@/lib/data-fetcher';
+import { cmsBaseUrl } from '@/lib/cms-config';
 
-const CMS_API_URL = process.env.NEXT_PUBLIC_CMS_API_URL || 'http://localhost:3010';
+const CMS_API_URL = cmsBaseUrl;
 
 type Props = {
   params: { locale: string; slug: string[] };

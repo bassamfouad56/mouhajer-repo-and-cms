@@ -1,4 +1,5 @@
 // CMS API Client for Mouhajer CMS Integration
+import { cmsBaseUrl } from '@/lib/cms-config';
 import type {
   Project,
   Service,
@@ -9,9 +10,6 @@ import type {
   Settings,
   NavItem,
 } from './cms-types';
-
-// Base URL for production CMS
-const CMS_URL = process.env['NEXT_PUBLIC_CMS_URL'] || 'https://mouhajer-9fjr6p7hm-bassam-fouads-projects.vercel.app';
 
 // Content-specific revalidation times (in seconds)
 // Optimized based on content update frequency for better performance and SEO
@@ -25,7 +23,7 @@ const REVALIDATION_TIMES = {
 
 // Helper function for API requests with content-aware caching
 async function fetchAPI(endpoint: string, options: RequestInit = {}, revalidate?: number) {
-  const url = `${CMS_URL}${endpoint}`;
+  const url = `${cmsBaseUrl}${endpoint}`;
 
   try {
     const res = await fetch(url, {

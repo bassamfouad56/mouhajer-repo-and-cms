@@ -31,8 +31,11 @@
   --color-border-subtle: 214.3 31.8% 91.4%;
 }
 
+/*
+
+
 /* Dark mode - supports both class-based (next-themes) and system preference */
-.dark,
+/* .dark,
 @media (prefers-color-scheme: dark) {
   @theme inline {
     --color-background: 222.2 84% 4.9%;
@@ -55,14 +58,14 @@
     --color-input: 217.2 32.6% 17.5%;
     --color-ring: 224.3 76.3% 94.1%;
 
-    /* Semantic color tokens - dark mode */
-    --color-text-primary: var(--color-foreground);
+     --color-text-primary: var(--color-foreground);
     --color-text-secondary: 215 20.2% 65.1%;
     --color-text-tertiary: 217.9 10.6% 64.9%;
     --color-surface-hover: 217.2 32.6% 20%;
     --color-border-subtle: 217.2 32.6% 25%;
   }
-}
+} 
+*/
 
 * {
   border-color: hsl(var(--color-border));

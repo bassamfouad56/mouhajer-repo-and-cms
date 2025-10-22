@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:cms\" \"npm run dev:frontend\" --names \"CMS,FRONTEND\" --prefix-colors \"cyan,magenta\"",
+    "dev": "concurrently \"npm run dev:cms\" \"npm run dev:frontend\" --names \"CMS,FRONTEND\" --prefix-colors \"cyan,magenta\" --kill-others-on-fail",
     "dev:cms": "cd apps/cms && npm run dev:cms-only",
     "dev:frontend": "cd apps/frontend && npm run dev",
     "dev:turbo": "turbo run dev --parallel",
@@ -21,7 +21,10 @@
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "type-check": "turbo run type-check",
     "prepare": "husky install",
-    "secret-scan": "node scripts/secret-scan.js"
+    "secret-scan": "node scripts/secret-scan.js",
+    "install:all": "npm install && cd apps/cms && npm install && cd ../frontend && npm install",
+    "install:cms": "cd apps/cms && npm install",
+    "install:frontend": "cd apps/frontend && npm install"
   },
   "devDependencies": {
     "@types/node": "^20",

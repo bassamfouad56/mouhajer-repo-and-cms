@@ -1,5 +1,7 @@
+import { cmsGraphqlUrl } from '@/lib/cms-config';
+
 export async function queryGraphQL({ query, variables }: { query: string; variables?: any }) {
-  const response = await fetch(process.env['NEXT_PUBLIC_GRAPHQL_URL'] || 'http://localhost:3010/api/graphql', {
+  const response = await fetch(cmsGraphqlUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query, variables }),

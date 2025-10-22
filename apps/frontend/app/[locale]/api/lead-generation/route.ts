@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { cmsBaseUrl } from "@/lib/cms-config";
 
 // Rate limiting (in production, use Redis or similar)
 const rateLimitMap = new Map();
@@ -208,7 +209,7 @@ export async function POST(request: NextRequest) {
 
     // Save lead to CMS database
     try {
-      const cmsUrl = process.env['NEXT_PUBLIC_CMS_URL'];
+      const cmsUrl = cmsBaseUrl;
       if (cmsUrl) {
         const leadResponse = await fetch(`${cmsUrl}/api/leads`, {
           method: 'POST',

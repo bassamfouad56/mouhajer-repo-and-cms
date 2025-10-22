@@ -6,7 +6,7 @@
 import nodemailer from 'nodemailer';
 
 // Create reusable transporter
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST || 'smtp.zoho.com',
   port: parseInt(process.env.EMAIL_PORT || '587'),
   secure: false, // Use TLS

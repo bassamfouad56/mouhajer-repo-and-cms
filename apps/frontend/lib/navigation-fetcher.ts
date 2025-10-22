@@ -1,4 +1,6 @@
-const CMS_API_URL = process.env.NEXT_PUBLIC_CMS_API_URL || 'http://localhost:3010';
+import { cmsBaseUrl } from '@/lib/cms-config';
+
+const CMS_API_URL = cmsBaseUrl;
 
 export interface NavItem {
   id: string;

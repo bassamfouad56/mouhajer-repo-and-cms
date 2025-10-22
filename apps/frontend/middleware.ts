@@ -1,25 +1,17 @@
-import createMiddleware from "next-intl/middleware";
-import { pathnames, locales, localePrefix } from "./config";
+import createMiddleware from 'next-intl/middleware';
 
 export default createMiddleware({
-  defaultLocale: "en",
-  locales,
-  pathnames,
-  ...(localePrefix !== undefined && { localePrefix }),
+  // A list of all locales that are supported
+  locales: ['en', 'ar'],
+
+  // Used when no locale matches
+  defaultLocale: 'en',
+
+  // Always use prefix for locale
+  localePrefix: 'always'
 });
 
 export const config = {
-  matcher: [
-    // Enable a redirect to a matching locale at the root
-    "/",
-
-    // Set a cookie to remember the previous locale for
-    // all requests that have a locale prefix
-    "/(ar|en)/:path*",
-
-    // Enable redirects that add missing locales
-    // (e.g. `/pathnames` -> `/en/pathnames`)
-    // Exclude API routes, _next, _vercel, and files with extensions
-    "/((?!api|_next|_vercel|.*\\..*).*)",
-  ],
+  // Match only internationalized pathnames
+  matcher: ['/', '/(ar|en)/:path*']
 };

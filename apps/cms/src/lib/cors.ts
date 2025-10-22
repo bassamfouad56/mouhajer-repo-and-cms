@@ -17,6 +17,7 @@ const allowedOrigins = [
   'https://mouhajer-9fjr6p7hm-bassam-fouads-projects.vercel.app', // Current CMS deployment
   'http://localhost:3000', // Local development
   'http://localhost:3001', // Alternative local port
+  'http://localhost:3007', // Frontend local development
 ];
 
 // Get CORS headers based on origin

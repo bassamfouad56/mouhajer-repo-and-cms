@@ -58,7 +58,9 @@
       "Bash(chmod:*)",
       "Bash(./dev-start.sh:*)",
       "Bash(dos2unix:*)",
-      "Bash(npx prisma generate:*)"
+      "Bash(npx prisma generate:*)",
+      "Bash(sudo chmod:*)",
+      "Bash(sudo -S chmod:*)"
     ],
     "deny": [],
     "ask": []

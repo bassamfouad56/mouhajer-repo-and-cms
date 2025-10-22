@@ -22,6 +22,17 @@ export const GET_SERVICES_STRING = `
         duration
         featured
         status
+        seoMetaTitleEn
+        seoMetaTitleAr
+        seoMetaDescEn
+        seoMetaDescAr
+        seoKeywordsEn
+        seoKeywordsAr
+        targetLocations
+        serviceArea
+        faqs
+        viewCount
+        averageRating
         createdAt
         updatedAt
       }
@@ -38,17 +49,31 @@ export const GET_SERVICES = gql`
         id
         titleEn
         titleAr
+        slugEn
+        slugAr
         descriptionEn
         descriptionAr
         shortDescriptionEn
         shortDescriptionAr
         icon
+        images
         featuresEn
         featuresAr
         price
         duration
         featured
         status
+        seoMetaTitleEn
+        seoMetaTitleAr
+        seoMetaDescEn
+        seoMetaDescAr
+        seoKeywordsEn
+        seoKeywordsAr
+        targetLocations
+        serviceArea
+        faqs
+        viewCount
+        averageRating
         createdAt
         updatedAt
       }
@@ -64,17 +89,31 @@ export const GET_SERVICE = gql`
       id
       titleEn
       titleAr
+      slugEn
+      slugAr
       descriptionEn
       descriptionAr
       shortDescriptionEn
       shortDescriptionAr
       icon
+      images
       featuresEn
       featuresAr
       price
       duration
       featured
       status
+      seoMetaTitleEn
+      seoMetaTitleAr
+      seoMetaDescEn
+      seoMetaDescAr
+      seoKeywordsEn
+      seoKeywordsAr
+      targetLocations
+      serviceArea
+      faqs
+      viewCount
+      averageRating
       createdAt
       updatedAt
     }
@@ -88,11 +127,26 @@ export const GET_FEATURED_SERVICES = gql`
         id
         titleEn
         titleAr
+        slugEn
+        slugAr
         shortDescriptionEn
         shortDescriptionAr
         icon
+        images
         featuresEn
         featuresAr
+        price
+        duration
+        seoMetaTitleEn
+        seoMetaTitleAr
+        seoMetaDescEn
+        seoMetaDescAr
+        seoKeywordsEn
+        seoKeywordsAr
+        targetLocations
+        serviceArea
+        viewCount
+        averageRating
       }
       total
     }
