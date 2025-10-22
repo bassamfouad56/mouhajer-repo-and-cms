@@ -114,6 +114,14 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
               );
 
             case 'company_description_home':
+              // Collect all 4 images into a gallery array
+              const companyGallery = [
+                block.data?.image1,
+                block.data?.image2,
+                block.data?.image3,
+                block.data?.image4
+              ].filter(Boolean); // Remove empty/undefined images
+
               return (
                 <AboutSectionHomePage
                   key={block.id}
@@ -122,12 +130,12 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
                     title: block.data?.title?.[locale] || '',
                     subtitle: block.data?.subtitle?.[locale] || '',
                     description: block.data?.description?.[locale] || '',
-                    image: block.data?.image || '',
+                    image: companyGallery[0] || '',
                     features: block.data?.features || [],
-                    gallery: block.data?.gallery || [],
+                    gallery: companyGallery,
                     stats: {
                       years: block.data?.yearsOfExperience || '22',
-                      label: block.data?.experienceLabel?.[locale] || ''
+                      label: block.data?.experienceLabel?.[locale] || (locale === 'en' ? 'Years of Excellence' : 'عاماً من التميز')
                     }
                   }}
                 />

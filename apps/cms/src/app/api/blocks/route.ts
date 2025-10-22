@@ -456,7 +456,10 @@ const blockTypes = [
       title: { type: 'text', bilingual: true, required: true },
       subtitle: { type: 'text', bilingual: true, required: false },
       description: { type: 'textarea', bilingual: true, required: true },
-      image: { type: 'image', required: false },
+      image1: { type: 'image', required: false },
+      image2: { type: 'image', required: false },
+      image3: { type: 'image', required: false },
+      image4: { type: 'image', required: false },
       features: {
         type: 'repeater',
         subFields: {
@@ -464,8 +467,8 @@ const blockTypes = [
           description: { type: 'text', bilingual: true, required: false }
         }
       },
-      gallery: { type: 'gallery', required: false },
       yearsOfExperience: { type: 'text', default: '22' },
+      experienceLabel: { type: 'text', bilingual: true, default: { en: 'Years of Excellence', ar: 'عاماً من التميز' } },
       backgroundColor: { type: 'color', default: '#F8F9FA' }
     }
   },
