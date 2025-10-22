@@ -71,7 +71,8 @@
       "Bash(vercel:*)",
       "Bash(node scripts/update-about-slug.js:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

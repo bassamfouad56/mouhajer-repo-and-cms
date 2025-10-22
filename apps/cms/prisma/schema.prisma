@@ -272,6 +272,7 @@ model NavItem {
   labelAr         String    @map("label_ar")
   url             String?
   type            String
+  location        String    @default("header") // "header" or "footer"
   icon            String?
   target          String    @default("_self")
   parentId        String?   @map("parent_id")
@@ -295,6 +296,7 @@ model NavItem {
   @@index([order])
   @@index([isActive])
   @@index([type])
+  @@index([location])
   @@map("nav_items")
 }
 

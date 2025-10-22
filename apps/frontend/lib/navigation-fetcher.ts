@@ -10,6 +10,7 @@ export interface NavItem {
   };
   url: string | null;
   type: 'link' | 'dropdown' | 'mega_menu';
+  location: 'header' | 'footer';
   icon?: string;
   target: string;
   parentId: string | null;
@@ -37,14 +38,20 @@ export interface NavigationData {
 let navigationCache: NavigationData | null = null;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
-export async function fetchNavigation(force: boolean = false): Promise<NavItem[]> {
+export async function fetchNavigation(location?: 'header' | 'footer', force: boolean = false): Promise<NavItem[]> {
   // Return cached data if still valid
   if (!force && navigationCache && Date.now() - navigationCache.timestamp < CACHE_DURATION) {
-    return navigationCache.items;
+    const items = navigationCache.items;
+    // Filter by location if specified
+    return location ? items.filter(item => item.location === location) : items;
   }
 
   try {
-    const response = await fetch(`${CMS_API_URL}/api/navigation/public`, {
+    const url = location
+      ? `${CMS_API_URL}/api/navigation/public?location=${location}`
+      : `${CMS_API_URL}/api/navigation/public`;
+
+    const response = await fetch(url, {
       next: { revalidate: 300 }, // Revalidate every 5 minutes
     });
 
@@ -54,11 +61,13 @@ export async function fetchNavigation(force: boolean = false): Promise<NavItem[]
 
     const items: NavItem[] = await response.json();
 
-    // Cache the result
-    navigationCache = {
-      items,
-      timestamp: Date.now(),
-    };
+    // Cache the result (only if not filtering by location)
+    if (!location) {
+      navigationCache = {
+        items,
+        timestamp: Date.now(),
+      };
+    }
 
     return items;
   } catch (error) {
@@ -66,7 +75,8 @@ export async function fetchNavigation(force: boolean = false): Promise<NavItem[]
 
     // Return cached data if available, even if expired
     if (navigationCache) {
-      return navigationCache.items;
+      const items = navigationCache.items;
+      return location ? items.filter(item => item.location === location) : items;
     }
 
     // Return empty array as fallback

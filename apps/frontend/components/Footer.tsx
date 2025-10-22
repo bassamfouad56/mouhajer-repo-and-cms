@@ -37,38 +37,17 @@ const Footer = ({ navigationItems = [] }: Props) => {
             </div>
             <div className="flex flex-col lg:items-end gap-10 pt-[55px] pb-[27px] text-white ">
               <div className="flex flex-col lg:flex-row items-center gap-10 text-xl font-Satoshi">
-                {navigationItems.length > 0 ? (
-                  // Use CMS navigation items
-                  navigationItems
-                    .filter((item) => item.type === "link")
-                    .map((item) => (
-                      <Link key={item.id} href={item.url || "#"}>
-                        <p>{item.label[local as "en" | "ar"]}</p>
-                      </Link>
-                    ))
-                ) : (
-                  // Fallback to hardcoded links
-                  <>
-                    <Link href={"/who-we-are"}>
-                      <p>{local === "en" ? "Who we are" : "مَن نحن؟"}</p>
-                    </Link>
-                    <Link href="/our-projects">
-                      <p>{local === "en" ? "Our Projects" : "المشاريع"}</p>
-                    </Link>
-                    <Link href="/services">
-                      <p>{local === "en" ? "Services" : "الخدمات"}</p>
-                    </Link>
-                    <Link href={"/blogs"}>
-                      <p>{local === "en" ? "Blog" : "مقالات"}</p>
-                    </Link>
-                    <Link href={"/careers"}>
-                      <p>{local === "en" ? `Careerss` : "المهن المتاحة"}</p>
-                    </Link>
-                    <Link href={"/contact-us"}>
-                      <p>{local === "en" ? "Contact US" : "تواصل معنا"}</p>
-                    </Link>
-                  </>
-                )}
+                {/* Render footer navigation items from CMS */}
+                {navigationItems.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={item.url || "#"}
+                    target={item.openInNewTab ? "_blank" : "_self"}
+                    rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+                  >
+                    <p>{item.label[local as "en" | "ar"]}</p>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>{" "}

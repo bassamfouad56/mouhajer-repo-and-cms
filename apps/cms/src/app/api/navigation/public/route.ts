@@ -3,14 +3,25 @@ import { prisma } from '@/lib/prisma';
 import { corsHeaders } from '@/lib/cors';
 
 // GET /api/navigation/public - Get all active nav items (no auth required)
-export async function GET() {
+// Supports ?location=header or ?location=footer query parameter
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const location = searchParams.get('location');
+
+    const whereClause: any = {
+      isActive: true,
+      parentId: null // Only get top-level items
+    };
+
+    // Filter by location if specified
+    if (location) {
+      whereClause.location = location;
+    }
+
     // Get all active nav items ordered by order field
     const navItems = await prisma.navItem.findMany({
-      where: {
-        isActive: true,
-        parentId: null // Only get top-level items
-      },
+      where: whereClause,
       orderBy: [
         { order: 'asc' }
       ],
@@ -55,6 +66,7 @@ function transformNavItem(item: any): any {
     },
     url: item.url,
     type: item.type,
+    location: item.location,
     icon: item.icon,
     target: item.target,
     parentId: item.parentId,

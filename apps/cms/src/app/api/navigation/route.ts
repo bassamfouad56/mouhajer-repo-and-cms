@@ -65,6 +65,7 @@ export async function POST(request: Request) {
         labelAr: data.labelAr,
         url: data.url || null,
         type: data.type,
+        location: data.location || 'header',
         icon: data.icon || null,
         target: data.target || '_self',
         parentId: data.parentId || null,

@@ -31,17 +31,19 @@ export default async function RootLayout({
   params: { locale: string };
 }) {
   // Fetch data needed for Navbar and Footer
-  const [services, blogs, projects, navigation] = await Promise.allSettled([
+  const [services, blogs, projects, headerNav, footerNav] = await Promise.allSettled([
     dataFetcher.getServices(),
     dataFetcher.getBlogPosts(),
     dataFetcher.getProjects(),
-    fetchNavigation(),
+    fetchNavigation('header'),
+    fetchNavigation('footer'),
   ]);
 
   const servicesData = services.status === 'fulfilled' ? services.value : [];
   const blogsData = blogs.status === 'fulfilled' ? blogs.value : [];
   const projectsData = projects.status === 'fulfilled' ? projects.value : [];
-  const navigationItems = navigation.status === 'fulfilled' ? navigation.value : [];
+  const headerNavigationItems = headerNav.status === 'fulfilled' ? headerNav.value : [];
+  const footerNavigationItems = footerNav.status === 'fulfilled' ? footerNav.value : [];
 
   return (
     <html
@@ -57,12 +59,12 @@ export default async function RootLayout({
           services={servicesData}
           blogs={blogsData}
           projectsData={projectsData}
-          navigationItems={navigationItems}
+          navigationItems={headerNavigationItems}
         />
 
         {children}
 
-        <Footer navigationItems={navigationItems} />
+        <Footer navigationItems={footerNavigationItems} />
       </body>
     </html>
   );
