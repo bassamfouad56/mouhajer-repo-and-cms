@@ -61,7 +61,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-[38rem]"
               width={'w-[40rem]'}
-              img={ABOUT_IMAGES}
+              img={carouselImages}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
             />
@@ -72,7 +72,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-[20rem]"
               width={'w-[24rem]'}
-              img={ABOUT_IMAGES}
+              img={carouselImages}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
             />
@@ -115,7 +115,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             nextSlide={nextSlide}
             height="h-full"
             width={'w-full'}
-            img={ABOUT_IMAGES}
+            img={carouselImages}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
           />
@@ -136,7 +136,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-full"
               width={'w-full'}
-              img={ABOUT_IMAGES}
+              img={carouselImages}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
             />
