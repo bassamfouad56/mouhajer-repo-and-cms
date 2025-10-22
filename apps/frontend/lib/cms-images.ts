@@ -182,7 +182,7 @@ export const COMPONENT_IMAGES = {
     '/images/about/founder.jpg',
     '/images/about/team-at-work.jpg',
   ],
-  ErrorPages: ['/khaleejitimes.png', '/zawya.png'],
+  ErrorPages: ['/khaleejitimes.png', '/zawya.png', '/images/about/mouhajer-studio.jpg'],
 };
 
 // ==================== Random Image Helpers ====================
@@ -229,6 +229,7 @@ export function getRandomSocialImage(): string {
 // ==================== Missing Exports ====================
 export const PLACEHOLDER_IMAGE = '/images/placeholder.jpg';
 export const PORTFOLIO_CAROUSEL_IMAGES = COMPONENT_IMAGES.PortfolioCarousel;
+export const ERROR_IMAGES = COMPONENT_IMAGES.ErrorPages;
 
 // ==================== Statistics ====================
 export const IMAGE_STATS = {

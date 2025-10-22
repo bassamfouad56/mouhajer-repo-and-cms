@@ -4,11 +4,12 @@ import SEOEnhanced from '@/components/SEOEnhanced';
 import BlockRenderer from '@/components/BlockRenderer';
 import { dataFetcher } from '@/lib/data-fetcher';
 import { cmsBaseUrl } from '@/lib/cms-config';
+import { getHomepageData } from '@/lib/homepage-data';
 
 const CMS_API_URL = cmsBaseUrl;
 
 type Props = {
-  params: { locale: string; slug: string[] };
+  params: { locale: string; slug?: string[] };
 };
 
 async function fetchPageBySlug(locale: 'en' | 'ar', slug: string) {
@@ -36,8 +37,33 @@ async function fetchPageBySlug(locale: 'en' | 'ar', slug: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = params.locale as 'en' | 'ar';
-  const slug = params.slug.join('/');
+  const slug = params.slug?.join('/') || '';
 
+  // Handle home page metadata
+  if (!slug || slug === '') {
+    try {
+      const { settings } = await getHomepageData(locale);
+      return {
+        title: settings?.seo?.[locale]?.defaultTitle || 'Mouhajer Interior Design',
+        description: settings?.seo?.[locale]?.defaultDescription || 'Luxury Interior Design Dubai',
+        keywords: settings?.seo?.[locale]?.keywords?.join(', '),
+        openGraph: {
+          title: settings?.seo?.[locale]?.defaultTitle || 'Mouhajer Interior Design',
+          description: settings?.seo?.[locale]?.defaultDescription || 'Luxury Interior Design Dubai',
+          type: 'website',
+          locale: locale === 'ar' ? 'ar_AE' : 'en_US',
+        },
+      };
+    } catch (error) {
+      console.error('Failed to load home SEO data:', error);
+      return {
+        title: 'Mouhajer Interior Design',
+        description: 'Luxury Interior Design Dubai',
+      };
+    }
+  }
+
+  // Handle other pages
   const page = await fetchPageBySlug(locale, slug);
 
   if (!page) {
@@ -77,7 +103,49 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DynamicPage({ params }: Props) {
   const locale = params.locale as 'en' | 'ar';
-  const slug = params.slug.join('/');
+  const slug = params.slug?.join('/') || '';
+
+  // Handle home page
+  if (!slug || slug === '') {
+    try {
+      const homepageData = await getHomepageData(locale);
+      const blocks = homepageData.homePage?.blocks || [];
+
+      if (blocks.length === 0) {
+        return (
+          <main className="min-h-screen" style={{ backgroundColor: '#FFFEF5' }}>
+            <div className="container mx-auto px-4 py-16">
+              <div className="text-center">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                  {locale === 'en' ? 'Welcome to Mouhajer Design' : 'مرحباً بكم في موهاجر للتصميم'}
+                </h1>
+                <p className="text-xl text-gray-600 mb-8">
+                  {locale === 'en'
+                    ? 'Luxury Interior Design & Architecture in Dubai'
+                    : 'التصميم الداخلي الفاخر والهندسة المعمارية في دبي'}
+                </p>
+              </div>
+            </div>
+          </main>
+        );
+      }
+
+      return (
+        <main className="min-h-screen" style={{ backgroundColor: '#FFFEF5' }}>
+          <BlockRenderer
+            blocks={blocks}
+            locale={locale}
+            featuredProjects={homepageData.featuredProjects}
+            featuredBlogs={homepageData.featuredBlogs}
+            media={homepageData.media}
+          />
+        </main>
+      );
+    } catch (error) {
+      console.error('Failed to load homepage:', error);
+      // Continue to try fetching as a regular page
+    }
+  }
 
   // Fetch the page data from CMS
   const page = await fetchPageBySlug(locale, slug);

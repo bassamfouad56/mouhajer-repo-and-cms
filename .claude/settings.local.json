@@ -60,7 +60,18 @@
       "Bash(dos2unix:*)",
       "Bash(npx prisma generate:*)",
       "Bash(sudo chmod:*)",
-      "Bash(sudo -S chmod:*)"
+      "Bash(sudo -S chmod:*)",
+      "Bash(xargs kill:*)",
+      "Bash(node scripts/seed-about-images.js:*)",
+      "Bash(source ../../.env)",
+      "Bash(DATABASE_URL=\"postgres://e4ee3832cf33bd87ffd178badf51af5f2fd4e07fe3e070ddfd435f08dcd1a5ae:sk_dMe_zwcCq8eyk9aRO0eB4@db.prisma.io:5432/postgres?sslmode=require\" node:*)",
+      "Bash(DATABASE_URL=\"postgres://e4ee3832cf33bd87ffd178badf51af5f2fd4e07fe3e070ddfd435f08dcd1a5ae:sk_dMe_zwcCq8eyk9aRO0eB4@db.prisma.io:5432/postgres?sslmode=require\" npx tsx:*)",
+      "Bash(awk:*)",
+      "Bash(vercel --version:*)",
+      "Bash(vercel:*)",
+      "Bash(node scripts/update-about-slug.js:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

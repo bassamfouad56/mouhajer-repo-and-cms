@@ -11,7 +11,7 @@ import 'swiper/css/effect-creative';
 // import required modules
 
 type Props = {
-  img: StaticImageData[];
+  img: (StaticImageData | string)[];
   width: string;
   height: string;
   index: number;
@@ -65,8 +65,10 @@ const TwoImagesCarousel = ({
     >
       {img?.map((el, i) => {
         const nextImage = img[i + 1] ?? img[0] ?? el;
+        // Handle both StaticImageData and string URLs
+        const imageKey = typeof el === 'string' ? el : el.src;
         return (
-          <SwiperSlide key={el.src + i}>
+          <SwiperSlide key={`${imageKey}-${i}`}>
             <div className={`${width}   ${height} relative  transition-all overflow-hidden`}>
               <div className="absolute w-full h-full flex">
                 <Image fill alt="" src={el} className="absolute w-full h-full object-cover" />

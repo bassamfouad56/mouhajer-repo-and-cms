@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { PROJECT_IMAGES } from '@/lib/cms-images';
+import { PROJECT_GALLERY_IMAGES, getRandomProjectImage } from '@/lib/cms-images';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
@@ -98,7 +98,7 @@ const HeroBanner = ({
           </video>
         ) : (
           <Image
-            src={heroImage || HomeBannerIamge || PROJECT_IMAGES.arumaila}
+            src={heroImage || HomeBannerIamge || PROJECT_GALLERY_IMAGES[0] || '/images/projects/villa-1-living.jpg'}
             alt={title || 'Mouhajer International Design - Luxury Interior Design in Dubai'}
             fill
             className="absolute w-full h-full object-cover"
@@ -128,7 +128,7 @@ const HeroBanner = ({
             <div className="relative z-[1] text-center flex flex-col gap-5 items-center">
               <h1 className="text-base lg:text-2xl font-normal font-Satoshi">{welcomText}</h1>
               <div className=" p-4">
-                <h1 className="font-light text-3xl lg:text-7xl  font-SchnyderS max-w-3xl">
+                <h1 className="font-light text-3xl lg:text-7xl  font-SchnyderS max-w-4xl">
                   {welcomeSubText}
                 </h1>
               </div>

@@ -126,7 +126,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             nextSlide={nextSlide}
             height="h-full"
             width={'w-full'}
-            img={[Engineer1, EngineerDiscussion, ViewOne, ViewOne, ViewOne]}
+            img={carouselImages}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
           />
@@ -148,7 +148,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             nextSlide={nextSlide}
             height="h-full"
             width={'w-full'}
-            img={[Engineer1, EngineerDiscussion, ViewOne, ViewOne, ViewOne]}
+            img={carouselImages}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
           />

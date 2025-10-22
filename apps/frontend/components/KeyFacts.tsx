@@ -1,6 +1,6 @@
-"use client";
-import { useLocale } from "next-intl";
-import React from "react";
+'use client';
+import { useLocale } from 'next-intl';
+import React from 'react';
 
 interface KeyFact {
   id?: string | number;
@@ -17,12 +17,12 @@ const KeyFacts = ({ facts = [], title }: Props) => {
   const locale = useLocale();
   const arr = facts;
   return (
-    <div className="pt-[5rem] py-[10rem]">
+    <div className="pt-20 py-40">
       <div className="px-4 2xl:px-80">
-        <h4 className="text-6xl font-SchnyderS uppercase mb-[10rem]">
-          {title || (locale === "en" ? `KEYFACTS` : "معلومات رئيسية")}
+        <h4 className="text-6xl font-SchnyderS uppercase mb-40">
+          {title || (locale === 'en' ? `KEYFACTS` : 'معلومات رئيسية')}
         </h4>
-        <div className="grid 2xl:grid-cols-2 gap-x-[12rem] gap-y-10">
+        <div className="grid 2xl:grid-cols-2 gap-x-48 gap-y-10">
           {arr.map((el, i) => (
             <KeyFactCard key={el.id || el.title + i} {...el} />
           ))}

@@ -291,7 +291,7 @@ export const cmsClient = {
   }> {
     try {
       // For lead submission, we don't want caching - use cache: 'no-store'
-      const url = `${CMS_URL}/api/leads`;
+      const url = `${cmsBaseUrl}/api/leads`;
       const res = await fetch(url, {
         method: 'POST',
         headers: {
@@ -315,5 +315,5 @@ export const cmsClient = {
   },
 };
 
-// Export CMS_URL for direct use
-export { CMS_URL };
+// Export cmsBaseUrl for direct use
+export { cmsBaseUrl };
