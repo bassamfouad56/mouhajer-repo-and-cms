@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Modal from '@/components/Modal';
 import FormInput from '@/components/FormInput';
+import BilingualInput from '@/components/BilingualInput';
 import Button from '@/components/Button';
 
 interface NavItem {
@@ -375,22 +376,21 @@ export default function NavigationPage() {
         }
       >
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <FormInput
-              label="Label (English)"
-              name="labelEn"
-              value={formData.labelEn}
-              onChange={(e) => setFormData({ ...formData, labelEn: e.target.value })}
-              required
-            />
-            <FormInput
-              label="Label (Arabic)"
-              name="labelAr"
-              value={formData.labelAr}
-              onChange={(e) => setFormData({ ...formData, labelAr: e.target.value })}
-              required
-            />
-          </div>
+          {/* Bilingual Label Input with Auto-translate */}
+          <BilingualInput
+            labelEn="Label (English)"
+            labelAr="Label (Arabic)"
+            nameEn="labelEn"
+            nameAr="labelAr"
+            valueEn={formData.labelEn}
+            valueAr={formData.labelAr}
+            onChangeEn={(e) => setFormData({ ...formData, labelEn: e.target.value })}
+            onChangeAr={(e) => setFormData({ ...formData, labelAr: e.target.value })}
+            contentType="title"
+            required
+            placeholderEn="Enter English label"
+            placeholderAr="أدخل التسمية بالعربية"
+          />
 
           <div className="grid grid-cols-2 gap-4">
             <FormInput
