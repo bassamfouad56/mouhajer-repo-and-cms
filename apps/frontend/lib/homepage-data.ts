@@ -93,7 +93,7 @@ export async function getHomepageData(locale: 'en' | 'ar'): Promise<HomepageData
         featuredCaseStudies,
         featuredFAQs,
         homePage: data.homePage?.pages?.[0] || null,
-        media: [],
+        media: data.media?.media || [],
       };
     }
   } catch (error) {

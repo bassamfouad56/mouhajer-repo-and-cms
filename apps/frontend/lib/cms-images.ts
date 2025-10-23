@@ -63,6 +63,7 @@ export const ABOUT_IMAGES = [
   '/images/about/mouhajer-studio.jpg',
   '/images/about/founder.jpg',
   '/images/about/team-at-work.jpg',
+  '/images/about/mouhajer-studio.jpg', // Duplicate for carousel (needs minimum 4)
 ];
 
 // ==================== Team ====================

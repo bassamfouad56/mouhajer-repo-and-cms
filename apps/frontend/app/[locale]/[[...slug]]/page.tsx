@@ -155,15 +155,16 @@ export default async function DynamicPage({ params }: Props) {
   }
 
   // Fetch additional data needed for blocks
-  const [featuredProjects, featuredBlogs, settings] = await Promise.allSettled([
+  const [featuredProjects, featuredBlogs, settings, mediaData] = await Promise.allSettled([
     dataFetcher.getFeaturedProjects(6),
     dataFetcher.getFeaturedBlogs(3),
     dataFetcher.getSettings(),
+    dataFetcher.getMedia(),
   ]);
 
   const projects = featuredProjects.status === 'fulfilled' ? featuredProjects.value : [];
   const blogs = featuredBlogs.status === 'fulfilled' ? featuredBlogs.value : [];
-  const media = []; // Optionally fetch media if needed
+  const media = mediaData.status === 'fulfilled' ? mediaData.value : [];
 
   // SEO data from CMS page
   const seoData = {

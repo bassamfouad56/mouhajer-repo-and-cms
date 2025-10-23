@@ -1,5 +1,5 @@
 export const GET_HOMEPAGE_DATA = `
-  query GetHomepageData {
+  query GetHomepageData($mediaLimit: Int) {
     settings {
       id
       siteNameEn
@@ -59,6 +59,19 @@ export const GET_HOMEPAGE_DATA = `
         author
         publishedAt
         featured
+      }
+      total
+      hasMore
+    }
+    media(limit: $mediaLimit) {
+      media {
+        id
+        title
+        url
+        type
+        altText
+        caption
+        size
       }
       total
       hasMore
