@@ -10,24 +10,36 @@ import { useLocale } from 'next-intl';
 
 type Props = {
   text: string;
-  headline?: string;
+  sectionTitle?: string;
+  description?: string;
+  showCta?: boolean;
+  ctaText?: string;
+  ctaLink?: string;
   projectCount?: string;
+  projectsLinkText?: string;
+  projectsLink?: string;
   projects?: any[];
   locale?: string;
-  portfolioText?: string;
 };
 
 const PortfolioHomePageDisplay = ({
   text,
-  headline,
+  sectionTitle,
+  description,
+  showCta = true,
+  ctaText,
+  ctaLink = '/contact-us',
   projectCount,
+  projectsLinkText,
+  projectsLink = '/our-projects',
   projects = [],
   locale: localeProp,
-  portfolioText,
 }: Props) => {
   const local = useLocale();
   const projectData = projects.length > 0 ? projects : [];
   const displayProjectCount = projectCount || (local === 'en' ? '+400 Projects' : '+400 مشروع');
+  const displayProjectsLinkText = projectsLinkText || (local === 'en' ? 'See All Projects' : 'اطلع على كافة المشاريع');
+
   return (
     <div className="bg-[#202020] pt-12 pb-12 2xl:pb-32 overflow-hidden">
       <div className="flex items-center justify-start   gap-x-52 mb-4 ">
@@ -37,7 +49,18 @@ const PortfolioHomePageDisplay = ({
       </div>
 
       <div className="px-4 2xl:px-16">
-        {local === 'en' ? (
+        {local === 'en' && (sectionTitle || description) ? (
+          <>
+            <div className="w-full h-0.5 bg-opacity-15 bg-[#FFFEF5] mb-8"></div>
+            <DescriptionAbouitMouahjerHomePage
+              title={sectionTitle}
+              subtitle={description}
+              showButton={showCta}
+              buttonText={ctaText}
+              buttonLink={ctaLink}
+            />
+          </>
+        ) : local === 'en' ? (
           <>
             <div className="w-full h-0.5 bg-opacity-15 bg-[#FFFEF5] mb-8"></div>
             <DescriptionAbouitMouahjerHomePage />
@@ -53,8 +76,8 @@ const PortfolioHomePageDisplay = ({
           </div>
           <div className="uppercase flex items-center gap-2">
             <StarSVG white />
-            <Link href="/our-projects">
-              <p className="">{local === 'en' ? `See All Projects` : `اطلع على كافة المشاريع `}</p>
+            <Link href={projectsLink}>
+              <p className="">{displayProjectsLinkText}</p>
             </Link>
           </div>
         </div>

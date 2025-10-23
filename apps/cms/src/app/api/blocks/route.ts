@@ -501,12 +501,18 @@ const blockTypes = [
     description: 'Featured portfolio projects for homepage with carousel',
     category: 'content',
     fields: {
-      headline: { type: 'text', bilingual: true, required: false },
-      title: { type: 'text', bilingual: true, required: true },
+      headline: { type: 'text', bilingual: true, required: false, default: { en: 'OUR PORTFOLIO 2', ar: 'محفظتنا 2' } },
+      sectionTitle: { type: 'text', bilingual: true, required: false, default: { en: 'Top Interior Design Company in Dubai, UAE Region (Founded In 1999),', ar: 'أفضل شركة لتصميم الديكور الداخلي في  دبي، الإمارات العربية المتحدة (تأسست في عام 1999).' } },
+      description: { type: 'textarea', bilingual: true, required: false, default: { en: 'Mouhajer International Design Reflects a combination of genuine artistry and culture. A blend of classical design styles from 19th and 20th Century Europe, to modern day contemporary styles, Mouhajer International design takes a brave step in mixing and contrasting colors with contradicting outlines and geometric patterns which is why Mouhajer International design Popularly Known to be the Best Interior Design Company in Dubai, UAE Region. The sophisticated, stylish approach reflect Maher and his team's imagination, true refinement and taste. With more than 15 years' experience, Maher Mouhajer has built a team of passionate experts with remarkable attention to detail..', ar: 'تعكس "مؤسسة المهاجر الدولية للتصميم" مزيجًا من الفن الأصيل والثقافة. فهي تمزج بين أنماط التصميم الكلاسيكية من أوروبا في القرنين التاسع عشر والعشرين، وأساليب الديكور المعاصرة في العصر الحديث. تأخذ مؤسسة المهاجر الدولية للتصميم خطوة جريئة في مزج الألوان وتناقض الخطوط والأنماط الهندسية، ولهذا السبب تُعتبر مؤسسة المهاجر الدولية للتصميم معروفة بأنها أفضل شركة لتصميم الديكور الداخلي في منطقة دبي، الإمارات العربية المتحدة. النهج المتطور والأنيق يعكس خيال ماهر وفريقه، والرقي الحقيقي والذوق. بخبرة تزيد عن 15 عامًا، قام ماهر المهاجر ببناء فريق من الخبراء المتحمسين ذوي الاهتمام الملحوظ بالتفاصيل.' } },
+      showCta: { type: 'boolean', default: true },
+      ctaText: { type: 'text', bilingual: true, required: false, default: { en: 'Ready To Be Inspired', ar: 'اتصل بخبرائنا الآن!' } },
+      ctaLink: { type: 'text', required: false, default: '/contact-us' },
+      projectCount: { type: 'text', bilingual: true, required: false, default: { en: '+400 Projects', ar: '+400 مشروع' } },
+      projectsLinkText: { type: 'text', bilingual: true, required: false, default: { en: 'See All Projects', ar: 'اطلع على كافة المشاريع' } },
+      projectsLink: { type: 'text', required: false, default: '/our-projects' },
       showFeatured: { type: 'boolean', default: true },
       category: { type: 'text', required: false },
-      maxItems: { type: 'number', default: 6 },
-      projectCount: { type: 'text', bilingual: true, required: false, default: { en: '+400 Projects', ar: '+400 مشروع' } }
+      maxItems: { type: 'number', default: 6 }
     }
   },
   {

@@ -225,9 +225,15 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
               return (
                 <PortfolioHomePageDisplay
                   key={block.id}
-                  text={block.data?.title?.[locale] || (locale === 'en' ? 'Portfolio' : 'الأعمال')}
-                  headline={block.data?.headline?.[locale]}
+                  text={block.data?.headline?.[locale] || (locale === 'en' ? 'Portfolio' : 'الأعمال')}
+                  sectionTitle={block.data?.sectionTitle?.[locale]}
+                  description={block.data?.description?.[locale]}
+                  showCta={block.data?.showCta !== false}
+                  ctaText={block.data?.ctaText?.[locale]}
+                  ctaLink={block.data?.ctaLink}
                   projectCount={block.data?.projectCount?.[locale] || (locale === 'en' ? '+400 Projects' : '+400 مشروع')}
+                  projectsLinkText={block.data?.projectsLinkText?.[locale]}
+                  projectsLink={block.data?.projectsLink}
                   projects={filteredProjects}
                   locale={locale}
                 />
