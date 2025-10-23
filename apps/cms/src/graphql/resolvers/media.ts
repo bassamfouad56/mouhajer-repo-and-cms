@@ -19,7 +19,7 @@ export const mediaResolvers = {
       const [files, total] = await Promise.all([
         prisma.mediaFile.findMany({
           where,
-          orderBy: { createdAt: 'desc' },
+          orderBy: { uploadedAt: 'desc' },
           take: limit,
         }),
         prisma.mediaFile.count({ where }),
@@ -34,11 +34,11 @@ export const mediaResolvers = {
         title: file.originalName || file.filename,
         url: file.url,
         type: file.type,
-        altText: file.altEn || file.altAr || '',
-        caption: file.captionEn || file.captionAr || '',
+        altText: file.alt || '',
+        caption: '', // MediaFile doesn't have caption fields
         size: file.size,
         tags: file.tags || [],
-        createdAt: file.createdAt,
+        createdAt: file.uploadedAt,
       }));
 
       return {
@@ -63,15 +63,14 @@ export const mediaResolvers = {
         where.OR = [
           { filename: { contains: filter.search, mode: 'insensitive' } },
           { originalName: { contains: filter.search, mode: 'insensitive' } },
-          { altEn: { contains: filter.search, mode: 'insensitive' } },
-          { altAr: { contains: filter.search, mode: 'insensitive' } },
+          { alt: { contains: filter.search, mode: 'insensitive' } },
         ];
       }
 
       const [files, total] = await Promise.all([
         prisma.mediaFile.findMany({
           where,
-          orderBy: { createdAt: 'desc' },
+          orderBy: { uploadedAt: 'desc' },
           take: limit,
           skip: offset,
         }),
@@ -107,10 +106,7 @@ export const mediaResolvers = {
       return await prisma.mediaFile.update({
         where: { id },
         data: {
-          ...(input.altEn !== undefined && { altEn: input.altEn }),
-          ...(input.altAr !== undefined && { altAr: input.altAr }),
-          ...(input.captionEn !== undefined && { captionEn: input.captionEn }),
-          ...(input.captionAr !== undefined && { captionAr: input.captionAr }),
+          ...(input.alt !== undefined && { alt: input.alt }),
         },
       });
     },
