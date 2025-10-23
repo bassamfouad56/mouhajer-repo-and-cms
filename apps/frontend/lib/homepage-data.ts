@@ -101,7 +101,7 @@ export async function getHomepageData(locale: 'en' | 'ar'): Promise<HomepageData
         featuredPricingPlans,
         featuredCaseStudies,
         featuredFAQs,
-        homePage: data.homePage?.pages?.[0] || null,
+        homePage: data.homePage || null,
         media: mediaArray,
       };
     }

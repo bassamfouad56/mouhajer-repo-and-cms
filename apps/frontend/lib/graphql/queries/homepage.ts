@@ -15,19 +15,17 @@ export const GET_HOMEPAGE_DATA = `
       seoMetaDescriptionAr
       seoKeywords
     }
-    homePage: pages(where: { slug: "home" }) {
-      pages {
+    homePage: pageBySlug(slugEn: "home") {
+      id
+      titleEn
+      titleAr
+      slugEn
+      slugAr
+      blocks {
         id
-        titleEn
-        titleAr
-        slugEn
-        slugAr
-        blocks {
-          id
-          type
-          data
-          order
-        }
+        type
+        data
+        order
       }
     }
     featuredProjects: projects(filter: { featured: true }, limit: 6) {
