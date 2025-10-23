@@ -111,6 +111,13 @@ export default async function DynamicPage({ params }: Props) {
       const homepageData = await getHomepageData(locale);
       const blocks = homepageData.homePage?.blocks || [];
 
+      console.log('[Page] Homepage data received:', {
+        blocksCount: blocks.length,
+        mediaCount: homepageData.media?.length || 0,
+        mediaSample: homepageData.media?.[0],
+        imageMedia: homepageData.media?.filter((m: any) => m.type === 'image').length || 0
+      });
+
       if (blocks.length === 0) {
         return (
           <main className="min-h-screen" style={{ backgroundColor: '#FFFEF5' }}>

@@ -83,6 +83,15 @@ export async function getHomepageData(locale: 'en' | 'ar'): Promise<HomepageData
         getFAQs(locale, { limit: 6 })
       ]);
 
+      const mediaArray = data.media?.media || [];
+      console.log('[Homepage] Media fetched from GraphQL:', {
+        total: data.media?.total,
+        count: mediaArray.length,
+        hasMore: data.media?.hasMore,
+        sample: mediaArray[0],
+        imageCount: mediaArray.filter((m: any) => m.type === 'image').length
+      });
+
       return {
         settings: transformSettings(data.settings),
         featuredProjects: (data.featuredProjects?.projects || []).map(transformProject),
@@ -93,7 +102,7 @@ export async function getHomepageData(locale: 'en' | 'ar'): Promise<HomepageData
         featuredCaseStudies,
         featuredFAQs,
         homePage: data.homePage?.pages?.[0] || null,
-        media: data.media?.media || [],
+        media: mediaArray,
       };
     }
   } catch (error) {

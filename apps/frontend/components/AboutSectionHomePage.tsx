@@ -28,6 +28,14 @@ const AboutSectionHomePage = ({ locale: localeProp, content }: Props) => {
     return null;
   }
 
+  console.log('[AboutSectionHomePage] Received content:', {
+    hasTitle: !!content.title,
+    hasDescription: !!content.description,
+    galleryCount: content.gallery?.length || 0,
+    gallerySample: content.gallery?.[0],
+    statsYears: content.stats?.years
+  });
+
   return (
     <div className="">
       <div className="pt-10 2xl:pt-36  2xl:pb-16">

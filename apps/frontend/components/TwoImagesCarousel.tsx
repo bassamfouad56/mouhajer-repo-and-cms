@@ -33,6 +33,13 @@ const TwoImagesCarousel = ({
   nextSlide,
   onImageClick,
 }: Props) => {
+  console.log('[TwoImagesCarousel] Rendering with images:', {
+    count: img?.length || 0,
+    images: img,
+    firstImage: img?.[0],
+    imageTypes: img?.map(i => typeof i)
+  });
+
   useEffect(() => {
     if (index >= img.length || index < 0) {
       setToggleSecondImage(0);
