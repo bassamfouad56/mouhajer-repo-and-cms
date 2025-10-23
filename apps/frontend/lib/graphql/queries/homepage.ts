@@ -164,3 +164,23 @@ export const GET_HOME_PAGE = `
     }
   }
 `;
+
+export const GET_MEDIA = `
+  query GetMedia($limit: Int) {
+    media(limit: $limit) {
+      media {
+        id
+        title
+        url
+        type
+        altText
+        caption
+        size
+        tags
+        createdAt
+      }
+      total
+      hasMore
+    }
+  }
+`;

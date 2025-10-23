@@ -1,5 +1,5 @@
 import { queryGraphQL } from './graphql/server-client';
-import { GET_PROJECTS, GET_BLOG_POSTS, GET_SETTINGS } from './graphql/queries/homepage';
+import { GET_PROJECTS, GET_BLOG_POSTS, GET_SETTINGS, GET_MEDIA } from './graphql/queries/homepage';
 import { GET_SERVICES_STRING } from './graphql/queries/services';
 import type { Project, BlogPost, Settings, Media, Service } from './cms-types';
 
@@ -158,7 +158,21 @@ export const graphqlClient = {
   },
 
   async getMedia(tags?: string[], limit?: number): Promise<Media[]> {
-    // Media endpoint - return empty array for now
-    return [];
+    try {
+      const data = await queryGraphQL({
+        query: GET_MEDIA,
+        variables: {
+          limit: limit || 50,
+        },
+      });
+
+      console.log('[graphql-client] getMedia response:', data);
+      console.log('[graphql-client] media count:', data.media?.media?.length);
+
+      return data.media?.media || [];
+    } catch (error) {
+      console.error('Error fetching media:', error);
+      return [];
+    }
   },
 };
