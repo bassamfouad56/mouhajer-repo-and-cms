@@ -20,7 +20,8 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
   const local = localeProp || localeFromHook;
 
   // Use CMS gallery images or fallback to default images
-  const carouselImages = gallery.length > 0 ? gallery.map((img) => img.url || img) : ABOUT_IMAGES;
+  // BlockRenderer already passes clean URL strings, no need to map
+  const carouselImages = gallery.length > 0 ? gallery : ABOUT_IMAGES;
 
   // Use CMS stats or fallback to defaults
   const yearsOfExperience = stats?.years || '22';

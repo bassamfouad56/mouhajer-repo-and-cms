@@ -1,12 +1,14 @@
 import Image, { StaticImageData } from 'next/image';
-import React, { Dispatch, MutableRefObject, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, MutableRefObject, SetStateAction, useEffect } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, EffectCreative } from 'swiper/modules';
+import { Navigation, EffectFade, Autoplay, Parallax } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/effect-creative';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
+import 'swiper/css/parallax';
 
 // import required modules
 
@@ -31,8 +33,6 @@ const TwoImagesCarousel = ({
   nextSlide,
   onImageClick,
 }: Props) => {
-  const [animatePresence, setAnimatePresence] = useState(index);
-
   useEffect(() => {
     if (index >= img.length || index < 0) {
       setToggleSecondImage(0);
@@ -52,21 +52,22 @@ const TwoImagesCarousel = ({
         clickable: true,
       }}
       grabCursor={true}
-      effect={'creative'}
-      creativeEffect={{
-        prev: {
-          shadow: true,
-          translate: [0, 0, -400],
-        },
-        next: {
-          translate: ['100%', 0, 0],
-        },
+      effect="fade"
+      fadeEffect={{
+        crossFade: true,
       }}
-      modules={[EffectCreative, Navigation]}
+      autoplay={{
+        delay: 4500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      }}
+      speed={800}
+      loop={true}
+      parallax={true}
+      modules={[EffectFade, Autoplay, Parallax, Navigation]}
       className={`${width} ${height} mySwiper`}
     >
       {img?.map((el, i) => {
-        const nextImage = img[i + 1] ?? img[0] ?? el;
         // Handle both StaticImageData and string URLs
         const imageKey = typeof el === 'string' ? el : el.src;
         const handleClick = () => {
@@ -79,20 +80,18 @@ const TwoImagesCarousel = ({
         return (
           <SwiperSlide key={`${imageKey}-${i}`}>
             <div
-              className={`${width}   ${height} relative  transition-all overflow-hidden ${onImageClick ? 'cursor-pointer' : ''}`}
+              className={`${width} ${height} relative overflow-hidden ${onImageClick ? 'cursor-pointer' : ''}`}
               onClick={handleClick}
+              data-swiper-parallax="-100"
             >
-              <div className="absolute w-full h-full flex">
-                <Image fill alt="" src={el} className="absolute w-full h-full object-cover" />
-                <Image
-                  fill
-                  alt=""
-                  src={nextImage}
-                  className={`${
-                    animatePresence ? 'translate-x-[0]' : 'translate-x-[100%]'
-                  }   transition-all duration-700 absolute w-full h-full object-cover`}
-                />
-              </div>
+              <Image
+                fill
+                alt=""
+                src={el}
+                className="w-full h-full object-cover"
+                priority={i === 0}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
             </div>
           </SwiperSlide>
         );
