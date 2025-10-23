@@ -118,12 +118,19 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
               const imageCount = block.data?.imageCount || 4;
               const imageMedia = media.filter((m: any) => m.type === 'image' && m.url);
 
+              console.log('[BlockRenderer] Company Description - Total media items:', media.length);
+              console.log('[BlockRenderer] Filtered image media:', imageMedia.length);
+              console.log('[BlockRenderer] Requested image count:', imageCount);
+              console.log('[BlockRenderer] Sample media item:', media[0]);
+
               // Shuffle and get random images
               const shuffled = [...imageMedia].sort(() => 0.5 - Math.random());
               const randomImages = shuffled.slice(0, imageCount).map((m: any) => m.url);
 
-              // Fallback to placeholder if not enough images
-              const companyGallery = randomImages.length > 0 ? randomImages : [];
+              console.log('[BlockRenderer] Random images selected:', randomImages.length, randomImages);
+
+              // Pass random images array - AboutSectionHomePageCarousel will handle fallback to ABOUT_IMAGES
+              const companyGallery = randomImages;
 
               return (
                 <AboutSectionHomePage

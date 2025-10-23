@@ -21,7 +21,13 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
 
   // Use CMS gallery images or fallback to default images
   // BlockRenderer already passes clean URL strings, no need to map
+  console.log('[AboutSectionHomePageCarousel] Gallery received:', gallery);
+  console.log('[AboutSectionHomePageCarousel] Gallery length:', gallery.length);
+  console.log('[AboutSectionHomePageCarousel] ABOUT_IMAGES fallback:', ABOUT_IMAGES);
+
   const carouselImages = gallery.length > 0 ? gallery : ABOUT_IMAGES;
+
+  console.log('[AboutSectionHomePageCarousel] Final carouselImages:', carouselImages);
 
   // Use CMS stats or fallback to defaults
   const yearsOfExperience = stats?.years || '22';
