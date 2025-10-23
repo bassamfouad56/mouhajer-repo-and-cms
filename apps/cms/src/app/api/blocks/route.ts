@@ -450,16 +450,13 @@ const blockTypes = [
   {
     id: 'company_description_home',
     name: 'Company Description (Homepage)',
-    description: 'Company overview section with features and highlights',
+    description: 'Company overview section with features, random images from media library, and CTA',
     category: 'content',
     fields: {
       title: { type: 'text', bilingual: true, required: true },
       subtitle: { type: 'text', bilingual: true, required: false },
       description: { type: 'textarea', bilingual: true, required: true },
-      image1: { type: 'image', required: false },
-      image2: { type: 'image', required: false },
-      image3: { type: 'image', required: false },
-      image4: { type: 'image', required: false },
+      imageCount: { type: 'number', default: 4, required: false },
       features: {
         type: 'repeater',
         subFields: {
@@ -469,6 +466,9 @@ const blockTypes = [
       },
       yearsOfExperience: { type: 'text', default: '22' },
       experienceLabel: { type: 'text', bilingual: true, default: { en: 'Years of Excellence', ar: 'عاماً من التميز' } },
+      showCta: { type: 'boolean', default: true },
+      ctaText: { type: 'text', bilingual: true, default: { en: 'Get in Touch', ar: 'تواصل معنا' } },
+      ctaLink: { type: 'text', default: '/contact-us' },
       backgroundColor: { type: 'color', default: '#F8F9FA' }
     }
   },

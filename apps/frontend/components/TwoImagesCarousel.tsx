@@ -18,6 +18,7 @@ type Props = {
   setToggleSecondImage: Dispatch<SetStateAction<number>>;
   previousSlide: MutableRefObject<null>;
   nextSlide: MutableRefObject<null>;
+  onImageClick?: (imageUrl: string) => void;
 };
 
 const TwoImagesCarousel = ({
@@ -28,6 +29,7 @@ const TwoImagesCarousel = ({
   setToggleSecondImage,
   previousSlide,
   nextSlide,
+  onImageClick,
 }: Props) => {
   const [animatePresence, setAnimatePresence] = useState(index);
 
@@ -67,9 +69,19 @@ const TwoImagesCarousel = ({
         const nextImage = img[i + 1] ?? img[0] ?? el;
         // Handle both StaticImageData and string URLs
         const imageKey = typeof el === 'string' ? el : el.src;
+        const handleClick = () => {
+          if (onImageClick) {
+            const imageUrl = typeof el === 'string' ? el : el.src;
+            onImageClick(imageUrl);
+          }
+        };
+
         return (
           <SwiperSlide key={`${imageKey}-${i}`}>
-            <div className={`${width}   ${height} relative  transition-all overflow-hidden`}>
+            <div
+              className={`${width}   ${height} relative  transition-all overflow-hidden ${onImageClick ? 'cursor-pointer' : ''}`}
+              onClick={handleClick}
+            >
               <div className="absolute w-full h-full flex">
                 <Image fill alt="" src={el} className="absolute w-full h-full object-cover" />
                 <Image

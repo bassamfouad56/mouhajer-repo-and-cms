@@ -114,13 +114,16 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
               );
 
             case 'company_description_home':
-              // Collect all 4 images into a gallery array
-              const companyGallery = [
-                block.data?.image1,
-                block.data?.image2,
-                block.data?.image3,
-                block.data?.image4
-              ].filter(Boolean); // Remove empty/undefined images
+              // Get random images from media library
+              const imageCount = block.data?.imageCount || 4;
+              const imageMedia = media.filter((m: any) => m.type === 'image' && m.url);
+
+              // Shuffle and get random images
+              const shuffled = [...imageMedia].sort(() => 0.5 - Math.random());
+              const randomImages = shuffled.slice(0, imageCount).map((m: any) => m.url);
+
+              // Fallback to placeholder if not enough images
+              const companyGallery = randomImages.length > 0 ? randomImages : [];
 
               return (
                 <AboutSectionHomePage
@@ -136,7 +139,10 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
                     stats: {
                       years: block.data?.yearsOfExperience || '22',
                       label: block.data?.experienceLabel?.[locale] || (locale === 'en' ? 'Years of Excellence' : 'عاماً من التميز')
-                    }
+                    },
+                    showCta: block.data?.showCta !== false,
+                    ctaText: block.data?.ctaText?.[locale] || (locale === 'en' ? 'Get in Touch' : 'تواصل معنا'),
+                    ctaLink: block.data?.ctaLink || '/contact-us'
                   }}
                 />
               );

@@ -4,6 +4,7 @@ import { ABOUT_IMAGES } from '@/lib/cms-images';
 import RightArrowCircle from './SVG/RightArrowCircle';
 import TwoImagesCarousel from './TwoImagesCarousel';
 import { useLocale } from 'next-intl';
+import Image from 'next/image';
 
 type Props = {
   gallery?: any[];
@@ -26,8 +27,17 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
   const experienceLabel =
     stats?.label || (local === 'en' ? 'Years of experience' : 'عاماً من الخبرة');
   const [toggleSecondImage, setToggleSecondImage] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const nextSlide = useRef(null);
   const previousSlide = useRef(null);
+
+  const openLightbox = (imageUrl: string) => {
+    setLightboxImage(imageUrl);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
 
   return (
     <>
@@ -42,6 +52,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               img={carouselImages.slice(0, 4)}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
+              onImageClick={openLightbox}
             />
           </div>
           <div className="absolute right-[50%] translate-x-[50%] hidden 2xl:block">
@@ -53,6 +64,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               img={carouselImages.slice(1, 5)}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
+              onImageClick={openLightbox}
             />
           </div>
           <div className="2xl:absolute 2xl:right-[45%] 2xl:translate-x-[100%] 2xl:top-[50rem] translate-y-[-65%] hidden 2xl:block">
@@ -64,6 +76,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               img={carouselImages}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
+              onImageClick={openLightbox}
             />
           </div>
           <div className="absolute right-0 bottom-0 hidden 2xl:block">
@@ -75,6 +88,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               img={carouselImages}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
+              onImageClick={openLightbox}
             />
           </div>
         </div>
@@ -118,6 +132,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             img={carouselImages}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
+            onImageClick={openLightbox}
           />
         </div>
         <div className="absolute w-[15rem] h-[15rem] sm:w-[23rem] sm:h-[23rem] lg:w-[32rem] lg:h-[32rem]  left-[50%] translate-x-[-50%] z-[0] top-20">
@@ -129,6 +144,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             img={carouselImages}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
+            onImageClick={openLightbox}
           />
           <div className="absolute w-[12rem] h-[12rem] sm:w-[15rem] sm:h-[15rem] lg:w-[26rem] lg:h-[26rem] right-0  z-[1]  bottom-0 translate-y-[80%] translate-x-[50%]">
             <TwoImagesCarousel
@@ -139,6 +155,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               img={carouselImages}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
+              onImageClick={openLightbox}
             />
           </div>
         </div>
@@ -151,6 +168,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             img={carouselImages}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
+            onImageClick={openLightbox}
           />
         </div>
         <div className="absolute right-10 bottom-14   left-[56%] lg:translate-x-[-50%]">
@@ -177,6 +195,31 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black bg-opacity-90 flex items-center justify-center p-4"
+          onClick={closeLightbox}
+        >
+          <button
+            className="absolute top-4 right-4 text-white text-4xl font-bold hover:text-gray-300 transition-colors z-[10000]"
+            onClick={closeLightbox}
+            aria-label="Close"
+          >
+            ×
+          </button>
+          <div className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center">
+            <Image
+              src={lightboxImage}
+              alt="Enlarged view"
+              fill
+              className="object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };
