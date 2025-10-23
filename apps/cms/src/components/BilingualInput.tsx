@@ -21,7 +21,7 @@ interface BilingualInputProps {
   contentType?: 'title' | 'description' | 'content' | 'alt' | 'general';
   rows?: number;
   disabled?: boolean;
-  placeholder En?: string;
+  placeholderEn?: string;
   placeholderAr?: string;
   autoTranslate?: boolean; // Enable auto-translate feature (default: true)
 }
