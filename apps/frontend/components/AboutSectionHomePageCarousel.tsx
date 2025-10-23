@@ -50,7 +50,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-[50rem] "
               width={'w-[36rem]'}
-              img={carouselImages.slice(0, 4)}
+              img={carouselImages}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
               onImageClick={openLightbox}
@@ -62,7 +62,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-[50rem]"
               width={'w-[50rem]'}
-              img={carouselImages.slice(1, 5)}
+              img={carouselImages}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
               onImageClick={openLightbox}
