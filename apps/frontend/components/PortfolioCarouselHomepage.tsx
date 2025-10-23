@@ -2,6 +2,7 @@
 import { PLACEHOLDER_IMAGE } from '@/lib/cms-images';
 import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import RightArrowCircle from './SVG/RightArrowCircle';
 import PlusIcon from './SVG/PlusIcon';
 
@@ -24,6 +25,8 @@ const PortfolioCarouselHomepage = ({ projectData }: Props) => {
         arabicTitle: el.title?.ar || 'مشروع بدون عنوان',
         type: el.category || 'Project',
         arabicType: el.category || 'مشروع',
+        slug: el.slug,
+        id: el.id,
       })) ?? [],
     [projectData],
   );
@@ -77,38 +80,45 @@ const PortfolioCarouselHomepage = ({ projectData }: Props) => {
           modules={[EffectCreative, Navigation]}
           className=" h-full w-full bg-[#202020]  "
         >
-          {img?.map((el: any, i: number) => (
-            <SwiperSlide key={`${el.image}-${i}`} className=" ">
-              <div className="lg:h-[40rem] max-w-[30vw]  2xl:h-[58rem] bg-[#202020] 2xl:w-full relative mb-8 cursor-view transition-all duration-700 overflow-hidden">
-                <Image
-                  src={el.image}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1536px) 30vw, (min-width: 1024px) 40vw, 90vw"
-                  className="w-full absolute h-full object-cover"
-                />
-              </div>
-              <div
-                className={`w-full h-full bg-[#202020] max-w-[30vw] ${
-                  locale === 'en' ? '' : 'text-right'
-                }`}
-              >
-                <div
-                  className={`flex justify-between items-start ${
-                    locale === 'en' ? '' : 'flex-row-reverse'
-                  }`}
-                >
-                  <h4 className="font-SchnyderS text-3xl font-light mb-4 uppercase max-w-xs">
-                    {locale === 'en' ? el.englishTitle : el.arabicTitle}
-                  </h4>
-                  <PlusIcon />
-                </div>
-                <p className="font-Satoshi text-base font-normal bg-[#202020] uppercase line-clamp-2">
-                  {locale === 'en' ? el.type : el.arabicType}
-                </p>
-              </div>
-            </SwiperSlide>
-          ))}
+          {img?.map((el: any, i: number) => {
+            const projectUrl = el.slug?.[locale] ? `/our-projects/${el.slug[locale]}` : '#';
+            return (
+              <SwiperSlide key={`${el.image}-${i}`} className=" ">
+                <Link href={projectUrl} className="block">
+                  <div className="lg:h-[40rem] max-w-[30vw]  2xl:h-[58rem] bg-[#202020] 2xl:w-full relative mb-8 cursor-pointer transition-all duration-700 overflow-hidden hover:opacity-90">
+                    <Image
+                      src={el.image}
+                      alt={locale === 'en' ? el.englishTitle : el.arabicTitle}
+                      fill
+                      sizes="(min-width: 1536px) 30vw, (min-width: 1024px) 40vw, 90vw"
+                      className="w-full absolute h-full object-cover"
+                    />
+                  </div>
+                </Link>
+                <Link href={projectUrl} className="block">
+                  <div
+                    className={`w-full h-full bg-[#202020] max-w-[30vw] ${
+                      locale === 'en' ? '' : 'text-right'
+                    }`}
+                  >
+                    <div
+                      className={`flex justify-between items-start ${
+                        locale === 'en' ? '' : 'flex-row-reverse'
+                      }`}
+                    >
+                      <h4 className="font-SchnyderS text-3xl font-light mb-4 uppercase max-w-xs hover:opacity-80 transition-opacity">
+                        {locale === 'en' ? el.englishTitle : el.arabicTitle}
+                      </h4>
+                      <PlusIcon />
+                    </div>
+                    <p className="font-Satoshi text-base font-normal bg-[#202020] uppercase line-clamp-2">
+                      {locale === 'en' ? el.type : el.arabicType}
+                    </p>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
 
@@ -138,38 +148,44 @@ const PortfolioCarouselHomepage = ({ projectData }: Props) => {
           }}
           modules={[EffectCreative, Navigation]}
         >
-          {img?.map((el: any, i: number) => (
-            <SwiperSlide key={`detail-${i}`} className="w-full h-full flex flex-col">
-              <div className=" cursor-view  relative mb-8 w-full h-[70%]">
-                <Image
-                  src={img[Math.min(imageDisplayed, img.length - 1)]?.image}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1536px) 40rem, (min-width: 1024px) 35rem, 90vw"
-                  className="w-full absolute h-full object-cover"
-                />
-              </div>
-              <div className={`w-full h-full ${locale === 'en' ? '' : 'text-right'}`}>
-                <div
-                  className={`flex justify-between items-start ${
-                    locale === 'en' ? '' : 'flex-row-reverse'
-                  }`}
-                >
-                  <h4 className="font-SchnyderS text-3xl font-light mb-4 uppercase max-w-xs">
-                    {locale === 'en'
-                      ? img[Math.min(imageDisplayed, img.length - 1)]?.englishTitle
-                      : img[Math.min(imageDisplayed, img.length - 1)]?.arabicTitle}
-                  </h4>
-                  <PlusIcon />
-                </div>
-                <p className="font-Satoshi text-base font-normal">
-                  {locale === 'en'
-                    ? img[Math.min(imageDisplayed, img.length - 1)]?.type
-                    : img[Math.min(imageDisplayed, img.length - 1)]?.arabicTitle}
-                </p>
-              </div>
-            </SwiperSlide>
-          ))}
+          {img?.map((el: any, i: number) => {
+            const currentImg = img[Math.min(imageDisplayed, img.length - 1)];
+            const projectUrl = currentImg?.slug?.[locale] ? `/our-projects/${currentImg.slug[locale]}` : '#';
+            return (
+              <SwiperSlide key={`detail-${i}`} className="w-full h-full flex flex-col">
+                <Link href={projectUrl} className="block cursor-pointer relative mb-8 w-full h-[70%] hover:opacity-90 transition-opacity">
+                  <Image
+                    src={currentImg?.image}
+                    alt={locale === 'en' ? currentImg?.englishTitle : currentImg?.arabicTitle}
+                    fill
+                    sizes="(min-width: 1536px) 40rem, (min-width: 1024px) 35rem, 90vw"
+                    className="w-full absolute h-full object-cover"
+                  />
+                </Link>
+                <Link href={projectUrl} className="block">
+                  <div className={`w-full h-full ${locale === 'en' ? '' : 'text-right'}`}>
+                    <div
+                      className={`flex justify-between items-start ${
+                        locale === 'en' ? '' : 'flex-row-reverse'
+                      }`}
+                    >
+                      <h4 className="font-SchnyderS text-3xl font-light mb-4 uppercase max-w-xs hover:opacity-80 transition-opacity">
+                        {locale === 'en'
+                          ? currentImg?.englishTitle
+                          : currentImg?.arabicTitle}
+                      </h4>
+                      <PlusIcon />
+                    </div>
+                    <p className="font-Satoshi text-base font-normal">
+                      {locale === 'en'
+                        ? currentImg?.type
+                        : currentImg?.arabicType}
+                    </p>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
     </div>

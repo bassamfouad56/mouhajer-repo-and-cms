@@ -174,11 +174,28 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
 
             case 'portfolio_section':
             case 'portfolio_display_home':
+              // Filter projects based on block settings
+              const showFeatured = block.data?.showFeatured !== false; // default true
+              const categoryFilter = block.data?.category;
+              const maxItems = block.data?.maxItems || 6;
+
+              let filteredProjects = featuredProjects;
+
+              // Apply category filter if specified
+              if (categoryFilter) {
+                filteredProjects = filteredProjects.filter((p: any) => p.category === categoryFilter);
+              }
+
+              // Apply maxItems limit
+              filteredProjects = filteredProjects.slice(0, maxItems);
+
               return (
                 <PortfolioHomePageDisplay
                   key={block.id}
                   text={block.data?.title?.[locale] || (locale === 'en' ? 'Portfolio' : 'الأعمال')}
-                  projects={featuredProjects}
+                  headline={block.data?.headline?.[locale]}
+                  projectCount={block.data?.projectCount?.[locale] || (locale === 'en' ? '+400 Projects' : '+400 مشروع')}
+                  projects={filteredProjects}
                   locale={locale}
                 />
               );

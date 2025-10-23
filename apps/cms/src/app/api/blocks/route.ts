@@ -498,13 +498,15 @@ const blockTypes = [
   {
     id: 'portfolio_display_home',
     name: 'Portfolio Display (Homepage)',
-    description: 'Featured portfolio projects for homepage',
+    description: 'Featured portfolio projects for homepage with carousel',
     category: 'content',
     fields: {
       headline: { type: 'text', bilingual: true, required: false },
-      title: { type: 'text', bilingual: true, required: false },
-      featured: { type: 'boolean', default: true },
-      maxItems: { type: 'number', default: 6 }
+      title: { type: 'text', bilingual: true, required: true },
+      showFeatured: { type: 'boolean', default: true },
+      category: { type: 'text', required: false },
+      maxItems: { type: 'number', default: 6 },
+      projectCount: { type: 'text', bilingual: true, required: false, default: { en: '+400 Projects', ar: '+400 مشروع' } }
     }
   },
   {
