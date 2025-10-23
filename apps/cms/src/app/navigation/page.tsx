@@ -36,12 +36,15 @@ export default function NavigationPage() {
   const [editingItem, setEditingItem] = useState<NavItem | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
+  const [pages, setPages] = useState<any[]>([]);
+  const [loadingPages, setLoadingPages] = useState(false);
 
   // Form state
   const [formData, setFormData] = useState({
     labelEn: '',
     labelAr: '',
     url: '',
+    urlType: 'internal' as 'internal' | 'external',
     type: 'link' as 'link' | 'dropdown' | 'mega_menu',
     location: 'header' as 'header' | 'footer',
     icon: '',
@@ -79,12 +82,27 @@ export default function NavigationPage() {
     }
   };
 
+  const fetchPages = async () => {
+    try {
+      setLoadingPages(true);
+      const response = await fetch('/api/pages');
+      if (!response.ok) throw new Error('Failed to fetch pages');
+      const data = await response.json();
+      setPages(data);
+    } catch (error) {
+      console.error('Error fetching pages:', error);
+    } finally {
+      setLoadingPages(false);
+    }
+  };
+
   const handleCreate = () => {
     setEditingItem(null);
     setFormData({
       labelEn: '',
       labelAr: '',
       url: '',
+      urlType: 'internal',
       type: 'link',
       location: 'header',
       icon: '',
@@ -102,15 +120,21 @@ export default function NavigationPage() {
       requiresAuth: false,
       requiredRoles: []
     });
+    fetchPages();
     setIsModalOpen(true);
   };
 
   const handleEdit = (item: NavItem) => {
     setEditingItem(item);
+    // Determine if URL is internal or external
+    const url = item.url || '';
+    const isExternal = url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//');
+
     setFormData({
       labelEn: item.labelEn,
       labelAr: item.labelAr,
-      url: item.url || '',
+      url: url,
+      urlType: isExternal ? 'external' : 'internal',
       type: item.type,
       location: item.location || 'header',
       icon: item.icon || '',
@@ -128,6 +152,7 @@ export default function NavigationPage() {
       requiresAuth: item.requiresAuth,
       requiredRoles: item.requiredRoles
     });
+    fetchPages();
     setIsModalOpen(true);
   };
 
@@ -142,9 +167,15 @@ export default function NavigationPage() {
         return;
       }
 
-      if (formData.type === 'link' && !formData.url) {
-        setError('URL is required for link type');
-        return;
+      if (formData.type === 'link') {
+        if (formData.urlType === 'internal' && !formData.url) {
+          setError('Please select a page');
+          return;
+        }
+        if (formData.urlType === 'external' && !formData.url) {
+          setError('URL is required for external links');
+          return;
+        }
       }
 
       const payload = {
@@ -391,14 +422,79 @@ export default function NavigationPage() {
           </div>
 
           {formData.type === 'link' && (
-            <FormInput
-              label="URL"
-              name="url"
-              value={formData.url}
-              onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-              required={formData.type === 'link'}
-              helperText="Full URL or relative path (e.g., /about or https://example.com)"
-            />
+            <div className="space-y-3">
+              {/* URL Type Selection */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Link Type <span className="text-red-500">*</span>
+                </label>
+                <div className="flex space-x-4">
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="urlType"
+                      value="internal"
+                      checked={formData.urlType === 'internal'}
+                      onChange={(e) => setFormData({ ...formData, urlType: 'internal', url: '' })}
+                      className="text-blue-600 focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-700">Internal Page</span>
+                  </label>
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="urlType"
+                      value="external"
+                      checked={formData.urlType === 'external'}
+                      onChange={(e) => setFormData({ ...formData, urlType: 'external', url: '' })}
+                      className="text-blue-600 focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-700">External URL</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Internal Page Dropdown */}
+              {formData.urlType === 'internal' && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Select Page <span className="text-red-500">*</span>
+                  </label>
+                  {loadingPages ? (
+                    <div className="text-sm text-gray-500">Loading pages...</div>
+                  ) : (
+                    <select
+                      value={formData.url}
+                      onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    >
+                      <option value="">-- Select a page --</option>
+                      {pages.map((page) => (
+                        <option key={page.id} value={page.slug.en}>
+                          {page.title.en} | {page.title.ar} - /{page.slug.en}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  <p className="text-xs text-gray-500 mt-1">
+                    Choose from existing CMS pages
+                  </p>
+                </div>
+              )}
+
+              {/* External URL Input */}
+              {formData.urlType === 'external' && (
+                <FormInput
+                  label="External URL"
+                  name="url"
+                  value={formData.url}
+                  onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+                  required
+                  helperText="Full URL (e.g., https://example.com)"
+                />
+              )}
+            </div>
           )}
 
           <div className="grid grid-cols-2 gap-4">
