@@ -114,7 +114,7 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
               );
 
             case 'company_description_home':
-              // Get random images from media library
+              // Get random images from media library using Fisher-Yates shuffle for better randomization
               const imageCount = block.data?.imageCount || 4;
               const imageMedia = media.filter((m: any) => m.type === 'image' && m.url);
 
@@ -129,22 +129,27 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
                 mediaWithoutUrls: media.filter((m: any) => !m.url).length
               });
 
-              // Shuffle and get random images
-              const shuffled = [...imageMedia].sort(() => 0.5 - Math.random());
-              const randomImages = shuffled.slice(0, imageCount).map((m: any) => m.url);
+              // Fisher-Yates shuffle for better randomization
+              const shuffleArray = <T,>(array: T[]): T[] => {
+                const shuffled = [...array];
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                return shuffled;
+              };
+
+              const shuffled = shuffleArray(imageMedia);
+              const randomImages = shuffled.slice(0, Math.max(imageCount, 16)).map((m: any) => m.url);
 
               console.log('[BlockRenderer] Random images selected:', {
                 count: randomImages.length,
-                urls: randomImages,
+                urls: randomImages.slice(0, 4), // Log first 4 for brevity
                 firstUrl: randomImages[0],
-                urlTypes: randomImages.map((url: string) => ({
-                  url,
-                  isAbsolute: url?.startsWith('http'),
-                  length: url?.length
-                }))
+                allUnique: randomImages.length === new Set(randomImages).size
               });
 
-              // Pass random images array - AboutSectionHomePageCarousel will handle fallback to ABOUT_IMAGES
+              // Pass random images array - AboutSectionHomePageCarousel will handle distribution to 4 positions
               const companyGallery = randomImages;
 
               return (

@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import { ABOUT_IMAGES } from '@/lib/cms-images';
 import RightArrowCircle from './SVG/RightArrowCircle';
 import TwoImagesCarousel from './TwoImagesCarousel';
@@ -15,6 +15,16 @@ type Props = {
   locale?: string;
 };
 
+// Fisher-Yates shuffle algorithm for better randomization
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp }: Props) => {
   const localeFromHook = useLocale();
   const local = localeProp || localeFromHook;
@@ -25,9 +35,44 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
   console.log('[AboutSectionHomePageCarousel] Gallery length:', gallery.length);
   console.log('[AboutSectionHomePageCarousel] ABOUT_IMAGES fallback:', ABOUT_IMAGES);
 
-  const carouselImages = gallery.length > 0 ? gallery : ABOUT_IMAGES;
+  const baseImages = gallery.length > 0 ? gallery : ABOUT_IMAGES;
 
-  console.log('[AboutSectionHomePageCarousel] Final carouselImages:', carouselImages);
+  // Create 4 unique image sets for each carousel position
+  // Each carousel will get a different subset of images to ensure variety
+  const imageSets = useMemo(() => {
+    if (baseImages.length < 4) {
+      // If we have fewer than 4 images, duplicate them to ensure we have enough
+      const extended = [...baseImages];
+      while (extended.length < 4) {
+        extended.push(...baseImages);
+      }
+      return [
+        [extended[0]],
+        [extended[1]],
+        [extended[2]],
+        [extended[3]]
+      ];
+    }
+
+    // Shuffle and split images into 4 unique sets
+    const shuffled = shuffleArray(baseImages);
+    const chunkSize = Math.ceil(shuffled.length / 4);
+
+    return [
+      shuffled.slice(0, chunkSize),
+      shuffled.slice(chunkSize, chunkSize * 2),
+      shuffled.slice(chunkSize * 2, chunkSize * 3),
+      shuffled.slice(chunkSize * 3)
+    ];
+  }, [baseImages]);
+
+  console.log('[AboutSectionHomePageCarousel] Image sets created:', {
+    set1: imageSets[0]?.length,
+    set2: imageSets[1]?.length,
+    set3: imageSets[2]?.length,
+    set4: imageSets[3]?.length,
+    firstImages: imageSets.map(set => set[0])
+  });
 
   // Use CMS stats or fallback to defaults
   const yearsOfExperience = stats?.years || '22';
@@ -56,7 +101,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-[50rem] "
               width={'w-[36rem]'}
-              img={carouselImages}
+              img={imageSets[0]}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
               onImageClick={openLightbox}
@@ -68,7 +113,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-[50rem]"
               width={'w-[50rem]'}
-              img={carouselImages}
+              img={imageSets[1]}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
               onImageClick={openLightbox}
@@ -80,7 +125,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-[38rem]"
               width={'w-[40rem]'}
-              img={carouselImages}
+              img={imageSets[2]}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
               onImageClick={openLightbox}
@@ -92,7 +137,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-[20rem]"
               width={'w-[24rem]'}
-              img={carouselImages}
+              img={imageSets[3]}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
               onImageClick={openLightbox}
@@ -136,7 +181,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             nextSlide={nextSlide}
             height="h-full"
             width={'w-full'}
-            img={carouselImages}
+            img={imageSets[0]}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
             onImageClick={openLightbox}
@@ -148,7 +193,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             nextSlide={nextSlide}
             height="h-full"
             width={'w-full'}
-            img={carouselImages}
+            img={imageSets[1]}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
             onImageClick={openLightbox}
@@ -159,7 +204,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
               nextSlide={nextSlide}
               height="h-full"
               width={'w-full'}
-              img={carouselImages}
+              img={imageSets[2]}
               index={toggleSecondImage}
               setToggleSecondImage={setToggleSecondImage}
               onImageClick={openLightbox}
@@ -172,7 +217,7 @@ const AboutSectionHomePageCarousel = ({ gallery = [], stats, locale: localeProp 
             nextSlide={nextSlide}
             height="h-full"
             width={'w-full'}
-            img={carouselImages}
+            img={imageSets[3]}
             index={toggleSecondImage}
             setToggleSecondImage={setToggleSecondImage}
             onImageClick={openLightbox}
