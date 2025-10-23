@@ -25,6 +25,12 @@ const NewSnippetForDubaiBEstInterioirDesign = ({
   // Use CMS image or fallback to structural engineering image
   const engineerImage = image || SERVICE_IMAGES.structuralEn;
   const local = useLocale();
+
+  // Don't render if no valid image
+  if (!engineerImage || engineerImage === '') {
+    console.warn('[NewSnippetForDubaiBEstInterioirDesign] No valid image provided, skipping render');
+    return null;
+  }
   return (
     <div className="">
       <div className="  2xl:pr-[19.5rem]  pb-14 ">
