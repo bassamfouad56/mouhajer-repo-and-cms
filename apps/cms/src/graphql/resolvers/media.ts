@@ -3,6 +3,51 @@ import { GraphQLError } from 'graphql';
 
 export const mediaResolvers = {
   Query: {
+    media: async (
+      _: any,
+      { limit = 50, tags }: any,
+      { prisma }: GraphQLContext
+    ) => {
+      const where: any = {};
+
+      if (tags && tags.length > 0) {
+        where.tags = {
+          hasSome: tags,
+        };
+      }
+
+      const [files, total] = await Promise.all([
+        prisma.mediaFile.findMany({
+          where,
+          orderBy: { createdAt: 'desc' },
+          take: limit,
+        }),
+        prisma.mediaFile.count({ where }),
+      ]);
+
+      console.log('[GraphQL media resolver] Fetched files:', files.length);
+      console.log('[GraphQL media resolver] Sample file:', files[0]);
+
+      // Transform MediaFile to Media format expected by frontend
+      const media = files.map((file: any) => ({
+        id: file.id,
+        title: file.originalName || file.filename,
+        url: file.url,
+        type: file.type,
+        altText: file.altEn || file.altAr || '',
+        caption: file.captionEn || file.captionAr || '',
+        size: file.size,
+        tags: file.tags || [],
+        createdAt: file.createdAt,
+      }));
+
+      return {
+        media,
+        total,
+        hasMore: limit < total,
+      };
+    },
+
     mediaFiles: async (
       _: any,
       { filter, limit = 20, offset = 0 }: any,

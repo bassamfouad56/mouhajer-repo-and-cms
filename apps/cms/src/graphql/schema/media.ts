@@ -38,6 +38,24 @@ export const mediaTypeDefs = gql`
     hasMore: Boolean!
   }
 
+  type Media {
+    id: ID!
+    title: String!
+    url: String!
+    type: String!
+    altText: String
+    caption: String
+    size: Int!
+    tags: [String!]
+    createdAt: DateTime!
+  }
+
+  type MediaListResponse {
+    media: [Media!]!
+    total: Int!
+    hasMore: Boolean!
+  }
+
   extend type Query {
     mediaFiles(
       filter: MediaFilterInput
@@ -45,6 +63,7 @@ export const mediaTypeDefs = gql`
       offset: Int = 0
     ): MediaResponse!
     mediaFile(id: ID!): MediaFile
+    media(limit: Int = 50, tags: [String!]): MediaListResponse!
   }
 
   extend type Mutation {
