@@ -14,22 +14,43 @@ type Props = {
   projectData: any;
 };
 
+// Fisher-Yates shuffle algorithm for better randomization
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const PortfolioCarouselHomepage = ({ projectData }: Props) => {
   const locale = useLocale();
-  const [imageDisplayed, setImageDisplayed] = useState(1);
-  const img = useMemo(
-    () =>
-      projectData?.map((el: any) => ({
-        image: el.images?.[0] || PLACEHOLDER_IMAGE,
-        englishTitle: el.title?.en || 'Untitled Project',
-        arabicTitle: el.title?.ar || 'مشروع بدون عنوان',
-        type: el.category || 'Project',
-        arabicType: el.category || 'مشروع',
-        slug: el.slug,
-        id: el.id,
-      })) ?? [],
-    [projectData],
-  );
+  const [imageDisplayed, setImageDisplayed] = useState(0);
+
+  // Create two separate shuffled sets for left and right carousels
+  const { leftCarouselProjects, rightCarouselProjects } = useMemo(() => {
+    const projects = projectData?.map((el: any) => ({
+      image: el.images?.[0] || PLACEHOLDER_IMAGE,
+      englishTitle: el.title?.en || 'Untitled Project',
+      arabicTitle: el.title?.ar || 'مشروع بدون عنوان',
+      type: el.category || 'Project',
+      arabicType: el.category || 'مشروع',
+      slug: el.slug,
+      id: el.id,
+    })) ?? [];
+
+    // Shuffle projects and split into two sets for variety
+    const shuffled = shuffleArray(projects);
+    const midPoint = Math.ceil(shuffled.length / 2);
+
+    return {
+      leftCarouselProjects: shuffled.slice(0, midPoint),
+      rightCarouselProjects: shuffled.slice(midPoint).concat(shuffled.slice(0, Math.max(0, midPoint - shuffled.slice(midPoint).length)))
+    };
+  }, [projectData]);
+
+  const img = leftCarouselProjects;
   return (
     <div className="relative lg:min-h-[50rem] 2xl:min-h-[66rem]    border-white">
       {/* <CursorComponenet /> */}
@@ -148,15 +169,14 @@ const PortfolioCarouselHomepage = ({ projectData }: Props) => {
           }}
           modules={[EffectCreative, Navigation]}
         >
-          {img?.map((el: any, i: number) => {
-            const currentImg = img[Math.min(imageDisplayed, img.length - 1)];
-            const projectUrl = currentImg?.slug?.[locale] ? `/our-projects/${currentImg.slug[locale]}` : '#';
+          {rightCarouselProjects?.map((el: any, i: number) => {
+            const projectUrl = el.slug?.[locale] ? `/our-projects/${el.slug[locale]}` : '#';
             return (
-              <SwiperSlide key={`detail-${i}`} className="w-full h-full flex flex-col">
+              <SwiperSlide key={`detail-${el.id}-${i}`} className="w-full h-full flex flex-col">
                 <Link href={projectUrl} className="block cursor-pointer relative mb-8 w-full h-[70%] hover:opacity-90 transition-opacity">
                   <Image
-                    src={currentImg?.image}
-                    alt={locale === 'en' ? currentImg?.englishTitle : currentImg?.arabicTitle}
+                    src={el.image}
+                    alt={locale === 'en' ? el.englishTitle : el.arabicTitle}
                     fill
                     sizes="(min-width: 1536px) 40rem, (min-width: 1024px) 35rem, 90vw"
                     className="w-full absolute h-full object-cover"
@@ -171,15 +191,15 @@ const PortfolioCarouselHomepage = ({ projectData }: Props) => {
                     >
                       <h4 className="font-SchnyderS text-3xl font-light mb-4 uppercase max-w-xs hover:opacity-80 transition-opacity">
                         {locale === 'en'
-                          ? currentImg?.englishTitle
-                          : currentImg?.arabicTitle}
+                          ? el.englishTitle
+                          : el.arabicTitle}
                       </h4>
                       <PlusIcon />
                     </div>
                     <p className="font-Satoshi text-base font-normal">
                       {locale === 'en'
-                        ? currentImg?.type
-                        : currentImg?.arabicType}
+                        ? el.type
+                        : el.arabicType}
                     </p>
                   </div>
                 </Link>
