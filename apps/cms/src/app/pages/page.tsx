@@ -13,6 +13,7 @@ import AIContentGenerator from '@/components/AIContentGenerator';
 import SEOAnalyzer from '@/components/SEOAnalyzer';
 import LanguageToggle, { AnimatedLanguageToggle } from '@/components/LanguageToggle';
 import DraggableBlocks from '@/components/DraggableBlocks';
+import PageListWithDelete from '@/components/PageListWithDelete';
 
 interface SEOConfig {
   // Basic SEO
@@ -497,105 +498,13 @@ export default function PagesPage() {
               />
             </div>
 
-            <div className="space-y-2">
-              {pages.map((page) => (
-                <div
-                  key={page.id}
-                  className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                    selectedPage?.id === page.id
-                      ? 'border-blue-500 bg-blue-50 shadow-sm'
-                      : 'border-gray-100 hover:border-gray-300 hover:bg-gray-50'
-                  }`}
-                  onClick={() => handlePageSelect(page)}
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="flex-1 min-w-0">
-                      {viewLanguage === 'EN' ? (
-                        <>
-                          <div className="flex items-center gap-1.5 mb-1.5">
-                            <span className="px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px] font-semibold">EN</span>
-                            <h3 className="font-semibold text-gray-900 truncate">
-                              {page.title?.en || 'Untitled'}
-                            </h3>
-                          </div>
-                          {page.description?.en && (
-                            <p className="text-xs text-gray-600 line-clamp-2 mb-2 ml-6">
-                              {page.description.en}
-                            </p>
-                          )}
-                          <div className="flex items-center text-xs text-gray-500 ml-6">
-                            <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                            </svg>
-                            <code className="text-[10px]">/{page.slug?.en}</code>
-                          </div>
-                        </>
-                      ) : (
-                        <div dir="rtl">
-                          <div className="flex items-center gap-1.5 mb-1.5">
-                            <h3 className="font-semibold text-gray-900 truncate">
-                              {page.title?.ar || page.title?.en || 'بدون عنوان'}
-                            </h3>
-                            <span className="px-1.5 py-0.5 bg-purple-100 text-purple-700 rounded text-[10px] font-semibold">AR</span>
-                          </div>
-                          {page.description?.ar && (
-                            <p className="text-xs text-gray-600 line-clamp-2 mb-2 mr-6">
-                              {page.description.ar}
-                            </p>
-                          )}
-                          <div className="flex items-center text-xs text-gray-500 mr-6">
-                            <code className="text-[10px]">/{page.slug?.ar || page.slug?.en}</code>
-                            <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                            </svg>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ml-2 ${
-                        page.status === 'published'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-yellow-100 text-yellow-800'
-                      }`}
-                    >
-                      {page.status}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between text-xs mt-3 pt-3 border-t border-gray-200">
-                    <div className="flex items-center space-x-3 text-gray-500">
-                      <span className="flex items-center">
-                        <svg className="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        {page.blocks?.length || 0}
-                      </span>
-                      <span className="flex items-center">
-                        <svg className="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {new Date(page.updatedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <div className="w-12 h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                        <div
-                          className={`h-full rounded-full ${
-                            (page.seo?.metaTitle?.en && page.seo?.metaDescription?.en)
-                              ? 'bg-green-500 w-4/5'
-                              : 'bg-yellow-500 w-2/5'
-                          }`}
-                        />
-                      </div>
-                      <span className="text-gray-700 font-medium text-[10px]">
-                        {(page.seo?.metaTitle?.en && page.seo?.metaDescription?.en) ? '80%' : '40%'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <PageListWithDelete
+              pages={pages}
+              selectedPage={selectedPage}
+              onPageSelect={handlePageSelect}
+              onPagesDeleted={fetchPages}
+              viewLanguage={viewLanguage}
+            />
           </div>
         </aside>
 

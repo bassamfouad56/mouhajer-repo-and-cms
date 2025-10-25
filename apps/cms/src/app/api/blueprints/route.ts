@@ -83,3 +83,82 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// DELETE /api/blueprints - Delete one or multiple blueprints
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const singleId = searchParams.get('id');
+    const multipleIds = searchParams.get('ids');
+
+    if (!singleId && !multipleIds) {
+      return NextResponse.json(
+        { error: 'Either id or ids parameter is required' },
+        { status: 400 }
+      );
+    }
+
+    let idsToDelete: string[] = [];
+
+    if (singleId) {
+      idsToDelete = [singleId];
+    } else if (multipleIds) {
+      idsToDelete = multipleIds.split(',').map(id => id.trim());
+    }
+
+    // Check for system blueprints
+    const systemBlueprints = await prisma.contentBlueprint.findMany({
+      where: {
+        id: {
+          in: idsToDelete
+        },
+        isSystem: true
+      },
+      select: {
+        id: true,
+        displayName: true
+      }
+    });
+
+    if (systemBlueprints.length > 0) {
+      return NextResponse.json(
+        {
+          error: 'Cannot delete system blueprints',
+          systemBlueprints: systemBlueprints.map(b => b.displayName)
+        },
+        { status: 403 }
+      );
+    }
+
+    // Delete related content first (cascade manually)
+    await prisma.content.deleteMany({
+      where: {
+        blueprintId: {
+          in: idsToDelete
+        }
+      }
+    });
+
+    // Delete the blueprints
+    const result = await prisma.contentBlueprint.deleteMany({
+      where: {
+        id: {
+          in: idsToDelete
+        },
+        isSystem: false // Extra safety check
+      }
+    });
+
+    return NextResponse.json({
+      message: `Successfully deleted ${result.count} blueprint(s)`,
+      deletedCount: result.count,
+      deletedIds: idsToDelete
+    });
+  } catch (error) {
+    console.error('Error deleting blueprints:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete blueprints' },
+      { status: 500 }
+    );
+  }
+}
