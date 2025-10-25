@@ -1,6 +1,15 @@
 import { gql } from 'graphql-tag';
 
 export const pageTypeDefs = gql`
+  # Page Type Enum - Unified Content Model
+  enum PageType {
+    NORMAL
+    BLOG
+    PROJECT
+    SERVICE
+    CUSTOM
+  }
+
   type Block {
     id: ID!
     type: String!
@@ -16,6 +25,13 @@ export const pageTypeDefs = gql`
     slugAr: String!
     descriptionEn: String
     descriptionAr: String
+
+    # Unified Content Model - Phase 1
+    type: PageType!
+    category: String
+    template: String
+    publishedAt: DateTime
+
     blocks: [Block!]!
     seoMetaTitleEn: String
     seoMetaTitleAr: String
@@ -41,6 +57,13 @@ export const pageTypeDefs = gql`
     slugAr: String!
     descriptionEn: String
     descriptionAr: String
+
+    # Unified Content Model
+    type: PageType!
+    category: String
+    template: String
+    publishedAt: DateTime
+
     blocks: [BlockInput!]
     seoMetaTitleEn: String
     seoMetaTitleAr: String
@@ -58,6 +81,13 @@ export const pageTypeDefs = gql`
     slugAr: String
     descriptionEn: String
     descriptionAr: String
+
+    # Unified Content Model
+    type: PageType
+    category: String
+    template: String
+    publishedAt: DateTime
+
     blocks: [BlockInput!]
     seoMetaTitleEn: String
     seoMetaTitleAr: String
@@ -72,6 +102,8 @@ export const pageTypeDefs = gql`
     status: String
     featured: Boolean
     search: String
+    type: PageType
+    category: String
   }
 
   type PagesResponse {

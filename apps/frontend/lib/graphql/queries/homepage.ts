@@ -1,5 +1,5 @@
 export const GET_HOMEPAGE_DATA = `
-  query GetHomepageData($mediaLimit: Int) {
+  query GetHomepageData($mediaLimit: Int!) {
     settings {
       id
       siteNameEn

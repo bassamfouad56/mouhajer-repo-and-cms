@@ -104,7 +104,25 @@ export default function SettingsPage() {
       const response = await fetch('/api/settings');
       if (response.ok) {
         const data = await response.json();
-        setSettings(data);
+        // Merge API data with default settings to ensure all nested properties exist
+        const mergedSettings = {
+          ...defaultSettings,
+          ...data,
+          siteName: { ...defaultSettings.siteName, ...data.siteName },
+          siteDescription: { ...defaultSettings.siteDescription, ...data.siteDescription },
+          address: { ...defaultSettings.address, ...data.address },
+          socialMedia: { ...defaultSettings.socialMedia, ...data.socialMedia },
+          seo: {
+            ...defaultSettings.seo,
+            ...data.seo,
+            defaultTitle: { ...defaultSettings.seo.defaultTitle, ...data.seo?.defaultTitle },
+            defaultDescription: { ...defaultSettings.seo.defaultDescription, ...data.seo?.defaultDescription },
+            keywords: { ...defaultSettings.seo.keywords, ...data.seo?.keywords },
+            openGraph: { ...defaultSettings.seo.openGraph, ...data.seo?.openGraph },
+          },
+          appearance: { ...defaultSettings.appearance, ...data.appearance },
+        };
+        setSettings(mergedSettings);
       }
     } catch (error) {
       console.error('Error fetching settings:', error);

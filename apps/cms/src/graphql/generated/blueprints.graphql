@@ -1,0 +1,744 @@
+# ========================================
+# AUTO-GENERATED FROM CONTENT BLUEPRINTS
+# DO NOT EDIT MANUALLY
+# Run: npm run generate:graphql
+# ========================================
+
+scalar DateTime
+scalar JSON
+
+enum Locale {
+  EN
+  AR
+}
+
+enum BlueprintType {
+  DOCUMENT
+  COMPONENT
+}
+
+# Base Asset type for media files
+type Asset {
+  id: ID!
+  url: String!
+  alt: String
+  caption: String
+  mimeType: String
+  size: Int
+  width: Int
+  height: Int
+}
+
+
+# System blueprint for media files (images, videos, documents)
+type Asset {
+  id: ID!
+  file: Asset!
+  altEn: String
+  altAr: String
+  captionEn: String
+  captionAr: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Prominent CTA section with heading, description, and button
+type CTASection {
+  id: ID!
+  headingEn: String
+  headingAr: String
+  descriptionEn: String
+  descriptionAr: String
+  primaryButton: JSON
+  secondaryButton: JSON
+  backgroundColor: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Frequently Asked Questions accordion
+type FAQSection {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  items: JSON
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# System blueprint for site footer
+type Footer {
+  id: ID!
+  columns: JSON
+  copyrightEn: String
+  copyrightAr: String
+  socialLinks: JSON
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Large banner section with heading, subheading, image, and CTA
+type HeroBanner {
+  id: ID!
+  headingEn: String
+  headingAr: String
+  subheadingEn: String
+  subheadingAr: String
+  backgroundImage: Asset!
+  ctaButton: JSON
+  alignment: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Responsive image gallery with multiple layout options
+type ImageGallery {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  images: [Asset!]!
+  layout: String
+  columns: Int
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# System blueprint for site navigation menu
+type Navigation {
+  id: ID!
+  items: JSON
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# WYSIWYG text editor with formatting options
+type RichText {
+  id: ID!
+  contentEn: String
+  contentAr: String
+  alignment: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Customer testimonials slider
+type Testimonials {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  items: JSON
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Embed videos from YouTube, Vimeo, or other platforms
+type VideoEmbed {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  videoUrl: String!
+  thumbnail: Asset
+  aspectRatio: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+
+input AssetFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateAssetInput {
+  file: Asset!
+  altEn: String
+  altAr: String
+  captionEn: String
+  captionAr: String
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateAssetInput {
+  file: Asset
+  altEn: String
+  altAr: String
+  captionEn: String
+  captionAr: String
+  status: String
+  publishedAt: DateTime
+}
+
+input CTASectionFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateCTASectionInput {
+  headingEn: String!
+  headingAr: String!
+  descriptionEn: String
+  descriptionAr: String
+  primaryButton: JSON
+  secondaryButton: JSON
+  backgroundColor: String
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateCTASectionInput {
+  headingEn: String
+  headingAr: String
+  descriptionEn: String
+  descriptionAr: String
+  primaryButton: JSON
+  secondaryButton: JSON
+  backgroundColor: String
+  status: String
+  publishedAt: DateTime
+}
+
+input FAQSectionFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateFAQSectionInput {
+  titleEn: String
+  titleAr: String
+  items: JSON
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateFAQSectionInput {
+  titleEn: String
+  titleAr: String
+  items: JSON
+  status: String
+  publishedAt: DateTime
+}
+
+input FooterFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateFooterInput {
+  columns: JSON
+  copyrightEn: String
+  copyrightAr: String
+  socialLinks: JSON
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateFooterInput {
+  columns: JSON
+  copyrightEn: String
+  copyrightAr: String
+  socialLinks: JSON
+  status: String
+  publishedAt: DateTime
+}
+
+input HeroBannerFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateHeroBannerInput {
+  headingEn: String!
+  headingAr: String!
+  subheadingEn: String
+  subheadingAr: String
+  backgroundImage: ID!
+  ctaButton: JSON
+  alignment: String
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateHeroBannerInput {
+  headingEn: String
+  headingAr: String
+  subheadingEn: String
+  subheadingAr: String
+  backgroundImage: ID
+  ctaButton: JSON
+  alignment: String
+  status: String
+  publishedAt: DateTime
+}
+
+input ImageGalleryFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateImageGalleryInput {
+  titleEn: String
+  titleAr: String
+  images: [Asset!]!
+  layout: String
+  columns: Int
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateImageGalleryInput {
+  titleEn: String
+  titleAr: String
+  images: [Asset!]
+  layout: String
+  columns: Int
+  status: String
+  publishedAt: DateTime
+}
+
+input NavigationFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateNavigationInput {
+  items: JSON
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateNavigationInput {
+  items: JSON
+  status: String
+  publishedAt: DateTime
+}
+
+input RichTextFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateRichTextInput {
+  contentEn: String!
+  contentAr: String!
+  alignment: String
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateRichTextInput {
+  contentEn: String
+  contentAr: String
+  alignment: String
+  status: String
+  publishedAt: DateTime
+}
+
+input TestimonialsFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateTestimonialsInput {
+  titleEn: String
+  titleAr: String
+  items: JSON
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateTestimonialsInput {
+  titleEn: String
+  titleAr: String
+  items: JSON
+  status: String
+  publishedAt: DateTime
+}
+
+input VideoEmbedFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateVideoEmbedInput {
+  titleEn: String
+  titleAr: String
+  videoUrl: String!
+  thumbnail: ID
+  aspectRatio: String
+  status: String
+  publishedAt: DateTime
+}
+
+input UpdateVideoEmbedInput {
+  titleEn: String
+  titleAr: String
+  videoUrl: String
+  thumbnail: ID
+  aspectRatio: String
+  status: String
+  publishedAt: DateTime
+}
+
+# ========================================
+# QUERIES
+# ========================================
+
+extend type Query {
+  # Get all Media Asset instances
+  Assets(
+    locale: Locale = EN
+    filter: AssetFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [Asset!]!
+  # Get single Media Asset by ID
+  asset(
+    id: ID!
+    locale: Locale = EN
+  ): Asset
+  # Get all Call to Action Section instances
+  CTASections(
+    locale: Locale = EN
+    filter: CTASectionFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [CTASection!]!
+  # Get single Call to Action Section by ID
+  ctasection(
+    id: ID!
+    locale: Locale = EN
+  ): CTASection
+  # Get all FAQ Section instances
+  FAQSections(
+    locale: Locale = EN
+    filter: FAQSectionFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [FAQSection!]!
+  # Get single FAQ Section by ID
+  faqsection(
+    id: ID!
+    locale: Locale = EN
+  ): FAQSection
+  # Get single Site Footer by ID
+  footer(
+    id: ID!
+    locale: Locale = EN
+  ): Footer
+  # Get all Hero Banner instances
+  HeroBanners(
+    locale: Locale = EN
+    filter: HeroBannerFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [HeroBanner!]!
+  # Get single Hero Banner by ID
+  herobanner(
+    id: ID!
+    locale: Locale = EN
+  ): HeroBanner
+  # Get all Image Gallery instances
+  ImageGalleries(
+    locale: Locale = EN
+    filter: ImageGalleryFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [ImageGallery!]!
+  # Get single Image Gallery by ID
+  imagegallery(
+    id: ID!
+    locale: Locale = EN
+  ): ImageGallery
+  # Get single Site Navigation by ID
+  navigation(
+    id: ID!
+    locale: Locale = EN
+  ): Navigation
+  # Get all Rich Text instances
+  RichTexts(
+    locale: Locale = EN
+    filter: RichTextFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [RichText!]!
+  # Get single Rich Text by ID
+  richtext(
+    id: ID!
+    locale: Locale = EN
+  ): RichText
+  # Get all Testimonials instances
+  Testimonialses(
+    locale: Locale = EN
+    filter: TestimonialsFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [Testimonials!]!
+  # Get single Testimonials by ID
+  testimonials(
+    id: ID!
+    locale: Locale = EN
+  ): Testimonials
+  # Get all Video Embed instances
+  VideoEmbeds(
+    locale: Locale = EN
+    filter: VideoEmbedFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [VideoEmbed!]!
+  # Get single Video Embed by ID
+  videoembed(
+    id: ID!
+    locale: Locale = EN
+  ): VideoEmbed
+
+  # Blueprint metadata
+  blueprints: [ContentBlueprint!]!
+  blueprint(id: ID!): ContentBlueprint
+}
+
+# ========================================
+# MUTATIONS
+# ========================================
+
+extend type Mutation {
+  # Create new Media Asset
+  createAsset(
+    input: CreateAssetInput!
+    locale: Locale = EN
+  ): Asset!
+  # Update existing Media Asset
+  updateAsset(
+    id: ID!
+    input: UpdateAssetInput!
+    locale: Locale = EN
+  ): Asset!
+  # Delete Media Asset
+  deleteAsset(id: ID!): Boolean!
+  # Create new Call to Action Section
+  createCTASection(
+    input: CreateCTASectionInput!
+    locale: Locale = EN
+  ): CTASection!
+  # Update existing Call to Action Section
+  updateCTASection(
+    id: ID!
+    input: UpdateCTASectionInput!
+    locale: Locale = EN
+  ): CTASection!
+  # Delete Call to Action Section
+  deleteCTASection(id: ID!): Boolean!
+  # Duplicate Call to Action Section
+  duplicateCTASection(id: ID!): CTASection!
+  # Create new FAQ Section
+  createFAQSection(
+    input: CreateFAQSectionInput!
+    locale: Locale = EN
+  ): FAQSection!
+  # Update existing FAQ Section
+  updateFAQSection(
+    id: ID!
+    input: UpdateFAQSectionInput!
+    locale: Locale = EN
+  ): FAQSection!
+  # Delete FAQ Section
+  deleteFAQSection(id: ID!): Boolean!
+  # Duplicate FAQ Section
+  duplicateFAQSection(id: ID!): FAQSection!
+  # Create new Site Footer
+  createFooter(
+    input: CreateFooterInput!
+    locale: Locale = EN
+  ): Footer!
+  # Update existing Site Footer
+  updateFooter(
+    id: ID!
+    input: UpdateFooterInput!
+    locale: Locale = EN
+  ): Footer!
+  # Delete Site Footer
+  deleteFooter(id: ID!): Boolean!
+  # Create new Hero Banner
+  createHeroBanner(
+    input: CreateHeroBannerInput!
+    locale: Locale = EN
+  ): HeroBanner!
+  # Update existing Hero Banner
+  updateHeroBanner(
+    id: ID!
+    input: UpdateHeroBannerInput!
+    locale: Locale = EN
+  ): HeroBanner!
+  # Delete Hero Banner
+  deleteHeroBanner(id: ID!): Boolean!
+  # Duplicate Hero Banner
+  duplicateHeroBanner(id: ID!): HeroBanner!
+  # Create new Image Gallery
+  createImageGallery(
+    input: CreateImageGalleryInput!
+    locale: Locale = EN
+  ): ImageGallery!
+  # Update existing Image Gallery
+  updateImageGallery(
+    id: ID!
+    input: UpdateImageGalleryInput!
+    locale: Locale = EN
+  ): ImageGallery!
+  # Delete Image Gallery
+  deleteImageGallery(id: ID!): Boolean!
+  # Duplicate Image Gallery
+  duplicateImageGallery(id: ID!): ImageGallery!
+  # Create new Site Navigation
+  createNavigation(
+    input: CreateNavigationInput!
+    locale: Locale = EN
+  ): Navigation!
+  # Update existing Site Navigation
+  updateNavigation(
+    id: ID!
+    input: UpdateNavigationInput!
+    locale: Locale = EN
+  ): Navigation!
+  # Delete Site Navigation
+  deleteNavigation(id: ID!): Boolean!
+  # Create new Rich Text
+  createRichText(
+    input: CreateRichTextInput!
+    locale: Locale = EN
+  ): RichText!
+  # Update existing Rich Text
+  updateRichText(
+    id: ID!
+    input: UpdateRichTextInput!
+    locale: Locale = EN
+  ): RichText!
+  # Delete Rich Text
+  deleteRichText(id: ID!): Boolean!
+  # Duplicate Rich Text
+  duplicateRichText(id: ID!): RichText!
+  # Create new Testimonials
+  createTestimonials(
+    input: CreateTestimonialsInput!
+    locale: Locale = EN
+  ): Testimonials!
+  # Update existing Testimonials
+  updateTestimonials(
+    id: ID!
+    input: UpdateTestimonialsInput!
+    locale: Locale = EN
+  ): Testimonials!
+  # Delete Testimonials
+  deleteTestimonials(id: ID!): Boolean!
+  # Duplicate Testimonials
+  duplicateTestimonials(id: ID!): Testimonials!
+  # Create new Video Embed
+  createVideoEmbed(
+    input: CreateVideoEmbedInput!
+    locale: Locale = EN
+  ): VideoEmbed!
+  # Update existing Video Embed
+  updateVideoEmbed(
+    id: ID!
+    input: UpdateVideoEmbedInput!
+    locale: Locale = EN
+  ): VideoEmbed!
+  # Delete Video Embed
+  deleteVideoEmbed(id: ID!): Boolean!
+  # Duplicate Video Embed
+  duplicateVideoEmbed(id: ID!): VideoEmbed!
+}
+
+# ========================================
+# BLUEPRINT METADATA TYPE
+# ========================================
+
+type ContentBlueprint {
+  id: ID!
+  name: String!
+  displayName: String!
+  description: String
+  blueprintType: BlueprintType!
+  allowMultiple: Boolean!
+  isSystem: Boolean!
+  icon: String
+  category: String!
+  fields: JSON!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

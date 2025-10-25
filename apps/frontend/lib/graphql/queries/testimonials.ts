@@ -4,20 +4,20 @@ export const GET_TESTIMONIALS = gql`
   query GetTestimonials($filter: TestimonialFilterInput, $limit: Int, $offset: Int) {
     testimonials(filter: $filter, limit: $limit, offset: $offset) {
       id
-      nameEn
-      nameAr
-      roleEn
-      roleAr
-      companyEn
-      companyAr
-      testimonialEn
-      testimonialAr
+      name
+      role
+      company
+      commentEn
+      commentAr
       rating
+      projectTitle
       projectType
-      avatarUrl
+      clientImage
+      projectImage
       locale
       featured
       published
+      reviewDate
       createdAt
       updatedAt
     }
@@ -28,20 +28,20 @@ export const GET_TESTIMONIAL = gql`
   query GetTestimonial($id: ID!) {
     testimonial(id: $id) {
       id
-      nameEn
-      nameAr
-      roleEn
-      roleAr
-      companyEn
-      companyAr
-      testimonialEn
-      testimonialAr
+      name
+      role
+      company
+      commentEn
+      commentAr
       rating
+      projectTitle
       projectType
-      avatarUrl
+      clientImage
+      projectImage
       locale
       featured
       published
+      reviewDate
       createdAt
       updatedAt
     }
@@ -52,18 +52,18 @@ export const GET_TESTIMONIALS_BY_PROJECT_TYPE = gql`
   query GetTestimonialsByProjectType($projectType: String!, $locale: String) {
     testimonialsByProjectType(projectType: $projectType, locale: $locale) {
       id
-      nameEn
-      nameAr
-      roleEn
-      roleAr
-      companyEn
-      companyAr
-      testimonialEn
-      testimonialAr
+      name
+      role
+      company
+      commentEn
+      commentAr
       rating
+      projectTitle
       projectType
-      avatarUrl
+      clientImage
+      projectImage
       featured
+      reviewDate
       createdAt
     }
   }

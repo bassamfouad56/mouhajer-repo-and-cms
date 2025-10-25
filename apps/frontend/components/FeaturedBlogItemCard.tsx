@@ -5,6 +5,7 @@ import PlusIcon from "./SVG/PlusIcon";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { BlogPost } from "@/lib/cms-types";
+import { getRandomBlogImage } from "@/lib/cms-images";
 
 type Props = {
   blog: BlogPost;
@@ -12,18 +13,27 @@ type Props = {
 
 const FeaturedBlogItemCard = ({ blog }: Props) => {
   const locale = useLocale() as 'en' | 'ar';
-  
+
   // Get localized values
   const title = blog.title?.[locale] || blog.title?.en || 'Untitled';
   const excerpt = blog.excerpt?.[locale] || blog.excerpt?.en || '';
   const slug = blog.slug?.[locale] || blog.slug?.en || blog.id;
-  const publishedDate = blog.publishedAt 
+  const publishedDate = blog.publishedAt
     ? new Date(blog.publishedAt).toLocaleDateString(locale === 'ar' ? 'ar-AE' : 'en-US', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
       })
     : null;
+
+  // Validate and get image URL - use CMS image if featuredImage is invalid
+  const isValidUrl = (url: string) => {
+    return url && (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:'));
+  };
+
+  const imageUrl = blog.featuredImage && isValidUrl(blog.featuredImage)
+    ? blog.featuredImage
+    : getRandomBlogImage();
 
   return (
     <Link href={`/blogs/${slug}`}>
@@ -55,17 +65,15 @@ const FeaturedBlogItemCard = ({ blog }: Props) => {
             </div>
           </div>
         )}
-        {blog.featuredImage && (
-          <div className="h-[35rem] w-full relative">
-            <Image
-              src={blog.featuredImage}
-              fill
-              sizes="(min-width: 1024px) 50vw, 90vw"
-              className="w-full h-full absolute object-cover"
-              alt={title}
-            />
-          </div>
-        )}
+        <div className="h-[35rem] w-full relative">
+          <Image
+            src={imageUrl}
+            fill
+            sizes="(min-width: 1024px) 50vw, 90vw"
+            className="w-full h-full absolute object-cover"
+            alt={title}
+          />
+        </div>
       </div>
     </Link>
   );

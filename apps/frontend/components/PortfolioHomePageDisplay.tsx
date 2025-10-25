@@ -81,11 +81,8 @@ const PortfolioHomePageDisplay = ({
             </Link>
           </div>
         </div>
-        <div className="2xl:px-16 hidden lg:block">
+        <div className="2xl:px-16">
           <PortfolioCarouselHomepage projectData={projectData} />
-        </div>
-        <div className="lg:hidden">
-          <PortfolioCarouselHomepageMobile projectData={projectData} projectCount={displayProjectCount} />
         </div>
       </div>
     </div>

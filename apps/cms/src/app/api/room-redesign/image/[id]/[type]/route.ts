@@ -4,11 +4,9 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import { readFile } from 'fs/promises';
 import { existsSync } from 'fs';
-
-const prisma = new PrismaClient();
 
 /**
  * GET /api/room-redesign/image/[id]/[type]

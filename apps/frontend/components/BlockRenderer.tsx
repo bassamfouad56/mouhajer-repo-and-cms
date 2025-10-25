@@ -30,21 +30,19 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
         .map((block) => {
           switch (block.type) {
             case 'hero_banner':
-              console.log('Hero banner block data:', block.data);
               // Handle multiple possible data structures
-              const title = block.data?.title?.[locale] || 
+              const title = block.data?.title?.[locale] ||
                            block.data?.[`title${locale.charAt(0).toUpperCase() + locale.slice(1)}`] ||
-                           block.data?.titleEn || 
-                           block.data?.titleAr || 
+                           block.data?.titleEn ||
+                           block.data?.titleAr ||
                            block.data?.text?.[locale] ||
                            '';
-              const subtitle = block.data?.subtitle?.[locale] || 
+              const subtitle = block.data?.subtitle?.[locale] ||
                               block.data?.[`subtitle${locale.charAt(0).toUpperCase() + locale.slice(1)}`] ||
-                              block.data?.subtitleEn || 
-                              block.data?.subtitleAr || 
+                              block.data?.subtitleEn ||
+                              block.data?.subtitleAr ||
                               block.data?.description?.[locale] ||
                               '';
-              console.log('Hero banner title/subtitle:', { title, subtitle, locale, rawData: block.data });
               return (
                 <HeroBanner
                   key={block.id}
@@ -118,17 +116,6 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
               const imageCount = block.data?.imageCount || 4;
               const imageMedia = media.filter((m: any) => m.type === 'image' && m.url);
 
-              console.log('[BlockRenderer] Company Description - Media Analysis:', {
-                totalMedia: media.length,
-                filteredImages: imageMedia.length,
-                requestedCount: imageCount,
-                mediaSample: media[0],
-                imageMediaSample: imageMedia[0],
-                mediaTypes: [...new Set(media.map((m: any) => m.type))],
-                mediaWithUrls: media.filter((m: any) => m.url).length,
-                mediaWithoutUrls: media.filter((m: any) => !m.url).length
-              });
-
               // Fisher-Yates shuffle for better randomization
               const shuffleArray = <T,>(array: T[]): T[] => {
                 const shuffled = [...array];
@@ -141,13 +128,6 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
 
               const shuffled = shuffleArray(imageMedia);
               const randomImages = shuffled.slice(0, Math.max(imageCount, 16)).map((m: any) => m.url);
-
-              console.log('[BlockRenderer] Random images selected:', {
-                count: randomImages.length,
-                urls: randomImages.slice(0, 4), // Log first 4 for brevity
-                firstUrl: randomImages[0],
-                allUnique: randomImages.length === new Set(randomImages).size
-              });
 
               // Pass random images array - AboutSectionHomePageCarousel will handle distribution to 4 positions
               const companyGallery = randomImages;
@@ -267,12 +247,13 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
                 desc_arabic: step.description?.ar || ''
               })) || [];
 
-              // Validate images
-              const mainImage = block.data?.mainImage || '/images/process/main.jpg';
-              const smallImage = block.data?.smallImage || '/images/process/small.jpg';
+              // Get images from CMS media library with 'process' tag or use block data
+              const processMedia = media?.filter((m: any) => m.tags?.includes('process')) || [];
+              const mainImage = block.data?.mainImage || processMedia[0]?.url || '';
+              const smallImage = block.data?.smallImage || processMedia[1]?.url || '';
 
-              // Only render if we have valid process steps
-              if (processSteps.length === 0) {
+              // Only render if we have valid process steps and images
+              if (processSteps.length === 0 || !mainImage) {
                 return null;
               }
 
@@ -296,11 +277,21 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
               );
 
             case 'featured_in':
+              // Get media from CMS library with 'press' or 'featured_in' tags, or use block data
+              const featuredInMedia = block.data?.logos && block.data.logos.length > 0
+                ? block.data.logos
+                : media?.filter((m: any) =>
+                    m.tags?.includes('press') ||
+                    m.tags?.includes('featured_in') ||
+                    m.tags?.includes('featured-in')
+                  ) || [];
+
               return (
                 <FeaturedIn
                   key={block.id}
                   locale={locale}
-                  media={block.data?.logos || []}
+                  media={featuredInMedia}
+                  title={block.data?.title?.[locale]}
                 />
               );
 

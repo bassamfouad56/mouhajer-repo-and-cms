@@ -12,8 +12,8 @@ export const serviceTypeDefs = gql`
     id: ID!
     titleEn: String!
     titleAr: String!
-    slugEn: String!
-    slugAr: String!
+    slugEn: String
+    slugAr: String
     descriptionEn: String!
     descriptionAr: String!
     shortDescriptionEn: String!

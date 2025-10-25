@@ -296,14 +296,28 @@ export default function BlockEditor({ block, blockType, onSave, onClose }: Block
 
         case 'gallery':
           // Handle both direct array and bilingual object structure
-          let galleryValue: string[] = [];
+          // Support both media objects {id, url, alt} and plain URL strings
+          let galleryValue: any[] = [];
           if (bilingual && lang) {
-            const bilingualValue = formData[fieldName] as Record<string, string[]>;
+            const bilingualValue = formData[fieldName] as Record<string, any[]>;
             galleryValue = Array.isArray(bilingualValue?.[lang]) ? bilingualValue[lang] : [];
           } else {
             galleryValue = Array.isArray(value) ? value : [];
           }
-          
+
+          // Normalize to get URL for display (handle both string URLs and media objects)
+          const getImageUrl = (item: any): string => {
+            if (typeof item === 'string') return item;
+            if (item && typeof item === 'object' && item.url) return item.url;
+            return '';
+          };
+
+          const getImageAlt = (item: any, index: number): string => {
+            if (typeof item === 'string') return `${fieldName} ${index + 1}`;
+            if (item && typeof item === 'object') return item.alt || item.name || `${fieldName} ${index + 1}`;
+            return `${fieldName} ${index + 1}`;
+          };
+
           return (
             <div className="space-y-3">
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
@@ -325,7 +339,7 @@ export default function BlockEditor({ block, blockType, onSave, onClose }: Block
                     Add Images
                   </button>
                   <p className="text-xs text-gray-500 mt-2">
-                    {fieldName === 'logos' ? 'Select company logos and media features' : 
+                    {fieldName === 'logos' ? 'Select company logos and media features' :
                      fieldName === 'clients' ? 'Select client logos and testimonials' :
                      'Select multiple images for this gallery'}
                   </p>
@@ -349,11 +363,11 @@ export default function BlockEditor({ block, blockType, onSave, onClose }: Block
                     </button>
                   </div>
                   <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-                    {galleryValue.map((img: string, index: number) => (
+                    {galleryValue.map((item: any, index: number) => (
                       <div key={index} className="relative group aspect-square">
                         <img
-                          src={img}
-                          alt={`${fieldName} ${index + 1}`}
+                          src={getImageUrl(item)}
+                          alt={getImageAlt(item, index)}
                           className="w-full h-full object-cover rounded-lg border border-gray-200 group-hover:border-gray-300 transition-colors"
                           onError={(e) => {
                             e.currentTarget.style.display = 'none';
@@ -378,8 +392,8 @@ export default function BlockEditor({ block, blockType, onSave, onClose }: Block
                             </svg>
                           </button>
                         </div>
-                        <div className="absolute bottom-1 left-1 right-1 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                          #{index + 1}
+                        <div className="absolute bottom-1 left-1 right-1 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity truncate">
+                          {getImageAlt(item, index)}
                         </div>
                       </div>
                     ))}
@@ -556,12 +570,22 @@ export default function BlockEditor({ block, blockType, onSave, onClose }: Block
           fileType="image"
           onSelect={(selectedMedia) => {
             if (currentField.type === 'gallery') {
-              // Handle gallery selection - replace existing with new selection
-              const urls = Array.isArray(selectedMedia) 
-                ? selectedMedia.map(m => m.url)
-                : [selectedMedia.url];
-              
-              handleFieldChange(currentField.name, urls, currentField.language, false);
+              // Handle gallery selection - save full media objects for proper rendering
+              const mediaObjects = Array.isArray(selectedMedia)
+                ? selectedMedia.map(m => ({
+                    id: m.id,
+                    url: m.url,
+                    alt: m.alt || m.filename,
+                    name: m.filename
+                  }))
+                : [{
+                    id: selectedMedia.id,
+                    url: selectedMedia.url,
+                    alt: selectedMedia.alt || selectedMedia.filename,
+                    name: selectedMedia.filename
+                  }];
+
+              handleFieldChange(currentField.name, mediaObjects, currentField.language, false);
             } else {
               // Handle single image selection
               const url = Array.isArray(selectedMedia) ? selectedMedia[0]?.url : selectedMedia.url;

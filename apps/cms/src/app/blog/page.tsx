@@ -461,6 +461,10 @@ export default function BlogPage() {
                         defaultValue={selectedPost?.title.en}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Blog post title in English"
+                        lang="en"
+                        spellCheck={true}
+                        autoCorrect="on"
+                        autoCapitalize="words"
                         required
                       />
                     </div>
@@ -472,6 +476,11 @@ export default function BlogPage() {
                         defaultValue={selectedPost?.title.ar}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="عنوان المقال بالعربية"
+                        dir="rtl"
+                        lang="ar"
+                        spellCheck={true}
+                        autoCorrect="on"
+                        autoCapitalize="words"
                         required
                       />
                     </div>
@@ -486,6 +495,10 @@ export default function BlogPage() {
                         defaultValue={selectedPost?.slug.en}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="blog-post-url-slug"
+                        lang="en"
+                        spellCheck={true}
+                        autoCorrect="on"
+                        autoCapitalize="none"
                       />
                     </div>
                     <div>
@@ -496,6 +509,11 @@ export default function BlogPage() {
                         defaultValue={selectedPost?.slug.ar}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="رابط-المقال-بالعربية"
+                        dir="rtl"
+                        lang="ar"
+                        spellCheck={true}
+                        autoCorrect="on"
+                        autoCapitalize="none"
                       />
                     </div>
                   </div>
@@ -509,6 +527,10 @@ export default function BlogPage() {
                         defaultValue={selectedPost?.excerpt.en}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Brief description of the blog post"
+                        lang="en"
+                        spellCheck={true}
+                        autoCorrect="on"
+                        autoCapitalize="sentences"
                         required
                       />
                     </div>
@@ -520,6 +542,11 @@ export default function BlogPage() {
                         defaultValue={selectedPost?.excerpt.ar}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="وصف مختصر للمقال"
+                        dir="rtl"
+                        lang="ar"
+                        spellCheck={true}
+                        autoCorrect="on"
+                        autoCapitalize="sentences"
                         required
                       />
                     </div>
@@ -557,6 +584,10 @@ export default function BlogPage() {
                         defaultValue={selectedPost?.category}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Design Trends"
+                        lang="en"
+                        spellCheck={true}
+                        autoCorrect="on"
+                        autoCapitalize="words"
                         required
                       />
                     </div>
@@ -568,6 +599,10 @@ export default function BlogPage() {
                         defaultValue={selectedPost?.author}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Author name"
+                        lang="en"
+                        spellCheck={true}
+                        autoCorrect="on"
+                        autoCapitalize="words"
                         required
                       />
                     </div>
@@ -603,6 +638,10 @@ export default function BlogPage() {
                       defaultValue={selectedPost?.tags.join(', ')}
                       className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       placeholder="interior design, trends, 2024 (comma separated)"
+                      lang="en"
+                      spellCheck={true}
+                      autoCorrect="on"
+                      autoCapitalize="none"
                     />
                     <p className="mt-1 text-xs text-gray-500">Separate tags with commas</p>
                   </div>

@@ -30,7 +30,12 @@ export const GET_SERVICES_STRING = `
         seoKeywordsAr
         targetLocations
         serviceArea
-        faqs
+        faqs {
+          questionEn
+          questionAr
+          answerEn
+          answerAr
+        }
         viewCount
         averageRating
         createdAt
@@ -71,7 +76,12 @@ export const GET_SERVICES = gql`
         seoKeywordsAr
         targetLocations
         serviceArea
-        faqs
+        faqs {
+          questionEn
+          questionAr
+          answerEn
+          answerAr
+        }
         viewCount
         averageRating
         createdAt
@@ -111,7 +121,12 @@ export const GET_SERVICE = gql`
       seoKeywordsAr
       targetLocations
       serviceArea
-      faqs
+      faqs {
+        questionEn
+        questionAr
+        answerEn
+        answerAr
+      }
       viewCount
       averageRating
       createdAt

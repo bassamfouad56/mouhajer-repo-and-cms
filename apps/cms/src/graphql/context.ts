@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { auth } from '@/lib/auth';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 export interface GraphQLContext {
   prisma: PrismaClient;

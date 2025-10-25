@@ -2,20 +2,20 @@ import { queryGraphQL } from '../graphql/server-client';
 
 export interface Testimonial {
   id: string;
-  nameEn: string;
-  nameAr: string | null;
-  roleEn: string;
-  roleAr: string | null;
-  companyEn: string | null;
-  companyAr: string | null;
-  testimonialEn: string;
-  testimonialAr: string | null;
+  name: string;
+  role: string | null;
+  company: string | null;
+  commentEn: string;
+  commentAr: string | null;
   rating: number;
+  projectTitle: string | null;
   projectType: string | null;
-  avatarUrl: string | null;
+  clientImage: string | null;
+  projectImage: string | null;
   locale: string;
   featured: boolean;
   published: boolean;
+  reviewDate: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -33,20 +33,20 @@ export async function getTestimonials(
     query GetTestimonials($filter: TestimonialFilterInput, $limit: Int, $offset: Int) {
       testimonials(filter: $filter, limit: $limit, offset: $offset) {
         id
-        nameEn
-        nameAr
-        roleEn
-        roleAr
-        companyEn
-        companyAr
-        testimonialEn
-        testimonialAr
+        name
+        role
+        company
+        commentEn
+        commentAr
         rating
+        projectTitle
         projectType
-        avatarUrl
+        clientImage
+        projectImage
         locale
         featured
         published
+        reviewDate
         createdAt
         updatedAt
       }
@@ -88,20 +88,20 @@ export async function getTestimonial(id: string): Promise<Testimonial | null> {
     query GetTestimonial($id: ID!) {
       testimonial(id: $id) {
         id
-        nameEn
-        nameAr
-        roleEn
-        roleAr
-        companyEn
-        companyAr
-        testimonialEn
-        testimonialAr
+        name
+        role
+        company
+        commentEn
+        commentAr
         rating
+        projectTitle
         projectType
-        avatarUrl
+        clientImage
+        projectImage
         locale
         featured
         published
+        reviewDate
         createdAt
         updatedAt
       }

@@ -260,3 +260,94 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+/**
+ * @swagger
+ * /api/pages:
+ *   delete:
+ *     summary: Delete one or multiple pages
+ *     description: Delete a single page by ID or multiple pages by providing an array of IDs
+ *     tags: [Pages]
+ *     security:
+ *       - sessionAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         schema:
+ *           type: string
+ *         description: Single page ID to delete
+ *       - in: query
+ *         name: ids
+ *         schema:
+ *           type: string
+ *         description: Comma-separated list of page IDs to delete
+ *     responses:
+ *       200:
+ *         description: Page(s) deleted successfully
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
+ *       404:
+ *         description: Page not found
+ *       500:
+ *         description: Server error
+ */
+export async function DELETE(request: NextRequest) {
+  try {
+    const session = await auth();
+    if (!session || session.user.role !== 'admin') {
+      return corsResponse(
+        { error: 'Unauthorized - Admin access required' },
+        { status: 401 }
+      );
+    }
+
+    const { searchParams } = new URL(request.url);
+    const singleId = searchParams.get('id');
+    const multipleIds = searchParams.get('ids');
+
+    if (!singleId && !multipleIds) {
+      return corsResponse(
+        { error: 'Either id or ids parameter is required' },
+        { status: 400 }
+      );
+    }
+
+    let idsToDelete: string[] = [];
+
+    if (singleId) {
+      idsToDelete = [singleId];
+    } else if (multipleIds) {
+      idsToDelete = multipleIds.split(',').map(id => id.trim());
+    }
+
+    // Delete blocks associated with the pages first (cascading delete)
+    await prisma.pageBlock.deleteMany({
+      where: {
+        pageId: {
+          in: idsToDelete
+        }
+      }
+    });
+
+    // Delete the pages
+    const result = await prisma.page.deleteMany({
+      where: {
+        id: {
+          in: idsToDelete
+        }
+      }
+    });
+
+    return corsResponse({
+      message: `Successfully deleted ${result.count} page(s)`,
+      deletedCount: result.count,
+      deletedIds: idsToDelete
+    });
+  } catch (error) {
+    console.error('Error deleting pages:', error);
+    return corsResponse(
+      { error: 'Failed to delete pages' },
+      { status: 500 }
+    );
+  }
+}

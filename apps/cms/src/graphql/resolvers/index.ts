@@ -16,6 +16,7 @@ import { faqResolvers } from './faq';
 import { teamResolvers } from './team';
 import { pricingResolvers } from './pricing';
 import { caseStudyResolvers } from './case-studies';
+import { initializeBlueprintResolvers } from './blueprints';
 
 // Custom DateTime scalar
 const dateTimeScalar = new GraphQLScalarType({
@@ -59,6 +60,63 @@ const jsonScalar = new GraphQLScalarType({
   },
 });
 
+// Export function to initialize resolvers (now async for blueprint resolvers)
+export async function initializeResolvers(prisma: any) {
+  // Initialize dynamic blueprint resolvers
+  const blueprintResolvers = await initializeBlueprintResolvers(prisma);
+
+  return {
+    DateTime: dateTimeScalar,
+    JSON: jsonScalar,
+
+    Query: {
+      ...projectResolvers.Query,
+      ...serviceResolvers.Query,
+      ...blogResolvers.Query,
+      ...settingsResolvers.Query,
+      ...crmResolvers.Query,
+      ...pageResolvers.Query,
+      ...mediaResolvers.Query,
+      ...navigationResolvers.Query,
+      ...userResolvers.Query,
+      ...adResolvers.Query,
+      ...roomRedesignResolvers.Query,
+      ...activityResolvers.Query,
+      ...testimonialResolvers.Query,
+      ...faqResolvers.Query,
+      ...teamResolvers.Query,
+      ...pricingResolvers.Query,
+      ...caseStudyResolvers.Query,
+      ...blueprintResolvers.Query, // Dynamic blueprint queries
+    },
+
+    Mutation: {
+      ...projectResolvers.Mutation,
+      ...serviceResolvers.Mutation,
+      ...blogResolvers.Mutation,
+      ...settingsResolvers.Mutation,
+      ...crmResolvers.Mutation,
+      ...pageResolvers.Mutation,
+      ...mediaResolvers.Mutation,
+      ...navigationResolvers.Mutation,
+      ...userResolvers.Mutation,
+      ...adResolvers.Mutation,
+      ...roomRedesignResolvers.Mutation,
+      ...activityResolvers.Mutation,
+      ...testimonialResolvers.Mutation,
+      ...faqResolvers.Mutation,
+      ...teamResolvers.Mutation,
+      ...pricingResolvers.Mutation,
+      ...caseStudyResolvers.Mutation,
+      ...blueprintResolvers.Mutation, // Dynamic blueprint mutations
+    },
+
+    NavigationItem: navigationResolvers.NavigationItem,
+  };
+}
+
+// For backwards compatibility, export static resolvers
+// (These will be replaced with dynamic resolvers at runtime)
 export const resolvers = {
   DateTime: dateTimeScalar,
   JSON: jsonScalar,
