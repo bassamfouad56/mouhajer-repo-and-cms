@@ -4,9 +4,17 @@ import React, { useState, useEffect } from 'react';
 
 interface Block {
   id: string;
-  type: string;
-  data: any;
+  type?: string;
+  data?: any;
   order?: number;
+  // BlueprintInstance properties
+  blueprint?: {
+    name?: string;
+    displayName?: string;
+  };
+  blueprintId?: string;
+  dataEn?: any;
+  dataAr?: any;
 }
 
 interface DraggableBlocksProps {
@@ -91,10 +99,20 @@ export default function DraggableBlocks({
     setDragOverIndex(null);
   };
 
-  const getBlockIcon = (type: string) => {
+  const getBlockType = (block: Block): string => {
+    // For BlueprintInstance blocks
+    if (block.blueprint?.name) return block.blueprint.name;
+    // For regular blocks
+    return block.type || 'unknown';
+  };
+
+  const getBlockIcon = (block: Block) => {
+    const type = getBlockType(block);
     const icons: { [key: string]: string } = {
       hero: '🏔️',
+      hero_banner: '🏔️',
       text: '📝',
+      text_content: '📝',
       image: '🖼️',
       video: '🎥',
       gallery: '🎨',
@@ -103,37 +121,60 @@ export default function DraggableBlocks({
       cta: '🎯',
       faq: '❓',
       contact: '📧',
+      contact_form: '📧',
       map: '🗺️',
       team: '👥',
       pricing: '💰',
       services: '🛠️',
+      services_showcase: '🛠️',
       portfolio: '📁',
+      portfolio_section: '📁',
+      portfolio_display_home: '📁',
       blog: '📰',
+      blog_section: '📰',
       rich_text: '📄',
       text_image_split: '🔀',
       services_grid: '⚡',
       process: '🔄',
-      values: '💎'
+      process_section: '🔄',
+      values: '💎',
+      about_section: '👥',
+      company_description_home: '🏢',
+      stats_section: '📊',
+      animated_headline: '✨',
+      separator: '➖',
+      awards_section: '🏆',
+      featured_in: '⭐',
+      clients_section: '🤝',
+      instagram_section: '📷'
     };
     return icons[type] || '📦';
   };
 
   const getBlockTitle = (block: Block) => {
-    // Try to get a title from block data
-    if (block.data?.title) return block.data.title;
-    if (block.data?.heading) return block.data.heading;
-    if (block.data?.name) return block.data.name;
+    // For BlueprintInstance blocks
+    if (block.blueprint?.displayName) return block.blueprint.displayName;
+
+    // Try to get a title from data (works for both regular and BlueprintInstance)
+    const data = block.dataEn || block.data || {};
+    if (data.title) return data.title;
+    if (data.heading) return data.heading;
+    if (data.name) return data.name;
 
     // Format block type as title
-    return block.type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    const type = getBlockType(block);
+    return type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   };
 
   const getBlockDescription = (block: Block) => {
-    if (block.data?.description) return block.data.description;
-    if (block.data?.subtitle) return block.data.subtitle;
-    if (block.data?.text) {
-      const text = block.data.text;
-      return text.length > 100 ? text.substring(0, 100) + '...' : text;
+    // Get data from either dataEn or data
+    const data = block.dataEn || block.data || {};
+
+    if (data.description) return data.description;
+    if (data.subtitle) return data.subtitle;
+    if (data.text) {
+      const text = data.text;
+      return typeof text === 'string' && text.length > 100 ? text.substring(0, 100) + '...' : text;
     }
     return null;
   };
@@ -196,7 +237,7 @@ export default function DraggableBlocks({
 
               {/* Block Icon */}
               <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg flex items-center justify-center mr-4">
-                <span className="text-2xl">{getBlockIcon(block.type)}</span>
+                <span className="text-2xl">{getBlockIcon(block)}</span>
               </div>
 
               {/* Block Content */}
@@ -213,7 +254,7 @@ export default function DraggableBlocks({
                     )}
                     <div className="flex items-center gap-3 mt-2">
                       <span className="text-xs bg-gray-100 px-2 py-1 rounded-lg font-medium">
-                        {block.type}
+                        {getBlockType(block)}
                       </span>
                       <span className="text-xs text-gray-500">
                         Position: {index + 1}
