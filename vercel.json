@@ -1,0 +1,14 @@
+{
+  "buildCommand": "cd apps/cms && npm run build",
+  "installCommand": "npm install",
+  "devCommand": "cd apps/cms && npm run dev",
+  "framework": "nextjs",
+  "outputDirectory": "apps/cms/.next",
+  "rootDirectory": ".",
+  "regions": ["iad1"],
+  "functions": {
+    "apps/cms/src/app/api/**/*.ts": {
+      "maxDuration": 60
+    }
+  }
+}
