@@ -12,7 +12,22 @@
       "Bash(npm run dev:cms-only:*)",
       "Bash(curl:*)",
       "Bash(npx tsc:*)",
-      "Bash(npx prisma generate)"
+      "Bash(npx prisma generate)",
+      "Bash(npm install:*)",
+      "Read(//Users/bassamfouad/Desktop/website/**)",
+      "Bash(vercel --version:*)",
+      "Bash(./deploy-production.sh)",
+      "Bash(npm run build:*)",
+      "Bash(vercel:*)",
+      "Bash(chmod:*)",
+      "Bash(./setup-cms-env.sh)",
+      "Bash(./setup-frontend-env.sh:*)",
+      "Bash(cat:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git reset:*)"
     ],
     "deny": [],
     "ask": []

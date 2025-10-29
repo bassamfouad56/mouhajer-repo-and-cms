@@ -12,7 +12,7 @@ type Props = {
   locale: string;
 };
 
-const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
+const ContactFormFormUpdated = ({ setSteps, steps, locale }: Props) => {
   const [isPending, startTransition] = useTransition();
 
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -173,6 +173,8 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
             />
           </div>
         </div>
+
+        {/* New Custom Phone Input with Flags */}
         <PhoneInputWithFlags
           value={phoneNumber}
           onChange={(value) => setPhoneNumber(value)}
@@ -180,6 +182,7 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
           locale={locale}
           required={true}
         />
+
         <div className="grid 2xl:grid-cols-2 gap-5">
           <div
             className="py-5 px-4 border-[#202020] flex items-center justify-between col-span-1 font-Satoshi font-light border border-opacity-[20%]"
@@ -345,4 +348,4 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
   );
 };
 
-export default ContactFormForm;
+export default ContactFormFormUpdated;

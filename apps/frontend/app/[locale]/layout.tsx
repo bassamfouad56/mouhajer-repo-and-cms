@@ -4,8 +4,10 @@ import Script from 'next/script';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { dataFetcher } from '@/lib/data-fetcher';
 import { fetchNavigation } from '@/lib/navigation-fetcher';
+import WhatsappComp from '@/components/WhatsappComp';
 
 const schnyder = localFont({
   src: '../../public/fonts/SchnyderS-Ligh.otf',
@@ -114,6 +116,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {children}
 
         <Footer navigationItems={footerNavigationItems} />
+
+        {/* WhatsApp Floating Button */}
+        {/* <WhatsAppFloat phoneNumber="971521341482" position="bottom-right" showAfterSeconds={1} /> */}
+
+        <WhatsappComp />
       </body>
     </html>
   );

@@ -33,6 +33,9 @@ try {
   blueprintTypeDefs = gql`
     # Blueprint schema placeholder
     # Run: npm run generate:graphql to generate blueprint types
+    type BlueprintPlaceholder {
+      id: ID
+    }
   `;
 }
 

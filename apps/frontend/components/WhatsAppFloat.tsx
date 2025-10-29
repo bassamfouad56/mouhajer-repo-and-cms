@@ -11,7 +11,7 @@ interface WhatsAppFloatProps {
 }
 
 export default function WhatsAppFloat({
-  phoneNumber = "971501234567", // Replace with actual number
+  phoneNumber = "971521341482", // Mouhajer WhatsApp number
   position = "bottom-right",
   showAfterSeconds = 3
 }: WhatsAppFloatProps) {

@@ -115,7 +115,7 @@ export default function PagesPage() {
           const titleData = await titleResponse.json();
 
           // Translate the English slug to Arabic (translate the words, not just the title)
-          const slugToTranslate = newPage.slugEn.replace(/-/g, ' '); // Convert "about-us" to "about us"
+          const slugToTranslate = (newPage.slugEn || '').replace(/-/g, ' '); // Convert "about-us" to "about us"
           const slugResponse = await fetch('/api/translate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -130,7 +130,7 @@ export default function PagesPage() {
             const slugData = await slugResponse.json();
             // Create Arabic slug from translated text
             // Keep Arabic characters in the slug for better SEO
-            arabicSlug = slugData.translatedText
+            arabicSlug = (slugData.translatedText || '')
               .toLowerCase()
               .trim()
               .replace(/\s+/g, '-')           // Replace spaces with hyphens
@@ -141,8 +141,8 @@ export default function PagesPage() {
 
           setNewPage(prev => ({
             ...prev,
-            titleAr: titleData.translatedText,
-            slugAr: arabicSlug,
+            titleAr: titleData.translatedText || '',
+            slugAr: arabicSlug || '',
           }));
         }
       } catch (error) {
@@ -219,7 +219,7 @@ export default function PagesPage() {
         if (section.startsWith('#')) {
           // It's a heading with content
           const lines = section.split('\n');
-          const heading = lines[0].replace(/^#+\s*/, '');
+          const heading = (lines[0] || '').replace(/^#+\s*/, '');
           const text = lines.slice(1).join('\n').trim();
 
           blocks.push({
@@ -826,12 +826,12 @@ export default function PagesPage() {
                     <div className="space-y-6">
                       {/* Real-time SEO Analyzer */}
                       <SEOAnalyzer
-                        titleEn={seoConfig.metaTitleEn || selectedPage?.title?.en}
-                        titleAr={seoConfig.metaTitleAr || selectedPage?.title?.ar}
-                        descriptionEn={seoConfig.metaDescEn || selectedPage?.description?.en}
-                        descriptionAr={seoConfig.metaDescAr || selectedPage?.description?.ar}
+                        titleEn={seoConfig.metaTitleEn || selectedPage?.titleEn}
+                        titleAr={seoConfig.metaTitleAr || selectedPage?.titleAr}
+                        descriptionEn={seoConfig.metaDescEn || selectedPage?.descriptionEn}
+                        descriptionAr={seoConfig.metaDescAr || selectedPage?.descriptionAr}
                         content=""
-                        slug={selectedPage?.slug?.en}
+                        slug={selectedPage?.slugEn}
                         keywords={seoConfig.keywords}
                       />
 
@@ -847,7 +847,7 @@ export default function PagesPage() {
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Meta Title (English) *
                               <span className="ml-2 text-xs text-gray-500">
-                                {seoConfig.metaTitleEn.length}/60
+                                {(seoConfig.metaTitleEn || '').length}/60
                               </span>
                             </label>
                             <input
@@ -866,7 +866,7 @@ export default function PagesPage() {
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Meta Title (Arabic) *
                               <span className="ml-2 text-xs text-gray-500">
-                                {seoConfig.metaTitleAr.length}/60
+                                {(seoConfig.metaTitleAr || '').length}/60
                               </span>
                             </label>
                             <input
@@ -887,7 +887,7 @@ export default function PagesPage() {
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Meta Description (English) *
                               <span className="ml-2 text-xs text-gray-500">
-                                {seoConfig.metaDescEn.length}/155
+                                {(seoConfig.metaDescEn || '').length}/155
                               </span>
                             </label>
                             <textarea
@@ -906,7 +906,7 @@ export default function PagesPage() {
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Meta Description (Arabic) *
                               <span className="ml-2 text-xs text-gray-500">
-                                {seoConfig.metaDescAr.length}/155
+                                {(seoConfig.metaDescAr || '').length}/155
                               </span>
                             </label>
                             <textarea

@@ -109,3 +109,6 @@ Desktop.ini
 # Development Scripts
 logs/
 .dev-pids
+
+# Setup scripts with sensitive data
+setup-*.sh
