@@ -14,6 +14,7 @@ import SEOAnalyzer from '@/components/SEOAnalyzer';
 import LanguageToggle, { AnimatedLanguageToggle } from '@/components/LanguageToggle';
 import DraggableBlocks from '@/components/DraggableBlocks';
 import PageListWithDelete from '@/components/PageListWithDelete';
+import BlockEditorModal from '@/components/BlockEditorModal';
 
 interface SEOConfig {
   // Basic SEO
@@ -67,6 +68,8 @@ export default function PagesPage() {
   const [aiGeneratedContent, setAiGeneratedContent] = useState<any>(null);
   const [visualComposerRef, setVisualComposerRef] = useState<any>(null);
   const [pageBlocks, setPageBlocks] = useState<any[]>([]);
+  const [showBlockEditor, setShowBlockEditor] = useState(false);
+  const [editingBlock, setEditingBlock] = useState<any>(null);
   const [seoConfig, setSeoConfig] = useState<SEOConfig>({
     metaTitleEn: '',
     metaTitleAr: '',
@@ -762,8 +765,8 @@ export default function PagesPage() {
                           }
                         }}
                         onEdit={(block) => {
-                          // TODO: Open block editor
-                          alert('Block editing coming soon!');
+                          setEditingBlock(block);
+                          setShowBlockEditor(true);
                         }}
                         onDelete={async (blockId) => {
                           try {
@@ -1407,6 +1410,50 @@ export default function PagesPage() {
           onGenerate={(content) => {
             setAiGeneratedContent(content);
             setShowAIGenerator(false);
+          }}
+        />
+      )}
+
+      {/* Block Editor Modal */}
+      {showBlockEditor && editingBlock && (
+        <BlockEditorModal
+          block={editingBlock}
+          isOpen={showBlockEditor}
+          onClose={() => {
+            setShowBlockEditor(false);
+            setEditingBlock(null);
+          }}
+          onSave={async (updatedBlock) => {
+            try {
+              // Update the block in the local state
+              const updatedBlocks = pageBlocks.map(b =>
+                b.id === updatedBlock.id ? updatedBlock : b
+              );
+              setPageBlocks(updatedBlocks);
+
+              // Save to the server
+              if (selectedPage) {
+                const response = await fetch(`/api/pages/${selectedPage.id}/components`, {
+                  method: 'PUT',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ components: updatedBlocks }),
+                });
+
+                if (response.ok) {
+                  // Close the modal
+                  setShowBlockEditor(false);
+                  setEditingBlock(null);
+
+                  // Show success message (optional)
+                  alert('✅ Block updated successfully!');
+                } else {
+                  throw new Error('Failed to save block');
+                }
+              }
+            } catch (error) {
+              console.error('Error updating block:', error);
+              alert('❌ Error saving block. Please try again.');
+            }
           }}
         />
       )}
