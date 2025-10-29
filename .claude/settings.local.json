@@ -27,7 +27,10 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(npm run build:cms:*)",
+      "Bash(git restore:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [],
     "ask": []
