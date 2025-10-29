@@ -3,18 +3,19 @@
 import React, { useState, useEffect } from 'react';
 import { X, Save, Globe, Eye, EyeOff } from 'lucide-react';
 import { FieldDefinition, getBlockFieldDefinition } from '@/lib/block-field-definitions';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
-// Dynamic import for rich text editor
-const ReactQuill = dynamic(() => import('react-quill').then(mod => {
-  // Import CSS only when the component is loaded
-  import('react-quill/dist/quill.snow.css');
-  return mod;
-}), {
-  ssr: false,
-  loading: () => <div className="h-32 bg-gray-100 animate-pulse rounded" />
-});
+// Rich text editor component (simplified for now to avoid deployment issues)
+const RichTextEditor = ({ value, onChange }: { value: string; onChange: (val: string) => void }) => {
+  return (
+    <textarea
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[150px]"
+      placeholder="Enter rich text content..."
+    />
+  );
+};
 
 interface BlockEditorModalProps {
   isOpen: boolean;
@@ -196,20 +197,9 @@ export default function BlockEditorModal({
       case 'richtext':
         return (
           <div className="border border-gray-300 rounded-lg overflow-hidden">
-            <ReactQuill
+            <RichTextEditor
               value={value || ''}
               onChange={onChange}
-              theme="snow"
-              modules={{
-                toolbar: [
-                  [{ 'header': [1, 2, 3, false] }],
-                  ['bold', 'italic', 'underline', 'strike'],
-                  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                  [{ 'align': [] }],
-                  ['link', 'image'],
-                  ['clean']
-                ]
-              }}
             />
           </div>
         );
