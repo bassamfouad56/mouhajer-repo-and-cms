@@ -7,8 +7,14 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 // Dynamic import for rich text editor
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
+const ReactQuill = dynamic(() => import('react-quill').then(mod => {
+  // Import CSS only when the component is loaded
+  import('react-quill/dist/quill.snow.css');
+  return mod;
+}), {
+  ssr: false,
+  loading: () => <div className="h-32 bg-gray-100 animate-pulse rounded" />
+});
 
 interface BlockEditorModalProps {
   isOpen: boolean;
