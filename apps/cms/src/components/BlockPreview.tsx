@@ -442,7 +442,7 @@ export default function BlockPreview({ block, size = 'small' }: BlockPreviewProp
       {renderBlockPreview()}
       {/* Hover tooltip for block type */}
       <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-        {block.type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+        {(block.type || 'unknown').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
       </div>
     </div>
   );

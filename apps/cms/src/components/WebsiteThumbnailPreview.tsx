@@ -100,7 +100,7 @@ export default function WebsiteThumbnailPreview({ block, size = 'small' }: Websi
     <div className={`${config.container} bg-gradient-to-br from-gray-100 to-gray-200 border border-gray-300 rounded-sm overflow-hidden flex items-center justify-center`}>
       <div className="text-center">
         <div className="text-[6px] font-medium text-gray-600 mb-0.5 leading-tight">
-          {block.type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+          {(block.type || 'unknown').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
         </div>
         <div className="w-3 h-0.5 bg-blue-400 rounded mx-auto opacity-60"></div>
       </div>
@@ -141,7 +141,7 @@ export default function WebsiteThumbnailPreview({ block, size = 'small' }: Websi
       {/* Enhanced hover tooltip */}
       <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
         <div className="font-medium">
-          {block.type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+          {(block.type || 'unknown').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
         </div>
         <div className="text-xs opacity-75">
           Live from Mouhajer Website

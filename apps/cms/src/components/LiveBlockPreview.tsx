@@ -114,7 +114,7 @@ export default function LiveBlockPreview({ block, size = 'small', fallback = tru
     <div className={`${config.container} bg-gray-100 border border-gray-300 rounded-sm overflow-hidden flex items-center justify-center`}>
       <div className="text-center">
         <div className="text-[6px] font-medium text-gray-600 mb-0.5">
-          {block.type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+          {(block.type || 'unknown').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
         </div>
         <div className="w-2 h-1 bg-blue-300 rounded mx-auto"></div>
       </div>
@@ -158,7 +158,7 @@ export default function LiveBlockPreview({ block, size = 'small', fallback = tru
 
       {/* Hover tooltip */}
       <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-        {block.type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+        {(block.type || 'unknown').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
         <br />
         <span className="text-xs opacity-75">Live from Mouhajer</span>
       </div>
