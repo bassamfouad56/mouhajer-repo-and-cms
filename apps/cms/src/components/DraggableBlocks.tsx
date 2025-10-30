@@ -47,16 +47,23 @@ export default function DraggableBlocks({
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/html', e.currentTarget.innerHTML);
 
+    // Capture element reference before setTimeout (React synthetic events are pooled)
+    const element = e.currentTarget as HTMLElement;
+
     // Add dragging class after a small delay to avoid visual glitch
     setTimeout(() => {
-      const element = e.currentTarget as HTMLElement;
-      element.classList.add('opacity-50');
+      if (element) {
+        element.classList.add('opacity-50');
+      }
     }, 0);
   };
 
   const handleDragEnd = (e: React.DragEvent) => {
+    // Capture element reference immediately (before any async operations)
     const element = e.currentTarget as HTMLElement;
-    element.classList.remove('opacity-50');
+    if (element) {
+      element.classList.remove('opacity-50');
+    }
     setDraggedBlock(null);
     setDragOverIndex(null);
     setIsDragging(false);
@@ -151,15 +158,32 @@ export default function DraggableBlocks({
     return icons[type] || '📦';
   };
 
+  // Helper to extract locale-specific text from potentially bilingual fields
+  const extractText = (value: any, locale: 'EN' | 'AR'): string | null => {
+    if (value === null || value === undefined) return null;
+
+    // If it's already a string, return it
+    if (typeof value === 'string') return value;
+
+    // If it's an object with en/ar keys, extract the appropriate language
+    if (typeof value === 'object' && value !== null) {
+      if ('en' in value || 'ar' in value) {
+        const key = locale === 'EN' ? 'en' : 'ar';
+        return value[key] || value.en || value.ar || null;
+      }
+    }
+
+    return null;
+  };
+
   const getBlockTitle = (block: Block) => {
     // For BlueprintInstance blocks
     if (block.blueprint?.displayName) return block.blueprint.displayName;
 
     // Try to get a title from data (works for both regular and BlueprintInstance)
     const data = block.dataEn || block.data || {};
-    if (data.title) return data.title;
-    if (data.heading) return data.heading;
-    if (data.name) return data.name;
+    const title = extractText(data.title, locale) || extractText(data.heading, locale) || extractText(data.name, locale);
+    if (title) return title;
 
     // Format block type as title
     const type = getBlockType(block);
@@ -170,12 +194,14 @@ export default function DraggableBlocks({
     // Get data from either dataEn or data
     const data = block.dataEn || block.data || {};
 
-    if (data.description) return data.description;
-    if (data.subtitle) return data.subtitle;
-    if (data.text) {
-      const text = data.text;
-      return typeof text === 'string' && text.length > 100 ? text.substring(0, 100) + '...' : text;
+    const description = extractText(data.description, locale) || extractText(data.subtitle, locale);
+    if (description) return description;
+
+    const text = extractText(data.text, locale);
+    if (text) {
+      return text.length > 100 ? text.substring(0, 100) + '...' : text;
     }
+
     return null;
   };
 

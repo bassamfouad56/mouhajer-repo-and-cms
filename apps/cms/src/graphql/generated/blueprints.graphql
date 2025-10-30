@@ -30,14 +30,23 @@ type Asset {
 }
 
 
-# System blueprint for media files (images, videos, documents)
-type Asset {
+# Create custom forms with dynamic fields (contact, inquiry, registration, etc.)
+type Form {
   id: ID!
-  file: Asset!
-  altEn: String
-  altAr: String
-  captionEn: String
-  captionAr: String
+  formNameEn: String
+  formNameAr: String
+  formTitleEn: String
+  formTitleAr: String
+  formDescriptionEn: String
+  formDescriptionAr: String
+  submitButtonTextEn: String
+  submitButtonTextAr: String
+  successMessageEn: String
+  successMessageAr: String
+  fields: JSON!
+  notifications: JSON
+  settings: JSON
+  crmIntegration: JSON
 
   # Metadata
   status: String!
@@ -46,16 +55,105 @@ type Asset {
   updatedAt: DateTime!
 }
 
-# Prominent CTA section with heading, description, and button
-type CTASection {
+# Company information with gallery
+type about_section {
   id: ID!
-  headingEn: String
-  headingAr: String
+  title: String!
+  subtitle: String
+  description: String!
+  image: String
+  gallery: String
+  yearsOfExperience: String
+  experienceLabel: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Scrolling animated text banner
+type animated_headline {
+  id: ID!
+  textEn: String
+  textAr: String
+  speed: Int
+  blackened: Boolean
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Showcase awards and achievements
+type awards_section {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  subtitleEn: String
+  subtitleAr: String
+  awards: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Display featured blog posts
+type blog_section {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  maxPosts: Int
+  showFeaturedOnly: Boolean
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Display client logos and testimonials
+type clients_section {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  subtitleEn: String
+  subtitleAr: String
+  showLogos: Boolean
+  showTestimonials: Boolean
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# About section with carousel for homepage
+type company_description_home {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  subtitleEn: String
+  subtitleAr: String
   descriptionEn: String
   descriptionAr: String
-  primaryButton: JSON
-  secondaryButton: JSON
-  backgroundColor: String
+  yearsOfExperience: Int
+  experienceLabelEn: String
+  experienceLabelAr: String
+  gallery: [Asset!]
+  imageCount: Int
+  showCta: Boolean
+  ctaTextEn: String
+  ctaTextAr: String
+  ctaLink: String
 
   # Metadata
   status: String!
@@ -64,12 +162,16 @@ type CTASection {
   updatedAt: DateTime!
 }
 
-# Frequently Asked Questions accordion
-type FAQSection {
+# Contact form section
+type contact_form {
   id: ID!
   titleEn: String
   titleAr: String
-  items: JSON
+  subtitleEn: String
+  subtitleAr: String
+  showPhone: Boolean
+  showEmail: Boolean
+  showAddress: Boolean
 
   # Metadata
   status: String!
@@ -78,47 +180,12 @@ type FAQSection {
   updatedAt: DateTime!
 }
 
-# System blueprint for site footer
-type Footer {
-  id: ID!
-  columns: JSON
-  copyrightEn: String
-  copyrightAr: String
-  socialLinks: JSON
-
-  # Metadata
-  status: String!
-  publishedAt: DateTime
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-# Large banner section with heading, subheading, image, and CTA
-type HeroBanner {
-  id: ID!
-  headingEn: String
-  headingAr: String
-  subheadingEn: String
-  subheadingAr: String
-  backgroundImage: Asset!
-  ctaButton: JSON
-  alignment: String
-
-  # Metadata
-  status: String!
-  publishedAt: DateTime
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-# Responsive image gallery with multiple layout options
-type ImageGallery {
+# Display logos of media features or partners
+type featured_in {
   id: ID!
   titleEn: String
   titleAr: String
-  images: [Asset!]!
-  layout: String
-  columns: Int
+  logos: String
 
   # Metadata
   status: String!
@@ -127,38 +194,18 @@ type ImageGallery {
   updatedAt: DateTime!
 }
 
-# System blueprint for site navigation menu
-type Navigation {
-  id: ID!
-  items: JSON
-
-  # Metadata
-  status: String!
-  publishedAt: DateTime
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-# WYSIWYG text editor with formatting options
-type RichText {
-  id: ID!
-  contentEn: String
-  contentAr: String
-  alignment: String
-
-  # Metadata
-  status: String!
-  publishedAt: DateTime
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-# Customer testimonials slider
-type Testimonials {
+# Main banner with background image/video and text overlay
+type hero_banner {
   id: ID!
   titleEn: String
   titleAr: String
-  items: JSON
+  subtitleEn: String
+  subtitleAr: String
+  backgroundImage: Asset
+  backgroundVideo: String
+  ctaTextEn: String
+  ctaTextAr: String
+  ctaLink: String
 
   # Metadata
   status: String!
@@ -167,14 +214,13 @@ type Testimonials {
   updatedAt: DateTime!
 }
 
-# Embed videos from YouTube, Vimeo, or other platforms
-type VideoEmbed {
+# Display Instagram posts or gallery
+type instagram_section {
   id: ID!
   titleEn: String
   titleAr: String
-  videoUrl: String!
-  thumbnail: Asset
-  aspectRatio: String
+  username: String
+  maxPosts: Int
 
   # Metadata
   status: String!
@@ -183,259 +229,616 @@ type VideoEmbed {
   updatedAt: DateTime!
 }
 
-
-input AssetFilterInput {
-  status: String
-  publishedAt_gte: DateTime
-  publishedAt_lte: DateTime
-  search: String
-}
-
-input CreateAssetInput {
-  file: Asset!
-  altEn: String
-  altAr: String
-  captionEn: String
-  captionAr: String
-  status: String
-  publishedAt: DateTime
-}
-
-input UpdateAssetInput {
-  file: Asset
-  altEn: String
-  altAr: String
-  captionEn: String
-  captionAr: String
-  status: String
-  publishedAt: DateTime
-}
-
-input CTASectionFilterInput {
-  status: String
-  publishedAt_gte: DateTime
-  publishedAt_lte: DateTime
-  search: String
-}
-
-input CreateCTASectionInput {
-  headingEn: String!
-  headingAr: String!
+# Portfolio showcase for homepage
+type portfolio_display_home {
+  id: ID!
+  headlineEn: String
+  headlineAr: String
+  sectionTitleEn: String
+  sectionTitleAr: String
   descriptionEn: String
   descriptionAr: String
-  primaryButton: JSON
-  secondaryButton: JSON
-  backgroundColor: String
+  projectCountEn: String
+  projectCountAr: String
+  showFeatured: Boolean
+  maxItems: Int
+  showCta: Boolean
+  ctaTextEn: String
+  ctaTextAr: String
+  ctaLink: String
+  projectsLinkTextEn: String
+  projectsLinkTextAr: String
+  projectsLink: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Process/methodology showcase
+type process_section {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  mainImage: Asset
+  smallImage: Asset
+  steps: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Visual separator between sections
+type separator {
+  id: ID!
+  style: String
+  height: Int
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Interactive services swiper/carousel
+type services_showcase {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  services: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Display key numbers and statistics
+type stats_section {
+  id: ID!
+  titleEn: String
+  titleAr: String
+  stats: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Rich text content block
+type text_content {
+  id: ID!
+  title: String!
+  subtitle: String
+  description: String!
+  backgroundImage: String
+
+  # Metadata
+  status: String!
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+
+input FormFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input CreateFormInput {
+  formNameEn: String!
+  formNameAr: String!
+  formTitleEn: String!
+  formTitleAr: String!
+  formDescriptionEn: String
+  formDescriptionAr: String
+  submitButtonTextEn: String
+  submitButtonTextAr: String
+  successMessageEn: String
+  successMessageAr: String
+  fields: JSON!
+  notifications: JSON
+  settings: JSON
+  crmIntegration: JSON
   status: String
   publishedAt: DateTime
 }
 
-input UpdateCTASectionInput {
-  headingEn: String
-  headingAr: String
+input UpdateFormInput {
+  formNameEn: String
+  formNameAr: String
+  formTitleEn: String
+  formTitleAr: String
+  formDescriptionEn: String
+  formDescriptionAr: String
+  submitButtonTextEn: String
+  submitButtonTextAr: String
+  successMessageEn: String
+  successMessageAr: String
+  fields: JSON
+  notifications: JSON
+  settings: JSON
+  crmIntegration: JSON
+  status: String
+  publishedAt: DateTime
+}
+
+input about_sectionFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input Createabout_sectionInput {
+  title: String!
+  subtitle: String
+  description: String!
+  image: String
+  gallery: String
+  yearsOfExperience: String
+  experienceLabel: String
+  status: String
+  publishedAt: DateTime
+}
+
+input Updateabout_sectionInput {
+  title: String
+  subtitle: String
+  description: String
+  image: String
+  gallery: String
+  yearsOfExperience: String
+  experienceLabel: String
+  status: String
+  publishedAt: DateTime
+}
+
+input animated_headlineFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input Createanimated_headlineInput {
+  textEn: String!
+  textAr: String!
+  speed: Int
+  blackened: Boolean
+  status: String
+  publishedAt: DateTime
+}
+
+input Updateanimated_headlineInput {
+  textEn: String
+  textAr: String
+  speed: Int
+  blackened: Boolean
+  status: String
+  publishedAt: DateTime
+}
+
+input awards_sectionFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input Createawards_sectionInput {
+  titleEn: String
+  titleAr: String
+  subtitleEn: String
+  subtitleAr: String
+  awards: String
+  status: String
+  publishedAt: DateTime
+}
+
+input Updateawards_sectionInput {
+  titleEn: String
+  titleAr: String
+  subtitleEn: String
+  subtitleAr: String
+  awards: String
+  status: String
+  publishedAt: DateTime
+}
+
+input blog_sectionFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input Createblog_sectionInput {
+  titleEn: String
+  titleAr: String
+  maxPosts: Int
+  showFeaturedOnly: Boolean
+  status: String
+  publishedAt: DateTime
+}
+
+input Updateblog_sectionInput {
+  titleEn: String
+  titleAr: String
+  maxPosts: Int
+  showFeaturedOnly: Boolean
+  status: String
+  publishedAt: DateTime
+}
+
+input clients_sectionFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input Createclients_sectionInput {
+  titleEn: String
+  titleAr: String
+  subtitleEn: String
+  subtitleAr: String
+  showLogos: Boolean
+  showTestimonials: Boolean
+  status: String
+  publishedAt: DateTime
+}
+
+input Updateclients_sectionInput {
+  titleEn: String
+  titleAr: String
+  subtitleEn: String
+  subtitleAr: String
+  showLogos: Boolean
+  showTestimonials: Boolean
+  status: String
+  publishedAt: DateTime
+}
+
+input company_description_homeFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input Createcompany_description_homeInput {
+  titleEn: String!
+  titleAr: String!
+  subtitleEn: String
+  subtitleAr: String
+  descriptionEn: String!
+  descriptionAr: String!
+  yearsOfExperience: Int
+  experienceLabelEn: String
+  experienceLabelAr: String
+  gallery: [ID!]
+  imageCount: Int
+  showCta: Boolean
+  ctaTextEn: String
+  ctaTextAr: String
+  ctaLink: String
+  status: String
+  publishedAt: DateTime
+}
+
+input Updatecompany_description_homeInput {
+  titleEn: String
+  titleAr: String
+  subtitleEn: String
+  subtitleAr: String
   descriptionEn: String
   descriptionAr: String
-  primaryButton: JSON
-  secondaryButton: JSON
-  backgroundColor: String
+  yearsOfExperience: Int
+  experienceLabelEn: String
+  experienceLabelAr: String
+  gallery: [ID!]
+  imageCount: Int
+  showCta: Boolean
+  ctaTextEn: String
+  ctaTextAr: String
+  ctaLink: String
   status: String
   publishedAt: DateTime
 }
 
-input FAQSectionFilterInput {
+input contact_formFilterInput {
   status: String
   publishedAt_gte: DateTime
   publishedAt_lte: DateTime
   search: String
 }
 
-input CreateFAQSectionInput {
+input Createcontact_formInput {
   titleEn: String
   titleAr: String
-  items: JSON
+  subtitleEn: String
+  subtitleAr: String
+  showPhone: Boolean
+  showEmail: Boolean
+  showAddress: Boolean
   status: String
   publishedAt: DateTime
 }
 
-input UpdateFAQSectionInput {
+input Updatecontact_formInput {
   titleEn: String
   titleAr: String
-  items: JSON
+  subtitleEn: String
+  subtitleAr: String
+  showPhone: Boolean
+  showEmail: Boolean
+  showAddress: Boolean
   status: String
   publishedAt: DateTime
 }
 
-input FooterFilterInput {
+input featured_inFilterInput {
   status: String
   publishedAt_gte: DateTime
   publishedAt_lte: DateTime
   search: String
 }
 
-input CreateFooterInput {
-  columns: JSON
-  copyrightEn: String
-  copyrightAr: String
-  socialLinks: JSON
+input Createfeatured_inInput {
+  titleEn: String
+  titleAr: String
+  logos: String
   status: String
   publishedAt: DateTime
 }
 
-input UpdateFooterInput {
-  columns: JSON
-  copyrightEn: String
-  copyrightAr: String
-  socialLinks: JSON
+input Updatefeatured_inInput {
+  titleEn: String
+  titleAr: String
+  logos: String
   status: String
   publishedAt: DateTime
 }
 
-input HeroBannerFilterInput {
+input hero_bannerFilterInput {
   status: String
   publishedAt_gte: DateTime
   publishedAt_lte: DateTime
   search: String
 }
 
-input CreateHeroBannerInput {
-  headingEn: String!
-  headingAr: String!
-  subheadingEn: String
-  subheadingAr: String
-  backgroundImage: ID!
-  ctaButton: JSON
-  alignment: String
-  status: String
-  publishedAt: DateTime
-}
-
-input UpdateHeroBannerInput {
-  headingEn: String
-  headingAr: String
-  subheadingEn: String
-  subheadingAr: String
+input Createhero_bannerInput {
+  titleEn: String!
+  titleAr: String!
+  subtitleEn: String
+  subtitleAr: String
   backgroundImage: ID
-  ctaButton: JSON
-  alignment: String
+  backgroundVideo: String
+  ctaTextEn: String
+  ctaTextAr: String
+  ctaLink: String
   status: String
   publishedAt: DateTime
 }
 
-input ImageGalleryFilterInput {
+input Updatehero_bannerInput {
+  titleEn: String
+  titleAr: String
+  subtitleEn: String
+  subtitleAr: String
+  backgroundImage: ID
+  backgroundVideo: String
+  ctaTextEn: String
+  ctaTextAr: String
+  ctaLink: String
+  status: String
+  publishedAt: DateTime
+}
+
+input instagram_sectionFilterInput {
   status: String
   publishedAt_gte: DateTime
   publishedAt_lte: DateTime
   search: String
 }
 
-input CreateImageGalleryInput {
+input Createinstagram_sectionInput {
   titleEn: String
   titleAr: String
-  images: [Asset!]!
-  layout: String
-  columns: Int
+  username: String
+  maxPosts: Int
   status: String
   publishedAt: DateTime
 }
 
-input UpdateImageGalleryInput {
+input Updateinstagram_sectionInput {
   titleEn: String
   titleAr: String
-  images: [Asset!]
-  layout: String
-  columns: Int
+  username: String
+  maxPosts: Int
   status: String
   publishedAt: DateTime
 }
 
-input NavigationFilterInput {
+input portfolio_display_homeFilterInput {
   status: String
   publishedAt_gte: DateTime
   publishedAt_lte: DateTime
   search: String
 }
 
-input CreateNavigationInput {
-  items: JSON
+input Createportfolio_display_homeInput {
+  headlineEn: String
+  headlineAr: String
+  sectionTitleEn: String
+  sectionTitleAr: String
+  descriptionEn: String
+  descriptionAr: String
+  projectCountEn: String
+  projectCountAr: String
+  showFeatured: Boolean
+  maxItems: Int
+  showCta: Boolean
+  ctaTextEn: String
+  ctaTextAr: String
+  ctaLink: String
+  projectsLinkTextEn: String
+  projectsLinkTextAr: String
+  projectsLink: String
   status: String
   publishedAt: DateTime
 }
 
-input UpdateNavigationInput {
-  items: JSON
+input Updateportfolio_display_homeInput {
+  headlineEn: String
+  headlineAr: String
+  sectionTitleEn: String
+  sectionTitleAr: String
+  descriptionEn: String
+  descriptionAr: String
+  projectCountEn: String
+  projectCountAr: String
+  showFeatured: Boolean
+  maxItems: Int
+  showCta: Boolean
+  ctaTextEn: String
+  ctaTextAr: String
+  ctaLink: String
+  projectsLinkTextEn: String
+  projectsLinkTextAr: String
+  projectsLink: String
   status: String
   publishedAt: DateTime
 }
 
-input RichTextFilterInput {
+input process_sectionFilterInput {
   status: String
   publishedAt_gte: DateTime
   publishedAt_lte: DateTime
   search: String
 }
 
-input CreateRichTextInput {
-  contentEn: String!
-  contentAr: String!
-  alignment: String
+input Createprocess_sectionInput {
+  titleEn: String
+  titleAr: String
+  mainImage: ID
+  smallImage: ID
+  steps: String
   status: String
   publishedAt: DateTime
 }
 
-input UpdateRichTextInput {
-  contentEn: String
-  contentAr: String
-  alignment: String
+input Updateprocess_sectionInput {
+  titleEn: String
+  titleAr: String
+  mainImage: ID
+  smallImage: ID
+  steps: String
   status: String
   publishedAt: DateTime
 }
 
-input TestimonialsFilterInput {
+input separatorFilterInput {
   status: String
   publishedAt_gte: DateTime
   publishedAt_lte: DateTime
   search: String
 }
 
-input CreateTestimonialsInput {
-  titleEn: String
-  titleAr: String
-  items: JSON
+input CreateseparatorInput {
+  style: String
+  height: Int
   status: String
   publishedAt: DateTime
 }
 
-input UpdateTestimonialsInput {
-  titleEn: String
-  titleAr: String
-  items: JSON
+input UpdateseparatorInput {
+  style: String
+  height: Int
   status: String
   publishedAt: DateTime
 }
 
-input VideoEmbedFilterInput {
+input services_showcaseFilterInput {
   status: String
   publishedAt_gte: DateTime
   publishedAt_lte: DateTime
   search: String
 }
 
-input CreateVideoEmbedInput {
+input Createservices_showcaseInput {
   titleEn: String
   titleAr: String
-  videoUrl: String!
-  thumbnail: ID
-  aspectRatio: String
+  services: String
   status: String
   publishedAt: DateTime
 }
 
-input UpdateVideoEmbedInput {
+input Updateservices_showcaseInput {
   titleEn: String
   titleAr: String
-  videoUrl: String
-  thumbnail: ID
-  aspectRatio: String
+  services: String
+  status: String
+  publishedAt: DateTime
+}
+
+input stats_sectionFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input Createstats_sectionInput {
+  titleEn: String
+  titleAr: String
+  stats: String
+  status: String
+  publishedAt: DateTime
+}
+
+input Updatestats_sectionInput {
+  titleEn: String
+  titleAr: String
+  stats: String
+  status: String
+  publishedAt: DateTime
+}
+
+input text_contentFilterInput {
+  status: String
+  publishedAt_gte: DateTime
+  publishedAt_lte: DateTime
+  search: String
+}
+
+input Createtext_contentInput {
+  title: String!
+  subtitle: String
+  description: String!
+  backgroundImage: String
+  status: String
+  publishedAt: DateTime
+}
+
+input Updatetext_contentInput {
+  title: String
+  subtitle: String
+  description: String
+  backgroundImage: String
   status: String
   publishedAt: DateTime
 }
@@ -445,128 +848,244 @@ input UpdateVideoEmbedInput {
 # ========================================
 
 extend type Query {
-  # Get all Media Asset instances
-  Assets(
+  # Get all Dynamic Form instances
+  forms(
     locale: Locale = EN
-    filter: AssetFilterInput
+    filter: FormFilterInput
     limit: Int = 10
     offset: Int = 0
     orderBy: String = "createdAt"
     orderDirection: String = "desc"
-  ): [Asset!]!
-  # Get single Media Asset by ID
-  asset(
+  ): [Form!]!
+  # Get single Dynamic Form by ID
+  form(
     id: ID!
     locale: Locale = EN
-  ): Asset
-  # Get all Call to Action Section instances
-  CTASections(
+  ): Form
+  # Get all About Section instances
+  about_sections(
     locale: Locale = EN
-    filter: CTASectionFilterInput
+    filter: about_sectionFilterInput
     limit: Int = 10
     offset: Int = 0
     orderBy: String = "createdAt"
     orderDirection: String = "desc"
-  ): [CTASection!]!
-  # Get single Call to Action Section by ID
-  ctasection(
+  ): [about_section!]!
+  # Get single About Section by ID
+  about_section(
     id: ID!
     locale: Locale = EN
-  ): CTASection
-  # Get all FAQ Section instances
-  FAQSections(
+  ): about_section
+  # Get all Animated Headline instances
+  animated_headlines(
     locale: Locale = EN
-    filter: FAQSectionFilterInput
+    filter: animated_headlineFilterInput
     limit: Int = 10
     offset: Int = 0
     orderBy: String = "createdAt"
     orderDirection: String = "desc"
-  ): [FAQSection!]!
-  # Get single FAQ Section by ID
-  faqsection(
+  ): [animated_headline!]!
+  # Get single Animated Headline by ID
+  animated_headline(
     id: ID!
     locale: Locale = EN
-  ): FAQSection
-  # Get single Site Footer by ID
-  footer(
+  ): animated_headline
+  # Get all Awards & Recognition instances
+  awards_sections(
+    locale: Locale = EN
+    filter: awards_sectionFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [awards_section!]!
+  # Get single Awards & Recognition by ID
+  awards_section(
     id: ID!
     locale: Locale = EN
-  ): Footer
+  ): awards_section
+  # Get all Featured Blogs instances
+  blog_sections(
+    locale: Locale = EN
+    filter: blog_sectionFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [blog_section!]!
+  # Get single Featured Blogs by ID
+  blog_section(
+    id: ID!
+    locale: Locale = EN
+  ): blog_section
+  # Get all Our Clients instances
+  clients_sections(
+    locale: Locale = EN
+    filter: clients_sectionFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [clients_section!]!
+  # Get single Our Clients by ID
+  clients_section(
+    id: ID!
+    locale: Locale = EN
+  ): clients_section
+  # Get all Company Description instances
+  company_description_homes(
+    locale: Locale = EN
+    filter: company_description_homeFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [company_description_home!]!
+  # Get single Company Description by ID
+  company_description_home(
+    id: ID!
+    locale: Locale = EN
+  ): company_description_home
+  # Get all Contact Form instances
+  contact_forms(
+    locale: Locale = EN
+    filter: contact_formFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [contact_form!]!
+  # Get single Contact Form by ID
+  contact_form(
+    id: ID!
+    locale: Locale = EN
+  ): contact_form
+  # Get all Featured In instances
+  featured_ins(
+    locale: Locale = EN
+    filter: featured_inFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [featured_in!]!
+  # Get single Featured In by ID
+  featured_in(
+    id: ID!
+    locale: Locale = EN
+  ): featured_in
   # Get all Hero Banner instances
-  HeroBanners(
+  hero_banners(
     locale: Locale = EN
-    filter: HeroBannerFilterInput
+    filter: hero_bannerFilterInput
     limit: Int = 10
     offset: Int = 0
     orderBy: String = "createdAt"
     orderDirection: String = "desc"
-  ): [HeroBanner!]!
+  ): [hero_banner!]!
   # Get single Hero Banner by ID
-  herobanner(
+  hero_banner(
     id: ID!
     locale: Locale = EN
-  ): HeroBanner
-  # Get all Image Gallery instances
-  ImageGalleries(
+  ): hero_banner
+  # Get all Instagram Feed instances
+  instagram_sections(
     locale: Locale = EN
-    filter: ImageGalleryFilterInput
+    filter: instagram_sectionFilterInput
     limit: Int = 10
     offset: Int = 0
     orderBy: String = "createdAt"
     orderDirection: String = "desc"
-  ): [ImageGallery!]!
-  # Get single Image Gallery by ID
-  imagegallery(
+  ): [instagram_section!]!
+  # Get single Instagram Feed by ID
+  instagram_section(
     id: ID!
     locale: Locale = EN
-  ): ImageGallery
-  # Get single Site Navigation by ID
-  navigation(
-    id: ID!
+  ): instagram_section
+  # Get all Portfolio Display instances
+  portfolio_display_homes(
     locale: Locale = EN
-  ): Navigation
-  # Get all Rich Text instances
-  RichTexts(
-    locale: Locale = EN
-    filter: RichTextFilterInput
+    filter: portfolio_display_homeFilterInput
     limit: Int = 10
     offset: Int = 0
     orderBy: String = "createdAt"
     orderDirection: String = "desc"
-  ): [RichText!]!
-  # Get single Rich Text by ID
-  richtext(
+  ): [portfolio_display_home!]!
+  # Get single Portfolio Display by ID
+  portfolio_display_home(
     id: ID!
     locale: Locale = EN
-  ): RichText
-  # Get all Testimonials instances
-  Testimonialses(
+  ): portfolio_display_home
+  # Get all How We Work instances
+  process_sections(
     locale: Locale = EN
-    filter: TestimonialsFilterInput
+    filter: process_sectionFilterInput
     limit: Int = 10
     offset: Int = 0
     orderBy: String = "createdAt"
     orderDirection: String = "desc"
-  ): [Testimonials!]!
-  # Get single Testimonials by ID
-  testimonials(
+  ): [process_section!]!
+  # Get single How We Work by ID
+  process_section(
     id: ID!
     locale: Locale = EN
-  ): Testimonials
-  # Get all Video Embed instances
-  VideoEmbeds(
+  ): process_section
+  # Get all Section Separator instances
+  separators(
     locale: Locale = EN
-    filter: VideoEmbedFilterInput
+    filter: separatorFilterInput
     limit: Int = 10
     offset: Int = 0
     orderBy: String = "createdAt"
     orderDirection: String = "desc"
-  ): [VideoEmbed!]!
-  # Get single Video Embed by ID
-  videoembed(
+  ): [separator!]!
+  # Get single Section Separator by ID
+  separator(
     id: ID!
     locale: Locale = EN
-  ): VideoEmbed
+  ): separator
+  # Get all Services Showcase instances
+  services_showcases(
+    locale: Locale = EN
+    filter: services_showcaseFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [services_showcase!]!
+  # Get single Services Showcase by ID
+  services_showcase(
+    id: ID!
+    locale: Locale = EN
+  ): services_showcase
+  # Get all Key Facts/Statistics instances
+  stats_sections(
+    locale: Locale = EN
+    filter: stats_sectionFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [stats_section!]!
+  # Get single Key Facts/Statistics by ID
+  stats_section(
+    id: ID!
+    locale: Locale = EN
+  ): stats_section
+  # Get all Text Content instances
+  text_contents(
+    locale: Locale = EN
+    filter: text_contentFilterInput
+    limit: Int = 10
+    offset: Int = 0
+    orderBy: String = "createdAt"
+    orderDirection: String = "desc"
+  ): [text_content!]!
+  # Get single Text Content by ID
+  text_content(
+    id: ID!
+    locale: Locale = EN
+  ): text_content
 
   # Blueprint metadata
   blueprints: [ContentBlueprint!]!
@@ -578,150 +1097,261 @@ extend type Query {
 # ========================================
 
 extend type Mutation {
-  # Create new Media Asset
-  createAsset(
-    input: CreateAssetInput!
+  # Create new Dynamic Form
+  createForm(
+    input: CreateFormInput!
     locale: Locale = EN
-  ): Asset!
-  # Update existing Media Asset
-  updateAsset(
+  ): Form!
+  # Update existing Dynamic Form
+  updateForm(
     id: ID!
-    input: UpdateAssetInput!
+    input: UpdateFormInput!
     locale: Locale = EN
-  ): Asset!
-  # Delete Media Asset
-  deleteAsset(id: ID!): Boolean!
-  # Create new Call to Action Section
-  createCTASection(
-    input: CreateCTASectionInput!
+  ): Form!
+  # Delete Dynamic Form
+  deleteForm(id: ID!): Boolean!
+  # Duplicate Dynamic Form
+  duplicateForm(id: ID!): Form!
+  # Create new About Section
+  createabout_section(
+    input: Createabout_sectionInput!
     locale: Locale = EN
-  ): CTASection!
-  # Update existing Call to Action Section
-  updateCTASection(
+  ): about_section!
+  # Update existing About Section
+  updateabout_section(
     id: ID!
-    input: UpdateCTASectionInput!
+    input: Updateabout_sectionInput!
     locale: Locale = EN
-  ): CTASection!
-  # Delete Call to Action Section
-  deleteCTASection(id: ID!): Boolean!
-  # Duplicate Call to Action Section
-  duplicateCTASection(id: ID!): CTASection!
-  # Create new FAQ Section
-  createFAQSection(
-    input: CreateFAQSectionInput!
+  ): about_section!
+  # Delete About Section
+  deleteabout_section(id: ID!): Boolean!
+  # Duplicate About Section
+  duplicateabout_section(id: ID!): about_section!
+  # Create new Animated Headline
+  createanimated_headline(
+    input: Createanimated_headlineInput!
     locale: Locale = EN
-  ): FAQSection!
-  # Update existing FAQ Section
-  updateFAQSection(
+  ): animated_headline!
+  # Update existing Animated Headline
+  updateanimated_headline(
     id: ID!
-    input: UpdateFAQSectionInput!
+    input: Updateanimated_headlineInput!
     locale: Locale = EN
-  ): FAQSection!
-  # Delete FAQ Section
-  deleteFAQSection(id: ID!): Boolean!
-  # Duplicate FAQ Section
-  duplicateFAQSection(id: ID!): FAQSection!
-  # Create new Site Footer
-  createFooter(
-    input: CreateFooterInput!
+  ): animated_headline!
+  # Delete Animated Headline
+  deleteanimated_headline(id: ID!): Boolean!
+  # Duplicate Animated Headline
+  duplicateanimated_headline(id: ID!): animated_headline!
+  # Create new Awards & Recognition
+  createawards_section(
+    input: Createawards_sectionInput!
     locale: Locale = EN
-  ): Footer!
-  # Update existing Site Footer
-  updateFooter(
+  ): awards_section!
+  # Update existing Awards & Recognition
+  updateawards_section(
     id: ID!
-    input: UpdateFooterInput!
+    input: Updateawards_sectionInput!
     locale: Locale = EN
-  ): Footer!
-  # Delete Site Footer
-  deleteFooter(id: ID!): Boolean!
+  ): awards_section!
+  # Delete Awards & Recognition
+  deleteawards_section(id: ID!): Boolean!
+  # Duplicate Awards & Recognition
+  duplicateawards_section(id: ID!): awards_section!
+  # Create new Featured Blogs
+  createblog_section(
+    input: Createblog_sectionInput!
+    locale: Locale = EN
+  ): blog_section!
+  # Update existing Featured Blogs
+  updateblog_section(
+    id: ID!
+    input: Updateblog_sectionInput!
+    locale: Locale = EN
+  ): blog_section!
+  # Delete Featured Blogs
+  deleteblog_section(id: ID!): Boolean!
+  # Duplicate Featured Blogs
+  duplicateblog_section(id: ID!): blog_section!
+  # Create new Our Clients
+  createclients_section(
+    input: Createclients_sectionInput!
+    locale: Locale = EN
+  ): clients_section!
+  # Update existing Our Clients
+  updateclients_section(
+    id: ID!
+    input: Updateclients_sectionInput!
+    locale: Locale = EN
+  ): clients_section!
+  # Delete Our Clients
+  deleteclients_section(id: ID!): Boolean!
+  # Duplicate Our Clients
+  duplicateclients_section(id: ID!): clients_section!
+  # Create new Company Description
+  createcompany_description_home(
+    input: Createcompany_description_homeInput!
+    locale: Locale = EN
+  ): company_description_home!
+  # Update existing Company Description
+  updatecompany_description_home(
+    id: ID!
+    input: Updatecompany_description_homeInput!
+    locale: Locale = EN
+  ): company_description_home!
+  # Delete Company Description
+  deletecompany_description_home(id: ID!): Boolean!
+  # Duplicate Company Description
+  duplicatecompany_description_home(id: ID!): company_description_home!
+  # Create new Contact Form
+  createcontact_form(
+    input: Createcontact_formInput!
+    locale: Locale = EN
+  ): contact_form!
+  # Update existing Contact Form
+  updatecontact_form(
+    id: ID!
+    input: Updatecontact_formInput!
+    locale: Locale = EN
+  ): contact_form!
+  # Delete Contact Form
+  deletecontact_form(id: ID!): Boolean!
+  # Duplicate Contact Form
+  duplicatecontact_form(id: ID!): contact_form!
+  # Create new Featured In
+  createfeatured_in(
+    input: Createfeatured_inInput!
+    locale: Locale = EN
+  ): featured_in!
+  # Update existing Featured In
+  updatefeatured_in(
+    id: ID!
+    input: Updatefeatured_inInput!
+    locale: Locale = EN
+  ): featured_in!
+  # Delete Featured In
+  deletefeatured_in(id: ID!): Boolean!
+  # Duplicate Featured In
+  duplicatefeatured_in(id: ID!): featured_in!
   # Create new Hero Banner
-  createHeroBanner(
-    input: CreateHeroBannerInput!
+  createhero_banner(
+    input: Createhero_bannerInput!
     locale: Locale = EN
-  ): HeroBanner!
+  ): hero_banner!
   # Update existing Hero Banner
-  updateHeroBanner(
+  updatehero_banner(
     id: ID!
-    input: UpdateHeroBannerInput!
+    input: Updatehero_bannerInput!
     locale: Locale = EN
-  ): HeroBanner!
+  ): hero_banner!
   # Delete Hero Banner
-  deleteHeroBanner(id: ID!): Boolean!
+  deletehero_banner(id: ID!): Boolean!
   # Duplicate Hero Banner
-  duplicateHeroBanner(id: ID!): HeroBanner!
-  # Create new Image Gallery
-  createImageGallery(
-    input: CreateImageGalleryInput!
+  duplicatehero_banner(id: ID!): hero_banner!
+  # Create new Instagram Feed
+  createinstagram_section(
+    input: Createinstagram_sectionInput!
     locale: Locale = EN
-  ): ImageGallery!
-  # Update existing Image Gallery
-  updateImageGallery(
+  ): instagram_section!
+  # Update existing Instagram Feed
+  updateinstagram_section(
     id: ID!
-    input: UpdateImageGalleryInput!
+    input: Updateinstagram_sectionInput!
     locale: Locale = EN
-  ): ImageGallery!
-  # Delete Image Gallery
-  deleteImageGallery(id: ID!): Boolean!
-  # Duplicate Image Gallery
-  duplicateImageGallery(id: ID!): ImageGallery!
-  # Create new Site Navigation
-  createNavigation(
-    input: CreateNavigationInput!
+  ): instagram_section!
+  # Delete Instagram Feed
+  deleteinstagram_section(id: ID!): Boolean!
+  # Duplicate Instagram Feed
+  duplicateinstagram_section(id: ID!): instagram_section!
+  # Create new Portfolio Display
+  createportfolio_display_home(
+    input: Createportfolio_display_homeInput!
     locale: Locale = EN
-  ): Navigation!
-  # Update existing Site Navigation
-  updateNavigation(
+  ): portfolio_display_home!
+  # Update existing Portfolio Display
+  updateportfolio_display_home(
     id: ID!
-    input: UpdateNavigationInput!
+    input: Updateportfolio_display_homeInput!
     locale: Locale = EN
-  ): Navigation!
-  # Delete Site Navigation
-  deleteNavigation(id: ID!): Boolean!
-  # Create new Rich Text
-  createRichText(
-    input: CreateRichTextInput!
+  ): portfolio_display_home!
+  # Delete Portfolio Display
+  deleteportfolio_display_home(id: ID!): Boolean!
+  # Duplicate Portfolio Display
+  duplicateportfolio_display_home(id: ID!): portfolio_display_home!
+  # Create new How We Work
+  createprocess_section(
+    input: Createprocess_sectionInput!
     locale: Locale = EN
-  ): RichText!
-  # Update existing Rich Text
-  updateRichText(
+  ): process_section!
+  # Update existing How We Work
+  updateprocess_section(
     id: ID!
-    input: UpdateRichTextInput!
+    input: Updateprocess_sectionInput!
     locale: Locale = EN
-  ): RichText!
-  # Delete Rich Text
-  deleteRichText(id: ID!): Boolean!
-  # Duplicate Rich Text
-  duplicateRichText(id: ID!): RichText!
-  # Create new Testimonials
-  createTestimonials(
-    input: CreateTestimonialsInput!
+  ): process_section!
+  # Delete How We Work
+  deleteprocess_section(id: ID!): Boolean!
+  # Duplicate How We Work
+  duplicateprocess_section(id: ID!): process_section!
+  # Create new Section Separator
+  createseparator(
+    input: CreateseparatorInput!
     locale: Locale = EN
-  ): Testimonials!
-  # Update existing Testimonials
-  updateTestimonials(
+  ): separator!
+  # Update existing Section Separator
+  updateseparator(
     id: ID!
-    input: UpdateTestimonialsInput!
+    input: UpdateseparatorInput!
     locale: Locale = EN
-  ): Testimonials!
-  # Delete Testimonials
-  deleteTestimonials(id: ID!): Boolean!
-  # Duplicate Testimonials
-  duplicateTestimonials(id: ID!): Testimonials!
-  # Create new Video Embed
-  createVideoEmbed(
-    input: CreateVideoEmbedInput!
+  ): separator!
+  # Delete Section Separator
+  deleteseparator(id: ID!): Boolean!
+  # Duplicate Section Separator
+  duplicateseparator(id: ID!): separator!
+  # Create new Services Showcase
+  createservices_showcase(
+    input: Createservices_showcaseInput!
     locale: Locale = EN
-  ): VideoEmbed!
-  # Update existing Video Embed
-  updateVideoEmbed(
+  ): services_showcase!
+  # Update existing Services Showcase
+  updateservices_showcase(
     id: ID!
-    input: UpdateVideoEmbedInput!
+    input: Updateservices_showcaseInput!
     locale: Locale = EN
-  ): VideoEmbed!
-  # Delete Video Embed
-  deleteVideoEmbed(id: ID!): Boolean!
-  # Duplicate Video Embed
-  duplicateVideoEmbed(id: ID!): VideoEmbed!
+  ): services_showcase!
+  # Delete Services Showcase
+  deleteservices_showcase(id: ID!): Boolean!
+  # Duplicate Services Showcase
+  duplicateservices_showcase(id: ID!): services_showcase!
+  # Create new Key Facts/Statistics
+  createstats_section(
+    input: Createstats_sectionInput!
+    locale: Locale = EN
+  ): stats_section!
+  # Update existing Key Facts/Statistics
+  updatestats_section(
+    id: ID!
+    input: Updatestats_sectionInput!
+    locale: Locale = EN
+  ): stats_section!
+  # Delete Key Facts/Statistics
+  deletestats_section(id: ID!): Boolean!
+  # Duplicate Key Facts/Statistics
+  duplicatestats_section(id: ID!): stats_section!
+  # Create new Text Content
+  createtext_content(
+    input: Createtext_contentInput!
+    locale: Locale = EN
+  ): text_content!
+  # Update existing Text Content
+  updatetext_content(
+    id: ID!
+    input: Updatetext_contentInput!
+    locale: Locale = EN
+  ): text_content!
+  # Delete Text Content
+  deletetext_content(id: ID!): Boolean!
+  # Duplicate Text Content
+  duplicatetext_content(id: ID!): text_content!
 }
 
 # ========================================

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { sendLeadEmails } from '@/lib/email';
 
 // POST /api/leads - Create a new lead
 export async function POST(request: NextRequest) {
@@ -89,6 +90,24 @@ export async function POST(request: NextRequest) {
         qualified: score >= 70,
         locale,
       },
+    });
+
+    // Send email notifications (non-blocking - don't wait for email to complete)
+    sendLeadEmails({
+      name,
+      email,
+      phone,
+      company,
+      projectType: projectType || service,
+      service,
+      projectLocation: projectLocation || city,
+      budget: budgetRange || budget,
+      timeline: timeline || startDate,
+      message: message || projectDescription,
+      locale,
+    }).catch((error) => {
+      console.error('[Leads API] Failed to send emails:', error);
+      // Don't fail the request if email fails
     });
 
     return NextResponse.json(

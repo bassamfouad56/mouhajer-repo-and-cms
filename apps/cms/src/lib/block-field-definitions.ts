@@ -1004,12 +1004,19 @@ export const blockFieldDefinitions: BlockFieldDefinition[] = [
         defaultValue: { en: 'Years of Excellence', ar: 'عاماً من التميز' }
       },
       {
+        name: 'gallery',
+        label: 'Select Images',
+        type: 'gallery',
+        helpText: 'Select specific images to display. If empty, random images will be shown based on Image Count below.'
+      },
+      {
         name: 'imageCount',
-        label: 'Number of Random Images',
+        label: 'Number of Random Images (if no images selected)',
         type: 'number',
         defaultValue: 4,
         min: 1,
-        max: 20
+        max: 20,
+        helpText: 'Used only when no images are selected in the gallery above'
       },
       {
         name: 'showCta',
@@ -1029,6 +1036,67 @@ export const blockFieldDefinitions: BlockFieldDefinition[] = [
         label: 'CTA Link',
         type: 'url',
         defaultValue: '/contact-us'
+      }
+    ]
+  },
+  {
+    type: 'dynamic_form',
+    displayName: 'Dynamic Form',
+    category: 'Forms',
+    icon: '📝',
+    fields: [
+      {
+        name: 'formId',
+        label: 'Form',
+        type: 'text',
+        required: true,
+        helpText: 'Select or enter the Form blueprint instance ID to display'
+      },
+      {
+        name: 'formTitle',
+        label: 'Form Title Override',
+        type: 'text',
+        bilingual: true,
+        helpText: 'Optional: Override the form title (leave empty to use form default)'
+      },
+      {
+        name: 'formDescription',
+        label: 'Form Description Override',
+        type: 'textarea',
+        bilingual: true,
+        helpText: 'Optional: Override the form description (leave empty to use form default)'
+      },
+      {
+        name: 'submitButtonText',
+        label: 'Submit Button Text Override',
+        type: 'text',
+        bilingual: true,
+        helpText: 'Optional: Override the submit button text'
+      },
+      {
+        name: 'containerStyle',
+        label: 'Container Style',
+        type: 'select',
+        options: [
+          { value: 'default', label: 'Default' },
+          { value: 'card', label: 'Card' },
+          { value: 'bordered', label: 'Bordered' },
+          { value: 'minimal', label: 'Minimal' }
+        ],
+        defaultValue: 'default'
+      },
+      {
+        name: 'showLabels',
+        label: 'Show Field Labels',
+        type: 'boolean',
+        defaultValue: true
+      },
+      {
+        name: 'compactMode',
+        label: 'Compact Mode',
+        type: 'boolean',
+        defaultValue: false,
+        helpText: 'Reduce spacing for a more compact layout'
       }
     ]
   }

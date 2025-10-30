@@ -64,17 +64,62 @@ export default function BlockEditorModal({
     if (block && definition) {
       const initialData: any = {};
 
-      // Merge both English and Arabic data
-      definition.fields.forEach(field => {
-        if (field.bilingual) {
-          initialData[field.name] = {
-            en: block.dataEn?.[field.name] || field.defaultValue?.en || '',
-            ar: block.dataAr?.[field.name] || field.defaultValue?.ar || ''
+      // Helper to extract bilingual value
+      const extractBilingualValue = (dataEnVal: any, dataArVal: any, defaultVal: any) => {
+        if (dataEnVal && typeof dataEnVal === 'object' && 'en' in dataEnVal && 'ar' in dataEnVal) {
+          // Old migrated structure: dataEn contains {en: "...", ar: "..."}
+          return {
+            en: dataEnVal.en || defaultVal?.en || '',
+            ar: dataEnVal.ar || defaultVal?.ar || ''
           };
         } else {
-          initialData[field.name] = block.dataEn?.[field.name] ||
-                                    block.dataAr?.[field.name] ||
-                                    field.defaultValue || '';
+          // New structure: English in dataEn, Arabic in dataAr
+          return {
+            en: dataEnVal || defaultVal?.en || '',
+            ar: dataArVal || defaultVal?.ar || ''
+          };
+        }
+      };
+
+      // Merge both English and Arabic data
+      definition.fields.forEach(field => {
+        const dataEnValue = block.dataEn?.[field.name];
+        const dataArValue = block.dataAr?.[field.name];
+
+        if (field.type === 'repeater' && Array.isArray(dataEnValue)) {
+          // Handle repeater fields with potential bilingual sub-fields
+          initialData[field.name] = dataEnValue.map((item: any, index: number) => {
+            const repeaterItem: any = {};
+
+            field.repeaterFields?.forEach(subField => {
+              const subFieldValue = item[subField.name];
+
+              if (subField.bilingual) {
+                // Check if subfield value is already in {en, ar} format (old migration)
+                if (subFieldValue && typeof subFieldValue === 'object' && 'en' in subFieldValue && 'ar' in subFieldValue) {
+                  repeaterItem[subField.name] = {
+                    en: subFieldValue.en || '',
+                    ar: subFieldValue.ar || ''
+                  };
+                } else {
+                  // New structure or simple value
+                  repeaterItem[subField.name] = {
+                    en: subFieldValue || '',
+                    ar: dataArValue?.[index]?.[subField.name] || ''
+                  };
+                }
+              } else {
+                repeaterItem[subField.name] = subFieldValue || '';
+              }
+            });
+
+            return repeaterItem;
+          });
+        } else if (field.bilingual) {
+          initialData[field.name] = extractBilingualValue(dataEnValue, dataArValue, field.defaultValue);
+        } else {
+          // Non-bilingual fields
+          initialData[field.name] = dataEnValue || dataArValue || field.defaultValue || '';
         }
       });
 
@@ -155,12 +200,19 @@ export default function BlockEditorModal({
           dataEn[field.name] = formData[field.name]?.en || '';
           dataAr[field.name] = formData[field.name]?.ar || '';
         } else {
+          // For non-bilingual fields, save the same value to both locales
           dataEn[field.name] = formData[field.name];
           dataAr[field.name] = formData[field.name];
         }
       });
 
+      // Return the complete block object with all necessary fields
       await onSave({
+        id: block.id,
+        blueprintId: (block as any).blueprintId,
+        blueprint: block.blueprint,
+        order: (block as any).order,
+        status: (block as any).status || 'published',
         dataEn,
         dataAr
       });

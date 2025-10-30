@@ -37,6 +37,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.mouhajer.ae',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
   },
 
@@ -51,6 +55,28 @@ const nextConfig = {
   // Security Headers
   async headers() {
     return [
+      // CORS headers for API routes
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Credentials',
+            value: 'true',
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*', // In production, specify exact origins
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET,DELETE,PATCH,POST,PUT,OPTIONS',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization',
+          },
+        ],
+      },
       {
         source: '/:path*',
         headers: [
@@ -88,7 +114,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https:",
               "font-src 'self' data:",
-              "connect-src 'self' https: http://localhost:3000 http://localhost:3001",
+              "connect-src 'self' https: http://localhost:3000 http://localhost:3001 http://localhost:3010",
               "frame-ancestors 'self'",
               "base-uri 'self'",
               "form-action 'self'",

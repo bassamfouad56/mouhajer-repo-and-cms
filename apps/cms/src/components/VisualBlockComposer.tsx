@@ -69,10 +69,19 @@ export default function VisualBlockComposer({ pageId, locale, onSave }: VisualBl
       try {
         const response = await fetch('/api/blueprints');
         const data = await response.json();
+
+        // Check if response is valid array
+        if (!response.ok || !Array.isArray(data)) {
+          console.error('Failed to fetch blueprints:', data);
+          setBlueprints([]);
+          return;
+        }
+
         // Only show COMPONENT blueprints
         setBlueprints(data.filter((b: ContentBlueprint) => b.blueprintType === 'COMPONENT'));
       } catch (error) {
         console.error('Error fetching blueprints:', error);
+        setBlueprints([]);
       }
     };
 

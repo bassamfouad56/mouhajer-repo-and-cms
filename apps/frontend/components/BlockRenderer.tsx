@@ -9,7 +9,7 @@ import FeaturedIn from './FeaturedIn';
 import FeaturedBlogsHomepage from './FeaturedBlogsHomepage';
 import OurClients from './OurCLients';
 import InstagraSection from './InstagraSection';
-import ContactForm from './ContactForm';
+import EnquiryForm from './EnquiryForm';
 import KeyFacts from './KeyFacts';
 import OurServicesSwiper from './OurServicesSwiper';
 import HowWeWork from './HowWeWork';
@@ -58,6 +58,8 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
                 <AnimatedHeadLine
                   key={block.id}
                   text={block.data?.text?.[locale] || ''}
+                  blackened={block.data?.blackened || false}
+                  speed={block.data?.speed || 5}
                 />
               );
 
@@ -112,25 +114,38 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
               );
 
             case 'company_description_home':
-              // Get random images from media library using Fisher-Yates shuffle for better randomization
-              const imageCount = block.data?.imageCount || 4;
-              const imageMedia = media.filter((m: any) => m.type === 'image' && m.url);
+              // Check if user selected specific images via gallery field
+              let companyGallery: string[];
 
-              // Fisher-Yates shuffle for better randomization
-              const shuffleArray = <T,>(array: T[]): T[] => {
-                const shuffled = [...array];
-                for (let i = shuffled.length - 1; i > 0; i--) {
-                  const j = Math.floor(Math.random() * (i + 1));
-                  [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-                }
-                return shuffled;
-              };
+              if (block.data?.gallery && Array.isArray(block.data.gallery) && block.data.gallery.length > 0) {
+                // Use user-selected images from gallery
+                companyGallery = block.data.gallery.map((item: any) => {
+                  // Handle both string URLs and objects with url property
+                  if (typeof item === 'string') return item;
+                  if (item?.url) return item.url;
+                  return null;
+                }).filter(Boolean);
+              } else {
+                // Fallback to random images from media library using Fisher-Yates shuffle
+                const imageCount = block.data?.imageCount || 4;
+                const imageMedia = media.filter((m: any) => m.type === 'image' && m.url);
 
-              const shuffled = shuffleArray(imageMedia);
-              const randomImages = shuffled.slice(0, Math.max(imageCount, 16)).map((m: any) => m.url);
+                // Fisher-Yates shuffle for better randomization
+                const shuffleArray = <T,>(array: T[]): T[] => {
+                  const shuffled = [...array];
+                  for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                  }
+                  return shuffled;
+                };
 
-              // Pass random images array - AboutSectionHomePageCarousel will handle distribution to 4 positions
-              const companyGallery = randomImages;
+                const shuffled = shuffleArray(imageMedia);
+                const randomImages = shuffled.slice(0, Math.max(imageCount, 16)).map((m: any) => m.url);
+
+                // Pass random images array - AboutSectionHomePageCarousel will handle distribution to 4 positions
+                companyGallery = randomImages;
+              }
 
               return (
                 <AboutSectionHomePage
@@ -324,7 +339,8 @@ export default function BlockRenderer({ blocks, locale, featuredProjects, featur
               );
 
             case 'contact_form':
-              return <ContactForm key={block.id} />;
+            case 'enquiry_form':
+              return <EnquiryForm key={block.id} locale={locale} />;
 
             case 'text_section':
               // Text section with optional image

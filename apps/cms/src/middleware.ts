@@ -3,7 +3,8 @@ import { getCorsHeaders } from './lib/cors';
 
 // Simple in-memory token bucket per IP (edge runtime memory - resets on cold start)
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 60; // 60 requests/min per IP
+// More lenient rate limit in development for hot reloading and multiple GraphQL queries
+const RATE_LIMIT_MAX_REQUESTS = process.env.NODE_ENV === 'production' ? 60 : 500; // 500 requests/min in dev, 60 in prod
 const ipRequestLog = new Map<string, { windowStart: number; count: number }>();
 
 export function middleware(request: NextRequest) {

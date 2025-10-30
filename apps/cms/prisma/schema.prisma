@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("PRISMA_DATABASE_URL")
-  directUrl = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -316,6 +315,40 @@ model BlueprintInstance {
   @@index([order])
   @@index([status])
   @@map("blueprint_instances")
+}
+
+// ========================================
+// FORM SUBMISSION SYSTEM
+// ========================================
+
+model FormSubmission {
+  id            String   @id @default(uuid())
+
+  // Form reference
+  formId        String   @map("form_id")
+  formName      String   @map("form_name") // Denormalized for easier querying
+
+  // Submission data (stores all form field values as JSON)
+  data          Json
+
+  // Metadata
+  locale        String   @default("en") // Language of submission
+  ipAddress     String?  @map("ip_address")
+  userAgent     String?  @map("user_agent")
+
+  // Status
+  status        String   @default("new") // new, read, archived, spam
+  notes         String?  // Admin notes
+
+  // Timestamps
+  submittedAt   DateTime @default(now()) @map("submitted_at")
+  readAt        DateTime? @map("read_at")
+
+  @@index([formId])
+  @@index([formName])
+  @@index([status])
+  @@index([submittedAt])
+  @@map("form_submissions")
 }
 
 // ========================================
@@ -706,6 +739,7 @@ model Lead {
   convertedToDeal    Boolean       @default(false) @map("converted_to_deal")
   convertedAt        DateTime?     @map("converted_at")
   assignedTo         String?       @map("assigned_to")
+  locale             String?       @default("en")
   createdAt          DateTime      @default(now()) @map("created_at")
   updatedAt          DateTime      @updatedAt @map("updated_at")
   activities         CrmActivity[]

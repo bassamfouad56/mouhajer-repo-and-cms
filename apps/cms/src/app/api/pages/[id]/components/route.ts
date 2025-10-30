@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 // GET /api/pages/[id]/components - Get all components for a page
 export async function GET(
@@ -106,11 +104,29 @@ export async function PUT(
     const body = await request.json();
     const { components } = body;
 
+    console.log('[PUT /api/pages/[id]/components] Received request:', {
+      pageId: params.id,
+      componentsCount: Array.isArray(components) ? components.length : 'not an array',
+      components: JSON.stringify(components, null, 2).substring(0, 500)
+    });
+
     if (!Array.isArray(components)) {
+      console.error('[PUT /api/pages/[id]/components] Components is not an array:', typeof components);
       return NextResponse.json(
         { error: 'Components must be an array' },
         { status: 400 }
       );
+    }
+
+    // Validate all components have required fields
+    for (const component of components) {
+      if (!component.blueprintId) {
+        console.error('[PUT /api/pages/[id]/components] Missing blueprintId:', component);
+        return NextResponse.json(
+          { error: `Component missing blueprintId: ${component.id || 'unknown'}` },
+          { status: 400 }
+        );
+      }
     }
 
     // Delete all existing components for this page
@@ -137,11 +153,12 @@ export async function PUT(
       )
     );
 
+    console.log('[PUT /api/pages/[id]/components] Successfully created', createdComponents.length, 'components');
     return NextResponse.json(createdComponents);
   } catch (error) {
-    console.error('Error updating page components:', error);
+    console.error('[PUT /api/pages/[id]/components] Error updating page components:', error);
     return NextResponse.json(
-      { error: 'Failed to update page components' },
+      { error: 'Failed to update page components', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }

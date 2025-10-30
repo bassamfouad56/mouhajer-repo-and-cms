@@ -3,10 +3,14 @@ import React, { useState } from "react";
 import "react-phone-input-2/lib/style.css";
 import { useLocale } from "next-intl";
 import ContactFormForm from "./ContactFormForm";
-type Props = {};
 
-const EnquiryForm = (props: Props) => {
-  const locale = useLocale();
+interface EnquiryFormProps {
+  locale?: 'en' | 'ar';
+}
+
+const EnquiryForm = ({ locale: localeProp }: EnquiryFormProps) => {
+  const localeFromContext = useLocale() as 'en' | 'ar';
+  const locale = localeProp || localeFromContext;
   const [steps, setSteps] = useState(false);
 
   return (

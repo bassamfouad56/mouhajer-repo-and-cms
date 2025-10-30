@@ -172,6 +172,10 @@ input ${blueprint.name}FilterInput {
         graphqlType = 'ID';
       } else if (field.type === 'relation') {
         graphqlType = '[ID!]';
+      } else if (field.type === 'image' || field.type === 'file') {
+        graphqlType = 'ID';
+      } else if (field.type === 'gallery') {
+        graphqlType = '[ID!]';
       }
 
       if (field.bilingual) {
@@ -197,6 +201,10 @@ ${createInputFields}
       if (field.type === 'reference' && field.referenceType) {
         graphqlType = 'ID';
       } else if (field.type === 'relation') {
+        graphqlType = '[ID!]';
+      } else if (field.type === 'image' || field.type === 'file') {
+        graphqlType = 'ID';
+      } else if (field.type === 'gallery') {
         graphqlType = '[ID!]';
       }
 

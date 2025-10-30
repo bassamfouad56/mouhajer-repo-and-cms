@@ -25,11 +25,14 @@ import { caseStudyTypeDefs } from './case-studies';
 // Load auto-generated blueprint schema
 let blueprintTypeDefs: any;
 try {
-  const blueprintSchemaPath = join(__dirname, '../generated/blueprints.graphql');
+  // Use process.cwd() for Next.js compatibility - already in apps/cms directory
+  const blueprintSchemaPath = join(process.cwd(), 'src', 'graphql', 'generated', 'blueprints.graphql');
   const blueprintSchemaContent = readFileSync(blueprintSchemaPath, 'utf-8');
   blueprintTypeDefs = gql`${blueprintSchemaContent}`;
+  console.log('✅ Loaded blueprint schema with', blueprintSchemaContent.split('type ').length - 1, 'types');
 } catch (error) {
   console.warn('⚠️  Blueprint schema not found. Run: npm run generate:graphql');
+  console.warn('   Error:', error);
   blueprintTypeDefs = gql`
     # Blueprint schema placeholder
     # Run: npm run generate:graphql to generate blueprint types

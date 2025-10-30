@@ -1,10 +1,15 @@
-'use client';
-import React, { Dispatch, SetStateAction, useState, useTransition } from 'react';
-import PhoneInputWithFlags from './PhoneInputWithFlags';
-import CheveronDown from './SVG/CheveronDown';
-import OutsideClickHandler from 'react-outside-click-handler';
-import { toast } from 'sonner';
-import { cmsClient } from '@/lib/cms-client';
+"use client";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useState,
+  useTransition,
+} from "react";
+import PhoneInput from "react-phone-input-2";
+import CheveronDown from "./SVG/CheveronDown";
+import OutsideClickHandler from "react-outside-click-handler";
+import { toast } from "sonner";
+import { cmsClient } from "@/lib/cms-client";
 
 type Props = {
   setSteps: Dispatch<SetStateAction<boolean>>;
@@ -16,43 +21,39 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
   const [isPending, startTransition] = useTransition();
 
   const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [emailField, setEmailField] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [company, setCompany] = useState('');
-  const [service, setService] = useState('');
-  const [projectLocation, setProjectLocation] = useState('');
-  const [projectBudget, setProjectBudget] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [projectDescription, setProjectDescription] = useState('');
+  const [emailField, setEmailField] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [company, setCompany] = useState("");
+  const [service, setService] = useState("");
+  const [projectLocation, setProjectLocation] = useState("");
+  const [projectBudget, setProjectBudget] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
 
   const [isIndividual, setIsIndividual] = useState(0);
   const [showServices, setShowServices] = useState(false);
+  const [showLocations, setShowLocations] = useState(false);
   const isValidEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
 
   const validateForm = () => {
-    if (firstName && isValidEmail(emailField) && phoneNumber) {
-      return true;
+    // Name and phone are required
+    if (!firstName || !phoneNumber) {
+      return false;
     }
+    // Email is optional, but if provided it must be valid
+    if (emailField && !isValidEmail(emailField)) {
+      return false;
+    }
+    return true;
   };
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
-      // Push GTM event for form submission start
-      if (typeof window !== 'undefined' && (window as any).dataLayer) {
-        (window as any).dataLayer.push({
-          event: 'form_submit_start',
-          form_name: 'contact_form',
-          form_location: 'homepage',
-          user_type: isIndividual === 0 ? 'individual' : 'company',
-          service_interest: service || 'not_specified',
-        });
-      }
-
       startTransition(async () => {
         try {
           // Submit lead to CMS for tracking and scoring
@@ -75,62 +76,69 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
           const result = await cmsClient.submitLead(leadData);
 
           if (result.success) {
-            // Push GTM event for successful form submission
+            // Google Tag Manager - Track successful form submission
             if (typeof window !== 'undefined' && (window as any).dataLayer) {
               (window as any).dataLayer.push({
-                event: 'form_submit_success',
-                form_name: 'contact_form',
-                form_location: 'homepage',
-                user_type: isIndividual === 0 ? 'individual' : 'company',
-                service_interest: service || 'not_specified',
-                lead_score: result.score || 0,
-                is_duplicate: result.duplicate || false,
-                company: company || 'not_specified',
-                has_project_details: !!projectDescription,
-                has_budget: !!projectBudget,
-                has_timeline: !!startDate,
+                event: 'enquiry_form_submit',
+                formType: 'enquiry',
+                formName: 'Project Inquiry Form',
+                formId: 'enquiry-form',
+                formLocale: locale,
+                projectType: service || 'general',
+                projectLocation: projectLocation || 'not specified',
+                leadScore: result.score || 0,
+                value: 2000, // Higher lead value for detailed enquiries
+                currency: 'AED',
+              });
+
+              // Also push as conversion for Google Ads
+              (window as any).dataLayer.push({
+                event: 'conversion',
+                conversionType: 'lead_submission',
+                conversionValue: 2000,
+                currency: 'AED',
               });
             }
 
             // Show success message with lead score info
             if (result.duplicate) {
               toast.success(
-                locale === 'en'
+                locale === "en"
                   ? "Thank you! We've updated your inquiry."
-                  : 'شكراً! تم تحديث استفسارك.',
+                  : "شكراً! تم تحديث استفسارك."
               );
             } else {
               toast.success(
-                locale === 'en'
-                  ? "Thank you! We'll be in touch soon."
-                  : 'شكراً! سنتواصل معك قريباً.',
+                locale === "en"
+                  ? "Thank you! We'll be in touch soon. Check your email for confirmation."
+                  : "شكراً! سنتواصل معك قريباً. تحقق من بريدك الإلكتروني للتأكيد."
               );
             }
 
             // Reset form
-            setFirstName('');
-            setEmailField('');
-            setPhoneNumber('');
-            setCompany('');
-            setService('');
-            setProjectLocation('');
-            setProjectBudget('');
-            setStartDate('');
-            setProjectDescription('');
+            setFirstName("");
+            setEmailField("");
+            setPhoneNumber("");
+            setCompany("");
+            setService("");
+            setProjectLocation("");
+            setProjectBudget("");
+            setStartDate("");
+            setProjectDescription("");
             setSteps(false);
           } else {
             toast.error(
-              locale === 'en'
-                ? 'Error submitting form. Please try again.'
-                : 'خطأ في إرسال النموذج. يرجى المحاولة مرة أخرى.',
+              locale === "en"
+                ? "Error submitting form. Please try again."
+                : "خطأ في إرسال النموذج. يرجى المحاولة مرة أخرى."
             );
           }
         } catch (error) {
-          console.error('Form submission error:', error);
+          console.error("Form submission error:", error);
           toast.error(
-            locale === 'en'
-              ? 'Error submitting form. Please try again later.'
-              : 'خطأ في إرسال النموذج. يرجى المحاولة مرة أخرى لاحقاً.',
+            locale === "en"
+              ? "Error submitting form. Please try again later."
+              : "خطأ في إرسال النموذج. يرجى المحاولة مرة أخرى لاحقاً."
           );
         }
       });
@@ -143,11 +151,13 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
   return (
     <form className="relative h-full" onSubmit={handleFormSubmit}>
       <div
-        className={`space-y-5 transition-all ${!steps ? 'translate-x-0' : 'translate-x-[-100%]'}`}
+        className={`space-y-5 transition-all ${
+          !steps ? "translate-x-0" : "translate-x-[-100%]"
+        }`}
       >
         <input
           className="w-full bg-transparent border border-[#202020] py-5 px-4 border-opacity-[20%] placeholder:text-black font-Satoshi font-light"
-          placeholder={locale === 'en' ? 'First Name *' : 'الاسم الأول *'}
+          placeholder={locale === "en" ? "First Name *" : "الاسم الأول *"}
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
@@ -156,15 +166,17 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
             <p
               className={`text-xs text-red-500 transition ${
                 showErrorMessage && !isValidEmail(emailField)
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-[100%] opacity-0'
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-[100%] opacity-0"
               }`}
             >
-              {locale === 'en' ? 'Email Is not Valid' : 'البريد الإلكتروني غير صحيح'}
+              {locale === "en"
+                ? "Email Is not Valid"
+                : "البريد الإلكتروني غير صحيح"}
             </p>
             <input
               className="w-full bg-transparent border border-[#202020] py-5 px-4 border-opacity-[20%] placeholder:text-black font-Satoshi font-light"
-              placeholder={locale === 'en' ? 'Email *' : 'البريد'}
+              placeholder={locale === "en" ? "Email *" : "البريد"}
               value={emailField}
               onChange={(e) => setEmailField(e.target.value)}
               onBlur={() => {
@@ -173,22 +185,33 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
             />
           </div>
         </div>
-        <PhoneInputWithFlags
-          value={phoneNumber}
-          onChange={(value) => setPhoneNumber(value)}
-          placeholder={locale === 'en' ? 'Phone Number *' : 'رقم الهاتف *'}
-          locale={locale}
-          required={true}
-        />
+        <div className="w-full">
+          <div className="gap-3 flex items-center py-4 px-5 relative border border-[#202020] border-opacity-[20%] placeholder:text-black font-Satoshi font-light w-full">
+            <PhoneInput
+              country={"ae"}
+              containerStyle={{ width: "100%" }}
+              inputStyle={{
+                width: "100%",
+                background: "transparent",
+                border: "none",
+              }}
+              value={phoneNumber}
+              onChange={setPhoneNumber}
+              placeholder={locale === "en" ? "Phone Number *" : "رقم الهاتف *"}
+            />
+            <CheveronDown />
+          </div>
+        </div>
+        <div className="w-full bg-transparent border-[#202020] py-5 px-4 border-opacity-[20%] text-black font-Satoshi font-light flex justify-between items-center"></div>
         <div className="grid 2xl:grid-cols-2 gap-5">
           <div
             className="py-5 px-4 border-[#202020] flex items-center justify-between col-span-1 font-Satoshi font-light border border-opacity-[20%]"
             onClick={() => setIsIndividual(0)}
           >
-            <p className="">{locale === 'en' ? 'Individuals' : 'الأفراد'}</p>
+            <p className="">{locale === "en" ? "Individuals" : "الأفراد"}</p>
             <div
               className={`border w-5 h-5 rounded-full border-[#202020] border-opacity-[20%] ${
-                isIndividual === 0 && 'bg-black'
+                isIndividual === 0 && "bg-black"
               } `}
             ></div>
           </div>
@@ -196,17 +219,17 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
             className="py-5 px-4 border-[#202020] flex items-center justify-between col-span-1 font-Satoshi font-light border border-opacity-[20%]"
             onClick={() => setIsIndividual(1)}
           >
-            <p className="">{locale === 'en' ? 'Company' : 'شركة'}</p>
+            <p className="">{locale === "en" ? "Company" : "شركة"}</p>
             <div
               className={`border w-5 h-5 rounded-full border-[#202020] border-opacity-[20%] ${
-                isIndividual === 1 && 'bg-black'
+                isIndividual === 1 && "bg-black"
               } `}
             ></div>
           </div>
         </div>
         <input
           className="w-full bg-transparent border border-[#202020] py-5 px-4 border-opacity-[20%] placeholder:text-black font-Satoshi font-light"
-          placeholder={locale === 'en' ? 'Company' : 'شركة'}
+          placeholder={locale === "en" ? "Company" : "شركة"}
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
@@ -218,7 +241,11 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
             {service ? (
               <p>{service}</p>
             ) : (
-              <p>{locale === 'en' ? 'Service you are looking for' : 'الخدمة التي تبحث عنها'}</p>
+              <p>
+                {locale === "en"
+                  ? "Service you are looking for"
+                  : "الخدمة التي تبحث عنها"}
+              </p>
             )}
 
             <CheveronDown />
@@ -229,7 +256,7 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
                 <p
                   onClick={() => {
                     setShowServices(false);
-                    setService('Hotels');
+                    setService("Hotels");
                   }}
                   className="py-2 cursor-pointer px-4 hover:bg-gray-100"
                 >
@@ -238,7 +265,7 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
                 <p
                   onClick={() => {
                     setShowServices(false);
-                    setService('RESIDENTIAL');
+                    setService("RESIDENTIAL");
                   }}
                   className="py-2 cursor-pointer px-4 hover:bg-gray-100"
                 >
@@ -247,7 +274,7 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
                 <p
                   onClick={() => {
                     setShowServices(false);
-                    setService('commercial');
+                    setService("commercial");
                   }}
                   className="py-2 cursor-pointer px-4 hover:bg-gray-100"
                 >
@@ -256,7 +283,7 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
                 <p
                   onClick={() => {
                     setShowServices(false);
-                    setService('restaurant');
+                    setService("restaurant");
                   }}
                   className="py-2 cursor-pointer px-4 hover:bg-gray-100"
                 >
@@ -265,7 +292,7 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
                 <p
                   onClick={() => {
                     setShowServices(false);
-                    setService('other');
+                    setService("other");
                   }}
                   className="py-2 cursor-pointer px-4 hover:bg-gray-100"
                 >
@@ -278,13 +305,104 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
       </div>
       <div
         className={`space-y-5 transition-all absolute bottom-0 translate-y-[-50%] w-full ${
-          steps ? 'translate-x-0 translate-y-[-90%]' : 'translate-x-[-100%]'
+          steps ? "translate-x-0 translate-y-[-90%]" : "translate-x-[-100%]"
         }`}
       >
         <div className="space-y-5 w-full">
-          <div className="w-full bg-transparent border border-[#202020] py-5 px-4 border-opacity-[20%] text-black font-Satoshi font-light flex justify-between items-center">
-            <p>Project Location</p>
-            <CheveronDown />
+          <div className="relative">
+            <div
+              onClick={() => setShowLocations(true)}
+              className="relative w-full bg-transparent border border-[#202020] py-5 px-4 border-opacity-[20%] text-black font-Satoshi font-light flex justify-between items-center cursor-pointer"
+            >
+              {projectLocation ? (
+                <p>{projectLocation}</p>
+              ) : (
+                <p>
+                  {locale === "en"
+                    ? "Project Location"
+                    : "موقع المشروع"}
+                </p>
+              )}
+              <CheveronDown />
+            </div>
+            {showLocations && (
+              <OutsideClickHandler onOutsideClick={() => setShowLocations(false)}>
+                <div className="bg-white shadow uppercase absolute w-full z-10">
+                  <p
+                    onClick={() => {
+                      setShowLocations(false);
+                      setProjectLocation("Dubai");
+                    }}
+                    className="py-2 cursor-pointer px-4 hover:bg-gray-100"
+                  >
+                    Dubai
+                  </p>
+                  <p
+                    onClick={() => {
+                      setShowLocations(false);
+                      setProjectLocation("Abu Dhabi");
+                    }}
+                    className="py-2 cursor-pointer px-4 hover:bg-gray-100"
+                  >
+                    Abu Dhabi
+                  </p>
+                  <p
+                    onClick={() => {
+                      setShowLocations(false);
+                      setProjectLocation("Sharjah");
+                    }}
+                    className="py-2 cursor-pointer px-4 hover:bg-gray-100"
+                  >
+                    Sharjah
+                  </p>
+                  <p
+                    onClick={() => {
+                      setShowLocations(false);
+                      setProjectLocation("Ajman");
+                    }}
+                    className="py-2 cursor-pointer px-4 hover:bg-gray-100"
+                  >
+                    Ajman
+                  </p>
+                  <p
+                    onClick={() => {
+                      setShowLocations(false);
+                      setProjectLocation("Ras Al Khaimah");
+                    }}
+                    className="py-2 cursor-pointer px-4 hover:bg-gray-100"
+                  >
+                    Ras Al Khaimah
+                  </p>
+                  <p
+                    onClick={() => {
+                      setShowLocations(false);
+                      setProjectLocation("Fujairah");
+                    }}
+                    className="py-2 cursor-pointer px-4 hover:bg-gray-100"
+                  >
+                    Fujairah
+                  </p>
+                  <p
+                    onClick={() => {
+                      setShowLocations(false);
+                      setProjectLocation("Umm Al Quwain");
+                    }}
+                    className="py-2 cursor-pointer px-4 hover:bg-gray-100"
+                  >
+                    Umm Al Quwain
+                  </p>
+                  <p
+                    onClick={() => {
+                      setShowLocations(false);
+                      setProjectLocation("Other");
+                    }}
+                    className="py-2 cursor-pointer px-4 hover:bg-gray-100"
+                  >
+                    Other
+                  </p>
+                </div>
+              </OutsideClickHandler>
+            )}
           </div>
           <input
             className="w-full bg-transparent border border-[#202020] py-5 px-4 border-opacity-[20%] placeholder:text-black font-Satoshi font-light"
@@ -309,35 +427,37 @@ const ContactFormForm = ({ setSteps, steps, locale }: Props) => {
       </div>
       {!steps && (
         <button
+          type="button"
           onClick={() => {
             setSteps(true);
           }}
           className="bg-[#202020] text-white flex items-center justify-center w-full py-5 font-Satoshi text-base mt-5"
         >
-          {locale === 'en' ? 'Next' : 'التالي'}
+          {locale === "en" ? "Next" : "التالي"}
         </button>
       )}
       {steps && (
         <div className="mt-5 space-y-5 translate-y-[-100%]">
           <button
+            type="button"
             onClick={() => {
               setSteps(false);
             }}
             className="bg-transparent text-black border border-black flex items-center justify-center w-full py-5 font-Satoshi text-base"
           >
-            {locale === 'en' ? 'Previous' : 'السابق'}
+            {locale === "en" ? "Previous" : "السابق"}
           </button>
           <button
             type="submit"
             className="bg-[#202020] text-white flex items-center justify-center w-full py-5 font-Satoshi text-base"
           >
-            {locale === 'en'
+            {locale === "en"
               ? isPending
-                ? 'Submitting...'
-                : 'submit'
+                ? "Submitting..."
+                : "submit"
               : isPending
-                ? 'جارٍ الإرسال'
-                : 'إرسال'}
+              ? "جارٍ الإرسال"
+              : "إرسال"}
           </button>
         </div>
       )}

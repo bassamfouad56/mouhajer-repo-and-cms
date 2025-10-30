@@ -274,81 +274,8 @@ export const blueprintResolvers = {
   },
 
   Mutation: {
-    // Blueprint CRUD operations (for managing blueprints themselves)
-    createBlueprint: async (
-      _: any,
-      { input }: { input: any },
-      { prisma, user }: { prisma: PrismaClient; user: any }
-    ) => {
-      // Only admins can create blueprints
-      if (!user || user.role !== 'admin') {
-        throw new Error('Only admins can create blueprints');
-      }
-
-      return await prisma.contentBlueprint.create({
-        data: {
-          ...input,
-          createdBy: user.id,
-        },
-      });
-    },
-
-    updateBlueprint: async (
-      _: any,
-      { id, input }: { id: string; input: any },
-      { prisma, user }: { prisma: PrismaClient; user: any }
-    ) => {
-      // Only admins can update blueprints
-      if (!user || user.role !== 'admin') {
-        throw new Error('Only admins can update blueprints');
-      }
-
-      // Check if it's a system blueprint
-      const blueprint = await prisma.contentBlueprint.findUnique({
-        where: { id },
-      });
-
-      if (blueprint?.isSystem) {
-        throw new Error('Cannot modify system blueprints');
-      }
-
-      return await prisma.contentBlueprint.update({
-        where: { id },
-        data: input,
-      });
-    },
-
-    deleteBlueprint: async (
-      _: any,
-      { id }: { id: string },
-      { prisma, user }: { prisma: PrismaClient; user: any }
-    ) => {
-      // Only admins can delete blueprints
-      if (!user || user.role !== 'admin') {
-        throw new Error('Only admins can delete blueprints');
-      }
-
-      // Check if it's a system blueprint
-      const blueprint = await prisma.contentBlueprint.findUnique({
-        where: { id },
-      });
-
-      if (blueprint?.isSystem) {
-        throw new Error('Cannot delete system blueprints');
-      }
-
-      // Delete all instances first
-      await prisma.blueprintInstance.deleteMany({
-        where: { blueprintId: id },
-      });
-
-      // Then delete the blueprint
-      await prisma.contentBlueprint.delete({
-        where: { id },
-      });
-
-      return true;
-    },
+    // Blueprint CRUD operations disabled - not in schema
+    // createBlueprint, updateBlueprint, deleteBlueprint removed to fix schema error
   },
 };
 

@@ -1425,10 +1425,27 @@ export default function PagesPage() {
           }}
           onSave={async (updatedBlock) => {
             try {
+              console.log('[BlockEditor] Received updated block:', updatedBlock);
+
               // Update the block in the local state
-              const updatedBlocks = pageBlocks.map(b =>
-                b.id === updatedBlock.id ? updatedBlock : b
-              );
+              const updatedBlocks = pageBlocks.map(b => {
+                if (b.id === updatedBlock.id) {
+                  return updatedBlock;
+                }
+                // Ensure other blocks have blueprintId
+                return {
+                  ...b,
+                  blueprintId: b.blueprintId || b.blueprint?.id
+                };
+              });
+
+              console.log('[BlockEditor] Updated blocks array:', updatedBlocks.map(b => ({
+                id: b.id,
+                blueprintId: b.blueprintId,
+                hasDataEn: !!b.dataEn,
+                hasDataAr: !!b.dataAr
+              })));
+
               setPageBlocks(updatedBlocks);
 
               // Save to the server
@@ -1447,7 +1464,9 @@ export default function PagesPage() {
                   // Show success message (optional)
                   alert('✅ Block updated successfully!');
                 } else {
-                  throw new Error('Failed to save block');
+                  const errorData = await response.json();
+                  console.error('[BlockEditor] API error response:', errorData);
+                  throw new Error(errorData.error || 'Failed to save block');
                 }
               }
             } catch (error) {

@@ -30,7 +30,21 @@
       "Bash(git reset:*)",
       "Bash(npm run build:cms:*)",
       "Bash(git restore:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(kill:*)",
+      "Bash(PRISMA_DATABASE_URL=\"postgres://e4ee3832cf33bd87ffd178badf51af5f2fd4e07fe3e070ddfd435f08dcd1a5ae:sk_dMe_zwcCq8eyk9aRO0eB4@db.prisma.io:5432/postgres?sslmode=require\" npx tsx:*)",
+      "Bash(pkill:*)",
+      "Bash(bash EMERGENCY_FIX.sh)",
+      "Bash(timeout 5 curl:*)",
+      "Read(//tmp/**)",
+      "Bash(xargs ps:*)",
+      "Read(//Users/bassamfouad/Downloads/**)",
+      "Bash(npx:*)",
+      "Bash(python3:*)",
+      "Bash(DATABASE_URL=\"postgres://e4ee3832cf33bd87ffd178badf51af5f2fd4e07fe3e070ddfd435f08dcd1a5ae:sk_dMe_zwcCq8eyk9aRO0eB4@db.prisma.io:5432/postgres?sslmode=require\" npx tsx:*)",
+      "Bash(awk:*)",
+      "Bash(nc:*)",
+      "Bash(/dev/null)"
     ],
     "deny": [],
     "ask": []

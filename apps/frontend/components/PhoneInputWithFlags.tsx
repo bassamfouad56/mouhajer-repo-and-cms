@@ -142,78 +142,93 @@ const PhoneInputWithFlags: React.FC<PhoneInputWithFlagsProps> = ({
   };
 
   return (
-    <div className={`relative flex w-full ${className}`}>
-      {/* Country Code Dropdown */}
-      <div className="relative">
-        <button
-          type="button"
-          onClick={() => setShowDropdown(!showDropdown)}
-          className="h-full bg-transparent border border-[#202020] border-r-0 py-5 px-3 border-opacity-[20%] font-Satoshi font-light flex items-center gap-2 hover:bg-gray-50 transition-colors"
-        >
-          <span className="text-2xl">{selectedCountry.flag}</span>
-          <span className="text-sm font-medium">{selectedCountry.dial}</span>
-          <div className={`transition-transform ${showDropdown ? 'rotate-180' : ''}`}>
-            <CheveronDown />
-          </div>
-        </button>
-
-        {/* Dropdown Menu */}
-        {showDropdown && (
-          <OutsideClickHandler onOutsideClick={() => {
-            setShowDropdown(false);
-            setSearchQuery('');
-          }}>
-            <div className="absolute top-full left-0 mt-1 w-72 bg-white border border-[#202020] border-opacity-[20%] shadow-lg z-50 max-h-96 overflow-hidden flex flex-col">
-              {/* Search Input */}
-              <div className="p-3 border-b border-[#202020] border-opacity-[20%]">
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={locale === 'en' ? 'Search country...' : 'البحث عن بلد...'}
-                  className="w-full px-3 py-2 bg-transparent border border-[#202020] border-opacity-[20%] font-Satoshi font-light placeholder:text-gray-500"
-                />
-              </div>
-
-              {/* Countries List */}
-              <div className="overflow-y-auto max-h-80">
-                {filteredCountries.map((country) => (
-                  <button
-                    key={country.code}
-                    type="button"
-                    onClick={() => handleCountrySelect(country)}
-                    className={`w-full px-3 py-3 flex items-center gap-3 hover:bg-gray-50 transition-colors font-Satoshi font-light text-left ${
-                      selectedCountry.code === country.code ? 'bg-gray-100' : ''
-                    }`}
-                  >
-                    <span className="text-2xl">{country.flag}</span>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium">{country.name}</span>
-                        <span className="text-sm text-gray-600">{country.dial}</span>
-                      </div>
-                    </div>
-                    {selectedCountry.code === country.code && (
-                      <div className="w-2 h-2 rounded-full bg-black"></div>
-                    )}
-                  </button>
-                ))}
-              </div>
+    <div className={`relative w-full ${className}`}>
+      <div className="flex items-stretch w-full border border-[#202020] border-opacity-[20%] bg-transparent">
+        {/* Country Code Dropdown */}
+        <div className="relative flex-shrink-0">
+          <button
+            type="button"
+            onClick={() => setShowDropdown(!showDropdown)}
+            className="h-full bg-transparent px-4 flex items-center gap-2 hover:bg-gray-50/50 transition-colors border-r border-[#202020] border-opacity-[20%] min-w-[110px]"
+          >
+            <span className="text-xl leading-none">{selectedCountry.flag}</span>
+            <span className="text-sm font-normal" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+              {selectedCountry.dial}
+            </span>
+            <div className={`transition-transform duration-200 ml-auto ${showDropdown ? 'rotate-180' : ''}`}>
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
-          </OutsideClickHandler>
-        )}
-      </div>
+          </button>
 
-      {/* Phone Number Input */}
-      <input
-        type="tel"
-        value={formatPhoneNumber(phoneNumber)}
-        onChange={handlePhoneChange}
-        placeholder={placeholder}
-        required={required}
-        className="flex-1 bg-transparent border border-[#202020] border-l-0 py-5 px-4 border-opacity-[20%] placeholder:text-black font-Satoshi font-light"
-      />
+          {/* Dropdown Menu */}
+          {showDropdown && (
+            <OutsideClickHandler onOutsideClick={() => {
+              setShowDropdown(false);
+              setSearchQuery('');
+            }}>
+              <div className="absolute top-full left-0 mt-2 w-80 bg-white border border-[#202020] border-opacity-[20%] shadow-xl z-[9999] rounded-sm overflow-hidden">
+                {/* Search Input */}
+                <div className="p-3 border-b border-[#202020] border-opacity-[10%] bg-gray-50/30">
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={locale === 'en' ? 'Search...' : 'بحث...'}
+                    className="w-full px-3 py-2 bg-white border border-[#202020] border-opacity-[20%] font-Satoshi font-light text-sm placeholder:text-gray-400 focus:outline-none focus:border-opacity-[40%]"
+                  />
+                </div>
+
+                {/* Countries List */}
+                <div className="overflow-y-auto max-h-72">
+                  {filteredCountries.length === 0 ? (
+                    <div className="px-4 py-8 text-center text-sm text-gray-500 font-Satoshi">
+                      {locale === 'en' ? 'No countries found' : 'لا توجد دول'}
+                    </div>
+                  ) : (
+                    filteredCountries.map((country) => (
+                      <button
+                        key={country.code}
+                        type="button"
+                        onClick={() => handleCountrySelect(country)}
+                        className={`w-full px-4 py-2.5 flex items-center gap-3 hover:bg-gray-50 transition-colors text-left ${
+                          selectedCountry.code === country.code ? 'bg-gray-100' : ''
+                        }`}
+                      >
+                        <span className="text-xl leading-none">{country.flag}</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-sm font-normal truncate">{country.name}</span>
+                            <span className="text-sm text-gray-600 font-normal flex-shrink-0" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+                              {country.dial}
+                            </span>
+                          </div>
+                        </div>
+                        {selectedCountry.code === country.code && (
+                          <div className="w-1.5 h-1.5 rounded-full bg-black flex-shrink-0"></div>
+                        )}
+                      </button>
+                    ))
+                  )}
+                </div>
+              </div>
+            </OutsideClickHandler>
+          )}
+        </div>
+
+        {/* Phone Number Input */}
+        <input
+          type="tel"
+          value={formatPhoneNumber(phoneNumber)}
+          onChange={handlePhoneChange}
+          placeholder={placeholder}
+          required={required}
+          className="flex-1 bg-transparent py-5 px-4 placeholder:text-black font-Satoshi font-light outline-none"
+          style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+        />
+      </div>
     </div>
   );
 };
