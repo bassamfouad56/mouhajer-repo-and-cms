@@ -1,19 +1,117 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Project } from '@/lib/wordpress';
-import { ArrowLeft, MapPin, Calendar, Tag, Maximize2, Share2 } from 'lucide-react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import {
+  ArrowLeft,
+  ArrowRight,
+  MapPin,
+  Calendar,
+  Tag,
+  Maximize2,
+  Share2,
+  Ruler,
+  User,
+  Building,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  Home,
+  Briefcase,
+  Layers,
+  FileText
+} from 'lucide-react';
 import { ImageGalleryModal } from '@/components/image-gallery-modal';
 
 interface ProjectPageClientProps {
   project: Project;
+  relatedProjects?: Project[];
+  allProjects?: Project[];
 }
 
-export function EnhancedProjectPageClient({ project }: ProjectPageClientProps) {
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      damping: 20,
+      stiffness: 80,
+    },
+  },
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      damping: 15,
+      stiffness: 100,
+    },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+// Section component with reveal
+function Section({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.15,
+  });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={inView ? 'visible' : 'hidden'}
+      variants={fadeInUp}
+      transition={{ delay: delay * 0.1 }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function EnhancedProjectPageClient({
+  project,
+  relatedProjects = [],
+  allProjects = []
+}: ProjectPageClientProps) {
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const heroOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
+  const heroScale = useTransform(smoothProgress, [0, 0.3], [1, 1.1]);
 
   const handleImageClick = (index: number) => {
     setSelectedImageIndex(index);
@@ -32,280 +130,535 @@ export function EnhancedProjectPageClient({ project }: ProjectPageClientProps) {
         console.log('Error sharing:', error);
       }
     } else {
-      // Fallback: Copy to clipboard
       navigator.clipboard.writeText(window.location.href);
       alert('Link copied to clipboard!');
     }
   };
 
+  // Find next/previous projects
+  const currentIndex = allProjects.findIndex(p => p.id === project.id);
+  const previousProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
+  const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
+
+  const galleryImages = project.acfFields?.gallery || [];
+
   return (
     <>
-      <main className="relative bg-white">
-        {/* Enhanced Hero Section */}
-        <section className="relative min-h-[70vh] overflow-hidden bg-neutral-950">
-          <div className="absolute inset-0">
+      {/* Progress indicator */}
+      <motion.div
+        className="fixed left-0 top-0 z-50 h-1 bg-neutral-950 origin-left"
+        style={{ scaleX: smoothProgress }}
+      />
+
+      <main ref={containerRef} className="relative bg-neutral-50">
+        {/* Immersive Hero with Parallax */}
+        <section className="relative h-screen overflow-hidden bg-neutral-950">
+          <motion.div
+            className="absolute inset-0"
+            style={{ opacity: heroOpacity, scale: heroScale }}
+          >
             {project.featuredImage?.node?.sourceUrl && (
               <Image
                 src={project.featuredImage.node.sourceUrl}
                 alt={project.title}
                 fill
-                className="object-cover opacity-40"
+                className="object-cover"
                 priority
+                quality={90}
               />
             )}
-            <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/50 via-neutral-950/70 to-neutral-950" />
-          </div>
+            <div className="absolute inset-0 bg-linear-to-br from-neutral-950/60 via-neutral-950/40 to-neutral-950/80" />
+          </motion.div>
 
-          {/* Decorative elements */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px]" />
+          {/* Grid overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-size-[80px_80px]" />
 
-          <div className="relative z-10 mx-auto flex min-h-[70vh] max-w-[1400px] flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-24">
-            {/* Breadcrumb */}
-            <div className="mb-8 flex items-center gap-3 text-sm font-light text-neutral-400">
+          <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-6 py-12 lg:px-12">
+            {/* Top Navigation */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center justify-between"
+            >
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-2 transition-colors hover:text-white"
+                className="group inline-flex items-center gap-2 text-sm font-light text-white/80 transition-colors hover:text-white"
               >
-                <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
-                PROJECTS
+                <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+                <span className="tracking-wider">BACK TO PROJECTS</span>
               </Link>
-              <span>/</span>
-              <span className="text-neutral-500">{project.acfFields?.projectType || 'Project'}</span>
-            </div>
 
-            {/* Category Badge */}
-            {project.acfFields?.projectType && (
-              <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-light tracking-wider text-white backdrop-blur-sm">
-                <Tag size={14} />
-                {project.acfFields.projectType}
-              </div>
-            )}
+              <motion.button
+                onClick={handleShare}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-light text-white backdrop-blur-sm transition-all hover:bg-white/20"
+              >
+                <Share2 size={14} />
+                <span>Share</span>
+              </motion.button>
+            </motion.div>
 
-            {/* Title */}
-            <h1 className="mb-6 max-w-4xl text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl">
-              {project.title}
-            </h1>
+            {/* Hero Content */}
+            <div className="space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                {project.acfFields?.projectType && (
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-light tracking-[0.2em] text-white backdrop-blur-sm">
+                    <Tag size={12} />
+                    {project.acfFields.projectType.toUpperCase()}
+                  </div>
+                )}
 
-            {/* Meta Information */}
-            <div className="mb-8 flex flex-wrap gap-6 text-sm font-light text-neutral-300">
-              {project.acfFields?.location && (
-                <div className="flex items-center gap-2">
-                  <MapPin size={16} className="text-neutral-500" />
-                  {project.acfFields.location}
+                <div className="overflow-hidden">
+                  <motion.h1
+                    initial={{ y: 100 }}
+                    animate={{ y: 0 }}
+                    transition={{ delay: 0.5, type: 'spring', damping: 20 }}
+                    className="font-light leading-[0.95] tracking-tight text-white"
+                    style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)' }}
+                  >
+                    {project.title}
+                  </motion.h1>
                 </div>
-              )}
-              {project.acfFields?.yearCompleted && (
-                <div className="flex items-center gap-2">
-                  <Calendar size={16} className="text-neutral-500" />
-                  {project.acfFields.yearCompleted}
-                </div>
-              )}
-            </div>
+              </motion.div>
 
-            {/* Share Button */}
-            <button
-              onClick={handleShare}
-              className="inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-light text-white backdrop-blur-sm transition-all hover:bg-white hover:text-neutral-950"
-            >
-              <Share2 size={16} />
-              <span>SHARE PROJECT</span>
-            </button>
+              {/* Meta Grid */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-6"
+              >
+                {project.acfFields?.location && (
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+                    <MapPin className="mb-2 h-4 w-4 text-white/60" />
+                    <div className="text-xs font-light tracking-wider text-white/40">LOCATION</div>
+                    <div className="mt-1 font-light text-white">{project.acfFields.location}</div>
+                  </div>
+                )}
+
+                {project.acfFields?.yearCompleted && (
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+                    <Calendar className="mb-2 h-4 w-4 text-white/60" />
+                    <div className="text-xs font-light tracking-wider text-white/40">YEAR</div>
+                    <div className="mt-1 font-light text-white">{project.acfFields.yearCompleted}</div>
+                  </div>
+                )}
+
+                {project.acfFields?.area && (
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+                    <Ruler className="mb-2 h-4 w-4 text-white/60" />
+                    <div className="text-xs font-light tracking-wider text-white/40">AREA</div>
+                    <div className="mt-1 font-light text-white">{project.acfFields.area} m²</div>
+                  </div>
+                )}
+
+                {project.acfFields?.client && (
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+                    <User className="mb-2 h-4 w-4 text-white/60" />
+                    <div className="text-xs font-light tracking-wider text-white/40">CLIENT</div>
+                    <div className="mt-1 font-light text-white">{project.acfFields.client}</div>
+                  </div>
+                )}
+              </motion.div>
+
+              {/* Scroll indicator */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 1 }}
+                className="flex items-center gap-3 text-sm font-light text-white/60"
+              >
+                <div className="h-px w-12 bg-white/20" />
+                <span className="tracking-wider">SCROLL TO EXPLORE</span>
+              </motion.div>
+            </div>
           </div>
         </section>
+
+        {/* Project Description Section */}
+        <Section delay={0}>
+          <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12 lg:py-32">
+            <div className="grid gap-12 lg:grid-cols-12 lg:gap-24">
+              <div className="lg:col-span-5">
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="mb-4 text-sm font-light tracking-[0.3em] text-neutral-400"
+                >
+                  OVERVIEW
+                </motion.h2>
+                <motion.h3
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl"
+                >
+                  Project Vision
+                </motion.h3>
+              </div>
+
+              <div className="lg:col-span-7">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="space-y-6 border-l border-neutral-200 pl-8 text-lg font-light leading-relaxed text-neutral-600"
+                >
+                  <p>{project.acfFields?.projectDescription || project.excerpt}</p>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* Full-Width Gallery Section */}
+        {galleryImages.length > 0 && (
+          <Section delay={1}>
+            <div className="relative bg-neutral-950 py-24 lg:py-32">
+              <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="mb-12 text-center"
+                >
+                  <h2 className="mb-4 text-sm font-light tracking-[0.3em] text-white/60">
+                    GALLERY
+                  </h2>
+                  <h3 className="text-4xl font-light tracking-tight text-white lg:text-5xl">
+                    Project Showcase
+                  </h3>
+                </motion.div>
+
+                {/* Gallery Grid */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={staggerContainer}
+                  className="grid gap-4 md:grid-cols-2 lg:gap-6"
+                >
+                  {galleryImages.slice(0, 4).map((image, index) => (
+                    <motion.div
+                      key={index}
+                      variants={fadeInUp}
+                      className={`group relative cursor-pointer overflow-hidden rounded-2xl ${
+                        index === 0 ? 'md:col-span-2' : ''
+                      } ${index === 0 ? 'aspect-[21/9]' : 'aspect-[4/3]'}`}
+                      onClick={() => handleImageClick(index)}
+                    >
+                      <Image
+                        src={image.sourceUrl}
+                        alt={image.altText || `Gallery image ${index + 1}`}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-neutral-950/0 transition-colors duration-500 group-hover:bg-neutral-950/40" />
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileHover={{ opacity: 1, scale: 1 }}
+                        className="absolute inset-0 flex items-center justify-center"
+                      >
+                        <div className="rounded-full bg-white/20 p-4 backdrop-blur-sm">
+                          <Maximize2 className="h-6 w-6 text-white" />
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+
+                {galleryImages.length > 4 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-8 text-center"
+                  >
+                    <button
+                      onClick={() => handleImageClick(0)}
+                      className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 font-light text-white backdrop-blur-sm transition-all hover:bg-white/20"
+                    >
+                      <span>View All {galleryImages.length} Images</span>
+                      <Maximize2 size={16} />
+                    </button>
+                  </motion.div>
+                )}
+              </div>
+            </div>
+          </Section>
+        )}
 
         {/* Content Section */}
-        <section className="px-6 py-20 lg:px-12 lg:py-32">
-          <div className="mx-auto max-w-[1400px]">
-            <div className="grid gap-16 lg:grid-cols-12 lg:gap-24">
-              {/* Main Content */}
-              <div className="lg:col-span-8">
-                {/* Project Overview with better styling */}
-                {project.acfFields?.projectDescription && (
-                  <div className="mb-16">
-                    <div className="mb-6 flex items-center gap-4">
-                      <div className="h-px w-12 bg-neutral-300" />
-                      <h2 className="text-sm font-light tracking-[0.3em] text-neutral-500">
-                        PROJECT OVERVIEW
-                      </h2>
+        {project.content && (
+          <Section delay={2}>
+            <div className="mx-auto max-w-4xl px-6 py-24 lg:px-12 lg:py-32">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="prose prose-lg prose-neutral max-w-none font-light"
+                dangerouslySetInnerHTML={{ __html: project.content }}
+              />
+            </div>
+          </Section>
+        )}
+
+        {/* Navigation Hub Section */}
+        <Section delay={3}>
+          <div className="border-t border-neutral-200 bg-white px-6 py-24 lg:px-12 lg:py-32">
+            <div className="mx-auto max-w-7xl">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="mb-12 text-center text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl"
+              >
+                Explore More
+              </motion.h2>
+
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {/* Services */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <Link
+                    href="/services"
+                    className="group block h-full rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-neutral-300 hover:shadow-xl"
+                  >
+                    <div className="mb-4 inline-flex rounded-full bg-neutral-950 p-3">
+                      <Briefcase className="h-6 w-6 text-white" />
                     </div>
-                    <p className="text-xl font-light leading-relaxed text-neutral-700">
-                      {project.acfFields.projectDescription}
+                    <h3 className="mb-2 text-xl font-light text-neutral-950">Our Services</h3>
+                    <p className="mb-4 font-light text-neutral-600">
+                      Discover our comprehensive design solutions
                     </p>
-                  </div>
-                )}
-
-                {/* Rich Content */}
-                {project.content && (
-                  <div className="mb-16">
-                    <div
-                      className="prose prose-lg prose-neutral max-w-none font-light
-                        prose-headings:mb-4 prose-headings:mt-12 prose-headings:font-light prose-headings:tracking-tight prose-headings:text-neutral-950
-                        prose-h2:text-3xl prose-h3:text-2xl
-                        prose-p:mb-6 prose-p:leading-relaxed prose-p:text-neutral-700
-                        prose-ul:my-6 prose-ul:space-y-2
-                        prose-li:text-neutral-700
-                        prose-a:font-normal prose-a:text-neutral-950 prose-a:underline prose-a:decoration-neutral-300 prose-a:transition-colors hover:prose-a:decoration-neutral-950"
-                      dangerouslySetInnerHTML={{ __html: project.content }}
-                    />
-                  </div>
-                )}
-
-                {/* Interactive Gallery */}
-                {project.acfFields?.gallery && project.acfFields.gallery.length > 0 && (
-                  <div className="mt-20">
-                    <div className="mb-12 flex items-center gap-4">
-                      <div className="h-px w-12 bg-neutral-300" />
-                      <h2 className="text-sm font-light tracking-[0.3em] text-neutral-500">
-                        PROJECT GALLERY
-                      </h2>
-                      <div className="h-px flex-1 bg-neutral-300" />
+                    <div className="inline-flex items-center gap-2 text-sm font-light text-neutral-950 transition-transform group-hover:translate-x-2">
+                      <span>Explore</span>
+                      <ArrowRight size={14} />
                     </div>
+                  </Link>
+                </motion.div>
 
-                    {/* Gallery Grid */}
-                    <div className="grid gap-8 md:grid-cols-2">
-                      {project.acfFields.gallery.map((image, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleImageClick(index)}
-                          className="group relative aspect-[4/3] overflow-hidden bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950"
-                        >
-                          <Image
-                            src={image.sourceUrl}
-                            alt={image.altText || `Gallery image ${index + 1}`}
-                            fill
-                            className="object-cover transition-all duration-700 group-hover:scale-110"
-                          />
-
-                          {/* Hover Overlay */}
-                          <div className="absolute inset-0 bg-neutral-950/0 transition-all duration-500 group-hover:bg-neutral-950/40" />
-
-                          {/* Expand Icon */}
-                          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-                            <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-white bg-neutral-950/50 backdrop-blur-sm">
-                              <Maximize2 className="text-white" size={24} />
-                            </div>
-                          </div>
-
-                          {/* Image Caption on Hover */}
-                          {image.altText && (
-                            <div className="absolute bottom-0 left-0 right-0 translate-y-full bg-gradient-to-t from-neutral-950/90 to-transparent p-6 transition-all duration-500 group-hover:translate-y-0">
-                              <p className="text-sm font-light text-white">
-                                {image.altText}
-                              </p>
-                            </div>
-                          )}
-
-                          {/* Image Number Badge */}
-                          <div className="absolute left-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-neutral-950/50 text-xs font-light text-white backdrop-blur-sm">
-                            {index + 1}
-                          </div>
-                        </button>
-                      ))}
+                {/* Industries */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <Link
+                    href="/industries"
+                    className="group block h-full rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-neutral-300 hover:shadow-xl"
+                  >
+                    <div className="mb-4 inline-flex rounded-full bg-neutral-950 p-3">
+                      <Layers className="h-6 w-6 text-white" />
                     </div>
-
-                    {/* Gallery Note */}
-                    <p className="mt-6 text-center text-sm font-light text-neutral-500">
-                      Click on any image to view in fullscreen • Use arrow keys to navigate
+                    <h3 className="mb-2 text-xl font-light text-neutral-950">Industries</h3>
+                    <p className="mb-4 font-light text-neutral-600">
+                      Explore our expertise across sectors
                     </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Enhanced Sidebar */}
-              <div className="lg:col-span-4">
-                <div className="sticky top-24 space-y-8">
-                  {/* Project Details Card */}
-                  <div className="rounded-sm border border-neutral-200 bg-neutral-50 p-8">
-                    <h3 className="mb-6 text-sm font-light tracking-[0.3em] text-neutral-500">
-                      PROJECT DETAILS
-                    </h3>
-
-                    <div className="space-y-6">
-                      {project.acfFields?.projectType && (
-                        <div>
-                          <div className="mb-2 text-xs font-light tracking-wider text-neutral-500">
-                            CATEGORY
-                          </div>
-                          <div className="text-lg font-light text-neutral-950">
-                            {project.acfFields.projectType}
-                          </div>
-                        </div>
-                      )}
-
-                      {project.acfFields?.location && (
-                        <div>
-                          <div className="mb-2 text-xs font-light tracking-wider text-neutral-500">
-                            LOCATION
-                          </div>
-                          <div className="text-lg font-light text-neutral-950">
-                            {project.acfFields.location}
-                          </div>
-                        </div>
-                      )}
-
-                      {project.acfFields?.yearCompleted && (
-                        <div>
-                          <div className="mb-2 text-xs font-light tracking-wider text-neutral-500">
-                            YEAR COMPLETED
-                          </div>
-                          <div className="text-lg font-light text-neutral-950">
-                            {project.acfFields.yearCompleted}
-                          </div>
-                        </div>
-                      )}
-
-                      {project.acfFields?.gallery && (
-                        <div>
-                          <div className="mb-2 text-xs font-light tracking-wider text-neutral-500">
-                            IMAGES
-                          </div>
-                          <div className="text-lg font-light text-neutral-950">
-                            {project.acfFields.gallery.length} Photos
-                          </div>
-                        </div>
-                      )}
+                    <div className="inline-flex items-center gap-2 text-sm font-light text-neutral-950 transition-transform group-hover:translate-x-2">
+                      <span>Explore</span>
+                      <ArrowRight size={14} />
                     </div>
-                  </div>
+                  </Link>
+                </motion.div>
 
-                  {/* CTA Card */}
-                  <div className="rounded-sm border border-neutral-200 bg-white p-8">
-                    <h3 className="mb-4 text-xl font-light tracking-tight text-neutral-950">
-                      Inspired by this project?
-                    </h3>
-                    <p className="mb-6 text-sm font-light leading-relaxed text-neutral-600">
-                      Let&apos;s discuss how we can create something equally exceptional for your space.
+                {/* Blog */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <Link
+                    href="/blog"
+                    className="group block h-full rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-neutral-300 hover:shadow-xl"
+                  >
+                    <div className="mb-4 inline-flex rounded-full bg-neutral-950 p-3">
+                      <FileText className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="mb-2 text-xl font-light text-neutral-950">Insights</h3>
+                    <p className="mb-4 font-light text-neutral-600">
+                      Read our latest design thoughts
                     </p>
+                    <div className="inline-flex items-center gap-2 text-sm font-light text-neutral-950 transition-transform group-hover:translate-x-2">
+                      <span>Read</span>
+                      <ArrowRight size={14} />
+                    </div>
+                  </Link>
+                </motion.div>
 
-                    <Link
-                      href="/#contact"
-                      className="group relative block overflow-hidden border-2 border-neutral-950 px-6 py-4 text-center text-sm font-light tracking-widest text-neutral-950 transition-all hover:text-white"
-                    >
-                      <span className="relative z-10">START YOUR PROJECT</span>
-                      <div className="absolute inset-0 -translate-x-full bg-neutral-950 transition-transform duration-300 group-hover:translate-x-0" />
-                    </Link>
-
-                    <Link
-                      href="/projects"
-                      className="mt-4 block text-center text-sm font-light tracking-wider text-neutral-500 transition-colors hover:text-neutral-950"
-                    >
-                      VIEW MORE PROJECTS
-                    </Link>
-                  </div>
-                </div>
+                {/* All Projects */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <Link
+                    href="/projects"
+                    className="group block h-full rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-neutral-300 hover:shadow-xl"
+                  >
+                    <div className="mb-4 inline-flex rounded-full bg-neutral-950 p-3">
+                      <Building className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="mb-2 text-xl font-light text-neutral-950">All Projects</h3>
+                    <p className="mb-4 font-light text-neutral-600">
+                      View our complete portfolio
+                    </p>
+                    <div className="inline-flex items-center gap-2 text-sm font-light text-neutral-950 transition-transform group-hover:translate-x-2">
+                      <span>Browse</span>
+                      <ArrowRight size={14} />
+                    </div>
+                  </Link>
+                </motion.div>
               </div>
             </div>
           </div>
-        </section>
+        </Section>
+
+        {/* Related Projects */}
+        {relatedProjects.length > 0 && (
+          <Section delay={4}>
+            <div className="bg-neutral-50 px-6 py-24 lg:px-12 lg:py-32">
+              <div className="mx-auto max-w-7xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="mb-12"
+                >
+                  <h2 className="mb-4 text-sm font-light tracking-[0.3em] text-neutral-400">
+                    RELATED WORK
+                  </h2>
+                  <h3 className="text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
+                    Similar Projects
+                  </h3>
+                </motion.div>
+
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  {relatedProjects.slice(0, 3).map((relatedProject, index) => (
+                    <motion.div
+                      key={relatedProject.id}
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Link
+                        href={`/projects/${relatedProject.slug}`}
+                        className="group block"
+                      >
+                        <div className="mb-4 aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-200">
+                          {relatedProject.featuredImage?.node?.sourceUrl && (
+                            <Image
+                              src={relatedProject.featuredImage.node.sourceUrl}
+                              alt={relatedProject.title}
+                              width={600}
+                              height={450}
+                              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                          )}
+                        </div>
+                        <div className="space-y-2">
+                          {relatedProject.acfFields?.projectType && (
+                            <div className="text-xs font-light tracking-wider text-neutral-400">
+                              {relatedProject.acfFields.projectType.toUpperCase()}
+                            </div>
+                          )}
+                          <h4 className="text-xl font-light text-neutral-950 transition-colors group-hover:text-neutral-600">
+                            {relatedProject.title}
+                          </h4>
+                          {relatedProject.acfFields?.location && (
+                            <div className="flex items-center gap-2 text-sm font-light text-neutral-600">
+                              <MapPin size={14} />
+                              {relatedProject.acfFields.location}
+                            </div>
+                          )}
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Section>
+        )}
+
+        {/* Next/Previous Navigation */}
+        <div className="border-t border-neutral-200 bg-white">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid md:grid-cols-2">
+              {/* Previous Project */}
+              {previousProject && (
+                <Link
+                  href={`/projects/${previousProject.slug}`}
+                  className="group relative overflow-hidden border-b border-neutral-200 p-12 transition-colors hover:bg-neutral-50 md:border-b-0 md:border-r"
+                >
+                  <div className="relative z-10">
+                    <div className="mb-4 inline-flex items-center gap-2 text-sm font-light text-neutral-400">
+                      <ChevronLeft size={16} />
+                      <span className="tracking-wider">PREVIOUS PROJECT</span>
+                    </div>
+                    <h3 className="mb-2 text-2xl font-light text-neutral-950 transition-colors group-hover:text-neutral-600">
+                      {previousProject.title}
+                    </h3>
+                    {previousProject.acfFields?.projectType && (
+                      <div className="text-sm font-light text-neutral-500">
+                        {previousProject.acfFields.projectType}
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              )}
+
+              {/* Next Project */}
+              {nextProject && (
+                <Link
+                  href={`/projects/${nextProject.slug}`}
+                  className="group relative overflow-hidden p-12 transition-colors hover:bg-neutral-50"
+                >
+                  <div className="relative z-10 text-right">
+                    <div className="mb-4 inline-flex items-center gap-2 text-sm font-light text-neutral-400">
+                      <span className="tracking-wider">NEXT PROJECT</span>
+                      <ChevronRight size={16} />
+                    </div>
+                    <h3 className="mb-2 text-2xl font-light text-neutral-950 transition-colors group-hover:text-neutral-600">
+                      {nextProject.title}
+                    </h3>
+                    {nextProject.acfFields?.projectType && (
+                      <div className="text-sm font-light text-neutral-500">
+                        {nextProject.acfFields.projectType}
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
       </main>
 
-      {/* Image Gallery Modal */}
-      {galleryOpen && project.acfFields?.gallery && (
-        <ImageGalleryModal
-          images={project.acfFields.gallery}
-          initialIndex={selectedImageIndex}
-          onClose={() => setGalleryOpen(false)}
-        />
-      )}
+      {/* Gallery Modal */}
+      <ImageGalleryModal
+        images={galleryImages}
+        isOpen={galleryOpen}
+        onClose={() => setGalleryOpen(false)}
+        initialIndex={selectedImageIndex}
+      />
     </>
   );
 }

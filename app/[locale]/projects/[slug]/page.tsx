@@ -237,20 +237,39 @@ export const dynamicParams = true;
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   let project = await getProjectBySlug(slug);
+  let allProjects = await getProjects();
 
-  if (!project) {
+  if (!project || allProjects.length === 0) {
     const placeholderProjects = getPlaceholderProjects();
-    project = placeholderProjects.find(p => p.slug === slug) || null;
+    if (!project) {
+      project = placeholderProjects.find(p => p.slug === slug) || null;
+    }
+    if (allProjects.length === 0) {
+      allProjects = placeholderProjects;
+    }
   }
 
   if (!project) {
     notFound();
   }
 
+  // Find related projects (same type/category)
+  const relatedProjects = allProjects
+    .filter(
+      (p) =>
+        p.id !== project.id &&
+        p.acfFields?.projectType === project.acfFields?.projectType
+    )
+    .slice(0, 3);
+
   return (
     <>
       <Header />
-      <EnhancedProjectPageClient project={project} />
+      <EnhancedProjectPageClient
+        project={project}
+        relatedProjects={relatedProjects}
+        allProjects={allProjects}
+      />
       <Footer />
     </>
   );
