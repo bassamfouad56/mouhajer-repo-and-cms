@@ -318,7 +318,7 @@ export function Contact() {
 
                   {submitStatus === 'success' && (
                     <p className="mt-4 text-sm font-light text-green-600">
-                      ✓ Message sent successfully! We'll get back to you soon.
+                      ✓ Message sent successfully! We&apos;ll get back to you soon.
                     </p>
                   )}
                   {submitStatus === 'error' && (

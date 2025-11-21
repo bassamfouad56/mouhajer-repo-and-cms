@@ -1,0 +1,125 @@
+{
+  "Common": {
+    "viewAll": "View All",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "readMore": "Read More",
+    "exploreService": "Explore Service",
+    "scheduleConsultation": "Schedule a Consultation"
+  },
+  "Header": {
+    "home": "Home",
+    "services": "Services",
+    "projects": "Projects",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "Hero": {
+    "title": "Transform Your Space into a Work of Art",
+    "subtitle": "Award-winning interior design, fitout solutions, and construction management",
+    "description": "Creating extraordinary spaces that inspire, innovate, and elevate your lifestyle. From concept to completion, we bring your vision to life with unparalleled expertise and attention to detail.",
+    "ctaPrimary": "Start Your Project",
+    "ctaSecondary": "View Portfolio"
+  },
+  "Services": {
+    "heading": "Our Services",
+    "title": "What We Offer",
+    "description": "From concept to completion, we deliver excellence in Interior Design, Fitout Solutions, and Construction Management.",
+    "interiorDesign": {
+      "title": "Interior Design",
+      "description": "Complete interior design solutions that blend aesthetics with functionality. We create bespoke spaces that reflect your personality and lifestyle, from concept development to final styling."
+    },
+    "fitoutSolutions": {
+      "title": "Fitout Solutions",
+      "description": "Professional fitout services for residential and commercial spaces. Our team handles everything from space planning to installation, ensuring quality and efficiency at every step."
+    },
+    "constructionManagement": {
+      "title": "Construction Management",
+      "description": "End-to-end construction management services that ensure your project is delivered on time, within budget, and to the highest standards of quality and craftsmanship."
+    }
+  },
+  "Process": {
+    "heading": "Our Process",
+    "title": "How We Work",
+    "description": "Our proven six-step process ensures every project is executed with precision, creativity, and unwavering attention to detail",
+    "cta": "Ready to start your design journey?",
+    "ctaButton": "Schedule a Consultation",
+    "steps": {
+      "discovery": {
+        "title": "Discovery & Consultation",
+        "description": "We begin by understanding your vision, lifestyle, and requirements through in-depth consultations and site analysis."
+      },
+      "concept": {
+        "title": "Concept Development",
+        "description": "Our team creates initial design concepts, mood boards, and 3D visualizations to bring your vision to life."
+      },
+      "refinement": {
+        "title": "Design Refinement",
+        "description": "We refine the designs based on your feedback, selecting materials, finishes, and furniture that align with your aesthetic."
+      },
+      "implementation": {
+        "title": "Implementation",
+        "description": "Our expert team manages the entire execution process, coordinating with contractors and ensuring quality at every step."
+      },
+      "styling": {
+        "title": "Styling & Finishing",
+        "description": "We add the final touches with carefully curated accessories, art, and styling to perfect every detail."
+      },
+      "completion": {
+        "title": "Project Completion",
+        "description": "Final walkthrough and handover of your transformed space, along with comprehensive documentation and care guides."
+      }
+    }
+  },
+  "Projects": {
+    "heading": "Our Projects",
+    "title": "Featured Work",
+    "description": "Explore our portfolio of exceptional interior design and fitout projects across the UAE",
+    "viewAllProjects": "View All Projects",
+    "projectType": "Type",
+    "location": "Location",
+    "year": "Year",
+    "gallery": "Project Gallery",
+    "relatedProjects": "Related Projects"
+  },
+  "Blog": {
+    "heading": "Latest Insights",
+    "title": "Design Stories & Tips",
+    "description": "Expert advice, design trends, and insights from our team",
+    "readTime": "min read",
+    "publishedOn": "Published on",
+    "author": "Author",
+    "categories": "Categories",
+    "tags": "Tags",
+    "relatedPosts": "Related Articles"
+  },
+  "Contact": {
+    "heading": "Get In Touch",
+    "title": "Let's Create Together",
+    "description": "Ready to transform your space? Get in touch with us to discuss your project",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "message": "Your Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Thank you! We'll get back to you soon.",
+    "error": "Something went wrong. Please try again."
+  },
+  "Footer": {
+    "tagline": "Creating extraordinary spaces that inspire",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "followUs": "Follow Us",
+    "address": "Address",
+    "email": "Email",
+    "phone": "Phone",
+    "copyright": "© 2025 Mouhajer Design Studio. All rights reserved."
+  }
+}

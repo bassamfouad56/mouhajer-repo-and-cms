@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
+import Link from 'next/link';
 
 export interface FAQItem {
   question: string;
@@ -154,9 +155,9 @@ export function FAQSection({
               isDark ? 'text-neutral-300' : 'text-neutral-700'
             }`}
           >
-            Still have questions? We're here to help.
+            Still have questions? We&apos;re here to help.
           </p>
-          <a
+          <Link
             href="/#contact"
             className={`group relative inline-flex items-center gap-2 overflow-hidden border-2 px-8 py-4 text-sm font-light tracking-widest transition-all ${
               isDark
@@ -170,7 +171,7 @@ export function FAQSection({
                 isDark ? 'bg-white' : 'bg-neutral-950'
               }`}
             />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

@@ -18,6 +18,16 @@ export function ImageGalleryModal({ images, initialIndex, onClose }: ImageGaller
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [isZoomed, setIsZoomed] = useState(false);
 
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+    setIsZoomed(false);
+  };
+
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    setIsZoomed(false);
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -32,17 +42,7 @@ export function ImageGalleryModal({ images, initialIndex, onClose }: ImageGaller
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [currentIndex]);
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-    setIsZoomed(false);
-  };
-
-  const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-    setIsZoomed(false);
-  };
+  }, [handleNext, handlePrevious, onClose]);
 
   return (
     <AnimatePresence>

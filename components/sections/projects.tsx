@@ -124,13 +124,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.title}
           </h3>
           <span className="shrink-0 text-sm font-light text-neutral-400">
-            {project.acfFields?.year || '2024'}
+            {project.acfFields?.yearCompleted || '2024'}
           </span>
         </div>
 
         <div className="mb-3 flex items-center gap-3 text-xs font-light tracking-wider text-neutral-500">
-          {project.acfFields?.category && (
-            <span>{project.acfFields.category}</span>
+          {project.acfFields?.projectType && (
+            <span>{project.acfFields.projectType}</span>
           )}
           {project.acfFields?.location && (
             <>
@@ -155,9 +155,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 const placeholderProjects: Project[] = [
   {
     id: '1',
+    databaseId: 1,
     title: 'Modern Villa Dubai',
     slug: 'modern-villa-dubai',
     excerpt: 'Contemporary luxury living',
+    date: new Date('2024-01-15').toISOString(),
+    modified: new Date('2024-01-15').toISOString(),
     featuredImage: {
       node: {
         sourceUrl: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80',
@@ -165,18 +168,21 @@ const placeholderProjects: Project[] = [
       },
     },
     acfFields: {
-      category: 'Residential',
+      projectType: 'Residential',
       location: 'Dubai Hills',
-      year: '2024',
+      yearCompleted: '2024',
       description: 'A stunning contemporary villa featuring minimalist design, natural materials, and seamless indoor-outdoor living spaces.',
       gallery: [],
     },
   },
   {
     id: '2',
+    databaseId: 2,
     title: 'Executive Office',
     slug: 'executive-office',
     excerpt: 'Sophisticated workspace design',
+    date: new Date('2024-02-20').toISOString(),
+    modified: new Date('2024-02-20').toISOString(),
     featuredImage: {
       node: {
         sourceUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
@@ -184,18 +190,21 @@ const placeholderProjects: Project[] = [
       },
     },
     acfFields: {
-      category: 'Commercial',
+      projectType: 'Commercial',
       location: 'DIFC',
-      year: '2024',
+      yearCompleted: '2024',
       description: 'Elegant executive office space combining functionality with luxury finishes and bespoke furniture.',
       gallery: [],
     },
   },
   {
     id: '3',
+    databaseId: 3,
     title: 'Coastal Penthouse',
     slug: 'coastal-penthouse',
     excerpt: 'Oceanfront luxury',
+    date: new Date('2024-03-05').toISOString(),
+    modified: new Date('2024-03-05').toISOString(),
     featuredImage: {
       node: {
         sourceUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
@@ -203,18 +212,21 @@ const placeholderProjects: Project[] = [
       },
     },
     acfFields: {
-      category: 'Residential',
+      projectType: 'Residential',
       location: 'Palm Jumeirah',
-      year: '2023',
+      yearCompleted: '2023',
       description: 'Breathtaking penthouse with panoramic ocean views, featuring custom lighting and premium finishes.',
       gallery: [],
     },
   },
   {
     id: '4',
+    databaseId: 4,
     title: 'Boutique Hotel Lobby',
     slug: 'boutique-hotel-lobby',
     excerpt: 'Hospitality excellence',
+    date: new Date('2023-11-10').toISOString(),
+    modified: new Date('2023-11-10').toISOString(),
     featuredImage: {
       node: {
         sourceUrl: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
@@ -222,9 +234,9 @@ const placeholderProjects: Project[] = [
       },
     },
     acfFields: {
-      category: 'Hospitality',
+      projectType: 'Hospitality',
       location: 'Downtown Dubai',
-      year: '2023',
+      yearCompleted: '2023',
       description: 'Luxurious hotel lobby design with marble finishes, custom chandeliers, and statement furniture pieces.',
       gallery: [],
     },

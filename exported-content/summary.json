@@ -1,0 +1,16 @@
+{
+  "exportDate": "2025-11-20T12:41:59.409Z",
+  "wordpress": "https://yuz.beb.mybluehost.me/website_d5ecf311/graphql",
+  "totals": {
+    "projects": 29,
+    "blogs": 1,
+    "services": 12,
+    "images": 20
+  },
+  "files": {
+    "projects": "/Users/bassamfouad/Desktop/website/mouhajer-repo/exported-content/projects.json",
+    "blogs": "/Users/bassamfouad/Desktop/website/mouhajer-repo/exported-content/blogs.json",
+    "services": "/Users/bassamfouad/Desktop/website/mouhajer-repo/exported-content/services.json",
+    "images": "/Users/bassamfouad/Desktop/website/mouhajer-repo/exported-content/images"
+  }
+}

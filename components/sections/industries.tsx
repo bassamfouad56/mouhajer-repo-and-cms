@@ -29,8 +29,8 @@ export function Industries({ industries, services = [], projects = [] }: Industr
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
 
-  // Use placeholder industries if none from WordPress
-  const displayIndustries = industries.length > 0 ? industries : placeholderIndustries;
+  // Render only CMS industries
+  const displayIndustries = industries;
 
   return (
     <section
@@ -334,92 +334,3 @@ function IndustryCard({
   );
 }
 
-// Placeholder industries
-const placeholderIndustries: Industry[] = [
-  {
-    id: '1',
-    title: 'Residential',
-    excerpt: 'Luxury homes, villas, and apartments designed for modern living',
-    content: '',
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-    acfFields: {
-      stats: { projectsCompleted: 45, yearsExperience: 10, clientsSatisfied: 98 },
-      relatedServices: ['1', '2', '3'], // Interior Design, Space Planning, Custom Furniture
-    },
-  },
-  {
-    id: '2',
-    title: 'Commercial',
-    excerpt: 'Professional office spaces that inspire productivity and innovation',
-    content: '',
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-    acfFields: {
-      stats: { projectsCompleted: 32, yearsExperience: 8, clientsSatisfied: 95 },
-      relatedServices: ['5', '6'], // Commercial Design, Consultation
-    },
-  },
-  {
-    id: '3',
-    title: 'Hospitality',
-    excerpt: 'Hotels, resorts, and boutique stays that create memorable experiences',
-    content: '',
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-    acfFields: {
-      stats: { projectsCompleted: 18, yearsExperience: 7, clientsSatisfied: 100 },
-      relatedServices: ['1', '4'], // Interior Design, Lighting Design
-    },
-  },
-  {
-    id: '4',
-    title: 'Retail',
-    excerpt: 'Engaging retail environments that enhance customer experience',
-    content: '',
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-    acfFields: {
-      stats: { projectsCompleted: 25, yearsExperience: 6, clientsSatisfied: 97 },
-      relatedServices: ['2', '4'], // Space Planning, Lighting Design
-    },
-  },
-  {
-    id: '5',
-    title: 'Healthcare',
-    excerpt: 'Healing environments that prioritize comfort and functionality',
-    content: '',
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-    acfFields: {
-      stats: { projectsCompleted: 12, yearsExperience: 5, clientsSatisfied: 100 },
-    },
-  },
-  {
-    id: '6',
-    title: 'Education',
-    excerpt: 'Inspiring learning spaces for schools, universities, and training centers',
-    content: '',
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-    acfFields: {
-      stats: { projectsCompleted: 8, yearsExperience: 4, clientsSatisfied: 96 },
-    },
-  },
-  {
-    id: '7',
-    title: 'Restaurant & F&B',
-    excerpt: 'Dining spaces that blend ambiance with operational excellence',
-    content: '',
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-    acfFields: {
-      stats: { projectsCompleted: 22, yearsExperience: 6, clientsSatisfied: 99 },
-      relatedServices: ['1', '3', '4'], // Interior Design, Custom Furniture, Lighting
-    },
-  },
-  {
-    id: '8',
-    title: 'Corporate',
-    excerpt: 'Executive offices and workspaces that reflect brand excellence',
-    content: '',
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-    acfFields: {
-      stats: { projectsCompleted: 28, yearsExperience: 7, clientsSatisfied: 98 },
-      relatedServices: ['5', '6'], // Commercial Design, Consultation
-    },
-  },
-];

@@ -2,56 +2,27 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Lightbulb, Ruler, Palette, Hammer, Sparkles, CheckCircle2 } from 'lucide-react';
 
 const processSteps = [
   {
     number: '01',
-    title: 'Discovery & Consultation',
-    description:
-      'We begin by understanding your vision, lifestyle, and requirements through in-depth consultations and site analysis.',
-    icon: Lightbulb,
-    color: 'from-purple-500 to-blue-500',
+    title: 'Discover',
+    description: 'We listen to your vision and analyze your space.',
   },
   {
     number: '02',
-    title: 'Concept Development',
-    description:
-      'Our team creates initial design concepts, mood boards, and 3D visualizations to bring your vision to life.',
-    icon: Ruler,
-    color: 'from-blue-500 to-cyan-500',
+    title: 'Design',
+    description: 'We create concepts and visualizations tailored to you.',
   },
   {
     number: '03',
-    title: 'Design Refinement',
-    description:
-      'We refine the designs based on your feedback, selecting materials, finishes, and furniture that align with your aesthetic.',
-    icon: Palette,
-    color: 'from-cyan-500 to-green-500',
+    title: 'Develop',
+    description: 'We refine every detail until it matches your vision.',
   },
   {
     number: '04',
-    title: 'Implementation',
-    description:
-      'Our expert team manages the entire execution process, coordinating with contractors and ensuring quality at every step.',
-    icon: Hammer,
-    color: 'from-green-500 to-yellow-500',
-  },
-  {
-    number: '05',
-    title: 'Styling & Finishing',
-    description:
-      'We add the final touches with carefully curated accessories, art, and styling to perfect every detail.',
-    icon: Sparkles,
-    color: 'from-yellow-500 to-orange-500',
-  },
-  {
-    number: '06',
-    title: 'Project Completion',
-    description:
-      'Final walkthrough and handover of your transformed space, along with comprehensive documentation and care guides.',
-    icon: CheckCircle2,
-    color: 'from-orange-500 to-red-500',
+    title: 'Deliver',
+    description: 'We execute flawlessly and transform your space.',
   },
 ];
 
@@ -63,80 +34,73 @@ export function Process() {
     <section
       ref={sectionRef}
       id="process"
-      className="relative overflow-hidden bg-white px-6 py-32 lg:px-12 lg:py-48"
+      className="relative overflow-hidden bg-white px-6 py-32 lg:px-12 lg:py-40"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.01)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
-        <div className="absolute right-1/4 top-0 h-96 w-96 rounded-full bg-blue-100/40 blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/4 h-96 w-96 rounded-full bg-purple-100/40 blur-3xl" />
+      {/* Minimal Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="h-full w-full bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1800px]">
+      <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section Header */}
-        <div className="mb-24 text-center lg:mb-32">
+        <div className="mb-20 lg:mb-32">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-6 flex items-center justify-center gap-4"
+            transition={{ duration: 0.6 }}
+            className="flex items-end justify-between border-b border-neutral-900 pb-8"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-neutral-400" />
-            <span className="text-sm font-light tracking-[0.3em] text-neutral-500">
-              OUR PROCESS
-            </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-neutral-400" />
+            <div>
+              <span className="mb-3 block text-sm font-light tracking-[0.3em] text-neutral-400">
+                PROCESS
+              </span>
+              <h2 className="text-5xl font-light tracking-tight text-neutral-900 lg:text-7xl">
+                Four Simple Steps
+              </h2>
+            </div>
+            <div className="hidden text-right lg:block">
+              <span className="text-sm font-light tracking-wider text-neutral-400">
+                From concept to completion
+              </span>
+            </div>
           </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl font-light tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl"
-          >
-            How We Work
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mx-auto mt-6 max-w-2xl text-lg font-light leading-relaxed text-neutral-600"
-          >
-            Our proven six-step process ensures every project is executed with
-            precision, creativity, and unwavering attention to detail
-          </motion.p>
         </div>
 
-        {/* Process Steps */}
-        <div className="relative">
-          {/* Connecting Line */}
-          <div className="absolute left-8 top-0 hidden h-full w-px bg-gradient-to-b from-neutral-200 via-neutral-300 to-neutral-200 lg:block" />
-
-          <div className="space-y-16 lg:space-y-24">
-            {processSteps.map((step, index) => (
-              <ProcessStep key={step.number} step={step} index={index} />
-            ))}
-          </div>
+        {/* Process Grid */}
+        <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+          {processSteps.map((step, index) => (
+            <ProcessCard key={step.number} step={step} index={index} />
+          ))}
         </div>
 
-        {/* CTA */}
+        {/* Minimal CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-24 text-center lg:mt-32"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-32 flex items-center justify-between border-t border-neutral-200 pt-12"
         >
-          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent" />
-          <p className="mb-6 text-lg font-light text-neutral-600">
-            Ready to start your design journey?
-          </p>
+          <span className="text-sm font-light tracking-wider text-neutral-500">
+            Ready to begin?
+          </span>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 border-b border-neutral-950 pb-1 text-sm font-light tracking-widest text-neutral-950 transition-all hover:gap-4 focus-visible:gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
+            className="group relative inline-flex items-center gap-4 text-sm font-light tracking-[0.2em] text-neutral-900 transition-all"
           >
-            SCHEDULE A CONSULTATION
-            <span className="transition-transform group-hover:translate-x-1 group-focus-visible:translate-x-1">
-              →
-            </span>
+            <span>START YOUR PROJECT</span>
+            <svg
+              className="h-8 w-8 transition-transform group-hover:translate-x-2"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 16H26M26 16L18 8M26 16L18 24"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="square"
+              />
+            </svg>
           </a>
         </motion.div>
       </div>
@@ -144,7 +108,7 @@ export function Process() {
   );
 }
 
-function ProcessStep({
+function ProcessCard({
   step,
   index,
 }: {
@@ -152,78 +116,70 @@ function ProcessStep({
   index: number;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
-  const Icon = step.icon;
+  const isInView = useInView(cardRef, { once: true, margin: '-50px' });
 
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="relative"
+      transition={{ duration: 0.7, delay: index * 0.1 }}
+      className="group relative"
     >
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
-        {/* Number & Icon */}
-        <div className="relative flex items-center gap-6 lg:w-64 lg:shrink-0">
-          {/* Number Circle */}
-          <div className="group relative flex h-16 w-16 shrink-0 items-center justify-center">
-            <div className="absolute inset-0 rounded-full bg-neutral-100 transition-all duration-500 group-hover:scale-110 group-hover:bg-neutral-200" />
-            <span className="relative text-2xl font-light text-neutral-950">
-              {step.number}
-            </span>
-
-            {/* Pulsing ring on hover */}
-            <motion.div
-              initial={{ scale: 1, opacity: 0 }}
-              whileHover={{ scale: 1.5, opacity: [0, 0.5, 0] }}
-              transition={{ duration: 1, repeat: Infinity }}
-              className="absolute inset-0 rounded-full border-2 border-neutral-400"
-            />
-          </div>
-
-          {/* Icon */}
-          <div className="hidden lg:block">
-            <div
-              className={`flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br ${step.color} opacity-10 transition-all duration-500 hover:opacity-20`}
-            >
-              <Icon size={24} className="text-neutral-950" strokeWidth={1.5} />
-            </div>
-          </div>
+      {/* Card Container */}
+      <div className="relative h-full overflow-hidden border border-neutral-200 bg-white transition-all duration-500 hover:border-neutral-900 hover:shadow-2xl hover:shadow-neutral-900/5">
+        {/* Number Badge - Top Left */}
+        <div className="absolute left-0 top-0 flex h-20 w-20 items-center justify-center border-b border-r border-neutral-200 bg-neutral-50 transition-all duration-500 group-hover:border-neutral-900 group-hover:bg-neutral-900">
+          <span className="text-2xl font-light text-neutral-400 transition-colors duration-500 group-hover:text-white">
+            {step.number}
+          </span>
         </div>
 
+        {/* Expanding Line Animation */}
+        <div className="absolute left-0 top-20 h-px w-0 bg-neutral-900 transition-all duration-700 group-hover:w-full" />
+
         {/* Content */}
-        <div className="flex-1">
-          <div className="group relative overflow-hidden border-l-2 border-neutral-200 bg-neutral-50 p-8 transition-all duration-500 hover:border-neutral-950 hover:bg-white lg:p-10">
-            <h3 className="mb-4 text-2xl font-light tracking-tight text-neutral-950 lg:text-3xl">
-              {step.title}
-            </h3>
-            <p className="text-base font-light leading-relaxed text-neutral-600 lg:text-lg">
-              {step.description}
-            </p>
+        <div className="p-8 pb-12 pt-32">
+          <h3 className="mb-4 text-4xl font-light tracking-tight text-neutral-900 lg:text-5xl">
+            {step.title}
+          </h3>
+          <p className="text-base font-light leading-relaxed text-neutral-600 lg:text-lg">
+            {step.description}
+          </p>
+        </div>
 
-            {/* Gradient accent on hover */}
-            <div
-              className={`absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r ${step.color} transition-all duration-500 group-hover:w-full`}
+        {/* Decorative Corner Element - Bottom Right */}
+        <div className="absolute bottom-0 right-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          <svg
+            className="h-24 w-24"
+            viewBox="0 0 96 96"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line x1="96" y1="96" x2="96" y2="48" stroke="#171717" strokeWidth="0.5" />
+            <line x1="96" y1="96" x2="48" y2="96" stroke="#171717" strokeWidth="0.5" />
+            <rect
+              x="64"
+              y="64"
+              width="32"
+              height="32"
+              stroke="#171717"
+              strokeWidth="0.5"
+              fill="none"
             />
+          </svg>
+        </div>
 
-            {/* Corner decoration */}
-            <div className="absolute right-0 top-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-              <div className="h-12 w-12">
-                <div
-                  className={`absolute right-0 top-0 h-px w-full bg-gradient-to-l ${step.color}`}
-                />
-                <div
-                  className={`absolute right-0 top-0 h-full w-px bg-gradient-to-b ${step.color}`}
-                />
-              </div>
-            </div>
-          </div>
+        {/* Large Number Watermark */}
+        <div className="pointer-events-none absolute bottom-0 right-0 select-none overflow-hidden opacity-[0.02] transition-opacity duration-500 group-hover:opacity-[0.04]">
+          <span className="text-[16rem] font-light leading-none text-neutral-900">
+            {step.number}
+          </span>
         </div>
       </div>
 
-      {/* Connecting dot for timeline */}
-      <div className="absolute left-[1.875rem] top-16 hidden h-3 w-3 rounded-full border-2 border-white bg-neutral-400 shadow-lg lg:block" />
+      {/* Hover Shadow Effect */}
+      <div className="absolute -inset-4 -z-10 bg-gradient-to-br from-neutral-900/0 via-neutral-900/0 to-neutral-900/5 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
     </motion.div>
   );
 }

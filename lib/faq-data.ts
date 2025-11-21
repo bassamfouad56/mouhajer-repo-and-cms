@@ -70,7 +70,7 @@ export const servicesFAQs: FAQItem[] = [
   {
     question: 'Can you work with my existing furniture and decor?',
     answer:
-      'Absolutely. We often incorporate clients' existing pieces that have sentimental value or are of high quality. Our design approach blends new elements with cherished existing items to create cohesive, personalized spaces that tell your story while achieving a fresh, updated look.',
+      "Absolutely. We often incorporate clients' existing pieces that have sentimental value or are of high quality. Our design approach blends new elements with cherished existing items to create cohesive, personalized spaces that tell your story while achieving a fresh, updated look.",
   },
   {
     question: 'Do you provide 3D renderings and visualizations?',

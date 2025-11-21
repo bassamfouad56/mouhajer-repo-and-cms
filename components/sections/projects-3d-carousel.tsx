@@ -259,9 +259,9 @@ export function Projects3DCarousel({ projects }: Projects3DCarouselProps) {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.3, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                         >
-                          {currentProject.acfFields?.category && (
+                          {currentProject.acfFields?.projectType && (
                             <span className="border border-white/30 bg-neutral-950/50 px-4 py-2 text-xs font-light tracking-widest text-white backdrop-blur-sm">
-                              {currentProject.acfFields.category}
+                              {currentProject.acfFields.projectType}
                             </span>
                           )}
                         </motion.div>
@@ -297,8 +297,8 @@ export function Projects3DCarousel({ projects }: Projects3DCarouselProps) {
                               <span className="h-1 w-1 rounded-full bg-white/40" />
                             </>
                           )}
-                          {currentProject.acfFields?.year && (
-                            <span>{currentProject.acfFields.year}</span>
+                          {currentProject.acfFields?.yearCompleted && (
+                            <span>{currentProject.acfFields.yearCompleted}</span>
                           )}
                         </motion.div>
 
@@ -396,9 +396,12 @@ export function Projects3DCarousel({ projects }: Projects3DCarouselProps) {
 const placeholderProjects: Project[] = [
   {
     id: '1',
+    databaseId: 1,
     title: 'Modern Villa Dubai',
     slug: 'modern-villa-dubai',
     excerpt: 'Contemporary luxury living',
+    date: new Date('2024-01-15').toISOString(),
+    modified: new Date('2024-01-15').toISOString(),
     featuredImage: {
       node: {
         sourceUrl: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&q=90',
@@ -406,18 +409,21 @@ const placeholderProjects: Project[] = [
       },
     },
     acfFields: {
-      category: 'Residential',
+      projectType: 'Residential',
       location: 'Dubai Hills',
-      year: '2024',
+      yearCompleted: '2024',
       description: 'A stunning contemporary villa featuring minimalist design, natural materials, and seamless indoor-outdoor living spaces that redefine luxury living.',
       gallery: [],
     },
   },
   {
     id: '2',
+    databaseId: 2,
     title: 'Executive Office',
     slug: 'executive-office',
     excerpt: 'Sophisticated workspace design',
+    date: new Date('2024-02-20').toISOString(),
+    modified: new Date('2024-02-20').toISOString(),
     featuredImage: {
       node: {
         sourceUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=90',
@@ -425,18 +431,21 @@ const placeholderProjects: Project[] = [
       },
     },
     acfFields: {
-      category: 'Commercial',
+      projectType: 'Commercial',
       location: 'DIFC',
-      year: '2024',
+      yearCompleted: '2024',
       description: 'Elegant executive office space combining functionality with luxury finishes, bespoke furniture, and cutting-edge technology integration.',
       gallery: [],
     },
   },
   {
     id: '3',
+    databaseId: 3,
     title: 'Coastal Penthouse',
     slug: 'coastal-penthouse',
     excerpt: 'Oceanfront luxury',
+    date: new Date('2024-03-05').toISOString(),
+    modified: new Date('2024-03-05').toISOString(),
     featuredImage: {
       node: {
         sourceUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=90',
@@ -444,18 +453,21 @@ const placeholderProjects: Project[] = [
       },
     },
     acfFields: {
-      category: 'Residential',
+      projectType: 'Residential',
       location: 'Palm Jumeirah',
-      year: '2023',
+      yearCompleted: '2023',
       description: 'Breathtaking penthouse with panoramic ocean views, featuring custom lighting solutions, premium finishes, and bespoke interior elements.',
       gallery: [],
     },
   },
   {
     id: '4',
+    databaseId: 4,
     title: 'Boutique Hotel Lobby',
     slug: 'boutique-hotel-lobby',
     excerpt: 'Hospitality excellence',
+    date: new Date('2023-11-10').toISOString(),
+    modified: new Date('2023-11-10').toISOString(),
     featuredImage: {
       node: {
         sourceUrl: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1600&q=90',
@@ -463,9 +475,9 @@ const placeholderProjects: Project[] = [
       },
     },
     acfFields: {
-      category: 'Hospitality',
+      projectType: 'Hospitality',
       location: 'Downtown Dubai',
-      year: '2023',
+      yearCompleted: '2023',
       description: 'Luxurious hotel lobby design with Italian marble finishes, custom crystal chandeliers, and statement furniture pieces that create an unforgettable first impression.',
       gallery: [],
     },

@@ -105,6 +105,43 @@ const megaMenuItems: MegaMenuItem[] = [
     },
   },
   {
+    href: '/industries',
+    label: 'Industries',
+    isPage: true,
+    subLinks: [
+      {
+        href: '/industries/residential',
+        label: 'Residential',
+        description: 'Luxury villas & apartments',
+        image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop',
+      },
+      {
+        href: '/industries/hospitality',
+        label: 'Hospitality',
+        description: 'Hotels & resorts',
+        image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop',
+      },
+      {
+        href: '/industries/retail',
+        label: 'Retail',
+        description: 'Shopping & commercial spaces',
+        image: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&h=300&fit=crop',
+      },
+      {
+        href: '/industries/healthcare',
+        label: 'Healthcare',
+        description: 'Medical facilities & clinics',
+        image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=300&fit=crop',
+      },
+    ],
+    featured: {
+      title: 'Industry Expertise',
+      description: 'Specialized design solutions tailored to your industry needs',
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop',
+      href: '/industries',
+    },
+  },
+  {
     href: '/blog',
     label: 'Blog',
     isPage: true,

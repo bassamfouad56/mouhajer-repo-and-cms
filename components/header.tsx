@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { EnhancedMegaMenu } from './enhanced-mega-menu';
+import { LanguageSwitcher } from './language-switcher';
 
 const mobileNavItems = [
   {
@@ -33,6 +34,17 @@ const mobileNavItems = [
       { href: '/services#architecture', label: 'Architecture' },
       { href: '/services#consultation', label: 'Consultation' },
       { href: '/services#project-management', label: 'Project Management' },
+    ],
+  },
+  {
+    href: '/industries',
+    label: 'Industries',
+    isPage: true,
+    subLinks: [
+      { href: '/industries/residential', label: 'Residential' },
+      { href: '/industries/hospitality', label: 'Hospitality' },
+      { href: '/industries/retail', label: 'Retail' },
+      { href: '/industries/healthcare', label: 'Healthcare' },
     ],
   },
   {
@@ -99,7 +111,10 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation with Enhanced Mega Menu */}
-            <EnhancedMegaMenu />
+            <div className="flex items-center gap-6">
+              <EnhancedMegaMenu />
+              <LanguageSwitcher />
+            </div>
 
             {/* Mobile Menu Button */}
             <button

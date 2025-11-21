@@ -9,6 +9,7 @@ export function PageTransition() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);

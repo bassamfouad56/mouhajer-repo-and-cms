@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 
@@ -45,31 +46,119 @@ export function Hero() {
     };
   }, []);
 
+  // Carousel images - Using Unsplash placeholders until you add your own
+  const carouselImages = [
+    'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80', // Modern villa
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', // Luxury interior
+    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80', // Modern living room
+    'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80', // Contemporary design
+    'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80', // Hotel lobby
+    'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&q=80', // Modern bedroom
+    'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&q=80', // Kitchen design
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', // Dining room
+  ];
+
   return (
     <section
       ref={containerRef}
       id="home"
       className="relative flex min-h-screen items-center justify-center overflow-hidden bg-neutral-950"
     >
-      {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
+      {/* Left Carousel Column */}
+      <div className="absolute left-0 top-0 hidden h-full w-48 lg:block xl:w-64">
+        {/* Column 1 */}
+        <motion.div
+          animate={{ y: ['-100%', '0%'] }}
+          transition={{
+            duration: 40,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          className="flex flex-col gap-6"
+        >
+          {[...carouselImages.slice(0, 4), ...carouselImages.slice(0, 4)].map((img, idx) => (
+            <div key={idx} className="relative h-80 w-full overflow-hidden">
+              <Image
+                src={img}
+                alt="Interior Design Project"
+                fill
+                className="object-cover opacity-90 transition-all duration-700 hover:opacity-100 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-neutral-950/20" />
+            </div>
+          ))}
+        </motion.div>
+      </div>
 
-      {/* Gradient Orbs */}
-      <div className="absolute left-1/4 top-1/4 h-96 w-96 animate-pulse rounded-full bg-purple-500/10 blur-[120px]" />
-      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 animate-pulse rounded-full bg-blue-500/10 blur-[120px] animation-delay-2000" />
+      {/* Right Carousel Column */}
+      <div className="absolute right-0 top-0 hidden h-full w-48 lg:block xl:w-64">
+        {/* Column 2 */}
+        <motion.div
+          animate={{ y: ['0%', '-100%'] }}
+          transition={{
+            duration: 35,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          className="flex flex-col gap-6"
+        >
+          {[...carouselImages.slice(4, 8), ...carouselImages.slice(4, 8)].map((img, idx) => (
+            <div key={idx} className="relative h-80 w-full overflow-hidden">
+              <Image
+                src={img}
+                alt="Interior Design Project"
+                fill
+                className="object-cover opacity-90 transition-all duration-700 hover:opacity-100 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-neutral-950/20" />
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Dark overlay for carousel fade */}
+      <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/70 via-neutral-950/40 to-neutral-950/70 lg:via-neutral-950/20" />
+
+      {/* Architectural Line Pattern */}
+      <div className="absolute inset-0">
+        {/* Subtle diagonal lines for architectural feel */}
+        <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-transparent via-neutral-800 to-transparent" />
+        <div className="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-transparent via-neutral-800 to-transparent" />
+        <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
+
+        {/* Decorative corner elements */}
+        <svg className="absolute left-12 top-12 h-32 w-32 opacity-20" viewBox="0 0 100 100">
+          <path d="M 0 0 L 0 100 M 0 0 L 100 0" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-white" />
+        </svg>
+        <svg className="absolute right-12 bottom-12 h-32 w-32 opacity-20" viewBox="0 0 100 100">
+          <path d="M 100 100 L 100 0 M 100 100 L 0 100" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-white" />
+        </svg>
+      </div>
+
+      {/* Elegant accent lines - architectural blueprint style */}
+      <div className="absolute left-1/4 top-1/3 h-px w-32 bg-gradient-to-r from-white/20 to-transparent" />
+      <div className="absolute right-1/4 bottom-1/3 h-px w-32 bg-gradient-to-l from-white/20 to-transparent" />
+
+      {/* Subtle background texture */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.01)_0%,transparent_70%)]" />
 
       <motion.div
         style={{ opacity, scale }}
         className="relative z-10 mx-auto max-w-7xl px-6 text-center lg:px-12"
       >
-        {/* Subtitle */}
+        {/* Subtitle with decorative elements */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="mb-6 text-sm font-light tracking-[0.3em] text-neutral-400"
+          className="mb-8 flex items-center justify-center gap-4"
         >
-          DUBAI • LUXURY INTERIOR DESIGN
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-neutral-600" />
+          <span className="text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
+            Dubai • Luxury Interior Design
+          </span>
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-neutral-600" />
         </motion.div>
 
         {/* Main Title */}
@@ -93,58 +182,65 @@ export function Hero() {
           studio specializing in luxury residential and commercial spaces.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons - More refined design studio aesthetic */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2 }}
-          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="flex flex-col items-center justify-center gap-6 sm:flex-row"
         >
           <a
             href="#projects"
-            className="group relative overflow-hidden border border-white px-8 py-4 text-sm font-light tracking-widest text-white transition-all hover:bg-white hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+            className="group relative overflow-hidden border border-white px-10 py-5 text-xs font-light uppercase tracking-[0.25em] text-white transition-all hover:bg-white hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
           >
-            <span className="relative z-10">VIEW PROJECTS</span>
-            <div className="absolute inset-0 -translate-x-full bg-white transition-transform duration-300 group-hover:translate-x-0" />
+            <span className="relative z-10">Explore Portfolio</span>
+            <div className="absolute inset-0 -translate-x-full bg-white transition-transform duration-500 group-hover:translate-x-0" />
           </a>
           <a
             href="#contact"
-            className="group relative overflow-hidden border border-neutral-600 px-8 py-4 text-sm font-light tracking-widest text-neutral-300 transition-all hover:border-white hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+            className="group relative border-b-2 border-neutral-600 pb-2 text-xs font-light uppercase tracking-[0.25em] text-neutral-300 transition-all hover:border-white hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
           >
-            <span className="relative z-10">
-              GET IN TOUCH
-              <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
+            <span className="relative z-10 flex items-center gap-2">
+              Start Your Project
+              <span className="inline-block transition-transform group-hover:translate-x-2">
                 →
               </span>
             </span>
           </a>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stats - More refined design-focused presentation */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 2.2 }}
-          className="mt-20 rounded-sm border-t border-neutral-800 bg-neutral-900/30 px-8 pt-12 backdrop-blur-sm"
+          className="mt-24"
         >
-          <div className="grid grid-cols-3 gap-8">
-            {[
-              { value: '15+', label: 'Years Experience' },
-              { value: '200+', label: 'Projects Completed' },
-              { value: '50+', label: 'Awards Won' },
-            ].map((stat, index) => (
-              <div key={index} className="group relative text-center">
-                <div className="mb-2 text-3xl font-light text-white transition-all duration-300 group-hover:scale-110 sm:text-4xl">
-                  {stat.value}
+          <div className="relative">
+            {/* Top decorative line */}
+            <div className="absolute -top-8 left-1/2 h-16 w-px -translate-x-1/2 bg-gradient-to-b from-white/20 to-transparent" />
+
+            <div className="grid grid-cols-3 gap-12 border-y border-neutral-800 py-8">
+              {[
+                { value: '15+', label: 'Years of Excellence' },
+                { value: '200+', label: 'Completed Projects' },
+                { value: '50+', label: 'Design Awards' },
+              ].map((stat, index) => (
+                <div key={index} className="group relative text-center">
+                  {/* Vertical divider between stats */}
+                  {index < 2 && (
+                    <div className="absolute -right-6 top-1/2 h-8 w-px -translate-y-1/2 bg-neutral-800" />
+                  )}
+                  <div className="mb-3 text-3xl font-light tracking-tight text-white transition-all duration-300 sm:text-4xl">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs font-light uppercase tracking-[0.2em] text-neutral-400">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="text-xs font-light tracking-wider text-neutral-500">
-                  {stat.label}
-                </div>
-                <div className="absolute -bottom-6 left-1/2 h-px w-0 -translate-x-1/2 bg-white transition-all duration-300 group-hover:w-16" />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-          <div className="h-6" />
         </motion.div>
       </motion.div>
 

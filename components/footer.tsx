@@ -1,10 +1,41 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessage({ type: 'success', text: 'Successfully subscribed!' });
+        setEmail('');
+      } else {
+        setMessage({ type: 'error', text: data.message || 'Failed to subscribe' });
+      }
+    } catch (error) {
+      setMessage({ type: 'error', text: 'An error occurred. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const footerLinks = {
     company: [
@@ -122,19 +153,29 @@ export function Footer() {
             <p className="mb-4 text-sm font-light text-neutral-400">
               Subscribe to our newsletter for design inspiration and updates.
             </p>
-            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex gap-2" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 border border-neutral-800 bg-transparent px-4 py-3 text-sm font-light text-white placeholder:text-neutral-600 focus:border-white focus:outline-none"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSubmitting}
+                required
+                className="flex-1 border border-neutral-800 bg-transparent px-4 py-3 text-sm font-light text-white placeholder:text-neutral-600 focus:border-white focus:outline-none disabled:opacity-50"
               />
               <button
                 type="submit"
-                className="border border-white px-6 py-3 text-sm font-light tracking-wider text-white transition-all hover:bg-white hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+                disabled={isSubmitting}
+                className="border border-white px-6 py-3 text-sm font-light tracking-wider text-white transition-all hover:bg-white hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                SUBSCRIBE
+                {isSubmitting ? 'SUBSCRIBING...' : 'SUBSCRIBE'}
               </button>
             </form>
+            {message && (
+              <p className={`mt-3 text-sm ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                {message.text}
+              </p>
+            )}
 
             {/* Social Links */}
             <div className="mt-6 flex gap-4">
