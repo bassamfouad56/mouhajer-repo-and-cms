@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
+import { SafeImage } from '@/components/safe-image';
 import { Linkedin, Mail } from 'lucide-react';
 
 const teamMembers = [

@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+import { SafeImage } from '@/components/safe-image';
 import Link from 'next/link';
 import { Project } from '@/lib/wordpress';
 import { ChevronLeft, ChevronRight, ArrowUpRight, Eye } from 'lucide-react';

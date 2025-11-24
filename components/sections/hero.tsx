@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import Image from 'next/image';
+import { SafeImage } from '@/components/safe-image';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 

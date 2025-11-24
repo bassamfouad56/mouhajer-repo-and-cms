@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
+import { SafeImage } from '@/components/safe-image';
 import Link from 'next/link';
 import { Project } from '@/lib/wordpress';
 import { ArrowUpRight } from 'lucide-react';
