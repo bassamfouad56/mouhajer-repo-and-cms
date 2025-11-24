@@ -8,6 +8,8 @@ import { notFound } from 'next/navigation';
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { PageTransition } from "@/components/page-transition";
 import { OrganizationStructuredData, LocalBusinessStructuredData } from "@/components/structured-data";
+import WhatsAppButton from "@/components/whatsapp-button";
+import AIChatbot from "@/components/ai-chatbot";
 import { locales, getDirection } from '@/i18n/config';
 import "../globals.css";
 
@@ -195,6 +197,15 @@ export default async function LocaleLayout({
           <SmoothScrollProvider>
             {children}
           </SmoothScrollProvider>
+
+          {/* Always-visible WhatsApp Button */}
+          <WhatsAppButton
+            phoneNumber="971501234567"
+            message="Hello! I'm interested in learning more about your design services."
+          />
+
+          {/* AI Chatbot */}
+          <AIChatbot />
         </NextIntlClientProvider>
       </body>
     </html>

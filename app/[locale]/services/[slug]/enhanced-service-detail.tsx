@@ -10,27 +10,15 @@ import {
   ArrowLeft,
   ArrowRight,
   Share2,
-  CheckCircle2,
-  Lightbulb,
-  Package,
-  Users,
-  TrendingUp,
   ChevronRight,
   MapPin,
   Building,
   Briefcase,
   Layers,
   FileText,
-  Palette,
-  Home,
-  Hotel,
-  ShoppingBag,
-  Heart,
-  Utensils,
-  Building2,
-  Sofa
 } from 'lucide-react';
 import { ImageGalleryModal } from '@/components/image-gallery-modal';
+import { getServiceIcon, CheckIcon } from '@/components/custom-icons';
 
 interface ServiceDetailProps {
   service: Service;
@@ -83,29 +71,7 @@ function Section({ children, delay = 0 }: { children: React.ReactNode; delay?: n
   );
 }
 
-// Get icon for service
-function getServiceIcon(slug: string) {
-  const iconMap: { [key: string]: any } = {
-    'architecture': Building2,
-    'interior-design': Palette,
-    'residential': Home,
-    'commercial': Building2,
-    'hospitality': Hotel,
-    'retail': ShoppingBag,
-    'healthcare': Heart,
-    'restaurants': Utensils,
-    'furniture': Sofa,
-  };
-
-  // Match partial slug
-  for (const [key, icon] of Object.entries(iconMap)) {
-    if (slug.toLowerCase().includes(key)) {
-      return icon;
-    }
-  }
-
-  return Briefcase;
-}
+// Service icon is now imported from custom-icons.tsx
 
 export default function EnhancedServiceDetail({
   service,
@@ -242,7 +208,7 @@ export default function EnhancedServiceDetail({
               >
                 {/* Icon */}
                 <div className="mb-6 inline-flex rounded-2xl bg-white/10 p-4 backdrop-blur-sm">
-                  <IconComponent className="h-12 w-12 text-white" strokeWidth={1.5} />
+                  <IconComponent className="h-12 w-12 text-white" strokeWidth={1} />
                 </div>
 
                 {/* Title */}
@@ -356,7 +322,7 @@ export default function EnhancedServiceDetail({
                       className="group rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-neutral-300 hover:shadow-xl"
                     >
                       <div className="mb-4 inline-flex rounded-full bg-neutral-950 p-3">
-                        <CheckCircle2 className="h-6 w-6 text-white" strokeWidth={1.5} />
+                        <CheckIcon className="h-6 w-6 text-white" strokeWidth={1} />
                       </div>
                       <h4 className="mb-3 text-xl font-light text-neutral-950">
                         {feature.title}
