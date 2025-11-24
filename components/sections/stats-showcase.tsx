@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
+import { SafeImage } from '@/components/safe-image';
 
 const stats = [
   {

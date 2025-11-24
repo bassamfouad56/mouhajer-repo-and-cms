@@ -10,6 +10,8 @@ import { PageTransition } from "@/components/page-transition";
 import { OrganizationStructuredData, LocalBusinessStructuredData } from "@/components/structured-data";
 import WhatsAppButton from "@/components/whatsapp-button";
 import AIChatbot from "@/components/ai-chatbot";
+import { CartProvider } from "@/lib/cart-context";
+import { CartSidebar } from "@/components/cart-sidebar";
 import { locales, getDirection } from '@/i18n/config';
 import "../globals.css";
 
@@ -194,18 +196,23 @@ export default async function LocaleLayout({
         <PageTransition />
 
         <NextIntlClientProvider messages={messages}>
-          <SmoothScrollProvider>
-            {children}
-          </SmoothScrollProvider>
+          <CartProvider>
+            <SmoothScrollProvider>
+              {children}
+            </SmoothScrollProvider>
 
-          {/* Always-visible WhatsApp Button */}
-          <WhatsAppButton
-            phoneNumber="971523041482"
-            message="Hello! I'm interested in learning more about your design services."
-          />
+            {/* Always-visible WhatsApp Button */}
+            <WhatsAppButton
+              phoneNumber="971523041482"
+              message="Hello! I'm interested in learning more about your design services."
+            />
 
-          {/* AI Chatbot */}
-          <AIChatbot />
+            {/* AI Chatbot */}
+            <AIChatbot />
+
+            {/* Shopping Cart Sidebar */}
+            <CartSidebar />
+          </CartProvider>
         </NextIntlClientProvider>
       </body>
     </html>

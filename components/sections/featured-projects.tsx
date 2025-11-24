@@ -2,9 +2,9 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Calendar } from 'lucide-react';
+import { SafeImage } from '@/components/safe-image';
 
 interface Project {
   id: string;
@@ -134,7 +134,7 @@ function FeaturedProjectCard({ project, index, isReversed }: FeaturedProjectCard
       >
         <Link href={`/projects/${project.slug}`} className="block h-full w-full">
           <div className="relative h-full w-full">
-            <Image
+            <SafeImage
               src={project.featuredImage.node.sourceUrl}
               alt={project.featuredImage.node.altText || project.title}
               fill

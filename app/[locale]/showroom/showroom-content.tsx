@@ -274,12 +274,19 @@ function ProductCard({
   isWishlisted: boolean;
   onToggleWishlist: (id: string) => void;
 }) {
+  const { addToCart } = useCart();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
   const [isHovered, setIsHovered] = useState(false);
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product, 1, product.colors[0]);
+  };
 
   const hasDiscount = product.salePrice && product.salePrice < product.price;
   const discountPercent = hasDiscount
@@ -348,7 +355,8 @@ function ProductCard({
             View Details
           </Link>
           <button
-            className="flex items-center justify-center rounded-full bg-neutral-950 px-6 py-3 text-white transition-colors hover:bg-neutral-800"
+            onClick={handleAddToCart}
+            className="flex items-center justify-center rounded-full bg-neutral-950 px-6 py-3 text-white transition-colors hover:bg-neutral-800 disabled:opacity-50"
             disabled={!product.inStock}
           >
             <ShoppingCart className="h-4 w-4" />

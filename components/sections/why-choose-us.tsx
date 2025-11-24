@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import Image from 'next/image';
+import { SafeImage } from '@/components/safe-image';
 import { Award, Target, Users, TrendingUp, Shield, Sparkles } from 'lucide-react';
 
 const reasons = [

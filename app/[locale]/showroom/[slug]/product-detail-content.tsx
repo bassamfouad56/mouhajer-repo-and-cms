@@ -21,6 +21,7 @@ import {
   Package,
 } from 'lucide-react';
 import { type FurnitureProduct } from '@/lib/furniture-data';
+import { useCart } from '@/lib/cart-context';
 
 export default function ProductDetailContent({
   product,
@@ -29,6 +30,7 @@ export default function ProductDetailContent({
   product: FurnitureProduct;
   relatedProducts: FurnitureProduct[];
 }) {
+  const { addToCart } = useCart();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [quantity, setQuantity] = useState(1);
@@ -60,6 +62,10 @@ export default function ProductDetailContent({
 
   const prevImage = () => {
     setSelectedImage((prev) => (prev - 1 + product.images.length) % product.images.length);
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product, quantity, selectedColor);
   };
 
   return (
@@ -242,6 +248,7 @@ export default function ProductDetailContent({
             {/* Action Buttons */}
             <div className="flex gap-3">
               <button
+                onClick={handleAddToCart}
                 disabled={!product.inStock}
                 className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-neutral-950 px-8 py-4 text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-50"
               >

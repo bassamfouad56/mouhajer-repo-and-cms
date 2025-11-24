@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, ShoppingBag } from 'lucide-react';
 import { EnhancedMegaMenu } from './enhanced-mega-menu';
 import { LanguageSwitcher } from './language-switcher';
+import { useCart } from '@/lib/cart-context';
 
 const mobileNavItems = [
   {
@@ -58,12 +59,18 @@ const mobileNavItems = [
       { href: '/blog?category=news', label: 'News' },
     ],
   },
+  {
+    href: '/showroom',
+    label: 'Showroom',
+    isPage: true
+  },
   { href: '/#about', label: 'About', isPage: false },
   { href: '/#contact', label: 'Contact', isPage: false },
 ];
 
 export function Header() {
   const pathname = usePathname();
+  const { totalItems, openCart } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
@@ -113,6 +120,21 @@ export function Header() {
             {/* Desktop Navigation with Enhanced Mega Menu */}
             <div className="flex items-center gap-6">
               <EnhancedMegaMenu />
+
+              {/* Cart Button */}
+              <button
+                onClick={openCart}
+                className="relative hidden text-white transition-colors hover:text-neutral-300 lg:block"
+                aria-label="Shopping cart"
+              >
+                <ShoppingBag size={20} />
+                {totalItems > 0 && (
+                  <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs font-medium text-neutral-950">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+
               <LanguageSwitcher />
             </div>
 
