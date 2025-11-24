@@ -18,23 +18,29 @@ interface Message {
   timestamp: Date;
 }
 
-// Pre-defined responses for common queries (lowkey sales-focused)
+// Contact information
+const PHONE = "971523041482";
+const PHONE_DISPLAY = "+971 52 304 1482";
+const EMAIL = "info@mouhajerdesign.com";
+const WHATSAPP_LINK = `https://wa.me/${PHONE}?text=${encodeURIComponent("Hello! I'm interested in your design services.")}`;
+
+// Pre-defined responses for common queries (shorter, actionable)
 const chatbotResponses: { [key: string]: string } = {
-  greeting: "Hello! Welcome to Mouhajer Design. I'm here to help you create exceptional spaces. Whether you're looking for residential elegance, commercial innovation, or hospitality excellence, we've crafted over 150 transformative projects. How can I assist you today?",
+  greeting: "Hello! Welcome to Mouhajer Design. We create exceptional spaces—residential, commercial, and hospitality. How can I help you today?",
 
-  services: "We specialize in comprehensive design solutions: Architecture & Master Planning, Interior Design, FF&E Specification, Project Management, and Custom Furniture Design. Each service is tailored to exceed expectations. Which area interests you most?",
+  services: "We specialize in:\n• Architecture & Planning\n• Interior Design\n• FF&E Specification\n• Project Management\n• Custom Furniture\n\nWhich interests you?",
 
-  projects: "Our portfolio spans luxury residences, 5-star hotels, prestigious commercial spaces, and award-winning restaurants across the UAE and beyond. We've partnered with leading brands like Address Hotels. Would you like to see specific project examples?",
+  projects: "We've completed 150+ projects including luxury residences, 5-star hotels, and award-winning restaurants. Partners include Address Hotels. Browse our Projects page!",
 
-  consultation: "I'd love to schedule a complimentary consultation for you. Our design team can discuss your vision, review your space, and create a tailored proposal. What type of project are you considering? You can also reach us directly on WhatsApp for immediate assistance.",
+  consultation: "Let's schedule a complimentary consultation! Contact us:\n\n💬 [WhatsApp](" + WHATSAPP_LINK + ")\n📧 [Email](mailto:" + EMAIL + ")\n📞 [Call](" + PHONE_DISPLAY + ")\n\nWhat type of project are you considering?",
 
-  pricing: "Our project fees are tailored to your specific needs, scope, and vision. Every space is unique, and we craft bespoke solutions. I'd be happy to connect you with our team for a personalized quote. Shall I arrange a call or would you prefer to WhatsApp us?",
+  pricing: "Every space is unique—we create bespoke solutions tailored to your needs. For a personalized quote:\n\n💬 [WhatsApp](" + WHATSAPP_LINK + ")\n📧 [Email](mailto:" + EMAIL + ")\n📞 [Call " + PHONE_DISPLAY + "](tel:+" + PHONE + ")",
 
-  timeline: "Project timelines vary based on scope, but typically: Concept Development (2-3 weeks), Design Development (3-4 weeks), Documentation (4-6 weeks), and Implementation (varies by scale). We prioritize both excellence and efficiency. Would you like to discuss your specific timeline needs?",
+  timeline: "Typical timeline:\n• Concept: 2-3 weeks\n• Design: 3-4 weeks\n• Documentation: 4-6 weeks\n\nDiscuss your project:\n💬 [WhatsApp](" + WHATSAPP_LINK + ")\n📞 [Call](tel:+" + PHONE + ")",
 
-  contact: "You can reach us at:\n📞 Phone: +971 50 XXX XXXX\n📧 Email: info@mouhajerdesign.com\n💬 WhatsApp: Click the green button for instant chat\n📍 Location: Dubai, UAE\n\nWe typically respond within 2 hours during business days. How would you prefer to connect?",
+  contact: "Reach us:\n\n💬 [WhatsApp " + PHONE_DISPLAY + "](" + WHATSAPP_LINK + ")\n📧 [" + EMAIL + "](mailto:" + EMAIL + ")\n📞 [Call " + PHONE_DISPLAY + "](tel:+" + PHONE + ")\n📍 Dubai, UAE\n\nWe respond within 2 hours!",
 
-  default: "That's a great question! I'm here to help guide you through our design services. For detailed, personalized assistance, I'd recommend:\n\n1. Chat with our team on WhatsApp (instant response)\n2. Schedule a consultation\n3. Explore our portfolio on the Projects page\n\nWhat would work best for you?",
+  default: "I'm here to help! Choose:\n\n💬 [WhatsApp](" + WHATSAPP_LINK + ") (instant)\n📧 [Email](mailto:" + EMAIL + ")\n📞 [Call](tel:+" + PHONE + ")\n\nWhat works best?",
 };
 
 // Quick action buttons
@@ -44,6 +50,31 @@ const quickActions = [
   { id: 'consultation', label: 'Book Consultation', icon: '📅' },
   { id: 'contact', label: 'Contact Us', icon: '💬' },
 ];
+
+// Convert markdown links to clickable HTML
+function renderMessageWithLinks(text: string) {
+  // Replace markdown links [text](url) with clickable links
+  const parts = text.split(/(\[.*?\]\(.*?\))/g);
+
+  return parts.map((part, index) => {
+    const linkMatch = part.match(/\[(.*?)\]\((.*?)\)/);
+    if (linkMatch) {
+      const [, linkText, url] = linkMatch;
+      return (
+        <a
+          key={index}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-blue-600 underline hover:text-blue-700"
+        >
+          {linkText}
+        </a>
+      );
+    }
+    return <span key={index}>{part}</span>;
+  });
+}
 
 export function AIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -239,7 +270,7 @@ export function AIChatbot() {
                   className={`flex gap-3 ${message.role === 'user' ? 'flex-row-reverse' : ''}`}
                 >
                   {/* Avatar */}
-                  <div className={`flex h-8 w-8 items-center justify-center rounded-full flex-shrink-0 ${
+                  <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
                     message.role === 'assistant' ? 'bg-neutral-950 text-white' : 'bg-blue-500 text-white'
                   }`}>
                     {message.role === 'assistant' ? (
@@ -255,9 +286,9 @@ export function AIChatbot() {
                       ? 'bg-white text-neutral-900'
                       : 'bg-neutral-950 text-white'
                   }`}>
-                    <p className="text-sm font-light leading-relaxed whitespace-pre-line">
-                      {message.content}
-                    </p>
+                    <div className="text-sm font-light leading-relaxed whitespace-pre-line">
+                      {renderMessageWithLinks(message.content)}
+                    </div>
                   </div>
                 </motion.div>
               ))}

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "migrate:sanity": "tsx scripts/migrate-to-sanity.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.0",
@@ -60,6 +61,7 @@
     "eslint-config-next": "16.0.3",
     "sanity": "^4.17.0",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

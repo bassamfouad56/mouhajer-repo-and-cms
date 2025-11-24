@@ -200,7 +200,7 @@ export default async function LocaleLayout({
 
           {/* Always-visible WhatsApp Button */}
           <WhatsAppButton
-            phoneNumber="971501234567"
+            phoneNumber="971523041482"
             message="Hello! I'm interested in learning more about your design services."
           />
 
