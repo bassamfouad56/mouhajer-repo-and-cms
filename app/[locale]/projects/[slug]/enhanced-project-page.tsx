@@ -26,6 +26,7 @@ import {
   FileText
 } from 'lucide-react';
 import { ImageGalleryModal } from '@/components/image-gallery-modal';
+import { getSafeImageUrl, filterValidImages, isNonEmptyArray } from '@/lib/error-handling';
 
 interface ProjectPageClientProps {
   project: Project;
@@ -140,7 +141,25 @@ export function EnhancedProjectPageClient({
   const previousProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
   const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
 
-  const galleryImages = project.acfFields?.gallery || [];
+  // Safely get gallery images with error handling
+  const rawGalleryImages = project.acfFields?.gallery || [];
+  const galleryImages = filterValidImages(rawGalleryImages);
+
+  // Helper to get project featured image
+  const getFeaturedImageUrl = () => {
+    return getSafeImageUrl(
+      project.featuredImage?.node,
+      'https://placehold.co/1920x1080/e5e5e5/737373?text=' + encodeURIComponent(project.title || 'Project')
+    );
+  };
+
+  // Helper to get any project image
+  const getProjectImageUrl = (proj: Project) => {
+    return getSafeImageUrl(
+      proj.featuredImage?.node,
+      'https://placehold.co/800x600/e5e5e5/737373?text=' + encodeURIComponent(proj.title || 'Project')
+    );
+  };
 
   return (
     <>
@@ -157,16 +176,14 @@ export function EnhancedProjectPageClient({
             className="absolute inset-0"
             style={{ opacity: heroOpacity, scale: heroScale }}
           >
-            {project.featuredImage?.node?.sourceUrl && (
-              <Image
-                src={project.featuredImage.node.sourceUrl}
-                alt={project.title}
-                fill
-                className="object-cover"
-                priority
-                quality={90}
-              />
-            )}
+            <Image
+              src={getFeaturedImageUrl()}
+              alt={project.title || 'Project'}
+              fill
+              className="object-cover"
+              priority
+              quality={90}
+            />
             <div className="absolute inset-0 bg-linear-to-br from-neutral-950/60 via-neutral-950/40 to-neutral-950/80" />
           </motion.div>
 
@@ -321,7 +338,7 @@ export function EnhancedProjectPageClient({
         </Section>
 
         {/* Full-Width Gallery Section */}
-        {galleryImages.length > 0 && (
+        {isNonEmptyArray(galleryImages) && (
           <Section delay={1}>
             <div className="relative bg-neutral-950 py-24 lg:py-32">
               <div className="mx-auto max-w-7xl px-6 lg:px-12">
@@ -531,7 +548,7 @@ export function EnhancedProjectPageClient({
         </Section>
 
         {/* Related Projects */}
-        {relatedProjects.length > 0 && (
+        {isNonEmptyArray(relatedProjects) && (
           <Section delay={4}>
             <div className="bg-neutral-50 px-6 py-24 lg:px-12 lg:py-32">
               <div className="mx-auto max-w-7xl">
@@ -563,15 +580,13 @@ export function EnhancedProjectPageClient({
                         className="group block"
                       >
                         <div className="mb-4 aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-200">
-                          {relatedProject.featuredImage?.node?.sourceUrl && (
-                            <Image
-                              src={relatedProject.featuredImage.node.sourceUrl}
-                              alt={relatedProject.title}
-                              width={600}
-                              height={450}
-                              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                          )}
+                          <Image
+                            src={getProjectImageUrl(relatedProject)}
+                            alt={relatedProject.title || 'Related Project'}
+                            width={600}
+                            height={450}
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
                         </div>
                         <div className="space-y-2">
                           {relatedProject.acfFields?.projectType && (

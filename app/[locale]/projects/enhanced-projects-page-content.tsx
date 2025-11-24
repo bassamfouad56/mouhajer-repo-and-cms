@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Project, Industry } from '@/lib/wordpress';
 import { ArrowUpRight, Filter, Grid3x3, LayoutGrid, MapPin, Calendar, Sparkles } from 'lucide-react';
+import { getSafeImageUrl, isNonEmptyArray } from '@/lib/error-handling';
 
 interface ProjectsPageContentProps {
   projects: Project[];
@@ -18,7 +19,15 @@ export default function EnhancedProjectsPageContent({ projects, industries }: Pr
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [gridLayout, setGridLayout] = useState<'masonry' | 'grid' | 'featured'>('featured');
 
-  const displayProjects = projects.length > 0 ? projects : placeholderProjects;
+  // Helper function to safely get project image URL
+  const getProjectImageUrl = (project: Project): string => {
+    return getSafeImageUrl(
+      project.featuredImage?.node,
+      'https://placehold.co/1200x800/e5e5e5/737373?text=' + encodeURIComponent(project.title || 'Project')
+    );
+  };
+
+  const displayProjects = isNonEmptyArray(projects) ? projects : placeholderProjects;
 
   // Filter projects by category
   const filteredProjects =
@@ -264,8 +273,8 @@ function FeaturedProjectCard({ project }: { project: Project }) {
       <Link href={`/projects/${project.slug}`} className="relative aspect-[4/3] lg:aspect-auto">
         <div className="relative h-full overflow-hidden bg-neutral-100">
           <Image
-            src={project.featuredImage?.node?.sourceUrl || '/placeholder-project.jpg'}
-            alt={project.title}
+            src={getProjectImageUrl(project)}
+            alt={project.title || 'Project'}
             fill
             className="object-cover transition-all duration-700 group-hover:scale-105"
           />
@@ -364,7 +373,7 @@ function ProjectCardMasonry({ project, index }: { project: Project; index: numbe
         <div className="relative mb-6 overflow-hidden bg-neutral-100">
           <div className="relative aspect-[4/5]">
             <Image
-              src={project.featuredImage?.node?.sourceUrl || '/placeholder-project.jpg'}
+              src={getProjectImageUrl(project)}
               alt={project.title}
               fill
               className="object-cover transition-all duration-700 group-hover:scale-105"
@@ -429,7 +438,7 @@ function ProjectCardGrid({ project, index }: { project: Project; index: number }
       >
         <div className="relative mb-6 aspect-[3/4] overflow-hidden bg-neutral-100">
           <Image
-            src={project.featuredImage?.node?.sourceUrl || '/placeholder-project.jpg'}
+            src={getProjectImageUrl(project)}
             alt={project.title}
             fill
             className="object-cover transition-all duration-700 group-hover:scale-105"

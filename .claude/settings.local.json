@@ -53,7 +53,13 @@
       "Bash(xargs sudo kill -9)",
       "Bash(chmod:*)",
       "Bash(PORT=3001 npm run dev:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(vercel --prod:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx sanity dev:*)",
+      "Bash(sudo -S chmod:*)",
+      "Bash(npx next dev -p 3005)"
     ],
     "deny": [],
     "ask": []
