@@ -179,7 +179,6 @@ const megaMenuItems: MegaMenuItem[] = [
     },
   },
   { href: '/#about', label: 'About', isPage: false },
-  { href: '/careers', label: 'Careers', isPage: true },
   { href: '/#contact', label: 'Contact', isPage: false },
 ];
 

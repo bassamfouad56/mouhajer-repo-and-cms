@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import { ArrowRight, Briefcase, Users, TrendingUp, Award, MapPin, Clock, DollarSign, ChevronRight, X } from 'lucide-react';
-import Header from '@/components/header';
-import Footer from '@/components/footer';
+import { ArrowRight, Briefcase, Users, TrendingUp, Award, MapPin, Clock, DollarSign, ChevronRight, X, Upload, FileText } from 'lucide-react';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 /**
  * Careers Page - Award-winning luxury aesthetic
@@ -620,19 +620,238 @@ function JobDetailModal({ job, onClose }: { job: JobPosition | null; onClose: ()
               </ul>
             </div>
 
-            {/* Apply Button */}
-            <div className="flex gap-4">
-              <a
-                href={`mailto:careers@mouhajerdesign.com?subject=Application for ${job.title}`}
-                className="inline-flex flex-1 items-center justify-center gap-3 border border-neutral-950 bg-neutral-950 px-8 py-4 text-sm font-light tracking-widest text-white transition-all hover:bg-transparent hover:text-neutral-950"
-              >
-                APPLY FOR THIS POSITION
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-              </a>
-            </div>
+            {/* Apply Button - Opens Form */}
+            <ApplicationForm job={job} onClose={onClose} />
           </motion.div>
         </>
       )}
     </AnimatePresence>
+  );
+}
+
+// Application Form Component
+function ApplicationForm({ job, onClose }: { job: JobPosition; onClose: () => void }) {
+  const [showForm, setShowForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    coverLetter: '',
+  });
+  const [resume, setResume] = useState<File | null>(null);
+  const [portfolio, setPortfolio] = useState<File | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Lock body scroll when form is shown
+  useEffect(() => {
+    if (showForm) {
+      document.body.style.overflow = 'hidden';
+      // Scroll to form
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showForm]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setMessage(null);
+
+    try {
+      const data = new FormData();
+      data.append('name', formData.name);
+      data.append('email', formData.email);
+      data.append('phone', formData.phone);
+      data.append('position', job.title);
+      data.append('coverLetter', formData.coverLetter);
+      if (resume) data.append('resume', resume);
+      if (portfolio) data.append('portfolio', portfolio);
+
+      const response = await fetch('/api/apply', {
+        method: 'POST',
+        body: data,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setMessage({ type: 'success', text: 'Application submitted successfully!' });
+        setTimeout(() => {
+          onClose();
+        }, 2000);
+      } else {
+        setMessage({ type: 'error', text: result.message || 'Failed to submit application' });
+      }
+    } catch (error) {
+      setMessage({ type: 'error', text: 'An error occurred. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (!showForm) {
+    return (
+      <div className="flex gap-4">
+        <button
+          onClick={() => setShowForm(true)}
+          className="inline-flex flex-1 items-center justify-center gap-3 border border-neutral-950 bg-neutral-950 px-8 py-4 text-sm font-light tracking-widest text-white transition-all hover:bg-transparent hover:text-neutral-950"
+        >
+          APPLY FOR THIS POSITION
+          <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 border-t border-neutral-200 pt-8">
+      <h3 className="text-2xl font-light tracking-tight text-neutral-950">Application Form</h3>
+
+      {/* Name */}
+      <div>
+        <label className="mb-2 block text-sm font-light text-neutral-700">
+          Full Name <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          required
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          className="w-full border border-neutral-200 px-4 py-3 text-sm font-light outline-none transition-colors focus:border-neutral-950"
+        />
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="mb-2 block text-sm font-light text-neutral-700">
+          Email Address <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="email"
+          required
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          className="w-full border border-neutral-200 px-4 py-3 text-sm font-light outline-none transition-colors focus:border-neutral-950"
+        />
+      </div>
+
+      {/* Phone */}
+      <div>
+        <label className="mb-2 block text-sm font-light text-neutral-700">
+          Phone Number <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="tel"
+          required
+          value={formData.phone}
+          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+          className="w-full border border-neutral-200 px-4 py-3 text-sm font-light outline-none transition-colors focus:border-neutral-950"
+        />
+      </div>
+
+      {/* Resume Upload */}
+      <div>
+        <label className="mb-2 block text-sm font-light text-neutral-700">
+          Resume/CV <span className="text-red-500">*</span>
+        </label>
+        <div className="relative">
+          <input
+            type="file"
+            required
+            accept=".pdf,.doc,.docx"
+            onChange={(e) => setResume(e.target.files?.[0] || null)}
+            className="hidden"
+            id="resume-upload"
+          />
+          <label
+            htmlFor="resume-upload"
+            className="flex cursor-pointer items-center justify-center gap-3 border-2 border-dashed border-neutral-300 px-4 py-8 transition-colors hover:border-neutral-950"
+          >
+            <Upload className="h-5 w-5 text-neutral-400" strokeWidth={1.5} />
+            <span className="text-sm font-light text-neutral-600">
+              {resume ? resume.name : 'Click to upload (PDF, DOC, DOCX)'}
+            </span>
+          </label>
+        </div>
+      </div>
+
+      {/* Portfolio Upload (Optional) */}
+      <div>
+        <label className="mb-2 block text-sm font-light text-neutral-700">
+          Portfolio (Optional)
+        </label>
+        <div className="relative">
+          <input
+            type="file"
+            accept=".pdf,.zip"
+            onChange={(e) => setPortfolio(e.target.files?.[0] || null)}
+            className="hidden"
+            id="portfolio-upload"
+          />
+          <label
+            htmlFor="portfolio-upload"
+            className="flex cursor-pointer items-center justify-center gap-3 border-2 border-dashed border-neutral-300 px-4 py-8 transition-colors hover:border-neutral-950"
+          >
+            <FileText className="h-5 w-5 text-neutral-400" strokeWidth={1.5} />
+            <span className="text-sm font-light text-neutral-600">
+              {portfolio ? portfolio.name : 'Click to upload (PDF, ZIP)'}
+            </span>
+          </label>
+        </div>
+      </div>
+
+      {/* Cover Letter */}
+      <div>
+        <label className="mb-2 block text-sm font-light text-neutral-700">
+          Cover Letter
+        </label>
+        <textarea
+          rows={6}
+          value={formData.coverLetter}
+          onChange={(e) => setFormData({ ...formData, coverLetter: e.target.value })}
+          placeholder="Tell us why you're a great fit for this position..."
+          className="w-full border border-neutral-200 px-4 py-3 text-sm font-light outline-none transition-colors focus:border-neutral-950"
+        />
+      </div>
+
+      {/* Message */}
+      {message && (
+        <div
+          className={`rounded px-4 py-3 text-sm font-light ${
+            message.type === 'success'
+              ? 'bg-green-50 text-green-800'
+              : 'bg-red-50 text-red-800'
+          }`}
+        >
+          {message.text}
+        </div>
+      )}
+
+      {/* Actions */}
+      <div className="flex gap-4">
+        <button
+          type="button"
+          onClick={() => setShowForm(false)}
+          className="flex-1 border border-neutral-300 px-8 py-4 text-sm font-light tracking-widest text-neutral-600 transition-all hover:border-neutral-950 hover:text-neutral-950"
+        >
+          CANCEL
+        </button>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="flex-1 border border-neutral-950 bg-neutral-950 px-8 py-4 text-sm font-light tracking-widest text-white transition-all hover:bg-transparent hover:text-neutral-950 disabled:opacity-50"
+        >
+          {isSubmitting ? 'SUBMITTING...' : 'SUBMIT APPLICATION'}
+        </button>
+      </div>
+    </form>
   );
 }
