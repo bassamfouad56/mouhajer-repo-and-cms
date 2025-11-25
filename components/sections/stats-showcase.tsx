@@ -49,7 +49,7 @@ export function StatsShowcase() {
         style={{ y: imageY }}
         className="absolute inset-0"
       >
-        <Image
+        <SafeImage
           src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2000&q=80"
           alt="Luxury Interior"
           fill

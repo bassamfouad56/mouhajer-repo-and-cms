@@ -186,7 +186,7 @@ function TestimonialCard({
         {/* Author */}
         <div className="flex items-center gap-4">
           <div className="relative h-14 w-14 overflow-hidden rounded-full">
-            <Image
+            <SafeImage
               src={testimonial.image}
               alt={testimonial.name}
               fill

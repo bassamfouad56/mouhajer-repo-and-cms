@@ -78,7 +78,7 @@ export function Hero() {
         >
           {[...carouselImages.slice(0, 4), ...carouselImages.slice(0, 4)].map((img, idx) => (
             <div key={idx} className="relative h-80 w-full overflow-hidden">
-              <Image
+              <SafeImage
                 src={img}
                 alt="Interior Design Project"
                 fill
@@ -104,7 +104,7 @@ export function Hero() {
         >
           {[...carouselImages.slice(4, 8), ...carouselImages.slice(4, 8)].map((img, idx) => (
             <div key={idx} className="relative h-80 w-full overflow-hidden">
-              <Image
+              <SafeImage
                 src={img}
                 alt="Interior Design Project"
                 fill

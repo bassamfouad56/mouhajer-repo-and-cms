@@ -13,19 +13,19 @@ interface ProjectsPageContentProps {
   industries: Industry[];
 }
 
+// Helper function to safely get project image URL - moved outside component so child components can access it
+const getProjectImageUrl = (project: Project): string => {
+  return getSafeImageUrl(
+    project.featuredImage?.node,
+    'https://placehold.co/1200x800/e5e5e5/737373?text=' + encodeURIComponent(project.title || 'Project')
+  );
+};
+
 export default function EnhancedProjectsPageContent({ projects, industries }: ProjectsPageContentProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const isHeroInView = useInView(heroRef, { once: true });
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [gridLayout, setGridLayout] = useState<'masonry' | 'grid' | 'featured'>('featured');
-
-  // Helper function to safely get project image URL
-  const getProjectImageUrl = (project: Project): string => {
-    return getSafeImageUrl(
-      project.featuredImage?.node,
-      'https://placehold.co/1200x800/e5e5e5/737373?text=' + encodeURIComponent(project.title || 'Project')
-    );
-  };
 
   const displayProjects = isNonEmptyArray(projects) ? projects : placeholderProjects;
 

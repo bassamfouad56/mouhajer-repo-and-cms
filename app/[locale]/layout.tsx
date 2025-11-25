@@ -5,6 +5,7 @@ import NextTopLoader from 'nextjs-toploader';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { draftMode } from 'next/headers';
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { PageTransition } from "@/components/page-transition";
 import { OrganizationStructuredData, LocalBusinessStructuredData } from "@/components/structured-data";
@@ -12,6 +13,7 @@ import WhatsAppButton from "@/components/whatsapp-button";
 import AIChatbot from "@/components/ai-chatbot";
 import { CartProvider } from "@/lib/cart-context";
 import { CartSidebar } from "@/components/cart-sidebar";
+import { PreviewBanner } from "@/components/preview-banner";
 import { locales, getDirection } from '@/i18n/config';
 import "../globals.css";
 
@@ -115,6 +117,7 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
   const direction = getDirection(locale as typeof locales[number]);
+  const { isEnabled: isDraftMode } = await draftMode();
 
   const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
   const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
@@ -212,6 +215,9 @@ export default async function LocaleLayout({
 
             {/* Shopping Cart Sidebar */}
             <CartSidebar />
+
+            {/* Preview Mode Banner */}
+            {isDraftMode && <PreviewBanner />}
           </CartProvider>
         </NextIntlClientProvider>
       </body>

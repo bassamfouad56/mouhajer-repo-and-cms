@@ -108,7 +108,7 @@ export function WhyChooseUs() {
                 style={{ y: imageY, scale: imageScale }}
                 className="relative aspect-[3/4] overflow-hidden"
               >
-                <Image
+                <SafeImage
                   src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80"
                   alt="Luxury Interior Design"
                   fill
@@ -125,7 +125,7 @@ export function WhyChooseUs() {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="absolute -bottom-12 -right-12 aspect-square w-1/2 overflow-hidden border-8 border-white shadow-2xl lg:-right-24"
               >
-                <Image
+                <SafeImage
                   src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"
                   alt="Interior Design Detail"
                   fill

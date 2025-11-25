@@ -1,8 +1,8 @@
 import { groq } from 'next-sanity'
 
-// Project Queries
+// Project Queries with i18n support
 export const projectsQuery = groq`
-  *[_type == "project"] | order(publishedAt desc) {
+  *[_type == "project" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -12,12 +12,13 @@ export const projectsQuery = groq`
     location,
     year,
     featured,
-    publishedAt
+    publishedAt,
+    __i18n_lang
   }
 `
 
 export const projectBySlugQuery = groq`
-  *[_type == "project" && slug.current == $slug][0] {
+  *[_type == "project" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
     _id,
     title,
     slug,
@@ -32,21 +33,24 @@ export const projectBySlugQuery = groq`
     content,
     publishedAt,
     seo,
+    __i18n_lang,
     "services": services[]-> {
       _id,
       title,
-      slug
+      slug,
+      __i18n_lang
     },
     "industries": industries[]-> {
       _id,
       title,
-      slug
+      slug,
+      __i18n_lang
     }
   }
 `
 
 export const featuredProjectsQuery = groq`
-  *[_type == "project" && featured == true] | order(publishedAt desc) [0...6] {
+  *[_type == "project" && featured == true && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) [0...6] {
     _id,
     title,
     slug,
@@ -54,13 +58,14 @@ export const featuredProjectsQuery = groq`
     mainImage,
     category,
     location,
-    year
+    year,
+    __i18n_lang
   }
 `
 
-// Service Queries
+// Service Queries with i18n support
 export const servicesQuery = groq`
-  *[_type == "service"] | order(order asc) {
+  *[_type == "service" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
     _id,
     title,
     slug,
@@ -68,12 +73,13 @@ export const servicesQuery = groq`
     mainImage,
     icon,
     featured,
-    order
+    order,
+    __i18n_lang
   }
 `
 
 export const serviceBySlugQuery = groq`
-  *[_type == "service" && slug.current == $slug][0] {
+  *[_type == "service" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
     _id,
     title,
     slug,
@@ -84,20 +90,22 @@ export const serviceBySlugQuery = groq`
     process,
     content,
     seo,
+    __i18n_lang,
     "relatedProjects": relatedProjects[]-> {
       _id,
       title,
       slug,
       mainImage,
       category,
-      location
+      location,
+      __i18n_lang
     }
   }
 `
 
-// Industry Queries
+// Industry Queries with i18n support
 export const industriesQuery = groq`
-  *[_type == "industry"] | order(order asc) {
+  *[_type == "industry" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
     _id,
     title,
     slug,
@@ -105,12 +113,13 @@ export const industriesQuery = groq`
     mainImage,
     icon,
     featured,
-    order
+    order,
+    __i18n_lang
   }
 `
 
 export const industryBySlugQuery = groq`
-  *[_type == "industry" && slug.current == $slug][0] {
+  *[_type == "industry" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
     _id,
     title,
     slug,
@@ -121,26 +130,29 @@ export const industryBySlugQuery = groq`
     solutions,
     content,
     seo,
+    __i18n_lang,
     "relatedProjects": relatedProjects[]-> {
       _id,
       title,
       slug,
       mainImage,
       category,
-      location
+      location,
+      __i18n_lang
     },
     "relatedServices": relatedServices[]-> {
       _id,
       title,
       slug,
-      mainImage
+      mainImage,
+      __i18n_lang
     }
   }
 `
 
-// Blog Post Queries
+// Blog Post Queries with i18n support
 export const postsQuery = groq`
-  *[_type == "post"] | order(publishedAt desc) {
+  *[_type == "post" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -151,12 +163,13 @@ export const postsQuery = groq`
     readTime,
     tags,
     featured,
-    publishedAt
+    publishedAt,
+    __i18n_lang
   }
 `
 
 export const postBySlugQuery = groq`
-  *[_type == "post" && slug.current == $slug][0] {
+  *[_type == "post" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
     _id,
     title,
     slug,
@@ -169,18 +182,20 @@ export const postBySlugQuery = groq`
     tags,
     publishedAt,
     seo,
+    __i18n_lang,
     "relatedProjects": relatedProjects[]-> {
       _id,
       title,
       slug,
       mainImage,
-      category
+      category,
+      __i18n_lang
     }
   }
 `
 
 export const featuredPostsQuery = groq`
-  *[_type == "post" && featured == true] | order(publishedAt desc) [0...3] {
+  *[_type == "post" && featured == true && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) [0...3] {
     _id,
     title,
     slug,
@@ -189,13 +204,14 @@ export const featuredPostsQuery = groq`
     category,
     author,
     readTime,
-    publishedAt
+    publishedAt,
+    __i18n_lang
   }
 `
 
-// Category Queries
+// Category Queries with i18n support
 export const projectsByCategoryQuery = groq`
-  *[_type == "project" && category == $category] | order(publishedAt desc) {
+  *[_type == "project" && category == $category && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -203,12 +219,13 @@ export const projectsByCategoryQuery = groq`
     mainImage,
     category,
     location,
-    year
+    year,
+    __i18n_lang
   }
 `
 
 export const postsByCategoryQuery = groq`
-  *[_type == "post" && category == $category] | order(publishedAt desc) {
+  *[_type == "post" && category == $category && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -217,6 +234,7 @@ export const postsByCategoryQuery = groq`
     category,
     author,
     readTime,
-    publishedAt
+    publishedAt,
+    __i18n_lang
   }
 `
