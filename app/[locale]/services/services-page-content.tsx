@@ -1,418 +1,769 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import Link from 'next/link';
-import { Service, Industry } from '@/lib/wordpress';
+import { useRef, useState, useEffect } from "react";
 import {
-  Home,
-  Ruler,
-  Palette,
-  Lightbulb,
-  Building2,
-  Sparkles,
-  ArrowRight,
-  Check,
-  ArrowUpRight,
-} from 'lucide-react';
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  MotionValue,
+  AnimatePresence,
+} from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { urlForImage } from "@/sanity/lib/image";
+import { FAQSection } from "@/components/sections/faq";
 
-interface ServicesPageContentProps {
-  services: Service[];
-  industries: Industry[];
+interface SanityService {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+  mainImage?: any;
+  icon?: string;
+  features?: Array<{ title: string; description: string }>;
+  order?: number;
 }
 
-export default function ServicesPageContent({ services, industries }: ServicesPageContentProps) {
+interface SanityProject {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+  mainImage?: any;
+  category?: string;
+  location?: string;
+  year?: string;
+}
+
+interface ServicesPageContentProps {
+  services?: SanityService[];
+  projects?: SanityProject[];
+}
+
+// Smooth parallax hook
+function useParallax(value: MotionValue<number>, distance: number) {
+  return useTransform(value, [0, 1], [-distance, distance]);
+}
+
+export default function ServicesPageContent({
+  services = [],
+  projects = [],
+}: ServicesPageContentProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const isHeroInView = useInView(heroRef, { once: true });
 
-  const displayServices = services.length > 0 ? services : placeholderServices;
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
   return (
-    <main className="relative bg-white">
-      {/* Hero Section */}
+    <main className="relative bg-neutral-950">
+      {/* Hero Section - Cinematic Full Screen */}
       <section
         ref={heroRef}
-        className="relative overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 px-6 py-32 lg:px-12 lg:py-48"
+        className="relative h-screen min-h-[800px] overflow-hidden bg-neutral-950"
       >
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
-        <div className="absolute left-0 top-0 h-[600px] w-[600px] rounded-full bg-purple-500/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-blue-500/10 blur-[120px]" />
+        {/* Subtle Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-900 via-neutral-950 to-black" />
 
-        <div className="relative z-10 mx-auto max-w-[1400px]">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-8 flex items-center gap-4"
-          >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-neutral-600" />
-            <span className="text-sm font-light tracking-[0.3em] text-neutral-400">
-              WHAT WE OFFER
-            </span>
-          </motion.div>
+        {/* Minimal Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px] opacity-20" />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-8 max-w-4xl text-6xl font-light tracking-tight text-white lg:text-8xl"
-          >
-            Comprehensive Design Services
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-12 max-w-2xl text-xl font-light leading-relaxed text-neutral-400"
-          >
-            From initial concept to final installation, we offer end-to-end design
-            solutions tailored to transform your vision into extraordinary spaces
-            that inspire, function, and endure.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-wrap gap-4"
-          >
-            <a
-              href="#services"
-              className="group inline-flex items-center gap-3 border border-white bg-white px-8 py-4 text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-white"
+        {/* Hero Content */}
+        <motion.div
+          style={{ opacity: heroOpacity, y: heroY }}
+          className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-20"
+        >
+          <div className="mx-auto max-w-6xl text-center">
+            {/* Minimal Label */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-12"
             >
-              <span>EXPLORE SERVICES</span>
-              <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-3 border border-neutral-600 px-8 py-4 text-sm font-light tracking-widest text-neutral-400 transition-all hover:border-white hover:text-white"
+              <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-white/40">
+                Services
+              </span>
+            </motion.div>
+
+            {/* Main Title */}
+            <div className="mb-8 overflow-hidden">
+              <motion.h1
+                initial={{ opacity: 0, y: 60 }}
+                animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 1.2,
+                  delay: 0.3,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl"
+              >
+                The Art of
+              </motion.h1>
+            </div>
+
+            <div className="mb-16 overflow-hidden">
+              <motion.h1
+                initial={{ opacity: 0, y: 60 }}
+                animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 1.2,
+                  delay: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-[#d4af37] sm:text-7xl md:text-8xl lg:text-9xl"
+              >
+                Integrated Construction
+              </motion.h1>
+            </div>
+
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="mx-auto mb-16 max-w-3xl px-4 font-Satoshi text-xl font-light leading-relaxed text-white/60 sm:px-0 sm:text-2xl"
             >
-              <span>GET STARTED</span>
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Services Grid Section */}
-      <section id="services" className="relative bg-white px-6 py-32 lg:px-12 lg:py-48">
-        <div className="mx-auto max-w-[1600px]">
-          {/* Grid with alternating layouts */}
-          <div className="space-y-24 lg:space-y-32">
-            {displayServices.map((service, index) => (
-              <ServiceCard
-                key={service.id}
-                service={service}
-                index={index}
-                industries={industries}
-              />
-            ))}
+              Design. Build. Engineering. One Point of Responsibility.
+            </motion.p>
           </div>
-        </div>
-      </section>
+        </motion.div>
 
-      {/* Process Overview */}
-      <section className="relative bg-neutral-50 px-6 py-32 lg:px-12 lg:py-48">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="mb-16 text-center">
-            <h2 className="mb-6 text-5xl font-light tracking-tight text-neutral-950 lg:text-6xl">
-              Our Service Process
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg font-light leading-relaxed text-neutral-600">
-              A proven methodology that ensures excellence at every stage
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step, index) => (
-              <ProcessStep key={index} step={step} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative bg-neutral-950 px-6 py-32 lg:px-12">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="mb-6 text-4xl font-light tracking-tight text-white lg:text-5xl">
-            Ready to Start Your Project?
-          </h2>
-          <p className="mb-10 text-lg font-light text-neutral-400">
-            Let&apos;s discuss how our services can bring your vision to life
-          </p>
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-3 border border-white px-10 py-5 text-sm font-light tracking-widest text-white transition-all hover:bg-white hover:text-neutral-950"
+        {/* Minimal Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isHeroInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="absolute bottom-16 left-1/2 z-10 -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-2"
           >
-            <span>SCHEDULE A CONSULTATION</span>
-            <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
-          </a>
-        </div>
+            <ChevronDown className="h-5 w-5 text-white/30" />
+          </motion.div>
+        </motion.div>
       </section>
+
+      {/* Section 1: Turnkey Solution with Real Project Image */}
+      <TurnkeySolutionSection projects={projects} />
+
+      {/* Section 2: Service Pillars - Professional Cards */}
+      <ServicePillarsSection
+        sanityServices={services}
+        sanityProjects={projects}
+      />
+
+      {/* Section 3: Expert Insights - Minimal Accordion */}
+      <FAQSection
+        label="Expert Insights"
+        title="Questions"
+        titleHighlight="& Answers"
+        faqs={[
+          {
+            question: "Do you handle the full construction scope from empty land?",
+            answer: "Yes. We are a licensed Building Contractor (G+12). We handle excavation, concrete, structural steel, and all civil works. You do not need a separate builder.",
+          },
+          {
+            question: "Who manages the government approvals?",
+            answer: "We do. Our in-house engineering team handles all permits and NOCs from Dubai Municipality, Civil Defence, DEWA, and master developers like Nakheel or Emaar.",
+          },
+          {
+            question: "Do you manufacture your own furniture?",
+            answer: "Yes. We own a dedicated joinery and furniture factory. We custom-make doors, wardrobes, kitchens, and loose furniture to fit your space perfectly.",
+          },
+          {
+            question: "Can you renovate my hotel while it stays open?",
+            answer: 'Yes. We specialize in "live environment" renovations. We phase the work to ensure your guests are undisturbed and your revenue stream continues.',
+          },
+          {
+            question: "Do you only do design, or can you build it too?",
+            answer: "We are a full Turnkey Solution Provider. We can design your project and then build it using our in-house construction and MEP teams. This is the preferred route for 90% of our clients as it guarantees quality and budget control.",
+          },
+          {
+            question: "Do you provide maintenance after handover?",
+            answer: "Yes. We offer comprehensive annual maintenance contracts to ensure your AC, lighting, and finishes remain in showroom condition.",
+          },
+        ]}
+        showCTA={false}
+      />
+
+      {/* Section 4: CTA - Clean and Professional */}
+      <IntegratedPathCTA />
     </main>
   );
 }
 
-function ServiceCard({
-  service,
-  index,
-  industries,
-}: {
-  service: Service;
-  index: number;
-  industries: Industry[];
-}) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
-  const isEven = index % 2 === 0;
+// Section 1: Turnkey Solution with Real Project Parallax
+function TurnkeySolutionSection({ projects }: { projects: SanityProject[] }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-200px" });
 
-  const iconMap: { [key: string]: typeof Home } = {
-    'Interior Design': Home,
-    'Space Planning': Ruler,
-    'Custom Furniture': Palette,
-    'Lighting Design': Lightbulb,
-    'Commercial Design': Building2,
-    'Consultation': Sparkles,
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useParallax(scrollYProgress, 200);
+
+  // Use first featured project image
+  const featuredProject = projects[0];
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white py-32 sm:py-40 lg:py-56"
+    >
+      <div className="mx-auto max-w-[1800px] px-6 lg:px-16 xl:px-24">
+        <div className="grid gap-20 lg:grid-cols-2 lg:gap-32 items-center">
+          {/* Left: Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col justify-center"
+          >
+            <div className="mb-10">
+              <motion.div
+                className="mb-4 h-px w-12 bg-neutral-900"
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              />
+            </div>
+
+            <h2 className="mb-16 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl xl:text-8xl">
+              We Do Not
+              <br />
+              <span className="text-[#d4af37]">Outsource Your Vision</span>
+            </h2>
+
+            <div className="space-y-10 font-Satoshi text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                In the UAE construction market, quality often gets lost in the
+                handovers. Architects hand over to contractors. Contractors hand
+                over to sub-contractors. By the end, the vision is diluted.
+              </motion.p>
+
+              <motion.p
+                className="text-neutral-950"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                MIDC was built to solve this. We are a true Turnkey Solution
+                Provider.
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                From the initial 3D visualization created by Eng. Maher's design
+                team to the final HVAC testing performed by our in-house MEP
+                engineers, we control every single variable.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="border-l-2 border-neutral-900 pl-8 text-neutral-950 text-xl lg:text-2xl"
+              >
+                <p>
+                  No Blame Games.
+                  <br />
+                  No Delays.
+                  <br />
+                  No Compromise.
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Right: Parallax Project Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+            className="relative h-[700px] lg:h-[900px] overflow-hidden"
+          >
+            <motion.div
+              style={{ y: imageY }}
+              className="relative h-full w-full"
+            >
+              {featuredProject?.mainImage ? (
+                <Image
+                  src={urlForImage(featuredProject.mainImage)
+                    .width(1200)
+                    .height(1600)
+                    .url()}
+                  alt={featuredProject.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              ) : (
+                <Image
+                  src="/projects/turnkey-design-fitout/_MID0058-HDR.jpg"
+                  alt="MIDC Turnkey Design Project"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/20 via-transparent to-transparent" />
+            </motion.div>
+
+            {/* Floating Project Label */}
+            {featuredProject && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="absolute bottom-8 left-8 right-8 backdrop-blur-sm bg-white/90 border border-white/50 p-8"
+              >
+                <div className="font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-neutral-500 mb-2">
+                  Featured Project
+                </div>
+                <div className="font-SchnyderS text-3xl font-light text-neutral-950 mb-2">
+                  {featuredProject.title}
+                </div>
+                {featuredProject.location && (
+                  <div className="font-Satoshi text-sm text-neutral-600">
+                    {featuredProject.location}
+                  </div>
+                )}
+              </motion.div>
+            )}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Section 2: Service Pillars - All Visible Grid Design
+function ServicePillarsSection({
+  sanityServices,
+  sanityProjects,
+}: {
+  sanityServices: SanityService[];
+  sanityProjects: SanityProject[];
+}) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  // Local project images for fallback (from /projects folder)
+  const localImages = {
+    civil: "/projects/commercial-interior/_DSC5263-HDR.jpg",
+    architecture: "/projects/bedroom-interior/_MID0040-HDR.jpg",
+    mep: "/projects/office-fitout/_MID0126-HDR.jpg",
+    manufacturing: "/projects/closet/_MID0095-HDR.jpg",
+    fitout: "/projects/bathroom/_MID2428-HDR.jpg",
+    handover: "/projects/turnkey-design-fitout/_MID0003-HDR.jpg",
   };
-  const IconComponent = iconMap[service.title] || Sparkles;
+
+  const services = [
+    {
+      id: "civil",
+      number: "01",
+      title: "Civil Construction",
+      subtitle: "THE STRUCTURE",
+      description:
+        "We Build. We hold the specific trade licenses to execute heavy civil works. Unlike fit-out firms that can only do interiors, we build from the ground up.",
+      capabilities: [
+        "Excavation & Piling",
+        "Concrete Superstructure",
+        "Structural Modifications",
+        "Foundation Works",
+      ],
+      ctaLink: "/services/civil-construction",
+      mainImage: sanityServices[0]?.mainImage || sanityProjects[0]?.mainImage,
+      localImage: localImages.civil,
+    },
+    {
+      id: "architecture",
+      number: "02",
+      title: "Interior Architecture",
+      subtitle: "THE VISION",
+      description:
+        'We Design. Led by Eng. Maher Mouhajer, our design studio creates the "Uncluttered Baroque" style. Every concept is validated for technical feasibility instantly.',
+      capabilities: [
+        "Conceptual Design",
+        "3D Visualization",
+        "Space Planning",
+        "FF&E Selection",
+      ],
+      ctaLink: "/services/interior-architecture",
+      mainImage: sanityServices[1]?.mainImage || sanityProjects[1]?.mainImage,
+      localImage: localImages.architecture,
+    },
+    {
+      id: "mep",
+      number: "03",
+      title: "MEP Engineering",
+      subtitle: "THE ENGINE",
+      description:
+        'We Power. The "Invisible Art." Our in-house MEP Division ensures your asset runs silently and efficiently. We don\'t outsource critical systems.',
+      capabilities: [
+        "HVAC Design & Install",
+        "Load Calculation",
+        "Firefighting Systems",
+        "Smart Home Integration",
+      ],
+      ctaLink: "/services/mep-engineering",
+      mainImage: sanityServices[2]?.mainImage || sanityProjects[2]?.mainImage,
+      localImage: localImages.mep,
+    },
+    {
+      id: "manufacturing",
+      number: "04",
+      title: "Manufacturing & Joinery",
+      subtitle: "THE FACTORY",
+      description:
+        "We Make. Luxury cannot be bought from a catalog. We operate our own facility to create bespoke woodworks and custom furniture.",
+      capabilities: [
+        "Walk-in Wardrobes",
+        "Vanity Units",
+        "Wall Paneling",
+        "Loose Furniture",
+      ],
+      ctaLink: "/services/manufacturing-joinery",
+      mainImage: sanityServices[3]?.mainImage || sanityProjects[3]?.mainImage,
+      localImage: localImages.manufacturing,
+    },
+    {
+      id: "fitout",
+      number: "05",
+      title: "Fit-Out Execution",
+      subtitle: "THE CRAFT",
+      description:
+        "We Install. Our teams of masons, gypsum artists, and painters execute the delicate finishes that define luxury.",
+      capabilities: [
+        "Marble & Stone Installation",
+        "Gypsum Cladding",
+        "Gold Leafing",
+        "Premium Painting",
+      ],
+      ctaLink: "/services/fit-out-execution",
+      mainImage: sanityServices[4]?.mainImage || sanityProjects[4]?.mainImage,
+      localImage: localImages.fitout,
+    },
+    {
+      id: "handover",
+      number: "06",
+      title: "Handover & Maintenance",
+      subtitle: "THE CARE",
+      description:
+        "We Protect. Our job isn't done when we hand over the keys. We offer comprehensive maintenance to protect the asset we built.",
+      capabilities: [
+        "HVAC Maintenance",
+        "Deep Cleaning",
+        "Electrical Testing",
+        "System Upgrades",
+      ],
+      ctaLink: "/services/handover-maintenance",
+      mainImage: sanityServices[5]?.mainImage || sanityProjects[5]?.mainImage,
+      localImage: localImages.handover,
+    },
+  ];
+
+  return (
+    <section
+      id="services"
+      ref={sectionRef}
+      className="relative overflow-hidden bg-neutral-950 py-32 sm:py-40 lg:py-48"
+    >
+      {/* Minimal Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px] opacity-20" />
+
+      <div className="mx-auto max-w-[1800px] px-6 lg:px-16 xl:px-24">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-20 lg:mb-24"
+        >
+          <div className="mb-4">
+            <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-white/40">
+              Complete Lifecycle Control
+            </span>
+          </div>
+
+          <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Our Core
+            <br />
+            <span className="text-[#d4af37]">Service Pillars</span>
+          </h2>
+        </motion.div>
+
+        {/* All Services Grid - 2 columns on desktop, 1 on mobile */}
+        <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+          {services.map((service, index) => {
+            const imageSource = service.mainImage
+              ? urlForImage(service.mainImage).width(800).height(600).url()
+              : service.localImage;
+
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="group relative"
+              >
+                <Link href={service.ctaLink} className="block">
+                  <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white/[0.04]">
+                    {/* Top Section: Image + Number */}
+                    <div className="relative">
+                      {/* Image */}
+                      <div className="relative aspect-[16/9] overflow-hidden">
+                        {imageSource && (
+                          <Image
+                            src={imageSource}
+                            alt={service.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
+                      </div>
+
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="p-8 lg:p-10">
+                      {/* Subtitle */}
+                      <div className="mb-3 font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#d4af37]">
+                        {service.subtitle}
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="mb-4 font-SchnyderS text-3xl font-light text-white transition-colors duration-500 group-hover:text-white lg:text-4xl">
+                        {service.title}
+                      </h3>
+
+                      {/* Description - Always visible */}
+                      <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-white/50">
+                        {service.description}
+                      </p>
+
+                      {/* Capabilities */}
+                      <div className="mb-6 flex flex-wrap gap-2">
+                        {service.capabilities.map((cap, i) => (
+                          <span
+                            key={i}
+                            className="border border-white/10 bg-white/5 px-3 py-1.5 font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/40"
+                          >
+                            {cap}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* CTA */}
+                      <div className="flex items-center gap-2 font-Satoshi text-sm font-light text-white/60 transition-colors duration-300 group-hover:text-[#d4af37]">
+                        <span>Explore Service</span>
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </div>
+                    </div>
+
+                    {/* Corner Accent */}
+                    <div className="absolute right-0 top-0 h-16 w-16 border-r border-t border-[#d4af37]/0 transition-all duration-500 group-hover:border-[#d4af37]/30" />
+                    <div className="absolute bottom-0 left-0 h-16 w-16 border-b border-l border-[#d4af37]/0 transition-all duration-500 group-hover:border-[#d4af37]/30" />
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Professional Service Card - No Icons, Image-Focused
+function ProfessionalServiceCard({ service, index, isInView }: any) {
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+
+  const cardY = useParallax(scrollYProgress, 30);
+
+  // Determine which image source to use
+  const imageSource = service.mainImage
+    ? urlForImage(service.mainImage).width(900).height(1200).url()
+    : service.localImage;
 
   return (
     <motion.div
       ref={cardRef}
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      className={`grid gap-12 lg:grid-cols-2 lg:gap-16 ${isEven ? '' : 'lg:grid-flow-dense'}`}
+      transition={{ duration: 1, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      style={{ y: cardY }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className="group relative"
     >
-      {/* Content Column */}
-      <div className={`flex flex-col justify-center ${isEven ? 'lg:pr-8' : 'lg:col-start-2 lg:pl-8'}`}>
-        {/* Number Badge */}
-        <div className="mb-6 flex items-center gap-6">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-neutral-950">
-            <IconComponent className="h-8 w-8 text-neutral-950" />
-          </div>
-          <span className="text-7xl font-light text-neutral-200">
-            {String(index + 1).padStart(2, '0')}
-          </span>
-        </div>
-
-        {/* Service Title */}
-        <h3 className="mb-6 text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
-          {service.title}
-        </h3>
-
-        {/* Description */}
-        <div
-          className="mb-8 text-lg font-light leading-relaxed text-neutral-600"
-          dangerouslySetInnerHTML={{
-            __html: service.content?.substring(0, 400) || service.excerpt || '',
-          }}
-        />
-
-        {/* Features List */}
-        <div className="mb-8 space-y-3">
-          {serviceFeatures[service.title]?.map((feature, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <Check className="mt-1 h-5 w-5 shrink-0 text-neutral-950" />
-              <span className="font-light text-neutral-700">{feature}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Related Industries */}
-        <div className="mb-8">
-          <div className="mb-3 text-sm font-light tracking-wider text-neutral-500">
-            INDUSTRIES SERVED
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {industries.slice(0, 4).map((industry) => (
-              <Link
-                key={industry.id}
-                href={`#industries`}
-                className="rounded-full border border-neutral-300 px-4 py-2 text-sm font-light text-neutral-700 transition-all hover:border-neutral-950 hover:bg-neutral-950 hover:text-white"
+      <Link href={service.ctaLink} className="block h-full">
+        <motion.div
+          whileHover={{ y: -4 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="relative flex h-full flex-col overflow-hidden bg-neutral-900 border border-neutral-800/50 transition-all duration-500 hover:border-neutral-700"
+        >
+          {/* Large Image */}
+          {imageSource ? (
+            <div className="relative aspect-[3/4] overflow-hidden">
+              <motion.div
+                animate={{ scale: isHovered ? 1.05 : 1 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="h-full w-full"
               >
-                {industry.title}
-              </Link>
-            ))}
-          </div>
-        </div>
+                <Image
+                  src={imageSource}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </motion.div>
 
-        {/* CTA */}
-        <div>
-          <Link
-            href={`/services/${service.slug}`}
-            className="group inline-flex items-center gap-3 border-b-2 border-neutral-950 pb-1 text-sm font-light tracking-widest text-neutral-950 transition-all hover:gap-5"
-          >
-            <span>LEARN MORE</span>
-            <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
-          </Link>
-        </div>
-      </div>
+              {/* Subtle Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/40 to-transparent" />
+            </div>
+          ) : (
+            <div className="aspect-[3/4] bg-neutral-900 flex items-center justify-center">
+              <div className="font-SchnyderS text-4xl font-light text-white/10">
+                {service.subtitle}
+              </div>
+            </div>
+          )}
 
-      {/* Visual Column */}
-      <div className={`${isEven ? 'lg:col-start-2' : 'lg:col-start-1 lg:row-start-1'}`}>
-        <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100">
-          {/* Placeholder for service image */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <IconComponent className="h-32 w-32 text-neutral-300" />
-          </div>
+          {/* Content */}
+          <div className="flex flex-1 flex-col p-8 lg:p-10">
+            {/* Subtitle */}
+            <div className="mb-3 font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-neutral-500">
+              {service.subtitle}
+            </div>
 
-          {/* Decorative overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-neutral-950/10 to-transparent p-8">
-            <div className="text-sm font-light tracking-wider text-neutral-700">
+            {/* Title */}
+            <h3 className="mb-6 font-SchnyderS text-3xl font-light leading-tight text-white xl:text-4xl">
               {service.title}
-            </div>
-          </div>
-        </div>
+            </h3>
 
-        {/* Stats */}
-        <div className="mt-6 grid grid-cols-3 gap-6 border-t border-neutral-200 pt-6">
-          <div>
-            <div className="mb-1 text-2xl font-light text-neutral-950">50+</div>
-            <div className="text-xs font-light tracking-wider text-neutral-500">
-              PROJECTS
+            {/* Description */}
+            <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-neutral-400">
+              {service.description}
+            </p>
+
+            {/* Capabilities */}
+            <div className="mb-8 pb-8 border-b border-neutral-800">
+              <p className="font-Satoshi text-sm font-light text-neutral-500">
+                {service.capabilities[0]}
+              </p>
+            </div>
+
+            {/* CTA */}
+            <div className="mt-auto">
+              <motion.div
+                className="inline-flex items-center gap-2 font-Satoshi text-sm font-light text-neutral-400 transition-colors group-hover:text-white"
+                animate={{ gap: isHovered ? 8 : 8 }}
+              >
+                <span>Explore</span>
+                <motion.div
+                  animate={{ x: isHovered ? 4 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ArrowRight size={16} />
+                </motion.div>
+              </motion.div>
             </div>
           </div>
-          <div>
-            <div className="mb-1 text-2xl font-light text-neutral-950">10+</div>
-            <div className="text-xs font-light tracking-wider text-neutral-500">
-              YEARS EXP.
-            </div>
-          </div>
-          <div>
-            <div className="mb-1 text-2xl font-light text-neutral-950">100%</div>
-            <div className="text-xs font-light tracking-wider text-neutral-500">
-              SATISFIED
-            </div>
-          </div>
-        </div>
-      </div>
+        </motion.div>
+      </Link>
     </motion.div>
   );
 }
 
-function ProcessStep({ step, index }: { step: typeof processSteps[0]; index: number }) {
-  const stepRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(stepRef, { once: true, margin: '-50px' });
+
+// CTA - Clean and Professional
+function IntegratedPathCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true });
 
   return (
-    <motion.div
-      ref={stepRef}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="relative"
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-neutral-950 py-40 lg:py-56"
     >
-      <div className="mb-6 text-6xl font-light text-neutral-200">
-        {String(index + 1).padStart(2, '0')}
+      {/* Minimal Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
+
+      <div className="relative z-10 mx-auto max-w-[1000px] px-6 text-center lg:px-16">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
+            Choose the
+            <br />
+            <span className="text-[#d4af37]">Integrated Path</span>
+          </h2>
+
+          <p className="mx-auto mb-16 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-white/60 lg:text-2xl">
+            Stop managing multiple vendors. Start building your legacy with one
+            partner.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <motion.a
+              href="/contact"
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.3 }}
+              className="group inline-flex items-center gap-3 bg-white px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-neutral-100"
+            >
+              <span>DISCUSS YOUR PROJECT</span>
+              <ArrowRight size={16} />
+            </motion.a>
+
+            <motion.a
+              href="/about/company-profile"
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.3 }}
+              className="inline-flex items-center gap-3 border border-white/20 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-white/40"
+            >
+              <span>DOWNLOAD PROFILE</span>
+            </motion.a>
+          </div>
+        </motion.div>
       </div>
-      <h3 className="mb-4 text-2xl font-light tracking-tight text-neutral-950">
-        {step.title}
-      </h3>
-      <p className="font-light leading-relaxed text-neutral-600">
-        {step.description}
-      </p>
-    </motion.div>
+    </section>
   );
 }
-
-// Placeholder data
-const placeholderServices = [
-  {
-    id: '1',
-    databaseId: 1,
-    slug: 'interior-design',
-    title: 'Interior Design',
-    excerpt: 'Complete interior design solutions for residential and commercial spaces',
-    content: 'Our interior design service transforms spaces into stunning environments that reflect your unique style and vision. We handle everything from concept development to final installation, ensuring every detail is perfectly executed.',
-    date: new Date().toISOString(),
-    modified: new Date().toISOString(),
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-  },
-  {
-    id: '2',
-    databaseId: 2,
-    slug: 'space-planning',
-    title: 'Space Planning',
-    excerpt: 'Intelligent layouts that optimize functionality',
-    content: 'Strategic space planning that maximizes the potential of every square foot. We analyze flow, function, and form to create layouts that enhance daily living and working experiences.',
-    date: new Date(Date.now() - 86400000 * 3).toISOString(),
-    modified: new Date(Date.now() - 86400000 * 3).toISOString(),
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-  },
-  {
-    id: '3',
-    databaseId: 3,
-    slug: 'custom-furniture',
-    title: 'Custom Furniture',
-    excerpt: 'Bespoke furniture pieces designed for your space',
-    content: 'Our custom furniture service brings unique, handcrafted pieces that perfectly complement your interior design. From concept sketches to final production, we create furniture that is both beautiful and functional.',
-    date: new Date(Date.now() - 86400000 * 7).toISOString(),
-    modified: new Date(Date.now() - 86400000 * 7).toISOString(),
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
-  },
-];
-
-const serviceFeatures: { [key: string]: string[] } = {
-  'Interior Design': [
-    'Complete design concept development',
-    'Material and finish selection',
-    'Custom color palettes',
-    '3D visualization and renderings',
-    'Project management and installation',
-  ],
-  'Space Planning': [
-    'Functional layout optimization',
-    'Traffic flow analysis',
-    'Furniture placement strategies',
-    'Ergonomic considerations',
-    'Spatial efficiency maximization',
-  ],
-  'Custom Furniture': [
-    'Bespoke design creation',
-    'Material sourcing and selection',
-    'Artisan craftsmanship',
-    'Quality control oversight',
-    'Delivery and installation',
-  ],
-  'Lighting Design': [
-    'Ambient lighting strategies',
-    'Task lighting solutions',
-    'Accent and feature lighting',
-    'Smart lighting integration',
-    'Energy efficiency optimization',
-  ],
-  'Commercial Design': [
-    'Brand-aligned workspace design',
-    'Employee wellness focus',
-    'Productivity optimization',
-    'Flexible space solutions',
-    'Corporate identity integration',
-  ],
-  'Consultation': [
-    'Initial concept development',
-    'Budget planning and management',
-    'Vendor and contractor coordination',
-    'Timeline development',
-    'Expert guidance and support',
-  ],
-};
-
-const processSteps = [
-  {
-    title: 'Discovery',
-    description: 'We begin by understanding your vision, needs, and goals through in-depth consultation.',
-  },
-  {
-    title: 'Design',
-    description: 'Our team develops comprehensive design concepts with detailed renderings and specifications.',
-  },
-  {
-    title: 'Development',
-    description: 'We refine the design, select materials, and coordinate with craftsmen and suppliers.',
-  },
-  {
-    title: 'Delivery',
-    description: 'Professional installation and final styling bring your vision to life with precision.',
-  },
-];

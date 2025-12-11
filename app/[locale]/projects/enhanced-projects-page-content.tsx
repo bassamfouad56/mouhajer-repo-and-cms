@@ -1,239 +1,749 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef, useState, useEffect, lazy, Suspense } from 'react';
+import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Project, Industry } from '@/lib/wordpress';
-import { ArrowUpRight, Filter, Grid3x3, LayoutGrid, MapPin, Calendar, Sparkles } from 'lucide-react';
-import { getSafeImageUrl, isNonEmptyArray } from '@/lib/error-handling';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { urlForImage } from '@/sanity/lib/image';
+import { SafeImage } from '@/components/safe-image';
+import { Search, X } from 'lucide-react';
 
-interface ProjectsPageContentProps {
-  projects: Project[];
-  industries: Industry[];
+// Import all view modes
+import {
+  GridView,
+  MasonryView,
+  HorizontalScrollView,
+  InfiniteScrollView,
+  CaseStudyView,
+  SplitScreenView,
+  StackedCardsView,
+  TimelineView,
+  Immersive3DView,
+  CinematicView,
+  ViewModeSelector,
+  VIEW_MODE_CONFIG,
+  type ViewMode,
+  type GridColumns,
+  type SanityProject,
+} from '@/components/projects/view-modes';
+
+// Type for raw Sanity data with potential i18n fields
+type I18nField = string | { en?: string; ar?: string };
+interface RawSanityProject {
+  _id: string;
+  title: I18nField;
+  slug: { current: string };
+  excerpt?: I18nField;
+  mainImage?: any;
+  category?: I18nField;
+  location?: I18nField;
+  year?: string;
+  featured?: boolean;
 }
 
-// Helper function to safely get project image URL - moved outside component so child components can access it
-const getProjectImageUrl = (project: Project): string => {
-  return getSafeImageUrl(
-    project.featuredImage?.node,
-    'https://placehold.co/1200x800/e5e5e5/737373?text=' + encodeURIComponent(project.title || 'Project')
-  );
-};
+// Fallback hero images for projects page
+const heroImages = [
+  '/projects/commercial-interior/_MID7362-HDR.jpg',
+  '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
+  '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+  '/projects/office-fitout/_MID0939-HDR.jpg',
+  '/projects/closet/_MID0095-HDR.jpg',
+];
 
-export default function EnhancedProjectsPageContent({ projects, industries }: ProjectsPageContentProps) {
+// Infinite carousel project images
+const carouselImages = [
+  { src: '/projects/commercial-interior/11.jpg', title: 'Commercial Excellence' },
+  { src: '/projects/bedroom-interior/Villa Ajman-Master Bedroom Light-06112022- HR-(1).jpg', title: 'Luxury Bedrooms' },
+  { src: '/projects/turnkey-design-fitout/c5c5c5.jpg', title: 'Turnkey Solutions' },
+  { src: '/projects/office-fitout/MID0173-HDR.jpg', title: 'Premium Offices' },
+  { src: '/projects/bathroom/_MID2588-HDR.jpg', title: 'Designer Bathrooms' },
+  { src: '/projects/closet/_MID0095-HDR.jpg', title: 'Custom Closets' },
+  { src: '/projects/commercial-interior/_MID7000-HDR.jpg', title: 'Hotel Interiors' },
+  { src: '/projects/bedroom-interior/bedroom cam1.jpg', title: 'Modern Living' },
+];
+
+interface SanityIndustry {
+  _id: string;
+  title: string | { en?: string; ar?: string };
+  slug: { current: string };
+  excerpt?: string | { en?: string; ar?: string };
+  mainImage?: any;
+  icon?: string;
+}
+
+interface ProjectsPageContentProps {
+  projects: RawSanityProject[];
+  industries: SanityIndustry[];
+  locale: string;
+}
+
+// Helper to extract localized string from i18n field
+function getLocalizedString(field: I18nField | undefined, locale: string): string {
+  if (!field) return '';
+  if (typeof field === 'string') return field;
+  if (typeof field === 'object' && field !== null) {
+    return field[locale as keyof typeof field] || field.en || field.ar || '';
+  }
+  return '';
+}
+
+// Helper to normalize project i18n fields to strings
+function normalizeProject(project: RawSanityProject, locale: string): SanityProject {
+  return {
+    ...project,
+    title: getLocalizedString(project.title, locale),
+    excerpt: getLocalizedString(project.excerpt, locale),
+    category: getLocalizedString(project.category, locale),
+    location: getLocalizedString(project.location, locale),
+  };
+}
+
+export default function EnhancedProjectsPageContent({ projects, industries, locale }: ProjectsPageContentProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const heroRef = useRef<HTMLDivElement>(null);
   const isHeroInView = useInView(heroRef, { once: true });
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [gridLayout, setGridLayout] = useState<'masonry' | 'grid' | 'featured'>('featured');
 
-  const displayProjects = isNonEmptyArray(projects) ? projects : placeholderProjects;
+  // Pre-process projects to normalize i18n fields
+  const normalizedProjects = projects.map(p => normalizeProject(p, locale));
 
-  // Filter projects by category
-  const filteredProjects =
-    selectedCategory === 'all'
-      ? displayProjects
-      : displayProjects.filter(
-          (project) => project.acfFields?.projectType === selectedCategory
-        );
+  // Get initial values from URL
+  const categoryFromUrl = searchParams.get('category') || 'all';
+  const viewFromUrl = (searchParams.get('view') as ViewMode) || 'grid';
+  const columnsFromUrl = searchParams.get('columns');
+  const searchFromUrl = searchParams.get('search') || '';
 
-  // Get unique categories
+  const [selectedCategory, setSelectedCategory] = useState<string>(categoryFromUrl);
+  const [viewMode, setViewMode] = useState<ViewMode>(viewFromUrl);
+  const [gridColumns, setGridColumns] = useState<GridColumns>(
+    columnsFromUrl ? (parseInt(columnsFromUrl) as GridColumns) : 3
+  );
+  const [searchQuery, setSearchQuery] = useState<string>(searchFromUrl);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+  // Update URL when filters change
+  useEffect(() => {
+    const params = new URLSearchParams();
+
+    if (selectedCategory !== 'all') {
+      params.set('category', selectedCategory);
+    }
+
+    if (viewMode !== 'grid') {
+      params.set('view', viewMode);
+    }
+
+    if (viewMode === 'grid' && gridColumns !== 3) {
+      params.set('columns', gridColumns.toString());
+    }
+
+    if (searchQuery.trim()) {
+      params.set('search', searchQuery.trim());
+    }
+
+    const queryString = params.toString();
+    const newUrl = queryString ? `?${queryString}` : window.location.pathname;
+
+    router.push(newUrl, { scroll: false });
+  }, [selectedCategory, viewMode, gridColumns, searchQuery, router]);
+
+  // Separate featured and regular projects (using normalized data)
+  const featuredProjects = normalizedProjects.filter((p) => p.featured);
+  const regularProjects = normalizedProjects.filter((p) => !p.featured);
+
+  // Helper function to check if project matches search query
+  const matchesSearch = (project: SanityProject) => {
+    if (!searchQuery.trim()) return true;
+    const query = searchQuery.toLowerCase().trim();
+    return (
+      project.title?.toLowerCase().includes(query) ||
+      project.category?.toLowerCase().includes(query) ||
+      project.location?.toLowerCase().includes(query) ||
+      project.excerpt?.toLowerCase().includes(query)
+    );
+  };
+
+  // Filter projects by category and search
+  const filteredFeaturedProjects = featuredProjects.filter((project) => {
+    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
+    return matchesCategory && matchesSearch(project);
+  });
+
+  const filteredRegularProjects = regularProjects.filter((project) => {
+    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
+    return matchesCategory && matchesSearch(project);
+  });
+
+  // All filtered projects combined
+  const allFilteredProjects = [...filteredFeaturedProjects, ...filteredRegularProjects];
+
+  // Get unique categories (using normalized projects with string categories)
   const categories: string[] = [
     'all',
     ...Array.from(
-      new Set(displayProjects.map((p) => p.acfFields?.projectType).filter(Boolean) as string[])
+      new Set(
+        normalizedProjects
+          .map((p) => p.category)
+          .filter((cat): cat is string => typeof cat === 'string' && cat.trim() !== '')
+      )
     ),
   ];
 
-  // Featured project (first in list)
-  const featuredProject = filteredProjects[0];
-  const regularProjects = filteredProjects.slice(1);
+  // State for hero background slideshow
+  const [currentHeroImage, setCurrentHeroImage] = useState(0);
+
+  // Auto-rotate hero background
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Render the active view
+  const renderProjectsView = (projectsToRender: SanityProject[]) => {
+    switch (viewMode) {
+      case 'grid':
+        return <GridView projects={projectsToRender} columns={gridColumns} />;
+      case 'masonry':
+        return <MasonryView projects={projectsToRender} />;
+      case 'horizontal':
+        return <HorizontalScrollView projects={projectsToRender} />;
+      case 'infinite-scroll':
+        return <InfiniteScrollView projects={projectsToRender} />;
+      case 'case-study':
+        return <CaseStudyView projects={projectsToRender} />;
+      case 'split-screen':
+        return <SplitScreenView projects={projectsToRender} />;
+      case 'stacked-cards':
+        return <StackedCardsView projects={projectsToRender} />;
+      case 'timeline':
+        return <TimelineView projects={projectsToRender} />;
+      case 'immersive-3d':
+        return <Immersive3DView projects={projectsToRender} />;
+      case 'cinematic':
+        return <CinematicView projects={projectsToRender} />;
+      default:
+        return <GridView projects={projectsToRender} columns={gridColumns} />;
+    }
+  };
+
+  // Check if view uses combined projects (no featured/regular separation)
+  const usesCombinedView = ['horizontal', 'split-screen', 'stacked-cards', 'infinite-scroll'].includes(viewMode);
 
   return (
     <main className="relative bg-white">
-      {/* Enhanced Hero Section */}
+      {/* Professional Hero Section with Background Image */}
       <section
         ref={heroRef}
-        className="relative overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 px-6 py-32 lg:px-12 lg:py-48"
+        className="relative h-screen min-h-[800px] overflow-hidden bg-neutral-950"
       >
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
-        <div className="absolute left-0 top-0 h-[600px] w-[600px] rounded-full bg-purple-500/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-blue-500/10 blur-[120px]" />
-
-        <div className="relative z-10 mx-auto max-w-[1400px]">
+        {/* Background Image Slideshow */}
+        <AnimatePresence mode="wait">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-8 flex items-center gap-4"
+            key={currentHeroImage}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-neutral-600" />
-            <span className="text-sm font-light tracking-[0.3em] text-neutral-400">
-              OUR PORTFOLIO
-            </span>
+            <SafeImage
+              src={heroImages[currentHeroImage]}
+              alt="MIDC Portfolio"
+              fill
+              className="object-cover"
+              priority
+            />
           </motion.div>
+        </AnimatePresence>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-8 max-w-4xl text-6xl font-light tracking-tight text-white lg:text-8xl"
-          >
-            Exceptional Projects
-          </motion.h1>
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/85 to-neutral-950/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/50" />
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-12 max-w-2xl text-xl font-light leading-relaxed text-neutral-400"
-          >
-            Discover our curated collection of transformative design projects spanning
-            residential luxury, commercial innovation, and hospitality excellence across the region.
-          </motion.p>
+        {/* Animated Grain Effect */}
+        <motion.div
+          className="absolute inset-0 opacity-[0.03]"
+          animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
+          }}
+        />
 
+        {/* Subtle Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+
+        {/* Floating Decorative Lines */}
+        <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="grid gap-8 sm:grid-cols-3"
+            className="absolute right-[15%] top-[25%] h-px w-40 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent"
+            animate={{ x: [0, 50, 0], opacity: [0.2, 0.5, 0.2] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="absolute left-[5%] top-[65%] h-px w-32 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            animate={{ x: [0, -30, 0], opacity: [0.1, 0.3, 0.1] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          />
+          <motion.div
+            className="absolute right-[25%] bottom-[20%] h-40 w-px bg-gradient-to-b from-transparent via-[#d4af37]/20 to-transparent"
+            animate={{ y: [0, 20, 0], opacity: [0.1, 0.3, 0.1] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          />
+        </div>
+
+        {/* Hero Content */}
+        <motion.div
+          style={{ opacity: heroOpacity, y: heroY }}
+          className="relative z-10 flex h-full flex-col items-start justify-center px-6 lg:px-24"
+        >
+          <div className="max-w-[1400px]">
+            {/* Minimal Label */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="mb-8 flex items-center gap-4"
+            >
+              <div className="h-px w-12 bg-[#d4af37]/50" />
+              <span className="text-[10px] uppercase tracking-[0.3em] text-white/50">
+                Our Portfolio
+              </span>
+            </motion.div>
+
+            {/* Hero Title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-8 font-SchnyderS text-6xl font-light tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl"
+            >
+              400+ Projects.
+              <br />
+              <span className="text-[#d4af37]">Zero Failures.</span>
+            </motion.h1>
+
+            {/* Hero Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-16 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-white/70 sm:text-2xl"
+            >
+              From empty land to final handover. One team. One vision.
+              <br />No handover has ever been refused.
+            </motion.p>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1.2, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="grid gap-12 sm:grid-cols-3"
+            >
+              <div className="border-l border-[#d4af37]/30 pl-6">
+                <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">400+</div>
+                <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
+                  Completed Projects
+                </div>
+              </div>
+              <div className="border-l border-white/10 pl-6">
+                <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">24</div>
+                <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
+                  Years in Business
+                </div>
+              </div>
+              <div className="border-l border-white/10 pl-6">
+                <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">100%</div>
+                <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
+                  Successful Handovers
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Image Progress Indicators */}
+          <div className="absolute bottom-12 left-6 flex items-center gap-3 lg:left-24">
+            {heroImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentHeroImage(index)}
+                className="group relative h-1 overflow-hidden"
+                aria-label={`Go to image ${index + 1}`}
+              >
+                <div
+                  className={`h-full transition-all duration-500 ${
+                    index === currentHeroImage ? 'w-12 bg-[#d4af37]' : 'w-6 bg-white/20 hover:bg-white/40'
+                  }`}
+                />
+                {index === currentHeroImage && (
+                  <motion.div
+                    className="absolute left-0 top-0 h-full bg-white/30"
+                    initial={{ width: '0%' }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 5, ease: 'linear' }}
+                    key={`progress-${currentHeroImage}`}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Corner Accents */}
+        <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#d4af37]/20" />
+        <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#d4af37]/20" />
+      </section>
+
+      {/* Infinite Animated Carousel */}
+      <section className="relative overflow-hidden bg-neutral-950 py-8">
+        <div className="flex">
+          {/* First set - scrolling left */}
+          <motion.div
+            className="flex shrink-0 gap-4"
+            animate={{ x: [0, -1920] }}
+            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
           >
-            <div className="border-l-2 border-white pl-6">
-              <div className="mb-2 text-5xl font-light text-white">150+</div>
-              <div className="text-sm font-light tracking-wider text-neutral-400">
-                COMPLETED PROJECTS
+            {[...carouselImages, ...carouselImages].map((image, index) => (
+              <div
+                key={`carousel-1-${index}`}
+                className="group relative h-32 w-48 flex-shrink-0 overflow-hidden lg:h-40 lg:w-64"
+              >
+                <SafeImage
+                  src={image.src}
+                  alt={image.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-neutral-950/30 transition-opacity duration-500 group-hover:opacity-0" />
+                <div className="absolute inset-0 flex items-end justify-center p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <span className="bg-neutral-950/80 px-3 py-1 text-[10px] uppercase tracking-wider text-white backdrop-blur-sm">
+                    {image.title}
+                  </span>
+                </div>
               </div>
-            </div>
-            <div className="border-l-2 border-neutral-700 pl-6">
-              <div className="mb-2 text-5xl font-light text-white">8</div>
-              <div className="text-sm font-light tracking-wider text-neutral-400">
-                INDUSTRIES SERVED
-              </div>
-            </div>
-            <div className="border-l-2 border-neutral-700 pl-6">
-              <div className="mb-2 text-5xl font-light text-white">100%</div>
-              <div className="text-sm font-light tracking-wider text-neutral-400">
-                CLIENT SATISFACTION
-              </div>
-            </div>
+            ))}
           </motion.div>
+          {/* Second set - continuous */}
+          <motion.div
+            className="flex shrink-0 gap-4"
+            animate={{ x: [0, -1920] }}
+            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+          >
+            {[...carouselImages, ...carouselImages].map((image, index) => (
+              <div
+                key={`carousel-2-${index}`}
+                className="group relative h-32 w-48 flex-shrink-0 overflow-hidden lg:h-40 lg:w-64"
+              >
+                <SafeImage
+                  src={image.src}
+                  alt={image.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-neutral-950/30 transition-opacity duration-500 group-hover:opacity-0" />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Gradient fades on edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-neutral-950 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-neutral-950 to-transparent" />
+      </section>
+
+      {/* Professional Filter Bar */}
+      <section className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-[1800px] px-6 py-4 lg:px-12 lg:py-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            {/* Left Side: Search + Category Filter */}
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-6">
+              {/* Search Input */}
+              <div className="relative">
+                <div
+                  className={`flex items-center gap-2 border bg-white px-4 py-2 transition-all duration-300 ${
+                    isSearchFocused
+                      ? 'border-neutral-950 shadow-md'
+                      : 'border-neutral-200 hover:border-neutral-300'
+                  }`}
+                >
+                  <Search size={16} className="text-neutral-400" />
+                  <input
+                    type="text"
+                    placeholder="Search projects..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => setIsSearchFocused(true)}
+                    onBlur={() => setIsSearchFocused(false)}
+                    className="w-full min-w-[200px] bg-transparent font-Satoshi text-sm text-neutral-950 outline-none placeholder:text-neutral-400 lg:w-64"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="text-neutral-400 transition-colors hover:text-neutral-950"
+                    >
+                      <X size={14} />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Category Filter */}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="mr-2 font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-400">
+                  Filter:
+                </span>
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`rounded-full px-4 py-2 font-Satoshi text-xs uppercase tracking-wider transition-all duration-300 ${
+                      selectedCategory === category
+                        ? 'bg-neutral-950 text-white shadow-md'
+                        : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-neutral-950'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* View Mode Selector */}
+            <ViewModeSelector
+              currentView={viewMode}
+              onViewChange={setViewMode}
+              gridColumns={gridColumns}
+              onGridColumnsChange={setGridColumns}
+            />
+          </div>
         </div>
       </section>
 
-      {/* Enhanced Filter Bar */}
-      <section className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur-sm shadow-sm">
-        <div className="mx-auto max-w-[1800px] px-6 py-6 lg:px-12">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            {/* Category Filter */}
-            <div className="flex flex-wrap items-center gap-2">
-              <Filter className="h-5 w-5 text-neutral-400" />
-              <span className="mr-2 text-xs font-light tracking-wider text-neutral-500">FILTER:</span>
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`rounded-full px-4 py-2 text-sm font-light tracking-wider transition-all ${
-                    selectedCategory === category
-                      ? 'bg-neutral-950 text-white'
-                      : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
-                  }`}
-                >
-                  {category.toUpperCase()}
-                </button>
-              ))}
-            </div>
-
-            {/* Layout Toggle */}
-            <div className="flex items-center gap-2">
-              <span className="mr-2 text-xs font-light tracking-wider text-neutral-500">VIEW:</span>
-              <div className="flex items-center gap-1 rounded-full border border-neutral-200 p-1">
-                <button
-                  onClick={() => setGridLayout('featured')}
-                  className={`rounded-full p-2 transition-all ${
-                    gridLayout === 'featured'
-                      ? 'bg-neutral-950 text-white'
-                      : 'text-neutral-400 hover:text-neutral-950'
-                  }`}
-                  aria-label="Featured layout"
-                  title="Featured"
-                >
-                  <Sparkles size={18} />
-                </button>
-                <button
-                  onClick={() => setGridLayout('masonry')}
-                  className={`rounded-full p-2 transition-all ${
-                    gridLayout === 'masonry'
-                      ? 'bg-neutral-950 text-white'
-                      : 'text-neutral-400 hover:text-neutral-950'
-                  }`}
-                  aria-label="Masonry layout"
-                  title="Masonry"
-                >
-                  <LayoutGrid size={18} />
-                </button>
-                <button
-                  onClick={() => setGridLayout('grid')}
-                  className={`rounded-full p-2 transition-all ${
-                    gridLayout === 'grid'
-                      ? 'bg-neutral-950 text-white'
-                      : 'text-neutral-400 hover:text-neutral-950'
-                  }`}
-                  aria-label="Grid layout"
-                  title="Grid"
-                >
-                  <Grid3x3 size={18} />
-                </button>
-              </div>
-            </div>
+      {/* Current View Mode Indicator */}
+      <section className="border-b border-neutral-100 bg-neutral-50/50 px-6 py-3 lg:px-12">
+        <div className="mx-auto flex max-w-[1800px] items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="text-neutral-400">{VIEW_MODE_CONFIG[viewMode].icon}</span>
+            <span className="font-Satoshi text-sm text-neutral-600">
+              <span className="font-medium text-neutral-950">{VIEW_MODE_CONFIG[viewMode].label}</span>
+              {' · '}
+              {VIEW_MODE_CONFIG[viewMode].description}
+              {searchQuery && (
+                <span className="ml-2 text-neutral-400">
+                  · Searching for &quot;{searchQuery}&quot;
+                </span>
+              )}
+            </span>
           </div>
+          <span className="font-Satoshi text-sm text-neutral-500">
+            {allFilteredProjects.length} {allFilteredProjects.length === 1 ? 'project' : 'projects'}
+            {(searchQuery || selectedCategory !== 'all') && (
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('all');
+                }}
+                className="ml-3 text-[#d4af37] underline transition-colors hover:text-neutral-950"
+              >
+                Clear filters
+              </button>
+            )}
+          </span>
         </div>
       </section>
 
       {/* Projects Display */}
-      <section className="relative bg-white px-6 py-16 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-[1800px]">
-          {gridLayout === 'featured' && <FeaturedLayout featured={featuredProject} projects={regularProjects} />}
-          {gridLayout === 'masonry' && <MasonryGrid projects={filteredProjects} />}
-          {gridLayout === 'grid' && <StandardGrid projects={filteredProjects} />}
+      <section className={`relative bg-white ${
+        ['horizontal', 'split-screen', 'stacked-cards'].includes(viewMode) ? '' : 'px-6 py-16 lg:px-12 lg:py-24'
+      }`}>
+        <div className={`mx-auto ${
+          ['horizontal', 'split-screen', 'stacked-cards'].includes(viewMode) ? '' : 'max-w-[1800px]'
+        }`}>
+          {/* For views that work best with all projects combined */}
+          {usesCombinedView ? (
+            <>
+              {allFilteredProjects.length > 0 ? (
+                renderProjectsView(allFilteredProjects)
+              ) : (
+                <NoProjectsFound
+                  searchQuery={searchQuery}
+                  onClear={() => {
+                    setSearchQuery('');
+                    setSelectedCategory('all');
+                  }}
+                />
+              )}
+            </>
+          ) : (
+            <>
+              {/* Featured Projects Section */}
+              {filteredFeaturedProjects.length > 0 && (
+                <div className="mb-24">
+                  <div className="mb-12 flex items-center justify-between">
+                    <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
+                      Featured Projects
+                    </h2>
+                    <div className="font-Satoshi text-sm text-neutral-500">
+                      {filteredFeaturedProjects.length} {filteredFeaturedProjects.length === 1 ? 'Project' : 'Projects'}
+                    </div>
+                  </div>
+                  {renderProjectsView(filteredFeaturedProjects)}
+                </div>
+              )}
+
+              {/* Regular Projects Section */}
+              {filteredRegularProjects.length > 0 && (
+                <div>
+                  {filteredFeaturedProjects.length > 0 && (
+                    <div className="mb-12 flex items-center justify-between border-t border-neutral-200 pt-12">
+                      <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
+                        All Projects
+                      </h2>
+                      <div className="font-Satoshi text-sm text-neutral-500">
+                        {filteredRegularProjects.length}{' '}
+                        {filteredRegularProjects.length === 1 ? 'Project' : 'Projects'}
+                      </div>
+                    </div>
+                  )}
+                  {renderProjectsView(filteredRegularProjects)}
+                </div>
+              )}
+
+              {/* No Projects Found */}
+              {filteredFeaturedProjects.length === 0 && filteredRegularProjects.length === 0 && (
+                <NoProjectsFound
+                  searchQuery={searchQuery}
+                  onClear={() => {
+                    setSearchQuery('');
+                    setSelectedCategory('all');
+                  }}
+                />
+              )}
+            </>
+          )}
         </div>
       </section>
 
-      {/* Related Industries */}
-      <section className="relative bg-neutral-50 px-6 py-32 lg:px-12 lg:py-48">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="mb-16 text-center">
-            <h2 className="mb-6 text-5xl font-light tracking-tight text-neutral-950 lg:text-6xl">
-              Industries We Serve
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg font-light leading-relaxed text-neutral-600">
-              Our expertise spans multiple sectors, bringing specialized knowledge
-              to every project
-            </p>
+      {/* Industries Section with Background */}
+      {industries.length > 0 && (
+        <section className="relative overflow-hidden bg-neutral-50 px-6 py-32 lg:px-12 lg:py-48">
+          {/* Background Image */}
+          <div className="absolute inset-0 opacity-5">
+            <SafeImage
+              src="/projects/commercial-interior/_MID7362-HDR.jpg"
+              alt=""
+              fill
+              className="object-cover"
+            />
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {industries.slice(0, 8).map((industry, index) => (
-              <IndustryCard key={industry.id} industry={industry} index={index} />
-            ))}
+          {/* Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+
+          <div className="relative z-10 mx-auto max-w-[1400px]">
+            <div className="mb-16 text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="mb-4 flex items-center justify-center gap-4"
+              >
+                <div className="h-px w-12 bg-neutral-300" />
+                <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">
+                  Sectors of Excellence
+                </span>
+                <div className="h-px w-12 bg-neutral-300" />
+              </motion.div>
+              <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-950 lg:text-6xl">
+                Industries We Serve
+              </h2>
+              <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
+                Specialized expertise across multiple sectors
+              </p>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {industries.slice(0, 8).map((industry, index) => (
+                <IndustryCard key={industry._id} industry={industry} index={index} locale={locale} />
+              ))}
+            </div>
           </div>
+        </section>
+      )}
+
+      {/* Professional CTA Section with Background */}
+      <section className="relative overflow-hidden bg-neutral-950 px-6 py-32 lg:px-12">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <SafeImage
+            src="/projects/turnkey-design-fitout/_MID2543-HDR.jpg"
+            alt=""
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-neutral-950/85" />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/50" />
         </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="relative bg-neutral-950 px-6 py-32 lg:px-12">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="mb-6 text-4xl font-light tracking-tight text-white lg:text-5xl">
-            Ready to Create Your Dream Space?
+        {/* Animated Lines */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute left-[10%] top-[30%] h-px w-24 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent"
+            animate={{ x: [0, 30, 0], opacity: [0.2, 0.4, 0.2] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="absolute right-[15%] bottom-[40%] h-px w-32 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            animate={{ x: [0, -20, 0], opacity: [0.1, 0.3, 0.1] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          />
+        </div>
+
+        {/* Corner Accents */}
+        <div className="absolute left-8 top-8 h-16 w-16 border-l border-t border-[#d4af37]/20" />
+        <div className="absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#d4af37]/20" />
+
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-4 flex items-center justify-center gap-4"
+          >
+            <div className="h-px w-8 bg-[#d4af37]/50" />
+            <span className="text-[10px] uppercase tracking-[0.3em] text-white/50">
+              Let&apos;s Build Together
+            </span>
+            <div className="h-px w-8 bg-[#d4af37]/50" />
+          </motion.div>
+          <h2 className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl xl:text-6xl">
+            Start Your Project
           </h2>
-          <p className="mb-10 text-lg font-light text-neutral-400">
-            Let&apos;s transform your vision into reality with our expert design team.
+          <p className="mb-10 font-Satoshi text-lg font-light text-white/60">
+            One team. From land to handover. Let&apos;s build something extraordinary.
           </p>
           <Link
             href="/#contact"
-            className="group inline-flex items-center gap-3 border border-white px-10 py-5 text-sm font-light tracking-widest text-white transition-all hover:bg-white hover:text-neutral-950"
+            className="group inline-flex items-center gap-3 border border-[#d4af37] bg-[#d4af37]/10 px-12 py-4 font-Satoshi text-xs uppercase tracking-[0.3em] text-[#d4af37] transition-all duration-500 hover:bg-[#d4af37] hover:text-neutral-950"
           >
-            <span>START YOUR PROJECT</span>
-            <ArrowUpRight size={18} className="transition-transform group-hover:rotate-45" />
+            Get in Touch
+            <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </Link>
         </div>
       </section>
@@ -241,343 +751,61 @@ export default function EnhancedProjectsPageContent({ projects, industries }: Pr
   );
 }
 
-// Featured Layout - Hero project + grid
-function FeaturedLayout({ featured, projects }: { featured: Project | undefined; projects: Project[] }) {
-  if (!featured) return <StandardGrid projects={projects} />;
-
+// No Projects Found Component
+function NoProjectsFound({ searchQuery, onClear }: { searchQuery?: string; onClear?: () => void }) {
   return (
-    <div className="space-y-16">
-      <FeaturedProjectCard project={featured} />
-      <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-16">
-        {projects.map((project, index) => (
-          <ProjectCardGrid key={project.id} project={project} index={index} />
-        ))}
+    <div className="py-32 text-center">
+      <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-neutral-100">
+        <Search size={32} className="text-neutral-400" />
       </div>
-    </div>
-  );
-}
-
-// Featured Project Card
-function FeaturedProjectCard({ project }: { project: Project }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true });
-
-  return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8 }}
-      className="group grid gap-12 overflow-hidden lg:grid-cols-2"
-    >
-      <Link href={`/projects/${project.slug}`} className="relative aspect-[4/3] lg:aspect-auto">
-        <div className="relative h-full overflow-hidden bg-neutral-100">
-          <Image
-            src={getProjectImageUrl(project)}
-            alt={project.title || 'Project'}
-            fill
-            className="object-cover transition-all duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-neutral-950/0 transition-all duration-500 group-hover:bg-neutral-950/20" />
-        </div>
-      </Link>
-
-      <div className="flex flex-col justify-center py-8">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2 text-xs font-light tracking-wider text-neutral-600 w-fit">
-          <Sparkles size={14} />
-          FEATURED PROJECT
-        </div>
-
-        <Link href={`/projects/${project.slug}`}>
-          <h2 className="mb-4 text-4xl font-light tracking-tight text-neutral-950 transition-colors group-hover:text-neutral-600 lg:text-5xl">
-            {project.title}
-          </h2>
-        </Link>
-
-        <div className="mb-6 flex flex-wrap items-center gap-4 text-sm font-light text-neutral-500">
-          {project.acfFields?.projectType && (
-            <span className="flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-neutral-400" />
-              {project.acfFields.projectType}
-            </span>
-          )}
-          {project.acfFields?.location && (
-            <span className="flex items-center gap-2">
-              <MapPin size={14} />
-              {project.acfFields.location}
-            </span>
-          )}
-          {project.acfFields?.yearCompleted && (
-            <span className="flex items-center gap-2">
-              <Calendar size={14} />
-              {project.acfFields.yearCompleted}
-            </span>
-          )}
-        </div>
-
-        {project.acfFields?.projectDescription && (
-          <p className="mb-8 text-lg font-light leading-relaxed text-neutral-600">
-            {project.acfFields.projectDescription.substring(0, 200)}...
-          </p>
-        )}
-
-        <Link
-          href={`/projects/${project.slug}`}
-          className="group/link inline-flex items-center gap-3 border-b-2 border-neutral-950 pb-1 text-sm font-light tracking-widest text-neutral-950 transition-all hover:gap-5 w-fit"
+      <h3 className="mb-4 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950">
+        No projects found
+      </h3>
+      <p className="mb-6 font-Satoshi text-lg text-neutral-500">
+        {searchQuery
+          ? `No projects match "${searchQuery}". Try a different search term or category.`
+          : 'Try selecting a different category or adjusting your filters.'}
+      </p>
+      {onClear && (
+        <button
+          onClick={onClear}
+          className="inline-flex items-center gap-2 border border-neutral-950 px-6 py-3 font-Satoshi text-sm uppercase tracking-wider text-neutral-950 transition-all hover:bg-neutral-950 hover:text-white"
         >
-          <span>VIEW PROJECT</span>
-          <ArrowUpRight size={18} className="transition-transform group-hover/link:rotate-45" />
-        </Link>
-      </div>
-    </motion.div>
-  );
-}
-
-// Masonry Grid and Standard Grid components remain the same as before...
-function MasonryGrid({ projects }: { projects: Project[] }) {
-  return (
-    <div className="columns-1 gap-8 md:columns-2 lg:columns-3 lg:gap-10">
-      {projects.map((project, index) => (
-        <ProjectCardMasonry key={project.id} project={project} index={index} />
-      ))}
+          Clear All Filters
+        </button>
+      )}
     </div>
   );
 }
 
-function StandardGrid({ projects }: { projects: Project[] }) {
-  return (
-    <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-16">
-      {projects.map((project, index) => (
-        <ProjectCardGrid key={project.id} project={project} index={index} />
-      ))}
-    </div>
-  );
-}
-
-function ProjectCardMasonry({ project, index }: { project: Project; index: number }) {
+// Industry Card Component
+function IndustryCard({ industry, index, locale }: { industry: SanityIndustry; index: number; locale: string }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: '-50px' });
 
-  return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.05 }}
-      className="group mb-8 break-inside-avoid"
-    >
-      <Link
-        href={`/projects/${project.slug}`}
-        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950"
-      >
-        <div className="relative mb-6 overflow-hidden bg-neutral-100">
-          <div className="relative aspect-[4/5]">
-            <Image
-              src={getProjectImageUrl(project)}
-              alt={project.title}
-              fill
-              className="object-cover transition-all duration-700 group-hover:scale-105"
-            />
-          </div>
-          <div className="absolute inset-0 bg-neutral-950/0 transition-all duration-500 group-hover:bg-neutral-950/40" />
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-white">
-              <ArrowUpRight className="text-white" size={28} />
-            </div>
-          </div>
-          {project.acfFields?.projectType && (
-            <div className="absolute left-6 top-6 bg-white/90 px-4 py-2 text-xs font-light tracking-wider text-neutral-950 backdrop-blur-sm">
-              {project.acfFields.projectType}
-            </div>
-          )}
-        </div>
-
-        <div>
-          <div className="mb-3 flex items-start justify-between gap-4">
-            <h3 className="text-2xl font-light tracking-tight text-neutral-950 transition-colors group-hover:text-neutral-600 lg:text-3xl">
-              {project.title}
-            </h3>
-            {project.acfFields?.yearCompleted && (
-              <span className="shrink-0 text-sm font-light text-neutral-400">
-                {project.acfFields.yearCompleted}
-              </span>
-            )}
-          </div>
-          {project.acfFields?.location && (
-            <div className="mb-3 flex items-center gap-2 text-sm font-light text-neutral-500">
-              <MapPin size={14} />
-              <span>{project.acfFields.location}</span>
-            </div>
-          )}
-          {project.acfFields?.projectDescription && (
-            <p className="line-clamp-3 text-sm font-light leading-relaxed text-neutral-600">
-              {project.acfFields.projectDescription}
-            </p>
-          )}
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
-
-function ProjectCardGrid({ project, index }: { project: Project; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
-
-  return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="group"
-    >
-      <Link
-        href={`/projects/${project.slug}`}
-        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950"
-      >
-        <div className="relative mb-6 aspect-[3/4] overflow-hidden bg-neutral-100">
-          <Image
-            src={getProjectImageUrl(project)}
-            alt={project.title}
-            fill
-            className="object-cover transition-all duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-neutral-950/0 transition-all duration-500 group-hover:bg-neutral-950/30" />
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white">
-              <ArrowUpRight className="text-white" size={24} />
-            </div>
-          </div>
-          {project.acfFields?.projectType && (
-            <div className="absolute left-4 top-4 bg-white/90 px-3 py-1.5 text-xs font-light tracking-wider text-neutral-950">
-              {project.acfFields.projectType}
-            </div>
-          )}
-        </div>
-
-        <div>
-          <div className="mb-2 flex items-start justify-between gap-4">
-            <h3 className="text-2xl font-light tracking-tight text-neutral-950 transition-colors group-hover:text-neutral-600 lg:text-3xl">
-              {project.title}
-            </h3>
-            {project.acfFields?.yearCompleted && (
-              <span className="shrink-0 text-sm font-light text-neutral-400">
-                {project.acfFields.yearCompleted}
-              </span>
-            )}
-          </div>
-          <div className="mb-3 flex items-center gap-3 text-xs font-light tracking-wider text-neutral-500">
-            {project.acfFields?.location && (
-              <>
-                <MapPin size={12} />
-                <span>{project.acfFields.location}</span>
-              </>
-            )}
-          </div>
-          {project.acfFields?.projectDescription && (
-            <p className="line-clamp-2 text-sm font-light leading-relaxed text-neutral-600">
-              {project.acfFields.projectDescription}
-            </p>
-          )}
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
-
-function IndustryCard({ industry, index }: { industry: Industry; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-50px' });
+  const title = getLocalizedString(industry.title, locale);
+  const excerpt = getLocalizedString(industry.excerpt, locale);
 
   return (
     <motion.div
       ref={cardRef}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
     >
       <Link
-        href="/#industries"
-        className="group block border border-neutral-200 p-8 transition-all hover:border-neutral-950 hover:bg-neutral-950"
+        href={`/industries/${industry.slug.current}`}
+        className="group block border border-neutral-200 p-8 transition-all duration-500 hover:border-neutral-950 hover:bg-neutral-950"
       >
-        <h3 className="mb-2 text-xl font-light tracking-tight text-neutral-950 transition-colors group-hover:text-white">
-          {industry.title}
+        <h3 className="mb-2 font-SchnyderS text-xl font-light tracking-tight text-neutral-950 transition-colors duration-500 group-hover:text-white">
+          {title}
         </h3>
-        <p className="text-sm font-light text-neutral-600 transition-colors group-hover:text-neutral-300">
-          {industry.excerpt}
-        </p>
+        {excerpt && (
+          <p className="font-Satoshi text-sm font-light text-neutral-600 transition-colors duration-500 group-hover:text-neutral-300">
+            {excerpt}
+          </p>
+        )}
       </Link>
     </motion.div>
   );
 }
-
-// Placeholder projects
-const placeholderProjects: Project[] = [
-  {
-    id: '1',
-    databaseId: 1,
-    title: 'Sheraton Abu Dhabi Hotel & Resort',
-    slug: 'sheraton-abu-dhabi-hotel-resort',
-    excerpt: 'Luxurious beachfront resort',
-    date: new Date().toISOString(),
-    modified: new Date().toISOString(),
-    featuredImage: {
-      node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80',
-        altText: 'Sheraton Abu Dhabi',
-      },
-    },
-    acfFields: {
-      projectType: 'Hospitality',
-      location: 'Abu Dhabi, UAE',
-      yearCompleted: '2023',
-      projectDescription: 'A transformative hospitality project spanning 50,000 square meters of luxury resort design.',
-      gallery: [],
-    },
-  },
-  {
-    id: '2',
-    databaseId: 2,
-    title: 'Downtown Luxury Penthouse',
-    slug: 'downtown-luxury-penthouse',
-    excerpt: 'Ultra-modern penthouse',
-    date: new Date(Date.now() - 86400000 * 3).toISOString(),
-    modified: new Date(Date.now() - 86400000 * 3).toISOString(),
-    featuredImage: {
-      node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
-        altText: 'Penthouse',
-      },
-    },
-    acfFields: {
-      projectType: 'Residential',
-      location: 'Dubai, UAE',
-      yearCompleted: '2024',
-      projectDescription: 'An 800-square-meter penthouse transformation featuring bespoke design elements.',
-      gallery: [],
-    },
-  },
-  {
-    id: '3',
-    databaseId: 3,
-    title: 'Corporate Headquarters',
-    slug: 'corporate-headquarters-redesign',
-    excerpt: 'Modern workspace design',
-    date: new Date(Date.now() - 86400000 * 7).toISOString(),
-    modified: new Date(Date.now() - 86400000 * 7).toISOString(),
-    featuredImage: {
-      node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
-        altText: 'Office',
-      },
-    },
-    acfFields: {
-      projectType: 'Commercial',
-      location: 'DIFC, Dubai',
-      yearCompleted: '2023',
-      projectDescription: 'Complete reimagining of 3,000 square meters of corporate office space.',
-      gallery: [],
-    },
-  },
-];

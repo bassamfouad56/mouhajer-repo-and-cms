@@ -1,13 +1,14 @@
 import { Metadata } from 'next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { FAQSection } from '@/components/sections/faq';
-import { getIndustries, getServices, getProjects } from '@/lib/wordpress';
+import { LogoMarquee } from '@/components/logo-marquee';
+import { client } from '@/sanity/lib/client';
+import { industriesQuery, servicesQuery, projectsQuery } from '@/sanity/lib/queries';
 import EnhancedIndustriesPageContent from './enhanced-industries-page-content';
 
 export const metadata: Metadata = {
-  title: 'Industries We Serve | Mouhajer Design Studio',
-  description: 'Bringing expertise and innovation across diverse sectors including residential, commercial, hospitality, retail, healthcare, education, and more.',
+  title: 'Industries We Serve | MIDC - Specialized Expertise',
+  description: '25+ years of specialized expertise across Luxury Hospitality, High-End Residential, and Commercial & Corporate sectors. From concept to handover, we deliver excellence in every industry.',
 };
 
 export const revalidate = 3600;
@@ -15,6 +16,36 @@ export const revalidate = 3600;
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+async function getIndustries(locale: string) {
+  try {
+    const industries = await client.fetch(industriesQuery, { locale });
+    return industries || [];
+  } catch (error) {
+    console.error('Error fetching industries from Sanity:', error);
+    return [];
+  }
+}
+
+async function getServices(locale: string) {
+  try {
+    const services = await client.fetch(servicesQuery, { locale });
+    return services || [];
+  } catch (error) {
+    console.error('Error fetching services from Sanity:', error);
+    return [];
+  }
+}
+
+async function getProjects(locale: string) {
+  try {
+    const projects = await client.fetch(projectsQuery, { locale });
+    return projects || [];
+  } catch (error) {
+    console.error('Error fetching projects from Sanity:', error);
+    return [];
+  }
+}
 
 export default async function IndustriesPage({ params }: Props) {
   const { locale } = await params;
@@ -33,6 +64,7 @@ export default async function IndustriesPage({ params }: Props) {
         services={services}
         projects={projects}
       />
+      <LogoMarquee />
       <Footer />
     </>
   );

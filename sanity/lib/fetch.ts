@@ -16,6 +16,8 @@ import {
   featuredPostsQuery,
   projectsByCategoryQuery,
   postsByCategoryQuery,
+  clientsQuery,
+  featuredTestimonialsQuery,
 } from './queries'
 
 // Projects
@@ -126,6 +128,26 @@ export async function getPostsByCategory(category: string, locale: string = 'en'
     return await client.fetch(postsByCategoryQuery, { category, locale }, { next: { revalidate: 3600 } })
   } catch (error) {
     console.error(`Error fetching posts by category ${category}:`, error)
+    return []
+  }
+}
+
+// Clients
+export async function getSanityClients(locale: string = 'en') {
+  try {
+    return await client.fetch(clientsQuery, { locale }, { next: { revalidate: 3600 } })
+  } catch (error) {
+    console.error('Error fetching clients:', error)
+    return []
+  }
+}
+
+// Testimonials
+export async function getFeaturedTestimonials(locale: string = 'en') {
+  try {
+    return await client.fetch(featuredTestimonialsQuery, { locale }, { next: { revalidate: 3600 } })
+  } catch (error) {
+    console.error('Error fetching testimonials:', error)
     return []
   }
 }

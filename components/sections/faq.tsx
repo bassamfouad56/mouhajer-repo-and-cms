@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Link from 'next/link';
 
 export interface FAQItem {
@@ -11,131 +10,157 @@ export interface FAQItem {
 }
 
 interface FAQSectionProps {
+  label?: string;
   title?: string;
+  titleHighlight?: string;
   subtitle?: string;
   faqs: FAQItem[];
   variant?: 'light' | 'dark';
+  showCTA?: boolean;
+  ctaText?: string;
+  ctaLink?: string;
+  defaultOpen?: number | null;
 }
 
+/**
+ * Unified FAQ Section Component
+ *
+ * Clean, minimal design with:
+ * - Label (small uppercase tracking)
+ * - Two-part title (main + gold highlight)
+ * - Minimal accordion with divider lines
+ * - Plus/X icon that rotates
+ */
 export function FAQSection({
-  title = 'Frequently Asked Questions',
-  subtitle = 'Find answers to common questions about our services and process',
+  label = 'Expert Insights',
+  title = 'Questions',
+  titleHighlight = '& Answers',
+  subtitle,
   faqs,
   variant = 'light',
+  showCTA = true,
+  ctaText = 'Get In Touch',
+  ctaLink = '/contact',
+  defaultOpen = 0,
 }: FAQSectionProps) {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const toggleFAQ = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
+  const [activeIndex, setActiveIndex] = useState<number | null>(defaultOpen);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   const isDark = variant === 'dark';
 
   return (
-    <section className={`px-6 py-20 lg:px-12 lg:py-32 ${isDark ? 'bg-neutral-950' : 'bg-white'}`}>
-      <div className="mx-auto max-w-[1400px]">
+    <section
+      ref={sectionRef}
+      className={`relative overflow-hidden px-6 py-24 sm:py-32 lg:px-12 lg:py-40 ${
+        isDark ? 'bg-neutral-950' : 'bg-white'
+      }`}
+    >
+      {/* Background pattern */}
+      <div className="absolute inset-0">
+        <div
+          className={`absolute inset-0 bg-[linear-gradient(${
+            isDark ? 'rgba(255,255,255,0.015)' : 'rgba(0,0,0,0.02)'
+          }_1px,transparent_1px),linear-gradient(90deg,${
+            isDark ? 'rgba(255,255,255,0.015)' : 'rgba(0,0,0,0.02)'
+          }_1px,transparent_1px)] bg-[size:60px_60px]`}
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1200px]">
         {/* Section Header */}
-        <div className="mb-16 text-center">
-          <div className="mb-4 flex items-center justify-center gap-4">
-            <div className={`h-px w-12 ${isDark ? 'bg-neutral-700' : 'bg-neutral-300'}`} />
-            <h2
-              className={`text-sm font-light tracking-[0.3em] ${
-                isDark ? 'text-neutral-400' : 'text-neutral-500'
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1 }}
+          className="mb-16 lg:mb-24"
+        >
+          {/* Label */}
+          <div className="mb-4">
+            <span
+              className={`font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] ${
+                isDark ? 'text-white/40' : 'text-neutral-400'
               }`}
             >
-              FAQ
-            </h2>
-            <div className={`h-px w-12 ${isDark ? 'bg-neutral-700' : 'bg-neutral-300'}`} />
+              {label}
+            </span>
           </div>
-          <h3
-            className={`mb-4 text-4xl font-light tracking-tight lg:text-5xl ${
+
+          {/* Title */}
+          <h2
+            className={`font-SchnyderS text-4xl font-light leading-tight tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl ${
               isDark ? 'text-white' : 'text-neutral-950'
             }`}
           >
             {title}
-          </h3>
-          <p
-            className={`mx-auto max-w-2xl text-lg font-light ${
-              isDark ? 'text-neutral-400' : 'text-neutral-600'
-            }`}
-          >
-            {subtitle}
-          </p>
-        </div>
+            <br />
+            <span className="text-[#d4af37]">{titleHighlight}</span>
+          </h2>
 
-        {/* FAQ Accordion */}
-        <div className="mx-auto max-w-4xl space-y-4">
+          {/* Subtitle */}
+          {subtitle && (
+            <p
+              className={`mt-6 max-w-xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
+                isDark ? 'text-white/50' : 'text-neutral-500'
+              }`}
+            >
+              {subtitle}
+            </p>
+          )}
+        </motion.div>
+
+        {/* Minimal Accordion */}
+        <div className="space-y-px">
           {faqs.map((faq, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`overflow-hidden rounded-sm border transition-all ${
-                isDark
-                  ? 'border-white/10 bg-neutral-900/50'
-                  : 'border-neutral-200 bg-neutral-50'
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
+              className={`border-t last:border-b ${
+                isDark ? 'border-white/10' : 'border-neutral-200'
               }`}
             >
               <button
-                onClick={() => toggleFAQ(index)}
-                className={`flex w-full items-center justify-between p-6 text-left transition-all hover:bg-opacity-70 ${
-                  expandedIndex === index ? 'pb-4' : ''
-                }`}
+                onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                className="group flex w-full items-start justify-between py-6 text-left transition-opacity hover:opacity-70 sm:py-8"
               >
-                <span
-                  className={`pr-8 text-lg font-light tracking-wide ${
+                <h3
+                  className={`max-w-3xl pr-6 font-SchnyderS text-xl font-light sm:pr-8 sm:text-2xl lg:text-3xl ${
                     isDark ? 'text-white' : 'text-neutral-950'
                   }`}
                 >
                   {faq.question}
-                </span>
-                <div
-                  className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all ${
-                    isDark
-                      ? 'bg-white/10 text-white'
-                      : 'bg-neutral-200 text-neutral-950'
-                  }`}
+                </h3>
+                <motion.div
+                  animate={{ rotate: activeIndex === index ? 45 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-1 flex-shrink-0"
                 >
-                  <AnimatePresence mode="wait">
-                    {expandedIndex === index ? (
-                      <motion.div
-                        key="minus"
-                        initial={{ rotate: -90, opacity: 0 }}
-                        animate={{ rotate: 0, opacity: 1 }}
-                        exit={{ rotate: 90, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Minus size={16} />
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="plus"
-                        initial={{ rotate: 90, opacity: 0 }}
-                        animate={{ rotate: 0, opacity: 1 }}
-                        exit={{ rotate: -90, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Plus size={16} />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                  <div className="relative flex h-6 w-6 items-center justify-center">
+                    <div
+                      className={`h-px w-4 ${isDark ? 'bg-white/40' : 'bg-neutral-400'}`}
+                    />
+                    <div
+                      className={`absolute h-4 w-px ${isDark ? 'bg-white/40' : 'bg-neutral-400'}`}
+                    />
+                  </div>
+                </motion.div>
               </button>
 
-              <AnimatePresence>
-                {expandedIndex === index && (
+              <AnimatePresence initial={false}>
+                {activeIndex === index && (
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
                   >
-                    <div
-                      className={`border-t px-6 pb-6 pt-4 ${
-                        isDark ? 'border-white/10' : 'border-neutral-200'
-                      }`}
-                    >
+                    <div className="pb-6 pr-12 sm:pb-8 sm:pr-16">
                       <p
-                        className={`font-light leading-relaxed ${
-                          isDark ? 'text-neutral-300' : 'text-neutral-700'
+                        className={`max-w-3xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
+                          isDark ? 'text-white/60' : 'text-neutral-600'
                         }`}
                       >
                         {faq.answer}
@@ -144,36 +169,183 @@ export function FAQSection({
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center">
-          <p
-            className={`mb-6 text-lg font-light ${
-              isDark ? 'text-neutral-300' : 'text-neutral-700'
-            }`}
+        {showCTA && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-16 text-center lg:mt-24"
           >
-            Still have questions? We&apos;re here to help.
-          </p>
-          <Link
-            href="/#contact"
-            className={`group relative inline-flex items-center gap-2 overflow-hidden border-2 px-8 py-4 text-sm font-light tracking-widest transition-all ${
-              isDark
-                ? 'border-white text-white hover:text-neutral-950'
-                : 'border-neutral-950 text-neutral-950 hover:text-white'
-            }`}
-          >
-            <span className="relative z-10">GET IN TOUCH</span>
-            <div
-              className={`absolute inset-0 -translate-x-full transition-transform duration-300 group-hover:translate-x-0 ${
-                isDark ? 'bg-white' : 'bg-neutral-950'
+            <p
+              className={`mb-6 font-Satoshi text-sm font-light sm:text-base ${
+                isDark ? 'text-white/50' : 'text-neutral-500'
               }`}
-            />
-          </Link>
-        </div>
+            >
+              Still have questions? We&apos;re here to help.
+            </p>
+            <Link
+              href={ctaLink}
+              className={`group inline-flex items-center gap-3 border px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.2em] transition-all ${
+                isDark
+                  ? 'border-white/30 text-white hover:bg-white hover:text-neutral-950'
+                  : 'border-neutral-950 text-neutral-950 hover:bg-neutral-950 hover:text-white'
+              }`}
+            >
+              {ctaText}
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
+  );
+}
+
+/**
+ * Standalone Accordion Component
+ * Use this when you need just the accordion without the section wrapper
+ */
+interface AccordionProps {
+  items: FAQItem[];
+  variant?: 'light' | 'dark';
+  defaultOpen?: number | null;
+  className?: string;
+}
+
+export function Accordion({
+  items,
+  variant = 'light',
+  defaultOpen = null,
+  className = '',
+}: AccordionProps) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(defaultOpen);
+  const isDark = variant === 'dark';
+
+  return (
+    <div className={`space-y-px ${className}`}>
+      {items.map((item, index) => (
+        <div
+          key={index}
+          className={`border-t last:border-b ${
+            isDark ? 'border-white/10' : 'border-neutral-200'
+          }`}
+        >
+          <button
+            onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+            className="group flex w-full items-start justify-between py-6 text-left transition-opacity hover:opacity-70 sm:py-8"
+          >
+            <h3
+              className={`max-w-3xl pr-6 font-SchnyderS text-xl font-light sm:pr-8 sm:text-2xl lg:text-3xl ${
+                isDark ? 'text-white' : 'text-neutral-950'
+              }`}
+            >
+              {item.question}
+            </h3>
+            <motion.div
+              animate={{ rotate: activeIndex === index ? 45 : 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-1 flex-shrink-0"
+            >
+              <div className="relative flex h-6 w-6 items-center justify-center">
+                <div
+                  className={`h-px w-4 ${isDark ? 'bg-white/40' : 'bg-neutral-400'}`}
+                />
+                <div
+                  className={`absolute h-4 w-px ${isDark ? 'bg-white/40' : 'bg-neutral-400'}`}
+                />
+              </div>
+            </motion.div>
+          </button>
+
+          <AnimatePresence initial={false}>
+            {activeIndex === index && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden"
+              >
+                <div className="pb-6 pr-12 sm:pb-8 sm:pr-16">
+                  <p
+                    className={`max-w-3xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
+                      isDark ? 'text-white/60' : 'text-neutral-600'
+                    }`}
+                  >
+                    {item.answer}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * FAQ Section Header Component
+ * Use this when you want to add a header above a custom accordion
+ */
+interface FAQHeaderProps {
+  label?: string;
+  title?: string;
+  titleHighlight?: string;
+  subtitle?: string;
+  variant?: 'light' | 'dark';
+  className?: string;
+}
+
+export function FAQHeader({
+  label = 'Expert Insights',
+  title = 'Questions',
+  titleHighlight = '& Answers',
+  subtitle,
+  variant = 'light',
+  className = '',
+}: FAQHeaderProps) {
+  const isDark = variant === 'dark';
+
+  return (
+    <div className={className}>
+      {/* Label */}
+      <div className="mb-4">
+        <span
+          className={`font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] ${
+            isDark ? 'text-white/40' : 'text-neutral-400'
+          }`}
+        >
+          {label}
+        </span>
+      </div>
+
+      {/* Title */}
+      <h2
+        className={`font-SchnyderS text-4xl font-light leading-tight tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl ${
+          isDark ? 'text-white' : 'text-neutral-950'
+        }`}
+      >
+        {title}
+        <br />
+        <span className="text-[#d4af37]">{titleHighlight}</span>
+      </h2>
+
+      {/* Subtitle */}
+      {subtitle && (
+        <p
+          className={`mt-6 max-w-xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
+            isDark ? 'text-white/50' : 'text-neutral-500'
+          }`}
+        >
+          {subtitle}
+        </p>
+      )}
+    </div>
   );
 }

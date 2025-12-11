@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { SafeImage } from '@/components/safe-image';
+import { SafeImage as Image } from '@/components/safe-image';
 import Link from 'next/link';
 import { Project } from '@/lib/wordpress';
 import { ChevronLeft, ChevronRight, ArrowUpRight, Eye } from 'lucide-react';
@@ -392,20 +392,20 @@ export function Projects3DCarousel({ projects }: Projects3DCarouselProps) {
   );
 }
 
-// Placeholder projects
+// Placeholder projects - Using real project images
 const placeholderProjects: Project[] = [
   {
     id: '1',
     databaseId: 1,
-    title: 'Modern Villa Dubai',
-    slug: 'modern-villa-dubai',
+    title: 'Villa Hatem Master Bedroom',
+    slug: 'villa-hatem-master-bedroom',
     excerpt: 'Contemporary luxury living',
     date: new Date('2024-01-15').toISOString(),
     modified: new Date('2024-01-15').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&q=90',
-        altText: 'Modern Villa Dubai',
+        sourceUrl: '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
+        altText: 'Villa Hatem Master Bedroom',
       },
     },
     acfFields: {
@@ -419,15 +419,15 @@ const placeholderProjects: Project[] = [
   {
     id: '2',
     databaseId: 2,
-    title: 'Executive Office',
-    slug: 'executive-office',
+    title: 'Modern Office Fit-out',
+    slug: 'modern-office-fitout-dubai',
     excerpt: 'Sophisticated workspace design',
     date: new Date('2024-02-20').toISOString(),
     modified: new Date('2024-02-20').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=90',
-        altText: 'Executive Office',
+        sourceUrl: '/projects/office-fitout/_MID0939-HDR.jpg',
+        altText: 'Modern Office Fit-out',
       },
     },
     acfFields: {
@@ -441,44 +441,88 @@ const placeholderProjects: Project[] = [
   {
     id: '3',
     databaseId: 3,
-    title: 'Coastal Penthouse',
-    slug: 'coastal-penthouse',
-    excerpt: 'Oceanfront luxury',
+    title: 'Luxury Bathroom Design',
+    slug: 'luxury-bathroom-design-dubai',
+    excerpt: 'Premium bathroom interiors',
     date: new Date('2024-03-05').toISOString(),
     modified: new Date('2024-03-05').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=90',
-        altText: 'Coastal Penthouse',
+        sourceUrl: '/projects/bathroom/_MID2588-HDR.jpg',
+        altText: 'Luxury Bathroom Design',
       },
     },
     acfFields: {
       projectType: 'Residential',
       location: 'Palm Jumeirah',
       yearCompleted: '2023',
-      description: 'Breathtaking penthouse with panoramic ocean views, featuring custom lighting solutions, premium finishes, and bespoke interior elements.',
+      description: 'Elegant bathroom design featuring premium marble finishes, custom vanities, and sophisticated lighting solutions.',
       gallery: [],
     },
   },
   {
     id: '4',
     databaseId: 4,
-    title: 'Boutique Hotel Lobby',
-    slug: 'boutique-hotel-lobby',
-    excerpt: 'Hospitality excellence',
+    title: 'Turnkey Residential Fit-out',
+    slug: 'turnkey-residential-fitout',
+    excerpt: 'Complete interior solutions',
     date: new Date('2023-11-10').toISOString(),
     modified: new Date('2023-11-10').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1600&q=90',
-        altText: 'Boutique Hotel Lobby',
+        sourceUrl: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+        altText: 'Turnkey Residential Fit-out',
       },
     },
     acfFields: {
-      projectType: 'Hospitality',
+      projectType: 'Residential',
       location: 'Downtown Dubai',
       yearCompleted: '2023',
-      description: 'Luxurious hotel lobby design with Italian marble finishes, custom crystal chandeliers, and statement furniture pieces that create an unforgettable first impression.',
+      description: 'Complete turnkey residential fit-out from design concept to final handover with premium finishes throughout.',
+      gallery: [],
+    },
+  },
+  {
+    id: '5',
+    databaseId: 5,
+    title: 'Custom Walk-in Closet',
+    slug: 'custom-walk-in-closet-design',
+    excerpt: 'Bespoke storage solutions',
+    date: new Date('2024-01-05').toISOString(),
+    modified: new Date('2024-01-05').toISOString(),
+    featuredImage: {
+      node: {
+        sourceUrl: '/projects/closet/_MID0095-HDR.jpg',
+        altText: 'Custom Walk-in Closet',
+      },
+    },
+    acfFields: {
+      projectType: 'Residential',
+      location: 'Dubai Marina',
+      yearCompleted: '2024',
+      description: 'Bespoke walk-in closet featuring custom joinery, intelligent storage solutions, and premium finishes.',
+      gallery: [],
+    },
+  },
+  {
+    id: '6',
+    databaseId: 6,
+    title: 'Commercial Interior Design',
+    slug: 'luxury-commercial-interior-dubai',
+    excerpt: 'Premium commercial spaces',
+    date: new Date('2024-03-01').toISOString(),
+    modified: new Date('2024-03-01').toISOString(),
+    featuredImage: {
+      node: {
+        sourceUrl: '/projects/commercial-interior/11.jpg',
+        altText: 'Commercial Interior Design',
+      },
+    },
+    acfFields: {
+      projectType: 'Commercial',
+      location: 'Business Bay',
+      yearCompleted: '2024',
+      description: 'High-end commercial space design featuring sophisticated finishes, optimal space planning, and brand-aligned aesthetics.',
       gallery: [],
     },
   },

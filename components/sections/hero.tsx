@@ -46,16 +46,16 @@ export function Hero() {
     };
   }, []);
 
-  // Carousel images - Using Unsplash placeholders until you add your own
+  // Carousel images - Real project images
   const carouselImages = [
-    'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80', // Modern villa
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', // Luxury interior
-    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80', // Modern living room
-    'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80', // Contemporary design
-    'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80', // Hotel lobby
-    'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&q=80', // Modern bedroom
-    'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&q=80', // Kitchen design
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', // Dining room
+    '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
+    '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+    '/projects/commercial-interior/11.jpg',
+    '/projects/bathroom/_MID2588-HDR.jpg',
+    '/projects/office-fitout/_MID0939-HDR.jpg',
+    '/projects/bedroom-interior/_MID6363-HDR.jpg',
+    '/projects/turnkey-design-fitout/_MID2583-HDR.jpg',
+    '/projects/closet/_MID0095-HDR.jpg',
   ];
 
   return (

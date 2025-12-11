@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fffef5;
+  --background: #ffffff;
   --foreground: #171717;
 }
 
@@ -10,6 +10,94 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-SchnyderS: var(--font-SchnyderS), "Playfair Display", Georgia, serif;
+  --font-Satoshi: var(--font-Satoshi), "Inter", -apple-system, sans-serif;
+}
+
+/* Custom Font Classes for Tailwind v4 */
+.font-SchnyderS {
+  font-family: var(--font-SchnyderS), "Playfair Display", Georgia, serif;
+}
+
+.font-Satoshi {
+  font-family: var(--font-Satoshi), "Inter", -apple-system, sans-serif;
+}
+
+/* Arabic Font Class */
+.font-arabic {
+  font-family: var(--font-arabic), "Cairo", "Noto Sans Arabic", -apple-system, sans-serif;
+}
+
+/* RTL Support Styles */
+html[dir="rtl"] body,
+html.rtl body,
+body.font-arabic {
+  font-family: var(--font-arabic), "Cairo", "Noto Sans Arabic", -apple-system, sans-serif;
+}
+
+/* RTL-specific adjustments */
+html[dir="rtl"] .font-SchnyderS,
+html.rtl .font-SchnyderS {
+  font-family: var(--font-arabic), "Cairo", Georgia, serif;
+}
+
+html[dir="rtl"] .font-Satoshi,
+html.rtl .font-Satoshi {
+  font-family: var(--font-arabic), "Cairo", -apple-system, sans-serif;
+}
+
+/* RTL Layout Utilities */
+[dir="rtl"] .space-x-1 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-6 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+/* RTL margin/padding adjustments */
+[dir="rtl"] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[dir="rtl"] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* RTL text alignment */
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* RTL flexbox direction */
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Keep flex-row-reverse as is in RTL (it becomes normal) */
+[dir="rtl"] .flex-row-reverse {
+  flex-direction: row;
+}
+
+/* RTL icon and arrow flipping */
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* RTL grid adjustments */
+[dir="rtl"] .text-start {
+  text-align: right;
+}
+
+[dir="rtl"] .text-end {
+  text-align: left;
 }
 
 * {
@@ -77,6 +165,24 @@ html.lenis body {
   }
 }
 
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
 .animation-delay-2000 {
   animation-delay: 2s;
 }
@@ -115,4 +221,28 @@ html.lenis body {
 :focus-visible {
   outline: 2px solid #0a0a0a;
   outline-offset: 2px;
+}
+
+/* Mega menu scrollbar styling */
+.mega-menu-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #404040 #171717;
+}
+
+.mega-menu-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mega-menu-scroll::-webkit-scrollbar-track {
+  background: #171717;
+  border-radius: 3px;
+}
+
+.mega-menu-scroll::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-radius: 3px;
+}
+
+.mega-menu-scroll::-webkit-scrollbar-thumb:hover {
+  background: #525252;
 }

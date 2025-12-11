@@ -11,17 +11,13 @@ import {
   Home,
   Hotel,
   Store,
-  Hospital,
-  GraduationCap,
   Utensils,
   Briefcase,
   ArrowRight,
   ChevronRight,
   Award,
   TrendingUp,
-  Users,
   MapPin,
-  Calendar,
   ArrowUpRight,
   CheckCircle2,
   ZoomIn,
@@ -98,12 +94,13 @@ export default function EnhancedIndustryDetail({
   // Get icon component based on industry title
   const getIcon = (title: string) => {
     const iconMap: { [key: string]: typeof Home } = {
+      'Luxury Hospitality': Hotel,
+      'High-End Residential': Home,
+      'Commercial & Corporate': Building2,
       'Residential': Home,
       'Commercial': Building2,
       'Hospitality': Hotel,
       'Retail': Store,
-      'Healthcare': Hospital,
-      'Education': GraduationCap,
       'Restaurant & F&B': Utensils,
       'Corporate': Briefcase,
     };
@@ -231,6 +228,15 @@ export default function EnhancedIndustryDetail({
           )}
         </motion.div>
       </section>
+
+      {/* Challenges & Solutions Section */}
+      {((industry.acfFields?.challenges?.length > 0) || (industry.acfFields?.solutions?.length > 0)) && (
+        <ChallengesSolutionsSection
+          challenges={industry.acfFields?.challenges || []}
+          solutions={industry.acfFields?.solutions || []}
+          industryTitle={industry.title}
+        />
+      )}
 
       {/* Gallery Section */}
       {galleryImages.length > 0 && (
@@ -648,6 +654,126 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
+// Challenges & Solutions Section Component
+interface ChallengesSolutionsSectionProps {
+  challenges: Array<{ title: string; description: string }>;
+  solutions: Array<{ title: string; description: string }>;
+  industryTitle: string;
+}
+
+function ChallengesSolutionsSection({ challenges, solutions, industryTitle }: ChallengesSolutionsSectionProps) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative bg-neutral-50 px-6 py-24 lg:px-12 lg:py-32"
+    >
+      <div className="mx-auto max-w-[1400px]">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-center"
+        >
+          <div className="mb-4 flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-neutral-400" />
+            <span className="text-sm font-light tracking-[0.3em] text-neutral-500">
+              INDUSTRY EXPERTISE
+            </span>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-neutral-400" />
+          </div>
+          <h2 className="mb-6 text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
+            Challenges & Solutions
+          </h2>
+          <p className="mx-auto max-w-2xl text-lg font-light leading-relaxed text-neutral-600">
+            Understanding the unique challenges of the {industryTitle.toLowerCase()} industry and delivering tailored solutions
+          </p>
+        </motion.div>
+
+        {/* Two Column Layout */}
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Challenges Column */}
+          {challenges.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="mb-8 flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+                  <TrendingUp className="h-6 w-6 text-red-600" />
+                </div>
+                <h3 className="text-2xl font-light tracking-tight text-neutral-950">
+                  Industry Challenges
+                </h3>
+              </div>
+
+              <div className="space-y-6">
+                {challenges.map((challenge, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                    className="group border-l-4 border-red-200 bg-white p-6 shadow-sm transition-all hover:border-red-400 hover:shadow-md"
+                  >
+                    <h4 className="mb-3 text-lg font-medium text-neutral-950">
+                      {challenge.title}
+                    </h4>
+                    <p className="text-sm font-light leading-relaxed text-neutral-600">
+                      {challenge.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Solutions Column */}
+          {solutions.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <div className="mb-8 flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
+                  <CheckCircle2 className="h-6 w-6 text-emerald-600" />
+                </div>
+                <h3 className="text-2xl font-light tracking-tight text-neutral-950">
+                  MIDC Solutions
+                </h3>
+              </div>
+
+              <div className="space-y-6">
+                {solutions.map((solution, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                    className="group border-l-4 border-emerald-200 bg-white p-6 shadow-sm transition-all hover:border-emerald-400 hover:shadow-md"
+                  >
+                    <h4 className="mb-3 text-lg font-medium text-neutral-950">
+                      {solution.title}
+                    </h4>
+                    <p className="text-sm font-light leading-relaxed text-neutral-600">
+                      {solution.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Other Industry Card Component
 function OtherIndustryCard({ industry, index }: { industry: Industry; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -656,12 +782,13 @@ function OtherIndustryCard({ industry, index }: { industry: Industry; index: num
 
   const getIcon = (title: string) => {
     const iconMap: { [key: string]: typeof Home } = {
+      'Luxury Hospitality': Hotel,
+      'High-End Residential': Home,
+      'Commercial & Corporate': Building2,
       'Residential': Home,
       'Commercial': Building2,
       'Hospitality': Hotel,
       'Retail': Store,
-      'Healthcare': Hospital,
-      'Education': GraduationCap,
       'Restaurant & F&B': Utensils,
       'Corporate': Briefcase,
     };

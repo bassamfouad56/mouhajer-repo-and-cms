@@ -1,29 +1,48 @@
 import { Metadata } from 'next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { FAQSection } from '@/components/sections/faq';
-import { getServices, getIndustries } from '@/lib/wordpress';
+import { LogoMarquee } from '@/components/logo-marquee';
 import ServicesPageContent from './services-page-content';
-import { servicesFAQs } from '@/lib/faq-data';
+import { client } from '@/sanity/lib/client';
+import { servicesQuery, featuredProjectsQuery } from '@/sanity/lib/queries';
 
 export const metadata: Metadata = {
-  title: 'Our Services | Mouhajer Design Studio',
-  description: 'Comprehensive design services from concept to completion. Interior design, space planning, custom furniture, lighting design, and more.',
+  title: 'Our Services | MIDC - Integrated Construction Excellence',
+  description: 'From civil construction to interior architecture, MEP engineering to handover. MIDC delivers the full circle of design, engineering, and execution without splitting the vision.',
 };
 
 export const revalidate = 3600;
 
-export default async function ServicesPage() {
-  const [services, industries] = await Promise.all([
-    getServices(),
-    getIndustries(),
-  ]);
+async function getServices(locale: string) {
+  try {
+    const services = await client.fetch(servicesQuery, { locale });
+    return services || [];
+  } catch (error) {
+    console.error('Error fetching services from Sanity:', error);
+    return [];
+  }
+}
+
+async function getFeaturedProjects(locale: string) {
+  try {
+    const projects = await client.fetch(featuredProjectsQuery, { locale });
+    return projects || [];
+  } catch (error) {
+    console.error('Error fetching projects from Sanity:', error);
+    return [];
+  }
+}
+
+export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const services = await getServices(locale);
+  const projects = await getFeaturedProjects(locale);
 
   return (
     <>
       <Header />
-      <ServicesPageContent services={services} industries={industries} />
-      <FAQSection faqs={servicesFAQs} variant="light" />
+      <ServicesPageContent services={services} projects={projects} />
+      <LogoMarquee />
       <Footer />
     </>
   );

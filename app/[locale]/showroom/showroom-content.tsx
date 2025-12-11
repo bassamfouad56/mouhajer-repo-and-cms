@@ -86,7 +86,7 @@ export default function ShowroomContent() {
       <section className="relative h-[60vh] overflow-hidden bg-neutral-950">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070"
+            src="/projects/turnkey-design-fitout/_MID2543-HDR.jpg"
             alt="Luxury furniture showroom"
             fill
             className="object-cover opacity-40"

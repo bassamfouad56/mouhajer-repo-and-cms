@@ -46,6 +46,21 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
   },
+  // Build optimizations to prevent Vercel timeout
+  experimental: {
+    // Reduce concurrent static page generation to prevent timeout
+    staticGenerationMaxConcurrency: 4,
+    // Retry failed static generation
+    staticGenerationRetryCount: 1,
+  },
+  // Reduce build output verbosity
+  logging: {
+    fetches: {
+      fullUrl: false,
+    },
+  },
+  // Remove standalone output to speed up build (Vercel handles this automatically)
+  // output: 'standalone',
 };
 
 export default withNextIntl(nextConfig);

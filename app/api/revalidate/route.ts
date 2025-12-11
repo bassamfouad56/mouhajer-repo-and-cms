@@ -65,9 +65,35 @@ export async function POST(request: NextRequest) {
         }
         break;
 
+      case 'client':
+        // Revalidate pages showing clients
+        revalidatePath('/[locale]'); // Homepage shows partner logos
+        revalidatePath('/[locale]/about');
+        revalidatePath('/[locale]/about/clients');
+        revalidateTag('clients');
+        break;
+
+      case 'testimonial':
+        // Revalidate pages showing testimonials
+        revalidatePath('/[locale]'); // Homepage may show testimonials
+        revalidatePath('/[locale]/about');
+        revalidatePath('/[locale]/about/clients');
+        revalidateTag('testimonials');
+        break;
+
+      case 'lead':
+        // Leads don't need page revalidation
+        // Just log for monitoring
+        console.log('New lead received:', body.email);
+        break;
+
       default:
         // Revalidate homepage for any other changes
         revalidatePath('/[locale]');
+        // Also revalidate with tags if available
+        if (_type) {
+          revalidateTag(_type);
+        }
     }
 
     return NextResponse.json({

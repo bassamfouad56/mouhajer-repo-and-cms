@@ -151,6 +151,25 @@ export default defineType({
         },
       ],
     }),
+    // Engagement tracking fields (hidden from editors, managed via API)
+    defineField({
+      name: 'viewCount',
+      title: 'View Count',
+      type: 'number',
+      initialValue: 0,
+      hidden: true,
+    }),
+    defineField({
+      name: 'reactions',
+      title: 'Reactions',
+      type: 'object',
+      hidden: true,
+      fields: [
+        { name: 'helpful', type: 'number', title: 'Helpful', initialValue: 0 },
+        { name: 'insightful', type: 'number', title: 'Insightful', initialValue: 0 },
+        { name: 'loved', type: 'number', title: 'Loved', initialValue: 0 },
+      ],
+    }),
   ],
   preview: {
     select: {

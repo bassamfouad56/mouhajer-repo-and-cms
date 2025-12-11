@@ -1,27 +1,31 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import { Award, Users, Globe, Target } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import { Award, Users, Globe, Target } from "lucide-react";
 
-export function About() {
+interface AboutProps {
+  mainImage?: string;
+}
+
+export function About({ mainImage }: AboutProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: imageRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
   const imageY = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   const stats = [
-    { icon: Award, value: '15+', label: 'Years of Excellence' },
-    { icon: Users, value: '200+', label: 'Happy Clients' },
-    { icon: Globe, value: '50+', label: 'Awards Won' },
-    { icon: Target, value: '300+', label: 'Projects Delivered' },
+    { icon: Award, value: "15+", label: "Years of Excellence" },
+    { icon: Users, value: "200+", label: "Happy Clients" },
+    { icon: Globe, value: "50+", label: "Awards Won" },
+    { icon: Target, value: "300+", label: "Projects Delivered" },
   ];
 
   return (
@@ -69,21 +73,22 @@ export function About() {
               className="space-y-6"
             >
               <p className="text-lg font-light leading-relaxed text-neutral-600">
-                Mouhajer International Design is a Dubai-based interior design studio
-                specializing in creating timeless, elegant spaces that reflect the unique
-                personality and lifestyle of our clients.
+                Mouhajer International Design is a Dubai-based interior design
+                studio specializing in creating timeless, elegant spaces that
+                reflect the unique personality and lifestyle of our clients.
               </p>
 
               <p className="text-lg font-light leading-relaxed text-neutral-600">
-                With over 15 years of experience in luxury residential and commercial
-                design, we combine innovative thinking with impeccable craftsmanship to
-                deliver spaces that inspire and endure.
+                With over 15 years of experience in luxury residential and
+                commercial design, we combine innovative thinking with
+                impeccable craftsmanship to deliver spaces that inspire and
+                endure.
               </p>
 
               <p className="text-lg font-light leading-relaxed text-neutral-600">
-                Our approach is rooted in understanding our clients&apos; vision, translating
-                it into sophisticated design solutions that seamlessly blend form,
-                function, and artistic expression.
+                Our approach is rooted in understanding our clients&apos;
+                vision, translating it into sophisticated design solutions that
+                seamlessly blend form, function, and artistic expression.
               </p>
             </motion.div>
 
@@ -99,7 +104,9 @@ export function About() {
                 className="group inline-flex items-center gap-2 border-b border-neutral-950 pb-1 text-sm font-light tracking-widest text-neutral-950 transition-all hover:gap-4 focus-visible:gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
               >
                 START YOUR PROJECT
-                <span className="transition-transform group-hover:translate-x-1 group-focus-visible:translate-x-1">→</span>
+                <span className="transition-transform group-hover:translate-x-1 group-focus-visible:translate-x-1">
+                  →
+                </span>
               </a>
             </motion.div>
           </div>
@@ -114,12 +121,14 @@ export function About() {
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-neutral-200">
               <motion.div style={{ y: imageY }} className="h-full w-full">
-                <Image
-                  src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
-                  alt="Luxury Interior Design"
-                  fill
-                  className="object-cover"
-                />
+                {mainImage && (
+                  <Image
+                    src={mainImage}
+                    alt="Luxury Interior Design"
+                    fill
+                    className="object-cover"
+                  />
+                )}
               </motion.div>
             </div>
 
@@ -191,11 +200,12 @@ export function About() {
               <div className="h-px flex-1 bg-gradient-to-l from-transparent to-neutral-700" />
             </div>
             <blockquote className="text-center text-2xl font-light italic leading-relaxed text-neutral-200 lg:text-3xl lg:leading-relaxed">
-              &ldquo;We believe that great design is not about following trends, but about
-              creating timeless spaces that tell a story and enhance the human experience.&rdquo;
+              &ldquo;We believe that great design is not about following trends,
+              but about creating timeless spaces that tell a story and enhance
+              the human experience.&rdquo;
             </blockquote>
             <div className="mt-8 text-center text-sm font-light tracking-wider text-neutral-500">
-              — MOUHAJER DESIGN PHILOSOPHY
+              MOUHAJER DESIGN PHILOSOPHY
             </div>
           </div>
         </motion.div>

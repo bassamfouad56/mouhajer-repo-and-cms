@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { LogoMarquee } from '@/components/logo-marquee';
 import { furnitureProducts, getProductBySlug } from '@/lib/furniture-data';
 import ProductDetailContent from './product-detail-content';
 
@@ -27,21 +28,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// Skip static generation at build time - use ISR instead
+// Pages will be generated on-demand and cached
 export async function generateStaticParams() {
-  const locales = ['en', 'ar'];
-  const paths = [];
-
-  for (const locale of locales) {
-    for (const product of furnitureProducts) {
-      paths.push({
-        locale,
-        slug: product.slug,
-      });
-    }
-  }
-
-  return paths;
+  return [];
 }
+
+// Allow dynamic params for on-demand generation
+export const dynamicParams = true;
 
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
@@ -60,6 +54,7 @@ export default async function ProductDetailPage({ params }: Props) {
     <>
       <Header />
       <ProductDetailContent product={product} relatedProducts={relatedProducts} />
+      <LogoMarquee />
       <Footer />
     </>
   );

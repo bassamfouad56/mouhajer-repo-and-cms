@@ -3,9 +3,14 @@
  *
  * Transforms WordPress project data into the application's expected format
  * with comprehensive error handling and image URL management
+ *
+ * NOTE: This adapter is legacy code. The site now uses Sanity CMS.
+ * ProjectsResData has been removed to reduce bundle size.
  */
 
-import { ProjectsResData } from '../projectResData';
+// Legacy WordPress data removed - now using Sanity CMS
+const ProjectsResData: any[] = [];
+
 import {
   getSafeImageUrl,
   getSafeAltText,

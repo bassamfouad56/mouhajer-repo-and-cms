@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(vercel:*)",
+      "Bash(npm install:*)",
+      "Bash(find:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git fetch:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(curl:*)",
+      "Bash(git checkout:*)",
+      "Bash(npm run build:*)",
+      "Bash(xargs:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(git stash:*)",
+      "Bash(npm run migrate:sanity:*)",
+      "Bash(tree:*)",
+      "Bash(npm run seed:blogs:*)",
+      "Bash(sudo rm:*)",
+      "Bash(wc:*)",
+      "Bash(git pull:*)",
+      "Bash(git merge feature/lifecycle-horizontal-cards -m \"$(cat <<''EOF''\nMerge feature/lifecycle-horizontal-cards into main\n\nMajor website restructure including:\n- Horizontal accordion cards for lifecycle section\n- Restructured service pillar pages\n- New industry detail pages\n- Complete careers system with 6 positions\n- Supplier registration page\n- All Sanity CMS schemas exported\n- Updated localization (552 keys EN/AR)\n- SEO meta tags on all pages\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(npx sanity query:*)",
+      "Bash(npx tsx:*)",
+      "Bash(tailscale status:*)",
+      "Bash(tee:*)",
+      "Bash(du -sh:*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx tsc:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

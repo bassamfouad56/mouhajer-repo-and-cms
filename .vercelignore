@@ -1,0 +1,17 @@
+# Projects folder (root level only)
+/projects
+
+# Documentation files
+*.md
+!README.md
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Local environment files
+.env*.local

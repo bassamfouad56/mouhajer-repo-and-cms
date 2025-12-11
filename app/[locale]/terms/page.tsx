@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { LogoMarquee } from '@/components/logo-marquee';
 
 export const metadata: Metadata = {
   title: 'Terms of Service | Mouhajer International Design',
@@ -231,6 +232,7 @@ export default function TermsOfService() {
           </div>
         </div>
       </main>
+      <LogoMarquee />
       <Footer />
     </>
   );

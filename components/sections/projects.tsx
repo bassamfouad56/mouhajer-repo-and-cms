@@ -99,8 +99,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       >
         {/* Image Container */}
         <div className="relative aspect-[3/4] overflow-hidden bg-neutral-200">
-        <Image
-          src={project.featuredImage?.node?.sourceUrl || '/placeholder-project.jpg'}
+        <SafeImage
+          src={project.featuredImage?.node?.sourceUrl || '/placeholder.jpg'}
           alt={project.title}
           fill
           className="object-cover transition-all duration-700 group-hover:scale-105"
@@ -151,20 +151,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
-// Placeholder projects for initial development
+// Placeholder projects for initial development - Using real project images
 const placeholderProjects: Project[] = [
   {
     id: '1',
     databaseId: 1,
-    title: 'Modern Villa Dubai',
-    slug: 'modern-villa-dubai',
+    title: 'Villa Hatem Master Bedroom',
+    slug: 'villa-hatem-master-bedroom',
     excerpt: 'Contemporary luxury living',
     date: new Date('2024-01-15').toISOString(),
     modified: new Date('2024-01-15').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80',
-        altText: 'Modern Villa Dubai',
+        sourceUrl: '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
+        altText: 'Villa Hatem Master Bedroom',
       },
     },
     acfFields: {
@@ -178,14 +178,14 @@ const placeholderProjects: Project[] = [
   {
     id: '2',
     databaseId: 2,
-    title: 'Executive Office',
-    slug: 'executive-office',
+    title: 'Executive Office Fit-out',
+    slug: 'modern-office-fitout-dubai',
     excerpt: 'Sophisticated workspace design',
     date: new Date('2024-02-20').toISOString(),
     modified: new Date('2024-02-20').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+        sourceUrl: '/projects/office-fitout/_MID0939-HDR.jpg',
         altText: 'Executive Office',
       },
     },
@@ -200,44 +200,44 @@ const placeholderProjects: Project[] = [
   {
     id: '3',
     databaseId: 3,
-    title: 'Coastal Penthouse',
-    slug: 'coastal-penthouse',
-    excerpt: 'Oceanfront luxury',
+    title: 'Luxury Bathroom Design',
+    slug: 'luxury-bathroom-design-dubai',
+    excerpt: 'Premium bathroom interiors',
     date: new Date('2024-03-05').toISOString(),
     modified: new Date('2024-03-05').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
-        altText: 'Coastal Penthouse',
+        sourceUrl: '/projects/bathroom/_MID2588-HDR.jpg',
+        altText: 'Luxury Bathroom',
       },
     },
     acfFields: {
       projectType: 'Residential',
       location: 'Palm Jumeirah',
       yearCompleted: '2023',
-      description: 'Breathtaking penthouse with panoramic ocean views, featuring custom lighting and premium finishes.',
+      description: 'Elegant bathroom design featuring premium marble finishes, custom vanities, and sophisticated lighting.',
       gallery: [],
     },
   },
   {
     id: '4',
     databaseId: 4,
-    title: 'Boutique Hotel Lobby',
-    slug: 'boutique-hotel-lobby',
-    excerpt: 'Hospitality excellence',
+    title: 'Turnkey Residential Fit-out',
+    slug: 'turnkey-residential-fitout',
+    excerpt: 'Complete interior solutions',
     date: new Date('2023-11-10').toISOString(),
     modified: new Date('2023-11-10').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
-        altText: 'Boutique Hotel Lobby',
+        sourceUrl: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+        altText: 'Turnkey Residential Fit-out',
       },
     },
     acfFields: {
-      projectType: 'Hospitality',
+      projectType: 'Residential',
       location: 'Downtown Dubai',
       yearCompleted: '2023',
-      description: 'Luxurious hotel lobby design with marble finishes, custom chandeliers, and statement furniture pieces.',
+      description: 'Complete turnkey residential fit-out from design concept to final handover with premium finishes.',
       gallery: [],
     },
   },

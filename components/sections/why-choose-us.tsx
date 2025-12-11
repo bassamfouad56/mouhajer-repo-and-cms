@@ -38,7 +38,12 @@ const reasons = [
   },
 ];
 
-export function WhyChooseUs() {
+interface WhyChooseUsProps {
+  mainImage?: string;
+  secondaryImage?: string;
+}
+
+export function WhyChooseUs({ mainImage, secondaryImage }: WhyChooseUsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
@@ -106,15 +111,17 @@ export function WhyChooseUs() {
               {/* Main Large Image */}
               <motion.div
                 style={{ y: imageY, scale: imageScale }}
-                className="relative aspect-[3/4] overflow-hidden"
+                className="relative aspect-[3/4] overflow-hidden bg-neutral-200"
               >
-                <SafeImage
-                  src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80"
-                  alt="Luxury Interior Design"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+                {mainImage && (
+                  <SafeImage
+                    src={mainImage}
+                    alt="Luxury Interior Design"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/20 to-transparent" />
               </motion.div>
 
@@ -123,15 +130,17 @@ export function WhyChooseUs() {
                 initial={{ opacity: 0, x: -50 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 1, delay: 0.3 }}
-                className="absolute -bottom-12 -right-12 aspect-square w-1/2 overflow-hidden border-8 border-white shadow-2xl lg:-right-24"
+                className="absolute -bottom-12 -right-12 aspect-square w-1/2 overflow-hidden border-8 border-white shadow-2xl lg:-right-24 bg-neutral-200"
               >
-                <SafeImage
-                  src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"
-                  alt="Interior Design Detail"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
+                {secondaryImage && (
+                  <SafeImage
+                    src={secondaryImage}
+                    alt="Interior Design Detail"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                )}
               </motion.div>
 
               {/* Stats Badge */}

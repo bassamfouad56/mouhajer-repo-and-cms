@@ -2,6 +2,7 @@
 
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { LogoMarquee } from '@/components/logo-marquee';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Shield, Lock, Eye, FileText, Globe, User, Mail, Phone, MapPin } from 'lucide-react';
@@ -690,6 +691,7 @@ export default function PrivacyPolicy() {
         </motion.section>
       </main>
 
+      <LogoMarquee />
       <Footer />
     </>
   );

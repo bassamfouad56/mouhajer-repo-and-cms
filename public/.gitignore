@@ -1,0 +1,13 @@
+.vercel
+
+# Large asset folders - use Sanity CDN instead
+projects/
+
+# Large media files
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Unoptimized images (keep optimized versions only)
+# Files over 5MB should be served via CDN

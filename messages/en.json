@@ -6,7 +6,35 @@
     "contactUs": "Contact Us",
     "readMore": "Read More",
     "exploreService": "Explore Service",
-    "scheduleConsultation": "Schedule a Consultation"
+    "scheduleConsultation": "Schedule a Consultation",
+    "viewProject": "View Project",
+    "downloadBrochure": "Download Brochure",
+    "requestQuote": "Request Quote",
+    "backToTop": "Back to Top",
+    "loading": "Loading...",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "all": "All",
+    "share": "Share",
+    "copyLink": "Copy Link",
+    "previous": "Previous",
+    "next": "Next",
+    "close": "Close",
+    "open": "Open",
+    "yes": "Yes",
+    "no": "No",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "remove": "Remove",
+    "moreDetails": "More Details",
+    "seeMore": "See More",
+    "seeLess": "See Less",
+    "explore": "Explore"
   },
   "Header": {
     "home": "Home",
@@ -15,19 +43,43 @@
     "about": "About",
     "blog": "Blog",
     "contact": "Contact",
-    "language": "Language"
+    "language": "Language",
+    "industries": "Industries",
+    "showroom": "Showroom",
+    "careers": "Careers",
+    "menu": "Menu"
   },
   "Hero": {
     "title": "Transform Your Space into a Work of Art",
+    "titleLine1": "FROM EMPTY LAND",
+    "titleLine2": "TO TURNKEY REALITY",
     "subtitle": "Award-winning interior design, fitout solutions, and construction management",
-    "description": "Creating extraordinary spaces that inspire, innovate, and elevate your lifestyle. From concept to completion, we bring your vision to life with unparalleled expertise and attention to detail.",
+    "badge": "Award-Winning Architecture & Construction",
+    "description": "We are the definitive Design and Build partner for the UAE's elite. Whether you are developing a 5-star hotel or building your private family estate, we deliver absolute perfection.",
     "ctaPrimary": "Start Your Project",
-    "ctaSecondary": "View Portfolio"
+    "ctaSecondary": "View Our Portfolio",
+    "scrollDown": "SCROLL",
+    "yearsExperience": "Years Experience",
+    "projectsCompleted": "Projects Completed",
+    "awardsWon": "Awards Won",
+    "happyClients": "Happy Clients"
+  },
+  "Stats": {
+    "heading": "Our Track Record",
+    "projectsCompleted": "Projects Completed",
+    "yearsExperience": "Years of Experience",
+    "internationalAwards": "International Awards",
+    "clientSatisfaction": "Client Satisfaction",
+    "happyClients": "Happy Clients",
+    "teamMembers": "Team Members",
+    "awardsWon": "Awards Won",
+    "sqmDelivered": "SQM Delivered"
   },
   "Services": {
     "heading": "Our Services",
     "title": "What We Offer",
     "description": "From concept to completion, we deliver excellence in Interior Design, Fitout Solutions, and Construction Management.",
+    "viewAllServices": "View All Services",
     "interiorDesign": {
       "title": "Interior Design",
       "description": "Complete interior design solutions that blend aesthetics with functionality. We create bespoke spaces that reflect your personality and lifestyle, from concept development to final styling."
@@ -39,6 +91,103 @@
     "constructionManagement": {
       "title": "Construction Management",
       "description": "End-to-end construction management services that ensure your project is delivered on time, within budget, and to the highest standards of quality and craftsmanship."
+    },
+    "interiorArchitecture": {
+      "title": "Interior Architecture",
+      "description": "Interior architectural design that integrates structure, space, and light to create exceptional environments that exceed expectations."
+    },
+    "mepEngineering": {
+      "title": "MEP Engineering",
+      "description": "Integrated engineering solutions for mechanical, electrical, and plumbing systems, focusing on efficiency and sustainability."
+    },
+    "civilConstruction": {
+      "title": "Civil Construction",
+      "description": "Comprehensive construction services from foundations to finishes, with strict adherence to safety and quality standards."
+    },
+    "manufacturingJoinery": {
+      "title": "Manufacturing & Joinery",
+      "description": "Custom furniture and joinery manufacturing with the highest standards of craftsmanship, from design to installation."
+    },
+    "handoverMaintenance": {
+      "title": "Handover & Maintenance",
+      "description": "Comprehensive handover services and annual maintenance contracts to ensure the continued quality of your project."
+    }
+  },
+  "Capabilities": {
+    "heading": "Our Capabilities",
+    "titleLine1": "Complete Lifecycle",
+    "titleLine2": "Control",
+    "description": "From concept to completion, every phase flows through our integrated system.",
+    "descriptionHighlight": "Six stages, one seamless journey.",
+    "ctaPrompt": "Ready to experience the difference?",
+    "ctaButton": "View All Services",
+    "items": {
+      "build": {
+        "badge": "We Build",
+        "title": "The Main Contractor",
+        "shortTitle": "Build",
+        "description": "We hold the trade license to execute heavy civil works. From excavation and piling to the concrete superstructure, our own teams are on site daily."
+      },
+      "design": {
+        "badge": "We Design",
+        "title": "The Design Studio",
+        "shortTitle": "Design",
+        "description": "Our creative team designs the vision, but because they work alongside the builders, every drawing is validated for cost and feasibility before you see it."
+      },
+      "power": {
+        "badge": "We Power",
+        "title": "In-House MEP Division",
+        "shortTitle": "Power",
+        "description": "We don't sub-contract the most critical systems. Our in-house engineers design and install the HVAC, electrical, and plumbing grids that keep your asset alive."
+      },
+      "make": {
+        "badge": "We Make",
+        "title": "The Mouhajer Factory",
+        "shortTitle": "Make",
+        "description": "Why wait for imports? We manufacture your fire-rated doors, wardrobes, and custom furniture in our own local facility, ensuring perfect fit and zero shipping delays."
+      },
+      "install": {
+        "badge": "We Install",
+        "title": "The Craftsmen",
+        "shortTitle": "Install",
+        "description": "Our own marble masons, gypsum artists, and painters execute the finish. This allows us to achieve a level of detail that subcontracted labor simply cannot match."
+      },
+      "care": {
+        "badge": "We Care",
+        "title": "The Keys",
+        "shortTitle": "Care",
+        "description": "We don't just hand over keys; we activate your asset. From white-glove deep cleaning to system programming and annual maintenance contracts, we protect your investment long after the build is done."
+      }
+    }
+  },
+  "Sectors": {
+    "label": "Sectors of Expertise",
+    "titleLine1": "Industries We",
+    "titleLine2": "Transform",
+    "description": "Delivering turnkey excellence across the UAE's most dynamic industries.",
+    "projectsLabel": "Projects",
+    "valueDelivered": "Value Delivered",
+    "ctaQuestion": "Ready to Transform Your Space?",
+    "ctaButton": "Discuss Your Project",
+    "items": {
+      "hospitality": {
+        "title": "Luxury Hospitality",
+        "subtitle": "The Partner of Choice for 5-Star Brands",
+        "description": "We understand the delicate balance of hospitality renovation, upgrading operating assets without disrupting the guest experience. From grand lobbies to royal suites, we deliver high-spec interiors.",
+        "features": ["Live Environment Renovations", "5-Star Interior Fit-Out", "MEP Systems Integration"]
+      },
+      "residential": {
+        "title": "High-End Residential",
+        "subtitle": "Creating Private Sanctuaries",
+        "description": "For over 25 years, MIDC has been the secret behind Dubai's most exclusive private addresses. We handle the complete lifecycle of luxury villas and penthouses.",
+        "features": ["Turnkey Villa Construction", "Bespoke Joinery", "Complete Privacy"]
+      },
+      "commercial": {
+        "title": "Commercial & Corporate",
+        "subtitle": "Defining Business Environments",
+        "description": "We build spaces that empower business. Our design-build approach ensures functional, branded environments delivered on tight timelines.",
+        "features": ["Corporate Headquarters", "Retail & F&B Fit-Out", "Fast-Track Delivery"]
+      }
     }
   },
   "Process": {
@@ -83,7 +232,175 @@
     "location": "Location",
     "year": "Year",
     "gallery": "Project Gallery",
-    "relatedProjects": "Related Projects"
+    "relatedProjects": "Related Projects",
+    "projectDetails": "Project Details",
+    "client": "Client",
+    "area": "Area",
+    "sqm": "sqm",
+    "duration": "Duration",
+    "months": "months",
+    "scope": "Scope of Work",
+    "challenges": "Challenges",
+    "solutions": "Solutions",
+    "results": "Results",
+    "filterBy": "Filter By",
+    "categories": {
+      "all": "All",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "hospitality": "Hospitality",
+      "institutional": "Institutional",
+      "retail": "Retail",
+      "healthcare": "Healthcare"
+    }
+  },
+  "Industries": {
+    "heading": "Our Industries",
+    "title": "Industries We Serve",
+    "description": "We provide specialized design and fitout solutions for various industries, with deep understanding of each sector's requirements",
+    "viewAll": "View All Industries",
+    "luxuryResidential": {
+      "title": "Luxury Residential",
+      "subtitle": "Villas, Palaces & Penthouses",
+      "description": "We design luxury homes that reflect their owners' lifestyle, with attention to the finest details and the use of premium materials.",
+      "features": [
+        "Fully customized interior design",
+        "Bespoke furniture and joinery",
+        "Smart home automation",
+        "Custom-designed lighting"
+      ]
+    },
+    "hospitality": {
+      "title": "Luxury Hospitality",
+      "subtitle": "Hotels, Restaurants & Resorts",
+      "description": "We create unforgettable hospitality experiences that combine luxury, comfort, and distinctive brand identity.",
+      "features": [
+        "Hotel rooms and suites design",
+        "Luxury restaurants and lounges",
+        "Distinctive reception areas",
+        "Spa and entertainment facilities"
+      ]
+    },
+    "commercial": {
+      "title": "Commercial & Corporate",
+      "subtitle": "Offices & Corporate Headquarters",
+      "description": "We design inspiring work environments that enhance productivity and reflect the company's identity and values.",
+      "features": [
+        "Workspace planning",
+        "Meeting and conference rooms",
+        "Executive reception areas",
+        "Luxury executive offices"
+      ]
+    },
+    "retail": {
+      "title": "Retail & Stores",
+      "subtitle": "Shops & Commercial Showrooms",
+      "description": "We design attractive retail spaces that enhance the shopping experience and increase sales.",
+      "features": [
+        "Store facade design",
+        "Creative product display",
+        "Specialized commercial lighting",
+        "Distinctive customer experience"
+      ]
+    },
+    "healthcare": {
+      "title": "Healthcare",
+      "subtitle": "Clinics, Hospitals & Health Centers",
+      "description": "We design healthcare facilities that combine functionality, comfort, and compliance with medical standards.",
+      "features": [
+        "Clinics and medical centers",
+        "Operating rooms and laboratories",
+        "Comfortable waiting areas",
+        "Calm therapeutic environment"
+      ]
+    }
+  },
+  "About": {
+    "heading": "About Us",
+    "title": "Our Story",
+    "subtitle": "Mouhajer International Design",
+    "description": "Since 2009, we've been transforming visions into reality through excellence in design and execution. We are a fully integrated design and fitout company providing comprehensive solutions from concept to delivery.",
+    "story": "Mouhajer International Design was founded with a clear vision: to provide an integrated design and execution experience with international standards. Over more than 15 years, we have executed hundreds of successful projects in the UAE and the region.",
+    "mission": {
+      "title": "Our Mission",
+      "description": "To deliver exceptional design experiences that exceed our clients' expectations, with commitment to the highest standards of quality and innovation."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the first choice for luxury interior design and fitout in the region, known for excellence and creativity."
+    },
+    "values": {
+      "title": "Our Values",
+      "excellence": {
+        "title": "Excellence",
+        "description": "We strive for perfection in every detail"
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We embrace the latest technologies and ideas"
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "We commit to transparency and honesty"
+      },
+      "collaboration": {
+        "title": "Collaboration",
+        "description": "We work as one team with our clients"
+      }
+    },
+    "team": {
+      "title": "Our Team",
+      "description": "A team of professional designers, engineers, and craftsmen"
+    },
+    "founder": {
+      "title": "The Founder",
+      "name": "Ahmad Mouhajer",
+      "role": "Founder & CEO",
+      "bio": "A visionary in the world of interior design with over 20 years of experience in transforming spaces into works of art."
+    },
+    "awards": {
+      "title": "Our Awards",
+      "description": "Recognition for our excellence in design and execution"
+    },
+    "certifications": {
+      "title": "Our Certifications",
+      "description": "Certified by the best international institutions"
+    }
+  },
+  "Showroom": {
+    "heading": "Showroom",
+    "title": "Discover Our Collection",
+    "description": "Explore a curated collection of luxury furniture, accessories, and finishes",
+    "visitShowroom": "Visit Showroom",
+    "bookAppointment": "Book Appointment",
+    "categories": {
+      "all": "All",
+      "furniture": "Furniture",
+      "lighting": "Lighting",
+      "accessories": "Accessories",
+      "fabrics": "Fabrics",
+      "finishes": "Finishes",
+      "outdoor": "Outdoor"
+    },
+    "product": {
+      "price": "Price",
+      "dimensions": "Dimensions",
+      "materials": "Materials",
+      "colors": "Colors",
+      "availability": "Availability",
+      "inStock": "In Stock",
+      "outOfStock": "Out of Stock",
+      "addToCart": "Add to Cart",
+      "addToWishlist": "Add to Wishlist",
+      "requestInfo": "Request Info"
+    },
+    "cart": {
+      "title": "Shopping Cart",
+      "empty": "Cart is empty",
+      "total": "Total",
+      "checkout": "Checkout",
+      "continueShopping": "Continue Shopping"
+    }
   },
   "Blog": {
     "heading": "Latest Insights",
@@ -94,7 +411,24 @@
     "author": "Author",
     "categories": "Categories",
     "tags": "Tags",
-    "relatedPosts": "Related Articles"
+    "relatedPosts": "Related Articles",
+    "searchPlaceholder": "Search articles...",
+    "noResults": "No articles found",
+    "loadMore": "Load More",
+    "share": "Share Article",
+    "tableOfContents": "In This Article",
+    "reactions": {
+      "helpful": "Helpful",
+      "insightful": "Insightful",
+      "loved": "Loved"
+    },
+    "filterCategories": {
+      "all": "All",
+      "trends": "Trends",
+      "tips": "Tips",
+      "caseStudies": "Case Studies",
+      "news": "News"
+    }
   },
   "Contact": {
     "heading": "Get In Touch",
@@ -107,7 +441,73 @@
     "send": "Send Message",
     "sending": "Sending...",
     "success": "Thank you! We'll get back to you soon.",
-    "error": "Something went wrong. Please try again."
+    "error": "Something went wrong. Please try again.",
+    "company": "Company Name",
+    "projectType": "Project Type",
+    "budget": "Budget",
+    "timeline": "Timeline",
+    "howDidYouHear": "How did you hear about us?",
+    "preferredContact": "Preferred Contact Method",
+    "selectOption": "Select an option",
+    "bookConsultation": {
+      "title": "Book a Consultation",
+      "description": "Schedule a free consultation with our design team",
+      "selectDate": "Select Date",
+      "selectTime": "Select Time",
+      "confirmBooking": "Confirm Booking"
+    },
+    "office": {
+      "title": "Our Office",
+      "address": "Dubai, United Arab Emirates",
+      "fullAddress": "Al Quoz Industrial Area 3, Dubai, UAE",
+      "workingHours": "Working Hours",
+      "weekdays": "Sunday - Thursday: 9 AM - 6 PM",
+      "weekend": "Friday - Saturday: Closed"
+    },
+    "supplierRegistration": {
+      "title": "Supplier Registration",
+      "description": "Join our network of trusted suppliers"
+    }
+  },
+  "Careers": {
+    "heading": "Join Us",
+    "title": "Career Opportunities",
+    "description": "Join a team that shapes the future of interior design in the region",
+    "openPositions": "Open Positions",
+    "noOpenings": "No open positions currently",
+    "applyNow": "Apply Now",
+    "benefits": {
+      "title": "Our Benefits",
+      "items": [
+        "Creative and inspiring work environment",
+        "Continuous professional development opportunities",
+        "Comprehensive health insurance",
+        "Competitive performance bonuses"
+      ]
+    },
+    "culture": {
+      "title": "Our Culture",
+      "description": "We believe that the best designs come from a happy and inspired team"
+    }
+  },
+  "Partners": {
+    "heading": "Our Partners",
+    "title": "Trusted by Industry Leaders",
+    "description": "We collaborate with the best global brands and suppliers"
+  },
+  "Testimonials": {
+    "heading": "Client Reviews",
+    "title": "What Our Clients Say",
+    "description": "Real experiences from satisfied clients"
+  },
+  "CTA": {
+    "readyToStart": "Ready to Start?",
+    "letsCreateTogether": "Let's Create Together",
+    "transformYourSpace": "Transform Your Space Today",
+    "getInTouch": "Get in Touch",
+    "scheduleCall": "Schedule a Call",
+    "downloadPortfolio": "Download Portfolio",
+    "viewOurWork": "View Our Work"
   },
   "Footer": {
     "tagline": "Creating extraordinary spaces that inspire",
@@ -120,6 +520,178 @@
     "address": "Address",
     "email": "Email",
     "phone": "Phone",
-    "copyright": "© 2025 Mouhajer Design Studio. All rights reserved."
+    "copyright": "© 2025 Mouhajer International Design. All rights reserved.",
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Subscribe to get the latest design news and exclusive offers",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe",
+      "success": "Thanks for subscribing!"
+    }
+  },
+  "MegaMenu": {
+    "explore": "EXPLORE",
+    "featured": "FEATURED",
+    "new": "NEW",
+    "learnMore": "LEARN MORE",
+    "viewAll": "View All",
+    "getInTouch": "GET IN TOUCH",
+    "projects": {
+      "residential": {
+        "label": "Residential",
+        "description": "Luxury homes & private residences"
+      },
+      "commercial": {
+        "label": "Commercial",
+        "description": "Modern offices & retail spaces"
+      },
+      "hospitality": {
+        "label": "Hospitality",
+        "description": "Hotels, resorts & restaurants"
+      },
+      "ongoing": {
+        "label": "Ongoing",
+        "description": "Current projects in progress"
+      },
+      "featured": {
+        "title": "Our Portfolio",
+        "description": "Explore 400+ projects across hospitality, residential, and commercial sectors."
+      }
+    },
+    "services": {
+      "civilConstruction": {
+        "label": "Civil Construction",
+        "description": "Build from the ground up with licensed heavy civil works"
+      },
+      "interiorArchitecture": {
+        "label": "Interior Architecture",
+        "description": "Bespoke design led by Eng. Maher Mouhajer"
+      },
+      "mepEngineering": {
+        "label": "MEP Engineering",
+        "description": "In-house HVAC, electrical & plumbing systems"
+      },
+      "manufacturingJoinery": {
+        "label": "Manufacturing & Joinery",
+        "description": "Custom woodworks from our own factory"
+      },
+      "fitOutExecution": {
+        "label": "Fit-Out Execution",
+        "description": "Expert finishing with marble, gypsum & gold leaf"
+      },
+      "handoverMaintenance": {
+        "label": "Handover & Maintenance",
+        "description": "Comprehensive care after project completion"
+      },
+      "featured": {
+        "title": "Turnkey Excellence",
+        "description": "Six integrated services, one vision. We control every variable from design to handover."
+      }
+    },
+    "industries": {
+      "luxuryHospitality": {
+        "label": "Luxury Hospitality",
+        "description": "Hotels, resorts & fine dining"
+      },
+      "highEndResidential": {
+        "label": "High-End Residential",
+        "description": "Luxury villas & penthouses"
+      },
+      "commercialCorporate": {
+        "label": "Commercial & Corporate",
+        "description": "Offices, retail & F&B spaces"
+      },
+      "featured": {
+        "title": "Industry Expertise",
+        "description": "Specialized design solutions tailored to your industry needs"
+      }
+    },
+    "blog": {
+      "trends": {
+        "label": "Design Trends",
+        "description": "Latest trends in interior design"
+      },
+      "tips": {
+        "label": "Design Tips",
+        "description": "Expert advice & practical guides"
+      },
+      "caseStudies": {
+        "label": "Case Studies",
+        "description": "In-depth project analyses"
+      },
+      "news": {
+        "label": "News & Updates",
+        "description": "Company news & announcements"
+      },
+      "featured": {
+        "title": "Insights & News",
+        "description": "Design trends, expert tips, and the latest news from MIDC."
+      }
+    },
+    "about": {
+      "aboutMidc": {
+        "label": "About MIDC",
+        "description": "Our story, vision & values"
+      },
+      "founder": {
+        "label": "The Founder",
+        "description": "Eng. Maher Mouhajer - The mind behind the masterpiece"
+      },
+      "process": {
+        "label": "Our Process",
+        "description": "From first sketch to final polish - The MIDC Protocol"
+      },
+      "awards": {
+        "label": "Awards & Recognition",
+        "description": "Celebrated globally for excellence in design"
+      },
+      "featured": {
+        "title": "Excellence in Design",
+        "description": "Redefining the art of turnkey construction in the UAE with award-winning projects"
+      }
+    },
+    "contact": {
+      "contactUs": {
+        "label": "Contact Us",
+        "description": "Get in touch with our team"
+      },
+      "bookConsultation": {
+        "label": "Book Consultation",
+        "description": "Schedule a discovery meeting"
+      }
+    }
+  },
+  "Errors": {
+    "404": {
+      "title": "Page Not Found",
+      "description": "Sorry, the page you are looking for does not exist.",
+      "backHome": "Back to Home"
+    },
+    "500": {
+      "title": "Server Error",
+      "description": "Sorry, something went wrong. Please try again.",
+      "retry": "Try Again"
+    }
+  },
+  "Accessibility": {
+    "skipToContent": "Skip to Content",
+    "menu": "Menu",
+    "closeMenu": "Close Menu",
+    "openMenu": "Open Menu",
+    "scrollToTop": "Scroll to Top",
+    "externalLink": "External Link"
+  },
+  "Dates": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "daysAgo": "{days} days ago",
+    "monthsAgo": "{months} months ago"
+  },
+  "Validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "invalidPhone": "Invalid phone number",
+    "minLength": "Must be at least {min} characters",
+    "maxLength": "Must not exceed {max} characters"
   }
 }

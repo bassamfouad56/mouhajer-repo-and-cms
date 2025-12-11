@@ -55,7 +55,7 @@ const megaMenuItems: MegaMenuItem[] = [
     ],
   },
   { href: '/#about', label: 'About', isPage: false },
-  { href: '/#contact', label: 'Contact', isPage: false },
+  { href: '/contact', label: 'Contact', isPage: true },
 ];
 
 export function MegaMenu() {

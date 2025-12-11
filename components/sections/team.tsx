@@ -10,7 +10,7 @@ const teamMembers = [
     id: 1,
     name: 'Mariam Mouhajer',
     role: 'Founder & Creative Director',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80',
+    image: '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
     bio: 'With over 15 years of experience in luxury interior design, Mariam leads our creative vision and client relationships.',
     linkedin: '#',
     email: 'mariam@mouhajer.com',
@@ -19,7 +19,7 @@ const teamMembers = [
     id: 2,
     name: 'Omar Al-Rashid',
     role: 'Lead Interior Designer',
-    image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=600&q=80',
+    image: '/projects/office-fitout/_MID0939-HDR.jpg',
     bio: 'Omar brings innovative design solutions and technical expertise to every project, specializing in commercial spaces.',
     linkedin: '#',
     email: 'omar@mouhajer.com',
@@ -28,7 +28,7 @@ const teamMembers = [
     id: 3,
     name: 'Fatima Al-Hassan',
     role: 'Senior Designer',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80',
+    image: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
     bio: 'Specializing in residential design, Fatima creates personalized spaces that reflect each client\'s unique lifestyle.',
     linkedin: '#',
     email: 'fatima@mouhajer.com',
@@ -37,7 +37,7 @@ const teamMembers = [
     id: 4,
     name: 'Khalid Rahman',
     role: 'Project Manager',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80',
+    image: '/projects/commercial-interior/11.jpg',
     bio: 'Khalid ensures seamless project execution, coordinating all aspects from concept to completion with precision.',
     linkedin: '#',
     email: 'khalid@mouhajer.com',
@@ -155,7 +155,7 @@ function TeamMemberCard({
       <div className="relative overflow-hidden bg-white">
         {/* Image */}
         <div className="relative aspect-[3/4] overflow-hidden bg-neutral-200">
-          <Image
+          <SafeImage
             src={member.image}
             alt={member.name}
             fill

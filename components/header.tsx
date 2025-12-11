@@ -4,71 +4,84 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, ChevronDown, ShoppingBag } from 'lucide-react';
 import { EnhancedMegaMenu } from './enhanced-mega-menu';
 import { LanguageSwitcher } from './language-switcher';
 import { useCart } from '@/lib/cart-context';
-
-const mobileNavItems = [
-  {
-    href: '/',
-    label: 'Home',
-    isPage: true
-  },
-  {
-    href: '/projects',
-    label: 'Projects',
-    isPage: true,
-    subLinks: [
-      { href: '/projects?category=residential', label: 'Residential' },
-      { href: '/projects?category=commercial', label: 'Commercial' },
-      { href: '/projects?category=hospitality', label: 'Hospitality' },
-      { href: '/projects?category=institutional', label: 'Institutional' },
-    ],
-  },
-  {
-    href: '/services',
-    label: 'Services',
-    isPage: true,
-    subLinks: [
-      { href: '/services#interior-design', label: 'Interior Design' },
-      { href: '/services#architecture', label: 'Architecture' },
-      { href: '/services#consultation', label: 'Consultation' },
-      { href: '/services#project-management', label: 'Project Management' },
-    ],
-  },
-  {
-    href: '/industries',
-    label: 'Industries',
-    isPage: true,
-    subLinks: [
-      { href: '/industries/residential', label: 'Residential' },
-      { href: '/industries/hospitality', label: 'Hospitality' },
-      { href: '/industries/retail', label: 'Retail' },
-      { href: '/industries/healthcare', label: 'Healthcare' },
-    ],
-  },
-  {
-    href: '/blog',
-    label: 'Blog',
-    isPage: true,
-    subLinks: [
-      { href: '/blog?category=trends', label: 'Design Trends' },
-      { href: '/blog?category=tips', label: 'Design Tips' },
-      { href: '/blog?category=case-studies', label: 'Case Studies' },
-      { href: '/blog?category=news', label: 'News' },
-    ],
-  },
-  {
-    href: '/showroom',
-    label: 'Showroom',
-    isPage: true
-  },
-  { href: '/#about', label: 'About', isPage: false },
-  { href: '/#contact', label: 'Contact', isPage: false },
-];
+import { useTranslations } from 'next-intl';
 
 export function Header() {
+  const t = useTranslations('Header');
+  const tProjects = useTranslations('Projects.categories');
+  const tServices = useTranslations('Services');
+  const tBlog = useTranslations('Blog.filterCategories');
+
+  const mobileNavItems = [
+    {
+      href: '/',
+      label: t('home'),
+      isPage: true
+    },
+    {
+      href: '/projects',
+      label: t('projects'),
+      isPage: true,
+      subLinks: [
+        { href: '/projects?category=residential', label: tProjects('residential') },
+        { href: '/projects?category=commercial', label: tProjects('commercial') },
+        { href: '/projects?category=hospitality', label: tProjects('hospitality') },
+        { href: '/projects?category=institutional', label: tProjects('institutional') },
+      ],
+    },
+    {
+      href: '/services',
+      label: t('services'),
+      isPage: true,
+      subLinks: [
+        { href: '/services#interior-design', label: tServices('interiorDesign.title') },
+        { href: '/services#fitout', label: tServices('fitoutSolutions.title') },
+        { href: '/services#construction', label: tServices('constructionManagement.title') },
+        { href: '/services#mep', label: tServices('mepEngineering.title') },
+      ],
+    },
+    {
+      href: '/industries',
+      label: t('industries'),
+      isPage: true,
+      subLinks: [
+        { href: '/industries/high-end-residential', label: tProjects('residential') },
+        { href: '/industries/luxury-hospitality', label: tProjects('hospitality') },
+        { href: '/industries/commercial-corporate', label: tProjects('commercial') },
+      ],
+    },
+    {
+      href: '/blog',
+      label: t('blog'),
+      isPage: true,
+      subLinks: [
+        { href: '/blog?category=trends', label: tBlog('trends') },
+        { href: '/blog?category=tips', label: tBlog('tips') },
+        { href: '/blog?category=case-studies', label: tBlog('caseStudies') },
+        { href: '/blog?category=news', label: tBlog('news') },
+      ],
+    },
+    {
+      href: '/showroom',
+      label: t('showroom'),
+      isPage: true
+    },
+    {
+      href: '/about',
+      label: t('about'),
+      isPage: true,
+    },
+    {
+      href: '/contact',
+      label: t('contact'),
+      isPage: true,
+    },
+  ];
   const pathname = usePathname();
   const { totalItems, openCart } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -107,33 +120,47 @@ export function Header() {
           <div className="flex h-20 items-center justify-between lg:h-24">
             {/* Logo */}
             <Link href="/" className="group relative z-50">
-              <div className="flex flex-col">
-                <span className="text-xl font-light tracking-[0.2em] text-white transition-all duration-300 group-hover:tracking-[0.3em] lg:text-2xl">
-                  MOUHAJER
-                </span>
-                <span className="text-[0.5rem] font-light tracking-[0.3em] text-neutral-400 lg:text-[0.6rem]">
-                  INTERNATIONAL DESIGN
-                </span>
-              </div>
+              <motion.div
+                className="relative h-12 w-40 lg:h-14 lg:w-48"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src="/logo.svg"
+                  alt="Mouhajer International Design"
+                  fill
+                  className="object-contain brightness-0 invert"
+                  priority
+                />
+              </motion.div>
             </Link>
 
             {/* Desktop Navigation with Enhanced Mega Menu */}
             <div className="flex items-center gap-6">
               <EnhancedMegaMenu />
 
-              {/* Cart Button */}
-              <button
-                onClick={openCart}
-                className="relative hidden text-white transition-colors hover:text-neutral-300 lg:block"
-                aria-label="Shopping cart"
-              >
-                <ShoppingBag size={20} />
-                {totalItems > 0 && (
-                  <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs font-medium text-neutral-950">
-                    {totalItems}
-                  </span>
-                )}
-              </button>
+              {/* Cart Button - Only show on showroom pages */}
+              {pathname?.includes('/showroom') && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={openCart}
+                  className="relative hidden text-white transition-colors hover:text-neutral-300 lg:block"
+                  aria-label="Shopping cart"
+                >
+                  <ShoppingBag size={20} />
+                  {totalItems > 0 && (
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs font-medium text-neutral-950"
+                    >
+                      {totalItems}
+                    </motion.span>
+                  )}
+                </motion.button>
+              )}
 
               <LanguageSwitcher />
             </div>

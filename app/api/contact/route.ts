@@ -1,9 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { createClient, type SanityClient } from '@sanity/client';
+
+// Force dynamic to prevent static analysis during build
+export const dynamic = 'force-dynamic';
+
+// Sanity client for saving leads - only create if projectId is valid
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'r97logzc';
+const isValidProjectId = projectId && /^[a-z0-9-]+$/.test(projectId);
+
+let sanityClient: SanityClient | null = null;
+if (isValidProjectId) {
+  sanityClient = createClient({
+    projectId,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+    apiVersion: '2024-01-01',
+    token: process.env.SANITY_API_TOKEN,
+    useCdn: false,
+  });
+}
+
+// Map project type to Sanity service category
+function mapProjectTypeToCategory(projectType: string): string {
+  const mapping: Record<string, string> = {
+    'Luxury Residential': 'residential',
+    'Hospitality / Hotel': 'hospitality',
+    'Commercial Fit-Out': 'commercial',
+    'Villa Renovation': 'residential',
+    'Office Interior': 'commercial',
+    'Other': 'interior',
+  };
+  return mapping[projectType] || 'interior';
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, phone, subject, message } = await request.json();
+    const { name, email, phone, subject, message, projectType, budget, timeline } = await request.json();
 
     // Validate required fields
     if (!name || !email || !subject || !message) {
@@ -11,6 +43,28 @@ export async function POST(request: NextRequest) {
         { error: 'Missing required fields' },
         { status: 400 }
       );
+    }
+
+    // Save lead to Sanity CMS
+    try {
+      if (sanityClient) {
+        await sanityClient.create({
+        _type: 'lead',
+        email,
+        prompt: `Contact Form: ${subject}\n\nMessage: ${message}`,
+        phoneNumber: phone || undefined,
+        projectBudget: budget || undefined,
+        timeline: timeline || undefined,
+        serviceCategory: projectType ? mapProjectTypeToCategory(projectType) : undefined,
+        status: 'new',
+        source: 'contact_form',
+        notes: `Name: ${name}\nProject Type: ${projectType || 'N/A'}\nSubject: ${subject}`,
+        createdAt: new Date().toISOString(),
+        });
+      }
+    } catch (sanityError) {
+      console.error('Failed to save lead to Sanity:', sanityError);
+      // Continue with email sending even if Sanity fails
     }
 
     // Create email transporter
@@ -74,6 +128,27 @@ export async function POST(request: NextRequest) {
                   <div class="label">Subject</div>
                   <div class="value">${subject}</div>
                 </div>
+
+                ${projectType ? `
+                <div class="field">
+                  <div class="label">Project Type</div>
+                  <div class="value">${projectType}</div>
+                </div>
+                ` : ''}
+
+                ${budget ? `
+                <div class="field">
+                  <div class="label">Budget Range</div>
+                  <div class="value">${budget}</div>
+                </div>
+                ` : ''}
+
+                ${timeline ? `
+                <div class="field">
+                  <div class="label">Timeline</div>
+                  <div class="value">${timeline}</div>
+                </div>
+                ` : ''}
 
                 <div class="field">
                   <div class="label">Message</div>

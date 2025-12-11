@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { LogoMarquee } from '@/components/logo-marquee';
 import ShowroomContent from './showroom-content';
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export default function ShowroomPage() {
     <>
       <Header />
       <ShowroomContent />
+      <LogoMarquee />
       <Footer />
     </>
   );

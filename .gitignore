@@ -39,3 +39,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large assets - use Sanity CDN instead
+public/projects/
+/projects/
+
+# Sanity image upload staging folders
+/sanity-images/
+/temp-sanity-uploads/
+
+# macOS resource fork files
+._*
+
+# Large media files
+*.mp4
+*.mov
+*.avi
+
+.vercel
+.env*.local

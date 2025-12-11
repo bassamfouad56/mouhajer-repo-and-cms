@@ -62,7 +62,8 @@ export function WhatsAppButton({
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative flex items-center gap-3"
+          aria-label="Chat with us on WhatsApp"
+          className="group relative flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 rounded-full"
         >
           {/* Tooltip */}
           <AnimatePresence>

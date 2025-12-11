@@ -2,9 +2,16 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { FadeIn, StaggerContainer, StaggerItem, AnimatedLine, HoverLift } from './animations';
 
 export function Footer() {
+  const t = useTranslations('Footer');
+  const tHeader = useTranslations('Header');
+  const tServices = useTranslations('Services');
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,7 +32,7 @@ export function Footer() {
       const data = await response.json();
 
       if (data.success) {
-        setMessage({ type: 'success', text: 'Successfully subscribed!' });
+        setMessage({ type: 'success', text: t('newsletter.success') });
         setEmail('');
       } else {
         setMessage({ type: 'error', text: data.message || 'Failed to subscribe' });
@@ -39,19 +46,19 @@ export function Footer() {
 
   const footerLinks = {
     company: [
-      { label: 'Home', href: '/' },
-      { label: 'About', href: '/#about' },
-      { label: 'Projects', href: '/projects' },
-      { label: 'Services', href: '/services' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Careers', href: '/careers' },
-      { label: 'Contact', href: '/#contact' },
+      { label: tHeader('home'), href: '/' },
+      { label: tHeader('about'), href: '/#about' },
+      { label: tHeader('projects'), href: '/projects' },
+      { label: tHeader('services'), href: '/services' },
+      { label: tHeader('blog'), href: '/blog' },
+      { label: tHeader('careers'), href: '/careers' },
+      { label: tHeader('contact'), href: '/contact' },
     ],
     services: [
-      { label: 'Interior Design', href: '/services#services' },
-      { label: 'Space Planning', href: '/services#services' },
-      { label: 'Custom Furniture', href: '/services#services' },
-      { label: 'Commercial Design', href: '/services#services' },
+      { label: tServices('interiorDesign.title'), href: '/services#services' },
+      { label: tServices('fitoutSolutions.title'), href: '/services#services' },
+      { label: tServices('manufacturingJoinery.title'), href: '/services#services' },
+      { label: tServices('mepEngineering.title'), href: '/services#services' },
     ],
     social: [
       { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
@@ -66,150 +73,221 @@ export function Footer() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100px_100px]" />
 
       <div className="relative z-10 mx-auto max-w-[1800px]">
+        {/* Animated top divider */}
+        <AnimatedLine className="mb-16" color="rgba(255,255,255,0.1)" fromCenter />
+
         {/* Top Section */}
         <div className="mb-16 grid gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Brand */}
-          <div className="lg:col-span-4">
+          <FadeIn direction="up" className="lg:col-span-4">
             <Link href="/" className="group inline-block">
-              <div className="mb-4 flex flex-col">
-                <span className="text-2xl font-light tracking-[0.2em] text-white transition-all duration-300 group-hover:tracking-[0.3em]">
-                  MOUHAJER
-                </span>
-                <span className="text-[0.6rem] font-light tracking-[0.3em] text-neutral-500">
-                  INTERNATIONAL DESIGN
-                </span>
-              </div>
+              <HoverLift lift={4} scale={1.02} shadow={false}>
+                <div className="relative mb-4 h-12 w-40">
+                  <Image
+                    src="/logo.svg"
+                    alt="Mouhajer International Design"
+                    fill
+                    className="object-contain brightness-0 invert"
+                  />
+                </div>
+              </HoverLift>
             </Link>
             <p className="mb-6 max-w-sm text-sm font-light leading-relaxed text-neutral-400">
               Creating timeless, elegant spaces that reflect the unique personality
               and lifestyle of our clients since 2009.
             </p>
 
-            {/* Contact Info */}
-            <div className="space-y-3 text-sm font-light text-neutral-400">
-              <a
-                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
-                className="flex items-center gap-3 transition-colors hover:text-white"
-              >
-                <Mail size={16} />
-                {process.env.NEXT_PUBLIC_EMAIL || 'info@mouhajerdesign.com'}
-              </a>
-              <a
-                href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
-                className="flex items-center gap-3 transition-colors hover:text-white"
-              >
-                <Phone size={16} />
-                {process.env.NEXT_PUBLIC_PHONE || '+971-4-323-4567'}
-              </a>
-              <div className="flex items-center gap-3">
-                <MapPin size={16} />
-                Dubai, UAE
-              </div>
-            </div>
-          </div>
+            {/* Contact Info with staggered animation */}
+            <StaggerContainer staggerDelay={0.1} className="space-y-3 text-sm font-light text-neutral-400">
+              <StaggerItem>
+                <a
+                  href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
+                  className="group flex items-center gap-3 transition-colors hover:text-white"
+                >
+                  <motion.span
+                    className="transition-transform group-hover:scale-110"
+                    whileHover={{ rotate: 5 }}
+                  >
+                    <Mail size={16} />
+                  </motion.span>
+                  <span className="relative">
+                    {process.env.NEXT_PUBLIC_EMAIL || 'info@mouhajerdesign.com'}
+                    <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+                  </span>
+                </a>
+              </StaggerItem>
+              <StaggerItem>
+                <a
+                  href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
+                  className="group flex items-center gap-3 transition-colors hover:text-white"
+                >
+                  <motion.span
+                    className="transition-transform group-hover:scale-110"
+                    whileHover={{ rotate: 15 }}
+                  >
+                    <Phone size={16} />
+                  </motion.span>
+                  <span className="relative">
+                    {process.env.NEXT_PUBLIC_PHONE || '+971-4-323-4567'}
+                    <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+                  </span>
+                </a>
+              </StaggerItem>
+              <StaggerItem>
+                <div className="flex items-center gap-3">
+                  <MapPin size={16} />
+                  Dubai, UAE
+                </div>
+              </StaggerItem>
+            </StaggerContainer>
+          </FadeIn>
 
           {/* Company Links */}
-          <div className="lg:col-span-2">
+          <FadeIn direction="up" delay={0.1} className="lg:col-span-2">
             <h3 className="mb-6 text-sm font-light tracking-widest text-white">
-              COMPANY
+              {t('quickLinks').toUpperCase()}
             </h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm font-light text-neutral-400 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:underline"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <StaggerContainer staggerDelay={0.05}>
+              <ul className="space-y-3">
+                {footerLinks.company.map((link) => (
+                  <StaggerItem key={link.label}>
+                    <li>
+                      <Link
+                        href={link.href}
+                        className="group relative inline-block text-sm font-light text-neutral-400 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
+                      >
+                        <span className="relative">
+                          {link.label}
+                          <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 ease-out group-hover:w-full" />
+                        </span>
+                      </Link>
+                    </li>
+                  </StaggerItem>
+                ))}
+              </ul>
+            </StaggerContainer>
+          </FadeIn>
 
           {/* Services Links */}
-          <div className="lg:col-span-2">
+          <FadeIn direction="up" delay={0.2} className="lg:col-span-2">
             <h3 className="mb-6 text-sm font-light tracking-widest text-white">
-              SERVICES
+              {t('services').toUpperCase()}
             </h3>
-            <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm font-light text-neutral-400 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:underline"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <StaggerContainer staggerDelay={0.05}>
+              <ul className="space-y-3">
+                {footerLinks.services.map((link) => (
+                  <StaggerItem key={link.label}>
+                    <li>
+                      <Link
+                        href={link.href}
+                        className="group relative inline-block text-sm font-light text-neutral-400 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
+                      >
+                        <span className="relative">
+                          {link.label}
+                          <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 ease-out group-hover:w-full" />
+                        </span>
+                      </Link>
+                    </li>
+                  </StaggerItem>
+                ))}
+              </ul>
+            </StaggerContainer>
+          </FadeIn>
 
           {/* Newsletter */}
-          <div className="lg:col-span-4">
+          <FadeIn direction="up" delay={0.3} className="lg:col-span-4">
             <h3 className="mb-6 text-sm font-light tracking-widest text-white">
-              STAY UPDATED
+              {t('newsletter.title').toUpperCase()}
             </h3>
             <p className="mb-4 text-sm font-light text-neutral-400">
-              Subscribe to our newsletter for design inspiration and updates.
+              {t('newsletter.description')}
             </p>
             <form className="flex gap-2" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
-                placeholder="Your email"
+                placeholder={t('newsletter.placeholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting}
                 required
-                className="flex-1 border border-neutral-800 bg-transparent px-4 py-3 text-sm font-light text-white placeholder:text-neutral-600 focus:border-white focus:outline-none disabled:opacity-50"
+                className="flex-1 border border-neutral-800 bg-transparent px-4 py-3 text-sm font-light text-white placeholder:text-neutral-600 transition-all duration-300 focus:border-white focus:outline-none disabled:opacity-50"
               />
-              <button
+              <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="border border-white px-6 py-3 text-sm font-light tracking-wider text-white transition-all hover:bg-white hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                className="group relative overflow-hidden border border-white px-6 py-3 text-sm font-light tracking-wider text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {isSubmitting ? 'SUBSCRIBING...' : 'SUBSCRIBE'}
-              </button>
+                <span className="relative z-10 flex items-center gap-2">
+                  {isSubmitting ? '...' : t('newsletter.subscribe').toUpperCase()}
+                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                </span>
+                <motion.span
+                  className="absolute inset-0 bg-white"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 text-neutral-950 opacity-0 transition-opacity group-hover:opacity-100">
+                  {isSubmitting ? '...' : t('newsletter.subscribe').toUpperCase()}
+                  <ArrowRight size={14} />
+                </span>
+              </motion.button>
             </form>
             {message && (
-              <p className={`mt-3 text-sm ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`mt-3 text-sm ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}`}
+              >
                 {message.text}
-              </p>
+              </motion.p>
             )}
 
             {/* Social Links */}
             <div className="mt-6 flex gap-4">
-              {footerLinks.social.map((social) => (
-                <a
+              {footerLinks.social.map((social, index) => (
+                <motion.a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center border border-neutral-800 text-neutral-400 transition-all hover:border-white hover:text-white focus-visible:border-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 + index * 0.1 }}
+                  whileHover={{ y: -4, borderColor: 'white', color: 'white' }}
+                  className="flex h-10 w-10 items-center justify-center border border-neutral-800 text-neutral-400 transition-colors focus-visible:border-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
                   aria-label={social.label}
                 >
                   <social.icon size={18} />
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </FadeIn>
         </div>
 
-        {/* Bottom Section */}
-        <div className="flex flex-col items-center justify-between gap-6 border-t border-neutral-800 pt-8 text-sm font-light text-neutral-500 lg:flex-row">
-          <div>
-            © {currentYear} Mouhajer International Design. All rights reserved.
+        {/* Bottom Section with animated divider */}
+        <AnimatedLine className="mb-8" color="rgba(255,255,255,0.1)" />
+        <FadeIn direction="up" delay={0.4}>
+          <div className="flex flex-col items-center justify-between gap-6 text-sm font-light text-neutral-500 lg:flex-row">
+            <div>
+              {t('copyright').replace('2025', String(currentYear))}
+            </div>
+            <div className="flex gap-6">
+              <Link href="/privacy" className="group relative transition-colors hover:text-white">
+                <span>{t('privacy')}</span>
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+              </Link>
+              <Link href="/terms" className="group relative transition-colors hover:text-white">
+                <span>{t('terms')}</span>
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+              </Link>
+            </div>
           </div>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="transition-colors hover:text-white">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="transition-colors hover:text-white">
-              Terms of Service
-            </Link>
-          </div>
-        </div>
+        </FadeIn>
       </div>
     </footer>
   );

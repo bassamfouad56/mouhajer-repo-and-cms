@@ -1,0 +1,1906 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2025-12-11T05:19:33.554Z",
+  "totalItems": 96,
+  "items": [
+    {
+      "id": "project-address-boulevard-penthouse",
+      "type": "project",
+      "title": "Address Boulevard Penthouse",
+      "content": "Luxury penthouse interior design and fit-out at Address Boulevard Hotel, Downtown Dubai.. Category: hospitality. Location: Downtown Dubai. Year: 2024",
+      "metadata": {
+        "slug": "address-boulevard-penthouse",
+        "category": "hospitality",
+        "location": "Downtown Dubai",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "address boulevard penthouse",
+        "hospitality",
+        "downtown dubai"
+      ]
+    },
+    {
+      "id": "project-address-marina-restaurant",
+      "type": "project",
+      "title": "Address Marina Restaurant",
+      "content": "Contemporary restaurant design at Address Dubai Marina featuring elegant interiors.. Category: hospitality. Location: Dubai Marina. Year: 2024",
+      "metadata": {
+        "slug": "address-marina-restaurant",
+        "category": "hospitality",
+        "location": "Dubai Marina",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "address marina restaurant",
+        "hospitality",
+        "dubai marina"
+      ]
+    },
+    {
+      "id": "project-closet-dressing-room-design",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: residential. Location: [object Object]. Year: 2024. Client: [object Object]",
+      "metadata": {
+        "slug": "closet-dressing-room-design",
+        "category": "residential",
+        "location": {
+          "_ref": "location-dubai",
+          "_type": "reference"
+        },
+        "year": 2024,
+        "area": null,
+        "client": {
+          "ar": "مسكن خاص",
+          "en": "Private Residence"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "residential",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "project-district-one-villa-79x",
+      "type": "project",
+      "title": "District One Villa 79X",
+      "content": "Contemporary villa in MBR City District One with premium interiors.. Category: residential. Location: MBR City. Year: 2024",
+      "metadata": {
+        "slug": "district-one-villa-79x",
+        "category": "residential",
+        "location": "MBR City",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "district one villa 79x",
+        "residential",
+        "mbr city"
+      ]
+    },
+    {
+      "id": "project-grand-hyatt-prince-suite",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: hospitality. Location: [object Object]. Year: 2024. Client: [object Object]",
+      "metadata": {
+        "slug": "grand-hyatt-prince-suite",
+        "category": "hospitality",
+        "location": {
+          "_ref": "location-dubai",
+          "_type": "reference"
+        },
+        "year": 2024,
+        "area": null,
+        "client": {
+          "ar": "جراند حياة دبي",
+          "en": "Grand Hyatt Dubai"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "hospitality",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "project-jumeirah-bay-villa",
+      "type": "project",
+      "title": "Jumeirah Bay Villa",
+      "content": "Exclusive beachfront villa with contemporary design and premium materials.. Category: residential. Location: Jumeirah Bay Island. Year: 2024",
+      "metadata": {
+        "slug": "jumeirah-bay-villa",
+        "category": "residential",
+        "location": "Jumeirah Bay Island",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "jumeirah bay villa",
+        "residential",
+        "jumeirah bay island"
+      ]
+    },
+    {
+      "id": "project-jumeirah-island-villa",
+      "type": "project",
+      "title": "Jumeirah Islands Villa",
+      "content": "Luxurious villa renovation in Jumeirah Islands with modern interior design.. Category: residential. Location: Jumeirah Islands. Year: 2024",
+      "metadata": {
+        "slug": "jumeirah-island-villa",
+        "category": "residential",
+        "location": "Jumeirah Islands",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "jumeirah islands villa",
+        "residential",
+        "jumeirah islands"
+      ]
+    },
+    {
+      "id": "project-luxury-bathroom-design-dubai",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: residential. Location: [object Object]. Year: 2024. Client: [object Object]",
+      "metadata": {
+        "slug": "luxury-bathroom-design-dubai",
+        "category": "residential",
+        "location": {
+          "_ref": "location-dubai",
+          "_type": "reference"
+        },
+        "year": 2024,
+        "area": null,
+        "client": {
+          "ar": "مسكن خاص",
+          "en": "Private Residence"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "residential",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "project-modern-bedroom-interior-ajman",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: residential. Location: [object Object]. Year: 2023. Client: [object Object]",
+      "metadata": {
+        "slug": "modern-bedroom-interior-ajman",
+        "category": "residential",
+        "location": {
+          "_ref": "location-ajman",
+          "_type": "reference"
+        },
+        "year": 2023,
+        "area": null,
+        "client": {
+          "ar": "عميل خاص",
+          "en": "Private Client"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "residential",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "project-modern-office-fitout-dubai",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: commercial. Location: [object Object]. Year: 2024. Client: [object Object]",
+      "metadata": {
+        "slug": "modern-office-fitout-dubai",
+        "category": "commercial",
+        "location": {
+          "_ref": "location-dubai",
+          "_type": "reference"
+        },
+        "year": 2024,
+        "area": null,
+        "client": {
+          "ar": "عميل شركات",
+          "en": "Corporate Client"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "commercial",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "project-offices-c1-abudhabi",
+      "type": "project",
+      "title": "Offices C1 Abu Dhabi",
+      "content": "Modern office fit-out in Abu Dhabi with contemporary workspace design.. Category: commercial. Location: Abu Dhabi. Year: 2024",
+      "metadata": {
+        "slug": "offices-c1-abudhabi",
+        "category": "commercial",
+        "location": "Abu Dhabi",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "offices c1 abu dhabi",
+        "commercial",
+        "abu dhabi"
+      ]
+    },
+    {
+      "id": "project-palm-jumeirah-villa",
+      "type": "project",
+      "title": "Palm Jumeirah Villa",
+      "content": "Stunning waterfront villa on Palm Jumeirah with bespoke interior design.. Category: residential. Location: Palm Jumeirah. Year: 2024",
+      "metadata": {
+        "slug": "palm-jumeirah-villa",
+        "category": "residential",
+        "location": "Palm Jumeirah",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "palm jumeirah villa",
+        "residential",
+        "palm jumeirah"
+      ]
+    },
+    {
+      "id": "project-park-hyatt-villa",
+      "type": "project",
+      "title": "Park Hyatt Villa",
+      "content": "Exclusive villa at Park Hyatt Dubai featuring sophisticated design elements.. Category: hospitality. Location: Dubai Creek. Year: 2024",
+      "metadata": {
+        "slug": "park-hyatt-villa",
+        "category": "hospitality",
+        "location": "Dubai Creek",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "park hyatt villa",
+        "hospitality",
+        "dubai creek"
+      ]
+    },
+    {
+      "id": "project-park-hyatt-vip-room",
+      "type": "project",
+      "title": "Park Hyatt VIP Room",
+      "content": "Premium VIP lounge design at Park Hyatt Dubai with luxury finishes.. Category: hospitality. Location: Dubai Creek. Year: 2024",
+      "metadata": {
+        "slug": "park-hyatt-vip-room",
+        "category": "hospitality",
+        "location": "Dubai Creek",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "park hyatt vip room",
+        "hospitality",
+        "dubai creek"
+      ]
+    },
+    {
+      "id": "project-premium-commercial-interior-dubai",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: commercial. Location: [object Object]. Year: 2024. Client: [object Object]",
+      "metadata": {
+        "slug": "premium-commercial-interior-dubai",
+        "category": "commercial",
+        "location": {
+          "_ref": "location-dubai",
+          "_type": "reference"
+        },
+        "year": 2024,
+        "area": null,
+        "client": {
+          "ar": "عميل شركات",
+          "en": "Corporate Client"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "commercial",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "project-ritz-carlton-villas",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: hospitality. Location: [object Object]. Year: 2024. Client: [object Object]",
+      "metadata": {
+        "slug": "ritz-carlton-villas",
+        "category": "hospitality",
+        "location": {
+          "_ref": "location-dubai",
+          "_type": "reference"
+        },
+        "year": 2024,
+        "area": null,
+        "client": {
+          "ar": "ريتز كارلتون",
+          "en": "Ritz Carlton"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "hospitality",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "project-sheraton-abu-dhabi",
+      "type": "project",
+      "title": "Sheraton Abu Dhabi Hotel & Resort",
+      "content": "Complete interior renovation of Sheraton Abu Dhabi Hotel & Resort.. Category: hospitality. Location: Abu Dhabi. Year: 2024",
+      "metadata": {
+        "slug": "sheraton-abu-dhabi",
+        "category": "hospitality",
+        "location": "Abu Dhabi",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "sheraton abu dhabi hotel & resort",
+        "hospitality",
+        "abu dhabi"
+      ]
+    },
+    {
+      "id": "project-sheraton-abu-dhabi-renovation",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: hospitality. Location: [object Object]. Year: 2024. Client: [object Object]",
+      "metadata": {
+        "slug": "sheraton-abu-dhabi-renovation",
+        "category": "hospitality",
+        "location": {
+          "_ref": "location-abu-dhabi",
+          "_type": "reference"
+        },
+        "year": 2024,
+        "area": null,
+        "client": {
+          "ar": "فنادق شيراتون",
+          "en": "Sheraton Hotels"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "hospitality",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "project-sofitel-jbr",
+      "type": "project",
+      "title": "Sofitel JBR",
+      "content": "Elegant hotel interiors at Sofitel Dubai Jumeirah Beach.. Category: hospitality. Location: JBR, Dubai. Year: 2024",
+      "metadata": {
+        "slug": "sofitel-jbr",
+        "category": "hospitality",
+        "location": "JBR, Dubai",
+        "year": 2024,
+        "area": null,
+        "client": "",
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "sofitel jbr",
+        "hospitality",
+        "jbr, dubai"
+      ]
+    },
+    {
+      "id": "project-turnkey-residential-fitout",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: residential. Location: [object Object]. Year: 2024. Client: [object Object]",
+      "metadata": {
+        "slug": "turnkey-residential-fitout",
+        "category": "residential",
+        "location": {
+          "_ref": "location-dubai",
+          "_type": "reference"
+        },
+        "year": 2024,
+        "area": null,
+        "client": {
+          "ar": "عميل خاص",
+          "en": "Private Client"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "residential",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "project-villa-hatem-master-bedroom",
+      "type": "project",
+      "title": "[object Object]",
+      "content": "[object Object]. Category: residential. Location: [object Object]. Year: 2024. Client: [object Object]",
+      "metadata": {
+        "slug": "villa-hatem-master-bedroom",
+        "category": "residential",
+        "location": {
+          "_ref": "location-dubai",
+          "_type": "reference"
+        },
+        "year": 2024,
+        "area": null,
+        "client": {
+          "ar": "فيلا حاتم",
+          "en": "Villa Hatem"
+        },
+        "services": [],
+        "tags": []
+      },
+      "keywords": [
+        "[object object]",
+        "residential",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "service-3d-visualization",
+      "type": "service",
+      "title": "3D Visualization",
+      "content": "Photorealistic 3D renderings and virtual tours bringing your designs to life before construction begins.. Features: [object Object], [object Object], [object Object], [object Object]",
+      "metadata": {
+        "slug": "3d-visualization",
+        "icon": "Box",
+        "features": [
+          "[object Object]",
+          "[object Object]",
+          "[object Object]",
+          "[object Object]"
+        ]
+      },
+      "keywords": [
+        "3d visualization",
+        "service",
+        "[object object]",
+        "[object object]",
+        "[object object]",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "service-8686",
+      "type": "service",
+      "title": "Interior Design",
+      "content": "",
+      "metadata": {
+        "slug": "interior-design",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "interior design",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8687",
+      "type": "service",
+      "title": "Architecture",
+      "content": "",
+      "metadata": {
+        "slug": "architecture",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "architecture",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8688",
+      "type": "service",
+      "title": "Custom Furniture",
+      "content": "",
+      "metadata": {
+        "slug": "furniture",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "custom furniture",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8689",
+      "type": "service",
+      "title": "Project Management",
+      "content": "",
+      "metadata": {
+        "slug": "project-management",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "project management",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8690",
+      "type": "service",
+      "title": "Turnkey Solutions",
+      "content": "",
+      "metadata": {
+        "slug": "turnkey-solutions",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "turnkey solutions",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8691",
+      "type": "service",
+      "title": "3D Visualization",
+      "content": "",
+      "metadata": {
+        "slug": "3d-visualization",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "3d visualization",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8704",
+      "type": "service",
+      "title": "Hospitality & Hotels",
+      "content": "",
+      "metadata": {
+        "slug": "hospitality-hotels-2",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "hospitality & hotels",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8708",
+      "type": "service",
+      "title": "Residential Luxury",
+      "content": "",
+      "metadata": {
+        "slug": "residential-luxury-2",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "residential luxury",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8712",
+      "type": "service",
+      "title": "Commercial & Office",
+      "content": "",
+      "metadata": {
+        "slug": "commercial-office-2",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "commercial & office",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8716",
+      "type": "service",
+      "title": "Retail & Showrooms",
+      "content": "",
+      "metadata": {
+        "slug": "retail-showrooms-2",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "retail & showrooms",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8720",
+      "type": "service",
+      "title": "Healthcare & Wellness",
+      "content": "",
+      "metadata": {
+        "slug": "healthcare-wellness-2",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "healthcare & wellness",
+        "service"
+      ]
+    },
+    {
+      "id": "service-8724",
+      "type": "service",
+      "title": "F&B & Restaurants",
+      "content": "",
+      "metadata": {
+        "slug": "fb-restaurants",
+        "icon": null,
+        "features": []
+      },
+      "keywords": [
+        "f&b & restaurants",
+        "service"
+      ]
+    },
+    {
+      "id": "service-commercial-office",
+      "type": "service",
+      "title": "Commercial & Office",
+      "content": "Innovative workspace design that boosts productivity, collaboration, and employee wellbeing.. Features: [object Object], [object Object], [object Object], [object Object]",
+      "metadata": {
+        "slug": "commercial-office",
+        "icon": "Building2",
+        "features": [
+          "[object Object]",
+          "[object Object]",
+          "[object Object]",
+          "[object Object]"
+        ]
+      },
+      "keywords": [
+        "commercial & office",
+        "service",
+        "[object object]",
+        "[object object]",
+        "[object object]",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "service-custom-joinery",
+      "type": "service",
+      "title": "Custom Joinery",
+      "content": "Bespoke joinery and millwork crafted with precision and attention to detail.. Features: [object Object], [object Object], [object Object], [object Object]",
+      "metadata": {
+        "slug": "custom-joinery",
+        "icon": "Hammer",
+        "features": [
+          "[object Object]",
+          "[object Object]",
+          "[object Object]",
+          "[object Object]"
+        ]
+      },
+      "keywords": [
+        "custom joinery",
+        "service",
+        "[object object]",
+        "[object object]",
+        "[object object]",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "service-fit-out-execution",
+      "type": "service",
+      "title": "Fit-Out & Execution",
+      "content": "Complete turnkey fit-out services delivering exceptional quality and precision in every detail.. Features: [object Object], [object Object], [object Object], [object Object]",
+      "metadata": {
+        "slug": "fit-out-execution",
+        "icon": "Wrench",
+        "features": [
+          "[object Object]",
+          "[object Object]",
+          "[object Object]",
+          "[object Object]"
+        ]
+      },
+      "keywords": [
+        "fit-out & execution",
+        "service",
+        "[object object]",
+        "[object object]",
+        "[object object]",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "service-hospitality-design",
+      "type": "service",
+      "title": "Hospitality Design",
+      "content": "Creating memorable hospitality experiences through thoughtful design of hotels, restaurants, and entertainment venues.. Features: [object Object], [object Object], [object Object], [object Object]",
+      "metadata": {
+        "slug": "hospitality-design",
+        "icon": "Hotel",
+        "features": [
+          "[object Object]",
+          "[object Object]",
+          "[object Object]",
+          "[object Object]"
+        ]
+      },
+      "keywords": [
+        "hospitality design",
+        "service",
+        "[object object]",
+        "[object object]",
+        "[object object]",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "service-interior-design",
+      "type": "service",
+      "title": "Interior Design",
+      "content": "Comprehensive interior design services from concept to completion, creating spaces that inspire and function beautifully.. Features: [object Object], [object Object], [object Object], [object Object]",
+      "metadata": {
+        "slug": "interior-design",
+        "icon": "Palette",
+        "features": [
+          "[object Object]",
+          "[object Object]",
+          "[object Object]",
+          "[object Object]"
+        ]
+      },
+      "keywords": [
+        "interior design",
+        "service",
+        "[object object]",
+        "[object object]",
+        "[object object]",
+        "[object object]"
+      ]
+    },
+    {
+      "id": "industry-commercial",
+      "type": "industry",
+      "title": "[object Object]",
+      "content": "",
+      "metadata": {
+        "slug": "commercial",
+        "icon": null
+      },
+      "keywords": [
+        "[object object]",
+        "industry",
+        "sector"
+      ]
+    },
+    {
+      "id": "industry-healthcare",
+      "type": "industry",
+      "title": "[object Object]",
+      "content": "",
+      "metadata": {
+        "slug": "healthcare",
+        "icon": null
+      },
+      "keywords": [
+        "[object object]",
+        "industry",
+        "sector"
+      ]
+    },
+    {
+      "id": "industry-hospitality",
+      "type": "industry",
+      "title": "[object Object]",
+      "content": "",
+      "metadata": {
+        "slug": "hospitality",
+        "icon": null
+      },
+      "keywords": [
+        "[object object]",
+        "industry",
+        "sector"
+      ]
+    },
+    {
+      "id": "industry-residential",
+      "type": "industry",
+      "title": "[object Object]",
+      "content": "",
+      "metadata": {
+        "slug": "residential",
+        "icon": null
+      },
+      "keywords": [
+        "[object object]",
+        "industry",
+        "sector"
+      ]
+    },
+    {
+      "id": "industry-retail",
+      "type": "industry",
+      "title": "[object Object]",
+      "content": "",
+      "metadata": {
+        "slug": "retail",
+        "icon": null
+      },
+      "keywords": [
+        "[object object]",
+        "industry",
+        "sector"
+      ]
+    },
+    {
+      "id": "7WZciq5UK6HSJWlcfda7Gp",
+      "type": "blog",
+      "title": "The Blame Game: Why \"Split Contracts\" Double Your Risk in Dubai Construction",
+      "content": "The Triangle of Blame is the inevitable result of the \"Split Contract\" model. Who pays for the replacement? You do. Who suffers the delay? You do.. Category: Insights. Author: Eng. Maher Mouhajer",
+      "metadata": {
+        "slug": "turnkey-vs-split-contract",
+        "category": "Insights",
+        "author": {
+          "name": "Eng. Maher Mouhajer",
+          "role": "CEO & Founder"
+        },
+        "tags": [
+          "Turnkey Construction",
+          "Contract Strategy",
+          "Risk Management",
+          "Dubai Construction"
+        ],
+        "publishedAt": "2025-12-04T12:50:28.995Z"
+      },
+      "keywords": [
+        "the blame game: why \"split contracts\" double your risk in dubai construction",
+        "insights",
+        "blog",
+        "article",
+        "turnkey construction",
+        "contract strategy",
+        "risk management",
+        "dubai construction"
+      ]
+    },
+    {
+      "id": "7WZciq5UK6HSJWlcfda7jr",
+      "type": "blog",
+      "title": "The Anatomy of a Winner: Why Turnkey Construction is the Future of Luxury in Dubai",
+      "content": "The industry recognized MIDC with the Architecture Leaders Award 2025 for \"Villa Project of the Year\". This article reveals the methodology that won it.. Category: Case Studies. Author: MIDC Editorial Team",
+      "metadata": {
+        "slug": "anatomy-of-winner-2025",
+        "category": "Case Studies",
+        "author": {
+          "name": "MIDC Editorial Team",
+          "role": "Project Stories"
+        },
+        "tags": [
+          "Award Winning",
+          "Turnkey Construction",
+          "ISO Standards",
+          "District One",
+          "Villa Construction"
+        ],
+        "publishedAt": "2025-12-04T12:50:28.995Z"
+      },
+      "keywords": [
+        "the anatomy of a winner: why turnkey construction is the future of luxury in dubai",
+        "case studies",
+        "blog",
+        "article",
+        "award winning",
+        "turnkey construction",
+        "iso standards",
+        "district one",
+        "villa construction"
+      ]
+    },
+    {
+      "id": "UizgfAv6Gyc2eS8AjuSZJE",
+      "type": "blog",
+      "title": "The Sound of Luxury is Silence",
+      "content": "A 50-Million Dirham Villa Should Not Hum. True luxury is not just about gold leaf, book-matched marble, or silk carpets. True luxury is the absence of irritation.. Category: Engineering. Author: MIDC Engineering Team",
+      "metadata": {
+        "slug": "silent-luxury-hvac",
+        "category": "Engineering",
+        "author": {
+          "name": "MIDC Engineering Team",
+          "role": "MEP Division"
+        },
+        "tags": [
+          "MEP Design",
+          "HVAC",
+          "Luxury Villas",
+          "Noise Control"
+        ],
+        "publishedAt": "2025-12-04T12:50:28.995Z"
+      },
+      "keywords": [
+        "the sound of luxury is silence",
+        "engineering",
+        "blog",
+        "article",
+        "mep design",
+        "hvac",
+        "luxury villas",
+        "noise control"
+      ]
+    },
+    {
+      "id": "faq-0",
+      "type": "faq",
+      "title": "Do you handle the full construction scope from empty land?",
+      "content": "Yes. We are a licensed Building Contractor (G+12). We handle excavation, concrete, structural steel, and all civil works. You do not need a separate builder.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "do",
+        "you",
+        "handle",
+        "the",
+        "full",
+        "construction",
+        "scope",
+        "from",
+        "empty",
+        "land?"
+      ]
+    },
+    {
+      "id": "faq-1",
+      "type": "faq",
+      "title": "Who manages the government approvals?",
+      "content": "We do. Our in-house engineering team handles all permits and NOCs from Dubai Municipality, Civil Defence, DEWA, and master developers like Nakheel or Emaar.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "who",
+        "manages",
+        "the",
+        "government",
+        "approvals?"
+      ]
+    },
+    {
+      "id": "faq-2",
+      "type": "faq",
+      "title": "Do you manufacture your own furniture?",
+      "content": "Yes. We own a dedicated joinery and furniture factory. We custom-make doors, wardrobes, kitchens, and loose furniture to fit your space perfectly.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "do",
+        "you",
+        "manufacture",
+        "your",
+        "own",
+        "furniture?"
+      ]
+    },
+    {
+      "id": "faq-3",
+      "type": "faq",
+      "title": "Can you renovate my hotel while it stays open?",
+      "content": "Yes. We specialize in ",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "can",
+        "you",
+        "renovate",
+        "my",
+        "hotel",
+        "while",
+        "it",
+        "stays",
+        "open?"
+      ]
+    },
+    {
+      "id": "faq-4",
+      "type": "faq",
+      "title": "Do you provide maintenance after handover?",
+      "content": "Yes. We offer comprehensive annual maintenance contracts to ensure your AC, lighting, and finishes remain in showroom condition.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "do",
+        "you",
+        "provide",
+        "maintenance",
+        "after",
+        "handover?"
+      ]
+    },
+    {
+      "id": "faq-5",
+      "type": "faq",
+      "title": "Can I schedule a visit to see your completed projects?",
+      "content": "Many of our projects are private residences or commercial spaces, so public access is limited. However, we can arrange visits to select projects with prior permission from the owners. We also have extensive photography and 3D visualizations that showcase our work in detail.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "can",
+        "i",
+        "schedule",
+        "a",
+        "visit",
+        "to",
+        "see",
+        "your",
+        "completed",
+        "projects?"
+      ]
+    },
+    {
+      "id": "faq-6",
+      "type": "faq",
+      "title": "Do you provide project management services?",
+      "content": "Yes, comprehensive project management is one of our core services. We coordinate with contractors, suppliers, and artisans to ensure timely delivery and quality execution. Our team oversees every detail from procurement to installation, keeping your project on schedule and within budget.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "do",
+        "you",
+        "provide",
+        "project",
+        "management",
+        "services?"
+      ]
+    },
+    {
+      "id": "faq-7",
+      "type": "faq",
+      "title": "Can you work within my existing budget?",
+      "content": "Absolutely. We work with a wide range of budgets and can tailor our design solutions accordingly. During the initial consultation, we discuss your budget parameters and create a design that maximizes value while achieving your aesthetic goals. We provide transparent cost estimates and help you make informed decisions throughout the project.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "can",
+        "you",
+        "work",
+        "within",
+        "my",
+        "existing",
+        "budget?"
+      ]
+    },
+    {
+      "id": "faq-8",
+      "type": "faq",
+      "title": "What happens if I want to make changes during the project?",
+      "content": "We understand that projects evolve, and we remain flexible throughout the process. Minor adjustments can typically be accommodated easily. For significant changes, we will assess the impact on timeline and budget, provide updated proposals, and proceed with your approval. Clear communication ensures smooth implementation of any modifications.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "what",
+        "happens",
+        "if",
+        "i",
+        "want",
+        "to",
+        "make",
+        "changes",
+        "during",
+        "the",
+        "project?"
+      ]
+    },
+    {
+      "id": "faq-9",
+      "type": "faq",
+      "title": "Do you offer sustainable and eco-friendly design options?",
+      "content": "Yes, sustainability is increasingly important in modern design. We incorporate eco-friendly materials, energy-efficient lighting, sustainable furniture, and environmentally conscious construction practices. We can guide you through certifications like LEED if desired and help you make choices that reduce environmental impact without compromising aesthetics.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "do",
+        "you",
+        "offer",
+        "sustainable",
+        "and",
+        "eco-friendly",
+        "design",
+        "options?"
+      ]
+    },
+    {
+      "id": "faq-10",
+      "type": "faq",
+      "title": "Do you offer consultation-only services?",
+      "content": "Yes, we offer consultation services for clients who want professional design guidance without full-service design. This includes space planning advice, material selection, color consultations, and design direction. Consultations can be one-time sessions or ongoing advisory relationships.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "do",
+        "you",
+        "offer",
+        "consultation-only",
+        "services?"
+      ]
+    },
+    {
+      "id": "faq-11",
+      "type": "faq",
+      "title": "Can you work with my existing furniture and decor?",
+      "content": "Absolutely. We often incorporate clients",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "can",
+        "you",
+        "work",
+        "with",
+        "my",
+        "existing",
+        "furniture",
+        "and",
+        "decor?"
+      ]
+    },
+    {
+      "id": "faq-12",
+      "type": "faq",
+      "title": "Do you provide 3D renderings and visualizations?",
+      "content": "Yes, 3D visualization is an integral part of our design process. We create photorealistic renderings that help you envision the final space before construction begins. This allows for informed decision-making and ensures the final result aligns with your expectations.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "do",
+        "you",
+        "provide",
+        "3d",
+        "renderings",
+        "and",
+        "visualizations?"
+      ]
+    },
+    {
+      "id": "faq-13",
+      "type": "faq",
+      "title": "What is the difference between interior design and interior decoration?",
+      "content": "Interior design is a comprehensive process that involves space planning, structural changes, technical drawings, building codes, and functionality optimization. Interior decoration focuses on aesthetics furnishings, colors, textures, and accessories. We offer both services: full interior design for renovations and new builds, and decoration services for refreshing existing spaces.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "what",
+        "is",
+        "the",
+        "difference",
+        "between",
+        "interior",
+        "design",
+        "and",
+        "interior",
+        "decoration?"
+      ]
+    },
+    {
+      "id": "faq-14",
+      "type": "faq",
+      "title": "Can you help with just one room or do you only take on full-home projects?",
+      "content": "We work on projects of all sizes from single-room makeovers to complete residential estates and large commercial developments. Whether you want to redesign your living room, renovate your kitchen, or transform an entire property, we tailor our services to your needs.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "can",
+        "you",
+        "help",
+        "with",
+        "just",
+        "one",
+        "room",
+        "or",
+        "do",
+        "you",
+        "only",
+        "take",
+        "on",
+        "full-home",
+        "projects?"
+      ]
+    },
+    {
+      "id": "faq-15",
+      "type": "faq",
+      "title": "Do you offer custom furniture design and fabrication?",
+      "content": "Yes, custom furniture design is one of our specialties. We design bespoke pieces tailored to your space and needs, then work with skilled artisans and manufacturers to bring them to life. Custom furniture allows for perfect proportions, unique materials, and designs that truly reflect your personal style.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "do",
+        "you",
+        "offer",
+        "custom",
+        "furniture",
+        "design",
+        "and",
+        "fabrication?"
+      ]
+    },
+    {
+      "id": "faq-16",
+      "type": "faq",
+      "title": "How often do you publish new blog content?",
+      "content": "We publish new blog posts regularly, typically 2-4 times per month. Our content covers design trends, project case studies, design tips, industry news, and insights from our team. Subscribe to our newsletter to receive updates when new content is published.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "how",
+        "often",
+        "do",
+        "you",
+        "publish",
+        "new",
+        "blog",
+        "content?"
+      ]
+    },
+    {
+      "id": "faq-17",
+      "type": "faq",
+      "title": "Can I share your blog posts on social media?",
+      "content": "Absolutely! We encourage sharing our content. Each blog post has social sharing buttons for easy distribution. Please ensure you credit Mouhajer International Design and include a link back to the original post when sharing on your platforms.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "can",
+        "i",
+        "share",
+        "your",
+        "blog",
+        "posts",
+        "on",
+        "social",
+        "media?"
+      ]
+    },
+    {
+      "id": "faq-18",
+      "type": "faq",
+      "title": "Do you accept guest blog submissions?",
+      "content": "We occasionally feature guest contributors who are experts in design, architecture, or related fields. If you are interested in contributing, please contact us with your proposed topic, a brief outline, and your credentials. We review all submissions and will respond within 2-3 weeks.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "do",
+        "you",
+        "accept",
+        "guest",
+        "blog",
+        "submissions?"
+      ]
+    },
+    {
+      "id": "faq-19",
+      "type": "faq",
+      "title": "Can I request a topic for a future blog post?",
+      "content": "Yes, we welcome topic suggestions from our readers! If there is a design subject you would like us to cover, please reach out through our contact form or email. While we cannot guarantee coverage of every suggestion, we value your input and consider reader interests when planning our content calendar.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "can",
+        "i",
+        "request",
+        "a",
+        "topic",
+        "for",
+        "a",
+        "future",
+        "blog",
+        "post?"
+      ]
+    },
+    {
+      "id": "faq-20",
+      "type": "faq",
+      "title": "How can I stay updated with your latest posts and projects?",
+      "content": "The best way to stay updated is to subscribe to our newsletter, where we share new blog posts, project highlights, and exclusive insights. You can also follow us on social media platforms where we regularly post updates, behind-the-scenes content, and design inspiration.",
+      "metadata": {},
+      "keywords": [
+        "faq",
+        "question",
+        "how",
+        "can",
+        "i",
+        "stay",
+        "updated",
+        "with",
+        "your",
+        "latest",
+        "posts",
+        "and",
+        "projects?"
+      ]
+    },
+    {
+      "id": "service-local-0",
+      "type": "service",
+      "title": "Design & Engineering",
+      "content": "Design & Engineering - One of MIDC's core service pillars. We provide comprehensive design & engineering solutions for luxury residential, commercial, and hospitality projects.",
+      "metadata": {
+        "pillar": true
+      },
+      "keywords": [
+        "design & engineering",
+        "service",
+        "midc"
+      ]
+    },
+    {
+      "id": "service-local-1",
+      "type": "service",
+      "title": "Civil Construction",
+      "content": "Civil Construction - One of MIDC's core service pillars. We provide comprehensive civil construction solutions for luxury residential, commercial, and hospitality projects.",
+      "metadata": {
+        "pillar": true
+      },
+      "keywords": [
+        "civil construction",
+        "service",
+        "midc"
+      ]
+    },
+    {
+      "id": "service-local-2",
+      "type": "service",
+      "title": "Fit-Out & Execution",
+      "content": "Fit-Out & Execution - One of MIDC's core service pillars. We provide comprehensive fit-out & execution solutions for luxury residential, commercial, and hospitality projects.",
+      "metadata": {
+        "pillar": true
+      },
+      "keywords": [
+        "fit-out & execution",
+        "service",
+        "midc"
+      ]
+    },
+    {
+      "id": "service-local-3",
+      "type": "service",
+      "title": "Manufacturing & Joinery",
+      "content": "Manufacturing & Joinery - One of MIDC's core service pillars. We provide comprehensive manufacturing & joinery solutions for luxury residential, commercial, and hospitality projects.",
+      "metadata": {
+        "pillar": true
+      },
+      "keywords": [
+        "manufacturing & joinery",
+        "service",
+        "midc"
+      ]
+    },
+    {
+      "id": "service-local-4",
+      "type": "service",
+      "title": "FF&E Specification",
+      "content": "FF&E Specification - One of MIDC's core service pillars. We provide comprehensive ff&e specification solutions for luxury residential, commercial, and hospitality projects.",
+      "metadata": {
+        "pillar": true
+      },
+      "keywords": [
+        "ff&e specification",
+        "service",
+        "midc"
+      ]
+    },
+    {
+      "id": "service-local-5",
+      "type": "service",
+      "title": "Project Management",
+      "content": "Project Management - One of MIDC's core service pillars. We provide comprehensive project management solutions for luxury residential, commercial, and hospitality projects.",
+      "metadata": {
+        "pillar": true
+      },
+      "keywords": [
+        "project management",
+        "service",
+        "midc"
+      ]
+    },
+    {
+      "id": "local-project-0",
+      "type": "project",
+      "title": "Luxury Bathroom Interior Design",
+      "content": "Elegant bathroom design featuring premium marble finishes, custom vanities, and sophisticated lighting. A harmonious blend of functionality and luxury.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "luxury",
+        "bathroom",
+        "interior",
+        "design"
+      ]
+    },
+    {
+      "id": "local-project-1",
+      "type": "project",
+      "title": "Villa Hatem Master Bedroom Suite",
+      "content": "Opulent master bedroom design featuring bespoke headboard, custom lighting, and premium textiles. A perfect sanctuary for rest and relaxation.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "villa",
+        "hatem",
+        "master",
+        "bedroom",
+        "suite"
+      ]
+    },
+    {
+      "id": "local-project-2",
+      "type": "project",
+      "title": "Modern Bedroom Interior - Ajman Villa",
+      "content": "Contemporary bedroom design with clean lines, natural light optimization, and modern amenities for the discerning homeowner.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "modern",
+        "bedroom",
+        "interior",
+        "-",
+        "ajman",
+        "villa"
+      ]
+    },
+    {
+      "id": "local-project-3",
+      "type": "project",
+      "title": "Amani Residence Bedroom",
+      "content": "Elegant bedroom design combining comfort with sophisticated style for the Amani residence project.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "amani",
+        "residence",
+        "bedroom"
+      ]
+    },
+    {
+      "id": "local-project-4",
+      "type": "project",
+      "title": "Premium Commercial Interior Fit-out",
+      "content": "High-end commercial space design featuring sophisticated finishes, optimal space planning, and brand-aligned aesthetics.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "premium",
+        "commercial",
+        "interior",
+        "fit-out"
+      ]
+    },
+    {
+      "id": "local-project-5",
+      "type": "project",
+      "title": "Corporate Headquarters Interior Design",
+      "content": "Complete corporate headquarters design featuring executive offices, collaborative spaces, and state-of-the-art meeting facilities.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "corporate",
+        "headquarters",
+        "interior",
+        "design"
+      ]
+    },
+    {
+      "id": "local-project-6",
+      "type": "project",
+      "title": "Modern Office Fit-out Project",
+      "content": "Contemporary office fit-out featuring ergonomic workstations, collaborative zones, and sophisticated meeting spaces.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "modern",
+        "office",
+        "fit-out",
+        "project"
+      ]
+    },
+    {
+      "id": "local-project-7",
+      "type": "project",
+      "title": "Turnkey Residential Fit-out Project",
+      "content": "Complete turnkey residential fit-out from design concept to final handover, featuring premium finishes throughout.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "turnkey",
+        "residential",
+        "fit-out",
+        "project"
+      ]
+    },
+    {
+      "id": "local-project-8",
+      "type": "project",
+      "title": "Luxury Apartment Turnkey Project",
+      "content": "Full turnkey delivery for a luxury apartment including bespoke joinery, lighting design, and premium finishes.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "luxury",
+        "apartment",
+        "turnkey",
+        "project"
+      ]
+    },
+    {
+      "id": "local-project-9",
+      "type": "project",
+      "title": "Custom Walk-in Closet Design",
+      "content": "Bespoke walk-in closet featuring custom joinery, intelligent storage solutions, and premium finishes.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "custom",
+        "walk-in",
+        "closet",
+        "design"
+      ]
+    },
+    {
+      "id": "local-project-10",
+      "type": "project",
+      "title": "Fine Dining Concepts",
+      "content": "Luxury villas, penthouses, and apartments designed to reflect your unique lifestyle and personality.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "fine",
+        "dining",
+        "concepts"
+      ]
+    },
+    {
+      "id": "local-project-11",
+      "type": "project",
+      "title": "Hospitality",
+      "content": "Creating unforgettable guest experiences through exceptional hotel, resort, and restaurant design.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "hospitality"
+      ]
+    },
+    {
+      "id": "local-project-12",
+      "type": "project",
+      "title": "Retail",
+      "content": "Immersive retail experiences that engage customers and drive sales through innovative design.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "retail"
+      ]
+    },
+    {
+      "id": "local-project-13",
+      "type": "project",
+      "title": "Healthcare",
+      "content": "Healing environments that promote wellness and support both patients and healthcare professionals.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "healthcare"
+      ]
+    },
+    {
+      "id": "local-project-14",
+      "type": "project",
+      "title": "Commercial",
+      "content": "Innovative office and commercial spaces that inspire productivity and reflect your brand identity.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "commercial"
+      ]
+    },
+    {
+      "id": "local-project-15",
+      "type": "project",
+      "title": "The Evolution of Modern Interior Design",
+      "content": "Explore how interior design has evolved over the decades and what trends are shaping the future of luxury spaces.",
+      "metadata": {
+        "source": "local"
+      },
+      "keywords": [
+        "project",
+        "the",
+        "evolution",
+        "of",
+        "modern",
+        "interior",
+        "design"
+      ]
+    },
+    {
+      "id": "company-about",
+      "type": "company",
+      "title": "About MIDC",
+      "content": "Mouhajer International Design & Contracting (MIDC) was founded by Eng. Maher Mouhajer over 20+ years ago. We are a full-service design and construction firm specializing in luxury residential, commercial, and hospitality projects across Dubai and Abu Dhabi, UAE. We have completed 150+ projects and are triple ISO certified.",
+      "metadata": {
+        "category": "about"
+      },
+      "keywords": [
+        "about",
+        "company",
+        "midc",
+        "mouhajer",
+        "history",
+        "background"
+      ]
+    },
+    {
+      "id": "company-founder",
+      "type": "company",
+      "title": "Our Founder",
+      "content": "Our founder and CEO is Eng. Maher Mouhajer, who has 20+ years of experience in luxury design and construction. Under his leadership, MIDC has become a multiple-time 5-Star Winner at the International Property Awards.",
+      "metadata": {
+        "category": "founder"
+      },
+      "keywords": [
+        "founder",
+        "ceo",
+        "maher",
+        "mouhajer",
+        "owner",
+        "leader"
+      ]
+    },
+    {
+      "id": "company-services",
+      "type": "company",
+      "title": "Our Services",
+      "content": "MIDC offers 6 core pillars of service: Design & Engineering, Civil Construction, Fit-Out & Execution, Manufacturing & Joinery, FF&E Specification, Project Management. We handle everything from concept to completion for luxury residential, commercial, and hospitality projects.",
+      "metadata": {
+        "category": "services"
+      },
+      "keywords": [
+        "services",
+        "offer",
+        "provide",
+        "capabilities",
+        "pillars"
+      ]
+    },
+    {
+      "id": "company-awards",
+      "type": "company",
+      "title": "Awards & Certifications",
+      "content": "MIDC is a multiple-time 5-Star Winner at the International Property Awards: Best Hotel Suite Interior Arabia (2023-2024), Best Hotel Suite Interior Dubai (2023-2024), Best Residential Interior Apartment Dubai (2023-2024), Best Hotel Interior Abu Dhabi (2022-2023), Luxury Lifestyle Awards - Best Luxury Interior Design (2021). We are also ISO 9001:2015 (Quality Management), ISO 14001:2015 (Environmental Management), ISO 45001:2018 (Occupational Health & Safety).",
+      "metadata": {
+        "category": "awards"
+      },
+      "keywords": [
+        "awards",
+        "certifications",
+        "iso",
+        "recognition",
+        "achievements",
+        "property awards"
+      ]
+    },
+    {
+      "id": "company-contact",
+      "type": "company",
+      "title": "Contact Information",
+      "content": "Contact MIDC: Phone: +971 52 304 1482, Email: info@mouhajerdesign.com, WhatsApp: +971 52 304 1482. We have offices in Dubai, UAE and Abu Dhabi, UAE.",
+      "metadata": {
+        "category": "contact"
+      },
+      "keywords": [
+        "contact",
+        "phone",
+        "email",
+        "whatsapp",
+        "reach",
+        "location",
+        "address"
+      ]
+    },
+    {
+      "id": "company-partners",
+      "type": "company",
+      "title": "Our Partners",
+      "content": "MIDC has partnered with prestigious brands including: Address Hotels & Resorts, Sheraton Hotels, Grand Hyatt Hotels, Abu Dhabi National Hotels. We specialize in luxury villas, 5-star hotel interiors, high-end apartments, penthouses, commercial offices, and restaurants.",
+      "metadata": {
+        "category": "partners"
+      },
+      "keywords": [
+        "partners",
+        "clients",
+        "hotels",
+        "address",
+        "sheraton",
+        "hyatt"
+      ]
+    }
+  ],
+  "companyInfo": {
+    "name": "Mouhajer International Design & Contracting",
+    "shortName": "MIDC",
+    "founder": "Eng. Maher Mouhajer",
+    "founderTitle": "Founder & CEO",
+    "experience": "20+ years",
+    "locations": [
+      "Dubai, UAE",
+      "Abu Dhabi, UAE"
+    ],
+    "phone": "+971 52 304 1482",
+    "email": "info@mouhajerdesign.com",
+    "whatsapp": "+971 52 304 1482",
+    "website": "mouhajerdesign.com",
+    "services": [
+      "Design & Engineering",
+      "Civil Construction",
+      "Fit-Out & Execution",
+      "Manufacturing & Joinery",
+      "FF&E Specification",
+      "Project Management"
+    ],
+    "awards": [
+      {
+        "name": "Best Hotel Suite Interior Arabia",
+        "year": "2023-2024",
+        "project": "Address Boulevard VIP Suite"
+      },
+      {
+        "name": "Best Hotel Suite Interior Dubai",
+        "year": "2023-2024",
+        "project": "Address Boulevard VIP Suite"
+      },
+      {
+        "name": "Best Residential Interior Apartment Dubai",
+        "year": "2023-2024",
+        "project": "Address Boulevard Penthouse"
+      },
+      {
+        "name": "Best Hotel Interior Abu Dhabi",
+        "year": "2022-2023",
+        "project": "Sheraton Abu Dhabi Hotel & Resort"
+      },
+      {
+        "name": "Luxury Lifestyle Awards - Best Luxury Interior Design",
+        "year": "2021"
+      }
+    ],
+    "certifications": [
+      "ISO 9001:2015 (Quality Management)",
+      "ISO 14001:2015 (Environmental Management)",
+      "ISO 45001:2018 (Occupational Health & Safety)"
+    ],
+    "partners": [
+      "Address Hotels & Resorts",
+      "Sheraton Hotels",
+      "Grand Hyatt Hotels",
+      "Abu Dhabi National Hotels"
+    ]
+  },
+  "statistics": {
+    "projectsCompleted": 150,
+    "yearsExperience": 20
+  }
+}

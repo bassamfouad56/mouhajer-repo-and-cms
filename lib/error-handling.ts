@@ -368,6 +368,102 @@ export function getSafeExcerpt(data: any, maxLength: number = 160): string {
 }
 
 // ============================================================================
+// LOCALIZATION HELPERS
+// ============================================================================
+
+/**
+ * Localized field structure from Sanity
+ */
+export interface LocalizedField {
+  ar?: string;
+  en?: string;
+  [key: string]: string | undefined;
+}
+
+/**
+ * Check if a value is a localized field object
+ */
+export function isLocalizedField(value: unknown): value is LocalizedField {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    !Array.isArray(value) &&
+    ('ar' in value || 'en' in value)
+  );
+}
+
+/**
+ * Safely extract the correct locale value from a field
+ * Handles both simple strings and localized objects {ar, en}
+ */
+export function getLocalizedValue(
+  value: string | LocalizedField | null | undefined,
+  locale: string = 'en',
+  fallback: string = ''
+): string {
+  // Null or undefined
+  if (value === null || value === undefined) {
+    return fallback;
+  }
+
+  // Already a string
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  // Localized object
+  if (isLocalizedField(value)) {
+    // Try the requested locale first
+    if (isNonEmptyString(value[locale])) {
+      return value[locale]!;
+    }
+    // Fallback to English
+    if (isNonEmptyString(value.en)) {
+      return value.en!;
+    }
+    // Fallback to Arabic
+    if (isNonEmptyString(value.ar)) {
+      return value.ar!;
+    }
+  }
+
+  return fallback;
+}
+
+/**
+ * Transform an object with potentially localized fields
+ * Converts all {ar, en} fields to the correct locale value
+ */
+export function localizeObject<T extends Record<string, any>>(
+  obj: T,
+  locale: string = 'en'
+): T {
+  if (!obj || typeof obj !== 'object') {
+    return obj;
+  }
+
+  const result = { ...obj };
+
+  for (const key of Object.keys(result)) {
+    const value = result[key];
+
+    if (isLocalizedField(value)) {
+      result[key] = getLocalizedValue(value, locale, '');
+    } else if (Array.isArray(value)) {
+      result[key] = value.map((item) =>
+        typeof item === 'object' && item !== null
+          ? localizeObject(item, locale)
+          : item
+      );
+    } else if (typeof value === 'object' && value !== null) {
+      result[key] = localizeObject(value, locale);
+    }
+  }
+
+  return result;
+}
+
+// ============================================================================
 // URL HANDLING
 // ============================================================================
 
@@ -460,6 +556,7 @@ export const ErrorHandling = {
   isNonEmptyString,
   isNonEmptyArray,
   hasProperty,
+  isLocalizedField,
 
   // Safe accessors
   safeGet,
@@ -484,6 +581,10 @@ export const ErrorHandling = {
   getFeaturedImage,
   getGalleryImages,
   getSafeExcerpt,
+
+  // Localization helpers
+  getLocalizedValue,
+  localizeObject,
 
   // URL handling
   getSafeUrl,
