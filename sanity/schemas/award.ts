@@ -81,6 +81,48 @@ export default defineType({
       description: 'If this award was for a specific project',
     }),
     defineField({
+      name: 'projectName',
+      title: 'Project Name',
+      type: 'string',
+      description: 'Name of the project (if not linked as reference)',
+    }),
+    defineField({
+      name: 'projectImage',
+      title: 'Project Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Image of the awarded project (alternative to linked project)',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+    }),
+    defineField({
+      name: 'level',
+      title: 'Award Level',
+      type: 'string',
+      options: {
+        list: [
+          { title: '5-Star', value: '5-Star' },
+          { title: 'Best', value: 'Best' },
+          { title: 'Winner', value: 'Winner' },
+          { title: 'Finalist', value: 'Finalist' },
+          { title: 'Highly Commended', value: 'Highly Commended' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'subtitle',
+      title: 'Subtitle / Short Description',
+      type: 'string',
+      description: 'Brief description of the achievement',
+    }),
+    defineField({
       name: 'certificateUrl',
       title: 'Certificate URL',
       type: 'url',

@@ -8,6 +8,11 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { urlForImage } from '@/sanity/lib/image';
 import { SafeImage } from '@/components/safe-image';
 import { Search, X } from 'lucide-react';
+import { CategoryTabs } from '@/components/projects/filters/CategoryTabs';
+import { FilterSidebar } from '@/components/projects/filters/FilterSidebar';
+import { AppliedFilters } from '@/components/projects/filters/AppliedFilters';
+import type { ProjectFilters, MainCategory, CategoryCount } from '@/types/filters';
+import { VideoBackground } from '@/components/projects/video-background';
 
 // Import all view modes
 import {
@@ -42,26 +47,8 @@ interface RawSanityProject {
   featured?: boolean;
 }
 
-// Fallback hero images for projects page
-const heroImages = [
-  '/projects/commercial-interior/_MID7362-HDR.jpg',
-  '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
-  '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
-  '/projects/office-fitout/_MID0939-HDR.jpg',
-  '/projects/closet/_MID0095-HDR.jpg',
-];
-
-// Infinite carousel project images
-const carouselImages = [
-  { src: '/projects/commercial-interior/11.jpg', title: 'Commercial Excellence' },
-  { src: '/projects/bedroom-interior/Villa Ajman-Master Bedroom Light-06112022- HR-(1).jpg', title: 'Luxury Bedrooms' },
-  { src: '/projects/turnkey-design-fitout/c5c5c5.jpg', title: 'Turnkey Solutions' },
-  { src: '/projects/office-fitout/MID0173-HDR.jpg', title: 'Premium Offices' },
-  { src: '/projects/bathroom/_MID2588-HDR.jpg', title: 'Designer Bathrooms' },
-  { src: '/projects/closet/_MID0095-HDR.jpg', title: 'Custom Closets' },
-  { src: '/projects/commercial-interior/_MID7000-HDR.jpg', title: 'Hotel Interiors' },
-  { src: '/projects/bedroom-interior/bedroom cam1.jpg', title: 'Modern Living' },
-];
+// YouTube video ID for hero background
+const HERO_VIDEO_ID = '9JeB0zJtPuM';
 
 interface SanityIndustry {
   _id: string;
@@ -76,6 +63,7 @@ interface ProjectsPageContentProps {
   projects: RawSanityProject[];
   industries: SanityIndustry[];
   locale: string;
+  initialCategory?: MainCategory;
 }
 
 // Helper to extract localized string from i18n field
@@ -99,7 +87,7 @@ function normalizeProject(project: RawSanityProject, locale: string): SanityProj
   };
 }
 
-export default function EnhancedProjectsPageContent({ projects, industries, locale }: ProjectsPageContentProps) {
+export default function EnhancedProjectsPageContent({ projects, industries, locale, initialCategory = 'all' }: ProjectsPageContentProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const heroRef = useRef<HTMLDivElement>(null);
@@ -108,18 +96,36 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
   // Pre-process projects to normalize i18n fields
   const normalizedProjects = projects.map(p => normalizeProject(p, locale));
 
+  // Dynamic carousel images from Sanity projects
+  const carouselImages = normalizedProjects
+    .filter(p => p.mainImage) // Only projects with images
+    .slice(0, 24) // Limit to 24 images for smooth animation
+    .map(p => ({
+      src: urlForImage(p.mainImage)?.width(800).height(600).quality(90).url() || '',
+      title: p.title || '',
+    }));
+
+  // State for hovered carousel image
+  const [hoveredImage, setHoveredImage] = useState<{ src: string; title: string } | null>(null);
+
   // Get initial values from URL
-  const categoryFromUrl = searchParams.get('category') || 'all';
   const viewFromUrl = (searchParams.get('view') as ViewMode) || 'grid';
   const columnsFromUrl = searchParams.get('columns');
   const searchFromUrl = searchParams.get('search') || '';
+  const projectTypesFromUrl = searchParams.get('types')?.split(',').filter(Boolean) || [];
+  const locationsFromUrl = searchParams.get('locations')?.split(',').filter(Boolean) || [];
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(categoryFromUrl);
+  // New filter state
+  const [filters, setFilters] = useState<ProjectFilters>({
+    category: initialCategory,
+    projectTypes: projectTypesFromUrl,
+    locations: locationsFromUrl,
+    search: searchFromUrl,
+  });
   const [viewMode, setViewMode] = useState<ViewMode>(viewFromUrl);
   const [gridColumns, setGridColumns] = useState<GridColumns>(
     columnsFromUrl ? (parseInt(columnsFromUrl) as GridColumns) : 3
   );
-  const [searchQuery, setSearchQuery] = useState<string>(searchFromUrl);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const { scrollYProgress } = useScroll({
@@ -134,10 +140,6 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
   useEffect(() => {
     const params = new URLSearchParams();
 
-    if (selectedCategory !== 'all') {
-      params.set('category', selectedCategory);
-    }
-
     if (viewMode !== 'grid') {
       params.set('view', viewMode);
     }
@@ -146,68 +148,79 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
       params.set('columns', gridColumns.toString());
     }
 
-    if (searchQuery.trim()) {
-      params.set('search', searchQuery.trim());
+    if (filters.search.trim()) {
+      params.set('search', filters.search.trim());
+    }
+
+    if (filters.projectTypes.length > 0) {
+      params.set('types', filters.projectTypes.join(','));
+    }
+
+    if (filters.locations.length > 0) {
+      params.set('locations', filters.locations.join(','));
     }
 
     const queryString = params.toString();
     const newUrl = queryString ? `?${queryString}` : window.location.pathname;
 
     router.push(newUrl, { scroll: false });
-  }, [selectedCategory, viewMode, gridColumns, searchQuery, router]);
+  }, [filters, viewMode, gridColumns, router]);
 
   // Separate featured and regular projects (using normalized data)
   const featuredProjects = normalizedProjects.filter((p) => p.featured);
   const regularProjects = normalizedProjects.filter((p) => !p.featured);
 
-  // Helper function to check if project matches search query
-  const matchesSearch = (project: SanityProject) => {
-    if (!searchQuery.trim()) return true;
-    const query = searchQuery.toLowerCase().trim();
-    return (
-      project.title?.toLowerCase().includes(query) ||
-      project.category?.toLowerCase().includes(query) ||
-      project.location?.toLowerCase().includes(query) ||
-      project.excerpt?.toLowerCase().includes(query)
-    );
+  // Helper function to check if project matches filters
+  const matchesFilters = (project: SanityProject) => {
+    // Search filter
+    if (filters.search.trim()) {
+      const query = filters.search.toLowerCase().trim();
+      const matchesSearch =
+        project.title?.toLowerCase().includes(query) ||
+        project.category?.toLowerCase().includes(query) ||
+        project.location?.toLowerCase().includes(query) ||
+        project.excerpt?.toLowerCase().includes(query);
+      if (!matchesSearch) return false;
+    }
+
+    // Project Type filter (client-side refinement)
+    // Check if project category/type matches selected project types
+    if (filters.projectTypes.length > 0) {
+      const projectCategory = project.category?.toLowerCase() || '';
+      const matchesType = filters.projectTypes.some(type =>
+        projectCategory.includes(type.toLowerCase()) ||
+        project.title?.toLowerCase().includes(type.toLowerCase())
+      );
+      if (!matchesType) return false;
+    }
+
+    // Location filter (client-side refinement)
+    if (filters.locations.length > 0) {
+      const projectLocation = project.location?.toLowerCase() || '';
+      const matchesLocation = filters.locations.some(loc =>
+        projectLocation.includes(loc.toLowerCase())
+      );
+      if (!matchesLocation) return false;
+    }
+
+    return true;
   };
 
-  // Filter projects by category and search
-  const filteredFeaturedProjects = featuredProjects.filter((project) => {
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    return matchesCategory && matchesSearch(project);
-  });
-
-  const filteredRegularProjects = regularProjects.filter((project) => {
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    return matchesCategory && matchesSearch(project);
-  });
+  // Filter projects
+  const filteredFeaturedProjects = featuredProjects.filter(matchesFilters);
+  const filteredRegularProjects = regularProjects.filter(matchesFilters);
 
   // All filtered projects combined
   const allFilteredProjects = [...filteredFeaturedProjects, ...filteredRegularProjects];
 
-  // Get unique categories (using normalized projects with string categories)
-  const categories: string[] = [
-    'all',
-    ...Array.from(
-      new Set(
-        normalizedProjects
-          .map((p) => p.category)
-          .filter((cat): cat is string => typeof cat === 'string' && cat.trim() !== '')
-      )
-    ),
-  ];
-
-  // State for hero background slideshow
-  const [currentHeroImage, setCurrentHeroImage] = useState(0);
-
-  // Auto-rotate hero background
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // Calculate category counts (simplified - in production this would come from server)
+  // Note: These counts are approximate when viewing filtered results
+  const categoryCounts: CategoryCount = {
+    residential: normalizedProjects.length, // Will be accurate on category pages
+    commercial: normalizedProjects.length,
+    hospitality: normalizedProjects.length,
+    ongoing: normalizedProjects.length,
+  };
 
   // Render the active view
   const renderProjectsView = (projectsToRender: SanityProject[]) => {
@@ -242,34 +255,76 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
 
   return (
     <main className="relative bg-white">
-      {/* Professional Hero Section with Background Image */}
+      {/* Professional Hero Section with YouTube Video Background */}
       <section
         ref={heroRef}
         className="relative h-screen min-h-[800px] overflow-hidden bg-neutral-950"
       >
-        {/* Background Image Slideshow */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentHeroImage}
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0"
-          >
-            <SafeImage
-              src={heroImages[currentHeroImage]}
-              alt="MIDC Portfolio"
-              fill
-              className="object-cover"
-              priority
-            />
-          </motion.div>
+        {/* YouTube Video Background */}
+        <div className="absolute inset-0 z-0">
+          <iframe
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-screen w-[177.77vh] min-w-full -translate-x-1/2 -translate-y-1/2"
+            src={`https://www.youtube.com/embed/${HERO_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`}
+            title="MIDC Portfolio Showcase"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+
+        {/* Hovered Image Overlay */}
+        <AnimatePresence>
+          {hoveredImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+              className="absolute inset-0 z-5 flex items-center justify-center"
+            >
+              {/* Background blur */}
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
+
+              {/* Image */}
+              <motion.div
+                initial={{ scale: 0.9, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.9, y: 20 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                className="relative z-10 h-[75vh] w-[85vw] overflow-hidden rounded-xl border border-white/10 shadow-2xl lg:h-[70vh] lg:w-[80vw]"
+              >
+                <SafeImage
+                  src={hoveredImage.src}
+                  alt={hoveredImage.title}
+                  fill
+                  className="object-cover"
+                />
+
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+
+                {/* Image title */}
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <motion.h3
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="font-SchnyderS text-4xl font-light text-white md:text-5xl lg:text-6xl"
+                  >
+                    {hoveredImage.title}
+                  </motion.h3>
+                </div>
+
+                {/* Decorative corner accents */}
+                <div className="pointer-events-none absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#d4af37]/60" />
+                <div className="pointer-events-none absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#d4af37]/60" />
+              </motion.div>
+            </motion.div>
+          )}
         </AnimatePresence>
 
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/85 to-neutral-950/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/50" />
+        {/* Dark Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-neutral-950/60 to-neutral-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/40 to-neutral-950/30" />
 
         {/* Animated Grain Effect */}
         <motion.div
@@ -372,33 +427,6 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
               </div>
             </motion.div>
           </div>
-
-          {/* Image Progress Indicators */}
-          <div className="absolute bottom-12 left-6 flex items-center gap-3 lg:left-24">
-            {heroImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentHeroImage(index)}
-                className="group relative h-1 overflow-hidden"
-                aria-label={`Go to image ${index + 1}`}
-              >
-                <div
-                  className={`h-full transition-all duration-500 ${
-                    index === currentHeroImage ? 'w-12 bg-[#d4af37]' : 'w-6 bg-white/20 hover:bg-white/40'
-                  }`}
-                />
-                {index === currentHeroImage && (
-                  <motion.div
-                    className="absolute left-0 top-0 h-full bg-white/30"
-                    initial={{ width: '0%' }}
-                    animate={{ width: '100%' }}
-                    transition={{ duration: 5, ease: 'linear' }}
-                    key={`progress-${currentHeroImage}`}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
         </motion.div>
 
         {/* Corner Accents */}
@@ -418,7 +446,9 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
             {[...carouselImages, ...carouselImages].map((image, index) => (
               <div
                 key={`carousel-1-${index}`}
-                className="group relative h-32 w-48 flex-shrink-0 overflow-hidden lg:h-40 lg:w-64"
+                className="group relative h-32 w-48 flex-shrink-0 cursor-pointer overflow-hidden lg:h-40 lg:w-64"
+                onMouseEnter={() => setHoveredImage(image)}
+                onMouseLeave={() => setHoveredImage(null)}
               >
                 <SafeImage
                   src={image.src}
@@ -444,7 +474,9 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
             {[...carouselImages, ...carouselImages].map((image, index) => (
               <div
                 key={`carousel-2-${index}`}
-                className="group relative h-32 w-48 flex-shrink-0 overflow-hidden lg:h-40 lg:w-64"
+                className="group relative h-32 w-48 flex-shrink-0 cursor-pointer overflow-hidden lg:h-40 lg:w-64"
+                onMouseEnter={() => setHoveredImage(image)}
+                onMouseLeave={() => setHoveredImage(null)}
               >
                 <SafeImage
                   src={image.src}
@@ -463,12 +495,40 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
         <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-neutral-950 to-transparent" />
       </section>
 
-      {/* Professional Filter Bar */}
-      <section className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur-sm">
-        <div className="mx-auto max-w-[1800px] px-6 py-4 lg:px-12 lg:py-6">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            {/* Left Side: Search + Category Filter */}
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-6">
+      {/* Category Tabs */}
+      <CategoryTabs
+        selected={filters.category}
+        onChange={(category) => {
+          setFilters({ ...filters, category });
+          // Navigate to category route if not 'all'
+          if (category !== 'all') {
+            router.push(`/${locale}/projects/${category}`);
+          } else {
+            router.push(`/${locale}/projects`);
+          }
+        }}
+        counts={categoryCounts}
+      />
+
+      {/* Main Content Area with Sidebar */}
+      <div className="mx-auto flex max-w-[1800px] gap-8 px-6 py-8 lg:px-12">
+        {/* Filter Sidebar */}
+        <aside className="hidden w-80 shrink-0 lg:block">
+          <div className="sticky top-24">
+            <FilterSidebar
+              filters={filters}
+              onChange={setFilters}
+              category={filters.category}
+            />
+          </div>
+        </aside>
+
+        {/* Projects Area */}
+        <div className="flex-1">
+          {/* Search Bar + Applied Filters + View Selector */}
+          <div className="mb-6 space-y-4">
+            {/* Search + View Mode */}
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               {/* Search Input */}
               <div className="relative">
                 <div
@@ -482,15 +542,15 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
                   <input
                     type="text"
                     placeholder="Search projects..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={filters.search}
+                    onChange={(e) => setFilters({ ...filters, search: e.target.value })}
                     onFocus={() => setIsSearchFocused(true)}
                     onBlur={() => setIsSearchFocused(false)}
                     className="w-full min-w-[200px] bg-transparent font-Satoshi text-sm text-neutral-950 outline-none placeholder:text-neutral-400 lg:w-64"
                   />
-                  {searchQuery && (
+                  {filters.search && (
                     <button
-                      onClick={() => setSearchQuery('')}
+                      onClick={() => setFilters({ ...filters, search: '' })}
                       className="text-neutral-400 transition-colors hover:text-neutral-950"
                     >
                       <X size={14} />
@@ -499,75 +559,43 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
                 </div>
               </div>
 
-              {/* Category Filter */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="mr-2 font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-400">
-                  Filter:
-                </span>
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`rounded-full px-4 py-2 font-Satoshi text-xs uppercase tracking-wider transition-all duration-300 ${
-                      selectedCategory === category
-                        ? 'bg-neutral-950 text-white shadow-md'
-                        : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-neutral-950'
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
+              {/* View Mode Selector */}
+              <ViewModeSelector
+                currentView={viewMode}
+                onViewChange={setViewMode}
+                gridColumns={gridColumns}
+                onGridColumnsChange={setGridColumns}
+              />
             </div>
 
-            {/* View Mode Selector */}
-            <ViewModeSelector
-              currentView={viewMode}
-              onViewChange={setViewMode}
-              gridColumns={gridColumns}
-              onGridColumnsChange={setGridColumns}
-            />
+            {/* Applied Filters */}
+            <AppliedFilters filters={filters} onChange={setFilters} />
           </div>
-        </div>
-      </section>
 
-      {/* Current View Mode Indicator */}
-      <section className="border-b border-neutral-100 bg-neutral-50/50 px-6 py-3 lg:px-12">
-        <div className="mx-auto flex max-w-[1800px] items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-neutral-400">{VIEW_MODE_CONFIG[viewMode].icon}</span>
-            <span className="font-Satoshi text-sm text-neutral-600">
-              <span className="font-medium text-neutral-950">{VIEW_MODE_CONFIG[viewMode].label}</span>
-              {' · '}
-              {VIEW_MODE_CONFIG[viewMode].description}
-              {searchQuery && (
-                <span className="ml-2 text-neutral-400">
-                  · Searching for &quot;{searchQuery}&quot;
-                </span>
-              )}
+          {/* Current View Mode Indicator */}
+          <div className="mb-6 flex items-center justify-between border-b border-neutral-100 bg-neutral-50/50 px-4 py-3">
+            <div className="flex items-center gap-3">
+              <span className="text-neutral-400">{VIEW_MODE_CONFIG[viewMode].icon}</span>
+              <span className="font-Satoshi text-sm text-neutral-600">
+                <span className="font-medium text-neutral-950">{VIEW_MODE_CONFIG[viewMode].label}</span>
+                {' · '}
+                {VIEW_MODE_CONFIG[viewMode].description}
+                {filters.search && (
+                  <span className="ml-2 text-neutral-400">
+                    · Searching for &quot;{filters.search}&quot;
+                  </span>
+                )}
+              </span>
+            </div>
+            <span className="font-Satoshi text-sm text-neutral-500">
+              {allFilteredProjects.length} {allFilteredProjects.length === 1 ? 'project' : 'projects'}
             </span>
           </div>
-          <span className="font-Satoshi text-sm text-neutral-500">
-            {allFilteredProjects.length} {allFilteredProjects.length === 1 ? 'project' : 'projects'}
-            {(searchQuery || selectedCategory !== 'all') && (
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setSelectedCategory('all');
-                }}
-                className="ml-3 text-[#d4af37] underline transition-colors hover:text-neutral-950"
-              >
-                Clear filters
-              </button>
-            )}
-          </span>
-        </div>
-      </section>
 
-      {/* Projects Display */}
-      <section className={`relative bg-white ${
-        ['horizontal', 'split-screen', 'stacked-cards'].includes(viewMode) ? '' : 'px-6 py-16 lg:px-12 lg:py-24'
-      }`}>
+          {/* Projects Display */}
+          <div className={`relative ${
+            ['horizontal', 'split-screen', 'stacked-cards'].includes(viewMode) ? '' : ''
+          }`}>
         <div className={`mx-auto ${
           ['horizontal', 'split-screen', 'stacked-cards'].includes(viewMode) ? '' : 'max-w-[1800px]'
         }`}>
@@ -624,17 +652,23 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
               {/* No Projects Found */}
               {filteredFeaturedProjects.length === 0 && filteredRegularProjects.length === 0 && (
                 <NoProjectsFound
-                  searchQuery={searchQuery}
+                  searchQuery={filters.search}
                   onClear={() => {
-                    setSearchQuery('');
-                    setSelectedCategory('all');
+                    setFilters({
+                      category: 'all',
+                      projectTypes: [],
+                      locations: [],
+                      search: '',
+                    });
                   }}
                 />
               )}
             </>
           )}
+          </div>
         </div>
-      </section>
+      </div>
+    </div>
 
       {/* Industries Section with Background */}
       {industries.length > 0 && (
