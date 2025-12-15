@@ -78,11 +78,6 @@ export default function MEPEngineeringContent() {
         </div>
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24 lg:px-12">
           <div className="mx-auto max-w-5xl text-center">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={isHeroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }} className="mb-8 flex items-center justify-center gap-4">
-              <div className="h-px w-16 bg-linear-to-r from-transparent to-white/40" />
-              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-white/70">Pillar 3</span>
-              <div className="h-px w-16 bg-linear-to-l from-transparent to-white/40" />
-            </motion.div>
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={isHeroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.9, delay: 0.5 }} className="mb-8 font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
               The<br /><span className="text-[#d4af37]">Invisible Art</span>
             </motion.h1>
@@ -122,7 +117,7 @@ function Section1() {
     <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 sm:py-40 lg:py-48">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12 xl:px-16">
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="lg:col-span-12">
-          <div className="mb-8"><div className="mb-2 h-px w-16 bg-neutral-900" /><span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">Section 1</span></div>
+          <div className="mb-8"><div className="mb-2 h-px w-16 bg-neutral-900" /></div>
           <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">We Do Not Outsource<br /><span className="text-[#d4af37]">Critical Systems</span></h2>
           <div className="max-w-4xl space-y-6 font-Satoshi text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
             <p>Most luxury design firms rely on subcontractors for MEP (Mechanical, Electrical, Plumbing). <strong className="font-medium text-neutral-950">MIDC refuses to take that risk.</strong> We maintain a dedicated in-house MEP Division with over 30 specialized engineers.</p>
@@ -158,7 +153,6 @@ function Section2() {
     <section ref={sectionRef} className="relative overflow-hidden bg-neutral-50 py-32 sm:py-40 lg:py-48">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12 xl:px-16">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="mb-20 text-center">
-          <div className="mb-4 flex items-center justify-center gap-4"><div className="h-px w-12 bg-neutral-300" /><span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">Section 2</span><div className="h-px w-12 bg-neutral-300" /></div>
           <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">Our Engineering<br /><span className="text-[#d4af37]">Capabilities</span></h2>
         </motion.div>
         <div className="space-y-24 lg:space-y-32">
@@ -214,7 +208,6 @@ function Section3() {
     <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 sm:py-40 lg:py-48">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-12">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="mb-16 text-center">
-          <div className="mb-4 flex items-center justify-center gap-4"><div className="h-px w-12 bg-neutral-300" /><span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">Section 3</span><div className="h-px w-12 bg-neutral-300" /></div>
           <h2 className="mb-6 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">Case Study:<br /><span className="text-[#d4af37]">MEP Renovation</span></h2>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="border border-neutral-200 bg-neutral-50 p-8 lg:p-12">
@@ -236,7 +229,6 @@ function Section4() {
     <section ref={sectionRef} className="relative overflow-hidden bg-neutral-50 py-32 sm:py-40 lg:py-48">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-12">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center">
-          <div className="mb-4 flex items-center justify-center gap-4"><div className="h-px w-12 bg-neutral-300" /><span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">Section 4</span><div className="h-px w-12 bg-neutral-300" /></div>
           <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">MIDC<br /><span className="text-[#d4af37]">Partner Brands</span></h2>
           <p className="mt-8 font-Satoshi text-lg font-light text-neutral-600">World-class equipment brands used in our MEP installations</p>
         </motion.div>
@@ -292,7 +284,6 @@ function Section5() {
     <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 sm:py-40 lg:py-48">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-12">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="mb-20 text-center">
-          <div className="mb-4 flex items-center justify-center gap-4"><div className="h-px w-12 bg-neutral-300" /><span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">Section 5</span><div className="h-px w-12 bg-neutral-300" /></div>
           <h2 className="mb-4 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">Expert<br /><span className="text-[#d4af37]">Insights</span></h2>
           <p className="font-Satoshi text-lg font-light text-neutral-600">Professional guidance on the details that matter most to you.</p>
         </motion.div>
@@ -319,7 +310,6 @@ function Section6() {
       <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#d4af37]/10 blur-[120px]" />
       <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center lg:px-12">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
-          <div className="mb-8 flex items-center justify-center gap-4"><div className="h-px w-12 bg-linear-to-r from-transparent to-white/40" /><span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-white/70">Section 6</span><div className="h-px w-12 bg-linear-to-l from-transparent to-white/40" /></div>
           <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">Engineer<br /><span className="text-[#d4af37]">Your Asset</span></h2>
           <p className="mx-auto mb-12 max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-white/70 lg:text-xl">Ensure your property runs as beautifully as it looks.</p>
           <div className="flex flex-wrap items-center justify-center gap-4">

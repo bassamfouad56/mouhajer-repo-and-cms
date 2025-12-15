@@ -15,31 +15,43 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { urlForImage } from "@/sanity/lib/image";
 import { FAQSection } from "@/components/sections/faq";
 
+// Type for multilingual fields that can be either a string or an object with locale keys
+type MultilingualField = string | { ar?: string; en?: string; [key: string]: string | undefined };
+
 interface SanityService {
   _id: string;
-  title: string;
+  title: MultilingualField;
   slug: { current: string };
-  excerpt?: string;
+  excerpt?: MultilingualField;
   mainImage?: any;
   icon?: string;
-  features?: Array<{ title: string; description: string }>;
+  features?: Array<{ title: MultilingualField; description: MultilingualField }>;
   order?: number;
 }
 
 interface SanityProject {
   _id: string;
-  title: string;
+  title: MultilingualField;
   slug: { current: string };
-  excerpt?: string;
+  excerpt?: MultilingualField;
   mainImage?: any;
-  category?: string;
-  location?: string;
+  category?: MultilingualField;
+  location?: MultilingualField;
   year?: string;
 }
 
 interface ServicesPageContentProps {
   services?: SanityService[];
   projects?: SanityProject[];
+  locale: string;
+}
+
+// Helper function to safely get localized text
+function getLocalizedText(field: MultilingualField | undefined, locale: string = 'en'): string {
+  if (!field) return '';
+  if (typeof field === 'string') return field;
+  // Try the requested locale first, then 'en', then any available value
+  return field[locale] || field.en || Object.values(field).find(v => v) || '';
 }
 
 // Smooth parallax hook
@@ -50,6 +62,7 @@ function useParallax(value: MotionValue<number>, distance: number) {
 export default function ServicesPageContent({
   services = [],
   projects = [],
+  locale = 'en',
 }: ServicesPageContentProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const isHeroInView = useInView(heroRef, { once: true });
@@ -154,12 +167,13 @@ export default function ServicesPageContent({
       </section>
 
       {/* Section 1: Turnkey Solution with Real Project Image */}
-      <TurnkeySolutionSection projects={projects} />
+      <TurnkeySolutionSection projects={projects} locale={locale} />
 
       {/* Section 2: Service Pillars - Professional Cards */}
       <ServicePillarsSection
         sanityServices={services}
         sanityProjects={projects}
+        locale={locale}
       />
 
       {/* Section 3: Expert Insights - Minimal Accordion */}
@@ -203,7 +217,7 @@ export default function ServicesPageContent({
 }
 
 // Section 1: Turnkey Solution with Real Project Parallax
-function TurnkeySolutionSection({ projects }: { projects: SanityProject[] }) {
+function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityProject[]; locale?: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-200px" });
 
@@ -311,7 +325,7 @@ function TurnkeySolutionSection({ projects }: { projects: SanityProject[] }) {
                     .width(1200)
                     .height(1600)
                     .url()}
-                  alt={featuredProject.title}
+                  alt={getLocalizedText(featuredProject.title, locale)}
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -342,11 +356,11 @@ function TurnkeySolutionSection({ projects }: { projects: SanityProject[] }) {
                   Featured Project
                 </div>
                 <div className="font-SchnyderS text-3xl font-light text-neutral-950 mb-2">
-                  {featuredProject.title}
+                  {getLocalizedText(featuredProject.title, locale)}
                 </div>
                 {featuredProject.location && (
                   <div className="font-Satoshi text-sm text-neutral-600">
-                    {featuredProject.location}
+                    {getLocalizedText(featuredProject.location, locale)}
                   </div>
                 )}
               </motion.div>
@@ -362,9 +376,11 @@ function TurnkeySolutionSection({ projects }: { projects: SanityProject[] }) {
 function ServicePillarsSection({
   sanityServices,
   sanityProjects,
+  locale = 'en',
 }: {
   sanityServices: SanityService[];
   sanityProjects: SanityProject[];
+  locale?: string;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });

@@ -1,12 +1,12 @@
 'use client';
 
-import { useRef, useState, useMemo, useEffect } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { urlForImage } from '@/sanity/lib/image';
 import { format } from 'date-fns';
-import { Eye, Clock, ArrowRight, Play, Search, X, ChevronDown } from 'lucide-react';
+import { Eye, Clock, ArrowRight, Play, Search, X } from 'lucide-react';
 
 interface SanityPost {
   _id: string;
@@ -41,13 +41,6 @@ const categoryColors: Record<string, { bg: string; text: string; border: string;
   news: { bg: 'bg-purple-500/10', text: 'text-purple-600', border: 'border-purple-500/30', gradient: 'from-purple-500/20' },
 };
 
-// Interior design hero images
-const heroImages = [
-  '/projects/grand-hyatt-prince-suite/prince01.jpg',
-  '/projects/park-hyatt-villa/hotelparkhyattvilla01.jpg',
-  '/projects/jumeirah-bay-villa/jumeirahbay01.jpg',
-];
-
 // Helper to calculate reading time from content
 function calculateReadingTime(excerpt?: string, readTime?: number): number {
   if (readTime) return readTime;
@@ -67,31 +60,10 @@ function formatViews(count: number): string {
 }
 
 export default function BlogPageContent({ posts, categories }: BlogPageContentProps) {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const isHeroInView = useInView(heroRef, { once: true });
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
-  const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -50]);
-
-  // Rotate hero images
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Filter posts by category and search
   const filteredPosts = useMemo(() => {
@@ -123,184 +95,6 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
 
   return (
     <main className="relative bg-white">
-      {/* Cinematic Hero Section with Video/Image Background */}
-      <section
-        ref={heroRef}
-        className="relative h-screen min-h-[900px] overflow-hidden bg-neutral-950"
-      >
-        {/* Animated Background Images */}
-        <motion.div
-          style={{ scale: heroScale }}
-          className="absolute inset-0"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentHeroImage}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={heroImages[currentHeroImage]}
-                alt="Interior design showcase"
-                fill
-                className="object-cover"
-                priority
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Gradient Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/70 via-neutral-950/50 to-neutral-950" />
-          <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-transparent to-neutral-950/40" />
-        </motion.div>
-
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px]" />
-
-        {/* Hero Content */}
-        <motion.div
-          style={{ opacity: heroOpacity, y: textY }}
-          className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center lg:px-24"
-        >
-          <div className="max-w-[1200px]">
-            {/* Animated Label */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="mb-8 flex items-center justify-center gap-4"
-            >
-              <motion.div
-                className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]"
-                initial={{ scaleX: 0 }}
-                animate={isHeroInView ? { scaleX: 1 } : {}}
-                transition={{ duration: 1, delay: 0.5 }}
-              />
-              <span className="font-Satoshi text-xs uppercase tracking-[0.4em] text-[#d4af37]">
-                Insights & Inspiration
-              </span>
-              <motion.div
-                className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]"
-                initial={{ scaleX: 0 }}
-                animate={isHeroInView ? { scaleX: 1 } : {}}
-                transition={{ duration: 1, delay: 0.5 }}
-              />
-            </motion.div>
-
-            {/* Hero Title with Staggered Animation */}
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-8 font-SchnyderS text-6xl font-light tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl"
-            >
-              Design
-              <motion.span
-                initial={{ opacity: 0, x: -30 }}
-                animate={isHeroInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 1, delay: 0.7 }}
-                className="text-[#d4af37]"
-              > Stories</motion.span>
-              <br />
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={isHeroInView ? { opacity: 1 } : {}}
-                transition={{ duration: 1, delay: 0.9 }}
-              >
-                & Expertise
-              </motion.span>
-            </motion.h1>
-
-            {/* Hero Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="mx-auto mb-12 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-white/70 sm:text-2xl"
-            >
-              Behind-the-scenes insights from 400+ luxury projects across hospitality, residential, and commercial sectors.
-            </motion.p>
-
-            {/* Interactive Search & Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col items-center gap-8"
-            >
-              {/* Search Button */}
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="group flex items-center gap-3 border border-white/30 bg-white/5 px-8 py-4 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37] hover:bg-white/10"
-              >
-                <Search size={18} className="text-white/60 transition-colors group-hover:text-[#d4af37]" />
-                <span className="font-Satoshi text-sm font-light tracking-wider text-white/60 transition-colors group-hover:text-white">
-                  Search articles...
-                </span>
-              </button>
-
-              {/* Stats Row */}
-              <div className="flex items-center gap-12">
-                {[
-                  { value: '400+', label: 'Projects' },
-                  { value: '50+', label: 'Articles' },
-                  { value: '15+', label: 'Years Experience' },
-                ].map((stat, i) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: 1.2 + i * 0.1 }}
-                    className="text-center"
-                  >
-                    <div className="font-SchnyderS text-3xl font-light text-white lg:text-4xl">
-                      {stat.value}
-                    </div>
-                    <div className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-white/50">
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isHeroInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="flex flex-col items-center gap-2"
-          >
-            <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
-              Scroll to Explore
-            </span>
-            <ChevronDown className="h-5 w-5 text-white/40" />
-          </motion.div>
-        </motion.div>
-
-        {/* Image Navigation Dots */}
-        <div className="absolute bottom-12 right-12 z-10 flex gap-2">
-          {heroImages.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentHeroImage(i)}
-              className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                i === currentHeroImage ? 'w-8 bg-[#d4af37]' : 'bg-white/30 hover:bg-white/50'
-              }`}
-            />
-          ))}
-        </div>
-      </section>
 
       {/* Search Modal */}
       <AnimatePresence>

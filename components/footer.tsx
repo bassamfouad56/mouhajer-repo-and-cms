@@ -50,7 +50,7 @@ export function Footer() {
       { label: tHeader('about'), href: '/#about' },
       { label: tHeader('projects'), href: '/projects' },
       { label: tHeader('services'), href: '/services' },
-      { label: tHeader('blog'), href: '/blog' },
+      { label: tHeader('blog'), href: '/journal' },
       { label: tHeader('careers'), href: '/careers' },
       { label: tHeader('contact'), href: '/contact' },
     ],

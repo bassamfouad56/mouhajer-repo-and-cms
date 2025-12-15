@@ -10,8 +10,13 @@ import { EnhancedMegaMenu } from './enhanced-mega-menu';
 import { LanguageSwitcher } from './language-switcher';
 import { useCart } from '@/lib/cart-context';
 import { useTranslations } from 'next-intl';
+import type { MegaMenuImages } from './server-header';
 
-export function Header() {
+interface HeaderProps {
+  megaMenuImages?: MegaMenuImages | null;
+}
+
+export function Header({ megaMenuImages }: HeaderProps) {
   const t = useTranslations('Header');
   const tProjects = useTranslations('Projects.categories');
   const tServices = useTranslations('Services');
@@ -56,14 +61,16 @@ export function Header() {
       ],
     },
     {
-      href: '/blog',
+      href: '/journal',
       label: t('blog'),
       isPage: true,
       subLinks: [
-        { href: '/blog?category=trends', label: tBlog('trends') },
-        { href: '/blog?category=tips', label: tBlog('tips') },
-        { href: '/blog?category=case-studies', label: tBlog('caseStudies') },
-        { href: '/blog?category=news', label: tBlog('news') },
+        { href: '/journal/design-trends', label: 'Design Trends' },
+        { href: '/journal/project-stories', label: 'Project Stories' },
+        { href: '/journal/behind-the-scenes', label: 'Behind the Scenes' },
+        { href: '/journal/materials-craft', label: 'Materials & Craft' },
+        { href: '/journal/engineering', label: 'Engineering' },
+        { href: '/journal/founders-insights', label: "Founder's Insights" },
       ],
     },
     {
@@ -137,7 +144,7 @@ export function Header() {
 
             {/* Desktop Navigation with Enhanced Mega Menu */}
             <div className="flex items-center gap-6">
-              <EnhancedMegaMenu />
+              <EnhancedMegaMenu megaMenuImages={megaMenuImages} />
 
               {/* Cart Button - Only show on showroom pages */}
               {pathname?.includes('/showroom') && (

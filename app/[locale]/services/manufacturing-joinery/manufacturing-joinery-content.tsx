@@ -89,29 +89,22 @@ function HeroSection() {
       ref={ref}
       className="relative flex min-h-screen items-center justify-center overflow-hidden bg-neutral-950 px-6 py-32 sm:px-12 sm:py-40 lg:px-20 lg:py-48"
     >
-      {/* Background Image */}
+      {/* Background Video */}
       <div className="absolute inset-0">
-        <SafeImage
-          src="/projects/turnkey-design-fitout/_MID2543-HDR.jpg"
-          alt="Luxury joinery and furniture manufacturing"
-          fill
-          className="object-cover"
-          priority
-        />
+        {/* YouTube Video Embed */}
+        <div className="absolute inset-0 h-full w-full overflow-hidden">
+          <iframe
+            className="absolute left-1/2 top-1/2 h-[56.25vw] min-h-screen w-[177.77vh] min-w-screen -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/MLCIxeg8-kA?autoplay=1&mute=1&loop=1&playlist=MLCIxeg8-kA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+            title="Manufacturing & Joinery Showcase"
+            allow="autoplay; encrypted-media"
+          />
+        </div>
         <div className="absolute inset-0 bg-neutral-950/70" />
         <div className="absolute inset-0 bg-linear-to-t from-neutral-950 via-neutral-950/50 to-transparent" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6 inline-block border border-white/20 px-6 py-2 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white/60"
-        >
-          Pillar 04
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -316,14 +309,6 @@ function Section2() {
       className="relative overflow-hidden bg-neutral-50 px-6 py-32 sm:px-12 sm:py-40 lg:px-20 lg:py-48"
     >
       <div className="mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6 inline-block border border-neutral-200 px-6 py-2 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-500"
-        >
-          Section 2
-        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -541,18 +526,6 @@ function Section4() {
       className="relative overflow-hidden bg-white px-6 py-32 sm:px-12 sm:py-40 lg:px-20 lg:py-48"
     >
       <div className="mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6 flex items-center justify-center gap-4"
-        >
-          <div className="h-px w-12 bg-neutral-300" />
-          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
-            Section 4
-          </span>
-          <div className="h-px w-12 bg-neutral-300" />
-        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -644,14 +617,6 @@ function Section6() {
       className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-neutral-950 px-6 py-32 sm:px-12 sm:py-40 lg:px-20 lg:py-48"
     >
       <div className="relative z-10 mx-auto max-w-4xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6 inline-block border border-white/20 px-6 py-2 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white/60"
-        >
-          Section 6
-        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 30 }}

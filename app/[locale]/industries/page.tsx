@@ -17,10 +17,18 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+// Industries to exclude from display
+const EXCLUDED_INDUSTRIES = ['healthcare', 'education'];
+
 async function getIndustries(locale: string) {
   try {
     const industries = await client.fetch(industriesQuery, { locale });
-    return industries || [];
+    // Filter out excluded industries (healthcare and education)
+    const filteredIndustries = (industries || []).filter(
+      (industry: { slug?: { current?: string } }) =>
+        !EXCLUDED_INDUSTRIES.includes(industry.slug?.current || '')
+    );
+    return filteredIndustries;
   } catch (error) {
     console.error('Error fetching industries from Sanity:', error);
     return [];

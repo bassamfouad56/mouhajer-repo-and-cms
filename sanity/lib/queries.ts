@@ -180,7 +180,7 @@ export const industryBySlugQuery = groq`
   }
 `
 
-// Blog Post Queries with i18n support
+// Blog/Journal Post Queries with i18n support
 export const postsQuery = groq`
   *[_type == "post" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) {
     _id,
@@ -191,7 +191,11 @@ export const postsQuery = groq`
     category,
     author,
     readTime,
-    tags,
+    "tags": tags[]->{
+      _id,
+      "name": name[$locale],
+      slug
+    },
     featured,
     publishedAt,
     __i18n_lang
@@ -209,7 +213,11 @@ export const postBySlugQuery = groq`
     author,
     content,
     readTime,
-    tags,
+    "tags": tags[]->{
+      _id,
+      "name": name[$locale],
+      slug
+    },
     publishedAt,
     seo,
     __i18n_lang,
@@ -264,6 +272,11 @@ export const postsByCategoryQuery = groq`
     category,
     author,
     readTime,
+    "tags": tags[]->{
+      _id,
+      "name": name[$locale],
+      slug
+    },
     publishedAt,
     __i18n_lang
   }
@@ -706,3 +719,205 @@ export const awardWinningProjectsQuery = groq`
     }
   }
 `
+
+// ============================================
+// ADVANCED FILTERING QUERIES (Phase 1)
+// ============================================
+
+// Combined Filter Query - supports multiple filters at once
+// Params: $sectorSlug (optional), $typeSlug (optional), $locationSlug (optional), $locale
+export const projectsWithFiltersQuery = groq`
+  *[_type == "project"
+    && (!defined(__i18n_lang) || __i18n_lang == $locale)
+    && (!defined($sectorSlug) || sector->slug.current == $sectorSlug)
+    && (!defined($typeSlug) || projectType->slug.current == $typeSlug)
+    && (!defined($locationSlug) || location->slug.current == $locationSlug)
+  ] | order(year desc, publishedAt desc) {
+    _id,
+    title,
+    slug,
+    "excerpt": coalesce(excerpt, description),
+    "mainImage": coalesce(mainImage, featuredImage),
+    "year": coalesce(year, yearCompleted),
+    status,
+    featured,
+    publishedAt,
+    __i18n_lang,
+    "sector": sector->{
+      _id,
+      title,
+      slug
+    },
+    "projectType": projectType->{
+      _id,
+      title,
+      slug
+    },
+    "location": location->{
+      _id,
+      name,
+      slug,
+      type
+    },
+    "services": services[]->{
+      _id,
+      title,
+      slug
+    }
+  }
+`
+
+// Ongoing Projects Query - filters by status (in-progress)
+export const ongoingProjectsQuery = groq`
+  *[_type == "project"
+    && status == "in-progress"
+    && (!defined(__i18n_lang) || __i18n_lang == $locale)
+  ] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    "excerpt": coalesce(excerpt, description),
+    "mainImage": coalesce(mainImage, featuredImage),
+    "year": coalesce(year, yearCompleted),
+    status,
+    featured,
+    publishedAt,
+    __i18n_lang,
+    "sector": sector->{
+      _id,
+      title,
+      slug
+    },
+    "projectType": projectType->{
+      _id,
+      title,
+      slug
+    },
+    "location": location->{
+      _id,
+      name,
+      slug,
+      type
+    }
+  }
+`
+
+// Filter Counts Query - returns counts for each filter option
+// Used for faceted filtering to show "Villa (12)" etc.
+export const filterCountsQuery = groq`
+{
+  "sectors": {
+    "residential": count(*[_type == "project" && sector->slug.current == "residential" && (!defined(__i18n_lang) || __i18n_lang == $locale)]),
+    "commercial": count(*[_type == "project" && sector->slug.current == "commercial" && (!defined(__i18n_lang) || __i18n_lang == $locale)]),
+    "hospitality": count(*[_type == "project" && sector->slug.current == "hospitality" && (!defined(__i18n_lang) || __i18n_lang == $locale)]),
+    "ongoing": count(*[_type == "project" && status == "in-progress" && (!defined(__i18n_lang) || __i18n_lang == $locale)])
+  },
+  "projectTypes": *[_type == "projectType"] {
+    "slug": slug.current,
+    "count": count(*[_type == "project" && references(^._id) && (!defined(__i18n_lang) || __i18n_lang == $locale)])
+  },
+  "locations": *[_type == "location"] {
+    "slug": slug.current,
+    "count": count(*[_type == "project" && references(^._id) && (!defined(__i18n_lang) || __i18n_lang == $locale)])
+  }
+}
+`
+
+// Get Projects by Main Category (sector-based with i18n)
+// This replaces the old category-based query for our new system
+export const projectsByMainCategoryQuery = groq`
+  *[_type == "project"
+    && sector->slug.current == $category
+    && (!defined(__i18n_lang) || __i18n_lang == $locale)
+  ] | order(year desc, publishedAt desc) {
+    _id,
+    title,
+    slug,
+    "excerpt": coalesce(excerpt, description),
+    "mainImage": coalesce(mainImage, featuredImage),
+    "year": coalesce(year, yearCompleted),
+    status,
+    featured,
+    publishedAt,
+    __i18n_lang,
+    "sector": sector->{
+      _id,
+      title,
+      slug
+    },
+    "projectType": projectType->{
+      _id,
+      title,
+      slug
+    },
+    "location": location->{
+      _id,
+      name,
+      slug,
+      type
+    }
+  }
+`
+
+// ============================================
+// MEGA MENU IMAGES QUERY
+// ============================================
+
+// Fetch images for mega menu from various content types
+export const megaMenuImagesQuery = groq`
+{
+  "projects": {
+    "residential": *[_type == "project" && (category == "residential" || sector->slug.current == "residential")][0] {
+      "mainImage": coalesce(mainImage, featuredImage)
+    },
+    "commercial": *[_type == "project" && (category == "commercial" || sector->slug.current == "commercial")][0] {
+      "mainImage": coalesce(mainImage, featuredImage)
+    },
+    "hospitality": *[_type == "project" && (category == "hospitality" || sector->slug.current == "hospitality")][0] {
+      "mainImage": coalesce(mainImage, featuredImage)
+    },
+    "ongoing": *[_type == "project" && status == "in-progress"][0] {
+      "mainImage": coalesce(mainImage, featuredImage)
+    },
+    "featured": *[_type == "project" && featured == true] | order(publishedAt desc)[0] {
+      "mainImage": coalesce(mainImage, featuredImage)
+    }
+  },
+  "services": *[_type == "service"] | order(order asc) {
+    _id,
+    title,
+    slug,
+    mainImage
+  },
+  "industries": *[_type == "industry"] | order(order asc) {
+    _id,
+    title,
+    slug,
+    mainImage
+  },
+  "posts": {
+    "designTrends": *[_type == "post" && category == "design-trends"][0] {
+      mainImage
+    },
+    "projectStories": *[_type == "post" && category == "project-stories"][0] {
+      mainImage
+    },
+    "materialsCraft": *[_type == "post" && category == "materials-craft"][0] {
+      mainImage
+    },
+    "engineering": *[_type == "post" && category == "engineering"][0] {
+      mainImage
+    },
+    "featured": *[_type == "post" && featured == true] | order(publishedAt desc)[0] {
+      mainImage
+    }
+  },
+  "about": {
+    "process": *[_type == "siteSettings"][0] {
+      "mainImage": processImages[0].image
+    },
+    "awards": *[_type == "project" && featured == true][0] {
+      "mainImage": coalesce(mainImage, featuredImage)
+    }
+  }
+}`

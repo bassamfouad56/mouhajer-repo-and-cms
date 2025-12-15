@@ -80,20 +80,6 @@ export default function InteriorArchitectureContent() {
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24 lg:px-12"
         >
           <div className="mx-auto max-w-5xl text-center">
-            {/* Subtitle */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-8 flex items-center justify-center gap-4"
-            >
-              <div className="h-px w-16 bg-linear-to-r from-transparent to-white/40" />
-              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-white/70">
-                Pillar 2
-              </span>
-              <div className="h-px w-16 bg-linear-to-l from-transparent to-white/40" />
-            </motion.div>
-
             {/* Main Title */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -306,13 +292,6 @@ function DesignServicesSection() {
           transition={{ duration: 0.8 }}
           className="mb-20 text-center"
         >
-          <div className="mb-4 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-neutral-300" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">
-              Section 2
-            </span>
-            <div className="h-px w-12 bg-neutral-300" />
-          </div>
 
           <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
             Our Design
@@ -522,13 +501,6 @@ function ExpertInsightsSection() {
           transition={{ duration: 0.8 }}
           className="mb-20 text-center"
         >
-          <div className="mb-4 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-neutral-300" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">
-              Section 4
-            </span>
-            <div className="h-px w-12 bg-neutral-300" />
-          </div>
 
           <h2 className="mb-4 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
             Expert
@@ -593,13 +565,6 @@ function VisualizeFutureCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-linear-to-r from-transparent to-white/40" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-white/70">
-              Section 5
-            </span>
-            <div className="h-px w-12 bg-linear-to-l from-transparent to-white/40" />
-          </div>
 
           <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             Visualize

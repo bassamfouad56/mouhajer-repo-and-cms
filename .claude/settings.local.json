@@ -65,7 +65,15 @@
       "Bash(npx tsx:*)",
       "Bash(git config:*)",
       "Bash(git checkout:*)",
-      "Bash(git rebase:*)"
+      "Bash(git rebase:*)",
+      "Bash(git stash:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(\"d:\\wbsite\\mouhajer-new-marketing-website\\app\\[locale]\\projects\\page-original.tsx.bak\")",
+      "Bash(vercel deploy:*)",
+      "Bash(del \"d:\\wbsite\\mouhajer-new-marketing-website\\app\\[locale]\\industries\\industries-cinematic-content.tsx\")",
+      "Bash(npx tsc --noEmit)",
+      "Bash(vercel env pull:*)",
+      "Bash(del \"\\?\\D:\\wbsite\\mouhajer-new-marketing-website\\nul\")"
     ],
     "deny": [],
     "ask": []

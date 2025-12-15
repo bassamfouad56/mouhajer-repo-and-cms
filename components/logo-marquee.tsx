@@ -31,7 +31,6 @@ const partnerLogos = [
   { name: 'Partner 14', filename: '4a47a0db6e60853dedfcfdf08a5ca2491574848189.png', alt: 'Partner Logo' },
   { name: 'Partner 15', filename: '8d7a350d024ed4990466536d651d4897.png', alt: 'Partner Logo' },
   { name: 'Partner 16', filename: 'unnamed (2).png', alt: 'Partner Logo' },
-  { name: 'Partner 17', filename: 'Rectangle 649.png', alt: 'Partner Logo' },
 ];
 
 export function LogoMarquee() {
@@ -44,11 +43,11 @@ export function LogoMarquee() {
   return (
     <div
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-950 py-12 sm:py-16"
+      className="relative overflow-hidden bg-neutral-50 py-12 sm:py-16"
     >
       {/* Border lines */}
-      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
+      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
 
       {/* Label */}
       <motion.div
@@ -58,7 +57,7 @@ export function LogoMarquee() {
         className="mb-8 flex items-center justify-center gap-4 sm:mb-10"
       >
         <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-        <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/30">
+        <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
           Trusted By Industry Leaders
         </span>
         <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
@@ -67,8 +66,8 @@ export function LogoMarquee() {
       {/* Marquee container */}
       <div className="relative">
         {/* Fade edges */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-neutral-950 to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-neutral-950 to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-neutral-50 to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-neutral-50 to-transparent" />
 
         {/* Scrolling logos - Row 1 */}
         <motion.div
@@ -98,7 +97,7 @@ export function LogoMarquee() {
                   alt={logo.alt}
                   width={160}
                   height={80}
-                  className="h-full w-full object-contain opacity-60 brightness-0 invert transition-all duration-300 hover:opacity-100 hover:brightness-100 hover:invert-0"
+                  className="h-full w-full object-contain opacity-70 transition-opacity duration-300 hover:opacity-100"
                   onError={(e) => {
                     // Fallback to text if image fails to load
                     const target = e.target as HTMLImageElement;
@@ -106,7 +105,7 @@ export function LogoMarquee() {
                     const parent = target.parentElement;
                     if (parent) {
                       const span = document.createElement('span');
-                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-white/30 transition-colors duration-300 hover:text-white/60 sm:text-2xl';
+                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-neutral-400 transition-colors duration-300 hover:text-neutral-600 sm:text-2xl';
                       span.textContent = logo.name;
                       parent.appendChild(span);
                     }
@@ -145,7 +144,7 @@ export function LogoMarquee() {
                   alt={logo.alt}
                   width={160}
                   height={80}
-                  className="h-full w-full object-contain opacity-40 brightness-0 invert transition-all duration-300 hover:opacity-80 hover:brightness-100 hover:invert-0"
+                  className="h-full w-full object-contain opacity-50 transition-opacity duration-300 hover:opacity-80"
                   onError={(e) => {
                     // Fallback to text if image fails to load
                     const target = e.target as HTMLImageElement;
@@ -153,7 +152,7 @@ export function LogoMarquee() {
                     const parent = target.parentElement;
                     if (parent) {
                       const span = document.createElement('span');
-                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-white/20 transition-colors duration-300 hover:text-white/50 sm:text-2xl';
+                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-neutral-300 transition-colors duration-300 hover:text-neutral-500 sm:text-2xl';
                       span.textContent = logo.name;
                       parent.appendChild(span);
                     }

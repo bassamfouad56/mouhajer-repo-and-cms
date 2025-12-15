@@ -45,6 +45,7 @@ interface RawSanityProject {
   location?: I18nField;
   year?: string;
   featured?: boolean;
+  services?: Array<{ _id: string; title: I18nField; slug: { current: string } }>;
 }
 
 // YouTube video ID for hero background
@@ -59,9 +60,19 @@ interface SanityIndustry {
   icon?: string;
 }
 
+interface SanityService {
+  _id: string;
+  title: string | { en?: string; ar?: string };
+  slug: { current: string };
+  excerpt?: string | { en?: string; ar?: string };
+  mainImage?: any;
+  icon?: string;
+}
+
 interface ProjectsPageContentProps {
   projects: RawSanityProject[];
   industries: SanityIndustry[];
+  services: SanityService[];
   locale: string;
   initialCategory?: MainCategory;
 }
@@ -87,7 +98,7 @@ function normalizeProject(project: RawSanityProject, locale: string): SanityProj
   };
 }
 
-export default function EnhancedProjectsPageContent({ projects, industries, locale, initialCategory = 'all' }: ProjectsPageContentProps) {
+export default function EnhancedProjectsPageContent({ projects, industries, services, locale, initialCategory = 'all' }: ProjectsPageContentProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const heroRef = useRef<HTMLDivElement>(null);
@@ -112,14 +123,17 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
   const viewFromUrl = (searchParams.get('view') as ViewMode) || 'grid';
   const columnsFromUrl = searchParams.get('columns');
   const searchFromUrl = searchParams.get('search') || '';
+  const filterFromUrl = (searchParams.get('filter') as MainCategory) || initialCategory;
   const projectTypesFromUrl = searchParams.get('types')?.split(',').filter(Boolean) || [];
   const locationsFromUrl = searchParams.get('locations')?.split(',').filter(Boolean) || [];
+  const servicesFromUrl = searchParams.get('services')?.split(',').filter(Boolean) || [];
 
   // New filter state
   const [filters, setFilters] = useState<ProjectFilters>({
-    category: initialCategory,
+    category: filterFromUrl,
     projectTypes: projectTypesFromUrl,
     locations: locationsFromUrl,
+    services: servicesFromUrl,
     search: searchFromUrl,
   });
   const [viewMode, setViewMode] = useState<ViewMode>(viewFromUrl);
@@ -140,6 +154,11 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
   useEffect(() => {
     const params = new URLSearchParams();
 
+    // Add filter (category) parameter
+    if (filters.category && filters.category !== 'all') {
+      params.set('filter', filters.category);
+    }
+
     if (viewMode !== 'grid') {
       params.set('view', viewMode);
     }
@@ -158,6 +177,10 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
 
     if (filters.locations.length > 0) {
       params.set('locations', filters.locations.join(','));
+    }
+
+    if (filters.services.length > 0) {
+      params.set('services', filters.services.join(','));
     }
 
     const queryString = params.toString();
@@ -201,6 +224,16 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
         projectLocation.includes(loc.toLowerCase())
       );
       if (!matchesLocation) return false;
+    }
+
+    // Service filter (check if project has any of the selected services)
+    if (filters.services.length > 0) {
+      const projectServices = (project as any).services || [];
+      const projectServiceSlugs = projectServices.map((s: any) => s.slug?.current || '');
+      const matchesService = filters.services.some(serviceSlug =>
+        projectServiceSlugs.includes(serviceSlug)
+      );
+      if (!matchesService) return false;
     }
 
     return true;
@@ -500,12 +533,6 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
         selected={filters.category}
         onChange={(category) => {
           setFilters({ ...filters, category });
-          // Navigate to category route if not 'all'
-          if (category !== 'all') {
-            router.push(`/${locale}/projects/${category}`);
-          } else {
-            router.push(`/${locale}/projects`);
-          }
         }}
         counts={categoryCounts}
       />
@@ -518,7 +545,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, loca
             <FilterSidebar
               filters={filters}
               onChange={setFilters}
-              category={filters.category}
+              services={services}
             />
           </div>
         </aside>

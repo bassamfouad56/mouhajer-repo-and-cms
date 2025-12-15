@@ -49,10 +49,12 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Design Trends', value: 'trends' },
-          { title: 'Design Tips', value: 'tips' },
-          { title: 'Case Studies', value: 'case-studies' },
-          { title: 'News & Updates', value: 'news' },
+          { title: 'Design Trends', value: 'design-trends' },
+          { title: 'Project Stories', value: 'project-stories' },
+          { title: 'Behind the Scenes', value: 'behind-the-scenes' },
+          { title: 'Materials & Craft', value: 'materials-craft' },
+          { title: 'Engineering', value: 'engineering' },
+          { title: "Founder's Insights", value: 'founders-insights' },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -105,7 +107,13 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'tag' }],
+        },
+      ],
+      validation: (Rule) => Rule.max(10),
     }),
     defineField({
       name: 'relatedProjects',

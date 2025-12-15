@@ -39,9 +39,23 @@ export default defineType({
           { title: 'Budget Range', value: 'budget' },
           { title: 'Feature', value: 'feature' },
           { title: 'Certification', value: 'certification' },
+          { title: 'Blog Topic', value: 'blog-topic' },
         ],
       },
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'usedIn',
+      title: 'Used In',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Projects', value: 'projects' },
+          { title: 'Blog', value: 'blog' },
+        ],
+      },
+      description: 'Where this tag can be used',
     }),
     defineField({
       name: 'description',

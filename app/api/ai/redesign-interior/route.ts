@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { analyzeImageWithOllama, checkOllamaHealth } from '@/lib/ai/ollama-client';
 import { generateImageWithComfyUIImg2Img, checkComfyUIHealth } from '@/lib/ai/comfyui-client';
-import { client as sanityClient } from '@/sanity/lib/client';
 import { Resend } from 'resend';
 
 // Force dynamic to prevent static analysis during build
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 // Initialize Resend only if API key is available
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -20,6 +20,9 @@ const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Mouhajer Design Studio <onb
 
 export async function POST(request: NextRequest) {
   try {
+    // Lazy load Sanity client to avoid build-time initialization
+    const { client: sanityClient } = await import('@/sanity/lib/client');
+
     const formData = await request.formData();
 
     const email = formData.get('email') as string;

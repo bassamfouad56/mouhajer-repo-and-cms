@@ -12,6 +12,7 @@ import { CertificationsAwards } from "@/components/sections/certifications-award
 import { SectorsExpertise } from "@/components/sections/sectors-expertise";
 import { Contact } from "@/components/sections/contact";
 import { FAQSection } from "@/components/sections/faq";
+import { SectionDivider, LuxuryTransition, SimpleAnimatedDivider } from "@/components/section-divider";
 
 // Homepage FAQ content from content.md
 const homepageFAQs = [
@@ -287,17 +288,26 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         {/* Section 1: Hero with Video */}
         <HeroVideo />
 
+        {/* Transition: Hero to Promise */}
+        <SectionDivider variant="line" theme="light" />
+
         {/* Section 2: The Mouhajer Promise */}
         <MouhajerPromise images={projectImages.promise} />
 
-        {/* Section 3: Who We Are - Cinematic Experience */}
+        {/* Section 3: Who We Are - Cinematic Horizontal Scroll Experience */}
         <WhoWeAreCinematic images={projectImages.whoWeAre} />
+
+        {/* Transition: Who We Are to Stats */}
+        <LuxuryTransition theme="dark" />
 
         {/* Section 4: Stats Banner */}
         <StatsBanner />
 
         {/* Section 4.5: Trusted Partners Logo Marquee */}
         <LogoMarquee />
+
+        {/* Transition: Logo Marquee to Founder */}
+        <SimpleAnimatedDivider theme="light" />
 
         {/* Section 5: Founder's Message */}
         <FounderMessage
@@ -307,20 +317,38 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           founderQuote={siteSettings.founderQuote}
         />
 
+        {/* Transition: Founder to Capabilities */}
+        <SectionDivider variant="diamond" theme="dark" />
+
         {/* Section 6: Our Capabilities */}
         <CapabilitiesCarousel images={projectImages.capabilities} />
+
+        {/* Transition: Capabilities to Portfolio */}
+        <LuxuryTransition theme="light" />
 
         {/* Section 7: Portfolio of Excellence */}
         <PortfolioShowcase projects={projects} />
 
-        {/* Section 9: Sectors of Expertise */}
+        {/* Transition: Portfolio to Sectors */}
+        <SectionDivider variant="grid" theme="dark" />
+
+        {/* Section 8: Sectors of Expertise */}
         <SectorsExpertise images={projectImages.sectors} />
+
+        {/* Transition: Sectors to Partners */}
+        <SimpleAnimatedDivider theme="dark" />
 
         {/* Section 9: Strategic Partners & Testimonials */}
         <PartnersTestimonials />
 
+        {/* Transition: Partners to Awards */}
+        <SectionDivider variant="wave" theme="dark" />
+
         {/* Section 10: Certifications & Awards */}
         <CertificationsAwards />
+
+        {/* Transition: Awards to FAQ */}
+        <LuxuryTransition theme="dark" />
 
         {/* Section 11: FAQ */}
         <FAQSection
@@ -329,6 +357,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           faqs={homepageFAQs}
           variant="dark"
         />
+
+        {/* Transition: FAQ to Contact */}
+        <SectionDivider variant="arrow" theme="dark" />
 
         {/* Section 12: Contact */}
         <Contact backgroundImage={siteSettings.contactBackgroundImage} />

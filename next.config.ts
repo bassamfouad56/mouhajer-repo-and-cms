@@ -61,6 +61,22 @@ const nextConfig: NextConfig = {
   },
   // Remove standalone output to speed up build (Vercel handles this automatically)
   // output: 'standalone',
+  // Redirects for blog to journal migration
+  async redirects() {
+    return [
+      // Redirect old blog URLs to journal
+      {
+        source: '/:locale/blog',
+        destination: '/:locale/journal',
+        permanent: true,
+      },
+      {
+        source: '/:locale/blog/:slug',
+        destination: '/:locale/journal/design-trends/:slug',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

@@ -5,6 +5,7 @@ import { LogoMarquee } from '@/components/logo-marquee';
 import { client } from '@/sanity/lib/client';
 import { postsQuery } from '@/sanity/lib/queries';
 import BlogPageContent from './blog-page-content';
+import { BlogHeroBanner } from '@/components/blog/blog-hero-banner';
 
 export const metadata: Metadata = {
   title: 'Insights | MIDC - Construction Knowledge & Industry Trends',
@@ -43,6 +44,9 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   return (
     <>
       <Header />
+      {/* YouTube Video Banner with Blog Images Carousel */}
+      <BlogHeroBanner />
+      {/* Existing Blog Content (will appear below the video banner) */}
       <BlogPageContent posts={posts} categories={categories} />
       <LogoMarquee />
       <Footer />

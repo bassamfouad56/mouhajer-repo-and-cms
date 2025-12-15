@@ -41,7 +41,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
   return (
     <>
       <Header />
-      <ServicesPageContent services={services} projects={projects} />
+      <ServicesPageContent services={services} projects={projects} locale={locale} />
       <LogoMarquee />
       <Footer />
     </>

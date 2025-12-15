@@ -52,13 +52,16 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
+  // Default background image when no card is hovered
+  const DEFAULT_BG_IMAGE = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80';
+
   const cards = [
     {
       title: 'Land Owners',
       subtitle: 'From Ground Zero',
       description:
         'You see potential in the sand. We have the engineering license to turn that empty plot into a structural masterpiece. We handle the excavation, the concrete, and the keys.',
-      image: images?.landOwners || '/projects/commercial-interior/11.jpg',
+      image: images?.landOwners || 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80',
       imageAlt: 'Construction site with modern building under construction',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="h-8 w-8">
@@ -71,7 +74,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
       subtitle: 'Renaissance & Rebirth',
       description:
         'You own a villa or hotel that needs a rebirth. We manage complex renovations that transform dated structures into modern assets, increasing value and livability.',
-      image: images?.propertyOwners || '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+      image: images?.propertyOwners || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80',
       imageAlt: 'Luxury villa renovation interior design',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="h-8 w-8">
@@ -103,7 +106,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
             className="absolute inset-0"
           >
             <SafeImage
-              src={activeCard !== null ? cards[activeCard].image : '/projects/commercial-interior/_MID7362-HDR.jpg'}
+              src={activeCard !== null ? cards[activeCard].image : DEFAULT_BG_IMAGE}
               alt="Background"
               fill
               className="object-cover"

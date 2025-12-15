@@ -78,20 +78,6 @@ export default function CivilConstructionContent() {
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24 lg:px-12"
         >
           <div className="mx-auto max-w-5xl text-center">
-            {/* Subtitle */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-8 flex items-center justify-center gap-4"
-            >
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-white/40" />
-              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-white/70">
-                Pillar 1
-              </span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-white/40" />
-            </motion.div>
-
             {/* Main Title - 100% VERBATIM line 849 */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -174,9 +160,6 @@ function DefiningSkylineSection() {
           >
             <div className="mb-8">
               <div className="mb-2 h-px w-16 bg-neutral-900" />
-              <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">
-                Section 1
-              </span>
             </div>
 
             <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
@@ -275,13 +258,6 @@ function TechnicalCapabilitiesSection() {
           transition={{ duration: 0.8 }}
           className="mb-20 text-center"
         >
-          <div className="mb-4 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-neutral-300" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">
-              Section 2
-            </span>
-            <div className="h-px w-12 bg-neutral-300" />
-          </div>
 
           <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
             Our Technical
@@ -383,13 +359,6 @@ function ISOStandardsSection() {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <div className="mb-4 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-neutral-300" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">
-              Section 3
-            </span>
-            <div className="h-px w-12 bg-neutral-300" />
-          </div>
 
           {/* 100% VERBATIM headline from line 880 */}
           <h2 className="mb-6 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
@@ -473,13 +442,6 @@ function ExpertInsightsSection() {
           transition={{ duration: 0.8 }}
           className="mb-20 text-center"
         >
-          <div className="mb-4 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-neutral-300" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">
-              Section 4
-            </span>
-            <div className="h-px w-12 bg-neutral-300" />
-          </div>
 
           <h2 className="mb-4 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
             Expert
@@ -535,13 +497,6 @@ function BuildOnSolidGroundCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-white/40" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-white/70">
-              Section 5
-            </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-white/40" />
-          </div>
 
           {/* 100% VERBATIM headline from line 904 */}
           <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">

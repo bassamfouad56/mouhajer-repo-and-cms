@@ -1,12 +1,15 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ArrowRight, Sparkles, Award } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { getSafeImageUrl } from '@/sanity/lib/image';
+import { useMegaMenuImages } from './providers/mega-menu-images-provider';
+import type { MegaMenuImages } from './server-header';
 
 interface SubLink {
   href: string;
@@ -30,12 +33,113 @@ interface MegaMenuItem {
   };
 }
 
-export function EnhancedMegaMenu() {
+// Fallback images for when Sanity images are not available
+const FALLBACK_IMAGES = {
+  projects: {
+    residential: '/projects/bedroom-interior/1.jpg',
+    commercial: '/projects/commercial-interior/11.jpg',
+    hospitality: '/projects/commercial-interior/16.jpg',
+    ongoing: '/projects/commercial-interior/17.jpg',
+    featured: '/projects/commercial-interior/11.jpg',
+  },
+  services: {
+    'civil-construction': '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+    'interior-architecture': '/projects/bedroom-interior/1.jpg',
+    'mep-engineering': '/projects/commercial-interior/18.jpg',
+    'manufacturing-joinery': '/projects/turnkey-design-fitout/_MID2583-HDR.jpg',
+    'fit-out-execution': '/projects/bathroom/_MID0061-HDR.jpg',
+    'handover-maintenance': '/projects/commercial-interior/19.jpg',
+    featured: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+  },
+  industries: {
+    'luxury-hospitality': '/projects/commercial-interior/23.jpg',
+    'high-end-residential': '/projects/bedroom-interior/5.jpg',
+    'commercial-corporate': '/projects/commercial-interior/27.jpg',
+    featured: '/projects/bedroom-interior/1.jpg',
+  },
+  journal: {
+    'design-trends': '/projects/turnkey-design-fitout/_MID0003-HDR.jpg',
+    'project-stories': '/projects/bedroom-interior/6.jpg',
+    'materials-craft': '/projects/commercial-interior/30.jpg',
+    engineering: '/projects/commercial-interior/37.jpg',
+    featured: '/projects/commercial-interior/16.jpg',
+  },
+  about: {
+    logo: '/logo.svg',
+    founder: '/founder/CEO Arabia.jpg',
+    process: '/projects/turnkey-design-fitout/_MID2653-HDR.jpg',
+    awards: '/projects/commercial-interior/39.jpg',
+    featured: '/projects/turnkey-design-fitout/_MID0003-HDR.jpg',
+  },
+  contact: {
+    contactUs: '/projects/commercial-interior/40.jpg',
+    bookConsultation: '/projects/turnkey-design-fitout/_MID0058-HDR.jpg',
+  },
+};
+
+interface EnhancedMegaMenuProps {
+  megaMenuImages?: MegaMenuImages | null;
+}
+
+export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMenuProps) {
   const pathname = usePathname();
   const t = useTranslations('MegaMenu');
   const tHeader = useTranslations('Header');
 
-  const megaMenuItems: MegaMenuItem[] = [
+  // Use prop images first, fallback to context, then to null (which uses fallback images)
+  const contextImages = useMegaMenuImages();
+  const megaMenuImages = propImages ?? contextImages;
+
+  const megaMenuItems: MegaMenuItem[] = useMemo(() => {
+    // Helper function to get image URL from Sanity or fallback
+    const getProjectImage = (category: 'residential' | 'commercial' | 'hospitality' | 'ongoing' | 'featured'): string => {
+      const sanityImage = megaMenuImages?.projects?.[category]?.mainImage;
+      if (sanityImage) {
+        return getSafeImageUrl(sanityImage, 400, 300, FALLBACK_IMAGES.projects[category]);
+      }
+      return FALLBACK_IMAGES.projects[category];
+    };
+
+    const getServiceImage = (slug: string): string => {
+      const service = megaMenuImages?.services?.find(s => s.slug?.current === slug);
+      if (service?.mainImage) {
+        return getSafeImageUrl(service.mainImage, 400, 300, FALLBACK_IMAGES.services[slug as keyof typeof FALLBACK_IMAGES.services] || FALLBACK_IMAGES.services.featured);
+      }
+      return FALLBACK_IMAGES.services[slug as keyof typeof FALLBACK_IMAGES.services] || FALLBACK_IMAGES.services.featured;
+    };
+
+    const getIndustryImage = (slug: string): string => {
+      const industry = megaMenuImages?.industries?.find(i => i.slug?.current === slug);
+      if (industry?.mainImage) {
+        return getSafeImageUrl(industry.mainImage, 400, 300, FALLBACK_IMAGES.industries[slug as keyof typeof FALLBACK_IMAGES.industries] || FALLBACK_IMAGES.industries.featured);
+      }
+      return FALLBACK_IMAGES.industries[slug as keyof typeof FALLBACK_IMAGES.industries] || FALLBACK_IMAGES.industries.featured;
+    };
+
+    const getPostImage = (category: 'designTrends' | 'projectStories' | 'materialsCraft' | 'engineering' | 'featured'): string => {
+      const sanityImage = megaMenuImages?.posts?.[category]?.mainImage;
+      const categoryToFallback: Record<string, keyof typeof FALLBACK_IMAGES.journal> = {
+        designTrends: 'design-trends',
+        projectStories: 'project-stories',
+        materialsCraft: 'materials-craft',
+        engineering: 'engineering',
+        featured: 'featured',
+      };
+      if (sanityImage) {
+        return getSafeImageUrl(sanityImage, 400, 300, FALLBACK_IMAGES.journal[categoryToFallback[category]]);
+      }
+      return FALLBACK_IMAGES.journal[categoryToFallback[category]];
+    };
+
+    const getAboutImage = (section: 'process' | 'awards'): string => {
+      const sanityImage = megaMenuImages?.about?.[section]?.mainImage;
+      if (sanityImage) {
+        return getSafeImageUrl(sanityImage, 400, 300, FALLBACK_IMAGES.about[section]);
+      }
+      return FALLBACK_IMAGES.about[section];
+    };
+
+    return [
     { href: '/', label: tHeader('home'), isPage: true },
     {
       href: '/projects',
@@ -46,31 +150,31 @@ export function EnhancedMegaMenu() {
           href: '/projects?category=residential',
           label: t('projects.residential.label'),
           description: t('projects.residential.description'),
-          image: '/projects/bedroom-interior/1.jpg',
+          image: getProjectImage('residential'),
         },
         {
           href: '/projects?category=commercial',
           label: t('projects.commercial.label'),
           description: t('projects.commercial.description'),
-          image: '/projects/commercial-interior/11.jpg',
+          image: getProjectImage('commercial'),
         },
         {
           href: '/projects?category=hospitality',
           label: t('projects.hospitality.label'),
           description: t('projects.hospitality.description'),
-          image: '/projects/commercial-interior/16.jpg',
+          image: getProjectImage('hospitality'),
         },
         {
           href: '/projects?category=ongoing',
           label: t('projects.ongoing.label'),
           description: t('projects.ongoing.description'),
-          image: '/projects/commercial-interior/17.jpg',
+          image: getProjectImage('ongoing'),
         },
       ],
       featured: {
         title: t('projects.featured.title'),
         description: t('projects.featured.description'),
-        image: '/projects/commercial-interior/11.jpg',
+        image: getProjectImage('featured'),
         href: '/projects',
       },
     },
@@ -83,43 +187,43 @@ export function EnhancedMegaMenu() {
           href: '/services/civil-construction',
           label: t('services.civilConstruction.label'),
           description: t('services.civilConstruction.description'),
-          image: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+          image: getServiceImage('civil-construction'),
         },
         {
           href: '/services/interior-architecture',
           label: t('services.interiorArchitecture.label'),
           description: t('services.interiorArchitecture.description'),
-          image: '/projects/bedroom-interior/1.jpg',
+          image: getServiceImage('interior-architecture'),
         },
         {
           href: '/services/mep-engineering',
           label: t('services.mepEngineering.label'),
           description: t('services.mepEngineering.description'),
-          image: '/projects/commercial-interior/18.jpg',
+          image: getServiceImage('mep-engineering'),
         },
         {
           href: '/services/manufacturing-joinery',
           label: t('services.manufacturingJoinery.label'),
           description: t('services.manufacturingJoinery.description'),
-          image: '/projects/turnkey-design-fitout/_MID2583-HDR.jpg',
+          image: getServiceImage('manufacturing-joinery'),
         },
         {
           href: '/services/fit-out-execution',
           label: t('services.fitOutExecution.label'),
           description: t('services.fitOutExecution.description'),
-          image: '/projects/bathroom/_MID0061-HDR.jpg',
+          image: getServiceImage('fit-out-execution'),
         },
         {
           href: '/services/handover-maintenance',
           label: t('services.handoverMaintenance.label'),
           description: t('services.handoverMaintenance.description'),
-          image: '/projects/commercial-interior/19.jpg',
+          image: getServiceImage('handover-maintenance'),
         },
       ],
       featured: {
         title: t('services.featured.title'),
         description: t('services.featured.description'),
-        image: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+        image: getServiceImage('civil-construction'),
         href: '/services',
       },
     },
@@ -132,63 +236,63 @@ export function EnhancedMegaMenu() {
           href: '/industries/luxury-hospitality',
           label: t('industries.luxuryHospitality.label'),
           description: t('industries.luxuryHospitality.description'),
-          image: '/projects/commercial-interior/23.jpg',
+          image: getIndustryImage('luxury-hospitality'),
         },
         {
           href: '/industries/high-end-residential',
           label: t('industries.highEndResidential.label'),
           description: t('industries.highEndResidential.description'),
-          image: '/projects/bedroom-interior/5.jpg',
+          image: getIndustryImage('high-end-residential'),
         },
         {
           href: '/industries/commercial-corporate',
           label: t('industries.commercialCorporate.label'),
           description: t('industries.commercialCorporate.description'),
-          image: '/projects/commercial-interior/27.jpg',
+          image: getIndustryImage('commercial-corporate'),
         },
       ],
       featured: {
         title: t('industries.featured.title'),
         description: t('industries.featured.description'),
-        image: '/projects/bedroom-interior/1.jpg',
+        image: getIndustryImage('luxury-hospitality'),
         href: '/industries',
       },
     },
     {
-      href: '/blog',
+      href: '/journal',
       label: tHeader('blog'),
       isPage: true,
       subLinks: [
         {
-          href: '/blog?category=trends',
-          label: t('blog.trends.label'),
-          description: t('blog.trends.description'),
-          image: '/projects/turnkey-design-fitout/_MID0003-HDR.jpg',
+          href: '/journal/design-trends',
+          label: 'Design Trends',
+          description: 'Latest trends in interior design and architecture',
+          image: getPostImage('designTrends'),
         },
         {
-          href: '/blog?category=tips',
-          label: t('blog.tips.label'),
-          description: t('blog.tips.description'),
-          image: '/projects/bedroom-interior/6.jpg',
+          href: '/journal/project-stories',
+          label: 'Project Stories',
+          description: 'Behind the scenes of our signature projects',
+          image: getPostImage('projectStories'),
         },
         {
-          href: '/blog?category=case-studies',
-          label: t('blog.caseStudies.label'),
-          description: t('blog.caseStudies.description'),
-          image: '/projects/commercial-interior/30.jpg',
+          href: '/journal/materials-craft',
+          label: 'Materials & Craft',
+          description: 'Exploring materials, finishes, and craftsmanship',
+          image: getPostImage('materialsCraft'),
         },
         {
-          href: '/blog?category=news',
-          label: t('blog.news.label'),
-          description: t('blog.news.description'),
-          image: '/projects/commercial-interior/37.jpg',
+          href: '/journal/engineering',
+          label: 'Engineering',
+          description: 'Technical insights and engineering excellence',
+          image: getPostImage('engineering'),
         },
       ],
       featured: {
         title: t('blog.featured.title'),
         description: t('blog.featured.description'),
-        image: '/projects/commercial-interior/16.jpg',
-        href: '/blog',
+        image: getPostImage('featured'),
+        href: '/journal',
       },
     },
     {
@@ -200,33 +304,33 @@ export function EnhancedMegaMenu() {
           href: '/about',
           label: t('about.aboutMidc.label'),
           description: t('about.aboutMidc.description'),
-          image: '/logo.svg',
+          image: FALLBACK_IMAGES.about.logo,
           animation: 'opacity' as const,
         },
         {
           href: '/about/founder',
           label: t('about.founder.label'),
           description: t('about.founder.description'),
-          image: '/founder/CEO Arabia.jpg',
+          image: FALLBACK_IMAGES.about.founder,
           animation: 'scale' as const,
         },
         {
           href: '/about/process',
           label: t('about.process.label'),
           description: t('about.process.description'),
-          image: '/projects/turnkey-design-fitout/_MID2653-HDR.jpg',
+          image: getAboutImage('process'),
         },
         {
           href: '/about/awards',
           label: t('about.awards.label'),
           description: t('about.awards.description'),
-          image: '/projects/commercial-interior/39.jpg',
+          image: getAboutImage('awards'),
         },
       ],
       featured: {
         title: t('about.featured.title'),
         description: t('about.featured.description'),
-        image: '/projects/turnkey-design-fitout/_MID0003-HDR.jpg',
+        image: getAboutImage('process'),
         href: '/about',
       },
     },
@@ -239,18 +343,19 @@ export function EnhancedMegaMenu() {
           href: '/contact',
           label: t('contact.contactUs.label'),
           description: t('contact.contactUs.description'),
-          image: '/projects/commercial-interior/40.jpg',
+          image: FALLBACK_IMAGES.contact.contactUs,
         },
         {
           href: '/contact/book-consultation',
           label: t('contact.bookConsultation.label'),
           description: t('contact.bookConsultation.description'),
-          image: '/projects/turnkey-design-fitout/_MID0058-HDR.jpg',
+          image: FALLBACK_IMAGES.contact.bookConsultation,
         },
       ],
       // No featured section = simple dropdown
     },
   ];
+  }, [megaMenuImages, t, tHeader]);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);

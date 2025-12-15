@@ -15,6 +15,7 @@ import testimonial from './testimonial'
 import team from './team'
 import faq from './faq'
 import client from './client'
+import partner from './partner'
 
 // Site Configuration
 import siteSettings from './siteSettings'
@@ -37,6 +38,7 @@ export const schemaTypes = [
   team,
   faq,
   client,
+  partner,
 
   // Configuration
   siteSettings,

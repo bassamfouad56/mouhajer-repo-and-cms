@@ -4,12 +4,52 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { LogoMarquee } from '@/components/logo-marquee';
 import { client } from '@/sanity/lib/client';
-import { projectBySlugQuery, projectsQuery } from '@/sanity/lib/queries';
+import {
+  projectBySlugQuery,
+  projectsByMainCategoryQuery,
+  ongoingProjectsQuery,
+  industriesQuery,
+  servicesQuery,
+} from '@/sanity/lib/queries';
 import { urlForImage } from '@/sanity/lib/image';
 import { EnhancedProjectPageClient } from './enhanced-project-page';
 import { getLocalizedValue } from '@/lib/error-handling';
+import EnhancedProjectsPageContent from '../enhanced-projects-page-content';
+import type { MainCategory } from '@/types/filters';
 
 export const revalidate = 3600;
+
+// Valid category slugs
+const VALID_CATEGORIES = ['residential', 'commercial', 'hospitality', 'ongoing'] as const;
+
+// Category metadata
+const CATEGORY_META = {
+  residential: {
+    title: 'Residential Projects',
+    description:
+      'Explore our luxury residential projects across the UAE. From villas and penthouses to palaces and townhouses, we deliver exceptional living spaces with zero failed handovers.',
+  },
+  commercial: {
+    title: 'Commercial Projects',
+    description:
+      'Discover our commercial interior design and fit-out projects. From offices and retail stores to medical clinics and showrooms, we create functional and inspiring spaces.',
+  },
+  hospitality: {
+    title: 'Hospitality Projects',
+    description:
+      'Experience our hospitality design excellence. From hotels and restaurants to cafes and spas, we craft memorable spaces that delight guests.',
+  },
+  ongoing: {
+    title: 'Ongoing Projects',
+    description:
+      'View our current projects in progress. Follow our latest work as we transform spaces across the UAE with our comprehensive design and build solutions.',
+  },
+} as const;
+
+// Check if slug is a category
+function isCategory(slug: string): slug is typeof VALID_CATEGORIES[number] {
+  return VALID_CATEGORIES.includes(slug as any);
+}
 
 interface PageProps {
   params: Promise<{
@@ -28,18 +68,74 @@ async function getProject(slug: string, locale: string) {
   }
 }
 
-// Skip static generation at build time - use ISR instead
-// Pages will be generated on-demand and cached
-export async function generateStaticParams() {
-  return [];
+// Fetch projects by category
+async function getProjectsByCategory(category: string, locale: string) {
+  try {
+    if (category === 'ongoing') {
+      const projects = await client.fetch(ongoingProjectsQuery, { locale });
+      return projects || [];
+    }
+    const projects = await client.fetch(projectsByMainCategoryQuery, {
+      category,
+      locale,
+    });
+    return projects || [];
+  } catch (error) {
+    console.error(`Error fetching ${category} projects from Sanity:`, error);
+    return [];
+  }
 }
 
-// Allow dynamic params for on-demand generation
+async function getIndustries(locale: string) {
+  try {
+    const industries = await client.fetch(industriesQuery, { locale });
+    return industries || [];
+  } catch (error) {
+    console.error('Error fetching industries from Sanity:', error);
+    return [];
+  }
+}
+
+async function getServices(locale: string) {
+  try {
+    const services = await client.fetch(servicesQuery, { locale });
+    return services || [];
+  } catch (error) {
+    console.error('Error fetching services from Sanity:', error);
+    return [];
+  }
+}
+
+// Generate static params for categories
+export async function generateStaticParams() {
+  // Pre-generate category pages
+  return VALID_CATEGORIES.map((category) => ({
+    slug: category,
+  }));
+}
+
+// Allow dynamic params for on-demand generation of project pages
 export const dynamicParams = true;
 
 // Generate metadata
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
+
+  // Check if it's a category page
+  if (isCategory(slug)) {
+    const meta = CATEGORY_META[slug];
+    return {
+      title: `${meta.title} | MIDC`,
+      description: meta.description,
+      openGraph: {
+        title: `${meta.title} | MIDC`,
+        description: meta.description,
+        type: 'website',
+      },
+    };
+  }
+
+  // Otherwise, it's a project page
   const project = await getProject(slug, locale);
 
   if (!project) {
@@ -72,6 +168,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProjectPage({ params }: PageProps) {
   const { locale, slug } = await params;
+
+  // Check if this is a category page
+  if (isCategory(slug)) {
+    // Fetch data for category page
+    const [projects, industries, services] = await Promise.all([
+      getProjectsByCategory(slug, locale),
+      getIndustries(locale),
+      getServices(locale),
+    ]);
+
+    return (
+      <>
+        <Header />
+        <EnhancedProjectsPageContent
+          projects={projects}
+          industries={industries}
+          services={services}
+          locale={locale}
+          initialCategory={slug as MainCategory}
+        />
+        <LogoMarquee />
+        <Footer />
+      </>
+    );
+  }
+
+  // Otherwise, it's an individual project page
   const project = await getProject(slug, locale);
 
   if (!project) {

@@ -18,6 +18,7 @@ import { Preloader } from "@/components/preloader";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { NoiseTexture } from "@/components/noise-texture";
 import { LocaleProvider } from "@/components/providers/locale-provider";
+import { MegaMenuImagesServerProvider } from "@/components/providers/mega-menu-images-server-provider";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -120,31 +121,33 @@ export default async function LocaleLayout({
       {/* Premium UX: Noise Texture Overlay */}
       <NoiseTexture />
 
-      <NextIntlClientProvider messages={messages}>
-        <CartProvider>
-          <SmoothScrollProvider>
-            {children}
-          </SmoothScrollProvider>
+      <MegaMenuImagesServerProvider>
+        <NextIntlClientProvider messages={messages}>
+          <CartProvider>
+            <SmoothScrollProvider>
+              {children}
+            </SmoothScrollProvider>
 
-          {/* Always-visible WhatsApp Button */}
-          <WhatsAppButton
-            phoneNumber="971523041482"
-            message="Hello! I'm interested in learning more about your design services."
-          />
+            {/* Always-visible WhatsApp Button */}
+            <WhatsAppButton
+              phoneNumber="971523041482"
+              message="Hello! I'm interested in learning more about your design services."
+            />
 
-          {/* AI Chatbot */}
-          <AIChatbot />
+            {/* AI Chatbot */}
+            <AIChatbot />
 
-          {/* Back to Top Button */}
-          <BackToTop />
+            {/* Back to Top Button */}
+            <BackToTop />
 
-          {/* Shopping Cart Sidebar */}
-          <CartSidebar />
+            {/* Shopping Cart Sidebar */}
+            <CartSidebar />
 
-          {/* Preview Mode Banner */}
-          {isDraftMode && <PreviewBanner />}
-        </CartProvider>
-      </NextIntlClientProvider>
+            {/* Preview Mode Banner */}
+            {isDraftMode && <PreviewBanner />}
+          </CartProvider>
+        </NextIntlClientProvider>
+      </MegaMenuImagesServerProvider>
     </LocaleProvider>
   );
 }

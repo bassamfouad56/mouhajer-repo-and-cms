@@ -3,7 +3,7 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { ProcessHero } from '@/components/process/process-hero';
 import { OrchestrationSection } from '@/components/process/orchestration-section';
-import { PhasesSection } from '@/components/process/phases-section';
+import { PhasesSectionCinematic } from '@/components/process/phases-section-cinematic';
 
 // Use dynamic rendering to speed up build
 export const dynamic = 'force-dynamic';
@@ -37,7 +37,7 @@ export default function ProcessPage() {
         <OrchestrationSection />
 
         {/* All 6 Phases */}
-        <PhasesSection />
+        <PhasesSectionCinematic />
       </main>
       <Footer />
     </>

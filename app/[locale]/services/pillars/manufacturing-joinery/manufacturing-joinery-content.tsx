@@ -102,15 +102,6 @@ function HeroSection() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6 inline-block border border-white/20 px-6 py-2 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white/60"
-        >
-          Pillar 04
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -315,14 +306,6 @@ function Section2() {
       className="relative overflow-hidden bg-neutral-50 px-6 py-32 sm:px-12 sm:py-40 lg:px-20 lg:py-48"
     >
       <div className="mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6 inline-block border border-neutral-200 px-6 py-2 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-500"
-        >
-          Section 2
-        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -540,18 +523,6 @@ function Section4() {
       className="relative overflow-hidden bg-white px-6 py-32 sm:px-12 sm:py-40 lg:px-20 lg:py-48"
     >
       <div className="mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6 flex items-center justify-center gap-4"
-        >
-          <div className="h-px w-12 bg-neutral-300" />
-          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
-            Section 4
-          </span>
-          <div className="h-px w-12 bg-neutral-300" />
-        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -688,14 +659,6 @@ function Section6() {
       className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-neutral-950 px-6 py-32 sm:px-12 sm:py-40 lg:px-20 lg:py-48"
     >
       <div className="relative z-10 mx-auto max-w-4xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6 inline-block border border-white/20 px-6 py-2 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white/60"
-        >
-          Section 6
-        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 30 }}

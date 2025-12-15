@@ -1,12 +1,13 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { urlForImage } from '@/sanity/lib/image';
+import { ArrowRight, Building2, Hotel, Home, Briefcase, ShoppingBag, Utensils } from 'lucide-react';
 
-// Helper to extract localized string from i18n object or return plain string
+// Helper to extract localized string
 function getLocalizedString(value: string | { ar?: string; en?: string } | undefined, locale: string = 'en'): string {
   if (!value) return '';
   if (typeof value === 'string') return value;
@@ -15,6 +16,40 @@ function getLocalizedString(value: string | { ar?: string; en?: string } | undef
   }
   return '';
 }
+
+// Helper to get safe image URL from Sanity
+function getSafeImageUrl(image: any, width: number, height: number): string {
+  if (!image) return '';
+  try {
+    const url = urlForImage(image)?.width(width).height(height).quality(85).url();
+    return url || '';
+  } catch {
+    return '';
+  }
+}
+
+// Fallback images for industries (mapped by slug)
+const INDUSTRY_FALLBACK_IMAGES: Record<string, string> = {
+  'hospitality': '/projects/grand-hyatt-prince-suite/prince02.jpg',
+  'residential': '/projects/jumeirah-island-villa/JumIsl01.jpg',
+  'commercial': '/projects/district-one-villa-79x/01.jpg',
+  'corporate': '/projects/park-hyatt-villa/hotelparkhyattvilla03.jpg',
+  'retail': '/projects/ritz-carlton-villas/ritzcarl01.jpg',
+  'food-beverage': '/projects/grand-hyatt-prince-suite/prince01.jpg',
+};
+
+// Default fallback if no specific match
+const DEFAULT_INDUSTRY_IMAGE = '/projects/grand-hyatt-prince-suite/prince02.jpg';
+
+// Icon mapping for industries
+const industryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  residential: Home,
+  commercial: Building2,
+  hospitality: Hotel,
+  retail: ShoppingBag,
+  corporate: Briefcase,
+  'food-beverage': Utensils,
+};
 
 interface SanityIndustry {
   _id: string;
@@ -27,38 +62,28 @@ interface SanityIndustry {
   order?: number;
 }
 
-interface SanityService {
-  _id: string;
-  title: string | { ar?: string; en?: string };
-  slug: { current: string };
-  excerpt?: string | { ar?: string; en?: string };
-  mainImage?: any;
-}
-
 interface SanityProject {
   _id: string;
   title: string | { ar?: string; en?: string };
   slug: { current: string };
-  excerpt?: string | { ar?: string; en?: string };
   mainImage?: any;
   category?: string | { ar?: string; en?: string };
   location?: string | { ar?: string; en?: string };
-  year?: string;
 }
 
 interface IndustriesPageContentProps {
   industries: SanityIndustry[];
-  services: SanityService[];
+  services: any[];
   projects: SanityProject[];
 }
 
 export default function EnhancedIndustriesPageContent({
   industries,
-  services,
   projects,
 }: IndustriesPageContentProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const isHeroInView = useInView(heroRef, { once: true });
+  const [hoveredIndustry, setHoveredIndustry] = useState<string | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -66,175 +91,195 @@ export default function EnhancedIndustriesPageContent({
   });
 
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
+  // Get featured industry image for hero background with fallback
+  const featuredIndustry = industries.find(i => i.featured) || industries[0];
+  const heroSanityUrl = getSafeImageUrl(featuredIndustry?.mainImage, 1920, 1080);
+  const heroFallback = featuredIndustry?.slug?.current
+    ? INDUSTRY_FALLBACK_IMAGES[featuredIndustry.slug.current] || DEFAULT_INDUSTRY_IMAGE
+    : DEFAULT_INDUSTRY_IMAGE;
+  const heroImageUrl = heroSanityUrl || heroFallback;
 
   return (
     <main className="relative bg-white">
-      {/* Professional Hero Section */}
+      {/* Cinematic Hero with Industry Image */}
       <section
         ref={heroRef}
-        className="relative h-screen min-h-[800px] overflow-hidden bg-neutral-950"
+        className="relative h-[70vh] min-h-[600px] overflow-hidden"
       >
-        {/* Subtle Grid Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px] opacity-20" />
-
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/50 via-neutral-950/80 to-black" />
+        {/* Background Image */}
+        <motion.div
+          style={{ scale: heroScale }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={heroImageUrl}
+            alt="Industries we serve"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/70 via-neutral-950/50 to-neutral-950/90" />
+        </motion.div>
 
         <motion.div
-          style={{ opacity: heroOpacity, y: heroY }}
-          className="relative z-10 flex h-full flex-col items-start justify-center px-6 lg:px-24"
+          style={{ opacity: heroOpacity }}
+          className="relative z-10 flex h-full flex-col justify-end px-6 pb-16 lg:px-24 lg:pb-24"
         >
-          <div className="max-w-[1400px]">
-            {/* Minimal Label */}
+          <div className="mx-auto w-full max-w-[1600px]">
+            {/* Breadcrumb */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="mb-8 font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40"
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-6 flex items-center gap-2 font-Satoshi text-[11px] uppercase tracking-[0.2em] text-white/50"
             >
-              Who We Serve
+              <Link href="/" className="transition-colors hover:text-white/80">Home</Link>
+              <span>/</span>
+              <span className="text-white/80">Industries</span>
             </motion.div>
 
-            {/* Hero Title */}
+            {/* Title */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-8 font-SchnyderS text-6xl font-light tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl"
+              transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl"
             >
-              Every Industry.
-              <br />
-              <span className="text-[#d4af37]">One Standard.</span>
+              Industries We Serve
             </motion.h1>
 
-            {/* Hero Description */}
+            {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-16 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-white/60 sm:text-2xl"
+              transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-white/70"
             >
-              From five-star hotels to private villas. From hospitals to retail flagships.
-              <br />24 years of specialized expertise.
+              Specialized expertise across sectors. From luxury hospitality to high-end residential,
+              we bring 24 years of precision to every industry.
             </motion.p>
 
-            {/* Stats */}
+            {/* Quick Stats */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="grid gap-12 sm:grid-cols-3"
+              transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-10 flex gap-12"
             >
               <div>
-                <div className="mb-2 font-SchnyderS text-6xl font-light text-white">8+</div>
-                <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-500">
-                  Industries Served
-                </div>
+                <div className="font-SchnyderS text-4xl font-light text-[#d4af37]">{industries.length}+</div>
+                <div className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-white/50">Industries</div>
               </div>
               <div>
-                <div className="mb-2 font-SchnyderS text-6xl font-light text-white">400+</div>
-                <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-500">
-                  Projects Delivered
-                </div>
+                <div className="font-SchnyderS text-4xl font-light text-[#d4af37]">400+</div>
+                <div className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-white/50">Projects</div>
               </div>
               <div>
-                <div className="mb-2 font-SchnyderS text-6xl font-light text-white">100%</div>
-                <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-500">
-                  Handover Success
-                </div>
+                <div className="font-SchnyderS text-4xl font-light text-[#d4af37]">24</div>
+                <div className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-white/50">Years</div>
               </div>
             </motion.div>
           </div>
         </motion.div>
       </section>
 
-      {/* Industries Grid - Image First */}
-      <section className="relative bg-white px-6 py-24 lg:px-12 lg:py-32">
+      {/* Industries Grid - Large Visual Cards */}
+      <section className="bg-white px-6 py-20 lg:px-12 lg:py-28">
         <div className="mx-auto max-w-[1600px]">
-          <div className="mb-16 text-center">
-            <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-950 lg:text-6xl">
-              Specialized Sectors
-            </h2>
-            <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
-              Deep industry knowledge. Proven track record. Zero compromises.
-            </p>
+          {/* Section Header */}
+          <div className="mb-16 flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+            <div>
+              <h2 className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
+                Specialized Sectors
+              </h2>
+              <p className="max-w-lg font-Satoshi text-base font-light text-neutral-600">
+                Deep industry knowledge combined with design excellence
+              </p>
+            </div>
+            <div className="font-Satoshi text-sm text-neutral-400">
+              {industries.length} Industries
+            </div>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+          {/* Industries Bento Grid */}
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             {industries.map((industry, index) => (
-              <IndustryCard key={industry._id} industry={industry} index={index} />
+              <IndustryCard
+                key={industry._id}
+                industry={industry}
+                index={index}
+                isHovered={hoveredIndustry === industry._id}
+                onHover={() => setHoveredIndustry(industry._id)}
+                onLeave={() => setHoveredIndustry(null)}
+                isLarge={index === 0 || index === 3}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
+      {/* Featured Projects from Industries */}
       {projects.length > 0 && (
-        <section className="relative bg-neutral-50 px-6 py-24 lg:px-12 lg:py-32">
+        <section className="bg-neutral-50 px-6 py-20 lg:px-12 lg:py-28">
           <div className="mx-auto max-w-[1600px]">
-            <div className="mb-16 text-center">
-              <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-950 lg:text-6xl">
-                Cross-Industry Excellence
-              </h2>
-              <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
-                Selected projects that showcase our versatility
-              </p>
+            <div className="mb-12 flex items-end justify-between">
+              <div>
+                <h2 className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
+                  Recent Work
+                </h2>
+                <p className="font-Satoshi text-base font-light text-neutral-600">
+                  Selected projects across all industries
+                </p>
+              </div>
+              <Link
+                href="/projects"
+                className="group hidden items-center gap-2 font-Satoshi text-sm font-medium text-neutral-950 transition-colors hover:text-[#d4af37] lg:flex"
+              >
+                View All Projects
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {projects.slice(0, 6).map((project, index) => (
-                <FeaturedProjectCard key={project._id} project={project} index={index} />
+            {/* Projects Grid */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {projects.slice(0, 8).map((project, index) => (
+                <ProjectCard key={project._id} project={project} index={index} />
               ))}
             </div>
 
-            <div className="mt-12 text-center">
+            {/* Mobile View All */}
+            <div className="mt-10 text-center lg:hidden">
               <Link
                 href="/projects"
-                className="inline-block border-b-2 border-neutral-950 pb-1 font-Satoshi text-xs uppercase tracking-[0.3em] text-neutral-950 transition-all duration-500 hover:border-neutral-400 hover:text-neutral-400"
+                className="inline-flex items-center gap-2 font-Satoshi text-sm font-medium text-neutral-950"
               >
                 View All Projects
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
         </section>
       )}
 
-      {/* Related Services */}
-      {services.length > 0 && (
-        <section className="relative bg-white px-6 py-24 lg:px-12 lg:py-32">
-          <div className="mx-auto max-w-[1600px]">
-            <div className="mb-16 text-center">
-              <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-950 lg:text-6xl">
-                Our Services
-              </h2>
-              <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
-                Five integrated pillars. One seamless experience.
-              </p>
-            </div>
+      {/* CTA Section */}
+      <section className="relative overflow-hidden bg-neutral-950 px-6 py-24 lg:px-12 lg:py-32">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
-              {services.slice(0, 5).map((service, index) => (
-                <ServiceCard key={service._id} service={service} index={index} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Professional CTA Section */}
-      <section className="relative bg-neutral-950 px-6 py-32 lg:px-12">
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="relative mx-auto max-w-3xl text-center">
           <h2 className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl">
-            Your Industry. Our Expertise.
+            Your Industry, Our Expertise
           </h2>
           <p className="mb-10 font-Satoshi text-lg font-light text-neutral-400">
-            Let&apos;s discuss how we can bring 24 years of experience to your project.
+            Discuss your project with our team
           </p>
           <Link
-            href="/#contact"
-            className="inline-block border border-white px-12 py-4 font-Satoshi text-xs uppercase tracking-[0.3em] text-white transition-all duration-500 hover:bg-white hover:text-neutral-950"
+            href="/contact"
+            className="inline-flex items-center gap-3 border border-[#d4af37] bg-[#d4af37] px-10 py-4 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-[#d4af37]"
           >
-            Get in Touch
+            Start a Conversation
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
@@ -242,74 +287,33 @@ export default function EnhancedIndustriesPageContent({
   );
 }
 
-// Industry Card - Image First, Minimal
-function IndustryCard({ industry, index }: { industry: SanityIndustry; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
-
-  const title = getLocalizedString(industry.title);
-  const excerpt = getLocalizedString(industry.excerpt);
-
-  return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 1, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="group"
-    >
-      <Link href={`/industries/${industry.slug.current}`}>
-        {/* Large Image */}
-        <div className="relative mb-6 aspect-[4/5] overflow-hidden bg-neutral-100">
-          {industry.mainImage ? (
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <Image
-                src={urlForImage(industry.mainImage).width(800).height(1000).url()}
-                alt={title}
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-          ) : (
-            <div className="absolute inset-0 bg-neutral-200" />
-          )}
-
-          {/* Minimal Number Badge */}
-          <div className="absolute left-6 top-6 bg-white/90 px-4 py-2 backdrop-blur-sm">
-            <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-950">
-              {String(index + 1).padStart(2, '0')}
-            </div>
-          </div>
-        </div>
-
-        {/* Content - Minimal */}
-        <div>
-          <h3 className="mb-3 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950 transition-colors duration-500 group-hover:text-neutral-600">
-            {title}
-          </h3>
-
-          {excerpt && (
-            <p className="line-clamp-2 font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
-              {excerpt}
-            </p>
-          )}
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
-
-// Featured Project Card - Minimal
-function FeaturedProjectCard({ project, index }: { project: SanityProject; index: number }) {
+// Industry Card Component
+function IndustryCard({
+  industry,
+  index,
+  isHovered,
+  onHover,
+  onLeave,
+  isLarge
+}: {
+  industry: SanityIndustry;
+  index: number;
+  isHovered: boolean;
+  onHover: () => void;
+  onLeave: () => void;
+  isLarge?: boolean;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: '-50px' });
 
-  const title = getLocalizedString(project.title);
-  const category = getLocalizedString(project.category);
-  const location = getLocalizedString(project.location);
+  const title = getLocalizedString(industry.title);
+  const excerpt = getLocalizedString(industry.excerpt);
+  const IconComponent = industryIcons[industry.slug?.current] || Building2;
+
+  // Get image URL with fallback
+  const sanityImageUrl = getSafeImageUrl(industry.mainImage, 800, isLarge ? 900 : 600);
+  const fallbackImage = INDUSTRY_FALLBACK_IMAGES[industry.slug?.current] || DEFAULT_INDUSTRY_IMAGE;
+  const imageUrl = sanityImageUrl || fallbackImage;
 
   return (
     <motion.div
@@ -317,48 +321,59 @@ function FeaturedProjectCard({ project, index }: { project: SanityProject; index
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="group"
+      className={`group ${isLarge ? 'md:col-span-2 lg:col-span-1 lg:row-span-2' : ''}`}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
     >
-      <Link href={`/projects/${project.slug.current}`}>
-        <div className="relative mb-6 aspect-[4/3] overflow-hidden bg-neutral-100">
-          {project.mainImage ? (
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <Image
-                src={urlForImage(project.mainImage).width(800).height(600).url()}
-                alt={title}
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-          ) : (
-            <div className="absolute inset-0 bg-neutral-200" />
-          )}
+      <Link href={`/industries/${industry.slug.current}`} className="block">
+        <div className={`relative overflow-hidden bg-neutral-100 ${isLarge ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
+          <motion.div
+            animate={{ scale: isHovered ? 1.05 : 1 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={imageUrl}
+              alt={title}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
 
-          {category && (
-            <div className="absolute left-4 top-4 bg-white/90 px-3 py-1.5 backdrop-blur-sm">
-              <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-950">
-                {category}
-              </div>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/30 to-transparent" />
+
+          {/* Content */}
+          <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
+            {/* Icon Badge */}
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+              <IconComponent className="h-5 w-5 text-white" />
             </div>
-          )}
-        </div>
 
-        <div>
-          <h3 className="mb-2 font-SchnyderS text-2xl font-light tracking-tight text-neutral-950 transition-colors duration-500 group-hover:text-neutral-600">
-            {title}
-          </h3>
+            {/* Title */}
+            <h3 className="mb-2 font-SchnyderS text-2xl font-light tracking-tight text-white lg:text-3xl">
+              {title}
+            </h3>
 
-          <div className="flex flex-wrap items-center gap-3 font-Satoshi text-xs font-light text-neutral-500">
-            {location && <span>{location}</span>}
-            {project.year && (
-              <>
-                <span className="h-1 w-1 rounded-full bg-neutral-300" />
-                <span>{project.year}</span>
-              </>
+            {/* Excerpt */}
+            {excerpt && (
+              <p className="line-clamp-2 font-Satoshi text-sm font-light text-white/70">
+                {excerpt}
+              </p>
             )}
+
+            {/* Arrow */}
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
+              transition={{ duration: 0.3 }}
+              className="mt-4"
+            >
+              <div className="flex items-center gap-2 font-Satoshi text-xs uppercase tracking-[0.2em] text-[#d4af37]">
+                Explore
+                <ArrowRight className="h-3 w-3" />
+              </div>
+            </motion.div>
           </div>
         </div>
       </Link>
@@ -366,35 +381,65 @@ function FeaturedProjectCard({ project, index }: { project: SanityProject; index
   );
 }
 
-// Service Card - Minimal
-function ServiceCard({ service, index }: { service: SanityService; index: number }) {
+// Project fallback images
+const PROJECT_FALLBACK_IMAGES = [
+  '/projects/jumeirah-island-villa/JumIsl01.jpg',
+  '/projects/park-hyatt-villa/hotelparkhyattvilla03.jpg',
+  '/projects/district-one-villa-79x/01.jpg',
+  '/projects/ritz-carlton-villas/ritzcarl01.jpg',
+];
+
+// Project Card Component
+function ProjectCard({ project, index }: { project: SanityProject; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: '-50px' });
 
-  const title = getLocalizedString(service.title);
-  const excerpt = getLocalizedString(service.excerpt);
+  const title = getLocalizedString(project.title);
+  const category = getLocalizedString(project.category);
+  const location = getLocalizedString(project.location);
+
+  // Get image URL with fallback
+  const sanityImageUrl = getSafeImageUrl(project.mainImage, 600, 450);
+  const imageUrl = sanityImageUrl || PROJECT_FALLBACK_IMAGES[index % PROJECT_FALLBACK_IMAGES.length];
 
   return (
     <motion.div
       ref={cardRef}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+      className="group"
     >
-      <Link
-        href={`/services#${service.slug.current}`}
-        className="group block border border-neutral-200 p-8 transition-all duration-500 hover:border-neutral-950 hover:bg-neutral-950"
-      >
-        <div className="mb-4 font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-400 transition-colors duration-500 group-hover:text-neutral-500">
-          {String(index + 1).padStart(2, '0')}
+      <Link href={`/projects/${project.slug.current}`}>
+        <div className="relative mb-4 aspect-[4/3] overflow-hidden bg-neutral-100">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.5 }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={imageUrl}
+              alt={title}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+
+          {category && (
+            <div className="absolute left-3 top-3 bg-white/90 px-2.5 py-1 backdrop-blur-sm">
+              <span className="font-Satoshi text-[10px] uppercase tracking-[0.15em] text-neutral-950">
+                {category}
+              </span>
+            </div>
+          )}
         </div>
-        <h3 className="mb-2 font-SchnyderS text-xl font-light tracking-tight text-neutral-950 transition-colors duration-500 group-hover:text-white">
+
+        <h3 className="mb-1 font-Satoshi text-sm font-medium text-neutral-950 transition-colors group-hover:text-[#d4af37]">
           {title}
         </h3>
-        {excerpt && (
-          <p className="line-clamp-2 font-Satoshi text-sm font-light text-neutral-600 transition-colors duration-500 group-hover:text-neutral-300">
-            {excerpt}
-          </p>
+
+        {location && (
+          <p className="font-Satoshi text-xs text-neutral-500">{location}</p>
         )}
       </Link>
     </motion.div>
