@@ -7,10 +7,23 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 
-export function FounderHero() {
+interface FounderHeroProps {
+  heroImage?: string;
+  founderName?: string;
+  founderTitle?: string;
+}
+
+export function FounderHero({
+  heroImage,
+  founderName = 'Eng. Maher Mouhajer',
+  founderTitle = 'CEO & Founder',
+}: FounderHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // Use Sanity image or fallback to local
+  const imageUrl = heroImage || '/founder/CEO Arabia.jpg';
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -70,8 +83,8 @@ export function FounderHero() {
         className="absolute inset-0"
       >
         <Image
-          src="/founder/CEO Arabia.jpg"
-          alt="Eng. Maher Mouhajer - CEO & Founder"
+          src={imageUrl}
+          alt={`${founderName} - ${founderTitle}`}
           fill
           priority
           quality={100}
@@ -142,10 +155,10 @@ export function FounderHero() {
           >
             <div className="text-left">
               <div className="font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-white/50">
-                CEO & Founder
+                {founderTitle}
               </div>
               <div className="font-SchnyderS text-2xl font-light text-white">
-                Eng. Maher Mouhajer
+                {founderName}
               </div>
             </div>
           </motion.div>

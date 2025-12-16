@@ -5,9 +5,10 @@ import { FounderHero } from '@/components/founder/founder-hero';
 import { DualitiesSection } from '@/components/founder/dualities-section';
 import { UnitySection } from '@/components/founder/unity-section';
 import { StandardsSection } from '@/components/founder/standards-section';
+import { client } from '@/sanity/lib/client';
+import { urlForImage } from '@/sanity/lib/image';
 
-// Use dynamic rendering to speed up build
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'The Founder | Eng. Maher Mouhajer | MIDC',
@@ -26,13 +27,63 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FounderPage() {
+async function getFounderData() {
+  try {
+    const settings = await client.fetch(`
+      *[_type == "siteSettings"][0] {
+        founderName,
+        founderTitle,
+        founderImage,
+        founderQuote,
+        aboutImage
+      }
+    `);
+
+    const getImageUrl = (image: any, width = 1920, height = 1080): string => {
+      if (!image?.asset) return '';
+      try {
+        return urlForImage(image)
+          .width(width)
+          .height(height)
+          .auto('format')
+          .url();
+      } catch {
+        return '';
+      }
+    };
+
+    return {
+      founderName: settings?.founderName || 'Eng. Maher Mouhajer',
+      founderTitle: settings?.founderTitle || 'CEO & Founder',
+      founderImage: getImageUrl(settings?.founderImage, 1600, 2000),
+      founderQuote: settings?.founderQuote || '',
+      aboutImage: getImageUrl(settings?.aboutImage, 1920, 1080),
+    };
+  } catch (error) {
+    console.error('Error fetching founder data from Sanity:', error);
+    return {
+      founderName: 'Eng. Maher Mouhajer',
+      founderTitle: 'CEO & Founder',
+      founderImage: '',
+      founderQuote: '',
+      aboutImage: '',
+    };
+  }
+}
+
+export default async function FounderPage() {
+  const founderData = await getFounderData();
+
   return (
     <>
       <Header />
       <main className="relative">
         {/* Hero Section - Eng. Maher on site with team, drone shot */}
-        <FounderHero />
+        <FounderHero
+          heroImage={founderData.founderImage || undefined}
+          founderName={founderData.founderName}
+          founderTitle={founderData.founderTitle}
+        />
 
         {/* Section 1: Defined by Dualities - Design Philosophy */}
         <DualitiesSection />
