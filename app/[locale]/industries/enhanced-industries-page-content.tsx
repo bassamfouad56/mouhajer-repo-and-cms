@@ -220,40 +220,125 @@ export default function EnhancedIndustriesPageContent({
         </div>
       </section>
 
-      {/* Featured Projects from Industries */}
+      {/* Featured Projects from Industries - Cinematic Dark Section */}
       {projects.length > 0 && (
-        <section className="bg-neutral-50 px-6 py-20 lg:px-12 lg:py-28">
-          <div className="mx-auto max-w-[1600px]">
-            <div className="mb-12 flex items-end justify-between">
+        <section className="relative overflow-hidden bg-neutral-950 px-6 py-24 lg:px-12 lg:py-32">
+          {/* Subtle grid background */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+              backgroundSize: '60px 60px',
+            }}
+          />
+
+          {/* Gold accent glow */}
+          <div className="pointer-events-none absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-[#d4af37]/[0.03] blur-[150px]" />
+
+          <div className="relative mx-auto max-w-[1600px]">
+            {/* Section Header */}
+            <div className="mb-16 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
               <div>
-                <h2 className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-4 flex items-center gap-4"
+                >
+                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+                  <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
+                    Featured Projects
+                  </span>
+                </motion.div>
+
+                <motion.h2
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
+                  className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl xl:text-6xl"
+                >
                   Recent Work
-                </h2>
-                <p className="font-Satoshi text-base font-light text-neutral-600">
+                </motion.h2>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="max-w-md font-Satoshi text-base font-light text-white/60"
+                >
                   Selected projects across all industries
-                </p>
+                </motion.p>
               </div>
-              <Link
-                href="/projects"
-                className="group hidden items-center gap-2 font-Satoshi text-sm font-medium text-neutral-950 transition-colors hover:text-[#d4af37] lg:flex"
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
-                View All Projects
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+                <Link
+                  href="/projects"
+                  className="group inline-flex items-center gap-3 border border-[#d4af37]/40 bg-[#d4af37]/10 px-8 py-4 font-Satoshi text-xs font-medium uppercase tracking-[0.2em] text-[#d4af37] transition-all duration-300 hover:border-[#d4af37] hover:bg-[#d4af37]/20"
+                >
+                  View All Projects
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </motion.div>
             </div>
 
-            {/* Projects Grid */}
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {projects.slice(0, 8).map((project, index) => (
-                <ProjectCard key={project._id} project={project} index={index} />
+            {/* Projects Masonry Grid */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+              {/* Featured Large Project */}
+              {projects[0] && (
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="lg:col-span-7 lg:row-span-2"
+                >
+                  <FeaturedProjectCard project={projects[0]} />
+                </motion.div>
+              )}
+
+              {/* Right Column - 2 Stacked Projects */}
+              <div className="flex flex-col gap-6 lg:col-span-5 lg:gap-8">
+                {projects.slice(1, 3).map((project, index) => (
+                  <motion.div
+                    key={project._id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
+                  >
+                    <ProjectCardDark project={project} index={index} />
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Bottom Row - 4 Smaller Projects */}
+              {projects.slice(3, 7).map((project, index) => (
+                <motion.div
+                  key={project._id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 + index * 0.05 }}
+                  className="lg:col-span-3"
+                >
+                  <ProjectCardDark project={project} index={index + 3} compact />
+                </motion.div>
               ))}
             </div>
 
             {/* Mobile View All */}
-            <div className="mt-10 text-center lg:hidden">
+            <div className="mt-12 text-center lg:hidden">
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 font-Satoshi text-sm font-medium text-neutral-950"
+                className="inline-flex items-center gap-3 border border-[#d4af37]/40 bg-[#d4af37]/10 px-8 py-4 font-Satoshi text-xs font-medium uppercase tracking-[0.2em] text-[#d4af37]"
               >
                 View All Projects
                 <ArrowRight className="h-4 w-4" />
@@ -443,5 +528,167 @@ function ProjectCard({ project, index }: { project: SanityProject; index: number
         )}
       </Link>
     </motion.div>
+  );
+}
+
+// Featured Project Card - Large Hero Style for Dark Theme
+function FeaturedProjectCard({ project }: { project: SanityProject }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const title = getLocalizedString(project.title);
+  const category = getLocalizedString(project.category);
+  const location = getLocalizedString(project.location);
+
+  const sanityImageUrl = getSafeImageUrl(project.mainImage, 1200, 900);
+  const imageUrl = sanityImageUrl || PROJECT_FALLBACK_IMAGES[0];
+
+  return (
+    <Link
+      href={`/projects/${project.slug.current}`}
+      className="group block h-full"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="relative h-full min-h-[500px] overflow-hidden border border-white/10 lg:min-h-[600px]">
+        {/* Background Image */}
+        <motion.div
+          animate={{ scale: isHovered ? 1.05 : 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
+
+        {/* Corner Accents */}
+        <div className="absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#d4af37]/40 transition-all duration-500 group-hover:border-[#d4af37]/70" />
+        <div className="absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#d4af37]/40 transition-all duration-500 group-hover:border-[#d4af37]/70" />
+
+        {/* Content */}
+        <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12">
+          {/* Category Badge */}
+          {category && (
+            <div className="mb-4 inline-flex w-fit border border-[#d4af37]/40 bg-[#d4af37]/10 px-4 py-2 backdrop-blur-sm">
+              <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#d4af37]">
+                {category}
+              </span>
+            </div>
+          )}
+
+          {/* Title */}
+          <h3 className="mb-3 font-SchnyderS text-3xl font-light tracking-tight text-white transition-colors group-hover:text-[#d4af37] lg:text-4xl xl:text-5xl">
+            {title}
+          </h3>
+
+          {/* Location */}
+          {location && (
+            <p className="mb-6 font-Satoshi text-sm font-light text-white/60">{location}</p>
+          )}
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: isHovered ? 1 : 0.7, y: isHovered ? 0 : 5 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-center gap-3"
+          >
+            <span className="font-Satoshi text-xs uppercase tracking-[0.2em] text-[#d4af37]">
+              View Project
+            </span>
+            <ArrowRight className="h-4 w-4 text-[#d4af37] transition-transform group-hover:translate-x-1" />
+          </motion.div>
+        </div>
+
+        {/* Shimmer Effect on Hover */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
+          initial={{ x: '-100%' }}
+          animate={{ x: isHovered ? '200%' : '-100%' }}
+          transition={{ duration: 0.8, ease: 'easeInOut' }}
+          style={{ transform: 'skewX(-20deg)' }}
+        />
+      </div>
+    </Link>
+  );
+}
+
+// Project Card Dark - For Dark Theme Grid
+function ProjectCardDark({ project, index, compact }: { project: SanityProject; index: number; compact?: boolean }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const title = getLocalizedString(project.title);
+  const category = getLocalizedString(project.category);
+  const location = getLocalizedString(project.location);
+
+  const sanityImageUrl = getSafeImageUrl(project.mainImage, 600, 450);
+  const imageUrl = sanityImageUrl || PROJECT_FALLBACK_IMAGES[index % PROJECT_FALLBACK_IMAGES.length];
+
+  return (
+    <Link
+      href={`/projects/${project.slug.current}`}
+      className="group block"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className={`relative overflow-hidden border border-white/10 transition-all duration-500 hover:border-[#d4af37]/30 ${compact ? 'aspect-[4/3]' : 'aspect-[16/10]'}`}>
+        {/* Background Image */}
+        <motion.div
+          animate={{ scale: isHovered ? 1.05 : 1 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/30 to-transparent" />
+
+        {/* Content */}
+        <div className="absolute inset-0 flex flex-col justify-end p-5 lg:p-6">
+          {/* Category Badge */}
+          {category && !compact && (
+            <div className="mb-2 inline-flex w-fit bg-white/10 px-2.5 py-1 backdrop-blur-sm">
+              <span className="font-Satoshi text-[9px] uppercase tracking-[0.15em] text-white/80">
+                {category}
+              </span>
+            </div>
+          )}
+
+          {/* Title */}
+          <h3 className={`font-Satoshi font-medium text-white transition-colors group-hover:text-[#d4af37] ${compact ? 'text-sm' : 'text-base lg:text-lg'}`}>
+            {title}
+          </h3>
+
+          {/* Location */}
+          {location && !compact && (
+            <p className="mt-1 font-Satoshi text-xs text-white/50">{location}</p>
+          )}
+        </div>
+
+        {/* Hover Arrow */}
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
+          transition={{ duration: 0.3 }}
+          className="absolute right-4 top-4"
+        >
+          <div className="flex h-8 w-8 items-center justify-center bg-[#d4af37]/20 backdrop-blur-sm">
+            <ArrowRight className="h-3.5 w-3.5 text-[#d4af37]" />
+          </div>
+        </motion.div>
+      </div>
+    </Link>
   );
 }
