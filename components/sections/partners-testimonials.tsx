@@ -104,10 +104,16 @@ export function PartnersSection() {
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-neutral-50 py-24 sm:py-32 lg:py-40"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40"
     >
-      {/* Subtle grid pattern for light background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
+      {/* Subtle grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
 
       {/* Floating orbs - subtle gold accents */}
       <motion.div
@@ -130,29 +136,29 @@ export function PartnersSection() {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
               Strategic Partners
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
           </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl xl:text-7xl"
+            className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
           >
             Trusted by The
             <br />
-            <span className="text-neutral-400">Region&apos;s Visionaries</span>
+            <span className="text-white/30">Region&apos;s Visionaries</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto max-w-2xl font-Satoshi text-base font-light leading-relaxed text-neutral-500 lg:text-lg"
+            className="mx-auto max-w-2xl font-Satoshi text-base font-light leading-relaxed text-white/60 lg:text-lg"
           >
             Collaborating with the most prestigious developers, hospitality brands,
             and corporate entities to create extraordinary spaces.
@@ -172,7 +178,7 @@ export function PartnersSection() {
                 className="group relative"
               >
                 <div
-                  className="relative overflow-hidden border border-neutral-200 bg-white p-8 shadow-sm transition-all duration-500 hover:border-[#d4af37]/50 hover:shadow-lg lg:p-10"
+                  className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white/[0.04] lg:p-10"
                   style={{ transformStyle: 'preserve-3d' }}
                 >
                   {/* Icon and Label */}
@@ -181,17 +187,17 @@ export function PartnersSection() {
                       <Icon className="h-5 w-5 text-[#d4af37]" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <h3 className="font-SchnyderS text-2xl font-light text-neutral-950 lg:text-3xl">
+                      <h3 className="font-SchnyderS text-2xl font-light text-white lg:text-3xl">
                         {category.label}
                       </h3>
-                      <p className="font-Satoshi text-xs font-light text-neutral-400">
+                      <p className="font-Satoshi text-xs font-light text-white/40">
                         {category.partners.length} Partners
                       </p>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-neutral-500">
+                  <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-white/60">
                     {category.description}
                   </p>
 
@@ -203,7 +209,7 @@ export function PartnersSection() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={isInView ? { opacity: 1, scale: 1 } : {}}
                         transition={{ duration: 0.4, delay: 0.5 + categoryIndex * 0.1 + index * 0.05 }}
-                        className="border border-neutral-200 bg-neutral-50 px-3 py-1.5 font-Satoshi text-xs font-light text-neutral-600 transition-all duration-300 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 hover:text-neutral-950"
+                        className="border border-white/10 bg-white/[0.02] px-3 py-1.5 font-Satoshi text-xs font-light text-white/60 transition-all duration-300 hover:border-[#d4af37]/30 hover:bg-[#d4af37]/10 hover:text-white"
                       >
                         {partner}
                       </motion.span>
@@ -221,8 +227,8 @@ export function PartnersSection() {
       </div>
 
       {/* Corner decorations */}
-      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-neutral-200 lg:block" />
-      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-neutral-200 lg:block" />
+      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-white/5 lg:block" />
+      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-white/5 lg:block" />
     </section>
   );
 }

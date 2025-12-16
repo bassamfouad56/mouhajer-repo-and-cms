@@ -41,33 +41,42 @@ export function LogoMarquee() {
   const doubledLogos = [...partnerLogos, ...partnerLogos];
 
   return (
-    <div
+    <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-50 py-12 sm:py-16"
+      className="relative overflow-hidden bg-neutral-950 py-16 sm:py-20"
     >
-      {/* Border lines */}
-      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
-      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
+      {/* Subtle grid background */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      {/* Border lines with gold accent */}
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#d4af37]/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#d4af37]/20 to-transparent" />
 
       {/* Label */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
-        className="mb-8 flex items-center justify-center gap-4 sm:mb-10"
+        className="mb-10 flex items-center justify-center gap-4 sm:mb-12"
       >
-        <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-        <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
+        <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+        <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
           Trusted By Industry Leaders
         </span>
-        <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+        <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
       </motion.div>
 
       {/* Marquee container */}
       <div className="relative">
         {/* Fade edges */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-neutral-50 to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-neutral-50 to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-neutral-950 to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-neutral-950 to-transparent" />
 
         {/* Scrolling logos - Row 1 */}
         <motion.div
@@ -97,7 +106,7 @@ export function LogoMarquee() {
                   alt={logo.alt}
                   width={160}
                   height={80}
-                  className="h-full w-full object-contain opacity-70 transition-opacity duration-300 hover:opacity-100"
+                  className="h-full w-full object-contain brightness-0 invert opacity-50 transition-all duration-300 hover:opacity-80 hover:scale-105"
                   onError={(e) => {
                     // Fallback to text if image fails to load
                     const target = e.target as HTMLImageElement;
@@ -105,7 +114,7 @@ export function LogoMarquee() {
                     const parent = target.parentElement;
                     if (parent) {
                       const span = document.createElement('span');
-                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-neutral-400 transition-colors duration-300 hover:text-neutral-600 sm:text-2xl';
+                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-white/40 transition-colors duration-300 hover:text-white/70 sm:text-2xl';
                       span.textContent = logo.name;
                       parent.appendChild(span);
                     }
@@ -144,7 +153,7 @@ export function LogoMarquee() {
                   alt={logo.alt}
                   width={160}
                   height={80}
-                  className="h-full w-full object-contain opacity-50 transition-opacity duration-300 hover:opacity-80"
+                  className="h-full w-full object-contain brightness-0 invert opacity-30 transition-all duration-300 hover:opacity-60 hover:scale-105"
                   onError={(e) => {
                     // Fallback to text if image fails to load
                     const target = e.target as HTMLImageElement;
@@ -152,7 +161,7 @@ export function LogoMarquee() {
                     const parent = target.parentElement;
                     if (parent) {
                       const span = document.createElement('span');
-                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-neutral-300 transition-colors duration-300 hover:text-neutral-500 sm:text-2xl';
+                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-white/30 transition-colors duration-300 hover:text-white/50 sm:text-2xl';
                       span.textContent = logo.name;
                       parent.appendChild(span);
                     }
@@ -163,6 +172,6 @@ export function LogoMarquee() {
           </motion.div>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 }

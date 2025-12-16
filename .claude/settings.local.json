@@ -73,7 +73,8 @@
       "Bash(del \"d:\\wbsite\\mouhajer-new-marketing-website\\app\\[locale]\\industries\\industries-cinematic-content.tsx\")",
       "Bash(npx tsc --noEmit)",
       "Bash(vercel env pull:*)",
-      "Bash(del \"\\?\\D:\\wbsite\\mouhajer-new-marketing-website\\nul\")"
+      "Bash(del \"\\?\\D:\\wbsite\\mouhajer-new-marketing-website\\nul\")",
+      "Bash(pnpm remove:*)"
     ],
     "deny": [],
     "ask": []

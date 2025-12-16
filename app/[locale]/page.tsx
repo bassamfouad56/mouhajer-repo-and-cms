@@ -289,7 +289,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <HeroVideo />
 
         {/* Transition: Hero to Promise */}
-        <SectionDivider variant="line" theme="light" />
+        <SectionDivider variant="line" theme="dark" />
 
         {/* Section 2: The Mouhajer Promise */}
         <MouhajerPromise images={projectImages.promise} />
@@ -307,7 +307,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <LogoMarquee />
 
         {/* Transition: Logo Marquee to Founder */}
-        <SimpleAnimatedDivider theme="light" />
+        <SimpleAnimatedDivider theme="dark" />
 
         {/* Section 5: Founder's Message */}
         <FounderMessage
@@ -324,13 +324,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <CapabilitiesCarousel images={projectImages.capabilities} />
 
         {/* Transition: Capabilities to Portfolio */}
-        <LuxuryTransition theme="light" />
+        <LuxuryTransition theme="dark" />
 
         {/* Section 7: Portfolio of Excellence */}
         <PortfolioShowcase projects={projects} />
 
         {/* Transition: Portfolio to Sectors */}
-        <SectionDivider variant="grid" theme="dark" />
+        <SectionDivider variant="gradient" theme="dark" />
 
         {/* Section 8: Sectors of Expertise */}
         <SectorsExpertise images={projectImages.sectors} />
@@ -342,7 +342,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <PartnersTestimonials />
 
         {/* Transition: Partners to Awards */}
-        <SectionDivider variant="wave" theme="dark" />
+        <SectionDivider variant="dots" theme="dark" />
 
         {/* Section 10: Certifications & Awards */}
         <CertificationsAwards />
@@ -359,7 +359,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         />
 
         {/* Transition: FAQ to Contact */}
-        <SectionDivider variant="arrow" theme="dark" />
+        <SectionDivider variant="minimal" theme="dark" />
 
         {/* Section 12: Contact */}
         <Contact backgroundImage={siteSettings.contactBackgroundImage} />
