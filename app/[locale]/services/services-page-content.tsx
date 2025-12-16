@@ -44,6 +44,7 @@ interface ServicesPageContentProps {
   services?: SanityService[];
   projects?: SanityProject[];
   locale: string;
+  heroImage?: string;
 }
 
 // Helper function to safely get localized text
@@ -63,6 +64,7 @@ export default function ServicesPageContent({
   services = [],
   projects = [],
   locale = 'en',
+  heroImage = '',
 }: ServicesPageContentProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const isHeroInView = useInView(heroRef, { once: true });
@@ -74,19 +76,57 @@ export default function ServicesPageContent({
 
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
+  // Get first project image as fallback if no heroImage from Sanity
+  const bannerImage = heroImage || (projects[0]?.mainImage
+    ? urlForImage(projects[0].mainImage).width(2560).height(1440).url()
+    : '/projects/turnkey-design-fitout/_MID0058-HDR.jpg');
 
   return (
     <main className="relative bg-neutral-950">
-      {/* Hero Section - Cinematic Full Screen */}
+      {/* Hero Section - Cinematic Full Screen with Background Image */}
       <section
         ref={heroRef}
         className="relative h-screen min-h-[800px] overflow-hidden bg-neutral-950"
       >
-        {/* Subtle Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-900 via-neutral-950 to-black" />
+        {/* Background Image with Parallax */}
+        {bannerImage && (
+          <motion.div
+            style={{ scale: imageScale, y: imageY }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={bannerImage}
+              alt="MIDC Services"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+              quality={90}
+            />
+          </motion.div>
+        )}
 
-        {/* Minimal Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px] opacity-20" />
+        {/* Cinematic Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-950/60 to-neutral-950" />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/40 via-transparent to-neutral-950/40" />
+
+        {/* Subtle Grid Pattern */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        {/* Gold Accent Glow */}
+        <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.03] blur-[150px]" />
+
+        {/* Top Border Accent */}
+        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" />
 
         {/* Hero Content */}
         <motion.div
@@ -99,15 +139,17 @@ export default function ServicesPageContent({
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-12"
+              className="mb-12 flex items-center justify-center gap-4"
             >
-              <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-white/40">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+              <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-white/50">
                 Services
               </span>
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
             </motion.div>
 
             {/* Main Title */}
-            <div className="mb-8 overflow-hidden">
+            <div className="mb-6 overflow-hidden">
               <motion.h1
                 initial={{ opacity: 0, y: 60 }}
                 animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
@@ -122,7 +164,7 @@ export default function ServicesPageContent({
               </motion.h1>
             </div>
 
-            <div className="mb-16 overflow-hidden">
+            <div className="mb-12 overflow-hidden">
               <motion.h1
                 initial={{ opacity: 0, y: 60 }}
                 animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
@@ -142,10 +184,33 @@ export default function ServicesPageContent({
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="mx-auto mb-16 max-w-3xl px-4 font-Satoshi text-xl font-light leading-relaxed text-white/60 sm:px-0 sm:text-2xl"
+              className="mx-auto mb-12 max-w-3xl px-4 font-Satoshi text-xl font-light leading-relaxed text-white/60 sm:px-0 sm:text-2xl"
             >
               Design. Build. Engineering. One Point of Responsibility.
             </motion.p>
+
+            {/* Stats Row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className="flex items-center justify-center gap-8 sm:gap-16"
+            >
+              {[
+                { number: '6', label: 'Core Services' },
+                { number: '1', label: 'Point of Contact' },
+                { number: '0', label: 'Outsourcing' },
+              ].map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="font-SchnyderS text-4xl font-light text-white sm:text-5xl">
+                    {stat.number}
+                  </div>
+                  <div className="mt-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </motion.div>
 
@@ -153,17 +218,23 @@ export default function ServicesPageContent({
         <motion.div
           initial={{ opacity: 0 }}
           animate={isHeroInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="absolute bottom-16 left-1/2 z-10 -translate-x-1/2"
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2"
+            className="flex flex-col items-center gap-3"
           >
-            <ChevronDown className="h-5 w-5 text-white/30" />
+            <span className="font-Satoshi text-[9px] font-light uppercase tracking-[0.3em] text-white/30">
+              Scroll
+            </span>
+            <ChevronDown className="h-4 w-4 text-white/30" />
           </motion.div>
         </motion.div>
+
+        {/* Bottom Border Accent */}
+        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#d4af37]/20 to-transparent" />
       </section>
 
       {/* Section 1: Turnkey Solution with Real Project Image */}
@@ -216,7 +287,7 @@ export default function ServicesPageContent({
   );
 }
 
-// Section 1: Turnkey Solution with Real Project Parallax
+// Section 1: Turnkey Solution with Real Project Parallax - Dark Theme
 function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityProject[]; locale?: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-200px" });
@@ -234,8 +305,20 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-white py-32 sm:py-40 lg:py-56"
+      className="relative overflow-hidden bg-neutral-950 py-32 sm:py-40 lg:py-56"
     >
+      {/* Subtle grid background */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      {/* Gold accent glow */}
+      <div className="pointer-events-none absolute right-0 top-1/4 h-[500px] w-[500px] rounded-full bg-[#d4af37]/[0.02] blur-[150px]" />
+
       <div className="mx-auto max-w-[1800px] px-6 lg:px-16 xl:px-24">
         <div className="grid gap-20 lg:grid-cols-2 lg:gap-32 items-center">
           {/* Left: Content */}
@@ -247,20 +330,20 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
           >
             <div className="mb-10">
               <motion.div
-                className="mb-4 h-px w-12 bg-neutral-900"
+                className="mb-4 h-px w-12 bg-gradient-to-r from-[#d4af37] to-transparent"
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
               />
             </div>
 
-            <h2 className="mb-16 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl xl:text-8xl">
+            <h2 className="mb-16 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
               We Do Not
               <br />
               <span className="text-[#d4af37]">Outsource Your Vision</span>
             </h2>
 
-            <div className="space-y-10 font-Satoshi text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
+            <div className="space-y-10 font-Satoshi text-lg font-light leading-relaxed text-white/60 lg:text-xl">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -272,7 +355,7 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
               </motion.p>
 
               <motion.p
-                className="text-neutral-950"
+                className="text-white"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -295,7 +378,7 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="border-l-2 border-neutral-900 pl-8 text-neutral-950 text-xl lg:text-2xl"
+                className="border-l-2 border-[#d4af37]/50 pl-8 text-white text-xl lg:text-2xl"
               >
                 <p>
                   No Blame Games.
@@ -341,33 +424,40 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
                   priority
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/20 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
             </motion.div>
 
-            {/* Floating Project Label */}
+            {/* Floating Project Label - Dark Theme */}
             {featuredProject && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="absolute bottom-8 left-8 right-8 backdrop-blur-sm bg-white/90 border border-white/50 p-8"
+                className="absolute bottom-8 left-8 right-8 backdrop-blur-md bg-neutral-950/80 border border-white/10 p-8"
               >
-                <div className="font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-neutral-500 mb-2">
+                <div className="font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#d4af37] mb-2">
                   Featured Project
                 </div>
-                <div className="font-SchnyderS text-3xl font-light text-neutral-950 mb-2">
+                <div className="font-SchnyderS text-3xl font-light text-white mb-2">
                   {getLocalizedText(featuredProject.title, locale)}
                 </div>
                 {featuredProject.location && (
-                  <div className="font-Satoshi text-sm text-neutral-600">
+                  <div className="font-Satoshi text-sm text-white/50">
                     {getLocalizedText(featuredProject.location, locale)}
                   </div>
                 )}
               </motion.div>
             )}
+
+            {/* Corner accents */}
+            <div className="absolute right-0 top-0 h-24 w-24 border-r border-t border-[#d4af37]/20" />
+            <div className="absolute bottom-0 left-0 h-24 w-24 border-b border-l border-[#d4af37]/20" />
           </motion.div>
         </div>
       </div>
+
+      {/* Section divider */}
+      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
     </section>
   );
 }
