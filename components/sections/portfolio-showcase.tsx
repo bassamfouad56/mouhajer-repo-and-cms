@@ -206,159 +206,50 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
       ref={sectionRef}
       id="portfolio"
       onMouseMove={handleMouseMove}
-      className="relative overflow-hidden bg-neutral-950 scroll-mt-24"
+      className="relative min-h-screen overflow-hidden bg-neutral-950 scroll-mt-24"
     >
-      {/* ===== PROMINENT CINEMATIC HEADER BANNER ===== */}
-      <div className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Background image for header */}
+      {/* Cinematic Background - Second Project Image */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ scale: backgroundScale, y: backgroundY }}
+      >
         <motion.div
           className="absolute inset-0"
-          style={{ scale: backgroundScale }}
+          style={{ x: parallaxX, y: parallaxY }}
         >
           <SafeImage
-            src={displayProjects[0].featuredImage.node.sourceUrl}
-            alt="Portfolio showcase"
-            fallbackSrc={getProjectPlaceholder(displayProjects[0].title, displayProjects[0].acfFields?.projectType)}
+            src={backgroundProject.featuredImage.node.sourceUrl}
+            alt={backgroundProject.featuredImage.node.altText || backgroundProject.title}
+            fallbackSrc={getProjectPlaceholder(backgroundProject.title, backgroundProject.acfFields?.projectType)}
             fill
             className="object-cover"
             sizes="100vw"
             priority
           />
-          {/* Heavy dark overlay for text readability */}
-          <div className="absolute inset-0 bg-neutral-950/80" />
-          <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-950/60 to-neutral-950" />
         </motion.div>
 
-        {/* Large Typography Header */}
-        <div className="relative z-10 container mx-auto px-6 text-center">
-          {/* Gold accent line */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto mb-8 h-px w-32 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent"
-          />
+        {/* Multiple overlay layers for cinematic depth */}
+        <div className="absolute inset-0 bg-gradient-to-l from-neutral-950 via-neutral-950/90 to-neutral-950/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/80" />
+        <div className="absolute inset-0 bg-neutral-950/40" />
 
-          {/* Section Label */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6"
-          >
-            <span className="inline-block border border-[#d4af37]/40 bg-[#d4af37]/10 px-6 py-2 font-Satoshi text-xs font-medium uppercase tracking-[0.4em] text-[#d4af37]">
-              Our Work
-            </span>
-          </motion.div>
-
-          {/* Massive Title */}
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
-          >
-            Portfolio of
-            <br />
-            <span className="bg-gradient-to-r from-[#d4af37] via-[#f5e6a3] to-[#d4af37] bg-clip-text text-transparent">
-              Excellence
-            </span>
-          </motion.h2>
-
-          {/* Stats Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mx-auto mt-10 flex max-w-2xl items-center justify-center gap-8 border-t border-b border-white/10 py-6"
-          >
-            <div className="text-center">
-              <div className="font-SchnyderS text-4xl font-light text-[#d4af37]">400+</div>
-              <div className="mt-1 font-Satoshi text-xs uppercase tracking-wider text-white/50">Projects Delivered</div>
-            </div>
-            <div className="h-10 w-px bg-white/10" />
-            <div className="text-center">
-              <div className="font-SchnyderS text-4xl font-light text-[#d4af37]">0</div>
-              <div className="mt-1 font-Satoshi text-xs uppercase tracking-wider text-white/50">Failed Handovers</div>
-            </div>
-            <div className="h-10 w-px bg-white/10" />
-            <div className="text-center">
-              <div className="font-SchnyderS text-4xl font-light text-[#d4af37]">20+</div>
-              <div className="mt-1 font-Satoshi text-xs uppercase tracking-wider text-white/50">Years Experience</div>
-            </div>
-          </motion.div>
-
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-12"
-          >
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="mx-auto flex h-14 w-8 items-start justify-center rounded-full border border-white/20 p-2"
-            >
-              <div className="h-3 w-1 rounded-full bg-[#d4af37]" />
-            </motion.div>
-            <span className="mt-3 block font-Satoshi text-xs uppercase tracking-widest text-white/40">
-              Scroll to Explore
-            </span>
-          </motion.div>
-        </div>
-
-        {/* Decorative corner frames */}
-        <div className="absolute left-8 top-8 h-20 w-20 border-l-2 border-t-2 border-[#d4af37]/30" />
-        <div className="absolute right-8 top-8 h-20 w-20 border-r-2 border-t-2 border-[#d4af37]/30" />
-        <div className="absolute bottom-8 left-8 h-20 w-20 border-b-2 border-l-2 border-[#d4af37]/30" />
-        <div className="absolute bottom-8 right-8 h-20 w-20 border-b-2 border-r-2 border-[#d4af37]/30" />
-      </div>
-
-      {/* ===== PROJECT CAROUSEL SECTION ===== */}
-      <div className="relative min-h-screen">
-        {/* Cinematic Background - Second Project Image */}
+        {/* Animated grain/noise effect */}
         <motion.div
-          className="absolute inset-0"
-          style={{ scale: backgroundScale, y: backgroundY }}
-        >
-          <motion.div
-            className="absolute inset-0"
-            style={{ x: parallaxX, y: parallaxY }}
-          >
-            <SafeImage
-              src={backgroundProject.featuredImage.node.sourceUrl}
-              alt={backgroundProject.featuredImage.node.altText || backgroundProject.title}
-              fallbackSrc={getProjectPlaceholder(backgroundProject.title, backgroundProject.acfFields?.projectType)}
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
-            />
-          </motion.div>
+          className="absolute inset-0 opacity-[0.03]"
+          animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
+          }}
+        />
 
-          {/* Multiple overlay layers for cinematic depth */}
-          <div className="absolute inset-0 bg-gradient-to-l from-neutral-950 via-neutral-950/90 to-neutral-950/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/80" />
-          <div className="absolute inset-0 bg-neutral-950/40" />
-
-          {/* Animated grain/noise effect */}
-          <motion.div
-            className="absolute inset-0 opacity-[0.03]"
-            animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
-            transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
-            style={{
-              backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
-            }}
-          />
-
-          {/* Cinematic light rays */}
-          <motion.div
-            className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-[#d4af37]/5 to-transparent"
-            animate={{ opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </motion.div>
+        {/* Cinematic light rays */}
+        <motion.div
+          className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-[#d4af37]/5 to-transparent"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </motion.div>
 
       {/* Main Content Container */}
       <motion.div
@@ -367,28 +258,71 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
       >
         {/* Left Side - Content */}
         <div className="flex w-full flex-col justify-center px-6 py-24 lg:w-1/2 lg:px-16 lg:py-32 order-2 lg:order-1">
-          {/* Sub-header */}
-          <motion.div style={{ y: headerY }} className="mb-8 lg:mb-12">
+          {/* Header */}
+          <motion.div style={{ y: headerY }} className="mb-12 lg:mb-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
-              className="mb-4 flex items-center gap-4"
+              className="mb-6 flex items-center gap-4"
             >
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
               <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
-                Featured Projects
+                Portfolio of Excellence
               </span>
             </motion.div>
 
-            <motion.h3
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
+            >
+              A Legacy of
+              <br />
+              <span className="text-white/30">Built Projects</span>
+            </motion.h2>
+
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-SchnyderS text-2xl font-light tracking-tight text-white/60 lg:text-3xl"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-4 font-Satoshi text-base font-light text-white/50 lg:text-lg"
             >
-              Explore Our Work
-            </motion.h3>
+              400+ Delivered. Zero Failed Handovers.
+            </motion.p>
+
+            {/* Navigation Arrows - Moved Up for Visibility */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-8 flex items-center gap-4"
+            >
+              <button
+                onClick={() => {
+                  prevSlide();
+                  setIsAutoPlaying(false);
+                }}
+                className="group flex h-14 w-14 items-center justify-center border border-[#d4af37]/40 bg-[#d4af37]/10 transition-all duration-300 hover:border-[#d4af37] hover:bg-[#d4af37]/20"
+                aria-label="Previous project"
+              >
+                <ArrowLeft className="h-6 w-6 text-[#d4af37] transition-transform group-hover:-translate-x-1" strokeWidth={1.5} />
+              </button>
+              <button
+                onClick={() => {
+                  nextSlide();
+                  setIsAutoPlaying(false);
+                }}
+                className="group flex h-14 w-14 items-center justify-center border border-[#d4af37]/40 bg-[#d4af37]/10 transition-all duration-300 hover:border-[#d4af37] hover:bg-[#d4af37]/20"
+                aria-label="Next project"
+              >
+                <ArrowRight className="h-6 w-6 text-[#d4af37] transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+              </button>
+              <span className="ml-2 font-Satoshi text-sm font-light text-white/40">
+                {activeIndex + 1} / {displayProjects.length}
+              </span>
+            </motion.div>
           </motion.div>
 
           {/* Active Project Card */}
@@ -455,61 +389,34 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation & Progress */}
-          <div className="flex items-center justify-between border-t border-white/10 pt-8">
-            {/* Progress Dots */}
-            <div className="flex items-center gap-3">
-              {displayProjects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setActiveIndex(index);
-                    setIsAutoPlaying(false);
-                  }}
-                  className="group relative h-2 overflow-hidden"
-                  aria-label={`Go to project ${index + 1}`}
-                >
-                  <div className={`h-full transition-all duration-500 ${
-                    index === activeIndex ? 'w-10 bg-[#d4af37]' : 'w-2 bg-white/20 hover:bg-white/40'
-                  }`} />
-
-                  {/* Auto-play progress */}
-                  {index === activeIndex && isAutoPlaying && (
-                    <motion.div
-                      className="absolute left-0 top-0 h-full bg-white/30"
-                      initial={{ width: '0%' }}
-                      animate={{ width: '100%' }}
-                      transition={{ duration: 6, ease: 'linear' }}
-                      key={`progress-${activeIndex}`}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Navigation Arrows */}
-            <div className="flex items-center gap-3">
+          {/* Progress Dots */}
+          <div className="flex items-center gap-3 border-t border-white/10 pt-8">
+            {displayProjects.map((_, index) => (
               <button
+                key={index}
                 onClick={() => {
-                  prevSlide();
+                  setActiveIndex(index);
                   setIsAutoPlaying(false);
                 }}
-                className="group flex h-12 w-12 items-center justify-center border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10"
-                aria-label="Previous project"
+                className="group relative h-2 overflow-hidden"
+                aria-label={`Go to project ${index + 1}`}
               >
-                <ArrowLeft className="h-5 w-5 text-white/50 transition-colors group-hover:text-[#d4af37]" strokeWidth={1.5} />
+                <div className={`h-full transition-all duration-500 ${
+                  index === activeIndex ? 'w-10 bg-[#d4af37]' : 'w-2 bg-white/20 hover:bg-white/40'
+                }`} />
+
+                {/* Auto-play progress */}
+                {index === activeIndex && isAutoPlaying && (
+                  <motion.div
+                    className="absolute left-0 top-0 h-full bg-white/30"
+                    initial={{ width: '0%' }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 6, ease: 'linear' }}
+                    key={`progress-${activeIndex}`}
+                  />
+                )}
               </button>
-              <button
-                onClick={() => {
-                  nextSlide();
-                  setIsAutoPlaying(false);
-                }}
-                className="group flex h-12 w-12 items-center justify-center border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10"
-                aria-label="Next project"
-              >
-                <ArrowRight className="h-5 w-5 text-white/50 transition-colors group-hover:text-[#d4af37]" strokeWidth={1.5} />
-              </button>
-            </div>
+            ))}
           </div>
 
           {/* View All Projects Link */}
@@ -572,7 +479,6 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
           </div>
         </div>
       </motion.div>
-      </div>{/* End of PROJECT CAROUSEL SECTION */}
 
     </section>
   );
