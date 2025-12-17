@@ -35,12 +35,14 @@ async function getFeaturedProjectImages(locale: string) {
     // Get 3 featured project images
     const images = (projects || []).slice(0, 3).map((project: any) => {
       if (project.mainImage?.asset) {
+        const imageUrl = urlForImage(project.mainImage)
+          ?.width(1200)
+          .height(800)
+          .auto('format')
+          .url();
+        if (!imageUrl) return null;
         return {
-          url: urlForImage(project.mainImage)
-            .width(1200)
-            .height(800)
-            .auto('format')
-            .url(),
+          url: imageUrl,
           alt: project.title || 'MIDC Project',
         };
       }

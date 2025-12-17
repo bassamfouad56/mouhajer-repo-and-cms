@@ -513,7 +513,7 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
       <motion.div style={{ y: imageY }} className="absolute inset-0">
         {post.mainImage ? (
           <Image
-            src={urlForImage(post.mainImage).width(1920).height(1080).url()}
+            src={urlForImage(post.mainImage)?.width(1920).height(1080).url() || '/placeholder.jpg'}
             alt={post.title}
             fill
             className="object-cover transition-all duration-1000 group-hover:scale-105"
@@ -645,7 +645,7 @@ function SecondaryFeaturedCard({ post, index }: { post: SanityPost; index: numbe
         <div className="relative mb-8 aspect-[16/10] overflow-hidden bg-neutral-100">
           {post.mainImage ? (
             <Image
-              src={urlForImage(post.mainImage).width(1200).height(750).url()}
+              src={urlForImage(post.mainImage)?.width(1200).height(750).url() || '/placeholder.jpg'}
               alt={post.title}
               fill
               className="object-cover transition-all duration-1000 group-hover:scale-110"
@@ -725,7 +725,7 @@ function PostCard({ post, index }: { post: SanityPost; index: number }) {
         <div className="relative mb-6 aspect-[4/3] overflow-hidden bg-neutral-100">
           {post.mainImage ? (
             <Image
-              src={urlForImage(post.mainImage).width(800).height(600).url()}
+              src={urlForImage(post.mainImage)?.width(800).height(600).url() || '/placeholder.jpg'}
               alt={post.title}
               fill
               className="object-cover transition-all duration-700 group-hover:scale-110"

@@ -94,10 +94,10 @@ async function getAwards() {
           projectSlug: project?.slug?.current,
           projectImage: project?.mainImage
             ? urlForImage(project.mainImage)
-                .width(1200)
+                ?.width(1200)
                 .height(750)
                 .auto('format')
-                .url()
+                .url() || '/placeholder.jpg'
             : '/placeholder.jpg',
           year: award.year || new Date().getFullYear(),
           organization: award.organization || 'International Property Awards',

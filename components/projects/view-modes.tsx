@@ -95,7 +95,7 @@ function GridCard({ project, index }: { project: SanityProject; index: number })
               transition={{ duration: 0.6 }}
             >
               <Image
-                src={urlForImage(project.mainImage).width(800).height(600).url()}
+                src={getProjectImageUrl(project.mainImage, 800, 600)}
                 alt={project.title}
                 fill
                 className="object-cover"
@@ -194,7 +194,7 @@ function MasonryCard({
         <div className="relative h-full w-full">
           {project.mainImage ? (
             <Image
-              src={urlForImage(project.mainImage).width(1000).height(1000).url()}
+              src={getProjectImageUrl(project.mainImage, 1000, 1000)}
               alt={project.title}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -269,7 +269,7 @@ function HorizontalCard({ project, index }: { project: SanityProject; index: num
         <div className="relative h-full w-full">
           {project.mainImage ? (
             <Image
-              src={urlForImage(project.mainImage).width(1400).height(900).url()}
+              src={getProjectImageUrl(project.mainImage, 1400, 900)}
               alt={project.title}
               fill
               className="object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -349,7 +349,7 @@ function InfiniteCard({ project, index }: { project: SanityProject; index: numbe
       <Link href={`/projects/${project.slug.current}`} className="block h-full">
         {project.mainImage ? (
           <Image
-            src={urlForImage(project.mainImage).width(600).height(800).url()}
+            src={getProjectImageUrl(project.mainImage, 600, 800)}
             alt={project.title}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -409,7 +409,7 @@ function CaseStudyCard({ project, index }: { project: SanityProject; index: numb
                   className="h-full w-full"
                 >
                   <Image
-                    src={urlForImage(project.mainImage).width(1000).height(700).url()}
+                    src={getProjectImageUrl(project.mainImage, 1000, 700)}
                     alt={project.title}
                     fill
                     className="object-cover"
@@ -537,7 +537,7 @@ export function SplitScreenView({ projects }: { projects: SanityProject[] }) {
             <Link href={`/projects/${projects[activeIndex]?.slug.current}`}>
               {projects[activeIndex]?.mainImage ? (
                 <Image
-                  src={urlForImage(projects[activeIndex].mainImage).width(1200).height(1000).url()}
+                  src={getProjectImageUrl(projects[activeIndex].mainImage, 1200, 1000)}
                   alt={projects[activeIndex].title}
                   fill
                   className="object-cover"
@@ -598,7 +598,7 @@ export function StackedCardsView({ projects }: { projects: SanityProject[] }) {
                 <div className="relative h-full w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-white shadow-2xl">
                   {project.mainImage ? (
                     <Image
-                      src={urlForImage(project.mainImage).width(600).height(800).url()}
+                      src={getProjectImageUrl(project.mainImage, 600, 800)}
                       alt={project.title}
                       fill
                       className="object-cover"
@@ -707,7 +707,7 @@ function TimelineCard({
             <div className="relative aspect-video overflow-hidden">
               {project.mainImage ? (
                 <Image
-                  src={urlForImage(project.mainImage).width(800).height(500).url()}
+                  src={getProjectImageUrl(project.mainImage, 800, 500)}
                   alt={project.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -799,7 +799,7 @@ function Immersive3DCard({ project, index }: { project: SanityProject; index: nu
       <Link href={`/projects/${project.slug.current}`} className="block h-full">
         {project.mainImage ? (
           <Image
-            src={urlForImage(project.mainImage).width(600).height(700).url()}
+            src={getProjectImageUrl(project.mainImage, 600, 700)}
             alt={project.title}
             fill
             className="object-cover"
@@ -866,7 +866,7 @@ function CinematicCard({ project, index }: { project: SanityProject; index: numb
           {project.mainImage ? (
             <motion.div style={{ scale: imageScale }} className="h-full w-full">
               <Image
-                src={urlForImage(project.mainImage).width(2000).height(857).url()}
+                src={getProjectImageUrl(project.mainImage, 2000, 857)}
                 alt={project.title}
                 fill
                 className="object-cover"

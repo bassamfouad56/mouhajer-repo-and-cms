@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      images: service.mainImage ? [{ url: urlForImage(service.mainImage).width(1200).height(630).url() }] : [],
+      images: service.mainImage ? [{ url: urlForImage(service.mainImage)?.width(1200).height(630).url() || '' }] : [],
     },
   };
 }
@@ -108,7 +108,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     content: '', // Sanity uses block content, handled separately
     featuredImage: service.mainImage ? {
       node: {
-        sourceUrl: urlForImage(service.mainImage).width(1920).height(1080).url(),
+        sourceUrl: urlForImage(service.mainImage)?.width(1920).height(1080).url() || '',
         altText: getLocalizedValue(service.mainImage.alt, locale) || serviceTitle,
       },
     } : undefined,
@@ -136,7 +136,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     content: '',
     featuredImage: project.mainImage ? {
       node: {
-        sourceUrl: urlForImage(project.mainImage).width(800).height(600).url(),
+        sourceUrl: urlForImage(project.mainImage)?.width(800).height(600).url() || '',
         altText: getLocalizedValue(project.mainImage.alt, locale) || getLocalizedValue(project.title, locale, ''),
       },
     } : undefined,
@@ -156,7 +156,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     content: '',
     featuredImage: s.mainImage ? {
       node: {
-        sourceUrl: urlForImage(s.mainImage).width(400).height(300).url(),
+        sourceUrl: urlForImage(s.mainImage)?.width(400).height(300).url() || '',
         altText: getLocalizedValue(s.mainImage.alt, locale) || getLocalizedValue(s.title, locale, ''),
       },
     } : undefined,
@@ -172,7 +172,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     content: '',
     featuredImage: i.mainImage ? {
       node: {
-        sourceUrl: urlForImage(i.mainImage).width(400).height(300).url(),
+        sourceUrl: urlForImage(i.mainImage)?.width(400).height(300).url() || '',
         altText: getLocalizedValue(i.mainImage.alt, locale) || getLocalizedValue(i.title, locale, ''),
       },
     } : undefined,

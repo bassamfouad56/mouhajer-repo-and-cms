@@ -81,7 +81,7 @@ export default function ServicesPageContent({
 
   // Get first project image as fallback if no heroImage from Sanity
   const bannerImage = heroImage || (projects[0]?.mainImage
-    ? urlForImage(projects[0].mainImage).width(2560).height(1440).url()
+    ? urlForImage(projects[0].mainImage)?.width(2560).height(1440).url() || '/projects/turnkey-design-fitout/_MID0058-HDR.jpg'
     : '/projects/turnkey-design-fitout/_MID0058-HDR.jpg');
 
   return (
@@ -624,7 +624,7 @@ function ServicePillarsSection({
         <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
           {services.map((service, index) => {
             const imageSource = service.mainImage
-              ? urlForImage(service.mainImage).width(800).height(600).url()
+              ? urlForImage(service.mainImage)?.width(800).height(600).url() || ''
               : service.localImage;
 
             return (
@@ -723,7 +723,7 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
 
   // Determine which image source to use
   const imageSource = service.mainImage
-    ? urlForImage(service.mainImage).width(900).height(1200).url()
+    ? urlForImage(service.mainImage)?.width(900).height(1200).url() || ''
     : service.localImage;
 
   return (
