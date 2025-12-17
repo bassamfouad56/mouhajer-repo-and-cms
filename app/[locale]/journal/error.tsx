@@ -1,0 +1,99 @@
+'use client';
+
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { RefreshCw, BookOpen, ArrowLeft, Home } from 'lucide-react';
+
+interface ErrorProps {
+  error: Error & { digest?: string };
+  reset: () => void;
+}
+
+export default function JournalError({ error, reset }: ErrorProps) {
+  useEffect(() => {
+    // Log the error to console in development
+    console.error('Journal page error:', error);
+  }, [error]);
+
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center bg-neutral-950 px-6">
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
+
+      {/* Gradient orb */}
+      <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4af37]/5 blur-[150px]" />
+
+      <div className="relative z-10 text-center">
+        {/* Error badge */}
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-4 py-2">
+          <BookOpen className="h-4 w-4 text-[#d4af37]" />
+          <span className="font-Satoshi text-xs uppercase tracking-wider text-[#d4af37]">
+            Journal Error
+          </span>
+        </div>
+
+        {/* Title */}
+        <h1 className="mb-4 font-SchnyderS text-4xl font-light text-white lg:text-6xl">
+          Article Unavailable
+        </h1>
+
+        {/* Description */}
+        <p className="mx-auto mb-8 max-w-md font-Satoshi text-lg font-light text-white/60">
+          We couldn&apos;t load this article. It may have been moved or is temporarily unavailable.
+        </p>
+
+        {/* Error details (only in development) */}
+        {process.env.NODE_ENV === 'development' && error.message && (
+          <div className="mx-auto mb-8 max-w-2xl rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-left">
+            <p className="font-Satoshi text-sm text-red-400">
+              <strong>Error:</strong> {error.message}
+            </p>
+            {error.digest && (
+              <p className="mt-2 font-Satoshi text-xs text-red-400/60">
+                Digest: {error.digest}
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Action buttons */}
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <button
+            onClick={reset}
+            className="group inline-flex items-center gap-3 rounded-full border border-[#d4af37] bg-[#d4af37] px-8 py-4 font-Satoshi text-sm font-medium text-neutral-950 transition-all duration-300 hover:bg-[#e5c349]"
+          >
+            <RefreshCw className="h-4 w-4 transition-transform group-hover:rotate-180" />
+            Try Again
+          </button>
+
+          <Link
+            href="/journal"
+            className="group inline-flex items-center gap-3 rounded-full border border-white/20 px-8 py-4 font-Satoshi text-sm font-light text-white transition-all duration-300 hover:border-white/40 hover:bg-white/5"
+          >
+            <BookOpen className="h-4 w-4" />
+            Browse Journal
+          </Link>
+        </div>
+
+        {/* Secondary links */}
+        <div className="mt-12 flex items-center justify-center gap-6">
+          <button
+            onClick={() => window.history.back()}
+            className="inline-flex items-center gap-2 font-Satoshi text-sm text-white/40 transition-colors hover:text-white"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Go back
+          </button>
+
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 font-Satoshi text-sm text-white/40 transition-colors hover:text-white"
+          >
+            <Home className="h-4 w-4" />
+            Homepage
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -9,8 +9,8 @@ import { urlForImage } from '@/sanity/lib/image';
 import { format } from 'date-fns';
 import { Search, X, Clock, Eye, ArrowRight, Play } from 'lucide-react';
 
-// Default hero image fallback from projects
-const DEFAULT_HERO_IMAGE = '/projects/grand-hyatt-prince-suite/prince02.jpg';
+// Default hero image fallback
+const DEFAULT_HERO_IMAGE = '/founder/CID_2106_00_COVER.jpg';
 
 // Helper to get safe image URL from Sanity
 function getSafeImageUrl(image: any, width: number, height: number): string {
@@ -355,7 +355,7 @@ export default function JournalPageContent({
                   animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 1, delay: 0.5 }}
                 >
-                  <Link href={`/${locale}/journal/${featuredPost.category}/${featuredPost.slug.current}`}>
+                  <Link href={`/${locale}/journal/${featuredPost.category || 'design-trends'}/${featuredPost.slug?.current || 'article'}`}>
                     <h1 className="mb-8 font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white transition-colors duration-500 hover:text-[#d4af37] sm:text-6xl lg:text-7xl">
                       {featuredPost.title}
                     </h1>
@@ -381,7 +381,7 @@ export default function JournalPageContent({
                   transition={{ duration: 0.8, delay: 0.7 }}
                 >
                   <Link
-                    href={`/${locale}/journal/${featuredPost.category}/${featuredPost.slug.current}`}
+                    href={`/${locale}/journal/${featuredPost.category || 'design-trends'}/${featuredPost.slug?.current || 'article'}`}
                     className="group/link inline-flex items-center gap-4 border border-white/30 px-8 py-4 font-Satoshi text-sm uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37] hover:bg-[#d4af37] hover:text-neutral-950"
                   >
                     <span>Read Full Article</span>
@@ -745,18 +745,41 @@ export default function JournalPageContent({
         </div>
       </section>
 
-      {/* Professional CTA Section */}
-      <section className="relative overflow-hidden bg-neutral-950 px-6 py-40 lg:px-12">
-        {/* Background Image */}
+      {/* Professional CTA Section - Cinematic Banner */}
+      <section className="relative overflow-hidden bg-neutral-950 px-6 py-32 lg:px-12 lg:py-48">
+        {/* Background Image with Parallax Effect */}
         <div className="absolute inset-0">
           <Image
             src={featuredPost?.mainImage ? getSafeImageUrl(featuredPost.mainImage, 1920, 1080) || DEFAULT_HERO_IMAGE : DEFAULT_HERO_IMAGE}
             alt="Background"
             fill
-            className="object-cover opacity-30"
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-neutral-950/60" />
+          {/* Multi-layer gradient overlays for cinematic effect */}
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/60 via-transparent to-neutral-950/60" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
         </div>
+
+        {/* Animated Background Elements */}
+        <motion.div
+          className="pointer-events-none absolute inset-0"
+          animate={{
+            background: [
+              'radial-gradient(ellipse 80% 60% at 20% 80%, rgba(212,175,55,0.08) 0%, transparent 60%)',
+              'radial-gradient(ellipse 80% 60% at 80% 20%, rgba(212,175,55,0.08) 0%, transparent 60%)',
+              'radial-gradient(ellipse 80% 60% at 20% 80%, rgba(212,175,55,0.08) 0%, transparent 60%)',
+            ],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+        />
+
+        {/* Subtle Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] opacity-50" />
+
+        {/* Decorative Lines */}
+        <div className="absolute left-0 top-1/2 h-px w-1/4 -translate-y-1/2 bg-gradient-to-r from-transparent via-[#d4af37]/20 to-transparent" />
+        <div className="absolute right-0 top-1/2 h-px w-1/4 -translate-y-1/2 bg-gradient-to-l from-transparent via-[#d4af37]/20 to-transparent" />
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <motion.div
@@ -765,30 +788,79 @@ export default function JournalPageContent({
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <span className="mb-6 block font-Satoshi text-[10px] uppercase tracking-[0.4em] text-[#d4af37]">
+            {/* Decorative top element */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mx-auto mb-8 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#d4af37] to-transparent"
+            />
+
+            <span className="mb-6 block font-Satoshi text-xs uppercase tracking-[0.5em] text-[#d4af37]">
               Stay Connected
             </span>
-            <h2 className="mb-8 font-SchnyderS text-5xl font-light tracking-tight text-white lg:text-7xl">
+
+            <h2 className="mb-8 font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
               Get Design
               <br />
-              <span className="text-[#d4af37]">Inspiration</span>
+              <span className="bg-gradient-to-r from-[#d4af37] via-[#f5d87a] to-[#d4af37] bg-clip-text text-transparent">
+                Inspiration
+              </span>
             </h2>
-            <p className="mb-12 font-Satoshi text-xl font-light text-white/60">
-              Subscribe to receive exclusive insights, project showcases, and industry trends.
+
+            <p className="mx-auto mb-12 max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-white/60 lg:text-xl">
+              Subscribe to receive exclusive insights, project showcases, and industry trends directly to your inbox.
             </p>
-            <Link
-              href={`/${locale}/contact`}
-              className="group inline-flex items-center gap-4 border border-[#d4af37] bg-[#d4af37] px-12 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#d4af37]"
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <span>Get in Touch</span>
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
-            </Link>
+              <Link
+                href={`/${locale}/contact`}
+                className="group relative inline-flex items-center gap-4 overflow-hidden border-2 border-[#d4af37] bg-[#d4af37] px-12 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#d4af37]"
+              >
+                <span className="relative z-10">Get in Touch</span>
+                <ArrowRight size={16} className="relative z-10 transition-transform group-hover:translate-x-2" />
+                {/* Shine effect on hover */}
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              </Link>
+            </motion.div>
+
+            {/* Decorative bottom element */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mx-auto mt-12 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#d4af37]/50 to-transparent"
+            />
           </motion.div>
         </div>
 
-        {/* Corner Accents */}
-        <div className="absolute left-8 top-8 h-16 w-16 border-l border-t border-[#d4af37]/20" />
-        <div className="absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#d4af37]/20" />
+        {/* Corner Accents - Larger */}
+        <div className="absolute left-6 top-6 h-24 w-24 border-l-2 border-t-2 border-[#d4af37]/30 lg:left-12 lg:top-12 lg:h-32 lg:w-32" />
+        <div className="absolute bottom-6 right-6 h-24 w-24 border-b-2 border-r-2 border-[#d4af37]/30 lg:bottom-12 lg:right-12 lg:h-32 lg:w-32" />
+
+        {/* Floating decorative elements */}
+        <motion.div
+          className="absolute left-[10%] top-[20%] h-2 w-2 rounded-full bg-[#d4af37]/30"
+          animate={{ y: [0, -20, 0], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute right-[15%] top-[30%] h-1.5 w-1.5 rounded-full bg-[#d4af37]/20"
+          animate={{ y: [0, 15, 0], opacity: [0.2, 0.5, 0.2] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        />
+        <motion.div
+          className="absolute bottom-[25%] left-[20%] h-1 w-1 rounded-full bg-[#d4af37]/40"
+          animate={{ y: [0, -10, 0], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        />
       </section>
     </main>
   );
@@ -796,13 +868,13 @@ export default function JournalPageContent({
 
 // Default card fallback images
 const CARD_FALLBACK_IMAGES = [
-  '/projects/jumeirah-island-villa/JumIsl01.jpg',
-  '/projects/park-hyatt-villa/hotelparkhyattvilla03.jpg',
-  '/projects/district-one-villa-79x/01.jpg',
-  '/projects/ritz-carlton-villas/ritzcarl01.jpg',
+  '/founder/CID_2106_00_COVER.jpg',
+  '/placeholder.jpg',
+  '/founder/CID_2106_00_COVER.jpg',
+  '/placeholder.jpg',
 ];
 
-// Secondary Featured Card Component
+// Secondary Featured Card Component - Full Background Image with Overlay
 function SecondaryFeaturedCard({ post, index, locale }: { post: Post; index: number; locale: string }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: '-100px' });
@@ -820,9 +892,10 @@ function SecondaryFeaturedCard({ post, index, locale }: { post: Post; index: num
       transition={{ duration: 1, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
       className="group"
     >
-      <Link href={`/${locale}/journal/${post.category}/${post.slug.current}`} className="block">
-        {/* Image with Hover Effect */}
-        <div className="relative mb-8 aspect-[16/10] overflow-hidden bg-neutral-100">
+      <Link href={`/${locale}/journal/${post.category || 'design-trends'}/${post.slug?.current || 'article'}`} className="block">
+        {/* Full Background Image Card */}
+        <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900 sm:aspect-[16/12]">
+          {/* Background Image */}
           <Image
             src={imageUrl}
             alt={post.title}
@@ -830,58 +903,77 @@ function SecondaryFeaturedCard({ post, index, locale }: { post: Post; index: num
             className="object-cover transition-all duration-1000 group-hover:scale-110"
           />
 
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/20 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+          {/* Multi-layer Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/40 via-transparent to-transparent" />
 
-          {/* Category Badge */}
+          {/* Hover Enhancement */}
+          <div className="absolute inset-0 bg-[#d4af37]/0 transition-all duration-700 group-hover:bg-[#d4af37]/10" />
+
+          {/* Category Badge - Top */}
           {post.category && (
-            <div className="absolute left-6 top-6">
+            <div className="absolute left-6 top-6 z-10">
               <span className={`inline-block rounded-full border px-4 py-1.5 font-Satoshi text-xs uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}>
                 {CATEGORIES.find(c => c.value === post.category)?.label || post.category}
               </span>
             </div>
           )}
 
-          {/* Hover Content */}
-          <div className="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-            <span className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-white">
-              Read Article
-              <ArrowRight size={12} />
-            </span>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div>
-          {/* Meta */}
-          <div className="mb-4 flex items-center gap-4 font-Satoshi text-xs font-light text-neutral-500">
-            {post.publishedAt && (
-              <span>{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</span>
-            )}
-            <span className="flex items-center gap-1.5">
+          {/* Reading Time - Top Right */}
+          <div className="absolute right-6 top-6 z-10">
+            <span className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 font-Satoshi text-xs font-light text-white backdrop-blur-sm">
               <Clock size={12} />
               {readingTime} min read
             </span>
           </div>
 
-          {/* Title */}
-          <h3 className="mb-4 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950 transition-colors duration-500 group-hover:text-[#d4af37] lg:text-4xl">
-            {post.title}
-          </h3>
+          {/* Content - Bottom */}
+          <div className="absolute inset-x-0 bottom-0 z-10 p-6 lg:p-8">
+            {/* Meta */}
+            <div className="mb-4 flex items-center gap-4 font-Satoshi text-xs font-light text-white/60">
+              {post.publishedAt && (
+                <span>{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</span>
+              )}
+              {post.viewCount !== undefined && post.viewCount > 0 && (
+                <span className="flex items-center gap-1.5">
+                  <Eye size={12} />
+                  {formatViews(post.viewCount)} views
+                </span>
+              )}
+            </div>
 
-          {/* Excerpt */}
-          {post.excerpt && (
-            <p className="line-clamp-2 font-Satoshi text-base font-light leading-relaxed text-neutral-600">
-              {post.excerpt}
-            </p>
-          )}
+            {/* Title */}
+            <h3 className="mb-4 font-SchnyderS text-2xl font-light leading-tight tracking-tight text-white transition-colors duration-500 group-hover:text-[#d4af37] sm:text-3xl lg:text-4xl">
+              {post.title}
+            </h3>
+
+            {/* Excerpt */}
+            {post.excerpt && (
+              <p className="mb-6 line-clamp-2 font-Satoshi text-sm font-light leading-relaxed text-white/70 lg:text-base">
+                {post.excerpt}
+              </p>
+            )}
+
+            {/* Read More CTA */}
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-white transition-colors group-hover:text-[#d4af37]">
+                Read Article
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-2" />
+              </span>
+              <div className="h-px flex-1 bg-white/20 transition-all duration-500 group-hover:bg-[#d4af37]/50" />
+            </div>
+          </div>
+
+          {/* Corner Accents */}
+          <div className="absolute left-0 top-0 h-16 w-16 border-l-2 border-t-2 border-[#d4af37]/0 transition-all duration-500 group-hover:border-[#d4af37]/50" />
+          <div className="absolute bottom-0 right-0 h-16 w-16 border-b-2 border-r-2 border-[#d4af37]/0 transition-all duration-500 group-hover:border-[#d4af37]/50" />
         </div>
       </Link>
     </motion.article>
   );
 }
 
-// Post Card Component
+// Post Card Component - Full Background Image with Overlay
 function PostCard({ post, index, locale }: { post: Post; index: number; locale: string }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: '-100px' });
@@ -897,11 +989,12 @@ function PostCard({ post, index, locale }: { post: Post; index: number; locale: 
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="group flex flex-col"
+      className="group"
     >
-      <Link href={`/${locale}/journal/${post.category}/${post.slug.current}`} className="block">
-        {/* Image Container with Animated Border */}
-        <div className="relative mb-6 aspect-[4/3] overflow-hidden bg-neutral-100">
+      <Link href={`/${locale}/journal/${post.category || 'design-trends'}/${post.slug?.current || 'article'}`} className="block">
+        {/* Full Background Image Card */}
+        <div className="relative aspect-[3/4] overflow-hidden bg-neutral-900">
+          {/* Background Image */}
           <Image
             src={imageUrl}
             alt={post.title}
@@ -909,85 +1002,90 @@ function PostCard({ post, index, locale }: { post: Post; index: number; locale: 
             className="object-cover transition-all duration-700 group-hover:scale-110"
           />
 
+          {/* Multi-layer Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/50 to-transparent" />
+          <div className="absolute inset-0 bg-neutral-950/20" />
+
+          {/* Hover Enhancement */}
+          <div className="absolute inset-0 bg-[#d4af37]/0 transition-all duration-500 group-hover:bg-[#d4af37]/10" />
+
           {/* Animated Border on Hover */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-0 top-0 h-0 w-full bg-[#d4af37] transition-all duration-500 group-hover:h-1" />
-            <div className="absolute right-0 top-0 h-full w-0 bg-[#d4af37] transition-all duration-500 delay-100 group-hover:w-1" />
-            <div className="absolute bottom-0 right-0 h-0 w-full bg-[#d4af37] transition-all duration-500 delay-200 group-hover:h-1" />
-            <div className="absolute bottom-0 left-0 h-full w-0 bg-[#d4af37] transition-all duration-500 delay-300 group-hover:w-1" />
+            <div className="absolute left-0 top-0 h-0 w-full bg-[#d4af37] transition-all duration-500 group-hover:h-[2px]" />
+            <div className="absolute right-0 top-0 h-full w-0 bg-[#d4af37] transition-all duration-500 delay-100 group-hover:w-[2px]" />
+            <div className="absolute bottom-0 right-0 h-0 w-full bg-[#d4af37] transition-all duration-500 delay-200 group-hover:h-[2px]" />
+            <div className="absolute bottom-0 left-0 h-full w-0 bg-[#d4af37] transition-all duration-500 delay-300 group-hover:w-[2px]" />
           </div>
 
-          {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-          {/* Category Badge */}
+          {/* Category Badge - Top Left */}
           {post.category && (
-            <div className="absolute left-4 top-4">
+            <div className="absolute left-4 top-4 z-10">
               <span className={`inline-block rounded-full border px-3 py-1 font-Satoshi text-[10px] uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}>
                 {CATEGORIES.find(c => c.value === post.category)?.label || post.category}
               </span>
             </div>
           )}
 
-          {/* Reading Time Badge */}
-          <div className="absolute right-4 top-4">
-            <span className="flex items-center gap-1 rounded-full bg-white/90 px-3 py-1 font-Satoshi text-[10px] font-light text-neutral-700 backdrop-blur-sm">
+          {/* Reading Time Badge - Top Right */}
+          <div className="absolute right-4 top-4 z-10">
+            <span className="flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 font-Satoshi text-[10px] font-light text-white backdrop-blur-sm">
               <Clock size={10} />
               {readingTime} min
             </span>
           </div>
-        </div>
 
-        {/* Content */}
-        <div className="flex flex-1 flex-col">
-          {/* Meta Row */}
-          <div className="mb-3 flex items-center gap-3 font-Satoshi text-xs font-light text-neutral-500">
-            {post.publishedAt && (
-              <span>{format(new Date(post.publishedAt), 'MMM d, yyyy')}</span>
-            )}
-            {post.viewCount !== undefined && post.viewCount > 0 && (
-              <>
-                <span className="h-1 w-1 rounded-full bg-neutral-300" />
-                <span className="flex items-center gap-1">
-                  <Eye size={12} />
-                  {formatViews(post.viewCount)}
-                </span>
-              </>
-            )}
-          </div>
-
-          {/* Title */}
-          <h3 className="mb-3 line-clamp-2 font-SchnyderS text-2xl font-light tracking-tight text-neutral-950 transition-colors duration-300 group-hover:text-[#d4af37]">
-            {post.title}
-          </h3>
-
-          {/* Excerpt */}
-          {post.excerpt && (
-            <p className="mb-4 line-clamp-2 flex-1 font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
-              {post.excerpt}
-            </p>
-          )}
-
-          {/* Tags */}
-          {post.tags && post.tags.length > 0 && (
-            <div className="mb-4 flex flex-wrap gap-2">
-              {post.tags.slice(0, 3).map(tag => (
-                <span
-                  key={tag._id}
-                  className="rounded-full bg-neutral-100 px-3 py-1 text-[10px] font-light text-neutral-600"
-                >
-                  {tag.name}
-                </span>
-              ))}
+          {/* Content - Bottom */}
+          <div className="absolute inset-x-0 bottom-0 z-10 p-5">
+            {/* Meta Row */}
+            <div className="mb-3 flex items-center gap-3 font-Satoshi text-[10px] font-light text-white/60">
+              {post.publishedAt && (
+                <span>{format(new Date(post.publishedAt), 'MMM d, yyyy')}</span>
+              )}
+              {post.viewCount !== undefined && post.viewCount > 0 && (
+                <>
+                  <span className="h-1 w-1 rounded-full bg-white/30" />
+                  <span className="flex items-center gap-1">
+                    <Eye size={10} />
+                    {formatViews(post.viewCount)}
+                  </span>
+                </>
+              )}
             </div>
-          )}
 
-          {/* Read More Link */}
-          <div className="mt-auto pt-4">
-            <span className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-neutral-400 transition-colors group-hover:text-[#d4af37]">
-              Read Article
-              <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
-            </span>
+            {/* Title */}
+            <h3 className="mb-3 line-clamp-2 font-SchnyderS text-xl font-light leading-tight tracking-tight text-white transition-colors duration-300 group-hover:text-[#d4af37] sm:text-2xl">
+              {post.title}
+            </h3>
+
+            {/* Excerpt */}
+            {post.excerpt && (
+              <p className="mb-4 line-clamp-2 font-Satoshi text-xs font-light leading-relaxed text-white/60">
+                {post.excerpt}
+              </p>
+            )}
+
+            {/* Tags */}
+            {post.tags && post.tags.length > 0 && (
+              <div className="mb-4 flex flex-wrap gap-1.5">
+                {post.tags.slice(0, 2).map(tag => (
+                  <span
+                    key={tag._id}
+                    className="rounded-full bg-white/10 px-2.5 py-0.5 text-[9px] font-light text-white/70 backdrop-blur-sm"
+                  >
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Read More Link */}
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 font-Satoshi text-[10px] uppercase tracking-wider text-white/70 transition-colors group-hover:text-[#d4af37]">
+                Read Article
+                <ArrowRight size={10} className="transition-transform group-hover:translate-x-1" />
+              </span>
+              <div className="h-px flex-1 bg-white/10 transition-all duration-500 group-hover:bg-[#d4af37]/30" />
+            </div>
           </div>
         </div>
       </Link>

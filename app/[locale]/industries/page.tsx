@@ -3,7 +3,7 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { LogoMarquee } from '@/components/logo-marquee';
 import { client } from '@/sanity/lib/client';
-import { industriesQuery, servicesQuery, projectsQuery } from '@/sanity/lib/queries';
+import { industriesQuery, servicesQuery, clientsQuery } from '@/sanity/lib/queries';
 import EnhancedIndustriesPageContent from './enhanced-industries-page-content';
 
 export const metadata: Metadata = {
@@ -17,16 +17,18 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// Industries to exclude from display
-const EXCLUDED_INDUSTRIES = ['healthcare', 'education'];
-
 async function getIndustries(locale: string) {
   try {
     const industries = await client.fetch(industriesQuery, { locale });
-    // Filter out excluded industries (healthcare and education)
+    // Deduplicate by slug (for i18n variants)
+    const seenSlugs = new Set<string>();
     const filteredIndustries = (industries || []).filter(
-      (industry: { slug?: { current?: string } }) =>
-        !EXCLUDED_INDUSTRIES.includes(industry.slug?.current || '')
+      (industry: { slug?: { current?: string } }) => {
+        const slug = industry.slug?.current || '';
+        if (seenSlugs.has(slug)) return false;
+        seenSlugs.add(slug);
+        return true;
+      }
     );
     return filteredIndustries;
   } catch (error) {
@@ -45,12 +47,12 @@ async function getServices(locale: string) {
   }
 }
 
-async function getProjects(locale: string) {
+async function getClients(locale: string) {
   try {
-    const projects = await client.fetch(projectsQuery, { locale });
-    return projects || [];
+    const clients = await client.fetch(clientsQuery, { locale });
+    return clients || [];
   } catch (error) {
-    console.error('Error fetching projects from Sanity:', error);
+    console.error('Error fetching clients from Sanity:', error);
     return [];
   }
 }
@@ -58,10 +60,10 @@ async function getProjects(locale: string) {
 export default async function IndustriesPage({ params }: Props) {
   const { locale } = await params;
 
-  const [industries, services, projects] = await Promise.all([
+  const [industries, services, clients] = await Promise.all([
     getIndustries(locale),
     getServices(locale),
-    getProjects(locale),
+    getClients(locale),
   ]);
 
   return (
@@ -70,9 +72,8 @@ export default async function IndustriesPage({ params }: Props) {
       <EnhancedIndustriesPageContent
         industries={industries}
         services={services}
-        projects={projects}
       />
-      <LogoMarquee />
+      <LogoMarquee clients={clients} />
       <Footer />
     </>
   );

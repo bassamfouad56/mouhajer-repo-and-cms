@@ -113,11 +113,6 @@ export function OrchestrationSection() {
                   {protocol.description}
                 </p>
 
-                {/* Number */}
-                <div className="absolute right-6 top-6 font-SchnyderS text-5xl font-extralight text-white/[0.03]">
-                  0{index + 1}
-                </div>
-
                 {/* Corner accent */}
                 <div className="absolute bottom-0 right-0 h-12 w-12 border-b border-r border-[#d4af37]/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </motion.div>

@@ -74,7 +74,8 @@
       "Bash(npx tsc --noEmit)",
       "Bash(vercel env pull:*)",
       "Bash(del \"\\?\\D:\\wbsite\\mouhajer-new-marketing-website\\nul\")",
-      "Bash(pnpm remove:*)"
+      "Bash(pnpm remove:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []

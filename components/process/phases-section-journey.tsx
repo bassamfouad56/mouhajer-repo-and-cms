@@ -7,7 +7,6 @@ import { SafeImage } from '@/components/safe-image';
 
 const phases = [
   {
-    number: '01',
     id: 'phase-01',
     title: 'Discovery & Conceptualization',
     headline: 'It Starts With Listening',
@@ -31,7 +30,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=1500&fit=crop',
   },
   {
-    number: '02',
     id: 'phase-02',
     title: 'Design Development & Visualization',
     headline: 'Where Imagination Meets Precision',
@@ -55,7 +53,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&h=1500&fit=crop',
   },
   {
-    number: '03',
     id: 'phase-03',
     title: 'Technical Engineering (The MEP Core)',
     headline: 'The Heartbeat of the Building',
@@ -79,7 +76,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1200&h=1500&fit=crop',
   },
   {
-    number: '04',
     id: 'phase-04',
     title: 'Planning & Material Control',
     headline: 'Precision Logistics',
@@ -103,7 +99,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=1500&fit=crop',
   },
   {
-    number: '05',
     id: 'phase-05',
     title: 'Execution & Safety',
     headline: 'The Art of Construction',
@@ -127,7 +122,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&h=1500&fit=crop',
   },
   {
-    number: '06',
     id: 'phase-06',
     title: 'Handover & Legacy',
     headline: 'The White-Glove Handover',
@@ -292,23 +286,12 @@ function PhaseStep({
             <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#d4af37] bg-[#d4af37]/10">
               <Icon className="h-7 w-7 text-[#d4af37]" strokeWidth={1.5} />
             </div>
-            <div className="flex items-baseline gap-3">
-              <span className="font-SchnyderS text-5xl font-light text-[#d4af37]">
-                {phase.number}
-              </span>
-              <span className="text-sm font-light text-neutral-500">
-                / 06
-              </span>
-            </div>
           </div>
 
           {/* Phase Info */}
           <div className="mb-6">
-            <div className="mb-2 flex items-center gap-3">
-              <span className="hidden font-SchnyderS text-6xl font-light text-[#d4af37] lg:block">
-                {phase.number}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-[#d4af37] to-transparent" />
+            <div className="mb-2">
+              <div className="h-px w-24 bg-gradient-to-r from-[#d4af37] to-transparent" />
             </div>
             <h3 className="mb-2 font-SchnyderS text-3xl font-light text-white md:text-4xl">
               {phase.title}
@@ -379,11 +362,6 @@ function PhaseStep({
             {/* Corner Frames */}
             <div className="absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#d4af37]/50 transition-all duration-300 group-hover:h-20 group-hover:w-20" />
             <div className="absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#d4af37]/50 transition-all duration-300 group-hover:h-20 group-hover:w-20" />
-
-            {/* Phase Number Watermark */}
-            <div className="absolute bottom-6 left-6 font-SchnyderS text-8xl font-light leading-none text-white/10">
-              {phase.number}
-            </div>
           </div>
         </motion.div>
       </div>

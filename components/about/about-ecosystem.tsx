@@ -170,11 +170,6 @@ export function AboutEcosystem() {
 
                     {/* Hover Border Effect */}
                     <div className="absolute inset-0 border border-white/5 transition-colors duration-500 group-hover:border-[#d4af37]/30" />
-
-                    {/* Number Badge */}
-                    <div className="absolute right-8 top-8 font-SchnyderS text-6xl font-extralight text-white/[0.03] transition-colors duration-500 group-hover:text-[#d4af37]/10 lg:right-10 lg:top-10 lg:text-7xl">
-                      0{index + 1}
-                    </div>
                   </div>
                 </Link>
               </motion.div>

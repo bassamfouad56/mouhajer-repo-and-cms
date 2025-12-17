@@ -154,10 +154,6 @@ function FeaturedProjectCard({ project, index, isReversed }: FeaturedProjectCard
           </div>
         </Link>
 
-        {/* Project Number */}
-        <div className="absolute right-8 top-8 text-8xl font-extralight text-white/20">
-          {String(index + 1).padStart(2, '0')}
-        </div>
       </motion.div>
 
       {/* Content */}

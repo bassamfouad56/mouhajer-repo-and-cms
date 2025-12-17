@@ -210,12 +210,20 @@ export const postBySlugQuery = groq`
     excerpt,
     mainImage,
     category,
-    author,
+    "author": author->{
+      name,
+      role,
+      bio,
+      "image": image {
+        asset,
+        alt
+      }
+    },
     content,
     readTime,
     "tags": tags[]->{
       _id,
-      "name": name[$locale],
+      "name": coalesce(name[$locale], name.en, name),
       slug
     },
     publishedAt,

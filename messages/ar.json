@@ -532,8 +532,10 @@
   "MegaMenu": {
     "explore": "استكشف",
     "featured": "مميز",
+    "preview": "معاينة",
     "new": "جديد",
     "learnMore": "اعرف المزيد",
+    "viewDetails": "عرض التفاصيل",
     "viewAll": "عرض الكل",
     "getInTouch": "تواصل معنا",
     "projects": {
@@ -658,6 +660,10 @@
       "bookConsultation": {
         "label": "حجز استشارة",
         "description": "جدولة اجتماع استكشافي"
+      },
+      "supplierRegistration": {
+        "label": "تسجيل الموردين",
+        "description": "انضم إلى شبكة موردينا الموثوقين"
       }
     }
   },

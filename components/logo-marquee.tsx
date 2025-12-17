@@ -2,43 +2,58 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
+import { SafeImage } from '@/components/safe-image';
+import { urlForImage } from '@/sanity/lib/image';
 
-// Partner logos with their actual file names from public/partners/
-const partnerLogos = [
-  { name: 'Sofitel', filename: 'Sofitel-JBR-Logo-2019-01_white.png', alt: 'Sofitel Luxury Hotels' },
-  { name: 'Marriott', filename: 'Marriott_International.png', alt: 'Marriott International' },
-  { name: 'Ritz-Carlton', filename: '1200px-RitzCarlton.svg.png', alt: 'The Ritz-Carlton' },
-  { name: 'DoubleTree', filename: '1200px-DoubletreeLogo.svg.png', alt: 'DoubleTree by Hilton' },
-  { name: 'Radisson Blu', filename: '2880px-Radisson_Blu_logo.svg.png', alt: 'Radisson Blu Hotels' },
-  { name: 'Meydan', filename: 'meydan-logo.png', alt: 'Meydan Dubai' },
-  { name: 'DMCC', filename: 'DMCC-logo.png', alt: 'DMCC Free Zone' },
-  { name: 'UCC', filename: 'UCCLogo.png', alt: 'Union Trading & Contracting' },
-  { name: 'The Residences', filename: 'The Residences.png', alt: 'The Residences' },
-  { name: 'Partner 1', filename: 'Layer 817.png', alt: 'Partner Logo' },
-  { name: 'Partner 2', filename: 'Layer 816.png', alt: 'Partner Logo' },
-  { name: 'Partner 3', filename: 'Layer 811.png', alt: 'Partner Logo' },
-  { name: 'Partner 4', filename: 'Layer 810.png', alt: 'Partner Logo' },
-  { name: 'Partner 5', filename: 'Layer 806.png', alt: 'Partner Logo' },
-  { name: 'Partner 6', filename: 'Layer 803.png', alt: 'Partner Logo' },
-  { name: 'Partner 7', filename: 'Layer 801.png', alt: 'Partner Logo' },
-  { name: 'Partner 8', filename: 'Layer 799.png', alt: 'Partner Logo' },
-  { name: 'Partner 9', filename: 'Layer 798.png', alt: 'Partner Logo' },
-  { name: 'Partner 10', filename: 'Layer 796.png', alt: 'Partner Logo' },
-  { name: 'Partner 11', filename: 'Layer 793.png', alt: 'Partner Logo' },
-  { name: 'Partner 12', filename: 'Layer 792.png', alt: 'Partner Logo' },
-  { name: 'Partner 13', filename: 'Layer 788.png', alt: 'Partner Logo' },
-  { name: 'Partner 14', filename: '4a47a0db6e60853dedfcfdf08a5ca2491574848189.png', alt: 'Partner Logo' },
-  { name: 'Partner 15', filename: '8d7a350d024ed4990466536d651d4897.png', alt: 'Partner Logo' },
-  { name: 'Partner 16', filename: 'unnamed (2).png', alt: 'Partner Logo' },
-];
+// Types for Sanity client data
+interface SanityClient {
+  _id: string;
+  name: string;
+  logo?: {
+    asset?: {
+      _ref?: string;
+    };
+  };
+  category?: string;
+  featured?: boolean;
+  isConfidential?: boolean;
+}
 
-export function LogoMarquee() {
+interface LogoMarqueeProps {
+  clients?: SanityClient[];
+}
+
+// Helper to get logo URL from Sanity
+function getLogoUrl(logo: SanityClient['logo']): string {
+  if (!logo?.asset) return '';
+  try {
+    return urlForImage(logo).width(200).height(100).url();
+  } catch {
+    return '';
+  }
+}
+
+export function LogoMarquee({ clients = [] }: LogoMarqueeProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
+  // Filter out confidential clients and those without logos
+  const visibleClients = clients.filter(c => !c.isConfidential && c.logo?.asset);
+
+  // Transform Sanity clients to logo format
+  const clientLogos = visibleClients.map(client => ({
+    name: client.name,
+    logoUrl: getLogoUrl(client.logo),
+    alt: client.name,
+  }));
+
   // Double the logos for seamless loop
-  const doubledLogos = [...partnerLogos, ...partnerLogos];
+  const doubledLogos = [...clientLogos, ...clientLogos];
+
+  // If no clients from Sanity, don't render
+  if (clientLogos.length === 0) {
+    return null;
+  }
 
   return (
     <section
@@ -101,25 +116,19 @@ export function LogoMarquee() {
                 key={`${logo.name}-${index}`}
                 className="relative flex h-16 w-32 shrink-0 items-center justify-center sm:h-20 sm:w-40"
               >
-                <Image
-                  src={`/partners/${logo.filename}`}
-                  alt={logo.alt}
-                  width={160}
-                  height={80}
-                  className="h-full w-full object-contain brightness-0 invert opacity-50 transition-all duration-300 hover:opacity-80 hover:scale-105"
-                  onError={(e) => {
-                    // Fallback to text if image fails to load
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent) {
-                      const span = document.createElement('span');
-                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-white/40 transition-colors duration-300 hover:text-white/70 sm:text-2xl';
-                      span.textContent = logo.name;
-                      parent.appendChild(span);
-                    }
-                  }}
-                />
+                {logo.logoUrl ? (
+                  <SafeImage
+                    src={logo.logoUrl}
+                    alt={logo.alt}
+                    width={160}
+                    height={80}
+                    className="h-full w-full object-contain brightness-0 invert opacity-50 transition-all duration-300 hover:opacity-80 hover:scale-105"
+                  />
+                ) : (
+                  <span className="whitespace-nowrap font-SchnyderS text-xl font-light text-white/40 transition-colors duration-300 hover:text-white/70 sm:text-2xl">
+                    {logo.name}
+                  </span>
+                )}
               </div>
             ))}
           </motion.div>
@@ -148,25 +157,19 @@ export function LogoMarquee() {
                 key={`${logo.name}-reverse-${index}`}
                 className="relative flex h-16 w-32 shrink-0 items-center justify-center sm:h-20 sm:w-40"
               >
-                <Image
-                  src={`/partners/${logo.filename}`}
-                  alt={logo.alt}
-                  width={160}
-                  height={80}
-                  className="h-full w-full object-contain brightness-0 invert opacity-30 transition-all duration-300 hover:opacity-60 hover:scale-105"
-                  onError={(e) => {
-                    // Fallback to text if image fails to load
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent) {
-                      const span = document.createElement('span');
-                      span.className = 'whitespace-nowrap font-SchnyderS text-xl font-light text-white/30 transition-colors duration-300 hover:text-white/50 sm:text-2xl';
-                      span.textContent = logo.name;
-                      parent.appendChild(span);
-                    }
-                  }}
-                />
+                {logo.logoUrl ? (
+                  <SafeImage
+                    src={logo.logoUrl}
+                    alt={logo.alt}
+                    width={160}
+                    height={80}
+                    className="h-full w-full object-contain brightness-0 invert opacity-30 transition-all duration-300 hover:opacity-60 hover:scale-105"
+                  />
+                ) : (
+                  <span className="whitespace-nowrap font-SchnyderS text-xl font-light text-white/30 transition-colors duration-300 hover:text-white/50 sm:text-2xl">
+                    {logo.name}
+                  </span>
+                )}
               </div>
             ))}
           </motion.div>

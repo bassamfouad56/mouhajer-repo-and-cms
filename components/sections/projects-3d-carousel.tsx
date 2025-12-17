@@ -102,16 +102,6 @@ export function Projects3DCarousel({ projects }: Projects3DCarouselProps) {
           >
             Selected Projects
           </motion.h2>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mx-auto flex items-center justify-center gap-6 text-sm font-light tracking-wider text-white/40"
-          >
-            <span>{String(currentIndex + 1).padStart(2, '0')}</span>
-            <div className="h-px w-12 bg-white/20" />
-            <span>{String(displayProjects.length).padStart(2, '0')}</span>
-          </motion.div>
         </div>
 
         {/* 3D Carousel */}

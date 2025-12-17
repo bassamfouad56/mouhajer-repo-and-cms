@@ -118,14 +118,6 @@ function TeamCard({ team, index }: { team: typeof teams[0]; index: number }) {
           />
         </div>
 
-        {/* Large number watermark */}
-        <div
-          className="absolute right-6 top-6 font-SchnyderS text-6xl font-extralight opacity-[0.02] transition-opacity duration-500 group-hover:opacity-[0.05]"
-          style={{ color: team.color }}
-        >
-          0{index + 1}
-        </div>
-
         {/* Corner decorations */}
         <motion.div
           initial={{ scale: 0 }}

@@ -218,8 +218,8 @@ function IndustryCard({
         }`} />
 
         <div className="p-8">
-          {/* Icon & Number */}
-          <div className="mb-6 flex items-center justify-between">
+          {/* Icon */}
+          <div className="mb-6">
             <div className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-500 ${
               isSelected
                 ? 'border-white bg-white text-neutral-950'
@@ -227,9 +227,6 @@ function IndustryCard({
             }`}>
               {getIcon(industry.title)}
             </div>
-            <span className="text-4xl font-light text-neutral-800/50">
-              {String(index + 1).padStart(2, '0')}
-            </span>
           </div>
 
           {/* Title */}

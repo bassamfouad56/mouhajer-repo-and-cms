@@ -129,14 +129,11 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent transition-all duration-500 group-hover:via-white" />
 
       <div className="p-10">
-        {/* Number Badge */}
-        <div className="mb-8 flex items-start justify-between">
+        {/* Icon */}
+        <div className="mb-8">
           <div className="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 text-neutral-400 transition-all duration-500 group-hover:border-white group-hover:text-white">
             {getIcon(service.title)}
           </div>
-          <span className="text-6xl font-light text-neutral-800/50 transition-all duration-500 group-hover:text-neutral-700/50">
-            0{index + 1}
-          </span>
         </div>
 
         {/* Title */}

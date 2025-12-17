@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform, animate, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import gsap from "gsap";
@@ -27,7 +27,6 @@ const createPillars = (images?: WhoWeAreCinematicProps["images"]) => [
     id: "contractor",
     title: "The Main Contractor",
     subtitle: "We Build",
-    number: "01",
     description:
       "We hold the trade license to execute heavy civil works. From excavation and piling to the concrete superstructure, our own teams are on site daily.",
     image: images?.contractor || "/projects/commercial-interior/11.jpg",
@@ -37,7 +36,6 @@ const createPillars = (images?: WhoWeAreCinematicProps["images"]) => [
     id: "designer",
     title: "The Designer",
     subtitle: "We Create",
-    number: "02",
     description:
       "Our creative team designs the vision, but because they work alongside the builders, every drawing is validated for cost and feasibility before you see it.",
     image:
@@ -49,13 +47,59 @@ const createPillars = (images?: WhoWeAreCinematicProps["images"]) => [
     id: "manufacturer",
     title: "The Manufacturer",
     subtitle: "We Craft",
-    number: "03",
     description:
       "We manufacture your fire-rated doors, wardrobes, and custom furniture in our own local facility, ensuring perfect fit and zero shipping delays.",
     image: images?.manufacturer || "/projects/closet/_MID0095-HDR.jpg",
     accent: "#78716c",
   },
 ];
+
+// Stats data
+const stats = [
+  { value: 400, suffix: "+", label: "Projects Completed" },
+  { value: 20, suffix: "+", label: "Years of Experience" },
+  { value: 10, suffix: "+", label: "International Awards" },
+  { value: 100, suffix: "%", label: "Client Satisfaction" },
+];
+
+// Animated Counter Component
+function AnimatedCounter({
+  value,
+  suffix,
+  isInView
+}: {
+  value: number;
+  suffix: string;
+  isInView: boolean;
+}) {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, value, {
+        duration: 2.5,
+        ease: [0.22, 1, 0.36, 1],
+      });
+
+      const unsubscribe = rounded.on("change", (v) => {
+        setDisplayValue(v);
+      });
+
+      return () => {
+        controls.stop();
+        unsubscribe();
+      };
+    }
+  }, [isInView, value, count, rounded]);
+
+  return (
+    <span className="tabular-nums">
+      {displayValue}{suffix}
+    </span>
+  );
+}
 
 // Split Screen Panel Component
 function PillarPanel({
@@ -96,17 +140,6 @@ function PillarPanel({
             <div className="absolute inset-0 bg-neutral-950/20" />
           </motion.div>
 
-          {/* Large Number Overlay */}
-          <motion.div
-            initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className={`absolute bottom-8 ${isEven ? "right-8" : "left-8"}`}
-          >
-            <span className="font-SchnyderS text-[180px] font-light leading-none text-white/10 lg:text-[240px]">
-              {pillar.number}
-            </span>
-          </motion.div>
         </div>
 
         {/* Content Side */}
@@ -175,96 +208,212 @@ function PillarPanel({
   );
 }
 
-// Introduction Panel
+// Roles for cycling animation
+const roles = [
+  { text: "Main Contractor", color: "#d4af37" },
+  { text: "Designer", color: "#a8a29e" },
+  { text: "Manufacturer", color: "#78716c" },
+];
+
+// Introduction Panel with cycling text
 function IntroPanel() {
   const panelRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(panelRef, { once: true });
+  const [currentRole, setCurrentRole] = useState(0);
+
+  // Cycle through roles
+  useEffect(() => {
+    if (!isInView) return;
+
+    const interval = setInterval(() => {
+      setCurrentRole((prev) => (prev + 1) % roles.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, [isInView]);
 
   return (
     <div
       ref={panelRef}
       className="panel relative flex h-screen w-screen shrink-0 items-center justify-center overflow-hidden bg-neutral-950"
     >
-      {/* Animated Background Grid */}
+      {/* Animated Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.05)_0%,transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:80px_80px]" />
+        {/* Radial glow that follows current role color */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: `radial-gradient(ellipse 80% 50% at 50% 50%, ${roles[currentRole].color}08 0%, transparent 70%)`,
+          }}
+          transition={{ duration: 1 }}
+        />
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
       </div>
 
-      {/* Floating Elements */}
+      {/* Animated vertical lines */}
+      <div className="absolute inset-0 flex justify-between px-[15%]">
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={isInView ? { scaleY: 1, opacity: 0.1 } : {}}
+            transition={{ duration: 1.5, delay: 0.3 + i * 0.2 }}
+            className="h-full w-px origin-top"
+            style={{ backgroundColor: roles[i].color }}
+          />
+        ))}
+      </div>
+
+      {/* Corner accents */}
       <motion.div
-        initial={{ opacity: 0, rotate: -10 }}
-        animate={isInView ? { opacity: 0.1, rotate: 0 } : {}}
-        transition={{ duration: 1.5, delay: 0.5 }}
-        className="absolute left-[10%] top-[20%] h-32 w-48 border border-white/10"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="absolute left-8 top-8 h-20 w-20 border-l-2 border-t-2 lg:left-12 lg:top-12 lg:h-28 lg:w-28"
+        style={{ borderColor: `${roles[currentRole].color}30` }}
       />
       <motion.div
-        initial={{ opacity: 0, rotate: 10 }}
-        animate={isInView ? { opacity: 0.1, rotate: 0 } : {}}
-        transition={{ duration: 1.5, delay: 0.7 }}
-        className="absolute bottom-[25%] right-[15%] h-40 w-32 border border-[#d4af37]/20"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 1, delay: 0.6 }}
+        className="absolute bottom-8 right-8 h-20 w-20 border-b-2 border-r-2 lg:bottom-12 lg:right-12 lg:h-28 lg:w-28"
+        style={{ borderColor: `${roles[currentRole].color}30` }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl px-8 text-center">
-        {/* Label */}
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col items-center px-8">
+        {/* WE ARE THE - Static with decorative lines */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1 }}
-          className="mb-8 inline-flex items-center gap-6"
+          className="mb-6 flex items-center gap-6"
         >
-          <div className="h-px w-20 bg-gradient-to-r from-transparent to-white/30" />
-          <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-white/40">
-            Who We Are
+          <motion.div
+            initial={{ width: 0 }}
+            animate={isInView ? { width: 60 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="h-px bg-gradient-to-r from-transparent to-white/30"
+          />
+          <span className="font-Satoshi text-base font-light uppercase tracking-[0.5em] text-white/40 sm:text-lg lg:text-xl">
+            We Are The
           </span>
-          <div className="h-px w-20 bg-gradient-to-l from-transparent to-white/30" />
+          <motion.div
+            initial={{ width: 0 }}
+            animate={isInView ? { width: 60 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="h-px bg-gradient-to-l from-transparent to-white/30"
+          />
         </motion.div>
 
-        {/* Main Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl"
-        >
-          Three Pillars
-        </motion.h2>
-
+        {/* Cycling Role Text with enhanced animation */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="mb-8"
-        >
-          <span className="font-SchnyderS text-4xl font-light italic text-[#d4af37] sm:text-5xl lg:text-6xl">
-            One Vision
-          </span>
-        </motion.div>
-
-        <motion.p
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="mx-auto max-w-xl font-Satoshi text-base font-light leading-relaxed text-white/50 lg:text-lg"
+          transition={{ duration: 1, delay: 0.3 }}
+          className="relative mb-6 flex min-h-[80px] items-center justify-center sm:min-h-[100px] md:min-h-[120px] lg:min-h-[140px] xl:min-h-[160px]"
         >
-          Discover the integrated capabilities that make MIDC the UAE's complete construction partner
-        </motion.p>
+          <AnimatePresence mode="wait">
+            <motion.h2
+              key={currentRole}
+              initial={{ opacity: 0, y: 80, rotateX: -15 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              exit={{ opacity: 0, y: -80, rotateX: 15 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="font-SchnyderS text-5xl font-light tracking-tight sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+              style={{ color: roles[currentRole].color }}
+            >
+              {roles[currentRole].text}
+            </motion.h2>
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Role indicator dots */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mb-10 flex items-center gap-4"
+        >
+          {roles.map((role, index) => (
+            <button
+              key={role.text}
+              onClick={() => setCurrentRole(index)}
+              className="group relative flex items-center gap-3"
+            >
+              {/* Dot */}
+              <motion.div
+                className="relative h-3 w-3 rounded-full border-2 transition-all duration-300"
+                style={{
+                  borderColor: index === currentRole ? role.color : "rgba(255,255,255,0.2)",
+                  backgroundColor: index === currentRole ? role.color : "transparent",
+                }}
+              >
+                {/* Pulse effect for active */}
+                {index === currentRole && (
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{ backgroundColor: role.color }}
+                    animate={{ scale: [1, 1.8, 1.8], opacity: [0.5, 0, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                )}
+              </motion.div>
+              {/* Label on hover/active */}
+              <motion.span
+                initial={{ opacity: 0, x: -10 }}
+                animate={{
+                  opacity: index === currentRole ? 1 : 0,
+                  x: index === currentRole ? 0 : -10,
+                }}
+                transition={{ duration: 0.3 }}
+                className="absolute left-5 whitespace-nowrap font-Satoshi text-[10px] uppercase tracking-widest"
+                style={{ color: role.color }}
+              >
+                {role.text}
+              </motion.span>
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Animated divider line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={isInView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="mb-8 h-px w-32 origin-center"
+          style={{ backgroundColor: `${roles[currentRole].color}40` }}
+        />
+
+        {/* Sub-headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.7 }}
+        >
+          <span className="font-SchnyderS text-2xl font-light italic text-white/50 sm:text-3xl lg:text-4xl">
+            We are all three.
+          </span>
+        </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="mt-16 flex items-center justify-center gap-4"
+          transition={{ duration: 1, delay: 1 }}
+          className="absolute -bottom-32 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3"
         >
+          <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/30">
+            Scroll
+          </span>
           <motion.div
             animate={{ x: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex items-center gap-3 text-white/30"
+            className="flex items-center gap-2 text-white/30"
           >
-            <div className="h-px w-8 bg-white/30" />
-            <ArrowRight className="h-4 w-4" strokeWidth={1} />
+            <div className="h-px w-6 bg-white/30" />
+            <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
           </motion.div>
         </motion.div>
       </div>
@@ -272,10 +421,12 @@ function IntroPanel() {
   );
 }
 
-// Final Panel - "We Are All Three"
+// Final Panel - "We Are All Three" with Stats
 function FinalPanel({ pillars }: { pillars: ReturnType<typeof createPillars> }) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(panelRef, { once: true, margin: "-10%" });
+  const statsInView = useInView(statsRef, { once: true, margin: "-20%" });
 
   return (
     <div
@@ -303,7 +454,7 @@ function FinalPanel({ pillars }: { pillars: ReturnType<typeof createPillars> }) 
             />
           </motion.div>
         ))}
-        <div className="absolute inset-0 bg-neutral-950/80" />
+        <div className="absolute inset-0 bg-neutral-950/85" />
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/50 via-transparent to-neutral-950/90" />
       </div>
 
@@ -314,7 +465,7 @@ function FinalPanel({ pillars }: { pillars: ReturnType<typeof createPillars> }) 
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-12 flex gap-4"
+          className="mb-8 flex gap-4"
         >
           {pillars.map((pillar, i) => (
             <motion.div
@@ -322,7 +473,7 @@ function FinalPanel({ pillars }: { pillars: ReturnType<typeof createPillars> }) 
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-              className="group relative h-20 w-28 overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm lg:h-24 lg:w-36"
+              className="group relative h-16 w-24 overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm lg:h-20 lg:w-32"
             >
               <SafeImage
                 src={pillar.image}
@@ -330,67 +481,135 @@ function FinalPanel({ pillars }: { pillars: ReturnType<typeof createPillars> }) 
                 fill
                 className="object-cover opacity-60 transition-opacity duration-300 group-hover:opacity-80"
               />
-              <div className="absolute bottom-2 left-2 font-Satoshi text-[9px] uppercase tracking-wider text-white/70">
+              <div className="absolute bottom-1.5 left-2 font-Satoshi text-[8px] uppercase tracking-wider text-white/70 lg:text-[9px]">
                 {pillar.subtitle}
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Main Message */}
+        {/* Main Headline */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-6 text-center"
+          className="mb-4 text-center"
         >
-          <h2 className="font-SchnyderS text-3xl font-light tracking-tight text-white/80 sm:text-4xl">
+          <h2 className="font-SchnyderS text-2xl font-light tracking-tight text-white/80 sm:text-3xl lg:text-4xl">
             The Main Contractor. The Designer. The Manufacturer.
           </h2>
         </motion.div>
 
+        {/* Sub-headline */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, delay: 0.5 }}
-          className="mb-10"
+          className="mb-8"
         >
-          <span className="font-SchnyderS text-5xl font-light italic text-[#d4af37] sm:text-6xl lg:text-7xl">
+          <span className="font-SchnyderS text-4xl font-light italic text-[#d4af37] sm:text-5xl lg:text-6xl">
             We are all three.
           </span>
         </motion.div>
 
-        {/* Description */}
-        <motion.p
+        {/* Body Copy */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="mb-12 max-w-2xl text-center font-Satoshi text-base font-light leading-relaxed text-white/50 lg:text-lg"
+          className="mb-10 max-w-3xl space-y-4 text-center"
         >
-          Mouhajer International Design & Contracting (MIDC) is more than a
-          construction firm; we are the architects of experience. From luxury
-          hospitality to private residences, our reputation is built on a
-          seamless fusion of aesthetic mastery and engineering rigor.
-        </motion.p>
+          <p className="font-Satoshi text-sm font-light leading-relaxed text-white/60 sm:text-base lg:text-lg">
+            Mouhajer International Design & Contracting (MIDC) is more than a construction firm;
+            we are the architects of experience. As a premier turnkey solution provider based in
+            Dubai and Abu Dhabi, we specialize in transforming ambitious concepts into award-winning realities.
+          </p>
+          <p className="font-Satoshi text-sm font-light leading-relaxed text-white/50 sm:text-base lg:text-lg">
+            From the intricate luxury of 5-star hospitality to the personalized grandeur of private
+            residences, our reputation is built on a seamless fusion of aesthetic mastery and
+            engineering rigor. We do not just build spaces; we curate environments that stand the test of time.
+          </p>
+        </motion.div>
+
+        {/* Stats Grid */}
+        <motion.div
+          ref={statsRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="mb-10 grid w-full max-w-4xl grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 1 + index * 0.1 }}
+              className="group relative text-center"
+            >
+              {/* Animated border line */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 1.2 + index * 0.1 }}
+                className="absolute -top-3 left-1/2 h-px w-12 -translate-x-1/2 origin-center bg-[#d4af37]/30"
+              />
+
+              {/* Number */}
+              <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37] sm:text-5xl lg:text-6xl">
+                <AnimatedCounter
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  isInView={statsInView}
+                />
+              </div>
+
+              {/* Label */}
+              <div className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-white/40 sm:text-xs">
+                {stat.label}
+              </div>
+
+              {/* Hover glow effect */}
+              <div className="absolute -inset-4 -z-10 rounded-lg bg-[#d4af37]/0 transition-all duration-500 group-hover:bg-[#d4af37]/5" />
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
         >
           <Link
             href="/about"
-            className="group inline-flex items-center gap-4 border-b border-[#d4af37] pb-2 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white transition-all duration-500 hover:border-white"
+            className="group relative inline-flex items-center gap-4 overflow-hidden border border-[#d4af37] bg-transparent px-10 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white transition-all duration-500 hover:text-neutral-950"
           >
-            Explore the MIDC Legacy
+            {/* Background fill on hover */}
+            <span className="absolute inset-0 -translate-x-full bg-[#d4af37] transition-transform duration-500 group-hover:translate-x-0" />
+
+            <span className="relative z-10">Explore the MIDC Legacy</span>
             <ArrowUpRight
-              className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+              className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
               strokeWidth={1.5}
             />
           </Link>
         </motion.div>
       </div>
+
+      {/* Corner Accents */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="absolute left-8 top-8 h-16 w-16 border-l border-t border-[#d4af37]/20"
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, delay: 0.6 }}
+        className="absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#d4af37]/20"
+      />
     </div>
   );
 }
@@ -465,15 +684,9 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
 
       {/* Current Panel Indicator - Top Left */}
       <div className="absolute left-8 top-8 z-50 hidden lg:block">
-        <div className="flex items-center gap-4">
-          <span className="font-SchnyderS text-4xl font-light text-[#d4af37]">
-            {String(currentPanel + 1).padStart(2, "0")}
-          </span>
-          <div className="h-8 w-px bg-white/20" />
-          <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-white/40">
-            {panelLabels[currentPanel]}
-          </span>
-        </div>
+        <span className="font-Satoshi text-xs uppercase tracking-[0.2em] text-white/40">
+          {panelLabels[currentPanel]}
+        </span>
       </div>
 
       {/* Horizontal Scroll Container */}
@@ -491,7 +704,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
           />
         ))}
 
-        {/* Panel 5: Final - We Are All Three */}
+        {/* Panel 5: Final - We Are All Three with Stats */}
         <FinalPanel pillars={pillars} />
       </div>
 

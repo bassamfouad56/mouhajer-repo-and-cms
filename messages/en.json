@@ -532,8 +532,10 @@
   "MegaMenu": {
     "explore": "EXPLORE",
     "featured": "FEATURED",
+    "preview": "PREVIEW",
     "new": "NEW",
     "learnMore": "LEARN MORE",
+    "viewDetails": "VIEW DETAILS",
     "viewAll": "View All",
     "getInTouch": "GET IN TOUCH",
     "projects": {
@@ -658,6 +660,10 @@
       "bookConsultation": {
         "label": "Book Consultation",
         "description": "Schedule a discovery meeting"
+      },
+      "supplierRegistration": {
+        "label": "Supplier Registration",
+        "description": "Join our network of trusted suppliers"
       }
     }
   },

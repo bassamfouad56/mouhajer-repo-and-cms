@@ -100,8 +100,8 @@ interface ContactPageContentProps {
 }
 
 export default function ContactPageContent({
-  bannerImage = '/projects/commercial-interior/_MID7362-HDR.jpg',
-  ctaImage = '/projects/commercial-interior/_MID7025-HDR.jpg'
+  bannerImage = '/founder/CID_2106_00_COVER.jpg',
+  ctaImage = '/founder/CID_2106_00_COVER.jpg'
 }: ContactPageContentProps) {
   const heroRef = useRef<HTMLElement>(null);
   const locationRef = useRef<HTMLElement>(null);
@@ -494,11 +494,6 @@ export default function ContactPageContent({
               className="group relative"
             >
               <div className="relative overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-[#d4af37]/20 hover:bg-white/[0.04] lg:p-12">
-                {/* Number */}
-                <div className="absolute right-10 top-10 font-Playfair text-[100px] font-light leading-none text-white/[0.03] lg:text-[140px]">
-                  01
-                </div>
-
                 <div className="relative">
                   <span className="mb-6 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#d4af37]">
                     New Project
@@ -539,11 +534,6 @@ export default function ContactPageContent({
               className="group relative"
             >
               <div className="relative overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-white/10 hover:bg-white/[0.04] lg:p-12">
-                {/* Number */}
-                <div className="absolute right-10 top-10 font-Playfair text-[100px] font-light leading-none text-white/[0.03] lg:text-[140px]">
-                  02
-                </div>
-
                 <div className="relative">
                   <span className="mb-6 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
                     Partnerships

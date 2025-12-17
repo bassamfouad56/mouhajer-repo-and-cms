@@ -18,11 +18,12 @@ interface SanityPost {
   author?: {
     name: string;
     role?: string;
+    bio?: string;
     image?: any;
   };
   content?: any[];
   readTime?: number;
-  tags?: Array<{ _id: string; name: string; slug: any }>;
+  tags?: Array<{ _id: string; name: string; slug?: { current: string } } | string>;
   publishedAt: string;
   seo?: {
     metaTitle?: string;
@@ -39,15 +40,6 @@ interface JournalPostPageProps {
     locale: string;
   }>;
 }
-
-const VALID_CATEGORIES = [
-  'design-trends',
-  'project-stories',
-  'behind-the-scenes',
-  'materials-craft',
-  'engineering',
-  'founders-insights'
-] as const;
 
 async function getPost(slug: string, locale: string): Promise<SanityPost | null> {
   try {
@@ -71,13 +63,18 @@ async function getRelatedPosts(category: string, currentPostId: string, locale: 
         category,
         "author": author->{
           name,
-          image
+          role,
+          bio,
+          "image": image {
+            asset,
+            alt
+          }
         },
         publishedAt,
         readTime,
         "tags": tags[]->{
           _id,
-          "name": name[$locale],
+          "name": coalesce(name[$locale], name.en, name),
           slug
         }
       }
@@ -96,10 +93,8 @@ export async function generateMetadata({
 }: JournalPostPageProps): Promise<Metadata> {
   const { slug, locale, category } = await params;
 
-  // Validate category
-  if (!VALID_CATEGORIES.includes(category as any)) {
-    return { title: 'Not Found' };
-  }
+  // Decode URL-encoded category (e.g., "Cost%20Management" -> "Cost Management")
+  const decodedCategory = decodeURIComponent(category);
 
   const post = await getPost(slug, locale);
 
@@ -109,8 +104,8 @@ export async function generateMetadata({
     };
   }
 
-  // Verify post category matches URL category
-  if (post.category !== category) {
+  // Verify post category matches URL category (decoded)
+  if (post.category !== decodedCategory) {
     return {
       title: 'Post Not Found',
     };
@@ -148,10 +143,8 @@ export const revalidate = 3600;
 export default async function JournalPostPage({ params }: JournalPostPageProps) {
   const { category, slug, locale } = await params;
 
-  // Validate category
-  if (!VALID_CATEGORIES.includes(category as any)) {
-    notFound();
-  }
+  // Decode URL-encoded category (e.g., "Cost%20Management" -> "Cost Management")
+  const decodedCategory = decodeURIComponent(category);
 
   const post = await getPost(slug, locale);
 
@@ -159,13 +152,13 @@ export default async function JournalPostPage({ params }: JournalPostPageProps) 
     notFound();
   }
 
-  // Verify post category matches URL category
-  if (post.category !== category) {
+  // Verify post category matches URL category (decoded)
+  if (post.category !== decodedCategory) {
     notFound();
   }
 
   // Get related posts from same category
-  const relatedPosts = await getRelatedPosts(category, post._id, locale);
+  const relatedPosts = await getRelatedPosts(decodedCategory, post._id, locale);
 
   // Transform post with localized values
   const localizedPost = {

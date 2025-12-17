@@ -140,11 +140,6 @@ export function TestFounderPhilosophy() {
                   {/* Bottom accent */}
                   <div className="mt-8 h-px w-0 bg-[#d4af37] transition-all duration-500 group-hover:w-full" />
                 </div>
-
-                {/* Number watermark */}
-                <div className="absolute right-6 top-6 font-SchnyderS text-6xl font-light text-white/[0.02]">
-                  0{index + 1}
-                </div>
               </motion.div>
             );
           })}

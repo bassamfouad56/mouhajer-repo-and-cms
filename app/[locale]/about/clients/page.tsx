@@ -2,24 +2,23 @@ import { Metadata } from 'next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { ClientsHero } from '@/components/clients/clients-hero';
-import { CompanyWeKeep } from '@/components/clients/company-we-keep';
-import { HospitalityPartners } from '@/components/clients/hospitality-partners';
-import { CorporatePartners } from '@/components/clients/corporate-partners';
-import { PrivateCircle } from '@/components/clients/private-circle';
-import { ClientTestimonials } from '@/components/clients/client-testimonials';
-import {
-  getSanityClients,
-  getFeaturedTestimonials
-} from '@/sanity/lib/fetch';
+import { PartnerLogoMarquee } from '@/components/clients/partner-logo-marquee';
+import { FeaturedPartnerships } from '@/components/clients/featured-partnerships';
+import { TestimonialSpotlight } from '@/components/clients/testimonial-spotlight';
+import { getFeaturedTestimonials } from '@/sanity/lib/fetch';
+import { client } from '@/sanity/lib/client';
+import { urlForImage } from '@/sanity/lib/image';
 
 export const revalidate = 3600; // Revalidate every hour
 
 export const metadata: Metadata = {
   title: 'Our Clients & Partners | MIDC',
-  description: 'Trusted by the Visionaries. We do not just have customers. We have enduring partnerships with the leaders shaping the UAE skyline.',
+  description:
+    'Trusted by the Visionaries. We do not just have customers. We have enduring partnerships with the leaders shaping the UAE skyline.',
   openGraph: {
     title: 'Our Clients & Partners | MIDC',
-    description: 'Enduring partnerships with Abu Dhabi National Hotels, Wasl Asset Management, Emaar Hospitality, and the UAE\'s most prestigious brands.',
+    description:
+      "Enduring partnerships with Abu Dhabi National Hotels, Wasl Asset Management, Emaar Hospitality, and the UAE's most prestigious brands.",
     images: [
       {
         url: '/founder/CID_2106_00_COVER.jpg',
@@ -31,44 +30,58 @@ export const metadata: Metadata = {
   },
 };
 
+async function getSiteSettings() {
+  try {
+    const settings = await client.fetch(`
+      *[_type == "siteSettings"][0] {
+        aboutImage
+      }
+    `);
+
+    const getImageUrl = (image: any, width = 1920, height = 1080): string => {
+      if (!image?.asset) return '';
+      try {
+        return urlForImage(image)
+          .width(width)
+          .height(height)
+          .auto('format')
+          .url();
+      } catch {
+        return '';
+      }
+    };
+
+    return {
+      heroImage: getImageUrl(settings?.aboutImage, 2560, 1440),
+    };
+  } catch (error) {
+    console.error('Error fetching site settings from Sanity:', error);
+    return { heroImage: '' };
+  }
+}
+
 export default async function ClientsPage() {
   // Fetch all data in parallel
-  const [clients, testimonials] = await Promise.all([
-    getSanityClients(),
+  const [testimonials, siteSettings] = await Promise.all([
     getFeaturedTestimonials(),
+    getSiteSettings(),
   ]);
-
-  // Categorize clients
-  const hospitalityClients = clients.filter((c: any) => c.category === 'hospitality');
-  const corporateClients = clients.filter((c: any) =>
-    ['corporate', 'retail', 'manufacturing'].includes(c.category)
-  );
-  const privateClients = clients.filter((c: any) =>
-    c.category === 'private' || c.isConfidential
-  );
-  const featuredClients = clients.filter((c: any) => c.featured);
 
   return (
     <>
       <Header />
-      <main className="relative">
-        {/* Hero Section */}
-        <ClientsHero />
+      <main className="relative bg-neutral-950">
+        {/* Section 1: Hero with Logo Wall Animation */}
+        <ClientsHero heroImage={siteSettings.heroImage || undefined} />
 
-        {/* Section 1: The Company We Keep */}
-        <CompanyWeKeep clients={featuredClients} />
+        {/* Section 2: Partner Logo Marquee */}
+        <PartnerLogoMarquee />
 
-        {/* Section 2: Hospitality Partners */}
-        <HospitalityPartners clients={hospitalityClients} />
+        {/* Section 3: Featured Partnerships */}
+        <FeaturedPartnerships />
 
-        {/* Section 3: Corporate & Commercial Partners */}
-        <CorporatePartners clients={corporateClients} />
-
-        {/* Section 4: Private Circle (VIP Residential) */}
-        <PrivateCircle clients={privateClients} />
-
-        {/* Section 5: Client Testimonials */}
-        <ClientTestimonials testimonials={testimonials} />
+        {/* Section 4: Testimonials + CTA */}
+        <TestimonialSpotlight testimonials={testimonials} />
       </main>
       <Footer />
     </>

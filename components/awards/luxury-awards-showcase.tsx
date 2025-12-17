@@ -172,11 +172,6 @@ function AwardShowcaseItem({
 
   return (
     <div ref={itemRef} className="relative">
-      {/* Award Number Watermark */}
-      <div className="pointer-events-none absolute -top-12 left-0 select-none font-SchnyderS text-[180px] font-light leading-none text-neutral-100/30 dark:text-neutral-900/20 lg:-left-8 lg:text-[220px]">
-        {String(index + 1).padStart(2, "0")}
-      </div>
-
       <div
         className={`grid gap-16 lg:grid-cols-2 lg:gap-20 ${
           isEven ? "" : "lg:grid-flow-dense"

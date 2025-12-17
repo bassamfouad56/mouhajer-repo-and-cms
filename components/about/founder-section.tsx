@@ -208,11 +208,6 @@ export function FounderSection() {
                         </p>
                       </div>
                     </div>
-
-                    {/* Number */}
-                    <div className="absolute right-6 top-6 font-SchnyderS text-4xl font-extralight text-neutral-100 lg:text-5xl">
-                      0{index + 1}
-                    </div>
                   </motion.div>
                 );
               })}

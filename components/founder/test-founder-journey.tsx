@@ -164,11 +164,6 @@ export function TestFounderJourney() {
 
                       {/* Gradient overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
-
-                      {/* Number watermark */}
-                      <div className="absolute bottom-6 right-6 font-SchnyderS text-8xl font-light text-white/10">
-                        0{index + 1}
-                      </div>
                     </motion.div>
                   </div>
 

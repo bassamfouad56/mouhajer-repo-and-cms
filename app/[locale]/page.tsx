@@ -40,7 +40,7 @@ const homepageFAQs = [
 
 import { LogoMarquee } from "@/components/logo-marquee";
 import { client } from "@/sanity/lib/client";
-import { projectsQuery, servicesQuery, industriesQuery, siteSettingsQuery } from "@/sanity/lib/queries";
+import { projectsQuery, servicesQuery, industriesQuery, siteSettingsQuery, clientsQuery, featuredTestimonialsQuery } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
 
 export const revalidate = 3600; // Revalidate every hour
@@ -120,6 +120,26 @@ async function getIndustries(locale: string) {
     return industries || [];
   } catch (error) {
     console.error('Error fetching industries from Sanity:', error);
+    return [];
+  }
+}
+
+async function getClients(locale: string) {
+  try {
+    const clients = await client.fetch(clientsQuery, { locale });
+    return clients || [];
+  } catch (error) {
+    console.error('Error fetching clients from Sanity:', error);
+    return [];
+  }
+}
+
+async function getTestimonials(locale: string) {
+  try {
+    const testimonials = await client.fetch(featuredTestimonialsQuery, { locale });
+    return testimonials || [];
+  } catch (error) {
+    console.error('Error fetching testimonials from Sanity:', error);
     return [];
   }
 }
@@ -272,12 +292,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
 
   // Fetch data from Sanity CMS
-  const [projects, services, industries, projectImages, siteSettings] = await Promise.all([
+  const [projects, services, industries, projectImages, siteSettings, clients, testimonials] = await Promise.all([
     getProjects(locale),
     getServices(locale),
     getIndustries(locale),
     getProjectImagesByCategory(locale),
     getSiteSettings(),
+    getClients(locale),
+    getTestimonials(locale),
   ]);
 
   return (
@@ -304,7 +326,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <StatsBanner />
 
         {/* Section 4.5: Trusted Partners Logo Marquee */}
-        <LogoMarquee />
+        <LogoMarquee clients={clients} />
 
         {/* Transition: Logo Marquee to Founder */}
         <SimpleAnimatedDivider theme="dark" />
@@ -339,7 +361,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <SimpleAnimatedDivider theme="dark" />
 
         {/* Section 9: Strategic Partners & Testimonials */}
-        <PartnersTestimonials />
+        <PartnersTestimonials clients={clients} testimonials={testimonials} />
 
         {/* Transition: Partners to Awards */}
         <SectionDivider variant="dots" theme="dark" />

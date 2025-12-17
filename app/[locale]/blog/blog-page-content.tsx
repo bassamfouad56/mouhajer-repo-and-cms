@@ -269,7 +269,7 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-6">
             {[
               {
-                src: '/projects/grand-hyatt-prince-suite/prince02.jpg',
+                src: '/founder/CID_2106_00_COVER.jpg',
                 span: 'col-span-2 row-span-2',
                 aspect: 'aspect-square',
                 title: 'Grand Hyatt Prince Suite',
@@ -277,7 +277,7 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
                 slug: 'grand-hyatt-prince-suite'
               },
               {
-                src: '/projects/jumeirah-island-villa/JumIsl01.jpg',
+                src: '/founder/CID_2106_00_COVER.jpg',
                 span: '',
                 aspect: 'aspect-[4/5]',
                 title: 'Jumeirah Island Villa',
@@ -285,7 +285,7 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
                 slug: 'jumeirah-island-villa'
               },
               {
-                src: '/projects/park-hyatt-villa/hotelparkhyattvilla03.jpg',
+                src: '/founder/CID_2106_00_COVER.jpg',
                 span: '',
                 aspect: 'aspect-[4/5]',
                 title: 'Park Hyatt Villa',
@@ -293,7 +293,7 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
                 slug: 'park-hyatt-villa'
               },
               {
-                src: '/projects/district-one-villa-79x/01.jpg',
+                src: '/founder/CID_2106_00_COVER.jpg',
                 span: 'col-span-2',
                 aspect: 'aspect-[2/1]',
                 title: 'District One Villa',
@@ -301,7 +301,7 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
                 slug: 'district-one-villa-79x'
               },
               {
-                src: '/projects/ritz-carlton-villas/ritzcarl01.jpg',
+                src: '/founder/CID_2106_00_COVER.jpg',
                 span: '',
                 aspect: 'aspect-square',
                 title: 'Ritz Carlton Villas',
@@ -309,7 +309,7 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
                 slug: 'ritz-carlton-villas'
               },
               {
-                src: '/projects/jumeirah-bay-villa/jumeirahbay02.jpg',
+                src: '/founder/CID_2106_00_COVER.jpg',
                 span: '',
                 aspect: 'aspect-square',
                 title: 'Jumeirah Bay Villa',
@@ -447,7 +447,7 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/projects/grand-hyatt-prince-suite/prince05.jpg"
+            src="/founder/CID_2106_00_COVER.jpg"
             alt="Interior design background"
             fill
             className="object-cover opacity-30"

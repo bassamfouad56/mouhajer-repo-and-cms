@@ -2,14 +2,15 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import Image from 'next/image';
 
 const pressLogos = [
-  { name: 'Arabian Business', abbr: 'AB' },
-  { name: 'Gulf News', abbr: 'GN' },
-  { name: 'Construction Week', abbr: 'CW' },
-  { name: 'Hotel Management', abbr: 'HM' },
-  { name: 'Architectural Digest ME', abbr: 'AD' },
-  { name: 'Forbes Middle East', abbr: 'FM' },
+  { name: 'Arabian Business', logo: '/press/arabian-business.svg' },
+  { name: 'Gulf News', logo: '/press/gulf-news.svg' },
+  { name: 'Construction Week', logo: '/press/construction-week.svg' },
+  { name: 'Hotelier Middle East', logo: '/press/hotelier-me.svg' },
+  { name: 'Architectural Digest ME', logo: '/press/architectural-digest.svg' },
+  { name: 'Forbes Middle East', logo: '/press/forbes-me.svg' },
 ];
 
 export function TrustedRecognized() {
@@ -95,13 +96,15 @@ export function TrustedRecognized() {
               whileHover={{ y: -5 }}
               className="group relative"
             >
-              <div className="flex h-24 items-center justify-center border border-neutral-200/50 bg-white/50 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white hover:shadow-lg hover:shadow-[#d4af37]/5">
-                {/* Abbreviated logo placeholder */}
-                <div className="text-center">
-                  <span className="font-SchnyderS text-2xl font-light text-neutral-300 transition-colors duration-500 group-hover:text-[#d4af37]/60">
-                    {press.abbr}
-                  </span>
-                </div>
+              <div className="flex h-24 items-center justify-center border border-neutral-200/50 bg-white/50 px-6 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white hover:shadow-lg hover:shadow-[#d4af37]/5">
+                {/* Press logo */}
+                <Image
+                  src={press.logo}
+                  alt={press.name}
+                  width={140}
+                  height={50}
+                  className="h-10 w-auto object-contain opacity-50 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
+                />
 
                 {/* Hover tooltip */}
                 <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 transition-opacity duration-300 group-hover:opacity-100">

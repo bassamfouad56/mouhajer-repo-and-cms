@@ -7,7 +7,6 @@ import { SafeImage } from '@/components/safe-image';
 
 const phases = [
   {
-    number: '01',
     id: 'phase-01',
     title: 'Discovery & Conceptualization',
     headline: 'It Starts With Listening',
@@ -31,7 +30,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=1500&fit=crop',
   },
   {
-    number: '02',
     id: 'phase-02',
     title: 'Design Development & Visualization',
     headline: 'Where Imagination Meets Precision',
@@ -55,7 +53,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&h=1500&fit=crop',
   },
   {
-    number: '03',
     id: 'phase-03',
     title: 'Technical Engineering (The MEP Core)',
     headline: 'The Heartbeat of the Building',
@@ -79,7 +76,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1200&h=1500&fit=crop',
   },
   {
-    number: '04',
     id: 'phase-04',
     title: 'Planning & Material Control',
     headline: 'Precision Logistics',
@@ -103,7 +99,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=1500&fit=crop',
   },
   {
-    number: '05',
     id: 'phase-05',
     title: 'Execution & Safety',
     headline: 'The Art of Construction',
@@ -127,7 +122,6 @@ const phases = [
     image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&h=1500&fit=crop',
   },
   {
-    number: '06',
     id: 'phase-06',
     title: 'Handover & Legacy',
     headline: 'The White-Glove Handover',
@@ -245,7 +239,6 @@ export function PhasesSectionCinematic() {
             {phases.map((phase, index) => (
               <StepIndicator
                 key={phase.id}
-                number={phase.number}
                 isCompleted={completedSteps.includes(index)}
                 Icon={phase.icon}
               />
@@ -442,11 +435,9 @@ function ConnectingLine({
 }
 
 function StepIndicator({
-  number,
   isCompleted,
   Icon,
 }: {
-  number: string;
   isCompleted: boolean;
   Icon: any;
 }) {
@@ -481,9 +472,6 @@ function StepIndicator({
         ) : (
           <Icon className="h-5 w-5 text-neutral-500" strokeWidth={1.5} />
         )}
-      </div>
-      <div className="absolute -bottom-6 left-1/2 -translate-x-1/2">
-        <span className="font-SchnyderS text-xs text-neutral-600">{number}</span>
       </div>
     </motion.div>
   );
@@ -572,21 +560,11 @@ const PhaseCard = ({
                     <div className="absolute inset-0 rounded-2xl bg-[#d4af37]/10 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
                     <Icon className="relative h-9 w-9 text-[#d4af37]" strokeWidth={1.5} />
                   </div>
-                  <div>
-                    <div className="mb-1 flex items-center gap-2">
-                      <span className="font-SchnyderS text-sm font-light text-neutral-500">
-                        Step
-                      </span>
-                      <span className="font-SchnyderS text-3xl font-light text-[#d4af37]">
-                        {phase.number}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 text-neutral-500">
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span className="font-Satoshi text-xs font-light">{phase.duration}</span>
-                    </div>
+                  <div className="flex items-center gap-2 text-neutral-500">
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="font-Satoshi text-xs font-light">{phase.duration}</span>
                   </div>
                 </div>
 
@@ -672,15 +650,6 @@ const PhaseCard = ({
               }}
               className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent"
             />
-
-            {/* Floating number badge */}
-            <div className="absolute bottom-8 right-8">
-              <div className="flex h-24 w-24 items-center justify-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl transition-all duration-500 group-hover:border-[#d4af37]/50 group-hover:bg-white/15">
-                <span className="font-SchnyderS text-4xl font-light text-white">
-                  {phase.number}
-                </span>
-              </div>
-            </div>
 
             {/* Decorative corner */}
             <div className="absolute left-8 top-8 h-20 w-20 border-l-2 border-t-2 border-white/30 transition-all duration-500 group-hover:h-24 group-hover:w-24 group-hover:border-[#d4af37]" />

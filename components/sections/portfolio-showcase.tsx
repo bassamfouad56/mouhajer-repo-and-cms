@@ -138,7 +138,8 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
   });
 
   // Use fallback projects if no projects at all, otherwise use projects with merged images
-  const displayProjects = projects.length > 0 ? projectsWithImages.slice(0, 5) : fallbackProjects;
+  // Show up to 12 featured projects in the homepage carousel
+  const displayProjects = projects.length > 0 ? projectsWithImages.slice(0, 12) : fallbackProjects;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,

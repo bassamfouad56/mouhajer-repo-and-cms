@@ -25,7 +25,6 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
       description: t('items.build.description'),
       link: '/services/civil-construction',
       imageAlt: 'Construction site with modern building',
-      icon: '01',
       color: '#BA9051',
     },
     {
@@ -36,7 +35,6 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
       description: t('items.design.description'),
       link: '/services/interior-architecture',
       imageAlt: 'Luxury interior design concept',
-      icon: '02',
       color: '#C9A961',
     },
     {
@@ -47,7 +45,6 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
       description: t('items.power.description'),
       link: '/services/mep-engineering',
       imageAlt: 'MEP engineering systems',
-      icon: '03',
       color: '#D4B872',
     },
     {
@@ -58,7 +55,6 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
       description: t('items.make.description'),
       link: '/services/manufacturing-joinery',
       imageAlt: 'Custom millwork and furniture',
-      icon: '04',
       color: '#BA9051',
     },
     {
@@ -69,7 +65,6 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
       description: t('items.install.description'),
       link: '/services/fit-out-execution',
       imageAlt: 'Luxury interior finishing details',
-      icon: '05',
       color: '#C9A961',
     },
     {
@@ -80,7 +75,6 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
       description: t('items.care.description'),
       link: '/services/handover-maintenance',
       imageAlt: 'Completed luxury property handover',
-      icon: '06',
       color: '#D4B872',
     },
   ];
@@ -225,9 +219,6 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                         transition={{ duration: 0.3 }}
                         className="absolute inset-0 flex flex-col items-center justify-center"
                       >
-                        <span className="mb-4 font-SchnyderS text-6xl font-light text-[#BA9051]/30">
-                          {cap.icon}
-                        </span>
                         <span
                           className="font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white/60"
                           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
@@ -294,11 +285,6 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
                           </Link>
                         </motion.div>
-
-                        {/* Step number in corner */}
-                        <div className="absolute right-8 top-8 font-SchnyderS text-8xl font-light text-white/5">
-                          {cap.icon}
-                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -338,18 +324,13 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                     onClick={() => setActiveIndex(index)}
                     className="flex w-full items-center justify-between p-5"
                   >
-                    <div className="flex items-center gap-4">
-                      <span className="font-SchnyderS text-2xl font-light text-[#BA9051]/40">
-                        {cap.icon}
+                    <div className="text-left">
+                      <span className="block font-Satoshi text-xs font-light uppercase tracking-wider text-[#BA9051]">
+                        {cap.badge}
                       </span>
-                      <div className="text-left">
-                        <span className="block font-Satoshi text-xs font-light uppercase tracking-wider text-[#BA9051]">
-                          {cap.badge}
-                        </span>
-                        <span className="font-SchnyderS text-lg font-light text-white">
-                          {cap.title}
-                        </span>
-                      </div>
+                      <span className="font-SchnyderS text-lg font-light text-white">
+                        {cap.title}
+                      </span>
                     </div>
                     <motion.div
                       animate={{ rotate: isActive ? 45 : 0 }}
@@ -408,7 +389,7 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-16 flex items-center justify-center gap-6"
+          className="mb-16 flex items-center justify-center"
         >
           <div className="flex items-center gap-2">
             {capabilities.map((_, index) => (
@@ -423,9 +404,6 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
               />
             ))}
           </div>
-          <span className="font-Satoshi text-xs font-light text-white/30">
-            {String(activeIndex + 1).padStart(2, '0')} / {String(capabilities.length).padStart(2, '0')}
-          </span>
         </motion.div>
 
         {/* Bottom CTA */}

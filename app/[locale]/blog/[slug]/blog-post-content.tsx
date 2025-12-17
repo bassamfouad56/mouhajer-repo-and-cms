@@ -31,7 +31,7 @@ interface SanityPost {
   };
   content?: any[];
   readTime?: number;
-  tags?: string[];
+  tags?: Array<{ _id: string; name: string; slug?: { current: string } } | string>;
   publishedAt: string;
   viewCount?: number;
   reactions?: {
@@ -503,14 +503,18 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                   >
                     <div className="flex flex-wrap items-center gap-3">
                       <span className="font-Satoshi text-xs uppercase tracking-wider text-neutral-400">Tags:</span>
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-1.5 font-Satoshi text-xs font-light text-neutral-600 transition-colors hover:border-[#d4af37] hover:bg-[#d4af37]/5"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                      {post.tags.map((tag) => {
+                        const tagKey = typeof tag === 'string' ? tag : tag._id;
+                        const tagName = typeof tag === 'string' ? tag : tag.name;
+                        return (
+                          <span
+                            key={tagKey}
+                            className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-1.5 font-Satoshi text-xs font-light text-neutral-600 transition-colors hover:border-[#d4af37] hover:bg-[#d4af37]/5"
+                          >
+                            {tagName}
+                          </span>
+                        );
+                      })}
                     </div>
                   </motion.div>
                 )}

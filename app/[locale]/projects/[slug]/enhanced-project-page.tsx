@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Project } from '@/lib/wordpress';
@@ -424,7 +424,7 @@ function DesignApproachSection({
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]" />
           </div>
           <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
-            03 — Philosophy
+            Philosophy
           </span>
           <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-6xl">
             Design Approach
@@ -504,25 +504,21 @@ function ScopeOfWorkSection({ project }: { project: Project }) {
 
   const scopeItems = [
     {
-      number: '01',
       title: 'Civil & Structural',
       desc: 'Complete overhaul of corridors, guest rooms, and public facility structures with modern engineering standards.',
       icon: Building,
     },
     {
-      number: '02',
       title: 'Interior Design & Fit-Out',
       desc: 'End-to-end execution including gypsum works, wall cladding, premium flooring, and custom millwork.',
       icon: Layers,
     },
     {
-      number: '03',
       title: 'FF&E Installation',
       desc: 'Sourcing and installation of custom bespoke furniture, lighting fixtures, and soft furnishings.',
       icon: Gem,
     },
     {
-      number: '04',
       title: 'MEP Engineering',
       desc: 'Full upgrade of electrical and mechanical systems to meet modern energy and safety standards.',
       icon: Wrench,
@@ -544,10 +540,7 @@ function ScopeOfWorkSection({ project }: { project: Project }) {
               <Wrench className="h-7 w-7 text-[#d4af37]" />
             </div>
             <div>
-              <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
-                04
-              </span>
-              <h2 className="mt-1 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
+              <h2 className="font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
                 Scope of Work
               </h2>
             </div>
@@ -564,10 +557,6 @@ function ScopeOfWorkSection({ project }: { project: Project }) {
               transition={{ duration: 0.6, delay: 0.1 * index }}
               className="group relative overflow-hidden rounded-3xl bg-neutral-50 p-10 transition-all duration-500 hover:bg-neutral-950"
             >
-              {/* Number Background */}
-              <span className="absolute -right-4 -top-8 font-SchnyderS text-[180px] font-light leading-none text-neutral-100 transition-colors group-hover:text-white/5">
-                {item.number}
-              </span>
 
               <div className="relative">
                 <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm transition-colors group-hover:bg-[#d4af37]">
@@ -616,7 +605,7 @@ function OutcomeSection({ project }: { project: Project }) {
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
           </div>
           <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
-            05 — Results
+            Results
           </span>
           <h2 className="mt-4 font-SchnyderS text-4xl font-light text-white lg:text-6xl">
             The Outcome
@@ -791,7 +780,7 @@ function GallerySection({
         <div className="mb-8 flex items-center justify-center gap-6">
           <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
           <span className="text-xs font-medium uppercase tracking-[0.4em] text-[#d4af37]">
-            07 — Visual Journey
+            Visual Journey
           </span>
           <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
         </div>
@@ -977,7 +966,7 @@ function BeforeAfterSection({
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]" />
           </div>
           <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
-            08 — Transformation
+            Transformation
           </span>
           <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-6xl">
             Before & After
@@ -1470,9 +1459,12 @@ export function EnhancedProjectPageClient({
     altText: img?.altText || project.title || 'Project image',
   }));
 
-  const heroImage = galleryImages[0]?.sourceUrl ||
-    project.featuredImage?.node?.sourceUrl ||
-    '/projects/sheraton-abu-dhabi/sheratonAD01.jpg';
+  // Ensure heroImage is never empty - Next.js Image requires a valid src
+  const heroImage = (galleryImages[0]?.sourceUrl && galleryImages[0].sourceUrl !== '')
+    ? galleryImages[0].sourceUrl
+    : (project.featuredImage?.node?.sourceUrl && project.featuredImage.node.sourceUrl !== '')
+      ? project.featuredImage.node.sourceUrl
+      : '/founder/CID_2106_00_COVER.jpg';
 
   const handleImageClick = (index: number) => {
     setSelectedImageIndex(index);

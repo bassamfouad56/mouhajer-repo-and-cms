@@ -279,11 +279,6 @@ function HorizontalCard({ project, index }: { project: SanityProject; index: num
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/20 to-transparent" />
 
-          {/* Number */}
-          <div className="absolute right-6 top-6 font-SchnyderS text-7xl font-light text-white/10 lg:text-9xl">
-            {String(index + 1).padStart(2, '0')}
-          </div>
-
           {/* Content */}
           <div className="absolute bottom-0 left-0 p-8 lg:p-12">
             <span className="mb-3 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#d4af37]">
@@ -882,11 +877,6 @@ function CinematicCard({ project, index }: { project: SanityProject; index: numb
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/60 via-transparent to-transparent" />
-
-          {/* Large index number */}
-          <div className="absolute right-8 top-8 font-SchnyderS text-[150px] font-light leading-none text-white/5 lg:text-[200px]">
-            {String(index + 1).padStart(2, '0')}
-          </div>
 
           <motion.div style={{ y: contentY }} className="absolute bottom-0 left-0 right-0 p-8 lg:p-16">
             <div className="mb-3 flex items-center gap-4">

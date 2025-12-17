@@ -151,7 +151,7 @@ export function AboutIntroEnhanced() {
             >
               <div className="absolute inset-0 rounded-sm">
                 <SafeImage
-                  src="/projects/commercial-interior/11.jpg"
+                  src="/founder/CID_2106_00_COVER.jpg"
                   alt="MIDC Interior Design Project"
                   fallbackSrc="/placeholder.jpg"
                   fill

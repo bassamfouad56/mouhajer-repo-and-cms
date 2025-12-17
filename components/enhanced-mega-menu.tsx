@@ -34,46 +34,48 @@ interface MegaMenuItem {
 }
 
 // Fallback images for when Sanity images are not available
+// Using placeholder.jpg and existing images in public folder
 const FALLBACK_IMAGES = {
   projects: {
-    residential: '/projects/bedroom-interior/1.jpg',
-    commercial: '/projects/commercial-interior/11.jpg',
-    hospitality: '/projects/commercial-interior/16.jpg',
-    ongoing: '/projects/commercial-interior/17.jpg',
-    featured: '/projects/commercial-interior/11.jpg',
+    residential: '/placeholder.jpg',
+    commercial: '/placeholder.jpg',
+    hospitality: '/placeholder.jpg',
+    ongoing: '/placeholder.jpg',
+    featured: '/placeholder.jpg',
   },
   services: {
-    'civil-construction': '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
-    'interior-architecture': '/projects/bedroom-interior/1.jpg',
-    'mep-engineering': '/projects/commercial-interior/18.jpg',
-    'manufacturing-joinery': '/projects/turnkey-design-fitout/_MID2583-HDR.jpg',
-    'fit-out-execution': '/projects/bathroom/_MID0061-HDR.jpg',
-    'handover-maintenance': '/projects/commercial-interior/19.jpg',
-    featured: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+    'civil-construction': '/founder/CID_2106_00_COVER.jpg',
+    'interior-architecture': '/founder/CID_2106_00_COVER.jpg',
+    'mep-engineering': '/founder/CID_2106_00_COVER.jpg',
+    'manufacturing-joinery': '/founder/CID_2106_00_COVER.jpg',
+    'fit-out-execution': '/founder/CID_2106_00_COVER.jpg',
+    'handover-maintenance': '/founder/CID_2106_00_COVER.jpg',
+    featured: '/founder/CID_2106_00_COVER.jpg',
   },
   industries: {
-    'luxury-hospitality': '/projects/commercial-interior/23.jpg',
-    'high-end-residential': '/projects/bedroom-interior/5.jpg',
-    'commercial-corporate': '/projects/commercial-interior/27.jpg',
-    featured: '/projects/bedroom-interior/1.jpg',
+    'luxury-hospitality': '/placeholder.jpg',
+    'high-end-residential': '/placeholder.jpg',
+    'commercial-corporate': '/placeholder.jpg',
+    featured: '/placeholder.jpg',
   },
   journal: {
-    'design-trends': '/projects/turnkey-design-fitout/_MID0003-HDR.jpg',
-    'project-stories': '/projects/bedroom-interior/6.jpg',
-    'materials-craft': '/projects/commercial-interior/30.jpg',
-    engineering: '/projects/commercial-interior/37.jpg',
-    featured: '/projects/commercial-interior/16.jpg',
+    'design-trends': '/placeholder.jpg',
+    'project-stories': '/placeholder.jpg',
+    'materials-craft': '/placeholder.jpg',
+    engineering: '/placeholder.jpg',
+    featured: '/placeholder.jpg',
   },
   about: {
     logo: '/logo.svg',
     founder: '/founder/CEO Arabia.jpg',
-    process: '/projects/turnkey-design-fitout/_MID2653-HDR.jpg',
-    awards: '/projects/commercial-interior/39.jpg',
-    featured: '/projects/turnkey-design-fitout/_MID0003-HDR.jpg',
+    process: '/founder/CID_2106_00_COVER.jpg',
+    awards: '/founder/CID_2106_00_COVER.jpg',
+    featured: '/founder/CID_2106_00_COVER.jpg',
   },
   contact: {
-    contactUs: '/projects/commercial-interior/40.jpg',
-    bookConsultation: '/projects/turnkey-design-fitout/_MID0058-HDR.jpg',
+    contactUs: '/placeholder.jpg',
+    bookConsultation: '/placeholder.jpg',
+    supplierRegistration: '/placeholder.jpg',
   },
 };
 
@@ -351,12 +353,19 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
           description: t('contact.bookConsultation.description'),
           image: FALLBACK_IMAGES.contact.bookConsultation,
         },
+        {
+          href: '/supplier-registration',
+          label: t('contact.supplierRegistration.label'),
+          description: t('contact.supplierRegistration.description'),
+          image: FALLBACK_IMAGES.contact.supplierRegistration,
+        },
       ],
       // No featured section = simple dropdown
     },
   ];
   }, [megaMenuImages, t, tHeader]);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [hoveredSubLink, setHoveredSubLink] = useState<SubLink | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
 
@@ -397,8 +406,16 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
             key={item.href}
             className="relative"
             role="none"
-            onMouseEnter={() => item.subLinks && setActiveMenu(item.href)}
-            onMouseLeave={() => setActiveMenu(null)}
+            onMouseEnter={() => {
+              if (item.subLinks) {
+                setActiveMenu(item.href);
+                setHoveredSubLink(null);
+              }
+            }}
+            onMouseLeave={() => {
+              setActiveMenu(null);
+              setHoveredSubLink(null);
+            }}
           >
             {item.subLinks ? (
               <>
@@ -520,7 +537,8 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                                   href={subLink.href}
                                   className={`group/card relative overflow-hidden rounded-lg bg-neutral-900/40 backdrop-blur-sm transition-all duration-500 hover:bg-neutral-800/60 hover:shadow-xl hover:shadow-black/20 ${
                                     (item.subLinks?.length ?? 0) > 4 && !subLink.image ? '' : ''
-                                  }`}
+                                  } ${hoveredSubLink?.href === subLink.href ? 'ring-1 ring-[#d4af37]/30' : ''}`}
+                                  onMouseEnter={() => setHoveredSubLink(subLink)}
                                 >
                                   <motion.div
                                     initial={{ opacity: 0, y: 20 }}
@@ -558,12 +576,6 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
 
                                     {/* Content - compact for 6+ items without images */}
                                     <div className={`${(item.subLinks?.length ?? 0) > 4 && !subLink.image ? 'p-4' : 'p-5'}`}>
-                                      {/* Number indicator for services */}
-                                      {(item.subLinks?.length ?? 0) > 4 && !subLink.image && (
-                                        <div className="mb-2 text-[10px] font-light tracking-[0.2em] text-[#d4af37]/60">
-                                          0{index + 1}
-                                        </div>
-                                      )}
                                       <div className="mb-2 flex items-center justify-between">
                                         <h4 className={`font-light tracking-wide text-white transition-colors duration-300 ${
                                           (item.subLinks?.length ?? 0) > 4 && !subLink.image ? 'text-[13px]' : 'text-[15px]'
@@ -592,7 +604,7 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                             </div>
                           </div>
 
-                          {/* Right Side - Featured Content with premium styling */}
+                          {/* Right Side - Dynamic Preview based on hovered item */}
                           {item.featured && (
                             <div className={`${(item.subLinks?.length ?? 0) > 4 ? 'col-span-4' : 'col-span-5'} p-10`}>
                               <motion.div
@@ -605,49 +617,72 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                                 }}
                                 className="h-full"
                               >
-                                {/* Premium featured badge */}
+                                {/* Premium badge - changes based on hover state */}
                                 <div className="mb-6 flex items-center gap-3">
                                   <div className="h-px flex-1 bg-gradient-to-r from-neutral-700 to-transparent" />
                                   <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-sm">
                                     <Award size={12} className="text-neutral-400" />
                                     <span className="text-[10px] font-light tracking-[0.2em] text-neutral-400">
-                                      {t('featured')}
+                                      {hoveredSubLink ? t('preview') : t('featured')}
                                     </span>
                                   </div>
                                 </div>
 
                                 <Link
-                                  href={item.featured.href}
+                                  href={hoveredSubLink?.href || item.featured.href}
                                   className="group/featured block"
                                 >
-                                  {/* Premium featured image */}
+                                  {/* Dynamic image - shows hovered item's image or featured */}
                                   <div className="relative mb-6 h-56 overflow-hidden rounded-lg bg-neutral-900/60 shadow-lg shadow-black/20">
-                                    <Image
-                                      src={item.featured.image}
-                                      alt={item.featured.title}
-                                      fill
-                                      className="object-cover transition-all duration-1000 group-hover/featured:scale-110 group-hover/featured:brightness-110"
-                                    />
+                                    <AnimatePresence mode="wait">
+                                      <motion.div
+                                        key={hoveredSubLink?.href || 'featured'}
+                                        initial={{ opacity: 0, scale: 1.1 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="absolute inset-0"
+                                      >
+                                        <Image
+                                          src={hoveredSubLink?.image || item.featured.image}
+                                          alt={hoveredSubLink?.label || item.featured.title}
+                                          fill
+                                          className="object-cover transition-all duration-1000 group-hover/featured:scale-110 group-hover/featured:brightness-110"
+                                        />
+                                      </motion.div>
+                                    </AnimatePresence>
                                     <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/20 to-transparent" />
 
                                     {/* Premium overlay badge */}
-                                    <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 backdrop-blur-md">
-                                      <span className="text-[10px] font-light tracking-wider text-white">{t('new')}</span>
-                                    </div>
+                                    {!hoveredSubLink && (
+                                      <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 backdrop-blur-md">
+                                        <span className="text-[10px] font-light tracking-wider text-white">{t('new')}</span>
+                                      </div>
+                                    )}
                                   </div>
 
-                                  {/* Premium content */}
-                                  <h4 className="mb-3 text-[17px] font-light leading-snug tracking-wide text-white transition-all duration-300 group-hover/featured:text-neutral-200">
-                                    {item.featured.title}
-                                  </h4>
-                                  <p className="mb-6 text-[13px] font-light leading-relaxed text-neutral-400 transition-colors duration-300 group-hover/featured:text-neutral-300">
-                                    {item.featured.description}
-                                  </p>
+                                  {/* Dynamic content - shows hovered item's info or featured */}
+                                  <AnimatePresence mode="wait">
+                                    <motion.div
+                                      key={hoveredSubLink?.href || 'featured-content'}
+                                      initial={{ opacity: 0, y: 10 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      exit={{ opacity: 0, y: -10 }}
+                                      transition={{ duration: 0.2 }}
+                                    >
+                                      <h4 className="mb-3 text-[17px] font-light leading-snug tracking-wide text-white transition-all duration-300 group-hover/featured:text-neutral-200">
+                                        {hoveredSubLink?.label || item.featured.title}
+                                      </h4>
+                                      <p className="mb-6 text-[13px] font-light leading-relaxed text-neutral-400 transition-colors duration-300 group-hover/featured:text-neutral-300">
+                                        {hoveredSubLink?.description || item.featured.description}
+                                      </p>
+                                    </motion.div>
+                                  </AnimatePresence>
 
                                   {/* Premium CTA button */}
                                   <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-5 py-2.5 backdrop-blur-sm transition-all duration-300 group-hover/featured:border-white/20 group-hover/featured:bg-white/10 group-hover/featured:shadow-lg group-hover/featured:shadow-white/5">
                                     <span className="text-[11px] font-light tracking-[0.15em] text-neutral-300 transition-colors duration-300 group-hover/featured:text-white">
-                                      {t('learnMore')}
+                                      {hoveredSubLink ? t('viewDetails') : t('learnMore')}
                                     </span>
                                     <ArrowRight
                                       size={13}
