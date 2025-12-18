@@ -199,7 +199,7 @@ function renderMessageWithLinks(text: string) {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-medium text-[#d4af37] underline decoration-[#d4af37]/30 underline-offset-2 hover:text-[#c4a030] hover:decoration-[#c4a030]/50 transition-colors"
+          className="font-medium text-[#c9a962] underline decoration-[#c9a962]/30 underline-offset-2 hover:text-[#c4a030] hover:decoration-[#c4a030]/50 transition-colors"
         >
           {linkText}
         </a>
@@ -636,7 +636,7 @@ export function AIChatbot() {
           >
             <Sparkles className="h-7 w-7 text-white" strokeWidth={1.5} />
             {messages.length === 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#d4af37] text-xs font-medium text-black">
+              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#c9a962] text-xs font-medium text-black">
                 1
               </span>
             )}
@@ -754,7 +754,7 @@ export function AIChatbot() {
                             className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full sm:h-8 sm:w-8 ${
                               message.role === "assistant"
                                 ? "bg-neutral-950 text-white"
-                                : "bg-[#d4af37] text-black"
+                                : "bg-[#c9a962] text-black"
                             }`}
                           >
                             {message.role === "assistant" ? (
@@ -862,7 +862,7 @@ export function AIChatbot() {
                             <button
                               key={action.id}
                               onClick={() => handleQuickAction(action.id)}
-                              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-left text-xs font-light transition-all hover:border-[#d4af37]/50 hover:shadow-md sm:text-sm"
+                              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-left text-xs font-light transition-all hover:border-[#c9a962]/50 hover:shadow-md sm:text-sm"
                             >
                               <span className="mr-1.5">{action.icon}</span>
                               {action.label}
@@ -878,7 +878,7 @@ export function AIChatbot() {
                             <button
                               key={i}
                               onClick={() => handleSuggestion(suggestion)}
-                              className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-[10px] font-light text-neutral-600 transition-all hover:border-[#d4af37]/50 hover:text-neutral-900 sm:text-xs"
+                              className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-[10px] font-light text-neutral-600 transition-all hover:border-[#c9a962]/50 hover:text-neutral-900 sm:text-xs"
                             >
                               {suggestion}
                             </button>
@@ -936,13 +936,13 @@ export function AIChatbot() {
                             onChange={(e) => setInputValue(e.target.value)}
                             placeholder="Enter your email address..."
                             aria-label="Email input"
-                            className="w-full rounded-lg border border-neutral-200 py-2 pl-10 pr-3 text-sm font-light outline-none transition-colors focus:border-[#d4af37] focus-visible:ring-2 focus-visible:ring-[#d4af37]/20"
+                            className="w-full rounded-lg border border-neutral-200 py-2 pl-10 pr-3 text-sm font-light outline-none transition-colors focus:border-[#c9a962] focus-visible:ring-2 focus-visible:ring-[#c9a962]/20"
                           />
                         </div>
                         <button
                           type="submit"
                           disabled={!inputValue.trim()}
-                          className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d4af37] text-white transition-all hover:bg-[#c4a030] disabled:opacity-30"
+                          className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#c9a962] text-white transition-all hover:bg-[#c4a030] disabled:opacity-30"
                         >
                           <Send className="h-4 w-4" strokeWidth={1.5} />
                         </button>
@@ -954,9 +954,9 @@ export function AIChatbot() {
                       <div className="space-y-2">
                         <button
                           onClick={() => fileInputRef.current?.click()}
-                          className="flex w-full items-center justify-center gap-3 rounded-lg border-2 border-dashed border-[#d4af37]/50 bg-[#d4af37]/5 py-4 text-sm font-medium text-neutral-700 transition-all hover:border-[#d4af37] hover:bg-[#d4af37]/10"
+                          className="flex w-full items-center justify-center gap-3 rounded-lg border-2 border-dashed border-[#c9a962]/50 bg-[#c9a962]/5 py-4 text-sm font-medium text-neutral-700 transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/10"
                         >
-                          <Upload className="h-5 w-5 text-[#d4af37]" />
+                          <Upload className="h-5 w-5 text-[#c9a962]" />
                           <span>Upload Interior Photo</span>
                         </button>
                         <button
@@ -971,7 +971,7 @@ export function AIChatbot() {
                     {/* Processing State */}
                     {designFlowStep === "processing" && (
                       <div className="flex items-center justify-center gap-3 py-3">
-                        <Loader2 className="h-5 w-5 animate-spin text-[#d4af37]" />
+                        <Loader2 className="h-5 w-5 animate-spin text-[#c9a962]" />
                         <span className="text-sm text-neutral-600">
                           AI is redesigning your space...
                         </span>
@@ -1002,7 +1002,7 @@ export function AIChatbot() {
                           disabled={isTyping}
                           aria-label="Redesign my space with AI"
                           title="Upload a photo to redesign your space"
-                          className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#d4af37]/50 bg-[#d4af37]/10 text-[#d4af37] transition-all hover:bg-[#d4af37]/20 hover:border-[#d4af37] disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37] focus-visible:ring-offset-2"
+                          className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#c9a962]/50 bg-[#c9a962]/10 text-[#c9a962] transition-all hover:bg-[#c9a962]/20 hover:border-[#c9a962] disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2"
                         >
                           <Upload className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
                         </button>

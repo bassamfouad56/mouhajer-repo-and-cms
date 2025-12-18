@@ -87,19 +87,19 @@ export function Process() {
     <section
       ref={sectionRef}
       id="process"
-      className="relative min-h-[300vh] overflow-hidden bg-neutral-950 scroll-mt-24"
+      className="relative min-h-[300vh] overflow-hidden bg-[#faf8f5] scroll-mt-24"
     >
       {/* Background Elements */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5] via-white to-[#faf8f5]" />
 
         {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:80px_80px]" />
 
         {/* Animated gradient orbs */}
         <motion.div
-          className="absolute left-[20%] top-[10%] h-[500px] w-[500px] rounded-full bg-[#d4af37]/[0.03] blur-[150px]"
+          className="absolute left-[20%] top-[10%] h-[500px] w-[500px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]"
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -117,7 +117,7 @@ export function Process() {
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
         />
         <motion.div
-          className="absolute left-[40%] bottom-[20%] h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.02] blur-[180px]"
+          className="absolute left-[40%] bottom-[20%] h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.02] blur-[180px]"
           animate={{
             x: [0, -40, 0],
             y: [0, 40, 0]
@@ -139,21 +139,21 @@ export function Process() {
             >
               <div>
                 <div className="mb-4 flex items-center gap-4">
-                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-                  <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
+                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+                  <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
                     How We Work
                   </span>
                 </div>
-                <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl">
+                <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
                   Complete Lifecycle
                   <br />
-                  <span className="text-white/30">Control</span>
+                  <span className="text-neutral-400">Control</span>
                 </h2>
               </div>
 
-              <p className="max-w-md font-Satoshi text-sm font-light text-white/50 lg:text-base lg:text-right">
+              <p className="max-w-md font-Satoshi text-sm font-light text-neutral-600 lg:text-base lg:text-right">
                 From concept to completion, every phase flows through our integrated system.
-                <span className="text-white/70"> Six stages, one seamless journey.</span>
+                <span className="text-neutral-800"> Six stages, one seamless journey.</span>
               </p>
             </motion.div>
 
@@ -166,7 +166,7 @@ export function Process() {
             >
               <div className="relative h-px w-full bg-white/10">
                 <motion.div
-                  className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#d4af37] to-[#d4af37]/50"
+                  className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#c9a962] to-[#c9a962]/50"
                   style={{ width: useTransform(smoothProgress, [0, 0.7], ['0%', '100%']) }}
                 />
 
@@ -177,8 +177,8 @@ export function Process() {
                       key={step.title}
                       className={`relative flex h-4 w-4 items-center justify-center rounded-full border transition-all duration-500 ${
                         index <= activeStep
-                          ? 'border-[#d4af37] bg-[#d4af37]'
-                          : 'border-white/20 bg-neutral-950'
+                          ? 'border-[#c9a962] bg-[#c9a962]'
+                          : 'border-neutral-300 bg-white'
                       }`}
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -229,19 +229,19 @@ export function Process() {
                       />
 
                       {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/60 via-neutral-950/20 to-transparent" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#faf8f5]/70 via-[#faf8f5]/30 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-transparent to-transparent" />
                     </motion.div>
                   ))}
 
 
                   {/* Corner accents */}
-                  <div className="absolute left-0 top-0 h-20 w-20 border-l border-t border-[#d4af37]/20" />
-                  <div className="absolute bottom-0 right-0 h-20 w-20 border-b border-r border-[#d4af37]/20" />
+                  <div className="absolute left-0 top-0 h-20 w-20 border-l border-t border-[#c9a962]/20" />
+                  <div className="absolute bottom-0 right-0 h-20 w-20 border-b border-r border-[#c9a962]/20" />
 
                   {/* Animated scan line */}
                   <motion.div
-                    className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent"
+                    className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
                     animate={{ top: ['0%', '100%', '0%'] }}
                     transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
                   />
@@ -250,8 +250,8 @@ export function Process() {
                 {/* Decorative elements below image */}
                 <div className="mt-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="h-px w-8 bg-[#d4af37]/30" />
-                    <span className="font-Satoshi text-xs font-light text-white/30">
+                    <div className="h-px w-8 bg-[#c9a962]/30" />
+                    <span className="font-Satoshi text-xs font-light text-neutral-500">
                       Phase {activeStep + 1} of {processSteps.length}
                     </span>
                   </div>
@@ -260,7 +260,7 @@ export function Process() {
                       <motion.div
                         key={index}
                         className={`h-1 rounded-full transition-all duration-300 ${
-                          index === activeStep ? 'w-6 bg-[#d4af37]' : 'w-1 bg-white/20'
+                          index === activeStep ? 'w-6 bg-[#c9a962]' : 'w-1 bg-white/20'
                         }`}
                       />
                     ))}
@@ -289,23 +289,23 @@ export function Process() {
                     >
                       {/* Subtitle */}
                       <motion.div
-                        className="mb-3 inline-flex items-center gap-2 border border-[#d4af37]/30 bg-[#d4af37]/5 px-4 py-2"
+                        className="mb-3 inline-flex items-center gap-2 border border-[#c9a962]/30 bg-[#c9a962]/5 px-4 py-2"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: index === activeStep ? 1 : 0, x: index === activeStep ? 0 : -20 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
                       >
-                        <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37]">
+                        <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
                           {step.subtitle}
                         </span>
                       </motion.div>
 
                       {/* Title */}
-                      <h3 className="mb-4 font-SchnyderS text-4xl font-light text-white lg:text-5xl xl:text-6xl">
+                      <h3 className="mb-4 font-SchnyderS text-4xl font-light text-neutral-900 lg:text-5xl xl:text-6xl">
                         {step.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-white/60 lg:text-lg">
+                      <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg">
                         {step.description}
                       </p>
 
@@ -322,22 +322,22 @@ export function Process() {
                             }}
                             transition={{ duration: 0.4, delay: 0.2 + fIndex * 0.1 }}
                           >
-                            <CheckCircle2 className="h-4 w-4 text-[#d4af37]" strokeWidth={1.5} />
-                            <span className="font-Satoshi text-sm font-light text-white/70">{feature}</span>
+                            <CheckCircle2 className="h-4 w-4 text-[#c9a962]" strokeWidth={1.5} />
+                            <span className="font-Satoshi text-sm font-light text-neutral-700">{feature}</span>
                           </motion.div>
                         ))}
                       </div>
 
                       {/* Navigation hint */}
-                      <div className="flex items-center gap-4 border-t border-white/10 pt-6">
-                        <span className="font-Satoshi text-xs font-light text-white/30">
+                      <div className="flex items-center gap-4 border-t border-[#c9a962]/20 pt-6">
+                        <span className="font-Satoshi text-xs font-light text-neutral-500">
                           Scroll to explore all phases
                         </span>
                         <motion.div
                           animate={{ y: [0, 5, 0] }}
                           transition={{ duration: 1.5, repeat: Infinity }}
                         >
-                          <ArrowRight className="h-4 w-4 rotate-90 text-[#d4af37]/50" strokeWidth={1} />
+                          <ArrowRight className="h-4 w-4 rotate-90 text-[#c9a962]/50" strokeWidth={1} />
                         </motion.div>
                       </div>
                     </motion.div>
@@ -354,13 +354,13 @@ export function Process() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <div className="flex items-center justify-between border-t border-white/5 pt-6">
-              <span className="font-Satoshi text-sm font-light text-white/30">
+            <div className="flex items-center justify-between border-t border-[#c9a962]/20 pt-6">
+              <span className="font-Satoshi text-sm font-light text-neutral-500">
                 Ready to begin your journey?
               </span>
               <Link
                 href="#contact"
-                className="group flex items-center gap-3 font-Satoshi text-sm font-light tracking-wide text-white/60 transition-colors hover:text-[#d4af37]"
+                className="group flex items-center gap-3 font-Satoshi text-sm font-light tracking-wide text-neutral-600 transition-colors hover:text-[#c9a962]"
               >
                 Start Your Project
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1} />
@@ -372,7 +372,7 @@ export function Process() {
 
       {/* Floating decorative elements that animate on scroll */}
       <motion.div
-        className="pointer-events-none fixed left-[5%] top-1/2 h-px w-32 bg-gradient-to-r from-[#d4af37]/20 to-transparent"
+        className="pointer-events-none fixed left-[5%] top-1/2 h-px w-32 bg-gradient-to-r from-[#c9a962]/20 to-transparent"
         style={{
           opacity: useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]),
           x: useTransform(scrollYProgress, [0, 1], [0, 100]),

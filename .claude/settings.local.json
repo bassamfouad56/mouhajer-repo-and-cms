@@ -75,7 +75,9 @@
       "Bash(vercel env pull:*)",
       "Bash(del \"\\?\\D:\\wbsite\\mouhajer-new-marketing-website\\nul\")",
       "Bash(pnpm remove:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(set:*)",
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []

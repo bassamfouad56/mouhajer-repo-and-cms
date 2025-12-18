@@ -457,7 +457,7 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                         >
                           <div className="overflow-hidden rounded-xl border border-white/10 bg-neutral-950/98 shadow-2xl shadow-black/50 backdrop-blur-xl">
                             {/* Top accent */}
-                            <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d4af37]/40 to-transparent" />
+                            <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c9a962]/40 to-transparent" />
 
                             <div className="p-2">
                               {item.subLinks.map((subLink, index) => (
@@ -474,14 +474,14 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                                     className="flex flex-1 items-center justify-between"
                                   >
                                     <div>
-                                      <span className="block text-[13px] font-light text-white group-hover/item:text-[#d4af37]">
+                                      <span className="block text-[13px] font-light text-white group-hover/item:text-[#c9a962]">
                                         {subLink.label}
                                       </span>
                                       <span className="mt-0.5 block text-[11px] text-neutral-500">
                                         {subLink.description}
                                       </span>
                                     </div>
-                                    <ArrowRight size={14} className="text-neutral-600 transition-all group-hover/item:translate-x-1 group-hover/item:text-[#d4af37]" />
+                                    <ArrowRight size={14} className="text-neutral-600 transition-all group-hover/item:translate-x-1 group-hover/item:text-[#c9a962]" />
                                   </motion.div>
                                 </Link>
                               ))}
@@ -537,7 +537,7 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                                   href={subLink.href}
                                   className={`group/card relative overflow-hidden rounded-lg bg-neutral-900/40 backdrop-blur-sm transition-all duration-500 hover:bg-neutral-800/60 hover:shadow-xl hover:shadow-black/20 ${
                                     (item.subLinks?.length ?? 0) > 4 && !subLink.image ? '' : ''
-                                  } ${hoveredSubLink?.href === subLink.href ? 'ring-1 ring-[#d4af37]/30' : ''}`}
+                                  } ${hoveredSubLink?.href === subLink.href ? 'ring-1 ring-[#c9a962]/30' : ''}`}
                                   onMouseEnter={() => setHoveredSubLink(subLink)}
                                 >
                                   <motion.div

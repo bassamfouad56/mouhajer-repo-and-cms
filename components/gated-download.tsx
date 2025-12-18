@@ -76,8 +76,8 @@ export function GatedDownload({
     return (
       <div className={`rounded-xl border border-neutral-200 bg-white p-4 ${className}`}>
         <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#d4af37]/10">
-            <FileText className="h-6 w-6 text-[#d4af37]" />
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#c9a962]/10">
+            <FileText className="h-6 w-6 text-[#c9a962]" />
           </div>
 
           <div className="flex-1">
@@ -91,7 +91,7 @@ export function GatedDownload({
             <a
               href={downloadUrl}
               download
-              className="flex items-center gap-2 rounded-lg bg-[#d4af37] px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-[#c4a030]"
+              className="flex items-center gap-2 rounded-lg bg-[#c9a962] px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-[#c4a030]"
             >
               <Download className="h-4 w-4" />
               Download
@@ -103,7 +103,7 @@ export function GatedDownload({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email to unlock"
-                className="w-48 rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#d4af37]"
+                className="w-48 rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#c9a962]"
                 disabled={isSubmitting}
               />
               <button
@@ -193,7 +193,7 @@ export function GatedDownload({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email to download"
-                    className="w-full rounded-lg border border-neutral-200 py-3 pl-12 pr-4 outline-none transition-colors focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+                    className="w-full rounded-lg border border-neutral-200 py-3 pl-12 pr-4 outline-none transition-colors focus:border-[#c9a962] focus:ring-2 focus:ring-[#c9a962]/20"
                     disabled={isSubmitting}
                   />
                 </div>
@@ -243,7 +243,7 @@ export function GatedDownload({
                 <a
                   href={downloadUrl}
                   download
-                  className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#d4af37] py-3 font-medium text-black transition-colors hover:bg-[#c4a030]"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#c9a962] py-3 font-medium text-black transition-colors hover:bg-[#c4a030]"
                 >
                   <Download className="h-5 w-5" />
                   Download Now

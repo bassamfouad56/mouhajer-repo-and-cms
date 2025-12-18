@@ -85,12 +85,12 @@ export function TrustBadgesSection({
 
   if (compact) {
     return (
-      <section className={`py-8 ${isDark ? "bg-neutral-950" : "bg-neutral-50"}`}>
+      <section className={`py-8 ${isDark ? "bg-[#faf8f5]" : "bg-neutral-50"}`}>
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             {/* Awards inline */}
             <div className="flex items-center gap-2">
-              <Award className={`h-5 w-5 ${isDark ? "text-[#d4af37]" : "text-[#d4af37]"}`} />
+              <Award className={`h-5 w-5 ${isDark ? "text-[#c9a962]" : "text-[#c9a962]"}`} />
               <span className={`text-sm font-medium ${isDark ? "text-white" : "text-neutral-900"}`}>
                 5x International Property Awards Winner
               </span>
@@ -98,7 +98,7 @@ export function TrustBadgesSection({
 
             {/* Certifications inline */}
             <div className="flex items-center gap-2">
-              <Shield className={`h-5 w-5 ${isDark ? "text-[#d4af37]" : "text-[#d4af37]"}`} />
+              <Shield className={`h-5 w-5 ${isDark ? "text-[#c9a962]" : "text-[#c9a962]"}`} />
               <span className={`text-sm font-medium ${isDark ? "text-white" : "text-neutral-900"}`}>
                 Triple ISO Certified
               </span>
@@ -108,7 +108,7 @@ export function TrustBadgesSection({
             <div className="flex items-center gap-6">
               {stats.slice(0, 2).map((stat, i) => (
                 <div key={i} className="text-center">
-                  <div className={`text-lg font-bold ${isDark ? "text-[#d4af37]" : "text-neutral-900"}`}>
+                  <div className={`text-lg font-bold ${isDark ? "text-[#c9a962]" : "text-neutral-900"}`}>
                     {stat.value}
                   </div>
                   <div className={`text-xs ${isDark ? "text-neutral-400" : "text-neutral-500"}`}>
@@ -124,7 +124,7 @@ export function TrustBadgesSection({
   }
 
   return (
-    <section className={`py-16 md:py-24 ${isDark ? "bg-neutral-950" : "bg-white"}`}>
+    <section className={`py-16 md:py-24 ${isDark ? "bg-[#faf8f5]" : "bg-white"}`}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -133,10 +133,10 @@ export function TrustBadgesSection({
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <span className={`mb-2 inline-block text-sm font-medium uppercase tracking-wider ${isDark ? "text-[#d4af37]" : "text-[#d4af37]"}`}>
+          <span className={`mb-2 inline-block text-sm font-medium uppercase tracking-wider ${isDark ? "text-[#c9a962]" : "text-[#c9a962]"}`}>
             Why Trust Us
           </span>
-          <h2 className={`text-3xl font-light md:text-4xl ${isDark ? "text-white" : "text-neutral-900"}`}>
+          <h2 className={`text-3xl font-light md:text-4xl ${isDark ? "text-neutral-900" : "text-neutral-900"}`}>
             Award-Winning Excellence
           </h2>
         </motion.div>
@@ -154,21 +154,21 @@ export function TrustBadgesSection({
               key={index}
               variants={itemVariants}
               className={`group relative overflow-hidden rounded-xl p-6 transition-all hover:shadow-lg ${
-                isDark ? "bg-neutral-900 hover:bg-neutral-800" : "bg-neutral-50 hover:bg-white"
+                isDark ? "bg-white/70 hover:bg-white/90" : "bg-neutral-50 hover:bg-white"
               }`}
             >
               {/* Gold accent */}
-              <div className="absolute left-0 top-0 h-full w-1 bg-[#d4af37]" />
+              <div className="absolute left-0 top-0 h-full w-1 bg-[#c9a962]" />
 
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#d4af37]/10">
-                  <award.icon className="h-6 w-6 text-[#d4af37]" />
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#c9a962]/10">
+                  <award.icon className="h-6 w-6 text-[#c9a962]" />
                 </div>
                 <div>
-                  <span className="mb-1 inline-block rounded-full bg-[#d4af37]/10 px-2 py-0.5 text-xs font-medium text-[#d4af37]">
+                  <span className="mb-1 inline-block rounded-full bg-[#c9a962]/10 px-2 py-0.5 text-xs font-medium text-[#c9a962]">
                     {award.highlight}
                   </span>
-                  <h3 className={`font-medium ${isDark ? "text-white" : "text-neutral-900"}`}>
+                  <h3 className={`font-medium ${isDark ? "text-neutral-900" : "text-neutral-900"}`}>
                     {award.title}
                   </h3>
                   <p className={`text-sm ${isDark ? "text-neutral-400" : "text-neutral-500"}`}>
@@ -192,10 +192,10 @@ export function TrustBadgesSection({
             <motion.div
               key={index}
               variants={itemVariants}
-              className={`rounded-xl p-6 text-center ${isDark ? "bg-neutral-900" : "bg-neutral-50"}`}
+              className={`rounded-xl p-6 text-center ${isDark ? "bg-white/70" : "bg-neutral-50"}`}
             >
-              <stat.icon className={`mx-auto mb-2 h-6 w-6 ${isDark ? "text-[#d4af37]" : "text-[#d4af37]"}`} />
-              <div className={`text-3xl font-bold ${isDark ? "text-white" : "text-neutral-900"}`}>
+              <stat.icon className={`mx-auto mb-2 h-6 w-6 ${isDark ? "text-[#c9a962]" : "text-[#c9a962]"}`} />
+              <div className={`text-3xl font-bold ${isDark ? "text-neutral-900" : "text-neutral-900"}`}>
                 {stat.value}
               </div>
               <div className={`text-sm ${isDark ? "text-neutral-400" : "text-neutral-500"}`}>
@@ -213,7 +213,7 @@ export function TrustBadgesSection({
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h3 className={`mb-6 text-center text-lg font-medium ${isDark ? "text-white" : "text-neutral-900"}`}>
+          <h3 className={`mb-6 text-center text-lg font-medium ${isDark ? "text-neutral-900" : "text-neutral-900"}`}>
             Certified Excellence
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-6">
@@ -222,12 +222,12 @@ export function TrustBadgesSection({
                 key={index}
                 variants={itemVariants}
                 className={`flex items-center gap-3 rounded-full px-5 py-3 ${
-                  isDark ? "bg-neutral-900" : "bg-neutral-50"
+                  isDark ? "bg-white/70" : "bg-neutral-50"
                 }`}
               >
-                <cert.icon className="h-5 w-5 text-[#d4af37]" />
+                <cert.icon className="h-5 w-5 text-[#c9a962]" />
                 <div>
-                  <div className={`text-sm font-medium ${isDark ? "text-white" : "text-neutral-900"}`}>
+                  <div className={`text-sm font-medium ${isDark ? "text-neutral-900" : "text-neutral-900"}`}>
                     {cert.name}
                   </div>
                   <div className={`text-xs ${isDark ? "text-neutral-500" : "text-neutral-500"}`}>
@@ -246,7 +246,7 @@ export function TrustBadgesSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className={`mb-6 text-center text-lg font-medium ${isDark ? "text-white" : "text-neutral-900"}`}>
+            <h3 className={`mb-6 text-center text-lg font-medium ${isDark ? "text-neutral-900" : "text-neutral-900"}`}>
               Trusted By Industry Leaders
             </h3>
             <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
@@ -285,12 +285,12 @@ export function TrustBadgesInline({ className = "" }: { className?: string }) {
   return (
     <div className={`flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500 ${className}`}>
       <span className="flex items-center gap-1">
-        <Award className="h-4 w-4 text-[#d4af37]" />
+        <Award className="h-4 w-4 text-[#c9a962]" />
         5-Star Award Winner
       </span>
       <span className="hidden sm:inline">•</span>
       <span className="flex items-center gap-1">
-        <Shield className="h-4 w-4 text-[#d4af37]" />
+        <Shield className="h-4 w-4 text-[#c9a962]" />
         Triple ISO Certified
       </span>
       <span className="hidden sm:inline">•</span>

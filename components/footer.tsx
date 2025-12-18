@@ -68,13 +68,13 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-neutral-950 px-6 py-20 lg:px-12">
+    <footer className="relative overflow-hidden bg-[#faf8f5] px-6 py-20 lg:px-12">
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100px_100px]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
 
       <div className="relative z-10 mx-auto max-w-[1800px]">
         {/* Animated top divider */}
-        <AnimatedLine className="mb-16" color="rgba(255,255,255,0.1)" fromCenter />
+        <AnimatedLine className="mb-16" color="rgba(201,169,98,0.2)" fromCenter />
 
         {/* Top Section */}
         <div className="mb-16 grid gap-12 lg:grid-cols-12 lg:gap-16">
@@ -87,22 +87,22 @@ export function Footer() {
                     src="/logo.svg"
                     alt="Mouhajer International Design"
                     fill
-                    className="object-contain brightness-0 invert"
+                    className="object-contain"
                   />
                 </div>
               </HoverLift>
             </Link>
-            <p className="mb-6 max-w-sm text-sm font-light leading-relaxed text-neutral-400">
+            <p className="mb-6 max-w-sm text-sm font-light leading-relaxed text-neutral-600">
               Creating timeless, elegant spaces that reflect the unique personality
               and lifestyle of our clients since 2009.
             </p>
 
             {/* Contact Info with staggered animation */}
-            <StaggerContainer staggerDelay={0.1} className="space-y-3 text-sm font-light text-neutral-400">
+            <StaggerContainer staggerDelay={0.1} className="space-y-3 text-sm font-light text-neutral-600">
               <StaggerItem>
                 <a
                   href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
-                  className="group flex items-center gap-3 transition-colors hover:text-white"
+                  className="group flex items-center gap-3 transition-colors hover:text-[#c9a962]"
                 >
                   <motion.span
                     className="transition-transform group-hover:scale-110"
@@ -112,14 +112,14 @@ export function Footer() {
                   </motion.span>
                   <span className="relative">
                     {process.env.NEXT_PUBLIC_EMAIL || 'info@mouhajerdesign.com'}
-                    <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
                   </span>
                 </a>
               </StaggerItem>
               <StaggerItem>
                 <a
                   href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
-                  className="group flex items-center gap-3 transition-colors hover:text-white"
+                  className="group flex items-center gap-3 transition-colors hover:text-[#c9a962]"
                 >
                   <motion.span
                     className="transition-transform group-hover:scale-110"
@@ -129,7 +129,7 @@ export function Footer() {
                   </motion.span>
                   <span className="relative">
                     {process.env.NEXT_PUBLIC_PHONE || '+971-4-323-4567'}
-                    <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
                   </span>
                 </a>
               </StaggerItem>
@@ -144,7 +144,7 @@ export function Footer() {
 
           {/* Company Links */}
           <FadeIn direction="up" delay={0.1} className="lg:col-span-2">
-            <h3 className="mb-6 text-sm font-light tracking-widest text-white">
+            <h3 className="mb-6 text-sm font-light tracking-widest text-neutral-900">
               {t('quickLinks').toUpperCase()}
             </h3>
             <StaggerContainer staggerDelay={0.05}>
@@ -154,11 +154,11 @@ export function Footer() {
                     <li>
                       <Link
                         href={link.href}
-                        className="group relative inline-block text-sm font-light text-neutral-400 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
+                        className="group relative inline-block text-sm font-light text-neutral-600 transition-colors hover:text-[#c9a962] focus-visible:text-[#c9a962] focus-visible:outline-none"
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 ease-out group-hover:w-full" />
+                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 ease-out group-hover:w-full" />
                         </span>
                       </Link>
                     </li>
@@ -170,7 +170,7 @@ export function Footer() {
 
           {/* Services Links */}
           <FadeIn direction="up" delay={0.2} className="lg:col-span-2">
-            <h3 className="mb-6 text-sm font-light tracking-widest text-white">
+            <h3 className="mb-6 text-sm font-light tracking-widest text-neutral-900">
               {t('services').toUpperCase()}
             </h3>
             <StaggerContainer staggerDelay={0.05}>
@@ -180,11 +180,11 @@ export function Footer() {
                     <li>
                       <Link
                         href={link.href}
-                        className="group relative inline-block text-sm font-light text-neutral-400 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
+                        className="group relative inline-block text-sm font-light text-neutral-600 transition-colors hover:text-[#c9a962] focus-visible:text-[#c9a962] focus-visible:outline-none"
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 ease-out group-hover:w-full" />
+                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 ease-out group-hover:w-full" />
                         </span>
                       </Link>
                     </li>
@@ -196,10 +196,10 @@ export function Footer() {
 
           {/* Newsletter */}
           <FadeIn direction="up" delay={0.3} className="lg:col-span-4">
-            <h3 className="mb-6 text-sm font-light tracking-widest text-white">
+            <h3 className="mb-6 text-sm font-light tracking-widest text-neutral-900">
               {t('newsletter.title').toUpperCase()}
             </h3>
-            <p className="mb-4 text-sm font-light text-neutral-400">
+            <p className="mb-4 text-sm font-light text-neutral-600">
               {t('newsletter.description')}
             </p>
             <form className="flex gap-2" onSubmit={handleNewsletterSubmit}>
@@ -210,7 +210,7 @@ export function Footer() {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting}
                 required
-                className="flex-1 border border-neutral-800 bg-transparent px-4 py-3 text-sm font-light text-white placeholder:text-neutral-600 transition-all duration-300 focus:border-white focus:outline-none disabled:opacity-50"
+                className="flex-1 border border-[#c9a962]/30 bg-white/60 px-4 py-3 text-sm font-light text-neutral-900 placeholder:text-neutral-400 transition-all duration-300 focus:border-[#c9a962] focus:outline-none disabled:opacity-50"
               />
               <motion.button
                 type="submit"
@@ -218,19 +218,19 @@ export function Footer() {
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className="group relative overflow-hidden border border-white px-6 py-3 text-sm font-light tracking-wider text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 disabled:cursor-not-allowed disabled:opacity-50"
+                className="group relative overflow-hidden border border-[#c9a962] px-6 py-3 text-sm font-light tracking-wider text-[#c9a962] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {isSubmitting ? '...' : t('newsletter.subscribe').toUpperCase()}
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </span>
                 <motion.span
-                  className="absolute inset-0 bg-white"
+                  className="absolute inset-0 bg-[#c9a962]"
                   initial={{ x: '-100%' }}
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 />
-                <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 text-neutral-950 opacity-0 transition-opacity group-hover:opacity-100">
+                <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 text-white opacity-0 transition-opacity group-hover:opacity-100">
                   {isSubmitting ? '...' : t('newsletter.subscribe').toUpperCase()}
                   <ArrowRight size={14} />
                 </span>
@@ -258,8 +258,8 @@ export function Footer() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 + index * 0.1 }}
-                  whileHover={{ y: -4, borderColor: 'white', color: 'white' }}
-                  className="flex h-10 w-10 items-center justify-center border border-neutral-800 text-neutral-400 transition-colors focus-visible:border-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+                  whileHover={{ y: -4, borderColor: '#c9a962', color: '#c9a962' }}
+                  className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/30 text-neutral-600 transition-colors focus-visible:border-[#c9a962] focus-visible:text-[#c9a962] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5]"
                   aria-label={social.label}
                 >
                   <social.icon size={18} />
@@ -270,20 +270,20 @@ export function Footer() {
         </div>
 
         {/* Bottom Section with animated divider */}
-        <AnimatedLine className="mb-8" color="rgba(255,255,255,0.1)" />
+        <AnimatedLine className="mb-8" color="rgba(201,169,98,0.2)" />
         <FadeIn direction="up" delay={0.4}>
           <div className="flex flex-col items-center justify-between gap-6 text-sm font-light text-neutral-500 lg:flex-row">
             <div>
               {t('copyright').replace('2025', String(currentYear))}
             </div>
             <div className="flex gap-6">
-              <Link href="/privacy" className="group relative transition-colors hover:text-white">
+              <Link href="/privacy" className="group relative transition-colors hover:text-[#c9a962]">
                 <span>{t('privacy')}</span>
-                <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
               </Link>
-              <Link href="/terms" className="group relative transition-colors hover:text-white">
+              <Link href="/terms" className="group relative transition-colors hover:text-[#c9a962]">
                 <span>{t('terms')}</span>
-                <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
               </Link>
             </div>
           </div>

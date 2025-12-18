@@ -105,10 +105,10 @@ export function TestFounderCraft() {
               />
 
               {/* Gold border accent */}
-              <div className="absolute inset-0 border-[6px] border-[#d4af37]/0 transition-all duration-500 hover:border-[#d4af37]/30" />
+              <div className="absolute inset-0 border-[6px] border-[#c9a962]/0 transition-all duration-500 hover:border-[#c9a962]/30" />
 
               {/* Bottom accent */}
-              <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#d4af37]" />
+              <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#c9a962]" />
             </motion.div>
           </motion.div>
 
@@ -153,7 +153,7 @@ export function TestFounderCraft() {
           className="border-t border-neutral-200 pt-20 text-center"
         >
           <div className="mx-auto max-w-4xl">
-            <div className="mb-6 h-px w-16 mx-auto bg-[#d4af37]" />
+            <div className="mb-6 h-px w-16 mx-auto bg-[#c9a962]" />
 
             <p className="mb-8 font-SchnyderS text-3xl font-light leading-relaxed text-neutral-950 lg:text-4xl xl:text-5xl">
               "I visit every site personally.

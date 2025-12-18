@@ -382,7 +382,7 @@ function JobCard({
 
             <div className="flex items-center gap-4 text-sm font-light text-neutral-500">
               <span>Experience: {job.experience}</span>
-              <span className="inline-flex items-center gap-1 text-[#d4af37] opacity-0 transition-opacity group-hover:opacity-100">
+              <span className="inline-flex items-center gap-1 text-[#c9a962] opacity-0 transition-opacity group-hover:opacity-100">
                 View Details <ArrowRight size={14} />
               </span>
             </div>

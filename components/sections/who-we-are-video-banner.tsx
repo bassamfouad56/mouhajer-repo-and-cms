@@ -55,7 +55,7 @@ export function WhoWeAreVideoBanner({ images = [] }: WhoWeAreVideoBannerProps) {
               transition={{ duration: 0.6 }}
               className="mb-6 flex items-center gap-4"
             >
-              <div className="h-px w-12 bg-[#d4af37]" />
+              <div className="h-px w-12 bg-[#c9a962]" />
               <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
                 Who We Are
               </span>
@@ -70,7 +70,7 @@ export function WhoWeAreVideoBanner({ images = [] }: WhoWeAreVideoBannerProps) {
             >
               Architects of
               <br />
-              <span className="text-[#d4af37]">Experience</span>
+              <span className="text-[#c9a962]">Experience</span>
             </motion.h2>
 
             {/* Description */}
@@ -177,7 +177,7 @@ export function WhoWeAreVideoBanner({ images = [] }: WhoWeAreVideoBannerProps) {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="absolute -bottom-6 -left-6 h-24 w-24 border border-[#d4af37]/20"
+              className="absolute -bottom-6 -left-6 h-24 w-24 border border-[#c9a962]/20"
             />
           </motion.div>
         </div>

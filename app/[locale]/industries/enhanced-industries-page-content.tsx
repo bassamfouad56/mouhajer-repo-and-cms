@@ -147,15 +147,15 @@ export default function EnhancedIndustriesPageContent({
               className="mt-10 flex gap-12"
             >
               <div>
-                <div className="font-SchnyderS text-4xl font-light text-[#d4af37]">{industries.length}+</div>
+                <div className="font-SchnyderS text-4xl font-light text-[#c9a962]">{industries.length}+</div>
                 <div className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-white/50">Industries</div>
               </div>
               <div>
-                <div className="font-SchnyderS text-4xl font-light text-[#d4af37]">400+</div>
+                <div className="font-SchnyderS text-4xl font-light text-[#c9a962]">400+</div>
                 <div className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-white/50">Projects</div>
               </div>
               <div>
-                <div className="font-SchnyderS text-4xl font-light text-[#d4af37]">24</div>
+                <div className="font-SchnyderS text-4xl font-light text-[#c9a962]">24</div>
                 <div className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-white/50">Years</div>
               </div>
             </motion.div>
@@ -200,7 +200,7 @@ export default function EnhancedIndustriesPageContent({
 
       {/* CTA Section */}
       <section className="relative overflow-hidden bg-neutral-950 px-6 py-24 lg:px-12 lg:py-32">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
         <div className="relative mx-auto max-w-3xl text-center">
           <h2 className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl">
@@ -211,7 +211,7 @@ export default function EnhancedIndustriesPageContent({
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 border border-[#d4af37] bg-[#d4af37] px-10 py-4 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-[#d4af37]"
+            className="inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-4 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-[#c9a962]"
           >
             Start a Conversation
             <ArrowRight className="h-4 w-4" />
@@ -303,7 +303,7 @@ function IndustryCard({
               transition={{ duration: 0.3 }}
               className="mt-4"
             >
-              <div className="flex items-center gap-2 font-Satoshi text-xs uppercase tracking-[0.2em] text-[#d4af37]">
+              <div className="flex items-center gap-2 font-Satoshi text-xs uppercase tracking-[0.2em] text-[#c9a962]">
                 Explore
                 <ArrowRight className="h-3 w-3" />
               </div>

@@ -94,9 +94,9 @@ export function MagneticCTAButton({
   variant?: 'primary' | 'secondary' | 'outline';
 }) {
   const variants = {
-    primary: 'border border-[#d4af37] bg-[#d4af37] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#d4af37]',
+    primary: 'border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]',
     secondary: 'border border-white bg-white px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-white',
-    outline: 'border border-white/20 bg-transparent px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white/70 transition-all duration-500 hover:border-[#d4af37]/50 hover:text-[#d4af37]',
+    outline: 'border border-white/20 bg-transparent px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white/70 transition-all duration-500 hover:border-[#c9a962]/50 hover:text-[#c9a962]',
   };
 
   return (

@@ -58,7 +58,7 @@ const PHYSICS = {
 const HolographicMaterial = {
   uniforms: {
     time: { value: 0 },
-    color: { value: new THREE.Color('#d4af37') },
+    color: { value: new THREE.Color('#c9a962') },
     opacity: { value: 0.8 },
   },
   vertexShader: `
@@ -149,7 +149,7 @@ function ParticleField() {
       </bufferGeometry>
       <pointsMaterial
         size={0.05}
-        color="#d4af37"
+        color="#c9a962"
         transparent
         opacity={0.6}
         sizeAttenuation
@@ -308,7 +308,7 @@ function ProjectCard3D({
       >
         <planeGeometry args={[3.8, 2.6]} />
         <meshBasicMaterial
-          color="#d4af37"
+          color="#c9a962"
           transparent
           opacity={0.1}
           blending={THREE.AdditiveBlending}
@@ -336,14 +336,14 @@ function ProjectCard3D({
       {/* Frame */}
       <lineSegments position={[gridPosition.x, gridPosition.y, gridPosition.z + 0.01]}>
         <edgesGeometry args={[new THREE.PlaneGeometry(3.6, 2.5)]} />
-        <lineBasicMaterial color={isHovered ? '#d4af37' : '#333333'} linewidth={2} />
+        <lineBasicMaterial color={isHovered ? '#c9a962' : '#333333'} linewidth={2} />
       </lineSegments>
 
       {/* Title */}
       <Text
         position={[gridPosition.x, gridPosition.y - 1.5, gridPosition.z]}
         fontSize={0.18}
-        color={isHovered ? '#d4af37' : '#ffffff'}
+        color={isHovered ? '#c9a962' : '#ffffff'}
         anchorX="center"
         anchorY="middle"
         maxWidth={3}
@@ -356,7 +356,7 @@ function ProjectCard3D({
         <Text
           position={[gridPosition.x - 1.5, gridPosition.y + 1.4, gridPosition.z]}
           fontSize={0.1}
-          color="#d4af37"
+          color="#c9a962"
           anchorX="left"
           anchorY="middle"
         >
@@ -414,7 +414,7 @@ function Scene({ projects, mousePosition, onSelect }: SceneProps) {
       {/* Lighting */}
       <ambientLight intensity={0.4} />
       <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
-      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#d4af37" />
+      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#c9a962" />
       <spotLight
         position={[0, 20, 0]}
         angle={0.5}
@@ -474,12 +474,12 @@ function LoadingScreen() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-          className="mb-6 h-16 w-16 mx-auto border-2 border-[#d4af37] border-t-transparent rounded-full"
+          className="mb-6 h-16 w-16 mx-auto border-2 border-[#c9a962] border-t-transparent rounded-full"
         />
         <motion.p
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="text-[#d4af37] font-Satoshi text-sm tracking-[0.3em] uppercase"
+          className="text-[#c9a962] font-Satoshi text-sm tracking-[0.3em] uppercase"
         >
           Loading Experience
         </motion.p>
@@ -548,7 +548,7 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
                   transition={{ delay: 0.2 }}
                   className="mb-4"
                 >
-                  <span className="px-3 py-1 bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37] font-Satoshi text-xs tracking-wider">
+                  <span className="px-3 py-1 bg-[#c9a962]/20 border border-[#c9a962]/50 text-[#c9a962] font-Satoshi text-xs tracking-wider">
                     {project.category}
                   </span>
                 </motion.div>
@@ -596,7 +596,7 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
               >
                 <Link
                   href={`/projects/${project.slug.current}`}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-[#d4af37] text-black font-Satoshi text-sm tracking-wider hover:bg-white transition-colors"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-[#c9a962] text-black font-Satoshi text-sm tracking-wider hover:bg-white transition-colors"
                 >
                   VIEW PROJECT
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -609,10 +609,10 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
 
           {/* Decorative frame */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#d4af37]/50" />
-            <div className="absolute top-0 right-0 w-16 h-16 border-r-2 border-t-2 border-[#d4af37]/50" />
-            <div className="absolute bottom-0 left-0 w-16 h-16 border-l-2 border-b-2 border-[#d4af37]/50" />
-            <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#d4af37]/50" />
+            <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#c9a962]/50" />
+            <div className="absolute top-0 right-0 w-16 h-16 border-r-2 border-t-2 border-[#c9a962]/50" />
+            <div className="absolute bottom-0 left-0 w-16 h-16 border-l-2 border-b-2 border-[#c9a962]/50" />
+            <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#c9a962]/50" />
           </div>
         </motion.div>
       </motion.div>
@@ -677,7 +677,7 @@ export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
         className="absolute bottom-8 left-8 z-20"
       >
         <div className="font-Satoshi text-xs tracking-wider text-white/30">
-          <span className="text-[#d4af37]">{projects.length}</span> PROJECTS IN VIEW
+          <span className="text-[#c9a962]">{projects.length}</span> PROJECTS IN VIEW
         </div>
       </motion.div>
 
@@ -729,20 +729,20 @@ export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
 
       {/* Decorative corner elements */}
       <div className="absolute top-0 left-0 w-32 h-32 pointer-events-none">
-        <div className="absolute top-8 left-8 w-12 h-px bg-gradient-to-r from-[#d4af37] to-transparent" />
-        <div className="absolute top-8 left-8 h-12 w-px bg-gradient-to-b from-[#d4af37] to-transparent" />
+        <div className="absolute top-8 left-8 w-12 h-px bg-gradient-to-r from-[#c9a962] to-transparent" />
+        <div className="absolute top-8 left-8 h-12 w-px bg-gradient-to-b from-[#c9a962] to-transparent" />
       </div>
       <div className="absolute top-0 right-0 w-32 h-32 pointer-events-none">
-        <div className="absolute top-8 right-8 w-12 h-px bg-gradient-to-l from-[#d4af37] to-transparent" />
-        <div className="absolute top-8 right-8 h-12 w-px bg-gradient-to-b from-[#d4af37] to-transparent" />
+        <div className="absolute top-8 right-8 w-12 h-px bg-gradient-to-l from-[#c9a962] to-transparent" />
+        <div className="absolute top-8 right-8 h-12 w-px bg-gradient-to-b from-[#c9a962] to-transparent" />
       </div>
       <div className="absolute bottom-0 left-0 w-32 h-32 pointer-events-none">
-        <div className="absolute bottom-8 left-8 w-12 h-px bg-gradient-to-r from-[#d4af37] to-transparent" />
-        <div className="absolute bottom-8 left-8 h-12 w-px bg-gradient-to-t from-[#d4af37] to-transparent" />
+        <div className="absolute bottom-8 left-8 w-12 h-px bg-gradient-to-r from-[#c9a962] to-transparent" />
+        <div className="absolute bottom-8 left-8 h-12 w-px bg-gradient-to-t from-[#c9a962] to-transparent" />
       </div>
       <div className="absolute bottom-0 right-0 w-32 h-32 pointer-events-none">
-        <div className="absolute bottom-8 right-8 w-12 h-px bg-gradient-to-l from-[#d4af37] to-transparent" />
-        <div className="absolute bottom-8 right-8 h-12 w-px bg-gradient-to-t from-[#d4af37] to-transparent" />
+        <div className="absolute bottom-8 right-8 w-12 h-px bg-gradient-to-l from-[#c9a962] to-transparent" />
+        <div className="absolute bottom-8 right-8 h-12 w-px bg-gradient-to-t from-[#c9a962] to-transparent" />
       </div>
     </div>
   );

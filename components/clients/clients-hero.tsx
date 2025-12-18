@@ -119,11 +119,11 @@ export function ClientsHero({ heroImage }: ClientsHeroProps) {
           transition={{ duration: 0.6 }}
           className="mb-8 flex items-center gap-4"
         >
-          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#d4af37]">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
             Our Clients & Partners
           </span>
-          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
         </motion.div>
 
         {/* Main Headline */}
@@ -152,7 +152,7 @@ export function ClientsHero({ heroImage }: ClientsHeroProps) {
           initial={{ opacity: 0, scaleX: 0 }}
           animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="h-px w-32 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent"
+          className="h-px w-32 bg-gradient-to-r from-transparent via-[#c9a962] to-transparent"
         />
 
         {/* Stats Row */}
@@ -163,19 +163,19 @@ export function ClientsHero({ heroImage }: ClientsHeroProps) {
           className="mt-16 grid grid-cols-3 gap-8 lg:gap-16"
         >
           <div className="text-center">
-            <div className="font-SchnyderS text-4xl text-[#d4af37] lg:text-5xl">25+</div>
+            <div className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl">25+</div>
             <div className="mt-2 font-Satoshi text-xs uppercase tracking-widest text-white/40">
               Years Partnership
             </div>
           </div>
           <div className="text-center">
-            <div className="font-SchnyderS text-4xl text-[#d4af37] lg:text-5xl">150+</div>
+            <div className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl">150+</div>
             <div className="mt-2 font-Satoshi text-xs uppercase tracking-widest text-white/40">
               Joint Projects
             </div>
           </div>
           <div className="text-center">
-            <div className="font-SchnyderS text-4xl text-[#d4af37] lg:text-5xl">50+</div>
+            <div className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl">50+</div>
             <div className="mt-2 font-Satoshi text-xs uppercase tracking-widest text-white/40">
               Trusted Partners
             </div>

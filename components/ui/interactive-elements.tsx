@@ -49,7 +49,7 @@ export const AnimatedButton = forwardRef<HTMLButtonElement, AnimatedButtonProps>
         "bg-white text-neutral-950 border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 focus-visible:ring-neutral-400",
       ghost:
         "bg-transparent text-neutral-950 hover:bg-neutral-100 focus-visible:ring-neutral-400",
-      gold: "bg-[#d4af37] text-black hover:bg-[#c4a030] focus-visible:ring-[#d4af37]",
+      gold: "bg-[#c9a962] text-black hover:bg-[#c4a030] focus-visible:ring-[#c9a962]",
     };
 
     const sizes = {
@@ -115,7 +115,7 @@ export const AnimatedLink = forwardRef<HTMLAnchorElement, AnimatedLinkProps>(
         "bg-white text-neutral-950 border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 focus-visible:ring-neutral-400",
       ghost:
         "bg-transparent text-neutral-950 hover:bg-neutral-100 focus-visible:ring-neutral-400",
-      gold: "bg-[#d4af37] text-black hover:bg-[#c4a030] focus-visible:ring-[#d4af37]",
+      gold: "bg-[#c9a962] text-black hover:bg-[#c4a030] focus-visible:ring-[#c9a962]",
     };
 
     const sizes = {
@@ -154,8 +154,8 @@ export const AnimatedCard = forwardRef<HTMLDivElement, AnimatedCardProps>(
   ({ children, className, hoverEffect = "lift", ...props }, ref) => {
     const hoverVariants = {
       lift: { y: -8, boxShadow: "0 20px 40px -12px rgba(0,0,0,0.15)" },
-      glow: { boxShadow: "0 0 30px rgba(212, 175, 55, 0.15)" },
-      border: { borderColor: "rgba(212, 175, 55, 0.5)" },
+      glow: { boxShadow: "0 0 30px rgba(201, 169, 98, 0.15)" },
+      border: { borderColor: "rgba(201, 169, 98, 0.5)" },
       scale: { scale: 1.02 },
       none: {},
     };

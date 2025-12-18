@@ -52,11 +52,11 @@ export function PartnerLogoMarquee() {
             transition={{ duration: 0.6 }}
             className="mb-4 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#d4af37]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
               Our Network
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </motion.div>
 
           <motion.h2
@@ -91,8 +91,8 @@ export function PartnerLogoMarquee() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`rounded-full px-5 py-2 font-Satoshi text-sm transition-all duration-300 ${
                   activeCategory === cat.id
-                    ? 'bg-[#d4af37] text-neutral-950'
-                    : 'border border-white/10 text-white/60 hover:border-[#d4af37]/50 hover:text-white'
+                    ? 'bg-[#c9a962] text-neutral-950'
+                    : 'border border-white/10 text-white/60 hover:border-[#c9a962]/50 hover:text-white'
                 }`}
               >
                 {cat.label}
@@ -118,7 +118,7 @@ export function PartnerLogoMarquee() {
               {[...row1, ...row1, ...row1].map((partner, idx) => (
                 <div
                   key={`row1-${idx}`}
-                  className="mx-8 flex h-20 w-40 flex-shrink-0 items-center justify-center rounded-lg border border-white/5 bg-white/[0.02] px-6 transition-all duration-300 hover:border-[#d4af37]/30 hover:bg-white/[0.05]"
+                  className="mx-8 flex h-20 w-40 flex-shrink-0 items-center justify-center rounded-lg border border-white/5 bg-white/[0.02] px-6 transition-all duration-300 hover:border-[#c9a962]/30 hover:bg-white/[0.05]"
                 >
                   <Image
                     src={partner.logo}
@@ -144,7 +144,7 @@ export function PartnerLogoMarquee() {
               {[...row2, ...row2, ...row2].map((partner, idx) => (
                 <div
                   key={`row2-${idx}`}
-                  className="mx-8 flex h-20 w-40 flex-shrink-0 items-center justify-center rounded-lg border border-white/5 bg-white/[0.02] px-6 transition-all duration-300 hover:border-[#d4af37]/30 hover:bg-white/[0.05]"
+                  className="mx-8 flex h-20 w-40 flex-shrink-0 items-center justify-center rounded-lg border border-white/5 bg-white/[0.02] px-6 transition-all duration-300 hover:border-[#c9a962]/30 hover:bg-white/[0.05]"
                 >
                   <Image
                     src={partner.logo}

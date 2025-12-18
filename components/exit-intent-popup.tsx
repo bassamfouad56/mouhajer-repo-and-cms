@@ -151,14 +151,14 @@ export function ExitIntentPopup({
               </button>
 
               {/* Gold accent */}
-              <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#d4af37] via-[#f4d03f] to-[#d4af37]" />
+              <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#c9a962] via-[#f4d03f] to-[#c9a962]" />
 
               <div className="p-6 sm:p-8">
                 {!isSuccess ? (
                   <>
                     {/* Icon */}
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#d4af37]/10">
-                      <Gift className="h-8 w-8 text-[#d4af37]" />
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#c9a962]/10">
+                      <Gift className="h-8 w-8 text-[#c9a962]" />
                     </div>
 
                     {/* Heading */}
@@ -167,7 +167,7 @@ export function ExitIntentPopup({
                     </h2>
 
                     <p className="mb-6 text-center text-neutral-600">
-                      Get a <span className="font-medium text-[#d4af37]">FREE Design Consultation</span> with
+                      Get a <span className="font-medium text-[#c9a962]">FREE Design Consultation</span> with
                       our award-winning team. Plus, receive exclusive access to our 2025 Luxury Interior Trends Guide.
                     </p>
 
@@ -179,7 +179,7 @@ export function ExitIntentPopup({
                         "Exclusive project portfolio access",
                       ].map((benefit, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm text-neutral-600">
-                          <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[#d4af37]" />
+                          <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[#c9a962]" />
                           {benefit}
                         </li>
                       ))}
@@ -193,7 +193,7 @@ export function ExitIntentPopup({
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email address"
-                          className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm outline-none transition-colors focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+                          className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm outline-none transition-colors focus:border-[#c9a962] focus:ring-2 focus:ring-[#c9a962]/20"
                           disabled={isSubmitting}
                         />
                         {error && (

@@ -22,7 +22,7 @@ export function ChatbotWithAI() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#d4af37] to-[#b8941f] text-white shadow-2xl transition-shadow hover:shadow-[0_0_30px_rgba(212,175,55,0.6)]"
+        className="fixed bottom-6 right-6 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#c9a962] to-[#b8941f] text-white shadow-2xl transition-shadow hover:shadow-[0_0_30px_rgba(201,169,98,0.6)]"
       >
         <MessageCircle className="h-7 w-7" />
       </motion.button>
@@ -39,7 +39,7 @@ export function ChatbotWithAI() {
             {/* Header */}
             <div className="flex items-center justify-between bg-gradient-to-r from-neutral-950 to-neutral-800 p-4">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-[#d4af37] flex items-center justify-center">
+                <div className="h-10 w-10 rounded-full bg-[#c9a962] flex items-center justify-center">
                   <span className="font-SchnyderS text-white text-lg">M</span>
                 </div>
                 <div>
@@ -59,7 +59,7 @@ export function ChatbotWithAI() {
             <div className="h-96 overflow-y-auto p-4 space-y-4 bg-neutral-50">
               {/* Welcome Message */}
               <div className="flex gap-3">
-                <div className="h-8 w-8 rounded-full bg-[#d4af37] flex items-center justify-center flex-shrink-0">
+                <div className="h-8 w-8 rounded-full bg-[#c9a962] flex items-center justify-center flex-shrink-0">
                   <span className="font-SchnyderS text-white text-sm">M</span>
                 </div>
                 <div className="flex-1">
@@ -74,13 +74,13 @@ export function ChatbotWithAI() {
 
               {/* AI Generator CTA */}
               <div className="flex gap-3">
-                <div className="h-8 w-8 rounded-full bg-[#d4af37] flex items-center justify-center flex-shrink-0">
+                <div className="h-8 w-8 rounded-full bg-[#c9a962] flex items-center justify-center flex-shrink-0">
                   <span className="font-SchnyderS text-white text-sm">M</span>
                 </div>
                 <div className="flex-1">
-                  <div className="rounded-2xl rounded-tl-sm bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5 p-4 border border-[#d4af37]/20">
+                  <div className="rounded-2xl rounded-tl-sm bg-gradient-to-br from-[#c9a962]/10 to-[#c9a962]/5 p-4 border border-[#c9a962]/20">
                     <div className="flex items-start gap-3 mb-3">
-                      <Sparkles className="h-5 w-5 text-[#d4af37] flex-shrink-0 mt-0.5" />
+                      <Sparkles className="h-5 w-5 text-[#c9a962] flex-shrink-0 mt-0.5" />
                       <div>
                         <h4 className="font-SchnyderS text-base text-neutral-950 mb-1">
                           Try Our AI Design Studio
@@ -93,7 +93,7 @@ export function ChatbotWithAI() {
                             setShowAIGenerator(true);
                             setIsOpen(false);
                           }}
-                          className="inline-flex items-center gap-2 rounded-lg bg-neutral-950 px-4 py-2 font-Satoshi text-xs font-medium text-white transition-colors hover:bg-[#d4af37]"
+                          className="inline-flex items-center gap-2 rounded-lg bg-neutral-950 px-4 py-2 font-Satoshi text-xs font-medium text-white transition-colors hover:bg-[#c9a962]"
                         >
                           <Sparkles className="h-4 w-4" />
                           Generate Design
@@ -114,9 +114,9 @@ export function ChatbotWithAI() {
                 <input
                   type="text"
                   placeholder="Type your message..."
-                  className="flex-1 rounded-lg border border-neutral-300 px-4 py-2 font-Satoshi text-sm focus:border-[#d4af37] focus:outline-none focus:ring-2 focus:ring-[#d4af37]/20"
+                  className="flex-1 rounded-lg border border-neutral-300 px-4 py-2 font-Satoshi text-sm focus:border-[#c9a962] focus:outline-none focus:ring-2 focus:ring-[#c9a962]/20"
                 />
-                <button className="rounded-lg bg-neutral-950 px-4 py-2 font-Satoshi text-sm font-medium text-white transition-colors hover:bg-[#d4af37]">
+                <button className="rounded-lg bg-neutral-950 px-4 py-2 font-Satoshi text-sm font-medium text-white transition-colors hover:bg-[#c9a962]">
                   Send
                 </button>
               </div>

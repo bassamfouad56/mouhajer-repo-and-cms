@@ -132,7 +132,7 @@ export function FounderHero({
             >
               The Mind Behind
               <br />
-              <span className="text-[#d4af37]">the Masterpiece</span>
+              <span className="text-[#c9a962]">the Masterpiece</span>
             </h1>
           </div>
 

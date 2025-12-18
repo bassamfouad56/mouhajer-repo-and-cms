@@ -41,7 +41,7 @@ export function AboutIntroEnhanced() {
         />
         {/* Gradient orbs */}
         <motion.div
-          className="absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#d4af37]/5 blur-3xl"
+          className="absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#c9a962]/5 blur-3xl"
           style={{ y: decorY2 }}
         />
         <motion.div
@@ -67,7 +67,7 @@ export function AboutIntroEnhanced() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-8 flex items-center gap-4"
             >
-              <SVGLineDraw width={48} height={2} strokeColor="#d4af37" duration={1} delay={0.3} />
+              <SVGLineDraw width={48} height={2} strokeColor="#c9a962" duration={1} delay={0.3} />
               <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
                 Who We Are
               </span>
@@ -108,7 +108,7 @@ export function AboutIntroEnhanced() {
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 1.2, delay: 1.2, ease: 'easeInOut' }}
-              className="my-8 h-px w-full origin-left bg-gradient-to-r from-[#d4af37] via-[#d4af37]/30 to-transparent"
+              className="my-8 h-px w-full origin-left bg-gradient-to-r from-[#c9a962] via-[#c9a962]/30 to-transparent"
             />
 
             {/* CTA with magnetic effect */}
@@ -120,7 +120,7 @@ export function AboutIntroEnhanced() {
               <MagneticButton strength={0.2}>
                 <Link
                   href="/about/process"
-                  className="group inline-flex items-center gap-3 border border-neutral-900 bg-neutral-950 px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all duration-500 hover:bg-[#d4af37] hover:border-[#d4af37]"
+                  className="group inline-flex items-center gap-3 border border-neutral-900 bg-neutral-950 px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all duration-500 hover:bg-[#c9a962] hover:border-[#c9a962]"
                 >
                   <span>Explore Our Process</span>
                   <ArrowRight
@@ -177,7 +177,7 @@ export function AboutIntroEnhanced() {
                     path="M 24 0 L 0 0 L 0 24"
                     width={24}
                     height={24}
-                    strokeColor="#d4af37"
+                    strokeColor="#c9a962"
                     strokeWidth={2}
                     duration={1.5}
                     delay={1.2}
@@ -193,7 +193,7 @@ export function AboutIntroEnhanced() {
                     path="M 0 24 L 24 24 L 24 0"
                     width={24}
                     height={24}
-                    strokeColor="#d4af37"
+                    strokeColor="#c9a962"
                     strokeWidth={2}
                     duration={1.5}
                     delay={1.3}
@@ -212,7 +212,7 @@ export function AboutIntroEnhanced() {
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute -right-8 top-1/4 hidden lg:block"
             >
-              <div className="h-16 w-16 rounded-full border-2 border-[#d4af37]/30 bg-white/80 backdrop-blur-sm" />
+              <div className="h-16 w-16 rounded-full border-2 border-[#c9a962]/30 bg-white/80 backdrop-blur-sm" />
             </motion.div>
           </motion.div>
         </div>
@@ -227,15 +227,15 @@ export function AboutIntroEnhanced() {
           <div className="mx-auto max-w-5xl">
             {/* Centered luxury divider */}
             <div className="mb-12 flex items-center justify-center gap-4">
-              <SVGLineDraw width={120} height={2} strokeColor="#d4af37" duration={1.5} delay={1} />
+              <SVGLineDraw width={120} height={2} strokeColor="#c9a962" duration={1.5} delay={1} />
               <motion.div
                 initial={{ scale: 0 }}
                 animate={isInView ? { scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: 1.2, type: 'spring' }}
               >
-                <Sparkles className="h-5 w-5 text-[#d4af37]" strokeWidth={1.5} />
+                <Sparkles className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
               </motion.div>
-              <SVGLineDraw width={120} height={2} strokeColor="#d4af37" duration={1.5} delay={1} />
+              <SVGLineDraw width={120} height={2} strokeColor="#c9a962" duration={1.5} delay={1} />
             </div>
 
             <div className="space-y-8 text-center">
@@ -274,10 +274,10 @@ export function AboutIntroEnhanced() {
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.5, delay: 2 + index * 0.1 }}
                     whileHover={{ scale: 1.05, y: -5 }}
-                    className="group relative overflow-hidden border border-neutral-200 bg-white p-6 text-center transition-all duration-300 hover:border-[#d4af37]/30 hover:shadow-xl"
+                    className="group relative overflow-hidden border border-neutral-200 bg-white p-6 text-center transition-all duration-300 hover:border-[#c9a962]/30 hover:shadow-xl"
                   >
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-[#d4af37]/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      className="absolute inset-0 bg-gradient-to-br from-[#c9a962]/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                     />
                     <div className="relative">
                       <div className="mb-3 text-3xl">{item.icon}</div>
@@ -299,7 +299,7 @@ export function AboutIntroEnhanced() {
           path="M 64 0 L 0 0 L 0 64"
           width={64}
           height={64}
-          strokeColor="#d4af37"
+          strokeColor="#c9a962"
           strokeWidth={1}
           duration={2}
           delay={0.5}
@@ -310,7 +310,7 @@ export function AboutIntroEnhanced() {
           path="M 0 64 L 64 64 L 64 0"
           width={64}
           height={64}
-          strokeColor="#d4af37"
+          strokeColor="#c9a962"
           strokeWidth={1}
           duration={2}
           delay={0.7}
@@ -325,7 +325,7 @@ function SVGPathDraw({
   path,
   width = 24,
   height = 24,
-  strokeColor = '#d4af37',
+  strokeColor = '#c9a962',
   strokeWidth = 2,
   duration = 1,
   delay = 0,

@@ -80,7 +80,7 @@ export function StandardsSection() {
 
               {/* Quote overlay - bottom */}
               <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-12 xl:p-16">
-                <div className="border-l-2 border-[#d4af37] pl-6">
+                <div className="border-l-2 border-[#c9a962] pl-6">
                   <p className="font-SchnyderS text-2xl font-light leading-tight text-white lg:text-3xl">
                     "Excellence is not an act, but a habit embedded in every team member."
                   </p>
@@ -91,7 +91,7 @@ export function StandardsSection() {
               </div>
 
               {/* Gold accent line */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-[#d4af37]" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-[#c9a962]" />
             </motion.div>
           </motion.div>
 
@@ -138,10 +138,10 @@ export function StandardsSection() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                    className="group flex items-center gap-4 border-l-2 border-neutral-200 pl-6 transition-all duration-300 hover:border-[#d4af37]"
+                    className="group flex items-center gap-4 border-l-2 border-neutral-200 pl-6 transition-all duration-300 hover:border-[#c9a962]"
                   >
                     <div>
-                      <div className="font-SchnyderS text-2xl font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#d4af37]">
+                      <div className="font-SchnyderS text-2xl font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962]">
                         {client.name}
                       </div>
                       <div className="font-Satoshi text-sm font-light text-neutral-400">
@@ -196,7 +196,7 @@ export function StandardsSection() {
 
               {/* Text overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
-                <div className="mb-3 h-px w-12 bg-[#d4af37]" />
+                <div className="mb-3 h-px w-12 bg-[#c9a962]" />
                 <h4 className="mb-2 font-SchnyderS text-2xl font-light text-white lg:text-3xl">
                   Recognition of Excellence
                 </h4>
@@ -229,7 +229,7 @@ export function StandardsSection() {
 
               {/* Text overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
-                <div className="mb-3 h-px w-12 bg-[#d4af37]" />
+                <div className="mb-3 h-px w-12 bg-[#c9a962]" />
                 <h4 className="mb-2 font-SchnyderS text-2xl font-light text-white lg:text-3xl">
                   On-Site Leadership
                 </h4>
@@ -260,7 +260,7 @@ export function StandardsSection() {
           <div className="flex flex-wrap items-center justify-center gap-6">
             <Link
               href="/about/awards"
-              className="group inline-flex items-center gap-4 border border-[#d4af37] bg-[#d4af37]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-[#d4af37] hover:text-white"
+              className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-[#c9a962] hover:text-white"
             >
               <span>View Our Achievements</span>
               <svg

@@ -40,7 +40,7 @@ export function CategoryTabs({ selected, onChange, counts }: CategoryTabsProps) 
                   <span
                     className={`rounded-full px-2 py-0.5 text-[10px] transition-colors ${
                       isActive
-                        ? 'bg-[#d4af37]/20 text-[#d4af37]'
+                        ? 'bg-[#c9a962]/20 text-[#c9a962]'
                         : 'bg-neutral-100 text-neutral-400 group-hover:bg-neutral-200'
                     }`}
                   >
@@ -52,7 +52,7 @@ export function CategoryTabs({ selected, onChange, counts }: CategoryTabsProps) 
                 {isActive && (
                   <motion.div
                     layoutId="activeCategory"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d4af37]"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#c9a962]"
                     transition={{ type: 'spring', stiffness: 500, damping: 35 }}
                   />
                 )}

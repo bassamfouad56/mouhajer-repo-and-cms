@@ -90,19 +90,19 @@ function HeroBanner({
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{ duration: 1.5, delay: 0.5 }}
-          className="absolute left-[10%] top-0 h-full w-px origin-top bg-gradient-to-b from-[#d4af37]/30 via-[#d4af37]/10 to-transparent"
+          className="absolute left-[10%] top-0 h-full w-px origin-top bg-gradient-to-b from-[#c9a962]/30 via-[#c9a962]/10 to-transparent"
         />
         <motion.div
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{ duration: 1.5, delay: 0.7 }}
-          className="absolute right-[10%] top-0 h-full w-px origin-top bg-gradient-to-b from-[#d4af37]/30 via-[#d4af37]/10 to-transparent"
+          className="absolute right-[10%] top-0 h-full w-px origin-top bg-gradient-to-b from-[#c9a962]/30 via-[#c9a962]/10 to-transparent"
         />
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.5, delay: 1 }}
-          className="absolute bottom-0 left-0 h-px w-full origin-left bg-gradient-to-r from-transparent via-[#d4af37]/50 to-transparent"
+          className="absolute bottom-0 left-0 h-px w-full origin-left bg-gradient-to-r from-transparent via-[#c9a962]/50 to-transparent"
         />
       </div>
 
@@ -117,10 +117,10 @@ function HeroBanner({
             initial={{ opacity: 0, y: -30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-10 flex items-center gap-3 rounded-full border border-[#d4af37]/40 bg-[#d4af37]/10 px-8 py-4 backdrop-blur-md"
+            className="mb-10 flex items-center gap-3 rounded-full border border-[#c9a962]/40 bg-[#c9a962]/10 px-8 py-4 backdrop-blur-md"
           >
-            <Award className="h-5 w-5 text-[#d4af37]" />
-            <span className="text-sm font-light tracking-widest text-[#d4af37]">
+            <Award className="h-5 w-5 text-[#c9a962]" />
+            <span className="text-sm font-light tracking-widest text-[#c9a962]">
               AWARD-WINNING PROJECT
             </span>
           </motion.div>
@@ -167,7 +167,7 @@ function HeroBanner({
           transition={{ duration: 0.8, delay: 0.8 }}
           className="flex items-center gap-3 rounded-full bg-white/5 px-6 py-3 backdrop-blur-sm"
         >
-          <MapPin className="h-4 w-4 text-[#d4af37]" />
+          <MapPin className="h-4 w-4 text-[#c9a962]" />
           <span className="text-sm font-light tracking-wide text-white/80">
             {project.acfFields?.location || 'United Arab Emirates'}
           </span>
@@ -213,7 +213,7 @@ function OverviewSection({ project }: { project: Project }) {
         initial={{ scale: 0, opacity: 0 }}
         animate={isInView ? { scale: 1, opacity: 0.03 } : {}}
         transition={{ duration: 1.5 }}
-        className="absolute -right-64 top-1/2 h-[800px] w-[800px] -translate-y-1/2 rounded-full bg-[#d4af37]"
+        className="absolute -right-64 top-1/2 h-[800px] w-[800px] -translate-y-1/2 rounded-full bg-[#c9a962]"
       />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
@@ -225,10 +225,10 @@ function OverviewSection({ project }: { project: Project }) {
           className="mb-16 flex items-center gap-6"
         >
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-            <Target className="h-7 w-7 text-[#d4af37]" />
+            <Target className="h-7 w-7 text-[#c9a962]" />
           </div>
           <div>
-            <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
+            <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
               01
             </span>
             <h2 className="mt-1 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
@@ -269,8 +269,8 @@ function OverviewSection({ project }: { project: Project }) {
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                 className="group"
               >
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-100 transition-colors group-hover:bg-[#d4af37]/10">
-                  <stat.icon className="h-5 w-5 text-neutral-400 transition-colors group-hover:text-[#d4af37]" />
+                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-100 transition-colors group-hover:bg-[#c9a962]/10">
+                  <stat.icon className="h-5 w-5 text-neutral-400 transition-colors group-hover:text-[#c9a962]" />
                 </div>
                 <span className="font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
                   {stat.value}
@@ -301,7 +301,7 @@ function ChallengeSection({ project, image }: { project: Project; image: string 
     <section ref={sectionRef} className="relative overflow-hidden bg-neutral-950 py-32 lg:py-48">
       {/* Background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[80px_80px]" />
-      <div className="absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-[#d4af37]/5 to-transparent" />
+      <div className="absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-[#c9a962]/5 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
@@ -328,7 +328,7 @@ function ChallengeSection({ project, image }: { project: Project; image: string 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="absolute -bottom-8 -right-8 flex h-32 w-32 items-center justify-center rounded-2xl bg-[#d4af37] shadow-2xl lg:h-40 lg:w-40"
+              className="absolute -bottom-8 -right-8 flex h-32 w-32 items-center justify-center rounded-2xl bg-[#c9a962] shadow-2xl lg:h-40 lg:w-40"
             >
               <div className="text-center">
                 <span className="font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">10</span>
@@ -346,11 +346,11 @@ function ChallengeSection({ project, image }: { project: Project; image: string 
           >
             {/* Section Label */}
             <div className="mb-12 flex items-center gap-6">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#d4af37]">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#c9a962]">
                 <Lightbulb className="h-7 w-7 text-neutral-950" />
               </div>
               <div>
-                <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
+                <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
                   02
                 </span>
                 <h2 className="mt-1 font-SchnyderS text-4xl font-light text-white lg:text-5xl">
@@ -379,8 +379,8 @@ function ChallengeSection({ project, image }: { project: Project; image: string 
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                   className="flex items-start gap-4"
                 >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#d4af37]/10">
-                    <CheckCircle2 className="h-4 w-4 text-[#d4af37]" />
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#c9a962]/10">
+                    <CheckCircle2 className="h-4 w-4 text-[#c9a962]" />
                   </div>
                   <span className="font-light text-white/80">{item}</span>
                 </motion.div>
@@ -417,13 +417,13 @@ function DesignApproachSection({
           className="mb-20 text-center"
         >
           <div className="mb-8 flex items-center justify-center gap-6">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]" />
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-              <Sparkles className="h-7 w-7 text-[#d4af37]" />
+              <Sparkles className="h-7 w-7 text-[#c9a962]" />
             </div>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
           </div>
-          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
+          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
             Philosophy
           </span>
           <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-6xl">
@@ -458,7 +458,7 @@ function DesignApproachSection({
               className="group text-center"
             >
               <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-white shadow-sm transition-all duration-500 group-hover:bg-neutral-950 group-hover:shadow-xl">
-                <item.icon className="h-8 w-8 text-neutral-400 transition-colors group-hover:text-[#d4af37]" />
+                <item.icon className="h-8 w-8 text-neutral-400 transition-colors group-hover:text-[#c9a962]" />
               </div>
               <h3 className="mb-4 text-xl font-medium text-neutral-950">{item.title}</h3>
               <p className="font-light leading-relaxed text-neutral-600">{item.desc}</p>
@@ -537,7 +537,7 @@ function ScopeOfWorkSection({ project }: { project: Project }) {
         >
           <div className="mb-8 flex items-center gap-6">
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-              <Wrench className="h-7 w-7 text-[#d4af37]" />
+              <Wrench className="h-7 w-7 text-[#c9a962]" />
             </div>
             <div>
               <h2 className="font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
@@ -559,7 +559,7 @@ function ScopeOfWorkSection({ project }: { project: Project }) {
             >
 
               <div className="relative">
-                <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm transition-colors group-hover:bg-[#d4af37]">
+                <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm transition-colors group-hover:bg-[#c9a962]">
                   <item.icon className="h-7 w-7 text-neutral-600 transition-colors group-hover:text-neutral-950" />
                 </div>
                 <h3 className="mb-4 text-xl font-medium text-neutral-950 transition-colors group-hover:text-white">
@@ -587,7 +587,7 @@ function OutcomeSection({ project }: { project: Project }) {
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-neutral-950 py-32 lg:py-48">
       {/* Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.1),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,169,98,0.1),transparent_50%)]" />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Label */}
@@ -598,13 +598,13 @@ function OutcomeSection({ project }: { project: Project }) {
           className="mb-20 text-center"
         >
           <div className="mb-8 flex items-center justify-center gap-6">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#d4af37]">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#c9a962]">
               <Award className="h-7 w-7 text-neutral-950" />
             </div>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </div>
-          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
+          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
             Results
           </span>
           <h2 className="mt-4 font-SchnyderS text-4xl font-light text-white lg:text-6xl">
@@ -639,7 +639,7 @@ function OutcomeSection({ project }: { project: Project }) {
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                 className="border-l border-white/10 pl-6 text-left"
               >
-                <span className="font-SchnyderS text-4xl font-light text-[#d4af37] lg:text-5xl">
+                <span className="font-SchnyderS text-4xl font-light text-[#c9a962] lg:text-5xl">
                   {stat.value}
                 </span>
                 <p className="mt-2 text-sm font-light text-white/50">{stat.label}</p>
@@ -682,10 +682,10 @@ function ProjectDetailsSection({ project }: { project: Project }) {
         >
           <div className="mb-8 flex items-center gap-6">
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-              <Layers className="h-7 w-7 text-[#d4af37]" />
+              <Layers className="h-7 w-7 text-[#c9a962]" />
             </div>
             <div>
-              <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
+              <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
                 06
               </span>
               <h2 className="mt-1 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
@@ -706,7 +706,7 @@ function ProjectDetailsSection({ project }: { project: Project }) {
               className="flex items-start gap-5 rounded-2xl bg-neutral-50 p-8"
             >
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white">
-                <item.icon className="h-5 w-5 text-[#d4af37]" />
+                <item.icon className="h-5 w-5 text-[#c9a962]" />
               </div>
               <div>
                 <span className="text-xs font-light uppercase tracking-wider text-neutral-400">
@@ -732,7 +732,7 @@ function ProjectDetailsSection({ project }: { project: Project }) {
             {services.map((service) => (
               <span
                 key={service}
-                className="rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-6 py-3 text-sm font-light text-[#d4af37]"
+                className="rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-6 py-3 text-sm font-light text-[#c9a962]"
               >
                 {service}
               </span>
@@ -778,11 +778,11 @@ function GallerySection({
         className="mb-20 px-6 text-center lg:px-12"
       >
         <div className="mb-8 flex items-center justify-center gap-6">
-          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-          <span className="text-xs font-medium uppercase tracking-[0.4em] text-[#d4af37]">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+          <span className="text-xs font-medium uppercase tracking-[0.4em] text-[#c9a962]">
             Visual Journey
           </span>
-          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
         </div>
         <h2 className="font-SchnyderS text-4xl font-light text-white lg:text-6xl">
           Project Gallery
@@ -841,7 +841,7 @@ function GallerySection({
               onClick={() => setCurrentIndex(index)}
               className={`relative h-20 w-28 overflow-hidden rounded-xl transition-all ${
                 currentIndex === index
-                  ? 'ring-2 ring-[#d4af37] ring-offset-4 ring-offset-neutral-950'
+                  ? 'ring-2 ring-[#c9a962] ring-offset-4 ring-offset-neutral-950'
                   : 'opacity-40 hover:opacity-70'
               }`}
             >
@@ -959,13 +959,13 @@ function BeforeAfterSection({
           className="mb-16 text-center"
         >
           <div className="mb-8 flex items-center justify-center gap-6">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]" />
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-              <Layers className="h-7 w-7 text-[#d4af37]" />
+              <Layers className="h-7 w-7 text-[#c9a962]" />
             </div>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
           </div>
-          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
+          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
             Transformation
           </span>
           <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-6xl">
@@ -1002,7 +1002,7 @@ function BeforeAfterSection({
               initial={{ opacity: 0, x: 20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.5 }}
-              className="absolute bottom-8 right-8 z-20 flex items-center gap-3 rounded-full bg-[#d4af37] px-6 py-3 shadow-lg"
+              className="absolute bottom-8 right-8 z-20 flex items-center gap-3 rounded-full bg-[#c9a962] px-6 py-3 shadow-lg"
             >
               <Sparkles className="h-4 w-4 text-neutral-950" />
               <span className="text-sm font-medium uppercase tracking-wider text-neutral-950">
@@ -1050,11 +1050,11 @@ function BeforeAfterSection({
             {/* Handle Circle */}
             <motion.div
               animate={{ scale: isDragging ? 1.2 : 1 }}
-              className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-neutral-950 shadow-2xl transition-shadow hover:shadow-[0_0_30px_rgba(212,175,55,0.5)]"
+              className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-neutral-950 shadow-2xl transition-shadow hover:shadow-[0_0_30px_rgba(201,169,98,0.5)]"
             >
               <div className="flex items-center gap-1">
-                <ChevronLeft className="h-5 w-5 text-[#d4af37]" />
-                <ChevronRight className="h-5 w-5 text-[#d4af37]" />
+                <ChevronLeft className="h-5 w-5 text-[#c9a962]" />
+                <ChevronRight className="h-5 w-5 text-[#c9a962]" />
               </div>
             </motion.div>
 
@@ -1091,11 +1091,11 @@ function BeforeAfterSection({
                 className="pointer-events-none absolute left-1/2 top-8 z-40 -translate-x-1/2"
               >
                 <div className="flex items-center gap-2 rounded-full bg-neutral-950/80 px-5 py-2.5 backdrop-blur-md">
-                  <ChevronLeft className="h-4 w-4 text-[#d4af37]" />
+                  <ChevronLeft className="h-4 w-4 text-[#c9a962]" />
                   <span className="text-xs font-light uppercase tracking-wider text-white">
                     Drag to Compare
                   </span>
-                  <ChevronRight className="h-4 w-4 text-[#d4af37]" />
+                  <ChevronRight className="h-4 w-4 text-[#c9a962]" />
                 </div>
               </motion.div>
             )}
@@ -1103,9 +1103,9 @@ function BeforeAfterSection({
 
           {/* Corner Accents */}
           <div className="pointer-events-none absolute left-4 top-4 h-12 w-12 border-l-2 border-t-2 border-white/30" />
-          <div className="pointer-events-none absolute right-4 top-4 h-12 w-12 border-r-2 border-t-2 border-[#d4af37]/50" />
+          <div className="pointer-events-none absolute right-4 top-4 h-12 w-12 border-r-2 border-t-2 border-[#c9a962]/50" />
           <div className="pointer-events-none absolute bottom-4 left-4 h-12 w-12 border-b-2 border-l-2 border-white/30" />
-          <div className="pointer-events-none absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-[#d4af37]/50" />
+          <div className="pointer-events-none absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-[#c9a962]/50" />
         </motion.div>
 
         {/* Comparison Selector */}
@@ -1150,7 +1150,7 @@ function BeforeAfterSection({
                 setSliderPosition(50);
               }}
               className={`h-2 rounded-full transition-all ${
-                activeIndex === index ? 'w-8 bg-[#d4af37]' : 'w-2 bg-neutral-300 hover:bg-neutral-400'
+                activeIndex === index ? 'w-8 bg-[#c9a962]' : 'w-2 bg-neutral-300 hover:bg-neutral-400'
               }`}
             />
           ))}
@@ -1168,7 +1168,7 @@ function TestimonialSection({ project }: { project: Project }) {
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-[#d4af37] py-32 lg:py-48">
+    <section ref={sectionRef} className="relative overflow-hidden bg-[#c9a962] py-32 lg:py-48">
       <div className="relative mx-auto max-w-5xl px-6 text-center lg:px-12">
         {/* Quote Icon */}
         <motion.div
@@ -1178,7 +1178,7 @@ function TestimonialSection({ project }: { project: Project }) {
           className="mb-12 flex justify-center"
         >
           <div className="flex h-24 w-24 items-center justify-center rounded-full bg-neutral-950">
-            <Quote className="h-12 w-12 text-[#d4af37]" />
+            <Quote className="h-12 w-12 text-[#c9a962]" />
           </div>
         </motion.div>
 
@@ -1267,15 +1267,15 @@ function ProjectNavigationSection({
               <motion.div
                 whileHover={{ x: -8 }}
                 transition={{ duration: 0.3 }}
-                className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm transition-colors group-hover:border-[#d4af37]/50 group-hover:bg-[#d4af37]/10"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm transition-colors group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10"
               >
-                <ChevronLeft className="h-6 w-6 text-white transition-colors group-hover:text-[#d4af37]" />
+                <ChevronLeft className="h-6 w-6 text-white transition-colors group-hover:text-[#c9a962]" />
               </motion.div>
               <span className="text-xs font-light uppercase tracking-[0.3em] text-white/50">
                 Previous Project
               </span>
             </div>
-            <h3 className="font-SchnyderS text-3xl font-light text-white transition-colors group-hover:text-[#d4af37] lg:text-4xl xl:text-5xl">
+            <h3 className="font-SchnyderS text-3xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-4xl xl:text-5xl">
               {prevProject.title}
             </h3>
             <p className="mt-4 text-sm font-light text-white/60">
@@ -1288,7 +1288,7 @@ function ProjectNavigationSection({
             initial={{ scaleX: 0 }}
             whileHover={{ scaleX: 1 }}
             transition={{ duration: 0.4 }}
-            className="absolute bottom-0 left-0 h-1 w-full origin-left bg-[#d4af37]"
+            className="absolute bottom-0 left-0 h-1 w-full origin-left bg-[#c9a962]"
           />
         </Link>
 
@@ -1328,12 +1328,12 @@ function ProjectNavigationSection({
               <motion.div
                 whileHover={{ x: 8 }}
                 transition={{ duration: 0.3 }}
-                className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm transition-colors group-hover:border-[#d4af37]/50 group-hover:bg-[#d4af37]/10"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm transition-colors group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10"
               >
-                <ChevronRight className="h-6 w-6 text-white transition-colors group-hover:text-[#d4af37]" />
+                <ChevronRight className="h-6 w-6 text-white transition-colors group-hover:text-[#c9a962]" />
               </motion.div>
             </div>
-            <h3 className="font-SchnyderS text-3xl font-light text-white transition-colors group-hover:text-[#d4af37] lg:text-4xl xl:text-5xl">
+            <h3 className="font-SchnyderS text-3xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-4xl xl:text-5xl">
               {nextProject.title}
             </h3>
             <p className="mt-4 text-sm font-light text-white/60">
@@ -1346,7 +1346,7 @@ function ProjectNavigationSection({
             initial={{ scaleX: 0 }}
             whileHover={{ scaleX: 1 }}
             transition={{ duration: 0.4 }}
-            className="absolute bottom-0 right-0 h-1 w-full origin-right bg-[#d4af37]"
+            className="absolute bottom-0 right-0 h-1 w-full origin-right bg-[#c9a962]"
           />
         </Link>
       </div>
@@ -1388,7 +1388,7 @@ function RelatedProjectsSection({
           className="mb-20 flex items-end justify-between"
         >
           <div>
-            <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#d4af37]">
+            <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
               Explore More
             </span>
             <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
@@ -1427,7 +1427,7 @@ function RelatedProjectsSection({
                 <span className="text-xs font-light uppercase tracking-wider text-neutral-400">
                   {project.acfFields?.projectType || 'Luxury Project'}
                 </span>
-                <h3 className="mt-2 font-SchnyderS text-2xl font-light text-neutral-950 transition-colors group-hover:text-[#d4af37]">
+                <h3 className="mt-2 font-SchnyderS text-2xl font-light text-neutral-950 transition-colors group-hover:text-[#c9a962]">
                   {project.title}
                 </h3>
               </Link>

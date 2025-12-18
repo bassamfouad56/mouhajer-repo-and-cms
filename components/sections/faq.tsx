@@ -94,7 +94,7 @@ export function FAQSection({
           >
             {title}
             <br />
-            <span className="text-[#d4af37]">{titleHighlight}</span>
+            <span className="text-[#c9a962]">{titleHighlight}</span>
           </h2>
 
           {/* Subtitle */}
@@ -333,7 +333,7 @@ export function FAQHeader({
       >
         {title}
         <br />
-        <span className="text-[#d4af37]">{titleHighlight}</span>
+        <span className="text-[#c9a962]">{titleHighlight}</span>
       </h2>
 
       {/* Subtitle */}

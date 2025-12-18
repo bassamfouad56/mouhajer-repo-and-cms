@@ -75,7 +75,7 @@ export function CompanyWeKeep({ clients = [] }: CompanyWeKeepProps) {
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute right-0 top-1/4 h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.03] blur-[150px]" />
+        <div className="absolute right-0 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]" />
         <div className="absolute left-0 bottom-1/4 h-[500px] w-[500px] rounded-full bg-neutral-900/[0.02] blur-[120px]" />
       </div>
 
@@ -135,16 +135,16 @@ export function CompanyWeKeep({ clients = [] }: CompanyWeKeepProps) {
             return (
               <div
                 key={index}
-                className="group relative overflow-hidden border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:shadow-lg lg:p-8"
+                className="group relative overflow-hidden border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:shadow-lg lg:p-8"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center border border-[#d4af37]/20 bg-[#d4af37]/5">
-                  <Icon className="h-6 w-6 text-[#d4af37]" strokeWidth={1.5} />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center border border-[#c9a962]/20 bg-[#c9a962]/5">
+                  <Icon className="h-6 w-6 text-[#c9a962]" strokeWidth={1.5} />
                 </div>
                 <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-700 lg:text-base">
                   {highlight.text}
                 </p>
                 {/* Accent Line */}
-                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#d4af37] to-transparent transition-all duration-500 group-hover:w-full" />
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#c9a962] to-transparent transition-all duration-500 group-hover:w-full" />
               </div>
             );
           })}
@@ -158,7 +158,7 @@ export function CompanyWeKeep({ clients = [] }: CompanyWeKeepProps) {
               initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 + index * 0.1 }}
-              className="group relative overflow-hidden border-l-2 border-[#d4af37]/30 bg-neutral-50 p-8 transition-all duration-500 hover:border-[#d4af37] hover:bg-white hover:shadow-lg lg:p-12"
+              className="group relative overflow-hidden border-l-2 border-[#c9a962]/30 bg-neutral-50 p-8 transition-all duration-500 hover:border-[#c9a962] hover:bg-white hover:shadow-lg lg:p-12"
             >
               {/* Client Name */}
               <h3 className="mb-4 font-SchnyderS text-2xl font-light text-neutral-950 lg:text-3xl">
@@ -170,7 +170,7 @@ export function CompanyWeKeep({ clients = [] }: CompanyWeKeepProps) {
                 {study.projects.map((project, pIndex) => (
                   <span
                     key={pIndex}
-                    className="border border-[#d4af37]/20 bg-[#d4af37]/5 px-4 py-2 font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37]"
+                    className="border border-[#c9a962]/20 bg-[#c9a962]/5 px-4 py-2 font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]"
                   >
                     {project}
                   </span>

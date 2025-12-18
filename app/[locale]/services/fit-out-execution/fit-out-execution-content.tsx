@@ -86,7 +86,7 @@ function HeroSection() {
         >
           The
           <br />
-          <span className="text-[#d4af37]">Craftsmen</span>
+          <span className="text-[#c9a962]">Craftsmen</span>
         </motion.h1>
 
         <motion.p
@@ -288,7 +288,7 @@ function Section2() {
                       />
                     </div>
                     {/* Icon badge */}
-                    <div className="absolute -bottom-4 -right-4 flex h-16 w-16 items-center justify-center border border-neutral-200 bg-white text-[#d4af37] shadow-lg transition-all duration-300 group-hover:bg-[#d4af37] group-hover:text-white lg:h-20 lg:w-20">
+                    <div className="absolute -bottom-4 -right-4 flex h-16 w-16 items-center justify-center border border-neutral-200 bg-white text-[#c9a962] shadow-lg transition-all duration-300 group-hover:bg-[#c9a962] group-hover:text-white lg:h-20 lg:w-20">
                       <IconComponent />
                     </div>
                   </div>
@@ -296,7 +296,7 @@ function Section2() {
                   {/* Content */}
                   <div className={`flex flex-col justify-center lg:col-span-7 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                     <div className="space-y-2 mb-8">
-                      <h3 className="font-SchnyderS text-3xl font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#d4af37] lg:text-4xl">
+                      <h3 className="font-SchnyderS text-3xl font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962] lg:text-4xl">
                         {capability.title}
                       </h3>
                       <p className="font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-500">
@@ -308,7 +308,7 @@ function Section2() {
                       {capability.items.map((item, itemIndex) => (
                         <div
                           key={itemIndex}
-                          className="border-l-2 border-[#d4af37] pl-6 transition-colors hover:border-neutral-950"
+                          className="border-l-2 border-[#c9a962] pl-6 transition-colors hover:border-neutral-950"
                         >
                           <div className="mb-2 font-Satoshi text-lg font-medium text-neutral-950">
                             {item.label}
@@ -357,7 +357,7 @@ function Section3() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="inline-block border-b-2 border-[#d4af37] pb-2 font-Satoshi text-sm font-light uppercase tracking-wider text-[#d4af37]">
+            <div className="inline-block border-b-2 border-[#c9a962] pb-2 font-Satoshi text-sm font-light uppercase tracking-wider text-[#c9a962]">
               Armani Hotel, Burj Khalifa
             </div>
 
@@ -373,7 +373,7 @@ function Section3() {
               Our approach:
             </p>
 
-            <ul className="space-y-4 border-l-2 border-[#d4af37] pl-6">
+            <ul className="space-y-4 border-l-2 border-[#c9a962] pl-6">
               <li className="font-Satoshi text-base font-light leading-relaxed text-white/70">
                 <span className="font-medium text-white">Rolling Schedule</span> — We fit-out 4 rooms per week, working night shifts (11 PM to 7 AM) to avoid guest disturbance.
               </li>
@@ -402,7 +402,7 @@ function Section3() {
               </div>
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     160
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -410,7 +410,7 @@ function Section3() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     10
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -418,7 +418,7 @@ function Section3() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     0
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -426,7 +426,7 @@ function Section3() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     0
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -508,7 +508,7 @@ function Section5() {
         >
           Ready to
           <br />
-          <span className="text-[#d4af37]">Execute Perfection?</span>
+          <span className="text-[#c9a962]">Execute Perfection?</span>
         </motion.h2>
 
         <motion.p
@@ -528,7 +528,7 @@ function Section5() {
         >
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-3 border-2 border-[#d4af37] bg-[#d4af37] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#d4af37]"
+            className="group inline-flex items-center gap-3 border-2 border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
           >
             Start Your Project
             <ArrowRight

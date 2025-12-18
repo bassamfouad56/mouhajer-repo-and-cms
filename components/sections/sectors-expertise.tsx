@@ -100,16 +100,16 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
     <section
       ref={sectionRef}
       id="sectors"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40 scroll-mt-24"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40 scroll-mt-24"
     >
       {/* Animated Background */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5] via-white to-[#faf8f5]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:80px_80px]" />
 
         {/* Floating gradient orbs */}
         <motion.div
-          className="absolute left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.03] blur-[150px]"
+          className="absolute left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]"
           animate={{
             x: [0, 50, 0],
             y: [0, -30, 0],
@@ -135,30 +135,30 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-            <Sparkles className="h-4 w-4 text-[#d4af37]" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-white/50">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <Sparkles className="h-4 w-4 text-[#c9a962]" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-neutral-500">
               {t('label')}
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl"
+            className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl"
           >
             {t('titleLine1')}
             <br />
-            <span className="text-white/30">{t('titleLine2')}</span>
+            <span className="text-neutral-400">{t('titleLine2')}</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto max-w-2xl font-Satoshi text-base font-light text-white/50 lg:text-lg"
+            className="mx-auto max-w-2xl font-Satoshi text-base font-light text-neutral-600 lg:text-lg"
           >
             {t('description')}
           </motion.p>
@@ -199,9 +199,9 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                   >
                     {/* Card Container */}
                     <motion.div
-                      className="relative aspect-[3/4] overflow-hidden border border-white/5 bg-neutral-900/50"
+                      className="relative aspect-[3/4] overflow-hidden border border-[#c9a962]/10 bg-white/70"
                       animate={{
-                        borderColor: isHovered ? 'rgba(212, 175, 55, 0.3)' : 'rgba(255, 255, 255, 0.05)',
+                        borderColor: isHovered ? 'rgba(201, 169, 98, 0.3)' : 'rgba(255, 255, 255, 0.05)',
                       }}
                       transition={{ duration: 0.4 }}
                     >
@@ -226,7 +226,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
 
                       {/* Gradient Overlays */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/20"
+                        className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-[#faf8f5]/60 to-[#faf8f5]/20"
                         animate={{
                           opacity: isHovered ? 0.85 : 0.9,
                         }}
@@ -241,7 +241,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.4 }}
-                            className="absolute inset-0 bg-gradient-to-t from-[#d4af37]/20 via-transparent to-transparent"
+                            className="absolute inset-0 bg-gradient-to-t from-[#c9a962]/20 via-transparent to-transparent"
                           />
                         )}
                       </AnimatePresence>
@@ -253,8 +253,8 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                           <motion.div
                             className="flex h-12 w-12 items-center justify-center border lg:h-14 lg:w-14"
                             animate={{
-                              borderColor: isHovered ? 'rgba(212, 175, 55, 0.5)' : 'rgba(255, 255, 255, 0.1)',
-                              backgroundColor: isHovered ? 'rgba(212, 175, 55, 0.1)' : 'transparent',
+                              borderColor: isHovered ? 'rgba(201, 169, 98, 0.5)' : 'rgba(255, 255, 255, 0.1)',
+                              backgroundColor: isHovered ? 'rgba(201, 169, 98, 0.1)' : 'transparent',
                             }}
                             transition={{ duration: 0.4 }}
                           >
@@ -262,7 +262,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                               className="h-5 w-5 lg:h-6 lg:w-6"
                               strokeWidth={1}
                               style={{
-                                color: isHovered ? '#d4af37' : 'rgba(255, 255, 255, 0.4)',
+                                color: isHovered ? '#c9a962' : 'rgba(255, 255, 255, 0.4)',
                               }}
                             />
                           </motion.div>
@@ -281,7 +281,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                                 className="mb-6 flex gap-6"
                               >
                                 <div>
-                                  <div className="font-SchnyderS text-2xl font-light text-[#d4af37]">
+                                  <div className="font-SchnyderS text-2xl font-light text-[#c9a962]">
                                     {sector.stats.projects}
                                   </div>
                                   <div className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/40">
@@ -290,7 +290,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                                 </div>
                                 <div className="h-10 w-px bg-white/10" />
                                 <div>
-                                  <div className="font-SchnyderS text-2xl font-light text-[#d4af37]">
+                                  <div className="font-SchnyderS text-2xl font-light text-[#c9a962]">
                                     {sector.stats.value}
                                   </div>
                                   <div className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/40">
@@ -305,7 +305,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                           <motion.div
                             className="mb-2 font-Satoshi text-xs font-light uppercase tracking-[0.2em]"
                             animate={{
-                              color: isHovered ? 'rgba(212, 175, 55, 0.8)' : 'rgba(255, 255, 255, 0.4)',
+                              color: isHovered ? 'rgba(201, 169, 98, 0.8)' : 'rgba(255, 255, 255, 0.4)',
                             }}
                             transition={{ duration: 0.4 }}
                           >
@@ -336,7 +336,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                             }}
                             className="overflow-hidden"
                           >
-                            <p className="mb-4 font-Satoshi text-sm font-light leading-relaxed text-white/60">
+                            <p className="mb-4 font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
                               {sector.description}
                             </p>
 
@@ -348,7 +348,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                                   initial={{ opacity: 0, x: -10 }}
                                   animate={{ opacity: 1, x: 0 }}
                                   transition={{ duration: 0.3, delay: i * 0.1 }}
-                                  className="border border-[#d4af37]/30 bg-[#d4af37]/5 px-3 py-1.5 font-Satoshi text-[10px] font-light text-white/70"
+                                  className="border border-[#c9a962]/30 bg-[#c9a962]/5 px-3 py-1.5 font-Satoshi text-[10px] font-light text-neutral-700"
                                 >
                                   {feature}
                                 </motion.span>
@@ -360,7 +360,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                           <motion.div
                             className="mb-4 h-px w-full"
                             animate={{
-                              backgroundColor: isHovered ? 'rgba(212, 175, 55, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                              backgroundColor: isHovered ? 'rgba(201, 169, 98, 0.3)' : 'rgba(255, 255, 255, 0.1)',
                             }}
                             transition={{ duration: 0.4 }}
                           />
@@ -369,7 +369,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                           <motion.div
                             className="flex items-center gap-2 font-Satoshi text-sm font-light"
                             animate={{
-                              color: isHovered ? '#d4af37' : 'rgba(255, 255, 255, 0.5)',
+                              color: isHovered ? '#c9a962' : 'rgba(255, 255, 255, 0.5)',
                             }}
                             transition={{ duration: 0.4 }}
                           >
@@ -390,14 +390,14 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                       <motion.div
                         className="absolute right-0 top-0 h-20 w-20 border-r border-t"
                         animate={{
-                          borderColor: isHovered ? 'rgba(212, 175, 55, 0.4)' : 'rgba(255, 255, 255, 0.05)',
+                          borderColor: isHovered ? 'rgba(201, 169, 98, 0.4)' : 'rgba(255, 255, 255, 0.05)',
                         }}
                         transition={{ duration: 0.4 }}
                       />
                       <motion.div
                         className="absolute bottom-0 left-0 h-20 w-20 border-b border-l"
                         animate={{
-                          borderColor: isHovered ? 'rgba(212, 175, 55, 0.4)' : 'rgba(255, 255, 255, 0.05)',
+                          borderColor: isHovered ? 'rgba(201, 169, 98, 0.4)' : 'rgba(255, 255, 255, 0.05)',
                         }}
                         transition={{ duration: 0.4 }}
                       />
@@ -430,15 +430,15 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-20 text-center lg:mt-28"
         >
-          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
 
-          <p className="mb-6 font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
+          <p className="mb-6 font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
             {t('ctaQuestion')}
           </p>
 
           <Link
             href="#contact"
-            className="group inline-flex items-center gap-4 border border-[#d4af37] bg-[#d4af37] px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#d4af37]"
+            className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]"
           >
             <span>{t('ctaButton')}</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
@@ -447,8 +447,8 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
       </div>
 
       {/* Decorative Lines */}
-      <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-      <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+      <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#c9a962]/10 to-transparent" />
+      <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#c9a962]/10 to-transparent" />
     </section>
   );
 }

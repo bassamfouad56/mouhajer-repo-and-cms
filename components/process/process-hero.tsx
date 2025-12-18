@@ -117,7 +117,7 @@ export function ProcessHero() {
             >
               From First Sketch
               <br />
-              to <span className="text-[#d4af37]">Final Polish</span>
+              to <span className="text-[#c9a962]">Final Polish</span>
             </h1>
           </div>
 

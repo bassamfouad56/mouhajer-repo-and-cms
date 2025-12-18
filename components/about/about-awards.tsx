@@ -67,7 +67,7 @@ export function AboutAwards() {
                 className="mb-6 flex items-center gap-4"
               >
                 <div className="h-px w-12 bg-neutral-300" />
-                <Trophy className="h-4 w-4 text-[#d4af37]" strokeWidth={1} />
+                <Trophy className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
                 <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
                   Recognition
                 </span>
@@ -107,7 +107,7 @@ export function AboutAwards() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              className="group relative border border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-[#d4af37]/30 hover:shadow-lg"
+              className="group relative border border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-[#c9a962]/30 hover:shadow-lg"
             >
               {/* Year */}
               <div className="absolute right-6 top-6 font-SchnyderS text-5xl font-extralight text-neutral-100">
@@ -115,15 +115,15 @@ export function AboutAwards() {
               </div>
 
               {/* Badge */}
-              <div className="mb-6 inline-flex items-center gap-2 border border-[#d4af37]/30 bg-[#d4af37]/5 px-3 py-1.5">
-                <Award className="h-3 w-3 text-[#d4af37]" strokeWidth={1} />
-                <span className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-[#d4af37]">
+              <div className="mb-6 inline-flex items-center gap-2 border border-[#c9a962]/30 bg-[#c9a962]/5 px-3 py-1.5">
+                <Award className="h-3 w-3 text-[#c9a962]" strokeWidth={1} />
+                <span className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-[#c9a962]">
                   {award.category}
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="mb-3 font-SchnyderS text-xl font-light text-neutral-950 transition-colors group-hover:text-[#d4af37] lg:text-2xl">
+              <h3 className="mb-3 font-SchnyderS text-xl font-light text-neutral-950 transition-colors group-hover:text-[#c9a962] lg:text-2xl">
                 {award.title}
               </h3>
 
@@ -134,14 +134,14 @@ export function AboutAwards() {
 
               {/* Year display */}
               <div className="flex items-center gap-2 border-t border-neutral-100 pt-4">
-                <Star className="h-3 w-3 text-[#d4af37]" fill="currentColor" />
+                <Star className="h-3 w-3 text-[#c9a962]" fill="currentColor" />
                 <span className="font-Satoshi text-xs font-light text-neutral-400">
                   {award.year}
                 </span>
               </div>
 
               {/* Hover corner */}
-              <div className="absolute bottom-0 right-0 h-12 w-12 border-b border-r border-[#d4af37]/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute bottom-0 right-0 h-12 w-12 border-b border-r border-[#c9a962]/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </motion.div>
           ))}
         </div>
@@ -167,7 +167,7 @@ export function AboutAwards() {
                 transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37] lg:text-5xl">
+                <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962] lg:text-5xl">
                   {stat.value}
                 </div>
                 <div className="font-Satoshi text-xs font-light uppercase tracking-[0.15em] text-neutral-500">

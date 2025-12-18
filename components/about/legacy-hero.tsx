@@ -117,7 +117,7 @@ export function LegacyHero() {
             >
               The MIDC Legacy:
               <br />
-              <span className="text-[#d4af37]">Excellence in Construction</span>
+              <span className="text-[#c9a962]">Excellence in Construction</span>
             </h1>
           </div>
 

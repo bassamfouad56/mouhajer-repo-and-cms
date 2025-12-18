@@ -193,25 +193,25 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40"
     >
       {/* Subtle grid pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, rgba(201,169,98,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(201,169,98,0.3) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }}
       />
 
       {/* Floating orbs - subtle gold accents */}
       <motion.div
-        className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#d4af37]/[0.05] blur-[150px]"
+        className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#c9a962]/[0.08] blur-[150px]"
         animate={{ y: [0, -40, 0], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute right-[15%] bottom-[20%] h-80 w-80 rounded-full bg-[#d4af37]/[0.03] blur-[120px]"
+        className="absolute right-[15%] bottom-[20%] h-80 w-80 rounded-full bg-[#c9a962]/[0.05] blur-[120px]"
         animate={{ y: [0, 50, 0], opacity: [0.2, 0.4, 0.2] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
       />
@@ -225,29 +225,29 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
               Strategic Partners
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
+            className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl xl:text-7xl"
           >
             Trusted by The
             <br />
-            <span className="text-white/30">Region&apos;s Visionaries</span>
+            <span className="text-[#c9a962]">Region&apos;s Visionaries</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto max-w-2xl font-Satoshi text-base font-light leading-relaxed text-white/60 lg:text-lg"
+            className="mx-auto max-w-2xl font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg"
           >
             Collaborating with the most prestigious developers, hospitality brands,
             and corporate entities to create extraordinary spaces.
@@ -267,26 +267,26 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
                 className="group relative"
               >
                 <div
-                  className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white/[0.04] lg:p-10"
+                  className="relative overflow-hidden border border-[#c9a962]/20 bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/40 hover:bg-white/90 lg:p-10"
                   style={{ transformStyle: 'preserve-3d' }}
                 >
                   {/* Icon and Label */}
                   <div className="mb-6 flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/10">
-                      <Icon className="h-5 w-5 text-[#d4af37]" strokeWidth={1.5} />
+                    <div className="flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10">
+                      <Icon className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <h3 className="font-SchnyderS text-2xl font-light text-white lg:text-3xl">
+                      <h3 className="font-SchnyderS text-2xl font-light text-neutral-900 lg:text-3xl">
                         {category.label}
                       </h3>
-                      <p className="font-Satoshi text-xs font-light text-white/40">
+                      <p className="font-Satoshi text-xs font-light text-neutral-500">
                         {category.partners.length} Partners
                       </p>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-white/60">
+                  <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
                     {category.description}
                   </p>
 
@@ -298,7 +298,7 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={isInView ? { opacity: 1, scale: 1 } : {}}
                         transition={{ duration: 0.4, delay: 0.5 + categoryIndex * 0.1 + index * 0.05 }}
-                        className="group relative flex h-16 items-center justify-center border border-white/10 bg-white/[0.02] px-3 py-2 transition-all duration-300 hover:border-[#d4af37]/30 hover:bg-[#d4af37]/5"
+                        className="group relative flex h-16 items-center justify-center border border-[#c9a962]/20 bg-white/60 px-3 py-2 transition-all duration-300 hover:border-[#c9a962]/40 hover:bg-[#c9a962]/10"
                       >
                         {partner.logo ? (
                           <SafeImage
@@ -306,15 +306,15 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
                             alt={partner.name}
                             width={100}
                             height={40}
-                            className="h-auto max-h-10 w-auto max-w-full object-contain opacity-60 brightness-0 invert transition-all duration-300 group-hover:opacity-100"
+                            className="h-auto max-h-10 w-auto max-w-full object-contain opacity-70 transition-all duration-300 group-hover:opacity-100"
                           />
                         ) : (
-                          <span className="whitespace-nowrap font-Satoshi text-xs font-light text-white/40 transition-colors duration-300 group-hover:text-white/70">
+                          <span className="whitespace-nowrap font-Satoshi text-xs font-light text-neutral-500 transition-colors duration-300 group-hover:text-neutral-900">
                             {partner.name}
                           </span>
                         )}
                         {/* Tooltip on hover */}
-                        <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 font-Satoshi text-[10px] text-white/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 font-Satoshi text-[10px] text-white/90 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                           {partner.name}
                         </div>
                       </motion.div>
@@ -322,8 +322,8 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
                   </div>
 
                   {/* Decorative corners */}
-                  <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-[#d4af37]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-[#d4af37]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-[#c9a962]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-[#c9a962]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
               </motion.div>
             );
@@ -332,8 +332,8 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
       </div>
 
       {/* Corner decorations */}
-      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-white/5 lg:block" />
-      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-white/5 lg:block" />
+      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-[#c9a962]/10 lg:block" />
+      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-[#c9a962]/10 lg:block" />
     </section>
   );
 }
@@ -394,7 +394,7 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40"
+      className="relative overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40"
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
@@ -403,15 +403,15 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
           className="absolute inset-0"
           animate={{
             background: [
-              'radial-gradient(ellipse 100% 100% at 0% 0%, rgba(212,175,55,0.03) 0%, transparent 50%)',
-              'radial-gradient(ellipse 100% 100% at 100% 100%, rgba(212,175,55,0.03) 0%, transparent 50%)',
-              'radial-gradient(ellipse 100% 100% at 0% 0%, rgba(212,175,55,0.03) 0%, transparent 50%)',
+              'radial-gradient(ellipse 100% 100% at 0% 0%, rgba(201,169,98,0.08) 0%, transparent 50%)',
+              'radial-gradient(ellipse 100% 100% at 100% 100%, rgba(201,169,98,0.08) 0%, transparent 50%)',
+              'radial-gradient(ellipse 100% 100% at 0% 0%, rgba(201,169,98,0.08) 0%, transparent 50%)',
             ],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
         />
         {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:80px_80px]" />
       </div>
 
       {/* Large Quote Mark - Background Decoration */}
@@ -421,7 +421,7 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
         transition={{ duration: 1.5 }}
         className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
       >
-        <Quote className="h-[60vh] w-[60vh] text-[#d4af37]/[0.02]" strokeWidth={0.3} />
+        <Quote className="h-[60vh] w-[60vh] text-[#c9a962]/[0.02]" strokeWidth={0.3} />
       </motion.div>
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-12">
@@ -432,12 +432,12 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
           transition={{ duration: 0.8 }}
           className="mb-16 text-center lg:mb-24"
         >
-          <span className="mb-4 inline-block font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#d4af37]">
+          <span className="mb-4 inline-block font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
             Testimonials
           </span>
-          <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
             Words That
-            <span className="block text-white/30">Inspire Us</span>
+            <span className="block text-[#c9a962]">Inspire Us</span>
           </h2>
         </motion.div>
 
@@ -446,17 +446,17 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
           {/* Navigation Arrows - Floating on sides */}
           <button
             onClick={prevTestimonial}
-            className="absolute -left-4 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center border border-white/10 bg-neutral-950/80 p-4 backdrop-blur-sm transition-all duration-300 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 lg:-left-8 lg:flex xl:-left-16"
+            className="absolute -left-4 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center border border-[#c9a962]/20 bg-white/80 p-4 backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 lg:-left-8 lg:flex xl:-left-16"
             aria-label="Previous testimonial"
           >
-            <ArrowLeft className="h-5 w-5 text-white/60" strokeWidth={1.5} />
+            <ArrowLeft className="h-5 w-5 text-neutral-600" strokeWidth={1.5} />
           </button>
           <button
             onClick={nextTestimonial}
-            className="absolute -right-4 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center border border-white/10 bg-neutral-950/80 p-4 backdrop-blur-sm transition-all duration-300 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 lg:-right-8 lg:flex xl:-right-16"
+            className="absolute -right-4 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center border border-[#c9a962]/20 bg-white/80 p-4 backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 lg:-right-8 lg:flex xl:-right-16"
             aria-label="Next testimonial"
           >
-            <ArrowRight className="h-5 w-5 text-white/60" strokeWidth={1.5} />
+            <ArrowRight className="h-5 w-5 text-neutral-600" strokeWidth={1.5} />
           </button>
 
           {/* Testimonial Card */}
@@ -467,10 +467,10 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
             className="relative"
           >
             {/* Corner accents */}
-            <div className="absolute -left-3 -top-3 h-12 w-12 border-l-2 border-t-2 border-[#d4af37]/30" />
-            <div className="absolute -bottom-3 -right-3 h-12 w-12 border-b-2 border-r-2 border-[#d4af37]/30" />
+            <div className="absolute -left-3 -top-3 h-12 w-12 border-l-2 border-t-2 border-[#c9a962]/30" />
+            <div className="absolute -bottom-3 -right-3 h-12 w-12 border-b-2 border-r-2 border-[#c9a962]/30" />
 
-            <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-sm">
+            <div className="relative overflow-hidden border border-[#c9a962]/20 bg-white/70 backdrop-blur-sm">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={activeTestimonial}
@@ -484,14 +484,14 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
                 >
                   {/* Quote Icon */}
                   <div className="mb-8 flex justify-center">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5">
-                      <Quote className="h-7 w-7 text-[#d4af37]" strokeWidth={1} />
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#c9a962]/30 bg-[#c9a962]/5">
+                      <Quote className="h-7 w-7 text-[#c9a962]" strokeWidth={1} />
                     </div>
                   </div>
 
                   {/* Quote Text */}
                   <blockquote className="mx-auto mb-10 max-w-4xl text-center">
-                    <p className="font-SchnyderS text-2xl font-light leading-relaxed text-white/80 sm:text-3xl lg:text-4xl">
+                    <p className="font-SchnyderS text-2xl font-light leading-relaxed text-neutral-700 sm:text-3xl lg:text-4xl">
                       &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
                     </p>
                   </blockquote>
@@ -499,7 +499,7 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
                   {/* Author Info - Centered */}
                   <div className="flex flex-col items-center">
                     {/* Divider */}
-                    <div className="mb-8 h-px w-16 bg-gradient-to-r from-transparent via-[#d4af37]/50 to-transparent" />
+                    <div className="mb-8 h-px w-16 bg-gradient-to-r from-transparent via-[#c9a962]/50 to-transparent" />
 
                     {/* Author Image */}
                     <div className="relative mb-5">
@@ -512,19 +512,19 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
                         />
                       </div>
                       {/* Ring decoration */}
-                      <div className="absolute -inset-1 rounded-full border border-[#d4af37]/20" />
-                      <div className="absolute -inset-2 rounded-full border border-[#d4af37]/10" />
+                      <div className="absolute -inset-1 rounded-full border border-[#c9a962]/20" />
+                      <div className="absolute -inset-2 rounded-full border border-[#c9a962]/10" />
                     </div>
 
                     {/* Author Details */}
                     <div className="text-center">
-                      <div className="mb-1 font-SchnyderS text-2xl font-light text-white">
+                      <div className="mb-1 font-SchnyderS text-2xl font-light text-neutral-900">
                         {testimonials[activeTestimonial].author}
                       </div>
-                      <div className="mb-1 font-Satoshi text-sm font-light text-white/50">
+                      <div className="mb-1 font-Satoshi text-sm font-light text-neutral-500">
                         {testimonials[activeTestimonial].role}
                       </div>
-                      <div className="font-Satoshi text-sm font-medium uppercase tracking-wider text-[#d4af37]/80">
+                      <div className="font-Satoshi text-sm font-medium uppercase tracking-wider text-[#c9a962]">
                         {testimonials[activeTestimonial].company}
                       </div>
                     </div>
@@ -544,10 +544,10 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
             {/* Mobile Navigation */}
             <button
               onClick={prevTestimonial}
-              className="flex h-10 w-10 items-center justify-center border border-white/10 transition-all duration-300 hover:border-[#d4af37]/50 lg:hidden"
+              className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/20 transition-all duration-300 hover:border-[#c9a962]/50 lg:hidden"
               aria-label="Previous"
             >
-              <ArrowLeft className="h-4 w-4 text-white/50" strokeWidth={1.5} />
+              <ArrowLeft className="h-4 w-4 text-neutral-500" strokeWidth={1.5} />
             </button>
 
             {/* Dots */}
@@ -565,14 +565,14 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
                   <div
                     className={`h-2 rounded-full transition-all duration-500 ${
                       index === activeTestimonial
-                        ? 'w-10 bg-[#d4af37]'
+                        ? 'w-10 bg-[#c9a962]'
                         : 'w-2 bg-white/20 hover:bg-white/40'
                     }`}
                   />
                   {/* Active pulse effect */}
                   {index === activeTestimonial && (
                     <motion.div
-                      className="absolute inset-0 rounded-full bg-[#d4af37]"
+                      className="absolute inset-0 rounded-full bg-[#c9a962]"
                       animate={{ scale: [1, 1.5, 1.5], opacity: [0.5, 0, 0] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
@@ -584,10 +584,10 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
             {/* Mobile Navigation */}
             <button
               onClick={nextTestimonial}
-              className="flex h-10 w-10 items-center justify-center border border-white/10 transition-all duration-300 hover:border-[#d4af37]/50 lg:hidden"
+              className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/20 transition-all duration-300 hover:border-[#c9a962]/50 lg:hidden"
               aria-label="Next"
             >
-              <ArrowRight className="h-4 w-4 text-white/50" strokeWidth={1.5} />
+              <ArrowRight className="h-4 w-4 text-neutral-500" strokeWidth={1.5} />
             </button>
           </motion.div>
 
@@ -596,8 +596,8 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
       </div>
 
       {/* Corner decorations */}
-      <div className="absolute left-8 top-24 hidden h-24 w-24 border-l border-t border-white/5 lg:block" />
-      <div className="absolute bottom-24 right-8 hidden h-24 w-24 border-b border-r border-white/5 lg:block" />
+      <div className="absolute left-8 top-24 hidden h-24 w-24 border-l border-t border-[#c9a962]/10 lg:block" />
+      <div className="absolute bottom-24 right-8 hidden h-24 w-24 border-b border-r border-[#c9a962]/10 lg:block" />
     </section>
   );
 }

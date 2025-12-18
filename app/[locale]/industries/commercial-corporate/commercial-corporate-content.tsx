@@ -60,7 +60,7 @@ export default function CommercialCorporateContent() {
             >
               Defining Business
               <br />
-              <span className="text-[#d4af37]">Environments.</span>
+              <span className="text-[#c9a962]">Environments.</span>
             </motion.h1>
 
             {/* Subheadline - VERBATIM from content.md line 878 */}
@@ -183,7 +183,7 @@ function TimeIsRevenueSection() {
             <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
               Time is
               <br />
-              <span className="text-[#d4af37]">Revenue.</span>
+              <span className="text-[#c9a962]">Revenue.</span>
             </h2>
 
             {/* VERBATIM content from line 881 */}
@@ -205,16 +205,16 @@ function TimeIsRevenueSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                className="group relative overflow-hidden border border-neutral-200 bg-neutral-50 p-8 transition-all duration-500 hover:border-[#d4af37] hover:bg-white hover:shadow-2xl hover:shadow-neutral-900/10"
+                className="group relative overflow-hidden border border-neutral-200 bg-neutral-50 p-8 transition-all duration-500 hover:border-[#c9a962] hover:bg-white hover:shadow-2xl hover:shadow-neutral-900/10"
               >
-                <Icon className="mb-6 h-12 w-12 text-[#d4af37]" />
+                <Icon className="mb-6 h-12 w-12 text-[#c9a962]" />
                 <h3 className="mb-4 font-SchnyderS text-2xl font-light leading-tight text-neutral-950">
                   {advantage.title}
                 </h3>
                 <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
                   {advantage.description}
                 </p>
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#d4af37] transition-all duration-500 group-hover:w-full" />
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#c9a962] transition-all duration-500 group-hover:w-full" />
               </motion.div>
             );
           })}
@@ -272,7 +272,7 @@ function CommercialCapabilitiesSection() {
           <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
             Our Commercial
             <br />
-            <span className="text-[#d4af37]">Capabilities</span>
+            <span className="text-[#c9a962]">Capabilities</span>
           </h2>
         </motion.div>
 
@@ -285,16 +285,16 @@ function CommercialCapabilitiesSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative overflow-hidden border border-neutral-200 bg-white p-8 transition-all duration-500 hover:border-[#d4af37] hover:shadow-2xl hover:shadow-neutral-900/10"
+                className="group relative overflow-hidden border border-neutral-200 bg-white p-8 transition-all duration-500 hover:border-[#c9a962] hover:shadow-2xl hover:shadow-neutral-900/10"
               >
-                <Icon className="mb-6 h-10 w-10 text-[#d4af37]" />
+                <Icon className="mb-6 h-10 w-10 text-[#c9a962]" />
                 <h3 className="mb-4 font-SchnyderS text-xl font-light leading-tight text-neutral-950">
                   {capability.title}
                 </h3>
                 <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
                   {capability.description}
                 </p>
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#d4af37] transition-all duration-500 group-hover:w-full" />
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#c9a962] transition-all duration-500 group-hover:w-full" />
               </motion.div>
             );
           })}
@@ -346,7 +346,7 @@ function CaseStudySection() {
             <h2 className="mb-6 font-SchnyderS text-4xl font-light leading-tight tracking-tight text-neutral-950 sm:text-5xl">
               C1 New Head Quarter
               <br />
-              <span className="text-[#d4af37]">Office Building</span>
+              <span className="text-[#c9a962]">Office Building</span>
             </h2>
 
             {/* VERBATIM from line 894 */}
@@ -397,7 +397,7 @@ function ClientLogosSection() {
           className="text-center"
         >
           <h3 className="mb-8 font-SchnyderS text-3xl font-light text-neutral-950">
-            Commercial <span className="text-[#d4af37]">Partners</span>
+            Commercial <span className="text-[#c9a962]">Partners</span>
           </h3>
 
           {/* Placeholder for client logos */}
@@ -428,8 +428,8 @@ function BuildForBusinessCTA() {
       className="relative overflow-hidden bg-neutral-950 py-32 lg:py-40"
     >
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
-      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#d4af37]/10 blur-[120px]" />
-      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#d4af37]/10 blur-[120px]" />
+      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center lg:px-12">
         <motion.div
@@ -449,21 +449,21 @@ function BuildForBusinessCTA() {
           <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             Build for
             <br />
-            <span className="text-[#d4af37]">Business.</span>
+            <span className="text-[#c9a962]">Business.</span>
           </h2>
 
           {/* VERBATIM CTAs from line 911 */}
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 border border-[#d4af37] bg-[#d4af37] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#d4af37]"
+              className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
             >
               <span>DISCUSS YOUR FIT-OUT</span>
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
             </Link>
             <a
               href="/downloads/midc-profile-2025.pdf"
-              className="group inline-flex items-center gap-3 border border-white/30 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#d4af37] hover:text-[#d4af37]"
+              className="group inline-flex items-center gap-3 border border-white/30 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
             >
               <span>DOWNLOAD MIDC PROFILE 2025</span>
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />

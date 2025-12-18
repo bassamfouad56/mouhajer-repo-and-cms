@@ -98,7 +98,7 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
 
           {/* Decorative Elements */}
           <motion.div
-            className="absolute right-[15%] top-[30%] h-px w-32 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent"
+            className="absolute right-[15%] top-[30%] h-px w-32 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
             animate={{ x: [0, 30, 0], opacity: [0.2, 0.5, 0.2] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -115,8 +115,8 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
               </Link>
 
               {/* Department Badge */}
-              <div className="mb-6 inline-flex items-center gap-2 border border-[#d4af37]/30 bg-[#d4af37]/10 px-4 py-2">
-                <span className="font-Satoshi text-xs uppercase tracking-widest text-[#d4af37]">
+              <div className="mb-6 inline-flex items-center gap-2 border border-[#c9a962]/30 bg-[#c9a962]/10 px-4 py-2">
+                <span className="font-Satoshi text-xs uppercase tracking-widest text-[#c9a962]">
                   {job.department}
                 </span>
               </div>
@@ -129,25 +129,25 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
               {/* Meta Info */}
               <div className="flex flex-wrap items-center gap-6 text-white/60">
                 <div className="flex items-center gap-2">
-                  <MapPin size={16} className="text-[#d4af37]" />
+                  <MapPin size={16} className="text-[#c9a962]" />
                   <span className="font-Satoshi text-sm">{job.location}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock size={16} className="text-[#d4af37]" />
+                  <Clock size={16} className="text-[#c9a962]" />
                   <span className="font-Satoshi text-sm">{job.type}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Briefcase size={16} className="text-[#d4af37]" />
+                  <Briefcase size={16} className="text-[#c9a962]" />
                   <span className="font-Satoshi text-sm">{job.experience}</span>
                 </div>
                 {job.salary && (
                   <div className="flex items-center gap-2">
-                    <DollarSign size={16} className="text-[#d4af37]" />
+                    <DollarSign size={16} className="text-[#c9a962]" />
                     <span className="font-Satoshi text-sm">{job.salary}</span>
                   </div>
                 )}
                 <div className="flex items-center gap-2">
-                  <Calendar size={16} className="text-[#d4af37]" />
+                  <Calendar size={16} className="text-[#c9a962]" />
                   <span className="font-Satoshi text-sm">Posted {formatDate(job.postedDate)}</span>
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
                         transition={{ delay: index * 0.05 }}
                         className="flex items-start gap-4"
                       >
-                        <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 bg-[#d4af37]" />
+                        <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 bg-[#c9a962]" />
                         <span className="font-Satoshi text-base font-light leading-relaxed text-neutral-600">
                           {item}
                         </span>
@@ -210,7 +210,7 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
                         transition={{ delay: index * 0.05 }}
                         className="flex items-start gap-4"
                       >
-                        <CheckCircle size={18} className="mt-0.5 flex-shrink-0 text-[#d4af37]" />
+                        <CheckCircle size={18} className="mt-0.5 flex-shrink-0 text-[#c9a962]" />
                         <span className="font-Satoshi text-base font-light leading-relaxed text-neutral-600">
                           {item}
                         </span>
@@ -234,8 +234,8 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
                         transition={{ delay: index * 0.05 }}
                         className="flex items-center gap-3 border border-neutral-200 p-4"
                       >
-                        <div className="flex h-8 w-8 items-center justify-center bg-[#d4af37]/10">
-                          <CheckCircle size={16} className="text-[#d4af37]" />
+                        <div className="flex h-8 w-8 items-center justify-center bg-[#c9a962]/10">
+                          <CheckCircle size={16} className="text-[#c9a962]" />
                         </div>
                         <span className="font-Satoshi text-sm font-light text-neutral-700">
                           {item}
@@ -306,7 +306,7 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
                     </p>
                     <a
                       href="mailto:careers@midcuae.com"
-                      className="font-Satoshi text-sm text-[#d4af37] underline transition-colors hover:text-neutral-950"
+                      className="font-Satoshi text-sm text-[#c9a962] underline transition-colors hover:text-neutral-950"
                     >
                       careers@midcuae.com
                     </a>
@@ -418,7 +418,7 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
     <section id="apply" className="bg-neutral-950 py-20 lg:py-32">
       <div className="mx-auto max-w-3xl px-6">
         <div className="mb-12 text-center">
-          <span className="mb-4 inline-block font-Satoshi text-xs uppercase tracking-widest text-[#d4af37]">
+          <span className="mb-4 inline-block font-Satoshi text-xs uppercase tracking-widest text-[#c9a962]">
             Apply Now
           </span>
           <h2 className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl">
@@ -434,27 +434,27 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
               <label className="mb-2 block font-Satoshi text-sm text-white/80">
-                Full Name <span className="text-[#d4af37]">*</span>
+                Full Name <span className="text-[#c9a962]">*</span>
               </label>
               <input
                 type="text"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#d4af37]"
+                className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
                 placeholder="John Doe"
               />
             </div>
             <div>
               <label className="mb-2 block font-Satoshi text-sm text-white/80">
-                Email Address <span className="text-[#d4af37]">*</span>
+                Email Address <span className="text-[#c9a962]">*</span>
               </label>
               <input
                 type="email"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#d4af37]"
+                className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
                 placeholder="john@example.com"
               />
             </div>
@@ -464,14 +464,14 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
               <label className="mb-2 block font-Satoshi text-sm text-white/80">
-                Phone Number <span className="text-[#d4af37]">*</span>
+                Phone Number <span className="text-[#c9a962]">*</span>
               </label>
               <input
                 type="tel"
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#d4af37]"
+                className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
                 placeholder="+971 50 123 4567"
               />
             </div>
@@ -483,7 +483,7 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
                 type="url"
                 value={formData.linkedIn}
                 onChange={(e) => setFormData({ ...formData, linkedIn: e.target.value })}
-                className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#d4af37]"
+                className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
                 placeholder="https://linkedin.com/in/yourprofile"
               />
             </div>
@@ -492,7 +492,7 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
           {/* Resume Upload */}
           <div>
             <label className="mb-2 block font-Satoshi text-sm text-white/80">
-              Resume/CV <span className="text-[#d4af37]">*</span>
+              Resume/CV <span className="text-[#c9a962]">*</span>
             </label>
             <div className="relative">
               <input
@@ -505,12 +505,12 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
               />
               <label
                 htmlFor="resume-upload"
-                className="flex cursor-pointer items-center justify-center gap-3 border-2 border-dashed border-white/20 px-4 py-8 transition-colors hover:border-[#d4af37]/50"
+                className="flex cursor-pointer items-center justify-center gap-3 border-2 border-dashed border-white/20 px-4 py-8 transition-colors hover:border-[#c9a962]/50"
               >
                 <Upload className="h-5 w-5 text-white/40" />
                 <span className="font-Satoshi text-sm text-white/60">
                   {resume ? (
-                    <span className="text-[#d4af37]">{resume.name}</span>
+                    <span className="text-[#c9a962]">{resume.name}</span>
                   ) : (
                     'Click to upload (PDF, DOC, DOCX - Max 10MB)'
                   )}
@@ -534,12 +534,12 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
               />
               <label
                 htmlFor="portfolio-upload"
-                className="flex cursor-pointer items-center justify-center gap-3 border-2 border-dashed border-white/20 px-4 py-8 transition-colors hover:border-[#d4af37]/50"
+                className="flex cursor-pointer items-center justify-center gap-3 border-2 border-dashed border-white/20 px-4 py-8 transition-colors hover:border-[#c9a962]/50"
               >
                 <FileText className="h-5 w-5 text-white/40" />
                 <span className="font-Satoshi text-sm text-white/60">
                   {portfolio ? (
-                    <span className="text-[#d4af37]">{portfolio.name}</span>
+                    <span className="text-[#c9a962]">{portfolio.name}</span>
                   ) : (
                     'Click to upload portfolio (PDF, ZIP - Max 25MB)'
                   )}
@@ -558,7 +558,7 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
               value={formData.coverLetter}
               onChange={(e) => setFormData({ ...formData, coverLetter: e.target.value })}
               placeholder="Tell us why you're a great fit for this position and what excites you about joining MIDC..."
-              className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#d4af37]"
+              className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
             />
           </div>
 
@@ -579,7 +579,7 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full border border-[#d4af37] bg-[#d4af37] px-8 py-4 font-Satoshi text-xs uppercase tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#d4af37] disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-xs uppercase tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? 'Submitting...' : 'Submit Application'}
           </button>
@@ -587,7 +587,7 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
           {/* Privacy Note */}
           <p className="text-center font-Satoshi text-xs text-white/40">
             By submitting this form, you agree to our{' '}
-            <Link href="/privacy" className="text-[#d4af37] underline">
+            <Link href="/privacy" className="text-[#c9a962] underline">
               Privacy Policy
             </Link>
             . Your information will only be used for recruitment purposes.

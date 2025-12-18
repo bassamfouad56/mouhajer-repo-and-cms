@@ -82,7 +82,7 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
         {/* Subtle Grid */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
         {/* Glow Effect */}
-        <div className="absolute right-1/4 top-1/2 h-[800px] w-[800px] -translate-y-1/2 rounded-full bg-[#d4af37]/[0.02] blur-[150px]" />
+        <div className="absolute right-1/4 top-1/2 h-[800px] w-[800px] -translate-y-1/2 rounded-full bg-[#c9a962]/[0.02] blur-[150px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
@@ -116,7 +116,7 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-white/60 lg:text-xl"
           >
-            <span className="font-SchnyderS text-2xl text-[#d4af37]">
+            <span className="font-SchnyderS text-2xl text-[#c9a962]">
               The Unnamed Elite.
             </span>
             <br />
@@ -139,10 +139,10 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
             return (
               <div
                 key={index}
-                className="group relative overflow-hidden border border-white/5 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white/[0.05]"
+                className="group relative overflow-hidden border border-white/5 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white/[0.05]"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/5">
-                  <Icon className="h-6 w-6 text-[#d4af37]" strokeWidth={1.5} />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
+                  <Icon className="h-6 w-6 text-[#c9a962]" strokeWidth={1.5} />
                 </div>
                 <h3 className="mb-3 font-Satoshi text-base font-medium text-white lg:text-lg">
                   {feature.title}
@@ -151,7 +151,7 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
                   {feature.description}
                 </p>
                 {/* Accent Line */}
-                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#d4af37] to-transparent transition-all duration-500 group-hover:w-full" />
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#c9a962] to-transparent transition-all duration-500 group-hover:w-full" />
               </div>
             );
           })}
@@ -162,7 +162,7 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-16 border border-[#d4af37]/20 bg-gradient-to-br from-[#d4af37]/5 to-transparent p-8 backdrop-blur-sm lg:mb-24 lg:p-12"
+          className="mb-16 border border-[#c9a962]/20 bg-gradient-to-br from-[#c9a962]/5 to-transparent p-8 backdrop-blur-sm lg:mb-24 lg:p-12"
         >
           <p className="mb-6 font-Satoshi text-lg font-light leading-relaxed text-white/80 lg:text-xl">
             We are the contractor of choice for private palaces and villas in
@@ -180,15 +180,15 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.5 + index * 0.1 }}
-                className="group relative overflow-hidden border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/40 hover:bg-white/[0.06]"
+                className="group relative overflow-hidden border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/40 hover:bg-white/[0.06]"
               >
                 {/* Icon */}
-                <div className="mb-6 flex h-14 w-14 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/5 transition-all duration-300 group-hover:border-[#d4af37]/50 group-hover:bg-[#d4af37]/10">
-                  <Icon className="h-7 w-7 text-[#d4af37]" strokeWidth={1} />
+                <div className="mb-6 flex h-14 w-14 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5 transition-all duration-300 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10">
+                  <Icon className="h-7 w-7 text-[#c9a962]" strokeWidth={1} />
                 </div>
 
                 {/* Location Name */}
-                <h3 className="mb-2 font-SchnyderS text-xl font-light text-white transition-colors group-hover:text-[#d4af37] lg:text-2xl">
+                <h3 className="mb-2 font-SchnyderS text-xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-2xl">
                   {location.name}
                 </h3>
 
@@ -198,8 +198,8 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
                 </p>
 
                 {/* Corner Accents */}
-                <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-white/5 transition-colors duration-300 group-hover:border-[#d4af37]/20" />
-                <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-white/5 transition-colors duration-300 group-hover:border-[#d4af37]/20" />
+                <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-white/5 transition-colors duration-300 group-hover:border-[#c9a962]/20" />
+                <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-white/5 transition-colors duration-300 group-hover:border-[#c9a962]/20" />
               </motion.div>
             );
           })}

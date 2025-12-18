@@ -21,7 +21,7 @@ const teams = [
     icon: Hammer,
     title: 'The Construction Team',
     description: 'respects the artistic intent.',
-    color: '#d4af37',
+    color: '#c9a962',
   },
   {
     id: 'mep',
@@ -53,7 +53,7 @@ function TeamCard({ team, index }: { team: typeof teams[0]; index: number }) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.8, delay: index * 0.15 }}
-      className="group relative border border-white/5 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/10 hover:bg-white/[0.04] hover:shadow-2xl"
+      className="group relative border border-[#c9a962]/10 bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white/90 hover:shadow-2xl"
     >
       {/* Glowing border on hover */}
       <div
@@ -91,8 +91,8 @@ function TeamCard({ team, index }: { team: typeof teams[0]; index: number }) {
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: index * 0.15 + 0.4 }}
-          className="mb-3 font-SchnyderS text-xl font-light text-white transition-all duration-500 group-hover:translate-x-1 lg:text-2xl"
-          style={{ color: isInView ? 'white' : team.color }}
+          className="mb-3 font-SchnyderS text-xl font-light text-neutral-900 transition-all duration-500 group-hover:translate-x-1 lg:text-2xl"
+          style={{ color: isInView ? '#171717' : team.color }}
         >
           {team.title}
         </motion.h3>
@@ -102,7 +102,7 @@ function TeamCard({ team, index }: { team: typeof teams[0]; index: number }) {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: index * 0.15 + 0.5 }}
-          className="font-Satoshi text-sm font-light text-white/60"
+          className="font-Satoshi text-sm font-light text-neutral-600"
         >
           {team.description}
         </motion.p>
@@ -152,17 +152,17 @@ export function UnitySectionEnhanced() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40"
+      className="relative overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40"
     >
       {/* Animated Background */}
       <motion.div style={{ y: bgY }} className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5] via-white to-[#faf8f5]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
       </motion.div>
 
       {/* Glowing orb */}
       <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2">
-        <div className="h-full w-full rounded-full bg-[#d4af37]/[0.02] blur-[150px]" />
+        <div className="h-full w-full rounded-full bg-[#c9a962]/[0.02] blur-[150px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
@@ -175,7 +175,7 @@ export function UnitySectionEnhanced() {
             className="mb-6 flex items-center justify-center gap-4"
           >
             <SVGLineDraw width={80} height={1} strokeColor="rgba(255,255,255,0.3)" duration={1.5} delay={0.2} />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
               Leadership Philosophy
             </span>
             <SVGLineDraw width={80} height={1} strokeColor="rgba(255,255,255,0.3)" duration={1.5} delay={0.2} />
@@ -183,7 +183,7 @@ export function UnitySectionEnhanced() {
 
           <div className="text-center">
             <RevealText
-              className="mb-8 font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl"
+              className="mb-8 font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl"
               delay={0.4}
               stagger={0.03}
               animationType="luxury"
@@ -196,17 +196,17 @@ export function UnitySectionEnhanced() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mx-auto max-w-3xl space-y-6 text-center font-Satoshi text-base font-light leading-relaxed text-white/70 lg:text-lg"
+            className="mx-auto max-w-3xl space-y-6 text-center font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg"
           >
             <p>
               Many CEOs outsource their problems.{' '}
-              <span className="font-medium text-white">Eng. Maher brings them in-house.</span>
+              <span className="font-medium text-neutral-900">Eng. Maher brings them in-house.</span>
             </p>
             <p>
               He built MIDC as a turnkey powerhouse because he wanted his designers to sit next to
               his engineers. He wanted the person drawing the joinery to know the person building it.
             </p>
-            <p className="text-white/50">
+            <p className="text-neutral-500">
               This unity creates a culture of mutual respect and efficiency.
             </p>
           </motion.div>
@@ -225,7 +225,7 @@ export function UnitySectionEnhanced() {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.5, delay: 0.5 }}
-          className="mx-auto mb-16 hidden h-px w-full max-w-5xl origin-center bg-gradient-to-r from-transparent via-white/10 to-transparent md:block lg:mb-24"
+          className="mx-auto mb-16 hidden h-px w-full max-w-5xl origin-center bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent md:block lg:mb-24"
         />
 
         {/* Leadership Statement with 3D card */}
@@ -234,7 +234,7 @@ export function UnitySectionEnhanced() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="border-t border-white/5 pt-16"
+          className="border-t border-[#c9a962]/20 pt-16"
         >
           <div className="mx-auto max-w-4xl">
             <motion.p
@@ -242,10 +242,10 @@ export function UnitySectionEnhanced() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8 text-center font-Satoshi text-base font-light leading-relaxed text-white/70 lg:text-lg"
+              className="mb-8 text-center font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg"
             >
               Eng. Maher sits at the head of this table, not to dictate, but to{' '}
-              <span className="font-medium text-white">orchestrate this collaboration</span>.
+              <span className="font-medium text-neutral-900">orchestrate this collaboration</span>.
             </motion.p>
 
             {/* Quote card with 3D effect */}
@@ -254,11 +254,11 @@ export function UnitySectionEnhanced() {
               whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="group relative border-l-2 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:bg-white/[0.04]"
-              style={{ borderColor: '#d4af37' }}
+              className="group relative border-l-2 bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:bg-white/90"
+              style={{ borderColor: '#c9a962' }}
             >
               <RevealText
-                className="font-SchnyderS text-xl font-light italic text-white/90 lg:text-2xl"
+                className="font-SchnyderS text-xl font-light italic text-neutral-700 lg:text-2xl"
                 delay={0.6}
                 stagger={0.015}
                 animationType="luxury"
@@ -267,7 +267,7 @@ export function UnitySectionEnhanced() {
               </RevealText>
 
               {/* Glowing accent */}
-              <div className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-[#d4af37]/0 via-[#d4af37] to-[#d4af37]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-[#c9a962]/0 via-[#c9a962] to-[#c9a962]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </motion.div>
           </div>
         </motion.div>
@@ -283,7 +283,7 @@ export function UnitySectionEnhanced() {
           <MagneticButton strength={0.25}>
             <Link
               href="/about/process"
-              className="group inline-flex items-center gap-3 border border-[#d4af37]/30 bg-[#d4af37]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all duration-500 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10"
+              className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-900 transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962]/20"
             >
               <span>See Our Integrated Process</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1} />

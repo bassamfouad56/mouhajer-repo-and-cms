@@ -84,7 +84,7 @@ function HeroSection() {
         >
           The Keys
           <br />
-          <span className="text-[#d4af37]">& Beyond</span>
+          <span className="text-[#c9a962]">& Beyond</span>
         </motion.h1>
 
         <motion.p
@@ -276,11 +276,11 @@ function Section2() {
                 className="group grid gap-12 lg:grid-cols-12"
               >
                 <div className="lg:col-span-3">
-                  <div className="mb-6 inline-flex h-20 w-20 items-center justify-center border border-neutral-200 bg-white text-[#d4af37] transition-all duration-300 group-hover:bg-[#d4af37] group-hover:text-white">
+                  <div className="mb-6 inline-flex h-20 w-20 items-center justify-center border border-neutral-200 bg-white text-[#c9a962] transition-all duration-300 group-hover:bg-[#c9a962] group-hover:text-white">
                     <IconComponent />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="font-SchnyderS text-2xl font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#d4af37] lg:text-3xl">
+                    <h3 className="font-SchnyderS text-2xl font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962] lg:text-3xl">
                       {service.title}
                     </h3>
                     <p className="font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-500">
@@ -293,7 +293,7 @@ function Section2() {
                   {service.items.map((item, itemIndex) => (
                     <div
                       key={itemIndex}
-                      className="border-l-2 border-[#d4af37] pl-6 transition-colors hover:border-neutral-950"
+                      className="border-l-2 border-[#c9a962] pl-6 transition-colors hover:border-neutral-950"
                     >
                       <div className="mb-2 font-Satoshi text-lg font-medium text-neutral-950">
                         {item.label}
@@ -339,7 +339,7 @@ function Section3() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="inline-block border-b-2 border-[#d4af37] pb-2 font-Satoshi text-sm font-light uppercase tracking-wider text-[#d4af37]">
+            <div className="inline-block border-b-2 border-[#c9a962] pb-2 font-Satoshi text-sm font-light uppercase tracking-wider text-[#c9a962]">
               Four Seasons Resort, Jumeirah Beach
             </div>
 
@@ -351,7 +351,7 @@ function Section3() {
               After completing the resort&apos;s beachfront villas renovation in 2019, Four Seasons signed a 5-year maintenance contract with MIDC. Here&apos;s what we&apos;ve delivered:
             </p>
 
-            <ul className="space-y-4 border-l-2 border-[#d4af37] pl-6">
+            <ul className="space-y-4 border-l-2 border-[#c9a962] pl-6">
               <li className="font-Satoshi text-base font-light leading-relaxed text-white/70">
                 <span className="font-medium text-white">Quarterly Inspections</span> — We inspect all 60 villas every 3 months, documenting wear-and-tear and scheduling preventive maintenance.
               </li>
@@ -383,7 +383,7 @@ function Section3() {
               </div>
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     240
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -391,7 +391,7 @@ function Section3() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     87
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -399,7 +399,7 @@ function Section3() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     2.3h
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -407,7 +407,7 @@ function Section3() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     1.2M
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -469,7 +469,7 @@ function Section5() {
         >
           Protect Your
           <br />
-          <span className="text-[#d4af37]">Investment</span>
+          <span className="text-[#c9a962]">Investment</span>
         </motion.h2>
 
         <motion.p
@@ -489,7 +489,7 @@ function Section5() {
         >
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-3 border-2 border-[#d4af37] bg-[#d4af37] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#d4af37]"
+            className="group inline-flex items-center gap-3 border-2 border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
           >
             Discuss Maintenance
             <ArrowRight

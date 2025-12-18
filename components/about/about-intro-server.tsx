@@ -109,7 +109,7 @@ function StrokeFillText({ text }: { text: string }) {
       <span
         className="font-SchnyderS text-4xl font-light leading-[1.3] tracking-tight sm:text-5xl lg:text-6xl"
         style={{
-          WebkitTextStroke: '1px rgba(212, 175, 55, 0.4)',
+          WebkitTextStroke: '1px rgba(201, 169, 98, 0.4)',
           WebkitTextFillColor: 'transparent',
         }}
       >
@@ -154,7 +154,7 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           style={{ y: bgY }}
-          className="absolute -left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.02] blur-[150px]"
+          className="absolute -left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.02] blur-[150px]"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], ['10%', '-20%']) }}
@@ -269,21 +269,21 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
-            className="h-px flex-1 origin-left bg-gradient-to-r from-[#d4af37]/60 to-transparent"
+            className="h-px flex-1 origin-left bg-gradient-to-r from-[#c9a962]/60 to-transparent"
           />
           <motion.div
             initial={{ scale: 0, rotate: 45 }}
             whileInView={{ scale: 1, rotate: 45 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="h-2 w-2 bg-[#d4af37]/40"
+            className="h-2 w-2 bg-[#c9a962]/40"
           />
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
-            className="h-px flex-1 origin-right bg-gradient-to-l from-[#d4af37]/60 to-transparent"
+            className="h-px flex-1 origin-right bg-gradient-to-l from-[#c9a962]/60 to-transparent"
           />
         </div>
 
@@ -303,7 +303,7 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="mb-8 font-SchnyderS text-6xl font-light text-[#d4af37]/20"
+              className="mb-8 font-SchnyderS text-6xl font-light text-[#c9a962]/20"
             >
               &ldquo;
             </motion.div>
@@ -328,7 +328,7 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.5 }}
-              className="mx-auto mt-12 h-0.5 w-24 origin-center bg-gradient-to-r from-transparent via-[#d4af37]/50 to-transparent"
+              className="mx-auto mt-12 h-0.5 w-24 origin-center bg-gradient-to-r from-transparent via-[#c9a962]/50 to-transparent"
             />
           </div>
         </div>

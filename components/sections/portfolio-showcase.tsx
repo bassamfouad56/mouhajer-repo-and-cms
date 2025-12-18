@@ -207,7 +207,7 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
       ref={sectionRef}
       id="portfolio"
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen overflow-hidden bg-neutral-950 scroll-mt-24"
+      className="relative min-h-screen overflow-hidden bg-[#faf8f5] scroll-mt-24"
     >
       {/* Cinematic Background - Second Project Image */}
       <motion.div
@@ -229,10 +229,10 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
           />
         </motion.div>
 
-        {/* Multiple overlay layers for cinematic depth */}
-        <div className="absolute inset-0 bg-gradient-to-l from-neutral-950 via-neutral-950/90 to-neutral-950/70" />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/80" />
-        <div className="absolute inset-0 bg-neutral-950/40" />
+        {/* Light overlay layers for elegant depth */}
+        <div className="absolute inset-0 bg-gradient-to-l from-[#faf8f5] via-[#faf8f5]/80 to-[#faf8f5]/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-transparent to-[#faf8f5]/70" />
+        <div className="absolute inset-0 bg-[#faf8f5]/30" />
 
         {/* Animated grain/noise effect */}
         <motion.div
@@ -246,7 +246,7 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
 
         {/* Cinematic light rays */}
         <motion.div
-          className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-[#d4af37]/5 to-transparent"
+          className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-[#c9a962]/5 to-transparent"
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -267,8 +267,8 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
               transition={{ duration: 0.6 }}
               className="mb-6 flex items-center gap-4"
             >
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
                 Portfolio of Excellence
               </span>
             </motion.div>
@@ -277,18 +277,18 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
+              className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl xl:text-7xl"
             >
               A Legacy of
               <br />
-              <span className="text-white/30">Built Projects</span>
+              <span className="text-[#c9a962]">Built Projects</span>
             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 font-Satoshi text-base font-light text-white/50 lg:text-lg"
+              className="mt-4 font-Satoshi text-base font-light text-neutral-600 lg:text-lg"
             >
               400+ Delivered. Zero Failed Handovers.
             </motion.p>
@@ -305,22 +305,22 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
                   prevSlide();
                   setIsAutoPlaying(false);
                 }}
-                className="group flex h-14 w-14 items-center justify-center border border-[#d4af37]/40 bg-[#d4af37]/10 transition-all duration-300 hover:border-[#d4af37] hover:bg-[#d4af37]/20"
+                className="group flex h-14 w-14 items-center justify-center border border-[#c9a962]/40 bg-[#c9a962]/10 transition-all duration-300 hover:border-[#c9a962] hover:bg-[#c9a962]/20"
                 aria-label="Previous project"
               >
-                <ArrowLeft className="h-6 w-6 text-[#d4af37] transition-transform group-hover:-translate-x-1" strokeWidth={1.5} />
+                <ArrowLeft className="h-6 w-6 text-[#c9a962] transition-transform group-hover:-translate-x-1" strokeWidth={1.5} />
               </button>
               <button
                 onClick={() => {
                   nextSlide();
                   setIsAutoPlaying(false);
                 }}
-                className="group flex h-14 w-14 items-center justify-center border border-[#d4af37]/40 bg-[#d4af37]/10 transition-all duration-300 hover:border-[#d4af37] hover:bg-[#d4af37]/20"
+                className="group flex h-14 w-14 items-center justify-center border border-[#c9a962]/40 bg-[#c9a962]/10 transition-all duration-300 hover:border-[#c9a962] hover:bg-[#c9a962]/20"
                 aria-label="Next project"
               >
-                <ArrowRight className="h-6 w-6 text-[#d4af37] transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                <ArrowRight className="h-6 w-6 text-[#c9a962] transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
               </button>
-              <span className="ml-2 font-Satoshi text-sm font-light text-white/40">
+              <span className="ml-2 font-Satoshi text-sm font-light text-neutral-500">
                 {activeIndex + 1} / {displayProjects.length}
               </span>
             </motion.div>
@@ -337,7 +337,7 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
               className="mb-12"
             >
               {/* Mobile Image */}
-              <div className="relative mb-6 aspect-[4/3] overflow-hidden lg:hidden">
+              <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-lg lg:hidden">
                 <SafeImage
                   src={activeProject.featuredImage.node.sourceUrl}
                   alt={activeProject.featuredImage.node.altText || activeProject.title}
@@ -346,43 +346,43 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
                   className="object-cover"
                   sizes="100vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/80 via-transparent to-transparent" />
               </div>
 
               {/* Project Type Badge */}
               {activeProject.acfFields?.projectType && (
-                <div className="mb-4 inline-block border border-[#d4af37]/30 bg-[#d4af37]/5 px-4 py-2 font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37]">
+                <div className="mb-4 inline-block border border-[#c9a962]/30 bg-[#c9a962]/5 px-4 py-2 font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
                   {activeProject.acfFields.projectType}
                 </div>
               )}
 
               {/* Title */}
-              <h3 className="mb-3 font-SchnyderS text-3xl font-light text-white lg:text-4xl xl:text-5xl">
+              <h3 className="mb-3 font-SchnyderS text-3xl font-light text-neutral-900 lg:text-4xl xl:text-5xl">
                 {activeProject.title}
               </h3>
 
               {/* Location & Year */}
-              <div className="mb-4 flex items-center gap-4 font-Satoshi text-sm font-light text-white/50">
+              <div className="mb-4 flex items-center gap-4 font-Satoshi text-sm font-light text-neutral-500">
                 {activeProject.acfFields?.location && (
                   <span>{activeProject.acfFields.location}</span>
                 )}
                 {activeProject.acfFields?.yearCompleted && (
                   <>
-                    <span className="h-1 w-1 rounded-full bg-[#d4af37]/50" />
+                    <span className="h-1 w-1 rounded-full bg-[#c9a962]/50" />
                     <span>{activeProject.acfFields.yearCompleted}</span>
                   </>
                 )}
               </div>
 
               {/* Description */}
-              <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-white/60 lg:text-lg">
+              <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg">
                 {activeProject.excerpt}
               </p>
 
               {/* CTA */}
               <Link
                 href={`/projects/${activeProject.slug}`}
-                className="group inline-flex items-center gap-3 border border-[#d4af37]/30 bg-[#d4af37]/5 px-6 py-4 font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37] transition-all hover:bg-[#d4af37]/10 hover:gap-4"
+                className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-6 py-4 font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962] transition-all hover:bg-[#c9a962]/10 hover:gap-4"
               >
                 Explore Project
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
@@ -391,7 +391,7 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
           </AnimatePresence>
 
           {/* Progress Dots */}
-          <div className="flex items-center gap-3 border-t border-white/10 pt-8">
+          <div className="flex items-center gap-3 border-t border-[#c9a962]/20 pt-8">
             {displayProjects.map((_, index) => (
               <button
                 key={index}
@@ -403,13 +403,13 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
                 aria-label={`Go to project ${index + 1}`}
               >
                 <div className={`h-full transition-all duration-500 ${
-                  index === activeIndex ? 'w-10 bg-[#d4af37]' : 'w-2 bg-white/20 hover:bg-white/40'
+                  index === activeIndex ? 'w-10 bg-[#c9a962]' : 'w-2 bg-neutral-400/40 hover:bg-neutral-500/60'
                 }`} />
 
                 {/* Auto-play progress */}
                 {index === activeIndex && isAutoPlaying && (
                   <motion.div
-                    className="absolute left-0 top-0 h-full bg-white/30"
+                    className="absolute left-0 top-0 h-full bg-neutral-400/40"
                     initial={{ width: '0%' }}
                     animate={{ width: '100%' }}
                     transition={{ duration: 6, ease: 'linear' }}
@@ -429,7 +429,7 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
           >
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-2 font-Satoshi text-sm font-light tracking-wide text-white/60 transition-colors hover:text-[#d4af37]"
+              className="group inline-flex items-center gap-2 font-Satoshi text-sm font-light tracking-wide text-neutral-600 transition-colors hover:text-[#c9a962]"
             >
               View All Projects
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.5} />
@@ -460,8 +460,8 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
                 />
 
                 {/* Gradient overlay on image */}
-                <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-neutral-950" />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[#faf8f5]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/60 via-transparent to-transparent" />
 
                 {/* Shimmer effect */}
                 <motion.div
@@ -475,8 +475,8 @@ export function PortfolioShowcase({ projects }: PortfolioShowcaseProps) {
             </AnimatePresence>
 
             {/* Corner Frame Accents */}
-            <div className="absolute right-8 top-8 h-24 w-24 border-r-2 border-t-2 border-[#d4af37]/30" />
-            <div className="absolute bottom-8 right-8 h-24 w-24 border-b-2 border-r-2 border-[#d4af37]/30" />
+            <div className="absolute right-8 top-8 h-24 w-24 border-r-2 border-t-2 border-[#c9a962]/30" />
+            <div className="absolute bottom-8 right-8 h-24 w-24 border-b-2 border-r-2 border-[#c9a962]/30" />
           </div>
         </div>
       </motion.div>

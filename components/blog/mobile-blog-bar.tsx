@@ -112,7 +112,7 @@ export default function MobileBlogBar({ postTitle, onTOCToggle, showTOC }: Mobil
                 <button
                   onClick={onTOCToggle}
                   className={`flex flex-col items-center gap-1 transition-colors ${
-                    showTOC ? 'text-[#d4af37]' : 'text-neutral-600 hover:text-neutral-950'
+                    showTOC ? 'text-[#c9a962]' : 'text-neutral-600 hover:text-neutral-950'
                   }`}
                 >
                   <List size={20} />

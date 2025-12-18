@@ -20,18 +20,18 @@ export function Services({ services }: ServicesProps) {
     <section
       ref={sectionRef}
       id="services"
-      className="relative overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 px-6 py-32 lg:px-12 lg:py-48"
+      className="relative overflow-hidden bg-gradient-to-b from-[#faf8f5] via-[#f8f6f3] to-[#faf8f5] px-6 py-32 lg:px-12 lg:py-48"
     >
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(38,36,32,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(38,36,32,0.03)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
 
       {/* Gradient Orbs */}
-      <div className="absolute left-0 top-1/4 h-[600px] w-[600px] rounded-full bg-purple-500/5 blur-[120px]" />
-      <div className="absolute bottom-1/4 right-0 h-[600px] w-[600px] rounded-full bg-blue-500/5 blur-[120px]" />
+      <div className="absolute left-0 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
+      <div className="absolute bottom-1/4 right-0 h-[600px] w-[600px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
 
       {/* Decorative Lines */}
-      <div className="absolute left-0 top-0 h-px w-1/3 bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
-      <div className="absolute bottom-0 right-0 h-px w-1/3 bg-gradient-to-l from-transparent via-neutral-700 to-transparent" />
+      <div className="absolute left-0 top-0 h-px w-1/3 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+      <div className="absolute bottom-0 right-0 h-px w-1/3 bg-gradient-to-l from-transparent via-[#c9a962]/30 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-[1600px]">
         {/* Section Header */}
@@ -42,17 +42,17 @@ export function Services({ services }: ServicesProps) {
             transition={{ duration: 0.8 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-neutral-600" />
-            <span className="text-sm font-light tracking-[0.3em] text-neutral-400">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <span className="text-sm font-light tracking-[0.3em] text-[#c9a962]">
               WHAT WE OFFER
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-neutral-600" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-6 text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl"
+            className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-[#262420] sm:text-6xl lg:text-7xl"
           >
             Our Services
           </motion.h2>
@@ -60,7 +60,7 @@ export function Services({ services }: ServicesProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mx-auto max-w-2xl text-lg font-light leading-relaxed text-neutral-400"
+            className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-[#3d3a36]/70"
           >
             From concept to completion, we offer comprehensive design services
             tailored to bring your vision to life with precision and elegance.
@@ -81,13 +81,13 @@ export function Services({ services }: ServicesProps) {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-24 text-center"
         >
-          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
-          <p className="mb-6 text-sm font-light tracking-wider text-neutral-500">
+          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+          <p className="mb-6 font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60">
             INTERESTED IN OUR SERVICES?
           </p>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 border border-white px-10 py-5 text-sm font-light tracking-widest text-white transition-all hover:bg-white hover:text-neutral-950 focus-visible:bg-white focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+            className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:bg-transparent hover:text-[#c9a962] focus-visible:bg-transparent focus-visible:text-[#c9a962] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5]"
           >
             <span>START YOUR PROJECT</span>
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-2 group-focus-visible:translate-x-2" />
@@ -123,48 +123,48 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="group relative overflow-hidden bg-neutral-900/40 backdrop-blur-sm transition-all duration-500 hover:bg-neutral-900/60"
+      className="group relative overflow-hidden bg-white/60 backdrop-blur-sm transition-all duration-500 hover:bg-white/90"
     >
       {/* Top Border Accent */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent transition-all duration-500 group-hover:via-white" />
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent transition-all duration-500 group-hover:via-[#c9a962]" />
 
       <div className="p-10">
         {/* Icon */}
         <div className="mb-8">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 text-neutral-400 transition-all duration-500 group-hover:border-white group-hover:text-white">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#e8e6e3] text-[#3d3a36]/60 transition-all duration-500 group-hover:border-[#c9a962] group-hover:text-[#c9a962]">
             {getIcon(service.title)}
           </div>
         </div>
 
         {/* Title */}
-        <h3 className="mb-5 text-2xl font-light tracking-tight text-white transition-all duration-500 group-hover:translate-x-1 lg:text-3xl">
+        <h3 className="mb-5 font-SchnyderS text-2xl font-light tracking-tight text-[#262420] transition-all duration-500 group-hover:translate-x-1 lg:text-3xl">
           {service.title}
         </h3>
 
         {/* Description */}
         <div
-          className="mb-8 text-base font-light leading-relaxed text-neutral-400"
+          className="mb-8 font-Satoshi text-base font-light leading-relaxed text-[#3d3a36]/70"
           dangerouslySetInnerHTML={{
             __html: service.excerpt || service.content?.substring(0, 150) + '...' || ''
           }}
         />
 
         {/* Divider */}
-        <div className="mb-6 h-px w-full bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
+        <div className="mb-6 h-px w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent" />
 
         {/* Learn More Link */}
-        <div className="flex items-center gap-3 text-sm font-light tracking-wider text-neutral-500 transition-all group-hover:gap-5 group-hover:text-white">
+        <div className="flex items-center gap-3 font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60 transition-all group-hover:gap-5 group-hover:text-[#c9a962]">
           <span>LEARN MORE</span>
           <ArrowRight size={18} className="transition-all group-hover:translate-x-2" />
         </div>
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-white/5 blur-3xl transition-all duration-500 group-hover:bg-white/10" />
-      <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-purple-500/5 blur-2xl transition-all duration-500 group-hover:bg-purple-500/10" />
+      <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#c9a962]/5 blur-3xl transition-all duration-500 group-hover:bg-[#c9a962]/10" />
+      <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-[#c9a962]/5 blur-2xl transition-all duration-500 group-hover:bg-[#c9a962]/10" />
 
       {/* Corner Frame */}
-      <div className="absolute bottom-0 right-0 h-20 w-20 border-b border-r border-neutral-800/50 transition-all duration-500 group-hover:border-neutral-600" />
+      <div className="absolute bottom-0 right-0 h-20 w-20 border-b border-r border-[#e8e6e3] transition-all duration-500 group-hover:border-[#c9a962]/30" />
     </motion.div>
   );
 }

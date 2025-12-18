@@ -97,8 +97,8 @@ export function BeforeAfterSlider({
         />
 
         {/* After label */}
-        <div className="absolute bottom-4 right-4 border border-[#d4af37]/30 bg-neutral-950/80 px-3 py-1.5 backdrop-blur-sm sm:bottom-6 sm:right-6">
-          <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37]">
+        <div className="absolute bottom-4 right-4 border border-[#c9a962]/30 bg-neutral-950/80 px-3 py-1.5 backdrop-blur-sm sm:bottom-6 sm:right-6">
+          <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
             {afterLabel}
           </span>
         </div>
@@ -159,7 +159,7 @@ export function BeforeAfterSlider({
 
       {/* Corner accents */}
       <div className="absolute left-0 top-0 h-16 w-16 border-l-2 border-t-2 border-white/20" />
-      <div className="absolute bottom-0 right-0 h-16 w-16 border-b-2 border-r-2 border-[#d4af37]/30" />
+      <div className="absolute bottom-0 right-0 h-16 w-16 border-b-2 border-r-2 border-[#c9a962]/30" />
 
       {/* Instruction text */}
       <motion.div

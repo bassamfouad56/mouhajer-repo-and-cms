@@ -301,7 +301,7 @@ export default function SupplierRegistrationPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-6"
             >
-              <span className="inline-block rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-6 py-2 text-[11px] font-light uppercase tracking-[0.3em] text-[#d4af37] backdrop-blur-sm">
+              <span className="inline-block rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-6 py-2 text-[11px] font-light uppercase tracking-[0.3em] text-[#c9a962] backdrop-blur-sm">
                 Supplier Registration
               </span>
             </motion.div>
@@ -376,8 +376,8 @@ export default function SupplierRegistrationPage() {
 
               <div className="grid gap-6 md:grid-cols-3">
                 {/* Traceability */}
-                <div className="group rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-[#d4af37]/50 hover:bg-white hover:shadow-lg">
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 transition-colors group-hover:bg-[#d4af37]">
+                <div className="group rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-[#c9a962]/50 hover:bg-white hover:shadow-lg">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 transition-colors group-hover:bg-[#c9a962]">
                     <Globe className="h-6 w-6 text-white transition-colors group-hover:text-neutral-950" />
                   </div>
                   <h3 className="mb-3 text-xl font-medium text-neutral-950">Traceability</h3>
@@ -387,8 +387,8 @@ export default function SupplierRegistrationPage() {
                 </div>
 
                 {/* Timeliness */}
-                <div className="group rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-[#d4af37]/50 hover:bg-white hover:shadow-lg">
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 transition-colors group-hover:bg-[#d4af37]">
+                <div className="group rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-[#c9a962]/50 hover:bg-white hover:shadow-lg">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 transition-colors group-hover:bg-[#c9a962]">
                     <Clock className="h-6 w-6 text-white transition-colors group-hover:text-neutral-950" />
                   </div>
                   <h3 className="mb-3 text-xl font-medium text-neutral-950">Timeliness</h3>
@@ -398,8 +398,8 @@ export default function SupplierRegistrationPage() {
                 </div>
 
                 {/* Quality */}
-                <div className="group rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-[#d4af37]/50 hover:bg-white hover:shadow-lg">
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 transition-colors group-hover:bg-[#d4af37]">
+                <div className="group rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-[#c9a962]/50 hover:bg-white hover:shadow-lg">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 transition-colors group-hover:bg-[#c9a962]">
                     <ShieldCheck className="h-6 w-6 text-white transition-colors group-hover:text-neutral-950" />
                   </div>
                   <h3 className="mb-3 text-xl font-medium text-neutral-950">Quality</h3>
@@ -487,7 +487,7 @@ export default function SupplierRegistrationPage() {
                               step.number === currentStep
                                 ? 'bg-neutral-950 text-white'
                                 : step.number < currentStep
-                                  ? 'bg-[#d4af37] text-neutral-950'
+                                  ? 'bg-[#c9a962] text-neutral-950'
                                   : 'bg-neutral-200 text-neutral-400'
                             }`}
                           >
@@ -512,7 +512,7 @@ export default function SupplierRegistrationPage() {
                         {index < steps.length - 1 && (
                           <div
                             className={`mx-2 hidden h-px w-8 md:mx-4 md:block md:w-12 lg:w-16 ${
-                              step.number < currentStep ? 'bg-[#d4af37]' : 'bg-neutral-200'
+                              step.number < currentStep ? 'bg-[#c9a962]' : 'bg-neutral-200'
                             }`}
                           />
                         )}
@@ -787,7 +787,7 @@ export default function SupplierRegistrationPage() {
                                 key={category.value}
                                 className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all ${
                                   selectedCategories.includes(category.value)
-                                    ? 'border-[#d4af37] bg-[#d4af37]/10'
+                                    ? 'border-[#c9a962] bg-[#c9a962]/10'
                                     : 'border-neutral-200 bg-neutral-50 hover:border-neutral-300'
                                 }`}
                               >
@@ -800,7 +800,7 @@ export default function SupplierRegistrationPage() {
                                 <div
                                   className={`flex h-5 w-5 items-center justify-center rounded border ${
                                     selectedCategories.includes(category.value)
-                                      ? 'border-[#d4af37] bg-[#d4af37]'
+                                      ? 'border-[#c9a962] bg-[#c9a962]'
                                       : 'border-neutral-300'
                                   }`}
                                 >
@@ -888,7 +888,7 @@ export default function SupplierRegistrationPage() {
                                 key={cert.value}
                                 className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all ${
                                   selectedCertifications.includes(cert.value)
-                                    ? 'border-[#d4af37] bg-[#d4af37]/10'
+                                    ? 'border-[#c9a962] bg-[#c9a962]/10'
                                     : 'border-neutral-200 bg-neutral-50 hover:border-neutral-300'
                                 }`}
                               >
@@ -901,7 +901,7 @@ export default function SupplierRegistrationPage() {
                                 <div
                                   className={`flex h-5 w-5 items-center justify-center rounded border ${
                                     selectedCertifications.includes(cert.value)
-                                      ? 'border-[#d4af37] bg-[#d4af37]'
+                                      ? 'border-[#c9a962] bg-[#c9a962]'
                                       : 'border-neutral-300'
                                   }`}
                                 >
@@ -1025,8 +1025,8 @@ export default function SupplierRegistrationPage() {
                             ) : (
                               <div className="flex items-center justify-between rounded-lg border border-neutral-200 bg-neutral-50 p-6">
                                 <div className="flex items-center gap-4">
-                                  <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-[#d4af37]/10">
-                                    <FileText className="h-8 w-8 text-[#d4af37]" />
+                                  <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-[#c9a962]/10">
+                                    <FileText className="h-8 w-8 text-[#c9a962]" />
                                   </div>
                                   <div>
                                     <p className="text-base font-medium text-neutral-950">
@@ -1083,7 +1083,7 @@ export default function SupplierRegistrationPage() {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="group flex items-center gap-3 rounded-full bg-[#d4af37] px-8 py-4 text-sm font-light tracking-wide text-neutral-950 transition-all hover:bg-[#c4a030] disabled:opacity-50"
+                          className="group flex items-center gap-3 rounded-full bg-[#c9a962] px-8 py-4 text-sm font-light tracking-wide text-neutral-950 transition-all hover:bg-[#c4a030] disabled:opacity-50"
                         >
                           {isSubmitting ? (
                             'Submitting...'
@@ -1173,12 +1173,12 @@ export default function SupplierRegistrationPage() {
               className="mt-16 text-center"
             >
               <div className="inline-flex items-center gap-3 rounded-full border border-neutral-200 bg-neutral-50 px-8 py-4">
-                <Truck className="h-5 w-5 text-[#d4af37]" />
+                <Truck className="h-5 w-5 text-[#c9a962]" />
                 <span className="text-sm font-light text-neutral-600">
                   Questions? Contact our Procurement Department at{' '}
                   <a
                     href="mailto:procurement@midc.ae"
-                    className="font-medium text-neutral-950 underline hover:text-[#d4af37]"
+                    className="font-medium text-neutral-950 underline hover:text-[#c9a962]"
                   >
                     procurement@midc.ae
                   </a>

@@ -80,7 +80,7 @@ export default function MEPEngineeringContent() {
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24 lg:px-12">
           <div className="mx-auto max-w-5xl text-center">
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={isHeroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.9, delay: 0.5 }} className="mb-8 font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
-              The<br /><span className="text-[#d4af37]">Invisible Art</span>
+              The<br /><span className="text-[#c9a962]">Invisible Art</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 30 }} animate={isHeroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.7 }} className="mx-auto mb-12 max-w-3xl px-4 font-Satoshi text-lg font-light leading-relaxed text-white/70 sm:px-0 sm:text-xl">
               Perfect comfort. Zero noise. Absolute efficiency. The systems you don&apos;t see are just as important as the ones you do.
@@ -119,7 +119,7 @@ function Section1() {
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12 xl:px-16">
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="lg:col-span-12">
           <div className="mb-8"><div className="mb-2 h-px w-16 bg-neutral-900" /></div>
-          <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">We Do Not Outsource<br /><span className="text-[#d4af37]">Critical Systems</span></h2>
+          <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">We Do Not Outsource<br /><span className="text-[#c9a962]">Critical Systems</span></h2>
           <div className="max-w-4xl space-y-6 font-Satoshi text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
             <p>Most luxury design firms rely on subcontractors for MEP (Mechanical, Electrical, Plumbing). <strong className="font-medium text-neutral-950">MIDC refuses to take that risk.</strong> We maintain a dedicated in-house MEP Division with over 30 specialized engineers.</p>
             <p><strong className="font-medium text-neutral-950">Why?</strong> Because a beautiful ceiling is ruined if the AC vent is placed incorrectly. A relaxing spa is ruined if the water pressure is low. By keeping MEP in-house, we integrate these systems perfectly into the architectural design.</p>
@@ -154,7 +154,7 @@ function Section2() {
     <section ref={sectionRef} className="relative overflow-hidden bg-neutral-50 py-32 sm:py-40 lg:py-48">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12 xl:px-16">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="mb-20 text-center">
-          <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">Our Engineering<br /><span className="text-[#d4af37]">Capabilities</span></h2>
+          <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">Our Engineering<br /><span className="text-[#c9a962]">Capabilities</span></h2>
         </motion.div>
         <div className="space-y-24 lg:space-y-32">
           {capabilities.map((cap, index) => {
@@ -174,18 +174,18 @@ function Section2() {
                       />
                     </div>
                     {/* Icon badge */}
-                    <div className="absolute -bottom-4 -right-4 flex h-16 w-16 items-center justify-center border border-neutral-200 bg-white text-[#d4af37] shadow-lg transition-all duration-300 group-hover:bg-[#d4af37] group-hover:text-white lg:h-20 lg:w-20">
+                    <div className="absolute -bottom-4 -right-4 flex h-16 w-16 items-center justify-center border border-neutral-200 bg-white text-[#c9a962] shadow-lg transition-all duration-300 group-hover:bg-[#c9a962] group-hover:text-white lg:h-20 lg:w-20">
                       <IconComponent />
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className={`flex flex-col justify-center lg:col-span-7 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <h3 className="mb-4 font-SchnyderS text-3xl font-light leading-tight text-neutral-950 transition-colors duration-300 group-hover:text-[#d4af37] lg:text-4xl">{cap.title}</h3>
+                    <h3 className="mb-4 font-SchnyderS text-3xl font-light leading-tight text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962] lg:text-4xl">{cap.title}</h3>
                     {cap.subtitle && <p className="mb-8 font-Satoshi text-lg font-light italic text-neutral-500">{cap.subtitle}</p>}
                     <div className="space-y-6">
                       {cap.items.map((item, i) => (
-                        <div key={i} className="border-l-2 border-[#d4af37] pl-6">
+                        <div key={i} className="border-l-2 border-[#c9a962] pl-6">
                           <div className="mb-2 font-Satoshi text-sm font-medium uppercase tracking-[0.2em] text-neutral-400">{item.label}</div>
                           <p className="font-Satoshi text-base font-light leading-relaxed text-neutral-700">{item.desc}</p>
                         </div>
@@ -209,7 +209,7 @@ function Section3() {
     <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 sm:py-40 lg:py-48">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-12">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="mb-16 text-center">
-          <h2 className="mb-6 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">Case Study:<br /><span className="text-[#d4af37]">MEP Renovation</span></h2>
+          <h2 className="mb-6 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">Case Study:<br /><span className="text-[#c9a962]">MEP Renovation</span></h2>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="border border-neutral-200 bg-neutral-50 p-8 lg:p-12">
           <div className="mb-6 font-Satoshi text-sm font-medium uppercase tracking-[0.2em] text-neutral-400">Project</div>
@@ -230,7 +230,7 @@ function Section4() {
     <section ref={sectionRef} className="relative overflow-hidden bg-neutral-50 py-32 sm:py-40 lg:py-48">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-12">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center">
-          <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">MIDC<br /><span className="text-[#d4af37]">Partner Brands</span></h2>
+          <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">MIDC<br /><span className="text-[#c9a962]">Partner Brands</span></h2>
           <p className="mt-8 font-Satoshi text-lg font-light text-neutral-600">World-class equipment brands used in our MEP installations</p>
         </motion.div>
 
@@ -251,9 +251,9 @@ function Section4() {
                 ease: [0.22, 1, 0.36, 1],
                 delay: 0.3 + index * 0.05,
               }}
-              className="group relative flex aspect-3/2 items-center justify-center rounded-sm border border-neutral-200 bg-white p-4 transition-all duration-300 hover:border-[#d4af37]/30 hover:shadow-lg"
+              className="group relative flex aspect-3/2 items-center justify-center rounded-sm border border-neutral-200 bg-white p-4 transition-all duration-300 hover:border-[#c9a962]/30 hover:shadow-lg"
             >
-              <span className="font-Satoshi text-sm font-medium text-neutral-400 transition-colors duration-300 group-hover:text-[#d4af37]">
+              <span className="font-Satoshi text-sm font-medium text-neutral-400 transition-colors duration-300 group-hover:text-[#c9a962]">
                 {brand.name}
               </span>
             </motion.div>
@@ -304,14 +304,14 @@ function Section6() {
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-neutral-950 py-32 lg:py-40">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[80px_80px]" />
-      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#d4af37]/10 blur-[120px]" />
-      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#d4af37]/10 blur-[120px]" />
+      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
       <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center lg:px-12">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
-          <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">Engineer<br /><span className="text-[#d4af37]">Your Asset</span></h2>
+          <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">Engineer<br /><span className="text-[#c9a962]">Your Asset</span></h2>
           <p className="mx-auto mb-12 max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-white/70 lg:text-xl">Ensure your property runs as beautifully as it looks.</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="#contact" className="group inline-flex items-center gap-3 border border-[#d4af37] bg-[#d4af37] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#d4af37]">
+            <a href="#contact" className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]">
               <span>CONSULT OUR ENGINEERS</span><ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
             </a>
             <a href="/about/company-profile" className="inline-flex items-center gap-3 border border-white/20 bg-white/5 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10">

@@ -40,16 +40,16 @@ export function CoreValuesGrid() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40"
+      className="relative overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40"
     >
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
       </div>
 
       {/* Radial Gradient Overlay */}
       <div className="absolute inset-0" style={{
-        background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.3) 100%)',
+        background: 'radial-gradient(ellipse at center, transparent 0%, rgba(201,169,98,0.02) 100%)',
       }} />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
@@ -61,17 +61,17 @@ export function CoreValuesGrid() {
           className="mb-16 text-center lg:mb-24"
         >
           <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/50">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
               The Pillars of Our Culture
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </div>
 
-          <h2 className="font-SchnyderS text-4xl font-light leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h2 className="font-SchnyderS text-4xl font-light leading-[1.1] tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
             Our
             <br />
-            <span className="text-[#d4af37]">Core Values</span>
+            <span className="text-[#c9a962]">Core Values</span>
           </h2>
         </motion.div>
 
@@ -87,24 +87,24 @@ export function CoreValuesGrid() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 className="group relative"
               >
-                <div className="relative h-full overflow-hidden rounded-sm border border-white/10 bg-neutral-900/50 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-[#d4af37]/50 hover:bg-neutral-900/80 hover:shadow-2xl">
+                <div className="relative h-full overflow-hidden rounded-sm border border-[#c9a962]/10 bg-white/70 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-[#c9a962]/30 hover:bg-white/90 hover:shadow-2xl">
                   {/* Icon */}
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-sm bg-[#d4af37]/10 transition-colors duration-300 group-hover:bg-[#d4af37]/20">
-                    <Icon className="h-8 w-8 text-[#d4af37] transition-transform duration-300 group-hover:scale-110" />
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-sm bg-[#c9a962]/10 transition-colors duration-300 group-hover:bg-[#c9a962]/20">
+                    <Icon className="h-8 w-8 text-[#c9a962] transition-transform duration-300 group-hover:scale-110" />
                   </div>
 
                   {/* Title - 100% VERBATIM */}
-                  <h3 className="mb-4 font-SchnyderS text-2xl font-light text-white">
+                  <h3 className="mb-4 font-SchnyderS text-2xl font-light text-neutral-900">
                     {value.title}
                   </h3>
 
                   {/* Description - 100% VERBATIM */}
-                  <p className="font-Satoshi text-sm font-light leading-relaxed text-white/70">
+                  <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
                     {value.description}
                   </p>
 
                   {/* Decorative Corner */}
-                  <div className="absolute right-4 top-4 h-8 w-8 border-r border-t border-[#d4af37]/20 transition-colors duration-300 group-hover:border-[#d4af37]/50" />
+                  <div className="absolute right-4 top-4 h-8 w-8 border-r border-t border-[#c9a962]/20 transition-colors duration-300 group-hover:border-[#c9a962]/50" />
                 </div>
               </motion.div>
             );
@@ -118,12 +118,12 @@ export function CoreValuesGrid() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-16 text-center lg:mt-24"
         >
-          <p className="mb-8 font-Satoshi text-lg font-light italic text-white/60">
+          <p className="mb-8 font-Satoshi text-lg font-light italic text-neutral-600">
             These values guide every project we undertake and every relationship we build.
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 border border-[#d4af37] bg-[#d4af37] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#d4af37]/90 hover:shadow-lg hover:shadow-[#d4af37]/20"
+            className="inline-flex items-center gap-2 border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#c9a962]/90 hover:shadow-lg hover:shadow-[#c9a962]/20"
           >
             Work With Us
             <svg

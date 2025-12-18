@@ -348,8 +348,8 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
                 </div>
 
                 {/* Decorative corner accents */}
-                <div className="pointer-events-none absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#d4af37]/60" />
-                <div className="pointer-events-none absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#d4af37]/60" />
+                <div className="pointer-events-none absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#c9a962]/60" />
+                <div className="pointer-events-none absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#c9a962]/60" />
               </motion.div>
             </motion.div>
           )}
@@ -375,7 +375,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
         {/* Floating Decorative Lines */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute right-[15%] top-[25%] h-px w-40 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent"
+            className="absolute right-[15%] top-[25%] h-px w-40 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
             animate={{ x: [0, 50, 0], opacity: [0.2, 0.5, 0.2] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -385,7 +385,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
           <motion.div
-            className="absolute right-[25%] bottom-[20%] h-40 w-px bg-gradient-to-b from-transparent via-[#d4af37]/20 to-transparent"
+            className="absolute right-[25%] bottom-[20%] h-40 w-px bg-gradient-to-b from-transparent via-[#c9a962]/20 to-transparent"
             animate={{ y: [0, 20, 0], opacity: [0.1, 0.3, 0.1] }}
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
           />
@@ -404,7 +404,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
               transition={{ duration: 1, delay: 0.2 }}
               className="mb-8 flex items-center gap-4"
             >
-              <div className="h-px w-12 bg-[#d4af37]/50" />
+              <div className="h-px w-12 bg-[#c9a962]/50" />
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/50">
                 Our Portfolio
               </span>
@@ -419,7 +419,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
             >
               400+ Projects.
               <br />
-              <span className="text-[#d4af37]">Zero Failures.</span>
+              <span className="text-[#c9a962]">Zero Failures.</span>
             </motion.h1>
 
             {/* Hero Description */}
@@ -440,7 +440,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
               transition={{ duration: 1.2, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="grid gap-12 sm:grid-cols-3"
             >
-              <div className="border-l border-[#d4af37]/30 pl-6">
+              <div className="border-l border-[#c9a962]/30 pl-6">
                 <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">400+</div>
                 <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
                   Completed Projects
@@ -463,8 +463,8 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
         </motion.div>
 
         {/* Corner Accents */}
-        <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#d4af37]/20" />
-        <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#d4af37]/20" />
+        <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#c9a962]/20" />
+        <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#c9a962]/20" />
       </section>
 
       {/* Infinite Animated Carousel */}
@@ -762,7 +762,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
         {/* Animated Lines */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute left-[10%] top-[30%] h-px w-24 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent"
+            className="absolute left-[10%] top-[30%] h-px w-24 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
             animate={{ x: [0, 30, 0], opacity: [0.2, 0.4, 0.2] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -774,8 +774,8 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
         </div>
 
         {/* Corner Accents */}
-        <div className="absolute left-8 top-8 h-16 w-16 border-l border-t border-[#d4af37]/20" />
-        <div className="absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#d4af37]/20" />
+        <div className="absolute left-8 top-8 h-16 w-16 border-l border-t border-[#c9a962]/20" />
+        <div className="absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#c9a962]/20" />
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <motion.div
@@ -785,11 +785,11 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
             viewport={{ once: true }}
             className="mb-4 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-8 bg-[#d4af37]/50" />
+            <div className="h-px w-8 bg-[#c9a962]/50" />
             <span className="text-[10px] uppercase tracking-[0.3em] text-white/50">
               Let&apos;s Build Together
             </span>
-            <div className="h-px w-8 bg-[#d4af37]/50" />
+            <div className="h-px w-8 bg-[#c9a962]/50" />
           </motion.div>
           <h2 className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl xl:text-6xl">
             Start Your Project
@@ -799,7 +799,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
           </p>
           <Link
             href="/#contact"
-            className="group inline-flex items-center gap-3 border border-[#d4af37] bg-[#d4af37]/10 px-12 py-4 font-Satoshi text-xs uppercase tracking-[0.3em] text-[#d4af37] transition-all duration-500 hover:bg-[#d4af37] hover:text-neutral-950"
+            className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962]/10 px-12 py-4 font-Satoshi text-xs uppercase tracking-[0.3em] text-[#c9a962] transition-all duration-500 hover:bg-[#c9a962] hover:text-neutral-950"
           >
             Get in Touch
             <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

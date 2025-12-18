@@ -113,7 +113,7 @@ function HeroSection() {
         >
           The Mouhajer
           <br />
-          <span className="text-[#d4af37]">Factory</span>
+          <span className="text-[#c9a962]">Factory</span>
         </motion.h1>
 
         <motion.p
@@ -193,11 +193,11 @@ function Section1() {
             {/* Stats overlay */}
             <div className="absolute -bottom-6 left-8 right-8 grid grid-cols-2 gap-4 bg-neutral-950 p-6 lg:left-0 lg:right-auto lg:w-80">
               <div>
-                <div className="font-SchnyderS text-3xl font-light text-[#d4af37]">40K</div>
+                <div className="font-SchnyderS text-3xl font-light text-[#c9a962]">40K</div>
                 <div className="font-Satoshi text-xs font-light text-white/60">Sq ft facility</div>
               </div>
               <div>
-                <div className="font-SchnyderS text-3xl font-light text-[#d4af37]">70+</div>
+                <div className="font-SchnyderS text-3xl font-light text-[#c9a962]">70+</div>
                 <div className="font-Satoshi text-xs font-light text-white/60">Full-time craftsmen</div>
               </div>
             </div>
@@ -347,7 +347,7 @@ function Section2() {
                       />
                     </div>
                     {/* Icon badge */}
-                    <div className="absolute -bottom-4 -right-4 flex h-16 w-16 items-center justify-center border border-neutral-200 bg-white text-[#d4af37] shadow-lg transition-all duration-300 group-hover:bg-[#d4af37] group-hover:text-white lg:h-20 lg:w-20">
+                    <div className="absolute -bottom-4 -right-4 flex h-16 w-16 items-center justify-center border border-neutral-200 bg-white text-[#c9a962] shadow-lg transition-all duration-300 group-hover:bg-[#c9a962] group-hover:text-white lg:h-20 lg:w-20">
                       <IconComponent />
                     </div>
                   </div>
@@ -355,7 +355,7 @@ function Section2() {
                   {/* Content */}
                   <div className={`flex flex-col justify-center lg:col-span-7 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                     <div className="space-y-2 mb-8">
-                      <h3 className="font-SchnyderS text-3xl font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#d4af37] lg:text-4xl">
+                      <h3 className="font-SchnyderS text-3xl font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962] lg:text-4xl">
                         {capability.title}
                       </h3>
                       <p className="font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-500">
@@ -367,7 +367,7 @@ function Section2() {
                       {capability.items.map((item, itemIndex) => (
                         <div
                           key={itemIndex}
-                          className="border-l-2 border-[#d4af37] pl-6 transition-colors hover:border-neutral-950"
+                          className="border-l-2 border-[#c9a962] pl-6 transition-colors hover:border-neutral-950"
                         >
                           <div className="mb-2 font-Satoshi text-lg font-medium text-neutral-950">
                             {item.label}
@@ -435,7 +435,7 @@ function Section3() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="inline-block border-b-2 border-[#d4af37] pb-2 font-Satoshi text-sm font-light uppercase tracking-wider text-[#d4af37]">
+            <div className="inline-block border-b-2 border-[#c9a962] pb-2 font-Satoshi text-sm font-light uppercase tracking-wider text-[#c9a962]">
               The Address Boulevard, Dubai
             </div>
 
@@ -447,7 +447,7 @@ function Section3() {
               For the renovation of The Address Boulevard, we manufactured all bedroom joinery in-house:
             </p>
 
-            <ul className="space-y-4 border-l-2 border-[#d4af37] pl-6">
+            <ul className="space-y-4 border-l-2 border-[#c9a962] pl-6">
               <li className="font-Satoshi text-base font-light leading-relaxed text-white/70">
                 <span className="font-medium text-white">342 upholstered headboards</span> — fabric-wrapped MDF with internal LED backlighting and integrated USB ports.
               </li>
@@ -476,7 +476,7 @@ function Section3() {
               </div>
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     70+
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -484,7 +484,7 @@ function Section3() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     40K
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -492,7 +492,7 @@ function Section3() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     8
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -500,7 +500,7 @@ function Section3() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37]">
+                  <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962]">
                     0
                   </div>
                   <div className="font-Satoshi text-sm font-light text-white/70">
@@ -533,7 +533,7 @@ function Section4() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="mb-8 text-center font-SchnyderS text-4xl font-light leading-tight tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl"
         >
-          MIDC <span className="text-[#d4af37]">Partner Brands</span>
+          MIDC <span className="text-[#c9a962]">Partner Brands</span>
         </motion.h2>
 
         <motion.p
@@ -562,7 +562,7 @@ function Section4() {
                 ease: [0.22, 1, 0.36, 1],
                 delay: 0.3 + index * 0.05,
               }}
-              className="group relative flex aspect-3/2 items-center justify-center rounded-sm border border-neutral-100 bg-neutral-50 p-4 transition-all duration-300 hover:border-[#d4af37]/30 hover:bg-white hover:shadow-lg"
+              className="group relative flex aspect-3/2 items-center justify-center rounded-sm border border-neutral-100 bg-neutral-50 p-4 transition-all duration-300 hover:border-[#c9a962]/30 hover:bg-white hover:shadow-lg"
             >
               <Image
                 src={`/services/${brand.filename}`}
@@ -626,7 +626,7 @@ function Section6() {
         >
           Tour the
           <br />
-          <span className="text-[#d4af37]">Mouhajer Factory</span>
+          <span className="text-[#c9a962]">Mouhajer Factory</span>
         </motion.h2>
 
         <motion.p
@@ -646,7 +646,7 @@ function Section6() {
         >
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-3 border-2 border-[#d4af37] bg-[#d4af37] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#d4af37]"
+            className="group inline-flex items-center gap-3 border-2 border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
           >
             Book Factory Tour
             <ArrowRight

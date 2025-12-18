@@ -169,29 +169,29 @@ export function PhasesSectionCinematic() {
   const backgroundOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 0.6, 0.4]);
 
   return (
-    <section ref={containerRef} className="relative overflow-hidden bg-white py-32 dark:bg-neutral-950">
+    <section ref={containerRef} className="relative overflow-hidden bg-[#faf8f5] py-32">
       {/* Animated background layers */}
       <div className="absolute inset-0">
         {/* Gradient mesh background */}
         <motion.div
           style={{ y: backgroundY, opacity: backgroundOpacity }}
-          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(212,175,55,0.15),transparent)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(201,169,98,0.15),transparent)]"
         />
         <motion.div
           style={{ y: useTransform(backgroundY, (v) => `${parseFloat(v as string) * -0.5}%`) }}
-          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_120%,rgba(212,175,55,0.1),transparent)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_120%,rgba(201,169,98,0.1),transparent)]"
         />
 
         {/* Noise texture overlay */}
         <div
-          className="absolute inset-0 opacity-[0.015] dark:opacity-[0.025]"
+          className="absolute inset-0 opacity-[0.015]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
           }}
         />
 
         {/* Geometric pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.02)_1px,transparent_1px)] bg-size-[80px_80px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.02)_1px,transparent_1px)] bg-size-[80px_80px]" />
 
         {/* Floating orbs */}
         <motion.div
@@ -204,7 +204,7 @@ export function PhasesSectionCinematic() {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-[#d4af37] blur-[120px]"
+          className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-[#c9a962] blur-[120px]"
         />
         <motion.div
           animate={{
@@ -217,20 +217,20 @@ export function PhasesSectionCinematic() {
             ease: 'easeInOut',
             delay: 2,
           }}
-          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-[#d4af37] blur-[120px]"
+          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-[#c9a962] blur-[120px]"
         />
       </div>
 
       {/* Fixed Progress Sidebar - Desktop Only */}
       <div className="fixed left-0 top-0 z-40 hidden h-screen w-24 items-center lg:flex xl:w-32">
-        <div className="relative h-full w-full bg-neutral-950/95 backdrop-blur-xl">
+        <div className="relative h-full w-full bg-white/95 backdrop-blur-xl border-r border-[#c9a962]/10">
           {/* Vertical progress bar */}
-          <div className="absolute left-0 top-0 h-full w-1 bg-neutral-800">
+          <div className="absolute left-0 top-0 h-full w-1 bg-neutral-200">
             <motion.div
               style={{ height: progressHeight }}
-              className="relative w-full bg-linear-to-b from-[#d4af37] to-[#d4af37]/50"
+              className="relative w-full bg-linear-to-b from-[#c9a962] to-[#c9a962]/50"
             >
-              <div className="absolute inset-0 animate-pulse bg-linear-to-b from-[#d4af37]/50 to-transparent" />
+              <div className="absolute inset-0 animate-pulse bg-linear-to-b from-[#c9a962]/50 to-transparent" />
             </motion.div>
           </div>
 
@@ -258,19 +258,19 @@ export function PhasesSectionCinematic() {
             transition={{ duration: 0.8 }}
             className="mb-24 text-center"
           >
-            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#d4af37]/20 bg-[#d4af37]/5 px-6 py-2.5 backdrop-blur-sm">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-[#d4af37]" />
-              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-600 dark:text-neutral-400">
+            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#c9a962]/20 bg-[#c9a962]/5 px-6 py-2.5 backdrop-blur-sm">
+              <div className="h-2 w-2 animate-pulse rounded-full bg-[#c9a962]" />
+              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-600">
                 The MIDC Protocol
               </span>
             </div>
 
-            <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 dark:text-white md:text-6xl lg:text-7xl">
+            <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 md:text-6xl lg:text-7xl">
               From Vision to<br />
-              <span className="text-[#d4af37]">Reality</span>
+              <span className="text-[#c9a962]">Reality</span>
             </h2>
 
-            <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600 dark:text-neutral-400">
+            <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
               Six integrated phases. One seamless execution. A methodology refined over 25 years.
             </p>
           </motion.div>
@@ -284,9 +284,9 @@ export function PhasesSectionCinematic() {
             >
               <defs>
                 <linearGradient id="lineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#d4af37" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#d4af37" stopOpacity="0.5" />
-                  <stop offset="100%" stopColor="#d4af37" stopOpacity="0.3" />
+                  <stop offset="0%" stopColor="#c9a962" stopOpacity="0.8" />
+                  <stop offset="50%" stopColor="#c9a962" stopOpacity="0.5" />
+                  <stop offset="100%" stopColor="#c9a962" stopOpacity="0.3" />
                 </linearGradient>
 
                 {/* Glow filter */}
@@ -368,7 +368,7 @@ function ConnectingLine({
       {/* Background path (faded) */}
       <motion.path
         d={pathD}
-        stroke="rgba(212, 175, 55, 0.1)"
+        stroke="rgba(201, 169, 98, 0.1)"
         strokeWidth="2"
         fill="none"
         strokeDasharray="8 8"
@@ -392,7 +392,7 @@ function ConnectingLine({
           cx="50%"
           cy={startY}
           r="8"
-          fill="#d4af37"
+          fill="#c9a962"
           opacity="0.3"
           animate={{ scale: [1, 1.5, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -401,7 +401,7 @@ function ConnectingLine({
           cx="50%"
           cy={startY}
           r="6"
-          fill="#d4af37"
+          fill="#c9a962"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: index * 0.2 }}
@@ -414,7 +414,7 @@ function ConnectingLine({
             cx="50%"
             cy={endY}
             r="8"
-            fill="#d4af37"
+            fill="#c9a962"
             opacity="0.3"
             animate={{ scale: [1, 1.5, 1] }}
             transition={{ duration: 2, repeat: Infinity, delay: 1 }}
@@ -423,7 +423,7 @@ function ConnectingLine({
             cx="50%"
             cy={endY}
             r="6"
-            fill="#d4af37"
+            fill="#c9a962"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: (index + 1) * 0.2 }}
@@ -454,7 +454,7 @@ function StepIndicator({
       {/* Glow effect when completed */}
       {isCompleted && (
         <motion.div
-          className="absolute inset-0 rounded-full bg-[#d4af37] blur-xl"
+          className="absolute inset-0 rounded-full bg-[#c9a962] blur-xl"
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
@@ -463,12 +463,12 @@ function StepIndicator({
       <div
         className={`relative flex h-14 w-14 items-center justify-center rounded-full border-2 transition-all duration-500 ${
           isCompleted
-            ? 'border-[#d4af37] bg-[#d4af37]/10'
-            : 'border-neutral-700 bg-transparent'
+            ? 'border-[#c9a962] bg-[#c9a962]/10'
+            : 'border-neutral-300 bg-transparent'
         }`}
       >
         {isCompleted ? (
-          <CheckCircle2 className="h-6 w-6 text-[#d4af37]" strokeWidth={1.5} />
+          <CheckCircle2 className="h-6 w-6 text-[#c9a962]" strokeWidth={1.5} />
         ) : (
           <Icon className="h-5 w-5 text-neutral-500" strokeWidth={1.5} />
         )}
@@ -530,35 +530,35 @@ const PhaseCard = ({
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex h-4 w-4 items-center justify-center"
         >
-          <div className="absolute h-4 w-4 animate-ping rounded-full bg-[#d4af37]/50" />
-          <div className="h-3 w-3 rounded-full bg-[#d4af37] shadow-[0_0_20px_rgba(212,175,55,0.6)]" />
+          <div className="absolute h-4 w-4 animate-ping rounded-full bg-[#c9a962]/50" />
+          <div className="h-3 w-3 rounded-full bg-[#c9a962] shadow-[0_0_20px_rgba(201,169,98,0.6)]" />
         </motion.div>
       </div>
 
       {/* Floating step card */}
-      <div className="relative overflow-hidden rounded-3xl bg-white shadow-[0_20px_70px_-15px_rgba(0,0,0,0.2)] transition-all duration-700 hover:shadow-[0_30px_90px_-15px_rgba(212,175,55,0.3)] dark:bg-neutral-900/95 dark:shadow-[0_20px_70px_-15px_rgba(0,0,0,0.5)] dark:backdrop-blur-xl">
+      <div className="relative overflow-hidden rounded-3xl bg-white shadow-[0_20px_70px_-15px_rgba(0,0,0,0.1)] transition-all duration-700 hover:shadow-[0_30px_90px_-15px_rgba(201,169,98,0.2)] border border-[#c9a962]/10">
         {/* Top accent line */}
-        <div className="h-1 w-full bg-linear-to-r from-transparent via-[#d4af37] to-transparent" />
+        <div className="h-1 w-full bg-linear-to-r from-transparent via-[#c9a962] to-transparent" />
 
         {/* Subtle background pattern for the card */}
         <div className="absolute inset-0 opacity-[0.03]">
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,#d4af37_1px,transparent_1px),linear-gradient(-45deg,#d4af37_1px,transparent_1px)] bg-size-[20px_20px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,#c9a962_1px,transparent_1px),linear-gradient(-45deg,#c9a962_1px,transparent_1px)] bg-size-[20px_20px]" />
         </div>
 
         <div className={`grid lg:grid-cols-2 ${isEven ? '' : 'lg:grid-flow-dense'}`}>
           {/* Content side */}
           <div className={`relative p-12 lg:p-16 ${isEven ? '' : 'lg:col-start-1'}`}>
             {/* Gradient overlay on content side */}
-            <div className="absolute inset-0 bg-linear-to-br from-[#d4af37]/5 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-[#c9a962]/5 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
 
             <div className="relative">
               {/* Header */}
               <div className="mb-10">
                 {/* Step number and icon */}
                 <div className="mb-6 flex items-center gap-4">
-                  <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-linear-to-br from-[#d4af37]/20 to-[#d4af37]/5">
-                    <div className="absolute inset-0 rounded-2xl bg-[#d4af37]/10 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
-                    <Icon className="relative h-9 w-9 text-[#d4af37]" strokeWidth={1.5} />
+                  <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-linear-to-br from-[#c9a962]/20 to-[#c9a962]/5">
+                    <div className="absolute inset-0 rounded-2xl bg-[#c9a962]/10 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+                    <Icon className="relative h-9 w-9 text-[#c9a962]" strokeWidth={1.5} />
                   </div>
                   <div className="flex items-center gap-2 text-neutral-500">
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -569,16 +569,16 @@ const PhaseCard = ({
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-3 font-SchnyderS text-4xl font-light leading-tight tracking-tight text-neutral-900 dark:text-white lg:text-5xl">
+                <h3 className="mb-3 font-SchnyderS text-4xl font-light leading-tight tracking-tight text-neutral-900 lg:text-5xl">
                   {phase.title}
                 </h3>
-                <p className="font-Satoshi text-lg font-light italic text-[#d4af37]">
+                <p className="font-Satoshi text-lg font-light italic text-[#c9a962]">
                   {phase.headline}
                 </p>
               </div>
 
               {/* Description */}
-              <p className="mb-10 font-Satoshi text-base font-light leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="mb-10 font-Satoshi text-base font-light leading-relaxed text-neutral-600">
                 {phase.description}
               </p>
 
@@ -595,15 +595,15 @@ const PhaseCard = ({
                   >
                     {/* Animated bullet */}
                     <div className="absolute left-0 top-1 flex h-5 w-5 items-center justify-center">
-                      <div className="h-2 w-2 rounded-full bg-[#d4af37] transition-all duration-300 group-hover/item:scale-150 group-hover/item:shadow-[0_0_10px_rgba(212,175,55,0.6)]" />
-                      <div className="absolute h-5 w-5 rounded-full border border-[#d4af37]/30 transition-all duration-300 group-hover/item:scale-110" />
+                      <div className="h-2 w-2 rounded-full bg-[#c9a962] transition-all duration-300 group-hover/item:scale-150 group-hover/item:shadow-[0_0_10px_rgba(201,169,98,0.6)]" />
+                      <div className="absolute h-5 w-5 rounded-full border border-[#c9a962]/30 transition-all duration-300 group-hover/item:scale-110" />
                     </div>
 
                     <div>
-                      <h4 className="mb-1 font-Satoshi text-sm font-medium text-neutral-900 dark:text-neutral-200">
+                      <h4 className="mb-1 font-Satoshi text-sm font-medium text-neutral-900">
                         {item.label}
                       </h4>
-                      <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600 dark:text-neutral-400">
+                      <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
                         {item.text}
                       </p>
                     </div>
@@ -634,8 +634,8 @@ const PhaseCard = ({
             </motion.div>
 
             {/* Multi-layered gradient overlays */}
-            <div className="absolute inset-0 bg-linear-to-t from-neutral-950/70 via-neutral-950/30 to-transparent" />
-            <div className="absolute inset-0 bg-linear-to-r from-neutral-950/50 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-[#faf8f5]/90 via-[#faf8f5]/40 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-r from-[#faf8f5]/60 via-transparent to-transparent" />
 
             {/* Animated shimmer effect */}
             <motion.div
@@ -652,7 +652,7 @@ const PhaseCard = ({
             />
 
             {/* Decorative corner */}
-            <div className="absolute left-8 top-8 h-20 w-20 border-l-2 border-t-2 border-white/30 transition-all duration-500 group-hover:h-24 group-hover:w-24 group-hover:border-[#d4af37]" />
+            <div className="absolute left-8 top-8 h-20 w-20 border-l-2 border-t-2 border-[#c9a962]/30 transition-all duration-500 group-hover:h-24 group-hover:w-24 group-hover:border-[#c9a962]" />
           </motion.div>
         </div>
       </div>

@@ -32,7 +32,7 @@ export default function ReadingProgress({ targetRef }: ReadingProgressProps) {
 
   return (
     <motion.div
-      className="fixed left-0 right-0 top-0 z-50 h-1 origin-left bg-[#d4af37]"
+      className="fixed left-0 right-0 top-0 z-50 h-1 origin-left bg-[#c9a962]"
       style={{ scaleX }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -40,7 +40,7 @@ export default function ReadingProgress({ targetRef }: ReadingProgressProps) {
     >
       {isComplete && (
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-[#d4af37] via-[#f5d77a] to-[#d4af37]"
+          className="absolute inset-0 bg-gradient-to-r from-[#c9a962] via-[#f5d77a] to-[#c9a962]"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{ duration: 1.5, repeat: 2 }}

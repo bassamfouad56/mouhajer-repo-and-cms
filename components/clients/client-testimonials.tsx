@@ -97,7 +97,7 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4af37]/[0.03] blur-[150px]" />
+        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a962]/[0.03] blur-[150px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
@@ -149,8 +149,8 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
             >
               {/* Quote Icon */}
               <div className="mb-8 flex justify-center">
-                <div className="flex h-20 w-20 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/5">
-                  <Quote className="h-10 w-10 text-[#d4af37]" strokeWidth={1} />
+                <div className="flex h-20 w-20 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
+                  <Quote className="h-10 w-10 text-[#c9a962]" strokeWidth={1} />
                 </div>
               </div>
 
@@ -159,7 +159,7 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
                 {Array.from({ length: activeTestimonial.rating }).map((_, i) => (
                   <Star
                     key={i}
-                    className="h-5 w-5 fill-[#d4af37] text-[#d4af37]"
+                    className="h-5 w-5 fill-[#c9a962] text-[#c9a962]"
                   />
                 ))}
               </div>
@@ -174,7 +174,7 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
               {/* Author Info */}
               <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
                 {/* Avatar */}
-                <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-[#d4af37]/30">
+                <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-[#c9a962]/30">
                   <img
                     src={activeTestimonial.image}
                     alt={activeTestimonial.author}
@@ -190,7 +190,7 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
                   <div className="mb-1 font-Satoshi text-sm font-light text-neutral-600">
                     {activeTestimonial.position}
                   </div>
-                  <div className="font-Satoshi text-sm font-light uppercase tracking-wider text-[#d4af37]">
+                  <div className="font-Satoshi text-sm font-light uppercase tracking-wider text-[#c9a962]">
                     {activeTestimonial.company}
                   </div>
                 </div>
@@ -202,10 +202,10 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
           <div className="mt-12 flex items-center justify-center gap-4">
             <button
               onClick={prevTestimonial}
-              className="group flex h-14 w-14 items-center justify-center border border-neutral-200 bg-white transition-all duration-300 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/5"
+              className="group flex h-14 w-14 items-center justify-center border border-neutral-200 bg-white transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/5"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="h-6 w-6 text-neutral-400 transition-colors group-hover:text-[#d4af37]" />
+              <ChevronLeft className="h-6 w-6 text-neutral-400 transition-colors group-hover:text-[#c9a962]" />
             </button>
 
             {/* Dots Indicator */}
@@ -216,7 +216,7 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
                   onClick={() => setActiveIndex(index)}
                   className={`h-2 w-2 rounded-full transition-all duration-300 ${
                     index === activeIndex
-                      ? 'w-8 bg-[#d4af37]'
+                      ? 'w-8 bg-[#c9a962]'
                       : 'bg-neutral-300 hover:bg-neutral-400'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -226,10 +226,10 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
 
             <button
               onClick={nextTestimonial}
-              className="group flex h-14 w-14 items-center justify-center border border-neutral-200 bg-white transition-all duration-300 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/5"
+              className="group flex h-14 w-14 items-center justify-center border border-neutral-200 bg-white transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/5"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="h-6 w-6 text-neutral-400 transition-colors group-hover:text-[#d4af37]" />
+              <ChevronRight className="h-6 w-6 text-neutral-400 transition-colors group-hover:text-[#c9a962]" />
             </button>
           </div>
 

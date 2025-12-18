@@ -98,7 +98,7 @@ export default function ReactionButtons({ postId, initialReactions }: ReactionBu
             whileTap={{ scale: 0.95 }}
             className={`group flex flex-col items-center gap-1 rounded-lg border px-4 py-3 transition-all duration-300 ${
               userReaction === key
-                ? 'border-[#d4af37] bg-[#d4af37]/10'
+                ? 'border-[#c9a962] bg-[#c9a962]/10'
                 : 'border-neutral-200 bg-white hover:border-neutral-300'
             }`}
           >
@@ -118,7 +118,7 @@ export default function ReactionButtons({ postId, initialReactions }: ReactionBu
             </span>
             <span
               className={`font-Satoshi text-xs font-medium ${
-                userReaction === key ? 'text-[#d4af37]' : 'text-neutral-400'
+                userReaction === key ? 'text-[#c9a962]' : 'text-neutral-400'
               }`}
             >
               {reactions[key as keyof Reactions]}

@@ -48,7 +48,7 @@ interface BlogPostContentProps {
 
 // Category colors
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
-  trends: { bg: 'bg-[#d4af37]/10', text: 'text-[#d4af37]', border: 'border-[#d4af37]/30' },
+  trends: { bg: 'bg-[#c9a962]/10', text: 'text-[#c9a962]', border: 'border-[#c9a962]/30' },
   tips: { bg: 'bg-blue-500/10', text: 'text-blue-600', border: 'border-blue-500/30' },
   'case-studies': { bg: 'bg-green-500/10', text: 'text-green-600', border: 'border-green-500/30' },
   news: { bg: 'bg-purple-500/10', text: 'text-purple-600', border: 'border-purple-500/30' },
@@ -111,7 +111,7 @@ const createPortableTextComponents = (): PortableTextComponents => ({
         id={value._headingId}
         className="mb-6 mt-14 scroll-mt-32 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950 lg:text-4xl"
       >
-        <span className="mr-4 inline-block h-px w-8 bg-[#d4af37] align-middle" />
+        <span className="mr-4 inline-block h-px w-8 bg-[#c9a962] align-middle" />
         {children}
       </motion.h2>
     ),
@@ -149,9 +149,9 @@ const createPortableTextComponents = (): PortableTextComponents => ({
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="relative my-12 overflow-hidden border-l-4 border-[#d4af37] bg-gradient-to-r from-neutral-50 to-transparent py-8 pl-10 pr-8"
+        className="relative my-12 overflow-hidden border-l-4 border-[#c9a962] bg-gradient-to-r from-neutral-50 to-transparent py-8 pl-10 pr-8"
       >
-        <div className="absolute left-6 top-6 font-SchnyderS text-6xl text-[#d4af37]/20">&ldquo;</div>
+        <div className="absolute left-6 top-6 font-SchnyderS text-6xl text-[#c9a962]/20">&ldquo;</div>
         <div className="relative z-10 font-SchnyderS text-2xl font-light italic leading-relaxed text-neutral-700 lg:text-3xl">
           {children}
         </div>
@@ -183,7 +183,7 @@ const createPortableTextComponents = (): PortableTextComponents => ({
   listItem: {
     bullet: ({ children }) => (
       <li className="relative pl-6 font-Satoshi text-lg font-light leading-relaxed text-neutral-700">
-        <span className="absolute left-0 top-3 h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
+        <span className="absolute left-0 top-3 h-1.5 w-1.5 rounded-full bg-[#c9a962]" />
         {children}
       </li>
     ),
@@ -200,7 +200,7 @@ const createPortableTextComponents = (): PortableTextComponents => ({
           href={href}
           target={isExternal ? '_blank' : undefined}
           rel={isExternal ? 'noopener noreferrer' : undefined}
-          className="text-[#d4af37] underline decoration-[#d4af37]/30 underline-offset-4 transition-colors hover:decoration-[#d4af37]"
+          className="text-[#c9a962] underline decoration-[#c9a962]/30 underline-offset-4 transition-colors hover:decoration-[#c9a962]"
         >
           {children}
         </a>
@@ -439,7 +439,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                       onClick={() => setIsBookmarked(!isBookmarked)}
                       className={`flex items-center gap-2 rounded-full border px-4 py-2 font-Satoshi text-xs transition-all ${
                         isBookmarked
-                          ? 'border-[#d4af37] bg-[#d4af37]/10 text-[#d4af37]'
+                          ? 'border-[#c9a962] bg-[#c9a962]/10 text-[#c9a962]'
                           : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white'
                       }`}
                     >
@@ -484,7 +484,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
               >
                 {/* Lead paragraph styling */}
                 {post.excerpt && (
-                  <p className="mb-12 border-l-4 border-[#d4af37] pl-6 font-SchnyderS text-2xl font-light leading-relaxed text-neutral-700 lg:text-3xl">
+                  <p className="mb-12 border-l-4 border-[#c9a962] pl-6 font-SchnyderS text-2xl font-light leading-relaxed text-neutral-700 lg:text-3xl">
                     {post.excerpt}
                   </p>
                 )}
@@ -509,7 +509,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                         return (
                           <span
                             key={tagKey}
-                            className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-1.5 font-Satoshi text-xs font-light text-neutral-600 transition-colors hover:border-[#d4af37] hover:bg-[#d4af37]/5"
+                            className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-1.5 font-Satoshi text-xs font-light text-neutral-600 transition-colors hover:border-[#c9a962] hover:bg-[#c9a962]/5"
                           >
                             {tagName}
                           </span>
@@ -577,7 +577,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                       </button>
                       <button
                         onClick={copyLink}
-                        className="flex items-center justify-center gap-2 rounded-lg border border-neutral-200 py-3 font-Satoshi text-xs text-neutral-600 transition-all hover:border-[#d4af37] hover:bg-[#d4af37]/10 hover:text-[#d4af37]"
+                        className="flex items-center justify-center gap-2 rounded-lg border border-neutral-200 py-3 font-Satoshi text-xs text-neutral-600 transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/10 hover:text-[#c9a962]"
                       >
                         {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
                         {copied ? 'Copied!' : 'Copy'}
@@ -595,7 +595,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                     </p>
                     <Link
                       href="/contact"
-                      className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-[#d4af37] transition-colors hover:text-white"
+                      className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-[#c9a962] transition-colors hover:text-white"
                     >
                       <span>Get in Touch</span>
                       <ArrowRight size={12} />
@@ -627,7 +627,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                     </div>
                   )}
                   <div className="flex-1">
-                    <p className="mb-2 font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37]">
+                    <p className="mb-2 font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
                       About the Author
                     </p>
                     <h3 className="mb-3 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950">
@@ -645,7 +645,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                     )}
                     <Link
                       href="/blog"
-                      className="inline-flex items-center gap-2 border-b border-neutral-950 pb-1 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-colors hover:border-[#d4af37] hover:text-[#d4af37]"
+                      className="inline-flex items-center gap-2 border-b border-neutral-950 pb-1 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-colors hover:border-[#c9a962] hover:text-[#c9a962]"
                     >
                       View all articles
                       <ArrowRight size={14} />
@@ -688,8 +688,8 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
         <section className="relative overflow-hidden bg-neutral-950 px-6 py-32 lg:px-12">
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px]" />
-          <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#d4af37]/5 blur-[150px]" />
-          <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#d4af37]/5 blur-[150px]" />
+          <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[150px]" />
+          <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[150px]" />
 
           <div className="relative z-10 mx-auto max-w-4xl text-center">
             <motion.div
@@ -698,13 +698,13 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="mb-6 block font-Satoshi text-[10px] uppercase tracking-[0.4em] text-[#d4af37]">
+              <span className="mb-6 block font-Satoshi text-[10px] uppercase tracking-[0.4em] text-[#c9a962]">
                 Start Your Project
               </span>
               <h2 className="mb-8 font-SchnyderS text-5xl font-light tracking-tight text-white lg:text-7xl">
                 Inspired by What
                 <br />
-                You&apos;ve <span className="text-[#d4af37]">Read?</span>
+                You&apos;ve <span className="text-[#c9a962]">Read?</span>
               </h2>
               <p className="mb-12 font-Satoshi text-xl font-light text-white/60">
                 Let&apos;s discuss how we can bring your interior design vision to life.
@@ -712,7 +712,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center gap-3 border border-[#d4af37] bg-[#d4af37] px-10 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#d4af37]"
+                  className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]"
                 >
                   <span>Start Your Project</span>
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
@@ -801,10 +801,10 @@ function RelatedPostCard({ post, index }: { post: SanityPost; index: number }) {
 
           {/* Animated Border */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-0 top-0 h-0 w-full bg-[#d4af37] transition-all duration-500 group-hover:h-1" />
-            <div className="absolute right-0 top-0 h-full w-0 bg-[#d4af37] transition-all duration-500 delay-75 group-hover:w-1" />
-            <div className="absolute bottom-0 right-0 h-0 w-full bg-[#d4af37] transition-all duration-500 delay-150 group-hover:h-1" />
-            <div className="absolute bottom-0 left-0 h-full w-0 bg-[#d4af37] transition-all duration-500 delay-200 group-hover:w-1" />
+            <div className="absolute left-0 top-0 h-0 w-full bg-[#c9a962] transition-all duration-500 group-hover:h-1" />
+            <div className="absolute right-0 top-0 h-full w-0 bg-[#c9a962] transition-all duration-500 delay-75 group-hover:w-1" />
+            <div className="absolute bottom-0 right-0 h-0 w-full bg-[#c9a962] transition-all duration-500 delay-150 group-hover:h-1" />
+            <div className="absolute bottom-0 left-0 h-full w-0 bg-[#c9a962] transition-all duration-500 delay-200 group-hover:w-1" />
           </div>
 
           {/* Category Badge */}
@@ -820,7 +820,7 @@ function RelatedPostCard({ post, index }: { post: SanityPost; index: number }) {
         {/* Content */}
         <div>
           {/* Title */}
-          <h3 className="mb-3 line-clamp-2 font-SchnyderS text-2xl font-light tracking-tight text-neutral-950 transition-colors group-hover:text-[#d4af37]">
+          <h3 className="mb-3 line-clamp-2 font-SchnyderS text-2xl font-light tracking-tight text-neutral-950 transition-colors group-hover:text-[#c9a962]">
             {post.title}
           </h3>
 

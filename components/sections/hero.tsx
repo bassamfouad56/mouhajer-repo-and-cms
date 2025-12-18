@@ -62,7 +62,7 @@ export function Hero() {
     <section
       ref={containerRef}
       id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-neutral-950"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#faf8f5]"
     >
       {/* Left Carousel Column */}
       <div className="absolute left-0 top-0 hidden h-full w-48 lg:block xl:w-64">
@@ -84,7 +84,7 @@ export function Hero() {
                 fill
                 className="object-cover opacity-90 transition-all duration-700 hover:opacity-100 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-neutral-950/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/30 via-transparent to-transparent" />
             </div>
           ))}
         </motion.div>
@@ -110,38 +110,38 @@ export function Hero() {
                 fill
                 className="object-cover opacity-90 transition-all duration-700 hover:opacity-100 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-neutral-950/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/30 via-transparent to-transparent" />
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Dark overlay for carousel fade */}
-      <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/70 via-neutral-950/40 to-neutral-950/70 lg:via-neutral-950/20" />
+      {/* Light overlay for carousel fade */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#faf8f5]/90 via-[#faf8f5]/70 to-[#faf8f5]/90" />
 
       {/* Architectural Line Pattern */}
       <div className="absolute inset-0">
         {/* Subtle diagonal lines for architectural feel */}
-        <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-transparent via-neutral-800 to-transparent" />
-        <div className="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-transparent via-neutral-800 to-transparent" />
-        <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
-        <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
+        <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#c9a962]/30 to-transparent" />
+        <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#c9a962]/30 to-transparent" />
+        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
 
         {/* Decorative corner elements */}
-        <svg className="absolute left-12 top-12 h-32 w-32 opacity-20" viewBox="0 0 100 100">
-          <path d="M 0 0 L 0 100 M 0 0 L 100 0" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-white" />
+        <svg className="absolute left-12 top-12 h-32 w-32 opacity-30" viewBox="0 0 100 100">
+          <path d="M 0 0 L 0 100 M 0 0 L 100 0" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-[#c9a962]" />
         </svg>
-        <svg className="absolute right-12 bottom-12 h-32 w-32 opacity-20" viewBox="0 0 100 100">
-          <path d="M 100 100 L 100 0 M 100 100 L 0 100" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-white" />
+        <svg className="absolute right-12 bottom-12 h-32 w-32 opacity-30" viewBox="0 0 100 100">
+          <path d="M 100 100 L 100 0 M 100 100 L 0 100" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-[#c9a962]" />
         </svg>
       </div>
 
       {/* Elegant accent lines - architectural blueprint style */}
-      <div className="absolute left-1/4 top-1/3 h-px w-32 bg-gradient-to-r from-white/20 to-transparent" />
-      <div className="absolute right-1/4 bottom-1/3 h-px w-32 bg-gradient-to-l from-white/20 to-transparent" />
+      <div className="absolute left-1/4 top-1/3 h-px w-32 bg-gradient-to-r from-[#c9a962]/40 to-transparent" />
+      <div className="absolute right-1/4 bottom-1/3 h-px w-32 bg-gradient-to-l from-[#c9a962]/40 to-transparent" />
 
       {/* Subtle background texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.01)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,98,0.03)_0%,transparent_70%)]" />
 
       <motion.div
         style={{ opacity, scale }}
@@ -154,21 +154,21 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 1.2 }}
           className="mb-8 flex items-center justify-center gap-4"
         >
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-neutral-600" />
-          <span className="text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
+          <span className="text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
             Dubai • Luxury Interior Design
           </span>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-neutral-600" />
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
         </motion.div>
 
         {/* Main Title */}
         <h1
           ref={titleRef}
-          className="mb-8 text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+          className="mb-8 text-5xl font-light leading-tight tracking-tight text-neutral-900 sm:text-6xl md:text-7xl lg:text-8xl"
         >
           Crafting Timeless
           <br />
-          Elegant Spaces
+          <span className="text-[#c9a962]">Elegant Spaces</span>
         </h1>
 
         {/* Description */}
@@ -176,7 +176,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.8 }}
-          className="mx-auto mb-12 max-w-2xl text-base font-light leading-relaxed text-neutral-300 sm:text-lg"
+          className="mx-auto mb-12 max-w-2xl text-base font-light leading-relaxed text-neutral-600 sm:text-lg"
         >
           Transforming visions into extraordinary interiors. Award-winning design
           studio specializing in luxury residential and commercial spaces.
@@ -191,14 +191,13 @@ export function Hero() {
         >
           <a
             href="#projects"
-            className="group relative overflow-hidden border border-white px-10 py-5 text-xs font-light uppercase tracking-[0.25em] text-white transition-all hover:bg-white hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+            className="group relative overflow-hidden border border-[#c9a962] bg-[#c9a962] px-10 py-5 text-xs font-light uppercase tracking-[0.25em] text-white transition-all hover:bg-transparent hover:text-[#c9a962] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2"
           >
             <span className="relative z-10">Explore Portfolio</span>
-            <div className="absolute inset-0 -translate-x-full bg-white transition-transform duration-500 group-hover:translate-x-0" />
           </a>
           <a
             href="#contact"
-            className="group relative border-b-2 border-neutral-600 pb-2 text-xs font-light uppercase tracking-[0.25em] text-neutral-300 transition-all hover:border-white hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+            className="group relative border-b-2 border-neutral-400 pb-2 text-xs font-light uppercase tracking-[0.25em] text-neutral-600 transition-all hover:border-[#c9a962] hover:text-[#c9a962] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2"
           >
             <span className="relative z-10 flex items-center gap-2">
               Start Your Project
@@ -218,9 +217,9 @@ export function Hero() {
         >
           <div className="relative">
             {/* Top decorative line */}
-            <div className="absolute -top-8 left-1/2 h-16 w-px -translate-x-1/2 bg-gradient-to-b from-white/20 to-transparent" />
+            <div className="absolute -top-8 left-1/2 h-16 w-px -translate-x-1/2 bg-gradient-to-b from-[#c9a962]/40 to-transparent" />
 
-            <div className="grid grid-cols-3 gap-12 border-y border-neutral-800 py-8">
+            <div className="grid grid-cols-3 gap-12 border-y border-[#c9a962]/20 py-8">
               {[
                 { value: '15+', label: 'Years of Excellence' },
                 { value: '200+', label: 'Completed Projects' },
@@ -229,12 +228,12 @@ export function Hero() {
                 <div key={index} className="group relative text-center">
                   {/* Vertical divider between stats */}
                   {index < 2 && (
-                    <div className="absolute -right-6 top-1/2 h-8 w-px -translate-y-1/2 bg-neutral-800" />
+                    <div className="absolute -right-6 top-1/2 h-8 w-px -translate-y-1/2 bg-[#c9a962]/20" />
                   )}
-                  <div className="mb-3 text-3xl font-light tracking-tight text-white transition-all duration-300 sm:text-4xl">
+                  <div className="mb-3 text-3xl font-light tracking-tight text-neutral-900 transition-all duration-300 sm:text-4xl">
                     {stat.value}
                   </div>
-                  <div className="text-xs font-light uppercase tracking-[0.2em] text-neutral-400">
+                  <div className="text-xs font-light uppercase tracking-[0.2em] text-neutral-500">
                     {stat.label}
                   </div>
                 </div>
@@ -254,10 +253,10 @@ export function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs font-light tracking-widest text-neutral-500">
+          <span className="text-xs font-light tracking-widest text-[#c9a962]">
             SCROLL
           </span>
-          <ChevronDown className="text-neutral-500" size={20} />
+          <ChevronDown className="text-[#c9a962]" size={20} />
         </motion.div>
       </motion.div>
     </section>

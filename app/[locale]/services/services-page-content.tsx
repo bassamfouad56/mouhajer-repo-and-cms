@@ -85,11 +85,11 @@ export default function ServicesPageContent({
     : '/projects/turnkey-design-fitout/_MID0058-HDR.jpg');
 
   return (
-    <main className="relative bg-neutral-950">
+    <main className="relative bg-[#faf8f5]">
       {/* Hero Section - Cinematic Full Screen with Background Image */}
       <section
         ref={heroRef}
-        className="relative h-screen min-h-[800px] overflow-hidden bg-neutral-950"
+        className="relative h-screen min-h-[800px] overflow-hidden bg-[#faf8f5]"
       >
         {/* Background Image with Parallax */}
         {bannerImage && (
@@ -110,23 +110,23 @@ export default function ServicesPageContent({
         )}
 
         {/* Cinematic Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-950/60 to-neutral-950" />
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/40 via-transparent to-neutral-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/85 via-[#faf8f5]/70 to-[#faf8f5]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#faf8f5]/50 via-transparent to-[#faf8f5]/50" />
 
         {/* Subtle Grid Pattern */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(to right, rgba(201,169,98,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(201,169,98,0.3) 1px, transparent 1px)`,
             backgroundSize: '60px 60px',
           }}
         />
 
         {/* Gold Accent Glow */}
-        <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.03] blur-[150px]" />
+        <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.06] blur-[150px]" />
 
         {/* Top Border Accent */}
-        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" />
+        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
 
         {/* Hero Content */}
         <motion.div
@@ -141,11 +141,11 @@ export default function ServicesPageContent({
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-12 flex items-center justify-center gap-4"
             >
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-              <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-white/50">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+              <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-neutral-500">
                 Services
               </span>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
             </motion.div>
 
             {/* Main Title */}
@@ -158,7 +158,7 @@ export default function ServicesPageContent({
                   delay: 0.3,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl"
+                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-neutral-900 sm:text-7xl md:text-8xl lg:text-9xl"
               >
                 The Art of
               </motion.h1>
@@ -173,7 +173,7 @@ export default function ServicesPageContent({
                   delay: 0.5,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-[#d4af37] sm:text-7xl md:text-8xl lg:text-9xl"
+                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-[#c9a962] sm:text-7xl md:text-8xl lg:text-9xl"
               >
                 Integrated Construction
               </motion.h1>
@@ -184,7 +184,7 @@ export default function ServicesPageContent({
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="mx-auto mb-12 max-w-3xl px-4 font-Satoshi text-xl font-light leading-relaxed text-white/60 sm:px-0 sm:text-2xl"
+              className="mx-auto mb-12 max-w-3xl px-4 font-Satoshi text-xl font-light leading-relaxed text-neutral-600 sm:px-0 sm:text-2xl"
             >
               Design. Build. Engineering. One Point of Responsibility.
             </motion.p>
@@ -202,10 +202,10 @@ export default function ServicesPageContent({
                 { number: '0', label: 'Outsourcing' },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="font-SchnyderS text-4xl font-light text-white sm:text-5xl">
+                  <div className="font-SchnyderS text-4xl font-light text-neutral-900 sm:text-5xl">
                     {stat.number}
                   </div>
-                  <div className="mt-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
+                  <div className="mt-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] text-neutral-500">
                     {stat.label}
                   </div>
                 </div>
@@ -226,15 +226,15 @@ export default function ServicesPageContent({
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="flex flex-col items-center gap-3"
           >
-            <span className="font-Satoshi text-[9px] font-light uppercase tracking-[0.3em] text-white/30">
+            <span className="font-Satoshi text-[9px] font-light uppercase tracking-[0.3em] text-neutral-500">
               Scroll
             </span>
-            <ChevronDown className="h-4 w-4 text-white/30" />
+            <ChevronDown className="h-4 w-4 text-neutral-500" />
           </motion.div>
         </motion.div>
 
         {/* Bottom Border Accent */}
-        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#d4af37]/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
       </section>
 
       {/* Section 1: Turnkey Solution with Real Project Image */}
@@ -305,19 +305,19 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-950 py-32 sm:py-40 lg:py-56"
+      className="relative overflow-hidden bg-[#faf8f5] py-32 sm:py-40 lg:py-56"
     >
       {/* Subtle grid background */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, rgba(201,169,98,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(201,169,98,0.3) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }}
       />
 
       {/* Gold accent glow */}
-      <div className="pointer-events-none absolute right-0 top-1/4 h-[500px] w-[500px] rounded-full bg-[#d4af37]/[0.02] blur-[150px]" />
+      <div className="pointer-events-none absolute right-0 top-1/4 h-[500px] w-[500px] rounded-full bg-[#c9a962]/[0.06] blur-[150px]" />
 
       <div className="mx-auto max-w-[1800px] px-6 lg:px-16 xl:px-24">
         <div className="grid gap-20 lg:grid-cols-2 lg:gap-32 items-center">
@@ -330,20 +330,20 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
           >
             <div className="mb-10">
               <motion.div
-                className="mb-4 h-px w-12 bg-gradient-to-r from-[#d4af37] to-transparent"
+                className="mb-4 h-px w-12 bg-gradient-to-r from-[#c9a962] to-transparent"
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
               />
             </div>
 
-            <h2 className="mb-16 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
+            <h2 className="mb-16 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl xl:text-8xl">
               We Do Not
               <br />
-              <span className="text-[#d4af37]">Outsource Your Vision</span>
+              <span className="text-[#c9a962]">Outsource Your Vision</span>
             </h2>
 
-            <div className="space-y-10 font-Satoshi text-lg font-light leading-relaxed text-white/60 lg:text-xl">
+            <div className="space-y-10 font-Satoshi text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -355,7 +355,7 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
               </motion.p>
 
               <motion.p
-                className="text-white"
+                className="text-neutral-900"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -378,7 +378,7 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="border-l-2 border-[#d4af37]/50 pl-8 text-white text-xl lg:text-2xl"
+                className="border-l-2 border-[#c9a962]/50 pl-8 text-neutral-900 text-xl lg:text-2xl"
               >
                 <p>
                   No Blame Games.
@@ -424,25 +424,25 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
                   priority
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/40 via-transparent to-transparent" />
             </motion.div>
 
-            {/* Floating Project Label - Dark Theme */}
+            {/* Floating Project Label - Light Theme */}
             {featuredProject && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="absolute bottom-8 left-8 right-8 backdrop-blur-md bg-neutral-950/80 border border-white/10 p-8"
+                className="absolute bottom-8 left-8 right-8 backdrop-blur-md bg-white/80 border border-[#c9a962]/20 p-8"
               >
-                <div className="font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#d4af37] mb-2">
+                <div className="font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#c9a962] mb-2">
                   Featured Project
                 </div>
-                <div className="font-SchnyderS text-3xl font-light text-white mb-2">
+                <div className="font-SchnyderS text-3xl font-light text-neutral-900 mb-2">
                   {getLocalizedText(featuredProject.title, locale)}
                 </div>
                 {featuredProject.location && (
-                  <div className="font-Satoshi text-sm text-white/50">
+                  <div className="font-Satoshi text-sm text-neutral-500">
                     {getLocalizedText(featuredProject.location, locale)}
                   </div>
                 )}
@@ -450,14 +450,14 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
             )}
 
             {/* Corner accents */}
-            <div className="absolute right-0 top-0 h-24 w-24 border-r border-t border-[#d4af37]/20" />
-            <div className="absolute bottom-0 left-0 h-24 w-24 border-b border-l border-[#d4af37]/20" />
+            <div className="absolute right-0 top-0 h-24 w-24 border-r border-t border-[#c9a962]/20" />
+            <div className="absolute bottom-0 left-0 h-24 w-24 border-b border-l border-[#c9a962]/20" />
           </motion.div>
         </div>
       </div>
 
       {/* Section divider */}
-      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
     </section>
   );
 }
@@ -594,10 +594,10 @@ function ServicePillarsSection({
     <section
       id="services"
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-950 py-32 sm:py-40 lg:py-48"
+      className="relative overflow-hidden bg-[#faf8f5] py-32 sm:py-40 lg:py-48"
     >
       {/* Minimal Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px] opacity-20" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:80px_80px] opacity-50" />
 
       <div className="mx-auto max-w-[1800px] px-6 lg:px-16 xl:px-24">
         {/* Section Header */}
@@ -608,15 +608,15 @@ function ServicePillarsSection({
           className="mb-20 lg:mb-24"
         >
           <div className="mb-4">
-            <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-white/40">
+            <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-neutral-500">
               Complete Lifecycle Control
             </span>
           </div>
 
-          <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
+          <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
             Our Core
             <br />
-            <span className="text-[#d4af37]">Service Pillars</span>
+            <span className="text-[#c9a962]">Service Pillars</span>
           </h2>
         </motion.div>
 
@@ -640,7 +640,7 @@ function ServicePillarsSection({
                 className="group relative"
               >
                 <Link href={service.ctaLink} className="block">
-                  <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white/[0.04]">
+                  <div className="relative overflow-hidden border border-[#c9a962]/20 bg-white/70 transition-all duration-500 hover:border-[#c9a962]/40 hover:bg-white/90">
                     {/* Top Section: Image + Number */}
                     <div className="relative">
                       {/* Image */}
@@ -654,7 +654,7 @@ function ServicePillarsSection({
                             sizes="(max-width: 768px) 100vw, 50vw"
                           />
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-[#faf8f5]/40 to-transparent" />
                       </div>
 
                     </div>
@@ -662,17 +662,17 @@ function ServicePillarsSection({
                     {/* Content Section */}
                     <div className="p-8 lg:p-10">
                       {/* Subtitle */}
-                      <div className="mb-3 font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#d4af37]">
+                      <div className="mb-3 font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#c9a962]">
                         {service.subtitle}
                       </div>
 
                       {/* Title */}
-                      <h3 className="mb-4 font-SchnyderS text-3xl font-light text-white transition-colors duration-500 group-hover:text-white lg:text-4xl">
+                      <h3 className="mb-4 font-SchnyderS text-3xl font-light text-neutral-900 transition-colors duration-500 group-hover:text-[#c9a962] lg:text-4xl">
                         {service.title}
                       </h3>
 
                       {/* Description - Always visible */}
-                      <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-white/50">
+                      <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-neutral-600">
                         {service.description}
                       </p>
 
@@ -681,7 +681,7 @@ function ServicePillarsSection({
                         {service.capabilities.map((cap, i) => (
                           <span
                             key={i}
-                            className="border border-white/10 bg-white/5 px-3 py-1.5 font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/40"
+                            className="border border-[#c9a962]/20 bg-[#c9a962]/5 px-3 py-1.5 font-Satoshi text-[10px] font-light uppercase tracking-wider text-neutral-600"
                           >
                             {cap}
                           </span>
@@ -689,15 +689,15 @@ function ServicePillarsSection({
                       </div>
 
                       {/* CTA */}
-                      <div className="flex items-center gap-2 font-Satoshi text-sm font-light text-white/60 transition-colors duration-300 group-hover:text-[#d4af37]">
+                      <div className="flex items-center gap-2 font-Satoshi text-sm font-light text-neutral-600 transition-colors duration-300 group-hover:text-[#c9a962]">
                         <span>Explore Service</span>
                         <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </div>
                     </div>
 
                     {/* Corner Accent */}
-                    <div className="absolute right-0 top-0 h-16 w-16 border-r border-t border-[#d4af37]/0 transition-all duration-500 group-hover:border-[#d4af37]/30" />
-                    <div className="absolute bottom-0 left-0 h-16 w-16 border-b border-l border-[#d4af37]/0 transition-all duration-500 group-hover:border-[#d4af37]/30" />
+                    <div className="absolute right-0 top-0 h-16 w-16 border-r border-t border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/30" />
+                    <div className="absolute bottom-0 left-0 h-16 w-16 border-b border-l border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/30" />
                   </div>
                 </Link>
               </motion.div>
@@ -741,7 +741,7 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
         <motion.div
           whileHover={{ y: -4 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex h-full flex-col overflow-hidden bg-neutral-900 border border-neutral-800/50 transition-all duration-500 hover:border-neutral-700"
+          className="relative flex h-full flex-col overflow-hidden bg-white/70 border border-[#c9a962]/20 transition-all duration-500 hover:border-[#c9a962]/40"
         >
           {/* Large Image */}
           {imageSource ? (
@@ -761,11 +761,11 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
               </motion.div>
 
               {/* Subtle Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-[#faf8f5]/40 to-transparent" />
             </div>
           ) : (
-            <div className="aspect-[3/4] bg-neutral-900 flex items-center justify-center">
-              <div className="font-SchnyderS text-4xl font-light text-white/10">
+            <div className="aspect-[3/4] bg-[#faf8f5] flex items-center justify-center">
+              <div className="font-SchnyderS text-4xl font-light text-[#c9a962]/20">
                 {service.subtitle}
               </div>
             </div>
@@ -779,17 +779,17 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
             </div>
 
             {/* Title */}
-            <h3 className="mb-6 font-SchnyderS text-3xl font-light leading-tight text-white xl:text-4xl">
+            <h3 className="mb-6 font-SchnyderS text-3xl font-light leading-tight text-neutral-900 xl:text-4xl">
               {service.title}
             </h3>
 
             {/* Description */}
-            <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-neutral-400">
+            <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-neutral-600">
               {service.description}
             </p>
 
             {/* Capabilities */}
-            <div className="mb-8 pb-8 border-b border-neutral-800">
+            <div className="mb-8 pb-8 border-b border-[#c9a962]/20">
               <p className="font-Satoshi text-sm font-light text-neutral-500">
                 {service.capabilities[0]}
               </p>
@@ -798,7 +798,7 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
             {/* CTA */}
             <div className="mt-auto">
               <motion.div
-                className="inline-flex items-center gap-2 font-Satoshi text-sm font-light text-neutral-400 transition-colors group-hover:text-white"
+                className="inline-flex items-center gap-2 font-Satoshi text-sm font-light text-neutral-600 transition-colors group-hover:text-[#c9a962]"
                 animate={{ gap: isHovered ? 8 : 8 }}
               >
                 <span>Explore</span>
@@ -826,10 +826,11 @@ function IntegratedPathCTA() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-950 py-40 lg:py-56"
+      className="relative overflow-hidden bg-[#faf8f5] py-40 lg:py-56"
     >
       {/* Minimal Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5] via-white/50 to-[#faf8f5]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,98,0.08),transparent_70%)]" />
 
       <div className="relative z-10 mx-auto max-w-[1000px] px-6 text-center lg:px-16">
         <motion.div
@@ -837,13 +838,13 @@ function IntegratedPathCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1 }}
         >
-          <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
+          <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl xl:text-8xl">
             Choose the
             <br />
-            <span className="text-[#d4af37]">Integrated Path</span>
+            <span className="text-[#c9a962]">Integrated Path</span>
           </h2>
 
-          <p className="mx-auto mb-16 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-white/60 lg:text-2xl">
+          <p className="mx-auto mb-16 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-neutral-600 lg:text-2xl">
             Stop managing multiple vendors. Start building your legacy with one
             partner.
           </p>
@@ -853,7 +854,7 @@ function IntegratedPathCTA() {
               href="/contact"
               whileHover={{ y: -2 }}
               transition={{ duration: 0.3 }}
-              className="group inline-flex items-center gap-3 bg-white px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-neutral-100"
+              className="group inline-flex items-center gap-3 bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-[#c9a962]/90"
             >
               <span>DISCUSS YOUR PROJECT</span>
               <ArrowRight size={16} />
@@ -863,7 +864,7 @@ function IntegratedPathCTA() {
               href="/about/company-profile"
               whileHover={{ y: -2 }}
               transition={{ duration: 0.3 }}
-              className="inline-flex items-center gap-3 border border-white/20 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-white/40"
+              className="inline-flex items-center gap-3 border border-[#c9a962]/30 bg-white/60 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-900 transition-all hover:border-[#c9a962]/50 hover:bg-white/80"
             >
               <span>DOWNLOAD PROFILE</span>
             </motion.a>

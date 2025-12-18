@@ -79,7 +79,7 @@ export function CorporatePartners({ clients = [] }: CorporatePartnersProps) {
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-0 top-1/3 h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.03] blur-[150px]" />
+        <div className="absolute left-0 top-1/3 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]" />
         <div className="absolute right-0 bottom-1/3 h-[500px] w-[500px] rounded-full bg-neutral-900/[0.02] blur-[120px]" />
       </div>
 
@@ -114,7 +114,7 @@ export function CorporatePartners({ clients = [] }: CorporatePartnersProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600 lg:text-xl"
           >
-            <span className="font-SchnyderS text-2xl text-[#d4af37]">
+            <span className="font-SchnyderS text-2xl text-[#c9a962]">
               The Leaders of Business.
             </span>
             <br />
@@ -135,22 +135,22 @@ export function CorporatePartners({ clients = [] }: CorporatePartnersProps) {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}
-                className="group relative overflow-hidden border border-neutral-200 bg-white p-8 shadow-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:shadow-xl lg:p-12"
+                className="group relative overflow-hidden border border-neutral-200 bg-white p-8 shadow-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:shadow-xl lg:p-12"
               >
                 {/* Category Badge */}
-                <div className="mb-6 inline-block border border-[#d4af37]/20 bg-[#d4af37]/5 px-4 py-2">
-                  <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37]">
+                <div className="mb-6 inline-block border border-[#c9a962]/20 bg-[#c9a962]/5 px-4 py-2">
+                  <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
                     {partner.category}
                   </span>
                 </div>
 
                 {/* Icon & Name */}
                 <div className="mb-6 flex items-start gap-4">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/5 transition-all duration-300 group-hover:border-[#d4af37]/50 group-hover:bg-[#d4af37]/10">
-                    <Icon className="h-8 w-8 text-[#d4af37]" strokeWidth={1} />
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5 transition-all duration-300 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10">
+                    <Icon className="h-8 w-8 text-[#c9a962]" strokeWidth={1} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="mb-2 font-SchnyderS text-2xl font-light text-neutral-950 transition-colors group-hover:text-[#d4af37] lg:text-3xl">
+                    <h3 className="mb-2 font-SchnyderS text-2xl font-light text-neutral-950 transition-colors group-hover:text-[#c9a962] lg:text-3xl">
                       {partner.name}
                     </h3>
                     <p className="font-Satoshi text-base font-light text-neutral-600 lg:text-lg">
@@ -160,11 +160,11 @@ export function CorporatePartners({ clients = [] }: CorporatePartnersProps) {
                 </div>
 
                 {/* Decorative Elements */}
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-[#d4af37] to-transparent transition-all duration-500 group-hover:w-full" />
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-[#c9a962] to-transparent transition-all duration-500 group-hover:w-full" />
 
                 {/* Corner Accents */}
-                <div className="absolute right-0 top-0 h-20 w-20 border-r border-t border-neutral-200 transition-colors duration-300 group-hover:border-[#d4af37]/30" />
-                <div className="absolute bottom-0 left-0 h-20 w-20 border-b border-l border-neutral-200 transition-colors duration-300 group-hover:border-[#d4af37]/30" />
+                <div className="absolute right-0 top-0 h-20 w-20 border-r border-t border-neutral-200 transition-colors duration-300 group-hover:border-[#c9a962]/30" />
+                <div className="absolute bottom-0 left-0 h-20 w-20 border-b border-l border-neutral-200 transition-colors duration-300 group-hover:border-[#c9a962]/30" />
               </motion.div>
             );
           })}
@@ -175,7 +175,7 @@ export function CorporatePartners({ clients = [] }: CorporatePartnersProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="mt-16 border-l-2 border-[#d4af37]/30 bg-neutral-50 p-8 lg:mt-24 lg:p-12"
+          className="mt-16 border-l-2 border-[#c9a962]/30 bg-neutral-50 p-8 lg:mt-24 lg:p-12"
         >
           <p className="max-w-3xl font-Satoshi text-lg font-light italic leading-relaxed text-neutral-700 lg:text-xl">
             &quot;Each corporate partnership is built on a foundation of brand

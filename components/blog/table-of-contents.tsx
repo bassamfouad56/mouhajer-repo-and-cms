@@ -166,7 +166,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                         heading.level === 3 ? 'pl-6' : ''
                       } ${
                         isActive
-                          ? 'bg-[#d4af37]/10 font-medium text-[#d4af37]'
+                          ? 'bg-[#c9a962]/10 font-medium text-[#c9a962]'
                           : 'font-light text-neutral-600 hover:bg-neutral-50 hover:text-neutral-950'
                       }`}
                     >
@@ -174,7 +174,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                       <span
                         className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full transition-all duration-200 ${
                           isActive
-                            ? 'bg-[#d4af37]'
+                            ? 'bg-[#c9a962]'
                             : 'bg-neutral-300 group-hover:bg-neutral-400'
                         }`}
                       />

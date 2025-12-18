@@ -80,7 +80,7 @@ export function AppliedFilters({ filters, onChange }: AppliedFiltersProps) {
       {hasFilters && (
         <button
           onClick={clearAll}
-          className="font-Satoshi text-xs uppercase tracking-wider text-neutral-500 transition-colors hover:text-[#d4af37]"
+          className="font-Satoshi text-xs uppercase tracking-wider text-neutral-500 transition-colors hover:text-[#c9a962]"
         >
           Clear All
         </button>
@@ -103,17 +103,17 @@ function FilterChip({ label, onRemove }: FilterChipProps) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.2 }}
-      className="group flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 transition-all hover:border-[#d4af37] hover:bg-[#d4af37]/5"
+      className="group flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/5"
     >
       <span className="font-Satoshi text-xs font-light text-neutral-700 group-hover:text-neutral-900">
         {label}
       </span>
       <button
         onClick={onRemove}
-        className="flex items-center justify-center rounded-full transition-colors hover:bg-[#d4af37]/10"
+        className="flex items-center justify-center rounded-full transition-colors hover:bg-[#c9a962]/10"
         aria-label={`Remove ${label} filter`}
       >
-        <X className="h-3 w-3 text-neutral-500 transition-colors group-hover:text-[#d4af37]" strokeWidth={2.5} />
+        <X className="h-3 w-3 text-neutral-500 transition-colors group-hover:text-[#c9a962]" strokeWidth={2.5} />
       </button>
     </motion.div>
   );

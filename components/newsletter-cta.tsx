@@ -77,7 +77,7 @@ export function NewsletterCTA({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full rounded-lg border border-neutral-200 py-2.5 pl-10 pr-4 text-sm outline-none transition-colors focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+                className="w-full rounded-lg border border-neutral-200 py-2.5 pl-10 pr-4 text-sm outline-none transition-colors focus:border-[#c9a962] focus:ring-2 focus:ring-[#c9a962]/20"
                 disabled={isSubmitting}
               />
             </div>
@@ -130,7 +130,7 @@ export function NewsletterCTA({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full rounded-lg border border-neutral-700 bg-neutral-900 px-4 py-3 text-sm text-white placeholder-neutral-500 outline-none transition-colors focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+                    className="w-full rounded-lg border border-neutral-700 bg-neutral-900 px-4 py-3 text-sm text-white placeholder-neutral-500 outline-none transition-colors focus:border-[#c9a962] focus:ring-2 focus:ring-[#c9a962]/20"
                     disabled={isSubmitting}
                   />
                   {error && (
@@ -140,7 +140,7 @@ export function NewsletterCTA({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-2 rounded-lg bg-[#d4af37] px-6 py-3 text-sm font-medium text-black transition-all hover:bg-[#c4a030] disabled:opacity-50"
+                  className="flex items-center gap-2 rounded-lg bg-[#c9a962] px-6 py-3 text-sm font-medium text-black transition-all hover:bg-[#c4a030] disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -168,14 +168,14 @@ export function NewsletterCTA({
       className={`relative overflow-hidden rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-950 p-8 ${className}`}
     >
       {/* Decorative elements */}
-      <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#d4af37]/10 blur-3xl" />
-      <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-[#d4af37]/5 blur-3xl" />
+      <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#c9a962]/10 blur-3xl" />
+      <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-[#c9a962]/5 blur-3xl" />
 
       <div className="relative z-10">
         {/* Icon */}
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#d4af37]/10 px-3 py-1.5">
-          <Sparkles className="h-4 w-4 text-[#d4af37]" />
-          <span className="text-xs font-medium text-[#d4af37]">Exclusive Access</span>
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#c9a962]/10 px-3 py-1.5">
+          <Sparkles className="h-4 w-4 text-[#c9a962]" />
+          <span className="text-xs font-medium text-[#c9a962]">Exclusive Access</span>
         </div>
 
         {/* Content */}
@@ -204,7 +204,7 @@ export function NewsletterCTA({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
-                className="w-full rounded-lg border border-neutral-700 bg-neutral-800/50 py-3.5 pl-12 pr-4 text-white placeholder-neutral-500 outline-none transition-colors focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-800/50 py-3.5 pl-12 pr-4 text-white placeholder-neutral-500 outline-none transition-colors focus:border-[#c9a962] focus:ring-2 focus:ring-[#c9a962]/20"
                 disabled={isSubmitting}
               />
             </div>
@@ -213,7 +213,7 @@ export function NewsletterCTA({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#d4af37] py-3.5 font-medium text-black transition-all hover:bg-[#c4a030] disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#c9a962] py-3.5 font-medium text-black transition-all hover:bg-[#c4a030] disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>

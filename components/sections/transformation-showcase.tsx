@@ -32,10 +32,10 @@ export function TransformationShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40"
+      className="relative overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/50 via-transparent to-neutral-900/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white/50" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -47,19 +47,19 @@ export function TransformationShowcase() {
           className="mb-16 text-center sm:mb-20"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#d4af37]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
               Transformation
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </div>
 
-          <h2 className="font-SchnyderM text-4xl font-light text-white sm:text-5xl lg:text-6xl">
+          <h2 className="font-SchnyderM text-4xl font-light text-neutral-900 sm:text-5xl lg:text-6xl">
             Witness the
-            <span className="block text-[#d4af37]">Transformation</span>
+            <span className="block text-[#c9a962]">Transformation</span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl font-Satoshi text-base font-light leading-relaxed text-white/60 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl font-Satoshi text-base font-light leading-relaxed text-neutral-600 sm:text-lg">
             From concept to completion, explore our dramatic renovations and see
             how we transform ordinary spaces into extraordinary living experiences.
           </p>
@@ -78,14 +78,14 @@ export function TransformationShowcase() {
               {/* Project Info */}
               <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37]">
+                  <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
                     {project.category}
                   </span>
-                  <h3 className="mt-1 font-SchnyderS text-xl font-light text-white sm:text-2xl">
+                  <h3 className="mt-1 font-SchnyderS text-xl font-light text-neutral-900 sm:text-2xl">
                     {project.title}
                   </h3>
                 </div>
-                <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm" />
+                <div className="h-8 w-8 rounded-full border border-[#c9a962]/20 bg-[#c9a962]/5 backdrop-blur-sm" />
               </div>
 
               {/* Before/After Slider */}
@@ -107,11 +107,11 @@ export function TransformationShowcase() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-16 text-center"
         >
-          <p className="font-Satoshi text-sm font-light text-white/40">
+          <p className="font-Satoshi text-sm font-light text-neutral-500">
             Every project tells a story of transformation.{' '}
             <a
               href="/projects"
-              className="text-[#d4af37] transition-colors duration-300 hover:text-[#d4af37]/80"
+              className="text-[#c9a962] transition-colors duration-300 hover:text-[#c9a962]/80"
             >
               View all projects
             </a>
@@ -120,8 +120,8 @@ export function TransformationShowcase() {
       </div>
 
       {/* Decorative elements */}
-      <div className="absolute left-0 top-1/4 h-64 w-64 rounded-full bg-[#d4af37]/5 blur-3xl" />
-      <div className="absolute bottom-1/4 right-0 h-64 w-64 rounded-full bg-[#d4af37]/5 blur-3xl" />
+      <div className="absolute left-0 top-1/4 h-64 w-64 rounded-full bg-[#c9a962]/5 blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 h-64 w-64 rounded-full bg-[#c9a962]/5 blur-3xl" />
     </section>
   );
 }

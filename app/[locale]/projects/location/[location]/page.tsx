@@ -228,12 +228,12 @@ export default async function LocationProjectsPage({ params }: PageProps) {
             <span className="text-white/30">/</span>
             <span className="text-white/50">Location</span>
             <span className="text-white/30">/</span>
-            <span className="text-[#d4af37]">{locationName}</span>
+            <span className="text-[#c9a962]">{locationName}</span>
           </nav>
 
           {/* Page Header */}
           <h1 className="font-SchnyderS text-5xl font-light text-white lg:text-7xl">
-            Projects in <span className="text-[#d4af37]">{locationName}</span>
+            Projects in <span className="text-[#c9a962]">{locationName}</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg font-light text-white/70">
             {getLocalizedValue(locationData.description, locale, `Explore our interior design and fit-out projects in ${locationName}.`)}
@@ -243,7 +243,7 @@ export default async function LocationProjectsPage({ params }: PageProps) {
           <div className="mt-10 flex flex-wrap gap-3">
             <a
               href={`/${locale}/projects`}
-              className="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-light text-white/70 transition-all hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 hover:text-white"
+              className="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-light text-white/70 transition-all hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 hover:text-white"
             >
               All Locations
             </a>
@@ -253,8 +253,8 @@ export default async function LocationProjectsPage({ params }: PageProps) {
                 href={`/${locale}/projects/location/${loc.slug?.current}`}
                 className={`rounded-full border px-5 py-2 text-sm font-light transition-all ${
                   loc.slug?.current === location
-                    ? 'border-[#d4af37] bg-[#d4af37] text-neutral-950'
-                    : 'border-white/20 bg-white/5 text-white/70 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 hover:text-white'
+                    ? 'border-[#c9a962] bg-[#c9a962] text-neutral-950'
+                    : 'border-white/20 bg-white/5 text-white/70 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 hover:text-white'
                 }`}
               >
                 {getLocalizedValue(loc.name, locale, '')}

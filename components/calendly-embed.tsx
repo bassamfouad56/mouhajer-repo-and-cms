@@ -35,7 +35,7 @@ export function CalendlyInline({ url, className = "" }: CalendlyEmbedProps) {
       {!isLoaded && (
         <div className="flex h-[700px] items-center justify-center rounded-xl bg-neutral-50">
           <div className="text-center">
-            <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-[#d4af37]" />
+            <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-[#c9a962]" />
             <p className="text-neutral-500">Loading calendar...</p>
           </div>
         </div>
@@ -147,7 +147,7 @@ export function CalendlyPopupButton({
                   {!isLoaded ? (
                     <div className="flex h-full items-center justify-center">
                       <div className="text-center">
-                        <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-[#d4af37]" />
+                        <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-[#c9a962]" />
                         <p className="text-neutral-500">Loading calendar...</p>
                       </div>
                     </div>
@@ -191,9 +191,9 @@ export function ConsultationBookingCard({
     >
       <div className="p-8">
         {/* Badge */}
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#d4af37]/10 px-3 py-1.5">
-          <Calendar className="h-4 w-4 text-[#d4af37]" />
-          <span className="text-xs font-medium text-[#d4af37]">Free Consultation</span>
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#c9a962]/10 px-3 py-1.5">
+          <Calendar className="h-4 w-4 text-[#c9a962]" />
+          <span className="text-xs font-medium text-[#c9a962]">Free Consultation</span>
         </div>
 
         {/* Content */}
@@ -213,7 +213,7 @@ export function ConsultationBookingCard({
             { icon: MapPin, text: "Dubai & Abu Dhabi" },
           ].map(({ icon: Icon, text }, i) => (
             <div key={i} className="flex items-center gap-2 text-sm text-neutral-300">
-              <Icon className="h-4 w-4 text-[#d4af37]" />
+              <Icon className="h-4 w-4 text-[#c9a962]" />
               {text}
             </div>
           ))}
@@ -223,7 +223,7 @@ export function ConsultationBookingCard({
         <CalendlyPopupButton
           url={calendlyUrl}
           buttonText="Book Free Consultation"
-          buttonClassName="w-full justify-center bg-[#d4af37] text-black hover:bg-[#c4a030]"
+          buttonClassName="w-full justify-center bg-[#c9a962] text-black hover:bg-[#c4a030]"
         />
 
         {/* Trust text */}

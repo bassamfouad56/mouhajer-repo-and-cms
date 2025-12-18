@@ -90,7 +90,7 @@ export default function InteriorArchitectureContent() {
             >
               The
               <br />
-              <span className="text-[#d4af37]">"Uncluttered Baroque"</span>
+              <span className="text-[#c9a962]">"Uncluttered Baroque"</span>
             </motion.h1>
 
             {/* Subheadline */}
@@ -172,7 +172,7 @@ function ScienceBehindStyleSection() {
             <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
               The Science Behind
               <br />
-              <span className="text-[#d4af37]">the Style</span>
+              <span className="text-[#c9a962]">the Style</span>
             </h2>
 
             <div className="space-y-6 font-Satoshi text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
@@ -208,8 +208,8 @@ function ScienceBehindStyleSection() {
             {/* Caption */}
             <div className="absolute -bottom-6 left-8 right-8 bg-neutral-950 p-6 lg:left-auto lg:right-0 lg:w-72">
               <div className="flex items-center gap-4">
-                <div className="h-px flex-1 bg-[#d4af37]/30" />
-                <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#d4af37]">Featured</span>
+                <div className="h-px flex-1 bg-[#c9a962]/30" />
+                <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#c9a962]">Featured</span>
               </div>
               <p className="mt-4 font-Playfair text-lg font-light text-white">Uncluttered Baroque</p>
               <p className="mt-1 font-Satoshi text-sm font-light text-white/50">Our signature style</p>
@@ -297,7 +297,7 @@ function DesignServicesSection() {
           <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
             Our Design
             <br />
-            <span className="text-[#d4af37]">Services</span>
+            <span className="text-[#c9a962]">Services</span>
           </h2>
         </motion.div>
 
@@ -332,14 +332,14 @@ function DesignServicesSection() {
                       <div className="absolute inset-0 bg-neutral-950/10 transition-opacity duration-500 group-hover:opacity-0" />
                     </div>
                     {/* Icon overlay */}
-                    <div className="absolute -bottom-6 -right-6 flex h-20 w-20 items-center justify-center border border-neutral-200 bg-white text-[#d4af37] shadow-lg transition-all duration-300 group-hover:bg-[#d4af37] group-hover:text-white lg:h-24 lg:w-24">
+                    <div className="absolute -bottom-6 -right-6 flex h-20 w-20 items-center justify-center border border-neutral-200 bg-white text-[#c9a962] shadow-lg transition-all duration-300 group-hover:bg-[#c9a962] group-hover:text-white lg:h-24 lg:w-24">
                       <IconComponent />
                     </div>
                   </motion.div>
 
                   {/* Content */}
                   <div className={`flex flex-col justify-center lg:col-span-7 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <h3 className="mb-4 font-SchnyderS text-4xl font-light leading-tight text-neutral-950 transition-colors duration-300 group-hover:text-[#d4af37] lg:text-5xl">
+                    <h3 className="mb-4 font-SchnyderS text-4xl font-light leading-tight text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962] lg:text-5xl">
                       {service.title}
                     </h3>
                     <p className="mb-8 font-Satoshi text-lg font-light italic text-neutral-500">
@@ -348,7 +348,7 @@ function DesignServicesSection() {
 
                     <div className="space-y-6">
                       {service.items.map((item, i) => (
-                        <div key={i} className="border-l-2 border-[#d4af37] pl-6">
+                        <div key={i} className="border-l-2 border-[#c9a962] pl-6">
                           <div className="mb-2 font-Satoshi text-sm font-medium uppercase tracking-[0.2em] text-neutral-400">
                             {item.label}
                           </div>
@@ -420,7 +420,7 @@ function AwardsSection() {
           <h2 className="mb-6 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl">
             Spotlight:
             <br />
-            <span className="text-[#d4af37]">Award-Winning Excellence</span>
+            <span className="text-[#c9a962]">Award-Winning Excellence</span>
           </h2>
 
           <p className="mx-auto max-w-3xl font-Satoshi text-lg font-light text-neutral-600">
@@ -435,7 +435,7 @@ function AwardsSection() {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="group relative overflow-hidden border border-neutral-200 bg-white transition-all duration-500 hover:border-[#d4af37] hover:shadow-2xl hover:shadow-neutral-900/10"
+              className="group relative overflow-hidden border border-neutral-200 bg-white transition-all duration-500 hover:border-[#c9a962] hover:shadow-2xl hover:shadow-neutral-900/10"
             >
               {/* Image */}
               <div className="relative aspect-4/3 overflow-hidden">
@@ -447,7 +447,7 @@ function AwardsSection() {
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-neutral-950/80 via-neutral-950/20 to-transparent" />
                 {/* Award icon */}
-                <div className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center bg-[#d4af37] text-white">
+                <div className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center bg-[#c9a962] text-white">
                   <IconAward />
                 </div>
               </div>
@@ -461,7 +461,7 @@ function AwardsSection() {
                 </p>
               </div>
 
-              <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#d4af37] transition-all duration-500 group-hover:w-full" />
+              <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#c9a962] transition-all duration-500 group-hover:w-full" />
             </motion.div>
           ))}
         </div>
@@ -516,8 +516,8 @@ function VisualizeFutureCTA() {
         />
         <div className="absolute inset-0 bg-neutral-950/70" />
       </div>
-      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#d4af37]/10 blur-[120px]" />
-      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#d4af37]/10 blur-[120px]" />
+      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center lg:px-12">
         <motion.div
@@ -529,7 +529,7 @@ function VisualizeFutureCTA() {
           <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             Visualize
             <br />
-            <span className="text-[#d4af37]">Your Future</span>
+            <span className="text-[#c9a962]">Your Future</span>
           </h2>
 
           <p className="mx-auto mb-12 max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-white/70 lg:text-xl">
@@ -538,7 +538,7 @@ function VisualizeFutureCTA() {
 
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 border border-[#d4af37] bg-[#d4af37] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#d4af37]"
+            className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
           >
             <span>COMMISSION A DESIGN</span>
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />

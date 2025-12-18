@@ -137,7 +137,7 @@ export function LuxuryGallery() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px]" />
 
         {/* Ambient glow */}
-        <div className="absolute left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.02] blur-[150px]" />
+        <div className="absolute left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.02] blur-[150px]" />
         <div className="absolute right-1/4 bottom-1/4 h-[500px] w-[500px] rounded-full bg-white/[0.02] blur-[120px]" />
       </motion.div>
 
@@ -150,7 +150,7 @@ export function LuxuryGallery() {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
               Visual Excellence
             </span>
@@ -214,9 +214,9 @@ export function LuxuryGallery() {
 
                 {/* Golden border on hover */}
                 <motion.div
-                  className="absolute inset-0 border-2 border-[#d4af37]/0 transition-all duration-500 group-hover:border-[#d4af37]/40"
+                  className="absolute inset-0 border-2 border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/40"
                   animate={{
-                    borderColor: hoveredId === image.id ? 'rgba(212, 175, 55, 0.4)' : 'rgba(212, 175, 55, 0)',
+                    borderColor: hoveredId === image.id ? 'rgba(201, 169, 98, 0.4)' : 'rgba(201, 169, 98, 0)',
                   }}
                 />
 
@@ -227,7 +227,7 @@ export function LuxuryGallery() {
                     animate={{ opacity: hoveredId === image.id ? 1 : 0, y: hoveredId === image.id ? 0 : 10 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <span className="mb-1 block font-Satoshi text-[10px] font-light uppercase tracking-wider text-[#d4af37]">
+                    <span className="mb-1 block font-Satoshi text-[10px] font-light uppercase tracking-wider text-[#c9a962]">
                       {image.category}
                     </span>
                     <h3 className="font-SchnyderS text-lg font-light text-white lg:text-xl">
@@ -247,8 +247,8 @@ export function LuxuryGallery() {
                 </motion.div>
 
                 {/* Corner accents */}
-                <div className="absolute left-0 top-0 h-8 w-8 border-l border-t border-white/0 transition-colors duration-500 group-hover:border-[#d4af37]/30" />
-                <div className="absolute bottom-0 right-0 h-8 w-8 border-b border-r border-white/0 transition-colors duration-500 group-hover:border-[#d4af37]/30" />
+                <div className="absolute left-0 top-0 h-8 w-8 border-l border-t border-white/0 transition-colors duration-500 group-hover:border-[#c9a962]/30" />
+                <div className="absolute bottom-0 right-0 h-8 w-8 border-b border-r border-white/0 transition-colors duration-500 group-hover:border-[#c9a962]/30" />
               </div>
             </motion.div>
           ))}
@@ -322,7 +322,7 @@ export function LuxuryGallery() {
 
               {/* Info bar */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-neutral-950 to-transparent p-6">
-                <span className="mb-2 block font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37]">
+                <span className="mb-2 block font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
                   {selectedImage.category}
                 </span>
                 <h3 className="font-SchnyderS text-2xl font-light text-white">

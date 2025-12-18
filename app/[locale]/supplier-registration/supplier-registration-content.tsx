@@ -147,8 +147,8 @@ function HeroSection() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
-        <div className="absolute left-0 top-0 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_top_left,rgba(212,175,55,0.08)_0%,transparent_70%)]" />
-        <div className="absolute bottom-0 right-0 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_bottom_right,rgba(212,175,55,0.05)_0%,transparent_70%)]" />
+        <div className="absolute left-0 top-0 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_top_left,rgba(201,169,98,0.08)_0%,transparent_70%)]" />
+        <div className="absolute bottom-0 right-0 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_bottom_right,rgba(201,169,98,0.05)_0%,transparent_70%)]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 text-center">
@@ -158,18 +158,18 @@ function HeroSection() {
           transition={{ duration: 0.8 }}
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
               Supplier Registration
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </div>
           <h1 className="font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
             Join Our Supply Chain.
           </h1>
           <p className="mx-auto mt-8 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-white/60 lg:text-2xl">
             We build the best.{' '}
-            <span className="text-[#d4af37]">We expect the best.</span>
+            <span className="text-[#c9a962]">We expect the best.</span>
           </p>
         </motion.div>
       </div>
@@ -180,7 +180,7 @@ function HeroSection() {
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <div className="h-12 w-px bg-gradient-to-b from-[#d4af37]/50 to-transparent" />
+        <div className="h-12 w-px bg-gradient-to-b from-[#c9a962]/50 to-transparent" />
       </motion.div>
     </section>
   );
@@ -217,7 +217,7 @@ function BeyondTransactionSection() {
             transition={{ duration: 0.8 }}
           >
             <div className="mb-6 flex items-center gap-4">
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
               <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
                 Our Philosophy
               </span>
@@ -261,10 +261,10 @@ function BeyondTransactionSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-              className="group border border-white/10 bg-white/[0.02] p-8 transition-all hover:border-[#d4af37]/30 hover:bg-[#d4af37]/5"
+              className="group border border-white/10 bg-white/[0.02] p-8 transition-all hover:border-[#c9a962]/30 hover:bg-[#c9a962]/5"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/10">
-                <CheckCircle2 className="h-6 w-6 text-[#d4af37]" strokeWidth={1.5} />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10">
+                <CheckCircle2 className="h-6 w-6 text-[#c9a962]" strokeWidth={1.5} />
               </div>
               <h3 className="mb-3 font-SchnyderS text-2xl font-light text-white">
                 {item.title}
@@ -364,7 +364,7 @@ function VendorRegistrationForm({
                   <div
                     className={`flex h-12 w-12 items-center justify-center border transition-all ${
                       currentStep >= step.number
-                        ? 'border-[#d4af37] bg-[#d4af37]/10 text-[#d4af37]'
+                        ? 'border-[#c9a962] bg-[#c9a962]/10 text-[#c9a962]'
                         : 'border-white/20 bg-white/[0.02] text-white/40'
                     }`}
                   >
@@ -377,7 +377,7 @@ function VendorRegistrationForm({
                 {index < steps.length - 1 && (
                   <div
                     className={`mx-4 h-px w-12 sm:w-24 lg:w-32 transition-all ${
-                      currentStep > step.number ? 'bg-[#d4af37]' : 'bg-white/10'
+                      currentStep > step.number ? 'bg-[#c9a962]' : 'bg-white/10'
                     }`}
                   />
                 )}
@@ -417,7 +417,7 @@ function VendorRegistrationForm({
                       required
                       value={formData.companyName}
                       onChange={e => setFormData({ ...formData, companyName: e.target.value })}
-                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="Company Legal Name"
                     />
                   </div>
@@ -430,7 +430,7 @@ function VendorRegistrationForm({
                       required
                       value={formData.tradeLicense}
                       onChange={e => setFormData({ ...formData, tradeLicense: e.target.value })}
-                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="License Number"
                     />
                   </div>
@@ -446,7 +446,7 @@ function VendorRegistrationForm({
                       required
                       value={formData.hqLocation}
                       onChange={e => setFormData({ ...formData, hqLocation: e.target.value })}
-                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="Country / City"
                     />
                   </div>
@@ -458,7 +458,7 @@ function VendorRegistrationForm({
                       type="url"
                       value={formData.website}
                       onChange={e => setFormData({ ...formData, website: e.target.value })}
-                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="https://www.company.com"
                     />
                   </div>
@@ -473,7 +473,7 @@ function VendorRegistrationForm({
                     required
                     value={formData.contactPerson}
                     onChange={e => setFormData({ ...formData, contactPerson: e.target.value })}
-                    className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                    className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                     placeholder="Name & Designation"
                   />
                 </div>
@@ -488,7 +488,7 @@ function VendorRegistrationForm({
                       required
                       value={formData.email}
                       onChange={e => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="email@company.com"
                     />
                   </div>
@@ -501,7 +501,7 @@ function VendorRegistrationForm({
                       required
                       value={formData.phone}
                       onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                      className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="+971 XX XXX XXXX"
                     />
                   </div>
@@ -533,14 +533,14 @@ function VendorRegistrationForm({
                         key={type.id}
                         className={`flex cursor-pointer items-center gap-4 border p-4 transition-all ${
                           formData.supplierType === type.id
-                            ? 'border-[#d4af37]/50 bg-[#d4af37]/5'
+                            ? 'border-[#c9a962]/50 bg-[#c9a962]/5'
                             : 'border-white/10 bg-white/[0.02] hover:border-white/20'
                         }`}
                       >
                         <div
                           className={`flex h-5 w-5 items-center justify-center border ${
                             formData.supplierType === type.id
-                              ? 'border-[#d4af37] bg-[#d4af37]'
+                              ? 'border-[#c9a962] bg-[#c9a962]'
                               : 'border-white/30'
                           }`}
                         >
@@ -572,14 +572,14 @@ function VendorRegistrationForm({
                         key={cat.id}
                         className={`flex cursor-pointer items-center gap-4 border p-4 transition-all ${
                           formData.primaryCategory === cat.id
-                            ? 'border-[#d4af37]/50 bg-[#d4af37]/5'
+                            ? 'border-[#c9a962]/50 bg-[#c9a962]/5'
                             : 'border-white/10 bg-white/[0.02] hover:border-white/20'
                         }`}
                       >
                         <div
                           className={`flex h-5 w-5 items-center justify-center border ${
                             formData.primaryCategory === cat.id
-                              ? 'border-[#d4af37] bg-[#d4af37]'
+                              ? 'border-[#c9a962] bg-[#c9a962]'
                               : 'border-white/30'
                           }`}
                         >
@@ -604,7 +604,7 @@ function VendorRegistrationForm({
                       type="text"
                       value={formData.otherCategory}
                       onChange={e => setFormData({ ...formData, otherCategory: e.target.value })}
-                      className="mt-4 w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                      className="mt-4 w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="Please specify category"
                     />
                   )}
@@ -618,7 +618,7 @@ function VendorRegistrationForm({
                     required
                     value={formData.annualTurnover}
                     onChange={e => setFormData({ ...formData, annualTurnover: e.target.value })}
-                    className="w-full border border-white/10 bg-neutral-950 px-4 py-3 font-Satoshi text-sm font-light text-white transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                    className="w-full border border-white/10 bg-neutral-950 px-4 py-3 font-Satoshi text-sm font-light text-white transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                   >
                     <option value="">Select Range</option>
                     {turnoverRanges.map(range => (
@@ -653,14 +653,14 @@ function VendorRegistrationForm({
                         key={cert.id}
                         className={`flex cursor-pointer items-center gap-4 border p-4 transition-all ${
                           formData.certifications.includes(cert.id)
-                            ? 'border-[#d4af37]/50 bg-[#d4af37]/5'
+                            ? 'border-[#c9a962]/50 bg-[#c9a962]/5'
                             : 'border-white/10 bg-white/[0.02] hover:border-white/20'
                         }`}
                       >
                         <div
                           className={`flex h-5 w-5 items-center justify-center border ${
                             formData.certifications.includes(cert.id)
-                              ? 'border-[#d4af37] bg-[#d4af37]'
+                              ? 'border-[#c9a962] bg-[#c9a962]'
                               : 'border-white/30'
                           }`}
                         >
@@ -692,7 +692,7 @@ function VendorRegistrationForm({
                     rows={6}
                     value={formData.referenceProjects}
                     onChange={e => setFormData({ ...formData, referenceProjects: e.target.value })}
-                    className="w-full resize-none border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#d4af37]/50 focus:outline-none"
+                    className="w-full resize-none border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                     placeholder="1. Project Name - Client - Year&#10;2. Project Name - Client - Year&#10;3. Project Name - Client - Year"
                   />
                 </div>
@@ -725,13 +725,13 @@ function VendorRegistrationForm({
                       'ISO Certificates (if applicable)',
                     ].map((item, index) => (
                       <li key={index} className="flex items-center gap-3 font-Satoshi text-sm font-light text-white/50">
-                        <div className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#c9a962]" />
                         {item}
                       </li>
                     ))}
                   </ul>
 
-                  <label className="group inline-flex cursor-pointer items-center gap-3 border border-[#d4af37]/30 bg-[#d4af37]/10 px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-[#d4af37] transition-all hover:bg-[#d4af37]/20">
+                  <label className="group inline-flex cursor-pointer items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/10 px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-[#c9a962] transition-all hover:bg-[#c9a962]/20">
                     <Upload className="h-5 w-5" strokeWidth={1.5} />
                     {fileName || 'Choose File'}
                     <input
@@ -743,15 +743,15 @@ function VendorRegistrationForm({
                   </label>
 
                   {fileName && (
-                    <p className="mt-4 font-Satoshi text-xs font-light text-[#d4af37]">
+                    <p className="mt-4 font-Satoshi text-xs font-light text-[#c9a962]">
                       Selected: {fileName}
                     </p>
                   )}
                 </div>
 
-                <div className="border border-[#d4af37]/20 bg-[#d4af37]/5 p-6">
+                <div className="border border-[#c9a962]/20 bg-[#c9a962]/5 p-6">
                   <p className="font-Satoshi text-sm font-light text-white/70">
-                    <span className="text-[#d4af37]">Important:</span> By submitting this application,
+                    <span className="text-[#c9a962]">Important:</span> By submitting this application,
                     you confirm that all information provided is accurate and that you consent to MIDC
                     verifying the details with relevant authorities.
                   </p>
@@ -778,7 +778,7 @@ function VendorRegistrationForm({
               <button
                 type="button"
                 onClick={nextStep}
-                className="group flex items-center gap-3 border border-[#d4af37] bg-[#d4af37] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#d4af37]"
+                className="group flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
               >
                 Next
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
@@ -788,7 +788,7 @@ function VendorRegistrationForm({
                 type="button"
                 onClick={onSubmit}
                 disabled={isSubmitting}
-                className="group flex items-center gap-3 border border-[#d4af37] bg-[#d4af37] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#d4af37] disabled:opacity-50"
+                className="group flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962] disabled:opacity-50"
               >
                 {isSubmitting ? 'Submitting...' : 'Submit for Pre-Qualification'}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
@@ -843,7 +843,7 @@ function ProcurementProtocolsSection() {
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className="h-5 w-5 text-[#d4af37]" strokeWidth={1.5} />
+                  <ChevronDown className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
                 </motion.div>
               </button>
               <AnimatePresence>
@@ -905,7 +905,7 @@ function ThankYouPage() {
       <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden pt-32 pb-20">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
-          <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse,rgba(212,175,55,0.1)_0%,transparent_70%)]" />
+          <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse,rgba(201,169,98,0.1)_0%,transparent_70%)]" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-[1000px] px-6 text-center">
@@ -914,8 +914,8 @@ function ThankYouPage() {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/10">
-              <CheckCircle2 className="h-12 w-12 text-[#d4af37]" strokeWidth={1} />
+            <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10">
+              <CheckCircle2 className="h-12 w-12 text-[#c9a962]" strokeWidth={1} />
             </div>
             <h1 className="font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl">
               Application Logged.
@@ -948,7 +948,7 @@ function ThankYouPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-6 font-Satoshi text-xs font-light uppercase tracking-wider text-[#d4af37]"
+            className="mb-6 font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]"
           >
             Our Vetting Protocol
           </motion.div>
@@ -962,9 +962,9 @@ function ThankYouPage() {
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                 className="border border-white/10 bg-white/[0.02] p-6"
               >
-                <div className="mb-4 inline-flex items-center gap-2 border border-[#d4af37]/30 bg-[#d4af37]/10 px-3 py-1">
-                  <Clock className="h-3 w-3 text-[#d4af37]" strokeWidth={1.5} />
-                  <span className="font-Satoshi text-xs font-light text-[#d4af37]">{step.days}</span>
+                <div className="mb-4 inline-flex items-center gap-2 border border-[#c9a962]/30 bg-[#c9a962]/10 px-3 py-1">
+                  <Clock className="h-3 w-3 text-[#c9a962]" strokeWidth={1.5} />
+                  <span className="font-Satoshi text-xs font-light text-[#c9a962]">{step.days}</span>
                 </div>
                 <h3 className="mb-2 font-SchnyderS text-lg font-light text-white">{step.title}</h3>
                 <p className="font-Satoshi text-sm font-light leading-relaxed text-white/50">
@@ -1008,7 +1008,7 @@ function ThankYouPage() {
           >
             <Link
               href="/"
-              className="group inline-flex items-center gap-3 border border-white/20 bg-white/[0.02] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 hover:text-[#d4af37]"
+              className="group inline-flex items-center gap-3 border border-white/20 bg-white/[0.02] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 hover:text-[#c9a962]"
             >
               <Home className="h-4 w-4" strokeWidth={1.5} />
               Return to Homepage

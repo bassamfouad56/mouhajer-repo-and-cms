@@ -73,7 +73,7 @@ export function ContactCTA({
       'border-neutral-950 bg-neutral-950 text-white hover:bg-transparent hover:text-neutral-950',
     secondary:
       'border-neutral-950 bg-transparent text-neutral-950 hover:bg-neutral-950 hover:text-white',
-    gold: 'border-[#d4af37] bg-[#d4af37] text-neutral-950 hover:bg-transparent hover:text-[#d4af37] shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.3)]',
+    gold: 'border-[#c9a962] bg-[#c9a962] text-neutral-950 hover:bg-transparent hover:text-[#c9a962] shadow-[0_0_30px_rgba(201,169,98,0.2)] hover:shadow-[0_0_40px_rgba(201,169,98,0.3)]',
   };
 
   return (

@@ -117,8 +117,8 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
             exit={{ opacity: 0, y: -20 }}
             className="text-center"
           >
-            <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-[#d4af37]/10">
-              <Palette className="h-10 w-10 text-[#d4af37]" />
+            <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-[#c9a962]/10">
+              <Palette className="h-10 w-10 text-[#c9a962]" />
             </div>
 
             <h2 className="mb-3 text-3xl font-light text-neutral-900">
@@ -170,7 +170,7 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
               </div>
               <div className="h-2 overflow-hidden rounded-full bg-neutral-100">
                 <motion.div
-                  className="h-full bg-[#d4af37]"
+                  className="h-full bg-[#c9a962]"
                   initial={{ width: 0 }}
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 0.3 }}
@@ -204,7 +204,7 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
                     }
                     className={`group relative overflow-hidden rounded-xl border-2 p-5 text-left transition-all ${
                       isSelected
-                        ? "border-[#d4af37] bg-[#d4af37]/5"
+                        ? "border-[#c9a962] bg-[#c9a962]/5"
                         : "border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
                     }`}
                   >
@@ -212,7 +212,7 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
                       <div
                         className={`flex h-6 w-6 items-center justify-center rounded-full border-2 transition-colors ${
                           isSelected
-                            ? "border-[#d4af37] bg-[#d4af37]"
+                            ? "border-[#c9a962] bg-[#c9a962]"
                             : "border-neutral-300 group-hover:border-neutral-400"
                         }`}
                       >
@@ -266,7 +266,7 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full rounded-lg border border-neutral-200 py-4 pl-12 pr-4 text-center outline-none transition-colors focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+                    className="w-full rounded-lg border border-neutral-200 py-4 pl-12 pr-4 text-center outline-none transition-colors focus:border-[#c9a962] focus:ring-2 focus:ring-[#c9a962]/20"
                     disabled={isSubmitting}
                   />
                 </div>
@@ -310,7 +310,7 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
           >
             {/* Result Header */}
             <div className="mb-8 text-center">
-              <span className="mb-2 inline-block rounded-full bg-[#d4af37]/10 px-4 py-1.5 text-sm font-medium text-[#d4af37]">
+              <span className="mb-2 inline-block rounded-full bg-[#c9a962]/10 px-4 py-1.5 text-sm font-medium text-[#c9a962]">
                 Your Design Style
               </span>
               <h2 className="mb-2 text-3xl font-light text-neutral-900">
@@ -347,7 +347,7 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
                       key={i}
                       className="flex items-center gap-2 text-sm text-neutral-600"
                     >
-                      <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[#d4af37]" />
+                      <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[#c9a962]" />
                       {char}
                     </li>
                   ))}
@@ -409,7 +409,7 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
               <div className="mt-6 text-center">
                 <Link
                   href={`/services/${result.serviceSlug}`}
-                  className="text-sm text-[#d4af37] hover:underline"
+                  className="text-sm text-[#c9a962] hover:underline"
                 >
                   View {result.name} Projects →
                 </Link>

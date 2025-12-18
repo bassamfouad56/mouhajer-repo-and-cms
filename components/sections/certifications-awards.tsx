@@ -126,9 +126,9 @@ export function CertificationsAwards() {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
-        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4af37]/[0.03] blur-[120px]" />
+        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a962]/[0.03] blur-[120px]" />
         <motion.div
-          className="absolute left-[10%] top-[20%] h-32 w-32 rounded-full bg-[#d4af37]/[0.02] blur-3xl"
+          className="absolute left-[10%] top-[20%] h-32 w-32 rounded-full bg-[#c9a962]/[0.02] blur-3xl"
           animate={{ y: [0, -30, 0], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -152,12 +152,12 @@ export function CertificationsAwards() {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-            <Trophy className="h-5 w-5 text-[#d4af37]/60" strokeWidth={1} />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <Trophy className="h-5 w-5 text-[#c9a962]/60" strokeWidth={1} />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
               Industry Validation
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </motion.div>
 
           <motion.h2
@@ -190,8 +190,8 @@ export function CertificationsAwards() {
           className="mb-16"
         >
           <div className="mb-8 flex items-center gap-4">
-            <div className="flex h-10 w-10 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/5">
-              <Shield className="h-4 w-4 text-[#d4af37]" strokeWidth={1} />
+            <div className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
+              <Shield className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
             </div>
             <div>
               <h3 className="font-SchnyderS text-xl font-light text-white">International Standards</h3>
@@ -206,11 +206,11 @@ export function CertificationsAwards() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="group relative overflow-hidden border border-white/5 bg-white/[0.02] p-5 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/20 hover:bg-white/[0.04]"
+                className="group relative overflow-hidden border border-white/5 bg-white/[0.02] p-5 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/20 hover:bg-white/[0.04]"
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/10">
-                    <CheckCircle2 className="h-5 w-5 text-[#d4af37]" strokeWidth={1} />
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10">
+                    <CheckCircle2 className="h-5 w-5 text-[#c9a962]" strokeWidth={1} />
                   </div>
                   <div>
                     <div className="font-SchnyderS text-lg font-light text-white">{cert.name}</div>
@@ -230,8 +230,8 @@ export function CertificationsAwards() {
         >
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex h-10 w-10 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/5">
-                <Award className="h-4 w-4 text-[#d4af37]" strokeWidth={1} />
+              <div className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
+                <Award className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
               </div>
               <div>
                 <h3 className="font-SchnyderS text-xl font-light text-white">Award Certificates</h3>
@@ -243,13 +243,13 @@ export function CertificationsAwards() {
             <div className="hidden items-center gap-2 sm:flex">
               <button
                 onClick={handlePrev}
-                className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/[0.02] transition-all hover:border-[#d4af37]/40 hover:bg-white/[0.05]"
+                className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/[0.02] transition-all hover:border-[#c9a962]/40 hover:bg-white/[0.05]"
               >
                 <ChevronLeft className="h-5 w-5 text-white/60" strokeWidth={1} />
               </button>
               <button
                 onClick={handleNext}
-                className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/[0.02] transition-all hover:border-[#d4af37]/40 hover:bg-white/[0.05]"
+                className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/[0.02] transition-all hover:border-[#c9a962]/40 hover:bg-white/[0.05]"
               >
                 <ChevronRight className="h-5 w-5 text-white/60" strokeWidth={1} />
               </button>
@@ -271,10 +271,10 @@ export function CertificationsAwards() {
                 className="group relative flex-shrink-0 snap-center"
               >
                 {/* Certificate Card with Embedded PDF */}
-                <div className="relative w-[340px] overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent transition-all duration-500 hover:border-[#d4af37]/40 sm:w-[400px]">
+                <div className="relative w-[340px] overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent transition-all duration-500 hover:border-[#c9a962]/40 sm:w-[400px]">
                   {/* Level Badge */}
                   {cert.level === '5-Star Winner' && (
-                    <div className="absolute left-4 top-4 z-10 flex items-center gap-1 rounded-full bg-[#d4af37] px-3 py-1 shadow-lg">
+                    <div className="absolute left-4 top-4 z-10 flex items-center gap-1 rounded-full bg-[#c9a962] px-3 py-1 shadow-lg">
                       <Trophy className="h-3 w-3 text-neutral-950" strokeWidth={2} />
                       <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-950">5-Star</span>
                     </div>
@@ -302,8 +302,8 @@ export function CertificationsAwards() {
                   {/* Certificate Info */}
                   <div className="p-5">
                     {/* Year Badge */}
-                    <div className="mb-3 inline-block border border-[#d4af37]/30 bg-[#d4af37]/10 px-2 py-1">
-                      <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#d4af37]">
+                    <div className="mb-3 inline-block border border-[#c9a962]/30 bg-[#c9a962]/10 px-2 py-1">
+                      <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#c9a962]">
                         {cert.year}
                       </span>
                     </div>
@@ -336,10 +336,10 @@ export function CertificationsAwards() {
                         href={cert.file}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/btn flex items-center gap-2 border border-[#d4af37]/30 bg-[#d4af37]/5 px-3 py-2 transition-all hover:border-[#d4af37] hover:bg-[#d4af37]/20"
+                        className="group/btn flex items-center gap-2 border border-[#c9a962]/30 bg-[#c9a962]/5 px-3 py-2 transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/20"
                       >
-                        <ExternalLink className="h-3.5 w-3.5 text-[#d4af37]" strokeWidth={1.5} />
-                        <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#d4af37]">
+                        <ExternalLink className="h-3.5 w-3.5 text-[#c9a962]" strokeWidth={1.5} />
+                        <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#c9a962]">
                           Open
                         </span>
                       </a>
@@ -358,7 +358,7 @@ export function CertificationsAwards() {
                 onClick={() => scrollToIndex(index)}
                 className={`h-2 transition-all duration-300 ${
                   activeIndex === index
-                    ? 'w-8 bg-[#d4af37]'
+                    ? 'w-8 bg-[#c9a962]'
                     : 'w-2 bg-white/20 hover:bg-white/40'
                 }`}
               />
@@ -387,7 +387,7 @@ export function CertificationsAwards() {
                 transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="mb-2 font-SchnyderS text-4xl font-light text-[#d4af37] lg:text-5xl">
+                <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962] lg:text-5xl">
                   {stat.value}
                 </div>
                 <div className="font-Satoshi text-xs font-light uppercase tracking-[0.15em] text-white/40">

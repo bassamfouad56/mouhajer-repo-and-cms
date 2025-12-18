@@ -39,10 +39,10 @@ export function LuxuryAwardsShowcase({ awards }: LuxuryAwardsShowcaseProps) {
     <>
       <section
         ref={sectionRef}
-        className="relative bg-white py-40 dark:bg-neutral-950"
+        className="relative bg-[#faf8f5] py-40"
       >
         {/* Subtle background pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
 
         <div className="container relative z-10 mx-auto px-6 lg:px-16 xl:px-24">
           {/* Section Header */}
@@ -53,29 +53,29 @@ export function LuxuryAwardsShowcase({ awards }: LuxuryAwardsShowcaseProps) {
             className="mb-32 text-center"
           >
             <div className="mb-8 flex items-center justify-center gap-6">
-              <div className="h-px w-20 bg-linear-to-r from-transparent to-[#d4af37]" />
+              <div className="h-px w-20 bg-linear-to-r from-transparent to-[#c9a962]" />
               <div className="flex items-center gap-3">
                 <Sparkles
-                  className="h-4 w-4 text-[#d4af37]"
+                  className="h-4 w-4 text-[#c9a962]"
                   strokeWidth={1.5}
                 />
                 <span className="font-Satoshi text-xs font-light uppercase tracking-[0.35em] text-neutral-500">
                   Gallery of Excellence
                 </span>
                 <Sparkles
-                  className="h-4 w-4 text-[#d4af37]"
+                  className="h-4 w-4 text-[#c9a962]"
                   strokeWidth={1.5}
                 />
               </div>
-              <div className="h-px w-20 bg-linear-to-l from-transparent to-[#d4af37]" />
+              <div className="h-px w-20 bg-linear-to-l from-transparent to-[#c9a962]" />
             </div>
 
-            <h2 className="mb-8 font-SchnyderS text-6xl font-light tracking-tight text-neutral-900 dark:text-white md:text-7xl lg:text-8xl">
+            <h2 className="mb-8 font-SchnyderS text-6xl font-light tracking-tight text-neutral-900 md:text-7xl lg:text-8xl">
               Recognition &<br />
-              <span className="text-[#d4af37]">Achievement</span>
+              <span className="text-[#c9a962]">Achievement</span>
             </h2>
 
-            <p className="mx-auto max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600 dark:text-neutral-400 md:text-xl">
+            <p className="mx-auto max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600 md:text-xl">
               Each award represents a project where we transcended expectations,
               <br className="hidden md:block" />
               pushing the boundaries of design, craftsmanship, and execution
@@ -120,13 +120,13 @@ export function LuxuryAwardsShowcase({ awards }: LuxuryAwardsShowcaseProps) {
               {/* Close Button */}
               <button
                 onClick={() => setSelectedAward(null)}
-                className="absolute -right-6 -top-6 z-10 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-neutral-900/80 text-white backdrop-blur-xl transition-all hover:border-[#d4af37]/50 hover:bg-neutral-900"
+                className="absolute -right-6 -top-6 z-10 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-neutral-900/80 text-white backdrop-blur-xl transition-all hover:border-[#c9a962]/50 hover:bg-neutral-900"
               >
                 <X className="h-5 w-5" strokeWidth={1.5} />
               </button>
 
               {/* Certificate */}
-              <div className="h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-white shadow-[0_0_80px_rgba(212,175,55,0.15)]">
+              <div className="h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-white shadow-[0_0_80px_rgba(201,169,98,0.15)]">
                 <iframe
                   src={selectedAward.certificate}
                   className="h-full w-full"
@@ -138,7 +138,7 @@ export function LuxuryAwardsShowcase({ awards }: LuxuryAwardsShowcaseProps) {
               <a
                 href={selectedAward.certificate}
                 download
-                className="absolute -bottom-20 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/20 bg-neutral-900/80 px-8 py-4 font-Satoshi text-sm font-light text-white backdrop-blur-xl transition-all hover:border-[#d4af37]/50 hover:bg-neutral-900"
+                className="absolute -bottom-20 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/20 bg-neutral-900/80 px-8 py-4 font-Satoshi text-sm font-light text-white backdrop-blur-xl transition-all hover:border-[#c9a962]/50 hover:bg-neutral-900"
               >
                 <Download className="h-4 w-4" strokeWidth={1.5} />
                 Download Certificate
@@ -190,16 +190,16 @@ function AwardShowcaseItem({
               initial={{ opacity: 0, y: 20 }}
               animate={itemInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#d4af37]/20 bg-[#d4af37]/5 px-5 py-2.5 backdrop-blur-sm hidden"
+              className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#c9a962]/20 bg-[#c9a962]/5 px-5 py-2.5 backdrop-blur-sm hidden"
             >
-              <Trophy className="h-4 w-4 text-[#d4af37]" strokeWidth={1.5} />
-              <span className="font-Satoshi text-sm font-medium text-[#d4af37]">
+              <Trophy className="h-4 w-4 text-[#c9a962]" strokeWidth={1.5} />
+              <span className="font-Satoshi text-sm font-medium text-[#c9a962]">
                 {award.level}
               </span>
             </motion.div> */}
 
             {/* Certificate Preview */}
-            <div className="group/cert relative overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(212,175,55,0.15)] dark:border-neutral-800/80 dark:bg-neutral-900 dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)]">
+            <div className="group/cert relative overflow-hidden rounded-2xl border border-[#c9a962]/20 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(201,169,98,0.15)]">
               <div className="aspect-[8.5/11] w-full">
                 <iframe
                   src={`${award.certificate}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
@@ -209,11 +209,11 @@ function AwardShowcaseItem({
               </div>
 
               {/* Hover Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-neutral-950/95 opacity-0 backdrop-blur-sm transition-all duration-500 group-hover/cert:opacity-100">
+              <div className="absolute inset-0 flex items-center justify-center bg-[#faf8f5]/95 opacity-0 backdrop-blur-sm transition-all duration-500 group-hover/cert:opacity-100">
                 <div className="flex gap-4">
                   <button
                     onClick={onViewCertificate}
-                    className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 font-Satoshi text-sm font-light text-white backdrop-blur-sm transition-all hover:border-[#d4af37]/50 hover:bg-white/15"
+                    className="flex items-center gap-2 rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-7 py-3.5 font-Satoshi text-sm font-light text-neutral-900 backdrop-blur-sm transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/20"
                   >
                     <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} />
                     View Full Size
@@ -221,7 +221,7 @@ function AwardShowcaseItem({
                   <a
                     href={award.certificate}
                     download
-                    className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 font-Satoshi text-sm font-light text-white backdrop-blur-sm transition-all hover:border-[#d4af37]/50 hover:bg-white/15"
+                    className="flex items-center gap-2 rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-7 py-3.5 font-Satoshi text-sm font-light text-neutral-900 backdrop-blur-sm transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/20"
                   >
                     <Download className="h-4 w-4" strokeWidth={1.5} />
                     Download
@@ -230,8 +230,8 @@ function AwardShowcaseItem({
               </div>
 
               {/* Decorative corner accents */}
-              <div className="pointer-events-none absolute left-8 top-8 h-12 w-12 border-l-2 border-t-2 border-[#d4af37]/30 transition-all duration-500 group-hover/cert:h-16 group-hover/cert:w-16 group-hover/cert:border-[#d4af37]/60" />
-              <div className="pointer-events-none absolute bottom-8 right-8 h-12 w-12 border-b-2 border-r-2 border-[#d4af37]/30 transition-all duration-500 group-hover/cert:h-16 group-hover/cert:w-16 group-hover/cert:border-[#d4af37]/60" />
+              <div className="pointer-events-none absolute left-8 top-8 h-12 w-12 border-l-2 border-t-2 border-[#c9a962]/30 transition-all duration-500 group-hover/cert:h-16 group-hover/cert:w-16 group-hover/cert:border-[#c9a962]/60" />
+              <div className="pointer-events-none absolute bottom-8 right-8 h-12 w-12 border-b-2 border-r-2 border-[#c9a962]/30 transition-all duration-500 group-hover/cert:h-16 group-hover/cert:w-16 group-hover/cert:border-[#c9a962]/60" />
             </div>
           </div>
         </motion.div>
@@ -248,29 +248,29 @@ function AwardShowcaseItem({
           {/* Award Metadata */}
           <div className="mb-8 flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-3 font-Satoshi text-sm font-light text-neutral-500">
-              <AwardIcon className="h-4 w-4 text-[#d4af37]" strokeWidth={1.5} />
+              <AwardIcon className="h-4 w-4 text-[#c9a962]" strokeWidth={1.5} />
               <span>{award.year}</span>
             </div>
-            <div className="h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-700" />
+            <div className="h-1 w-1 rounded-full bg-neutral-300" />
             <span className="font-Satoshi text-sm font-light text-neutral-500">
               {award.organization}
             </span>
           </div>
 
           {/* Award Title */}
-          <h3 className="mb-6 font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-neutral-900 dark:text-white md:text-6xl lg:text-7xl">
+          <h3 className="mb-6 font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-neutral-900 md:text-6xl lg:text-7xl">
             {award.title}
           </h3>
 
           {/* Award Description */}
           {award.description && (
-            <p className="mb-10 font-Satoshi text-lg font-light leading-relaxed text-neutral-600 dark:text-neutral-400">
+            <p className="mb-10 font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
               {award.description}
             </p>
           )}
 
           {/* Decorative divider */}
-          <div className="mb-10 h-px w-24 bg-linear-to-r from-[#d4af37] to-transparent" />
+          <div className="mb-10 h-px w-24 bg-linear-to-r from-[#c9a962] to-transparent" />
 
           {/* Winning Project */}
           {award.projectSlug && (
@@ -279,7 +279,7 @@ function AwardShowcaseItem({
                 <span className="mb-2 block font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
                   Winning Project
                 </span>
-                <h4 className="font-SchnyderS text-3xl font-light text-neutral-900 dark:text-white md:text-4xl">
+                <h4 className="font-SchnyderS text-3xl font-light text-neutral-900 md:text-4xl">
                   {award.project}
                 </h4>
               </div>
@@ -315,7 +315,7 @@ function AwardShowcaseItem({
                     </div>
 
                     {/* Corner accent */}
-                    <div className="pointer-events-none absolute right-8 top-8 h-12 w-12 border-r-2 border-t-2 border-white/40 transition-all duration-500 group-hover/project:h-16 group-hover/project:w-16 group-hover/project:border-[#d4af37]" />
+                    <div className="pointer-events-none absolute right-8 top-8 h-12 w-12 border-r-2 border-t-2 border-white/40 transition-all duration-500 group-hover/project:h-16 group-hover/project:w-16 group-hover/project:border-[#c9a962]" />
                   </div>
                 </Link>
               )}

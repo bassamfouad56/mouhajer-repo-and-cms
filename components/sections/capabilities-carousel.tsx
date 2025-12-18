@@ -105,31 +105,31 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
     <section
       ref={sectionRef}
       id="capabilities"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-neutral-950 py-24 lg:py-32 scroll-mt-24"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#faf8f5] py-24 lg:py-32 scroll-mt-24"
     >
       {/* Background */}
       <div className="absolute inset-0">
         {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5] via-[#f8f6f3] to-[#faf8f5]" />
 
         {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(38,36,32,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(38,36,32,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
         {/* Animated accent lines */}
         <motion.div
-          className="absolute left-0 top-1/4 h-px w-full bg-gradient-to-r from-transparent via-[#BA9051]/20 to-transparent"
+          className="absolute left-0 top-1/4 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent"
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 4, repeat: Infinity }}
         />
         <motion.div
-          className="absolute left-0 top-3/4 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"
+          className="absolute left-0 top-3/4 h-px w-full bg-gradient-to-r from-transparent via-[#262420]/10 to-transparent"
           animate={{ opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 5, repeat: Infinity, delay: 2 }}
         />
 
         {/* Corner gradients */}
-        <div className="absolute left-0 top-0 h-[500px] w-[500px] bg-[radial-gradient(ellipse_at_top_left,rgba(186,144,81,0.05)_0%,transparent_70%)]" />
-        <div className="absolute bottom-0 right-0 h-[500px] w-[500px] bg-[radial-gradient(ellipse_at_bottom_right,rgba(186,144,81,0.03)_0%,transparent_70%)]" />
+        <div className="absolute left-0 top-0 h-[500px] w-[500px] bg-[radial-gradient(ellipse_at_top_left,rgba(201,169,98,0.08)_0%,transparent_70%)]" />
+        <div className="absolute bottom-0 right-0 h-[500px] w-[500px] bg-[radial-gradient(ellipse_at_bottom_right,rgba(201,169,98,0.05)_0%,transparent_70%)]" />
       </div>
 
       {/* Content Container */}
@@ -144,20 +144,20 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <div className="mb-4 flex items-center gap-4">
-                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#BA9051]/50" />
-                <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+                <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
                   {t('heading')}
                 </span>
               </div>
-              <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+              <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-[#262420] sm:text-5xl lg:text-6xl xl:text-7xl">
                 {t('titleLine1')}
                 <br />
-                <span className="text-white/30">{t('titleLine2')}</span>
+                <span className="text-[#3d3a36]/40">{t('titleLine2')}</span>
               </h2>
             </div>
-            <p className="max-w-md font-Satoshi text-base font-light text-white/50 lg:text-right lg:text-lg">
+            <p className="max-w-md font-Satoshi text-base font-light text-[#3d3a36]/60 lg:text-right lg:text-lg">
               {t('description')}
-              <span className="text-white/70"> {t('descriptionHighlight')}</span>
+              <span className="text-[#262420]/80"> {t('descriptionHighlight')}</span>
             </p>
           </div>
         </motion.div>
@@ -204,8 +204,8 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                     {/* Overlay */}
                     <div className={`absolute inset-0 transition-all duration-500 ${
                       isActive
-                        ? 'bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/30'
-                        : 'bg-neutral-950/80'
+                        ? 'bg-gradient-to-t from-[#262420]/90 via-[#262420]/60 to-[#262420]/20'
+                        : 'bg-[#262420]/75'
                     }`} />
                   </div>
 
@@ -244,9 +244,9 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.5, delay: 0.3 }}
-                          className="mb-4 inline-flex w-fit items-center gap-2 border border-[#BA9051]/30 bg-neutral-950/50 px-4 py-2 backdrop-blur-sm"
+                          className="mb-4 inline-flex w-fit items-center gap-2 border border-[#c9a962]/30 bg-[#262420]/50 px-4 py-2 backdrop-blur-sm"
                         >
-                          <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#BA9051]">
+                          <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
                             {cap.badge}
                           </span>
                         </motion.div>
@@ -279,7 +279,7 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                         >
                           <Link
                             href={cap.link}
-                            className="group inline-flex items-center gap-3 border border-[#BA9051]/30 bg-[#BA9051]/10 px-6 py-3 font-Satoshi text-xs font-light uppercase tracking-wider text-[#BA9051] backdrop-blur-sm transition-all hover:bg-[#BA9051]/20 hover:gap-4"
+                            className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/10 px-6 py-3 font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962] backdrop-blur-sm transition-all hover:bg-[#c9a962]/20 hover:gap-4"
                           >
                             {tCommon('learnMore')}
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
@@ -291,14 +291,14 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
 
                   {/* Hover indicator line */}
                   <motion.div
-                    className="absolute bottom-0 left-0 h-1 bg-[#BA9051]"
+                    className="absolute bottom-0 left-0 h-1 bg-[#c9a962]"
                     initial={{ width: '0%' }}
                     animate={{ width: isActive ? '100%' : isHovered ? '100%' : '0%' }}
                     transition={{ duration: 0.5 }}
                   />
 
                   {/* Side border accent */}
-                  <div className="absolute right-0 top-0 h-full w-px bg-white/10" />
+                  <div className="absolute right-0 top-0 h-full w-px bg-[#262420]/10" />
                 </motion.div>
               );
             })}
@@ -312,7 +312,7 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
               return (
                 <motion.div
                   key={cap.id}
-                  className="relative overflow-hidden border border-white/10 bg-white/[0.02]"
+                  className="relative overflow-hidden border border-[#262420]/10 bg-white/50"
                   initial={false}
                   animate={{
                     height: isActive ? 'auto' : 80,
@@ -325,10 +325,10 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                     className="flex w-full items-center justify-between p-5"
                   >
                     <div className="text-left">
-                      <span className="block font-Satoshi text-xs font-light uppercase tracking-wider text-[#BA9051]">
+                      <span className="block font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
                         {cap.badge}
                       </span>
-                      <span className="font-SchnyderS text-lg font-light text-white">
+                      <span className="font-SchnyderS text-lg font-light text-[#262420]">
                         {cap.title}
                       </span>
                     </div>
@@ -336,7 +336,7 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                       animate={{ rotate: isActive ? 45 : 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Plus className="h-5 w-5 text-[#BA9051]" strokeWidth={1.5} />
+                      <Plus className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
                     </motion.div>
                   </button>
 
@@ -359,18 +359,18 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                             className="object-cover"
                             sizes="100vw"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#262420]/60 to-transparent" />
                         </div>
 
                         {/* Description */}
-                        <p className="mb-4 font-Satoshi text-sm font-light leading-relaxed text-white/60">
+                        <p className="mb-4 font-Satoshi text-sm font-light leading-relaxed text-[#3d3a36]/70">
                           {cap.description}
                         </p>
 
                         {/* Link */}
                         <Link
                           href={cap.link}
-                          className="inline-flex items-center gap-2 font-Satoshi text-xs font-light text-[#BA9051] transition-all hover:gap-3"
+                          className="inline-flex items-center gap-2 font-Satoshi text-xs font-light text-[#c9a962] transition-all hover:gap-3"
                         >
                           {tCommon('learnMore')}
                           <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
@@ -398,8 +398,8 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                 onClick={() => setActiveIndex(index)}
                 className={`h-1 transition-all duration-300 ${
                   index === activeIndex
-                    ? 'w-12 bg-[#BA9051]'
-                    : 'w-4 bg-white/20 hover:bg-white/40'
+                    ? 'w-12 bg-[#c9a962]'
+                    : 'w-4 bg-[#262420]/20 hover:bg-[#262420]/40'
                 }`}
               />
             ))}
@@ -414,12 +414,12 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <div className="inline-flex flex-col items-center gap-6 sm:flex-row sm:gap-8">
-            <span className="font-Satoshi text-sm font-light text-white/40">
+            <span className="font-Satoshi text-sm font-light text-[#3d3a36]/60">
               {t('ctaPrompt')}
             </span>
             <Link
               href="/services"
-              className="group inline-flex items-center gap-3 border border-[#BA9051] bg-[#BA9051] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#BA9051] hover:gap-4"
+              className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all hover:bg-transparent hover:text-[#c9a962] hover:gap-4"
             >
               {t('ctaButton')}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
@@ -429,8 +429,8 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
       </div>
 
       {/* Corner decorations */}
-      <div className="pointer-events-none absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-white/5 lg:block" />
-      <div className="pointer-events-none absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-white/5 lg:block" />
+      <div className="pointer-events-none absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-[#c9a962]/10 lg:block" />
+      <div className="pointer-events-none absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-[#c9a962]/10 lg:block" />
     </section>
   );
 }

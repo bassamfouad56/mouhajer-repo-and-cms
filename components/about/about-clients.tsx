@@ -64,11 +64,11 @@ export function AboutClients() {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
               Strategic Partners
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </motion.div>
 
           <motion.h2
@@ -96,8 +96,8 @@ export function AboutClients() {
                 className="border border-white/5 bg-white/[0.02] p-8 backdrop-blur-sm"
               >
                 <div className="mb-6 flex items-center gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/5">
-                    <Icon className="h-5 w-5 text-[#d4af37]" strokeWidth={1} />
+                  <div className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
+                    <Icon className="h-5 w-5 text-[#c9a962]" strokeWidth={1} />
                   </div>
                   <h3 className="font-SchnyderS text-xl font-light text-white">
                     {category.title}
@@ -145,7 +145,7 @@ export function AboutClients() {
                 className="relative border border-white/5 bg-white/[0.02] p-8 backdrop-blur-sm lg:p-10"
               >
                 {/* Quote Icon */}
-                <Quote className="mb-6 h-8 w-8 text-[#d4af37]/30" strokeWidth={1} />
+                <Quote className="mb-6 h-8 w-8 text-[#c9a962]/30" strokeWidth={1} />
 
                 {/* Quote */}
                 <p className="mb-8 font-Satoshi text-base font-light leading-relaxed text-white/70">
@@ -160,13 +160,13 @@ export function AboutClients() {
                   <div className="font-Satoshi text-sm font-light text-white/50">
                     {testimonial.title}
                   </div>
-                  <div className="mt-1 font-Satoshi text-xs font-light text-[#d4af37]">
+                  <div className="mt-1 font-Satoshi text-xs font-light text-[#c9a962]">
                     {testimonial.company}
                   </div>
                 </div>
 
                 {/* Corner accent */}
-                <div className="absolute right-0 top-0 h-16 w-16 border-r border-t border-[#d4af37]/10" />
+                <div className="absolute right-0 top-0 h-16 w-16 border-r border-t border-[#c9a962]/10" />
               </motion.div>
             ))}
           </div>

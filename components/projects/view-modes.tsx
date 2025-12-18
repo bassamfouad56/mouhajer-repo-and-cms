@@ -208,7 +208,7 @@ function MasonryCard({
           {/* Content */}
           <div className="absolute inset-x-0 bottom-0 p-4 lg:p-6">
             {project.category && (
-              <span className="mb-2 inline-block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#d4af37]">
+              <span className="mb-2 inline-block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962]">
                 {project.category}
               </span>
             )}
@@ -281,7 +281,7 @@ function HorizontalCard({ project, index }: { project: SanityProject; index: num
 
           {/* Content */}
           <div className="absolute bottom-0 left-0 p-8 lg:p-12">
-            <span className="mb-3 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#d4af37]">
+            <span className="mb-3 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
               {project.category || 'Project'}
             </span>
             <h3 className="mb-3 font-SchnyderS text-3xl font-light text-white lg:text-5xl">
@@ -455,7 +455,7 @@ function CaseStudyCard({ project, index }: { project: SanityProject; index: numb
                 </p>
               )}
 
-              <div className="flex items-center gap-2 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-colors duration-300 group-hover:text-[#d4af37]">
+              <div className="flex items-center gap-2 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962]">
                 <span>View Case Study</span>
                 <motion.svg
                   animate={{ x: isHovered ? 5 : 0 }}
@@ -497,7 +497,7 @@ export function SplitScreenView({ projects }: { projects: SanityProject[] }) {
             >
               <div className={`border-l-2 py-4 pl-6 transition-all duration-300 ${
                 activeIndex === index
-                  ? 'border-[#d4af37] bg-white'
+                  ? 'border-[#c9a962] bg-white'
                   : 'border-transparent hover:border-neutral-300'
               }`}>
                 <span className="mb-1 block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-400">
@@ -546,7 +546,7 @@ export function SplitScreenView({ projects }: { projects: SanityProject[] }) {
                 <div className="absolute inset-0 bg-neutral-200" />
               )}
               <div className="absolute inset-0 bg-neutral-950/20" />
-              <div className="absolute bottom-8 right-8 flex items-center gap-2 bg-white px-6 py-3 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-colors duration-300 hover:bg-[#d4af37] hover:text-white">
+              <div className="absolute bottom-8 right-8 flex items-center gap-2 bg-white px-6 py-3 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-colors duration-300 hover:bg-[#c9a962] hover:text-white">
                 View Project
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -608,7 +608,7 @@ export function StackedCardsView({ projects }: { projects: SanityProject[] }) {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-6">
-                    <span className="mb-2 block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#d4af37]">
+                    <span className="mb-2 block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962]">
                       {project.category}
                     </span>
                     <h3 className="font-SchnyderS text-xl font-light text-white lg:text-2xl">
@@ -629,7 +629,7 @@ export function StackedCardsView({ projects }: { projects: SanityProject[] }) {
             key={index}
             onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
             className={`h-2 w-2 rounded-full transition-all duration-300 ${
-              hoveredIndex === index ? 'w-6 bg-[#d4af37]' : 'bg-neutral-300 hover:bg-neutral-400'
+              hoveredIndex === index ? 'w-6 bg-[#c9a962]' : 'bg-neutral-300 hover:bg-neutral-400'
             }`}
           />
         ))}
@@ -689,8 +689,8 @@ function TimelineCard({
       className={`relative flex items-center ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
     >
       {/* Year marker */}
-      <div className="absolute left-4 z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#d4af37] bg-white lg:left-1/2 lg:-translate-x-1/2">
-        <div className="h-2 w-2 rounded-full bg-[#d4af37]" />
+      <div className="absolute left-4 z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#c9a962] bg-white lg:left-1/2 lg:-translate-x-1/2">
+        <div className="h-2 w-2 rounded-full bg-[#c9a962]" />
       </div>
 
       {/* Year label */}
@@ -718,7 +718,7 @@ function TimelineCard({
             </div>
             <div className="p-6">
               <div className="mb-2 flex items-center gap-2">
-                <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#d4af37]">
+                <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#c9a962]">
                   {project.category}
                 </span>
                 <span className="font-Satoshi text-sm text-neutral-400 lg:hidden">
@@ -818,7 +818,7 @@ function Immersive3DCard({ project, index }: { project: SanityProject; index: nu
         />
 
         <div className="absolute inset-x-0 bottom-0 p-5" style={{ transform: 'translateZ(30px)' }}>
-          <span className="mb-1 block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#d4af37]">
+          <span className="mb-1 block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962]">
             {project.category}
           </span>
           <h3 className="font-SchnyderS text-xl font-light text-white">
@@ -880,12 +880,12 @@ function CinematicCard({ project, index }: { project: SanityProject; index: numb
 
           <motion.div style={{ y: contentY }} className="absolute bottom-0 left-0 right-0 p-8 lg:p-16">
             <div className="mb-3 flex items-center gap-4">
-              <div className="h-px w-12 bg-[#d4af37]" />
-              <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#d4af37]">
+              <div className="h-px w-12 bg-[#c9a962]" />
+              <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
                 {project.category || 'Featured Project'}
               </span>
             </div>
-            <h2 className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-white transition-all duration-500 group-hover:text-[#d4af37] lg:text-6xl xl:text-7xl">
+            <h2 className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-white transition-all duration-500 group-hover:text-[#c9a962] lg:text-6xl xl:text-7xl">
               {project.title}
             </h2>
             <div className="mb-6 flex flex-wrap items-center gap-4 font-Satoshi text-sm text-white/60">
@@ -911,7 +911,7 @@ function CinematicCard({ project, index }: { project: SanityProject; index: numb
             )}
 
             {/* View button */}
-            <div className="mt-6 inline-flex items-center gap-2 border-b border-white/30 pb-1 font-Satoshi text-xs uppercase tracking-[0.2em] text-white/80 transition-all duration-300 group-hover:border-[#d4af37] group-hover:text-[#d4af37]">
+            <div className="mt-6 inline-flex items-center gap-2 border-b border-white/30 pb-1 font-Satoshi text-xs uppercase tracking-[0.2em] text-white/80 transition-all duration-300 group-hover:border-[#c9a962] group-hover:text-[#c9a962]">
               Explore Project
               <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -1070,7 +1070,7 @@ export function ViewModeSelector({
             onClick={() => setIsExpanded(!isExpanded)}
             className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 font-Satoshi text-xs transition-all duration-200 ${
               isExpanded || !['grid', 'masonry', 'cinematic'].includes(currentView)
-                ? 'bg-[#d4af37] text-white'
+                ? 'bg-[#c9a962] text-white'
                 : 'text-neutral-600 hover:bg-neutral-100'
             }`}
           >
@@ -1157,16 +1157,16 @@ export function ViewModeSelector({
                     }}
                     className={`group rounded-lg border p-3 text-left transition-all duration-200 ${
                       currentView === view
-                        ? 'border-[#d4af37] bg-[#d4af37]/5'
+                        ? 'border-[#c9a962] bg-[#c9a962]/5'
                         : 'border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50'
                     }`}
                   >
                     <div className="mb-2 flex items-center gap-2">
-                      <div className={`${currentView === view ? 'text-[#d4af37]' : 'text-neutral-400 group-hover:text-neutral-600'}`}>
+                      <div className={`${currentView === view ? 'text-[#c9a962]' : 'text-neutral-400 group-hover:text-neutral-600'}`}>
                         {VIEW_MODE_CONFIG[view].icon}
                       </div>
                       <span className={`font-Satoshi text-sm font-medium ${
-                        currentView === view ? 'text-[#d4af37]' : 'text-neutral-950'
+                        currentView === view ? 'text-[#c9a962]' : 'text-neutral-950'
                       }`}>
                         {VIEW_MODE_CONFIG[view].label}
                       </span>

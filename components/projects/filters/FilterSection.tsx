@@ -70,7 +70,7 @@ export function FilterCheckbox({ label, value, checked, onChange, count }: Filte
             type="checkbox"
             checked={checked}
             onChange={(e) => onChange(e.target.checked)}
-            className="peer h-4 w-4 cursor-pointer appearance-none rounded border border-neutral-300 bg-white transition-all checked:border-[#d4af37] checked:bg-[#d4af37]"
+            className="peer h-4 w-4 cursor-pointer appearance-none rounded border border-neutral-300 bg-white transition-all checked:border-[#c9a962] checked:bg-[#c9a962]"
           />
           {/* Checkmark */}
           <svg

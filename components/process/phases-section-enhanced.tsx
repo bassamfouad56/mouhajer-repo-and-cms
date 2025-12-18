@@ -22,7 +22,7 @@ const phases = [
       'Preliminary Budget & Timeline Estimates',
       'Conceptual Design Brief',
     ],
-    color: '#d4af37',
+    color: '#c9a962',
   },
   {
     id: 2,
@@ -97,7 +97,7 @@ const phases = [
       'Staff Training on Building Systems',
       'Comprehensive Warranty & Maintenance Plans',
     ],
-    color: '#d4af37',
+    color: '#c9a962',
   },
 ];
 
@@ -286,7 +286,7 @@ export function PhasesSectionEnhanced() {
     <section ref={sectionRef} className="relative overflow-hidden bg-white py-24 sm:py-32 lg:py-40">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-[#d4af37]/5 blur-3xl" />
+        <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-[#c9a962]/5 blur-3xl" />
         <div className="absolute bottom-1/4 right-0 h-96 w-96 rounded-full bg-[#3b82f6]/5 blur-3xl" />
       </div>
 
@@ -299,11 +299,11 @@ export function PhasesSectionEnhanced() {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <SVGLineDraw width={60} height={2} strokeColor="#d4af37" duration={1.5} delay={0.2} />
+            <SVGLineDraw width={60} height={2} strokeColor="#c9a962" duration={1.5} delay={0.2} />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
               The MIDC Protocol
             </span>
-            <SVGLineDraw width={60} height={2} strokeColor="#d4af37" duration={1.5} delay={0.2} />
+            <SVGLineDraw width={60} height={2} strokeColor="#c9a962" duration={1.5} delay={0.2} />
           </motion.div>
 
           <RevealText
@@ -354,7 +354,7 @@ export function PhasesSectionEnhanced() {
           <MagneticButton strength={0.25}>
             <Link
               href="/#contact"
-              className="group inline-flex items-center gap-3 border border-neutral-900 bg-neutral-950 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all duration-500 hover:border-[#d4af37] hover:bg-[#d4af37]"
+              className="group inline-flex items-center gap-3 border border-neutral-900 bg-neutral-950 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962]"
             >
               <span>Start Your Project</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />

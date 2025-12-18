@@ -119,7 +119,7 @@ export function AboutHero() {
               <br />
               Turnkey Construction
               <br />
-              <span className="text-[#d4af37]">in the UAE.</span>
+              <span className="text-[#c9a962]">in the UAE.</span>
             </h1>
           </div>
 

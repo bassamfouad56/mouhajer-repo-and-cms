@@ -96,7 +96,7 @@ export function HospitalityPartners({ clients = [] }: HospitalityPartnersProps) 
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
-        <div className="absolute left-1/3 top-1/4 h-[700px] w-[700px] rounded-full bg-[#d4af37]/[0.02] blur-[150px]" />
+        <div className="absolute left-1/3 top-1/4 h-[700px] w-[700px] rounded-full bg-[#c9a962]/[0.02] blur-[150px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
@@ -130,7 +130,7 @@ export function HospitalityPartners({ clients = [] }: HospitalityPartnersProps) 
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-white/60 lg:text-xl"
           >
-            <span className="font-SchnyderS text-2xl text-[#d4af37]">
+            <span className="font-SchnyderS text-2xl text-[#c9a962]">
               The Giants of Tourism.
             </span>
             <br />
@@ -153,10 +153,10 @@ export function HospitalityPartners({ clients = [] }: HospitalityPartnersProps) 
             return (
               <div
                 key={index}
-                className="group relative overflow-hidden border border-white/5 bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white/[0.05] lg:p-8"
+                className="group relative overflow-hidden border border-white/5 bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white/[0.05] lg:p-8"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/5">
-                  <Icon className="h-6 w-6 text-[#d4af37]" strokeWidth={1.5} />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
+                  <Icon className="h-6 w-6 text-[#c9a962]" strokeWidth={1.5} />
                 </div>
                 <h3 className="mb-3 font-Satoshi text-base font-medium text-white lg:text-lg">
                   {capability.title}
@@ -165,7 +165,7 @@ export function HospitalityPartners({ clients = [] }: HospitalityPartnersProps) 
                   {capability.description}
                 </p>
                 {/* Accent */}
-                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#d4af37] to-transparent transition-all duration-500 group-hover:w-full" />
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#c9a962] to-transparent transition-all duration-500 group-hover:w-full" />
               </div>
             );
           })}
@@ -181,15 +181,15 @@ export function HospitalityPartners({ clients = [] }: HospitalityPartnersProps) 
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.4 + index * 0.1 }}
-                className="group relative overflow-hidden border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/40 hover:bg-white/[0.06]"
+                className="group relative overflow-hidden border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/40 hover:bg-white/[0.06]"
               >
                 {/* Icon */}
-                <div className="mb-6 flex h-14 w-14 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/5 transition-all duration-300 group-hover:border-[#d4af37]/50 group-hover:bg-[#d4af37]/10">
-                  <Icon className="h-7 w-7 text-[#d4af37]" strokeWidth={1} />
+                <div className="mb-6 flex h-14 w-14 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5 transition-all duration-300 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10">
+                  <Icon className="h-7 w-7 text-[#c9a962]" strokeWidth={1} />
                 </div>
 
                 {/* Partner Name */}
-                <h3 className="mb-3 font-SchnyderS text-xl font-light text-white transition-colors group-hover:text-[#d4af37] lg:text-2xl">
+                <h3 className="mb-3 font-SchnyderS text-xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-2xl">
                   {partner.name}
                 </h3>
 
@@ -199,8 +199,8 @@ export function HospitalityPartners({ clients = [] }: HospitalityPartnersProps) 
                 </p>
 
                 {/* Corner Accents */}
-                <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-white/5 transition-colors duration-300 group-hover:border-[#d4af37]/20" />
-                <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-white/5 transition-colors duration-300 group-hover:border-[#d4af37]/20" />
+                <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-white/5 transition-colors duration-300 group-hover:border-[#c9a962]/20" />
+                <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-white/5 transition-colors duration-300 group-hover:border-[#c9a962]/20" />
               </motion.div>
             );
           })}

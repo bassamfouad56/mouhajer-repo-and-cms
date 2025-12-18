@@ -70,7 +70,7 @@ export function BackToTop() {
               cy="24"
               r="20"
               fill="none"
-              stroke="#d4af37"
+              stroke="#c9a962"
               strokeWidth="2"
               strokeLinecap="round"
               strokeDasharray={125.6}

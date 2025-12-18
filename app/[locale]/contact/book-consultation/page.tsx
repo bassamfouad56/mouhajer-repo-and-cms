@@ -224,7 +224,7 @@ export default function BookConsultationPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-6"
             >
-              <span className="inline-block rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-6 py-2 text-[11px] font-light uppercase tracking-[0.3em] text-[#d4af37] backdrop-blur-sm">
+              <span className="inline-block rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-6 py-2 text-[11px] font-light uppercase tracking-[0.3em] text-[#c9a962] backdrop-blur-sm">
                 Book Consultation
               </span>
             </motion.div>
@@ -343,7 +343,7 @@ export default function BookConsultationPage() {
                               step.number === currentStep
                                 ? 'bg-neutral-950 text-white'
                                 : step.number < currentStep
-                                ? 'bg-[#d4af37] text-neutral-950'
+                                ? 'bg-[#c9a962] text-neutral-950'
                                 : 'bg-neutral-200 text-neutral-400'
                             }`}
                           >
@@ -370,7 +370,7 @@ export default function BookConsultationPage() {
                         {index < steps.length - 1 && (
                           <div
                             className={`mx-4 h-px w-8 md:w-24 ${
-                              step.number < currentStep ? 'bg-[#d4af37]' : 'bg-neutral-200'
+                              step.number < currentStep ? 'bg-[#c9a962]' : 'bg-neutral-200'
                             }`}
                           />
                         )}
@@ -584,7 +584,7 @@ export default function BookConsultationPage() {
                                 key={scope}
                                 className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all ${
                                   selectedScopes.includes(scope)
-                                    ? 'border-[#d4af37] bg-[#d4af37]/10'
+                                    ? 'border-[#c9a962] bg-[#c9a962]/10'
                                     : 'border-neutral-200 bg-neutral-50 hover:border-neutral-300'
                                 }`}
                               >
@@ -597,7 +597,7 @@ export default function BookConsultationPage() {
                                 <div
                                   className={`flex h-5 w-5 items-center justify-center rounded border ${
                                     selectedScopes.includes(scope)
-                                      ? 'border-[#d4af37] bg-[#d4af37]'
+                                      ? 'border-[#c9a962] bg-[#c9a962]'
                                       : 'border-neutral-300'
                                   }`}
                                 >
@@ -608,7 +608,7 @@ export default function BookConsultationPage() {
                                 <span className="text-sm font-light text-neutral-950">
                                   {scope}
                                   {index === 0 && (
-                                    <span className="ml-2 text-xs text-[#d4af37]">(Recommended)</span>
+                                    <span className="ml-2 text-xs text-[#c9a962]">(Recommended)</span>
                                   )}
                                 </span>
                               </label>
@@ -786,7 +786,7 @@ export default function BookConsultationPage() {
                                 key={timeline}
                                 className={`flex cursor-pointer items-center justify-center rounded-lg border p-4 text-center transition-all ${
                                   watchedValues.timeline === timeline
-                                    ? 'border-[#d4af37] bg-[#d4af37]/10 text-neutral-950'
+                                    ? 'border-[#c9a962] bg-[#c9a962]/10 text-neutral-950'
                                     : 'border-neutral-200 bg-neutral-50 hover:border-neutral-300'
                                 }`}
                               >
@@ -848,7 +848,7 @@ export default function BookConsultationPage() {
                             ) : (
                               <div className="flex items-center justify-between rounded-lg border border-neutral-200 bg-neutral-50 p-4">
                                 <div className="flex items-center gap-3">
-                                  <FileText className="h-8 w-8 text-[#d4af37]" />
+                                  <FileText className="h-8 w-8 text-[#c9a962]" />
                                   <div>
                                     <p className="text-sm font-medium text-neutral-950">
                                       {uploadedFile.name}
@@ -904,7 +904,7 @@ export default function BookConsultationPage() {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="group flex items-center gap-3 rounded-full bg-[#d4af37] px-8 py-4 text-sm font-light tracking-wide text-neutral-950 transition-all hover:bg-[#c4a030] disabled:opacity-50"
+                          className="group flex items-center gap-3 rounded-full bg-[#c9a962] px-8 py-4 text-sm font-light tracking-wide text-neutral-950 transition-all hover:bg-[#c4a030] disabled:opacity-50"
                         >
                           {isSubmitting ? (
                             'Submitting...'
@@ -945,7 +945,7 @@ export default function BookConsultationPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 rounded-xl border border-neutral-200 bg-white p-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#d4af37]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#c9a962]">
                     <Heart className="h-5 w-5 text-neutral-950" />
                   </div>
                   <div>
