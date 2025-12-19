@@ -29,7 +29,7 @@ const createPillars = (images?: WhoWeAreCinematicProps["images"]) => [
     subtitle: "We Build",
     description:
       "We hold the trade license to execute heavy civil works. From excavation and piling to the concrete superstructure, our own teams are on site daily.",
-    image: images?.contractor || "/projects/commercial-interior/11.jpg",
+    image: images?.contractor || "/placeholder.jpg",
     accent: "#c9a962",
   },
   {
@@ -40,7 +40,7 @@ const createPillars = (images?: WhoWeAreCinematicProps["images"]) => [
       "Our creative team designs the vision, but because they work alongside the builders, every drawing is validated for cost and feasibility before you see it.",
     image:
       images?.designer ||
-      "/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg",
+      "/placeholder.jpg",
     accent: "#a8a29e",
   },
   {
@@ -49,7 +49,7 @@ const createPillars = (images?: WhoWeAreCinematicProps["images"]) => [
     subtitle: "We Craft",
     description:
       "We manufacture your fire-rated doors, wardrobes, and custom furniture in our own local facility, ensuring perfect fit and zero shipping delays.",
-    image: images?.manufacturer || "/projects/closet/_MID0095-HDR.jpg",
+    image: images?.manufacturer || "/placeholder.jpg",
     accent: "#78716c",
   },
 ];

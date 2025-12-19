@@ -12,7 +12,7 @@ const processSteps = [
     subtitle: 'Understanding Your Vision',
     description: 'We begin with an in-depth consultation to understand your aspirations, lifestyle needs, and aesthetic preferences. Every detail matters.',
     features: ['Site Analysis', 'Client Brief', 'Budget Planning'],
-    image: '/projects/office-fitout/_MID0939-HDR.jpg',
+    image: '/placeholder.jpg',
     imageAlt: 'Consultation meeting with architects',
   },
   {
@@ -20,7 +20,7 @@ const processSteps = [
     subtitle: 'Crafting the Blueprint',
     description: 'Our design team creates initial concepts, mood boards, and 3D visualizations that bring your vision to life before construction begins.',
     features: ['3D Modeling', 'Material Selection', 'Design Approval'],
-    image: '/projects/bedroom-interior/bedroom cam1.jpg',
+    image: '/placeholder.jpg',
     imageAlt: 'Architectural blueprints and designs',
   },
   {
@@ -28,7 +28,7 @@ const processSteps = [
     subtitle: 'Technical Excellence',
     description: 'Detailed engineering drawings, structural calculations, and MEP coordination ensure your project is built to perfection.',
     features: ['Structural Design', 'MEP Planning', 'Permit Acquisition'],
-    image: '/projects/commercial-interior/11.jpg',
+    image: '/placeholder.jpg',
     imageAlt: 'Engineering and technical drawings',
   },
   {
@@ -36,7 +36,7 @@ const processSteps = [
     subtitle: 'Building Dreams',
     description: 'Our in-house construction teams execute with precision. Grade-A materials, skilled craftsmen, and rigorous quality control.',
     features: ['Quality Assurance', 'Progress Reports', 'Safety Compliance'],
-    image: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+    image: '/placeholder.jpg',
     imageAlt: 'Construction site with workers',
   },
   {
@@ -44,7 +44,7 @@ const processSteps = [
     subtitle: 'Interior Mastery',
     description: 'From custom joinery to imported finishes, our fit-out specialists transform shells into stunning living and working spaces.',
     features: ['Custom Millwork', 'Premium Finishes', 'Lighting Design'],
-    image: '/projects/closet/_MID0095-HDR.jpg',
+    image: '/placeholder.jpg',
     imageAlt: 'Luxury interior fit-out in progress',
   },
   {
@@ -52,7 +52,7 @@ const processSteps = [
     subtitle: 'Your Keys, Our Pride',
     description: 'Final inspections, snag resolution, and a comprehensive handover. We stay connected for post-completion support.',
     features: ['Final Inspection', 'Documentation', 'Warranty Support'],
-    image: '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
+    image: '/placeholder.jpg',
     imageAlt: 'Completed luxury property',
   },
 ];

@@ -68,7 +68,7 @@ export default function MEPEngineeringContent() {
       <section ref={heroRef} className="relative h-screen min-h-[700px] max-h-[1000px] overflow-hidden bg-neutral-950">
         <div className="absolute inset-0">
           <SafeImage
-            src="/projects/commercial-interior/17.jpg"
+            src="/placeholder.jpg"
             alt="MEP Engineering excellence"
             fill
             className="object-cover"
@@ -134,17 +134,17 @@ function Section2() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const capabilities = [
-    { id: 1, icon: IconHVAC, title: 'HVAC Systems', subtitle: 'Climate Control', image: '/projects/commercial-interior/14.jpg', items: [
+    { id: 1, icon: IconHVAC, title: 'HVAC Systems', subtitle: 'Climate Control', image: '/placeholder.jpg', items: [
       { label: 'Load Calculation', desc: 'We calculate the precise cooling load for every room to ensure it stays at 21°C even in the August heat.' },
       { label: 'Noise Control', desc: 'We design ducting layouts that minimize airflow noise. You should feel the cool air, not hear it.' },
       { label: 'Aesthetic Integration', desc: 'We use linear slot diffusers and hidden vents that disappear into the joinery or gypsum ceiling.' }
     ]},
-    { id: 2, icon: IconLighting, title: 'Electrical & Lighting Engineering', subtitle: '', image: '/projects/turnkey-design-fitout/_MID2653-HDR.jpg', items: [
+    { id: 2, icon: IconLighting, title: 'Electrical & Lighting Engineering', subtitle: '', image: '/placeholder.jpg', items: [
       { label: 'Load Balancing', desc: 'We design robust power distribution boards (DBs) that can handle the heavy load of a modern luxury mansion without tripping.' },
       { label: 'Smart Home Automation', desc: 'We route the cabling for full home automation (KNX/Lutron) during the construction phase. This allows you to control lights, curtains, and AC from your phone.' },
       { label: 'Lighting Schematics', desc: 'We calculate the Lux levels to ensure every corner is perfectly lit, enhancing the texture of the wall finishes.' }
     ]},
-    { id: 3, icon: IconPlumbing, title: 'Plumbing & Firefighting', subtitle: '', image: '/projects/commercial-interior/15.jpg', items: [
+    { id: 3, icon: IconPlumbing, title: 'Plumbing & Firefighting', subtitle: '', image: '/placeholder.jpg', items: [
       { label: 'Water Systems', desc: 'We install high-pressure pumps and filtration systems to ensure hotel-quality showers in private residences.' },
       { label: 'Safety First', desc: 'We design and install comprehensive firefighting systems (sprinklers, smoke detectors) that comply strictly with Civil Defence regulations.' }
     ]}

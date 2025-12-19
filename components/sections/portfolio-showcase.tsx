@@ -38,7 +38,7 @@ const fallbackProjects = [
     excerpt: 'A magnificent new build construction featuring contemporary Arabian architecture with state-of-the-art amenities.',
     featuredImage: {
       node: {
-        sourceUrl: '/projects/bedroom-interior/Villa Ajman-Master Bedroom Light-06112022- HR-(1).jpg',
+        sourceUrl: '/placeholder.jpg',
         altText: 'District One Palace',
       },
     },
@@ -55,7 +55,7 @@ const fallbackProjects = [
     excerpt: 'Complete renovation and fit-out of a 5-star hotel maintaining operations throughout the transformation.',
     featuredImage: {
       node: {
-        sourceUrl: '/projects/commercial-interior/_MID7000-HDR.jpg',
+        sourceUrl: '/placeholder.jpg',
         altText: 'Sheraton Abu Dhabi',
       },
     },
@@ -72,7 +72,7 @@ const fallbackProjects = [
     excerpt: 'Turnkey design and build of a modern beachfront villa with panoramic views of the Arabian Gulf.',
     featuredImage: {
       node: {
-        sourceUrl: '/projects/turnkey-design-fitout/c5c5c5.jpg',
+        sourceUrl: '/placeholder.jpg',
         altText: 'Palm Jumeirah Villa',
       },
     },
@@ -89,7 +89,7 @@ const fallbackProjects = [
     excerpt: 'Premium commercial fit-out featuring executive offices and collaborative spaces with stunning Burj views.',
     featuredImage: {
       node: {
-        sourceUrl: '/projects/office-fitout/MID0173-HDR.jpg',
+        sourceUrl: '/placeholder.jpg',
         altText: 'Burj Vista Office',
       },
     },
@@ -106,7 +106,7 @@ const fallbackProjects = [
     excerpt: 'Ultra-luxury mansion with bespoke interiors, private cinema, and championship golf course views.',
     featuredImage: {
       node: {
-        sourceUrl: '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
+        sourceUrl: '/placeholder.jpg',
         altText: 'Emirates Hills Mansion',
       },
     },

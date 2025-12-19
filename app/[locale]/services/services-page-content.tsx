@@ -81,8 +81,8 @@ export default function ServicesPageContent({
 
   // Get first project image as fallback if no heroImage from Sanity
   const bannerImage = heroImage || (projects[0]?.mainImage
-    ? urlForImage(projects[0].mainImage)?.width(2560).height(1440).url() || '/projects/turnkey-design-fitout/_MID0058-HDR.jpg'
-    : '/projects/turnkey-design-fitout/_MID0058-HDR.jpg');
+    ? urlForImage(projects[0].mainImage)?.width(2560).height(1440).url() || '/placeholder.jpg'
+    : '/placeholder.jpg');
 
   return (
     <main className="relative bg-[#faf8f5]">
@@ -416,7 +416,7 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
                 />
               ) : (
                 <Image
-                  src="/projects/turnkey-design-fitout/_MID0058-HDR.jpg"
+                  src="/placeholder.jpg"
                   alt="MIDC Turnkey Design Project"
                   fill
                   className="object-cover"
@@ -475,14 +475,14 @@ function ServicePillarsSection({
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  // Local project images for fallback (from /projects folder)
+  // Local project images for fallback
   const localImages = {
-    civil: "/projects/commercial-interior/_DSC5263-HDR.jpg",
-    architecture: "/projects/bedroom-interior/_MID0040-HDR.jpg",
-    mep: "/projects/office-fitout/_MID0126-HDR.jpg",
-    manufacturing: "/projects/closet/_MID0095-HDR.jpg",
-    fitout: "/projects/bathroom/_MID2428-HDR.jpg",
-    handover: "/projects/turnkey-design-fitout/_MID0003-HDR.jpg",
+    civil: "/placeholder.jpg",
+    architecture: "/placeholder.jpg",
+    mep: "/placeholder.jpg",
+    manufacturing: "/placeholder.jpg",
+    fitout: "/placeholder.jpg",
+    handover: "/placeholder.jpg",
   };
 
   const services = [

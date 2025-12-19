@@ -63,7 +63,7 @@ export default function CivilConstructionContent() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <SafeImage
-            src="/projects/turnkey-design-fitout/_MID2543-HDR.jpg"
+            src="/placeholder.jpg"
             alt="Civil construction excellence"
             fill
             className="object-cover"

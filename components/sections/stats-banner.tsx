@@ -89,19 +89,19 @@ function StatItem({ value, suffix, label, delay }: StatItemProps) {
 // Luxury interior images for the background carousel
 const backgroundImages = [
   {
-    src: '/projects/turnkey-design-fitout/_MID0003-HDR.jpg',
+    src: '/placeholder.jpg',
     alt: 'Luxury living room with marble floors',
   },
   {
-    src: '/projects/bedroom-interior/1.jpg',
+    src: '/placeholder.jpg',
     alt: 'Elegant master bedroom suite',
   },
   {
-    src: '/projects/bathroom/_MID0061-HDR.jpg',
+    src: '/placeholder.jpg',
     alt: 'Modern luxury bathroom interior',
   },
   {
-    src: '/projects/commercial-interior/11.jpg',
+    src: '/placeholder.jpg',
     alt: 'Premium commercial interior',
   },
 ];

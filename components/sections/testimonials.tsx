@@ -10,7 +10,7 @@ const testimonials = [
     id: 1,
     name: 'Sarah Al Mansoori',
     role: 'CEO, Emirates Properties',
-    image: '/projects/office-fitout/_MID0939-HDR.jpg',
+    image: '/placeholder.jpg',
     content:
       'Mouhajer transformed our office into a space that truly reflects our brand. Their attention to detail and understanding of luxury design is unmatched in the region.',
     rating: 5,
@@ -20,7 +20,7 @@ const testimonials = [
     id: 2,
     name: 'Ahmed Hassan',
     role: 'Property Developer',
-    image: '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
+    image: '/placeholder.jpg',
     content:
       'Working with Mouhajer was an absolute pleasure. They delivered a stunning villa design that exceeded all our expectations. Every detail was meticulously crafted.',
     rating: 5,
@@ -30,7 +30,7 @@ const testimonials = [
     id: 3,
     name: 'Layla Rahman',
     role: 'Boutique Hotel Owner',
-    image: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+    image: '/placeholder.jpg',
     content:
       'The team at Mouhajer brought our vision to life with elegance and sophistication. Our hotel lobby is now a masterpiece that leaves every guest in awe.',
     rating: 5,

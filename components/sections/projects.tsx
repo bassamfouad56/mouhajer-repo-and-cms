@@ -163,7 +163,7 @@ const placeholderProjects: Project[] = [
     modified: new Date('2024-01-15').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
+        sourceUrl: '/placeholder.jpg',
         altText: 'Villa Hatem Master Bedroom',
       },
     },
@@ -185,7 +185,7 @@ const placeholderProjects: Project[] = [
     modified: new Date('2024-02-20').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: '/projects/office-fitout/_MID0939-HDR.jpg',
+        sourceUrl: '/placeholder.jpg',
         altText: 'Executive Office',
       },
     },
@@ -207,7 +207,7 @@ const placeholderProjects: Project[] = [
     modified: new Date('2024-03-05').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: '/projects/bathroom/_MID2588-HDR.jpg',
+        sourceUrl: '/placeholder.jpg',
         altText: 'Luxury Bathroom',
       },
     },
@@ -229,7 +229,7 @@ const placeholderProjects: Project[] = [
     modified: new Date('2023-11-10').toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+        sourceUrl: '/placeholder.jpg',
         altText: 'Turnkey Residential Fit-out',
       },
     },

@@ -703,7 +703,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
           {/* Background Image */}
           <div className="absolute inset-0 opacity-5">
             <SafeImage
-              src="/projects/commercial-interior/_MID7362-HDR.jpg"
+              src="/placeholder.jpg"
               alt=""
               fill
               className="object-cover"
@@ -750,7 +750,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
         {/* Background Image */}
         <div className="absolute inset-0">
           <SafeImage
-            src="/projects/turnkey-design-fitout/_MID2543-HDR.jpg"
+            src="/placeholder.jpg"
             alt=""
             fill
             className="object-cover"

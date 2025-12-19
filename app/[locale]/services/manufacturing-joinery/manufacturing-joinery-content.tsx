@@ -182,7 +182,7 @@ function Section1() {
           >
             <div className="relative aspect-4/5 overflow-hidden">
               <SafeImage
-                src="/projects/turnkey-design-fitout/_MID2583-HDR.jpg"
+                src="/placeholder.jpg"
                 alt="Custom joinery craftsmanship"
                 fill
                 className="object-cover"
@@ -218,7 +218,7 @@ function Section2() {
       icon: IconMillwork,
       title: 'Custom Millwork & Built-Ins',
       subtitle: 'Architectural Joinery',
-      image: '/projects/commercial-interior/12.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'Wall Paneling & Feature Walls',
@@ -239,7 +239,7 @@ function Section2() {
       icon: IconFurniture,
       title: 'Furniture Manufacturing',
       subtitle: 'Bespoke Pieces',
-      image: '/projects/bedroom-interior/Master Bedroom_1.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'Dining Tables',
@@ -260,7 +260,7 @@ function Section2() {
       icon: IconPrecision,
       title: 'CNC Precision & Hand Finishing',
       subtitle: 'The Process',
-      image: '/projects/turnkey-design-fitout/_MID2653-HDR.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'CNC Routing & Panel Cutting',
@@ -285,7 +285,7 @@ function Section2() {
       icon: IconQuality,
       title: 'Quality Control & Delivery',
       subtitle: 'Pre-Installation Standards',
-      image: '/projects/commercial-interior/15.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'Pre-Approval Mock-Ups',
@@ -401,7 +401,7 @@ function Section3() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <SafeImage
-          src="/projects/commercial-interior/14.jpg"
+          src="/placeholder.jpg"
           alt="Luxury joinery case study"
           fill
           className="object-cover opacity-20"

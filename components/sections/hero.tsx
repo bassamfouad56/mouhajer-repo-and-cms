@@ -46,16 +46,16 @@ export function Hero() {
     };
   }, []);
 
-  // Carousel images - Real project images
+  // Carousel images - Using placeholder until Sanity images are integrated
   const carouselImages = [
-    '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
-    '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
-    '/projects/commercial-interior/11.jpg',
-    '/projects/bathroom/_MID2588-HDR.jpg',
-    '/projects/office-fitout/_MID0939-HDR.jpg',
-    '/projects/bedroom-interior/_MID6363-HDR.jpg',
-    '/projects/turnkey-design-fitout/_MID2583-HDR.jpg',
-    '/projects/closet/_MID0095-HDR.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
   ];
 
   return (

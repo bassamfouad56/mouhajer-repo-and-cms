@@ -65,7 +65,7 @@ function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <SafeImage
-          src="/projects/commercial-interior/18.jpg"
+          src="/placeholder.jpg"
           alt="Handover and maintenance services"
           fill
           className="object-cover"

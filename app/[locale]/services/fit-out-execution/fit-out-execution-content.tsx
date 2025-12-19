@@ -67,7 +67,7 @@ function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <SafeImage
-          src="/projects/turnkey-design-fitout/_MID2543-HDR.jpg"
+          src="/placeholder.jpg"
           alt="Luxury fit-out execution"
           fill
           className="object-cover"
@@ -163,7 +163,7 @@ function Section2() {
       icon: IconFlooring,
       title: 'Flooring & Wall Finishes',
       subtitle: 'The Foundation of Visual Quality',
-      image: '/projects/commercial-interior/_MID7362-HDR.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'Marble & Stone Installation',
@@ -184,7 +184,7 @@ function Section2() {
       icon: IconJoinery,
       title: 'Joinery & Furniture Installation',
       subtitle: 'From Factory to Final Position',
-      image: '/projects/bedroom-interior/Master bedroom cam1.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'Built-In Cabinetry',
@@ -205,7 +205,7 @@ function Section2() {
       icon: IconMEP,
       title: 'MEP Final Connections',
       subtitle: 'Lighting, Power, Plumbing',
-      image: '/projects/commercial-interior/11.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'Lighting Installation & Aiming',
@@ -226,7 +226,7 @@ function Section2() {
       icon: IconFinishes,
       title: 'Final Finishes & Detailing',
       subtitle: 'The Last 5% That Defines Luxury',
-      image: '/projects/turnkey-design-fitout/_MID2653-HDR.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'Paint Touch-Ups & Wall Perfection',
@@ -482,7 +482,7 @@ function Section5() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <SafeImage
-          src="/projects/commercial-interior/16.jpg"
+          src="/placeholder.jpg"
           alt="Luxury fit-out execution"
           fill
           className="object-cover opacity-30"

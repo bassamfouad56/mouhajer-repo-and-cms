@@ -85,12 +85,12 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
 
   // Default fallback images for each capability
   const fallbackImages = [
-    '/projects/commercial-interior/11.jpg',
-    '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
-    '/projects/office-fitout/_MID0939-HDR.jpg',
-    '/projects/closet/_MID0095-HDR.jpg',
-    '/projects/bathroom/_MID2588-HDR.jpg',
-    '/projects/turnkey-design-fitout/_MID2543-HDR.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
+    '/placeholder.jpg',
   ];
 
   // Merge default capabilities with images

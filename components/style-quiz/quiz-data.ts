@@ -203,7 +203,7 @@ export const designStyles: DesignStyle[] = [
     ],
     colors: ["White", "Cream", "Soft Grey", "Warm Beige"],
     materials: ["Natural Oak", "Linen", "Concrete", "Glass"],
-    image: "/projects/bathroom/_MID2588-HDR.jpg",
+    image: "/placeholder.jpg",
     serviceSlug: "interior-architecture",
   },
   {
@@ -221,7 +221,7 @@ export const designStyles: DesignStyle[] = [
     ],
     colors: ["Black", "White", "Chrome", "Accent Colors"],
     materials: ["Polished Concrete", "Steel", "Glass", "Lacquer"],
-    image: "/projects/commercial-interior/_MID0023-HDR.jpg",
+    image: "/placeholder.jpg",
     serviceSlug: "fit-out-execution",
   },
   {
@@ -239,7 +239,7 @@ export const designStyles: DesignStyle[] = [
     ],
     colors: ["Ivory", "Gold", "Deep Blue", "Burgundy"],
     materials: ["Marble", "Silk", "Walnut", "Brass"],
-    image: "/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg",
+    image: "/placeholder.jpg",
     serviceSlug: "manufacturing-joinery",
   },
   {
@@ -257,7 +257,7 @@ export const designStyles: DesignStyle[] = [
     ],
     colors: ["Warm Greys", "Soft Gold", "Emerald", "Blush"],
     materials: ["Velvet", "Terrazzo", "Brushed Brass", "Natural Stone"],
-    image: "/projects/closet/_MID0109-HDR.jpg",
+    image: "/placeholder.jpg",
     serviceSlug: "interior-architecture",
   },
   {
@@ -275,7 +275,7 @@ export const designStyles: DesignStyle[] = [
     ],
     colors: ["Warm White", "Taupe", "Soft Blue", "Natural Wood"],
     materials: ["Linen", "Natural Wood", "Woven Textures", "Leather"],
-    image: "/projects/turnkey-design-and-fitout/_MID0008-HDR.jpg",
+    image: "/placeholder.jpg",
     serviceSlug: "fit-out-execution",
   },
   {
@@ -293,7 +293,7 @@ export const designStyles: DesignStyle[] = [
     ],
     colors: ["Deep Teal", "Gold", "Burgundy", "Ivory"],
     materials: ["Mother of Pearl", "Carved Wood", "Silk", "Copper"],
-    image: "/projects/office-fitout/_MID2428-HDR.jpg",
+    image: "/placeholder.jpg",
     serviceSlug: "manufacturing-joinery",
   },
 ];

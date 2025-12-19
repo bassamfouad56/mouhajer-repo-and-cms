@@ -168,7 +168,7 @@ export function UnitySection() {
           className="relative mb-32 aspect-21/9 overflow-hidden bg-neutral-900"
         >
           <img
-            src="/projects/office-fitout/_MID0939-HDR.jpg"
+            src="/placeholder.jpg"
             alt="Eng. Maher Mouhajer with his design and engineering team"
             className="h-full w-full object-cover"
           />

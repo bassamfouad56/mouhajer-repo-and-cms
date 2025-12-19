@@ -32,10 +32,10 @@ export function WhoWeAreVideoBanner({ images = [] }: WhoWeAreVideoBannerProps) {
   const displayImages = images.length >= 3
     ? images.slice(0, 4)
     : [
-        { url: '/projects/commercial-interior/11.jpg', alt: 'Commercial Interior' },
-        { url: '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg', alt: 'Residential Interior' },
-        { url: '/projects/turnkey-design-fitout/_MID0003-HDR.jpg', alt: 'Design & Fitout' },
-        { url: '/projects/closet/_MID0095-HDR.jpg', alt: 'Custom Joinery' },
+        { url: '/placeholder.jpg', alt: 'Commercial Interior' },
+        { url: '/placeholder.jpg', alt: 'Residential Interior' },
+        { url: '/placeholder.jpg', alt: 'Design & Fitout' },
+        { url: '/placeholder.jpg', alt: 'Custom Joinery' },
       ];
 
   return (

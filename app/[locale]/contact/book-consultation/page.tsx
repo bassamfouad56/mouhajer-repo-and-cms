@@ -204,7 +204,7 @@ export default function BookConsultationPage() {
           {/* Background Image */}
           <motion.div className="absolute inset-0" style={{ y: heroY }}>
             <SafeImage
-              src="/projects/commercial-interior/_MID7025-HDR.jpg"
+              src="/placeholder.jpg"
               alt="Architect working on blueprint"
               fill
               className="object-cover"

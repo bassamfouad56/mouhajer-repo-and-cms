@@ -71,9 +71,9 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
 
   // Default fallback images for each sector
   const fallbackImages: Record<string, string> = {
-    hospitality: '/projects/commercial-interior/11.jpg',
-    residential: '/projects/bedroom-interior/01 Villa Hatem Master Bedroom OP4.jpg',
-    commercial: '/projects/office-fitout/_MID0939-HDR.jpg',
+    hospitality: '/placeholder.jpg',
+    residential: '/placeholder.jpg',
+    commercial: '/placeholder.jpg',
   };
 
   // Merge default sectors with images

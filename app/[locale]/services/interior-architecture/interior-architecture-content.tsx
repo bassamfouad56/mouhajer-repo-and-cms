@@ -65,7 +65,7 @@ export default function InteriorArchitectureContent() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <SafeImage
-            src="/projects/bedroom-interior/Master Bedroom_1.jpg"
+            src="/placeholder.jpg"
             alt="Luxury Interior Architecture"
             fill
             className="object-cover"
@@ -197,7 +197,7 @@ function ScienceBehindStyleSection() {
           >
             <div className="relative aspect-[4/5] overflow-hidden">
               <SafeImage
-                src="/projects/commercial-interior/_MID7362-HDR.jpg"
+                src="/placeholder.jpg"
                 alt="Luxury interior design by MIDC"
                 fill
                 className="object-cover"
@@ -232,7 +232,7 @@ function DesignServicesSection() {
       icon: IconConceptDesign,
       title: 'Conceptual Design & Narrative',
       subtitle: 'Every project starts with a story',
-      image: '/projects/commercial-interior/11.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'The Brief',
@@ -249,7 +249,7 @@ function DesignServicesSection() {
       icon: IconVisualization,
       title: '3D Visualization',
       subtitle: 'The Digital Twin - We remove the risk from design',
-      image: '/projects/bedroom-interior/Master bedroom cam1.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'Photorealistic Rendering',
@@ -266,7 +266,7 @@ function DesignServicesSection() {
       icon: IconDocumentation,
       title: 'Technical Documentation',
       subtitle: 'Shop Drawings - A beautiful picture is useless if you cannot build it',
-      image: '/projects/commercial-interior/16.jpg',
+      image: '/placeholder.jpg',
       items: [
         {
           label: 'Buildability Checks',
@@ -383,17 +383,17 @@ function AwardsSection() {
     {
       title: 'Best Hotel Suite Interior (Arabia)',
       project: 'Address Boulevard VIP Suite',
-      image: '/projects/bedroom-interior/Master Bedroom_6_10_2020 copy.jpg',
+      image: '/placeholder.jpg',
     },
     {
       title: 'Best Residential Apartment (Dubai)',
       project: 'Boulevard Penthouse 70-71',
-      image: '/projects/commercial-interior/17.jpg',
+      image: '/placeholder.jpg',
     },
     {
       title: 'Best Luxury Hotel Interior',
       project: 'Sofitel JBR',
-      image: '/projects/commercial-interior/18.jpg',
+      image: '/placeholder.jpg',
     },
   ];
 
@@ -509,7 +509,7 @@ function VisualizeFutureCTA() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <SafeImage
-          src="/projects/turnkey-design-fitout/_MID2543-HDR.jpg"
+          src="/placeholder.jpg"
           alt="Luxury Interior"
           fill
           className="object-cover opacity-40"

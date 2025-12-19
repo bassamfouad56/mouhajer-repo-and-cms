@@ -281,7 +281,7 @@ export default function SupplierRegistrationPage() {
           {/* Background Image */}
           <motion.div className="absolute inset-0" style={{ y: heroY }}>
             <SafeImage
-              src="/projects/commercial-interior/_MID7025-HDR.jpg"
+              src="/placeholder.jpg"
               alt="Premium materials and construction"
               fill
               className="object-cover"
