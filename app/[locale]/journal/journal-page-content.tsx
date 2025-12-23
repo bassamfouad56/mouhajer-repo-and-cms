@@ -4,7 +4,7 @@ import { useRef, useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { urlForImage } from '@/sanity/lib/image';
 import { format } from 'date-fns';
 import { Search, X, Clock, Eye, ArrowRight, Play } from 'lucide-react';
@@ -90,8 +90,13 @@ export default function JournalPageContent({
   locale
 }: JournalPageContentProps) {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const heroRef = useRef<HTMLDivElement>(null);
   const isHeroInView = useInView(heroRef, { once: true });
+
+  // Check if we're on a category-specific page (not the main /journal page)
+  const isOnCategoryPage = pathname?.includes('/journal/') && !pathname?.endsWith('/journal');
 
   // State for filters - initialize from URL params
   const [currentCategory, setCurrentCategory] = useState(() => {
@@ -142,17 +147,24 @@ export default function JournalPageContent({
     updateUrl(currentCategory, selectedTags, searchQuery);
   }, [currentCategory, selectedTags, searchQuery, updateUrl]);
 
-  // Extract all unique tags from posts
+  // Extract all unique tags from posts (with null-safe handling)
   const allTags = useMemo(() => {
     const tagMap = new Map<string, Tag>();
     posts.forEach(post => {
       post.tags?.forEach(tag => {
-        if (tag && !tagMap.has(tag._id)) {
-          tagMap.set(tag._id, tag);
+        if (tag && tag._id && !tagMap.has(tag._id)) {
+          // Use tag name with fallback to slug if name is missing
+          const tagWithName = {
+            ...tag,
+            name: tag.name || tag.slug?.current || 'Unknown'
+          };
+          tagMap.set(tag._id, tagWithName);
         }
       });
     });
-    return Array.from(tagMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+    return Array.from(tagMap.values()).sort((a, b) =>
+      (a.name || '').localeCompare(b.name || '')
+    );
   }, [posts]);
 
   // Filter posts
@@ -170,12 +182,12 @@ export default function JournalPageContent({
         if (!hasAllTags) return false;
       }
 
-      // Search filter
+      // Search filter (null-safe)
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const matchesSearch =
-          post.title.toLowerCase().includes(query) ||
-          post.excerpt?.toLowerCase().includes(query);
+          (post.title || '').toLowerCase().includes(query) ||
+          (post.excerpt || '').toLowerCase().includes(query);
         if (!matchesSearch) return false;
       }
 
@@ -184,11 +196,20 @@ export default function JournalPageContent({
   }, [posts, currentCategory, selectedTags, searchQuery]);
 
   // Separate featured and regular posts
-  const featuredPost = filteredPosts.find(p => p.featured) || filteredPosts[0];
-  const secondaryFeatured = filteredPosts.slice(1, 3);
-  const regularPosts = filteredPosts.filter(
-    p => p._id !== featuredPost?._id && !secondaryFeatured.find(sf => sf._id === p._id)
-  );
+  // Only separate into featured/secondary/regular when NO filters are active
+  // When any filter is active (category, tags, or search), show all results in the grid
+  const hasActiveFilters = currentCategory !== 'all' || selectedTags.length > 0 || searchQuery.trim() !== '';
+  const shouldSeparateFeatured = !hasActiveFilters && filteredPosts.length > 3;
+
+  const featuredPost = shouldSeparateFeatured
+    ? (filteredPosts.find(p => p.featured) || filteredPosts[0])
+    : null;
+  const secondaryFeatured = shouldSeparateFeatured ? filteredPosts.slice(1, 3) : [];
+  const regularPosts = shouldSeparateFeatured
+    ? filteredPosts.filter(
+        p => p._id !== featuredPost?._id && !secondaryFeatured.find(sf => sf._id === p._id)
+      )
+    : filteredPosts; // Show all posts in grid when filters are active
   const visiblePosts = regularPosts.slice(0, visibleCount);
   const hasMorePosts = visibleCount < regularPosts.length;
 
@@ -203,14 +224,33 @@ export default function JournalPageContent({
 
   // Clear all filters
   const clearFilters = () => {
+    // If on category page, navigate to main journal page
+    if (isOnCategoryPage) {
+      router.push(`/${locale}/journal`);
+      return;
+    }
+
     setCurrentCategory('all');
     setSelectedTags([]);
     setSearchQuery('');
     setVisibleCount(9);
   };
 
-  // Handle category change - just update state, URL syncs via useEffect
+  // Handle category change - navigate to main journal page with filter
   const handleCategoryChange = (category: string) => {
+    // If we're on a category-specific page (like /journal/design-trends),
+    // navigate to the main journal page with the filter applied
+    if (isOnCategoryPage) {
+      const params = new URLSearchParams();
+      if (category !== 'all') {
+        params.set('category', category);
+      }
+      const queryString = params.toString();
+      router.push(`/${locale}/journal${queryString ? `?${queryString}` : ''}`);
+      return;
+    }
+
+    // On main journal page, just update state
     setCurrentCategory(category);
     setVisibleCount(9); // Reset pagination when changing category
   };
@@ -775,7 +815,6 @@ export default function JournalPageContent({
         />
 
         {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] opacity-50" />
 
         {/* Decorative Lines */}
         <div className="absolute left-0 top-1/2 h-px w-1/4 -translate-y-1/2 bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
@@ -1070,7 +1109,7 @@ function PostCard({ post, index, locale }: { post: Post; index: number; locale: 
                 {post.tags.slice(0, 2).map(tag => (
                   <span
                     key={tag._id}
-                    className="rounded-full bg-white/10 px-2.5 py-0.5 text-[9px] font-light text-white/70 backdrop-blur-sm"
+                    className="rounded-full border border-[#c9a962]/40 bg-neutral-950/60 px-2.5 py-1 font-Satoshi text-[10px] font-medium tracking-wide text-[#c9a962] backdrop-blur-md transition-all duration-300 group-hover:border-[#c9a962]/60 group-hover:bg-[#c9a962]/20"
                   >
                     {tag.name}
                   </span>

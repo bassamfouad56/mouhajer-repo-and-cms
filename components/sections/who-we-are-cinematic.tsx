@@ -1,8 +1,11 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView, useMotionValue, useTransform, animate, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import {
+  motion,
+  useInView,
+} from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -38,9 +41,7 @@ const createPillars = (images?: WhoWeAreCinematicProps["images"]) => [
     subtitle: "We Create",
     description:
       "Our creative team designs the vision, but because they work alongside the builders, every drawing is validated for cost and feasibility before you see it.",
-    image:
-      images?.designer ||
-      "/placeholder.jpg",
+    image: images?.designer || "/placeholder.jpg",
     accent: "#a8a29e",
   },
   {
@@ -54,62 +55,13 @@ const createPillars = (images?: WhoWeAreCinematicProps["images"]) => [
   },
 ];
 
-// Stats data
-const stats = [
-  { value: 400, suffix: "+", label: "Projects Completed" },
-  { value: 20, suffix: "+", label: "Years of Experience" },
-  { value: 10, suffix: "+", label: "International Awards" },
-  { value: 100, suffix: "%", label: "Client Satisfaction" },
-];
-
-// Animated Counter Component
-function AnimatedCounter({
-  value,
-  suffix,
-  isInView
-}: {
-  value: number;
-  suffix: string;
-  isInView: boolean;
-}) {
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    if (isInView) {
-      const controls = animate(count, value, {
-        duration: 2.5,
-        ease: [0.22, 1, 0.36, 1],
-      });
-
-      const unsubscribe = rounded.on("change", (v) => {
-        setDisplayValue(v);
-      });
-
-      return () => {
-        controls.stop();
-        unsubscribe();
-      };
-    }
-  }, [isInView, value, count, rounded]);
-
-  return (
-    <span className="tabular-nums">
-      {displayValue}{suffix}
-    </span>
-  );
-}
-
-// Split Screen Panel Component
+// Split Screen Panel Component - Image always on left, text on right
 function PillarPanel({
   pillar,
   index,
-  isEven,
 }: {
   pillar: ReturnType<typeof createPillars>[0];
   index: number;
-  isEven: boolean;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(panelRef, { once: true, margin: "-10%" });
@@ -119,8 +71,8 @@ function PillarPanel({
       ref={panelRef}
       className="panel relative flex h-screen w-screen shrink-0 overflow-hidden"
     >
-      {/* Split Layout - Image & Content */}
-      <div className={`flex h-full w-full ${isEven ? "flex-row" : "flex-row-reverse"}`}>
+      {/* Split Layout - Image on Left, Content on Right */}
+      <div className="flex h-full w-full flex-row">
         {/* Image Side */}
         <div className="relative h-full w-1/2">
           <motion.div
@@ -139,24 +91,22 @@ function PillarPanel({
             {/* Subtle overlay */}
             <div className="absolute inset-0 bg-[#faf8f5]/20" />
           </motion.div>
-
         </div>
 
         {/* Content Side */}
         <div className="relative flex h-full w-1/2 items-center bg-[#faf8f5]">
           {/* Background Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
           {/* Accent Line */}
           <motion.div
             initial={{ scaleY: 0 }}
             animate={isInView ? { scaleY: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className={`absolute top-0 h-full w-px origin-top ${isEven ? "left-0" : "right-0"}`}
+            className="absolute left-0 top-0 h-full w-px origin-top"
             style={{ backgroundColor: pillar.accent }}
           />
 
-          <div className={`relative z-10 px-12 lg:px-20 ${isEven ? "pl-16 lg:pl-24" : "pr-16 lg:pr-24"}`}>
+          <div className="relative z-10 px-12 pl-16 lg:px-20 lg:pl-24">
             {/* Subtitle */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -170,7 +120,10 @@ function PillarPanel({
               >
                 {pillar.subtitle}
               </span>
-              <div className="h-px w-12" style={{ backgroundColor: pillar.accent }} />
+              <div
+                className="h-px w-12"
+                style={{ backgroundColor: pillar.accent }}
+              />
             </motion.div>
 
             {/* Title */}
@@ -208,225 +161,14 @@ function PillarPanel({
   );
 }
 
-// Roles for cycling animation
-const roles = [
-  { text: "Main Contractor", color: "#c9a962" },
-  { text: "Designer", color: "#a8a29e" },
-  { text: "Manufacturer", color: "#78716c" },
-];
-
-// Introduction Panel with cycling text
-function IntroPanel() {
+// Opening Panel - "We Are All Three" (Previously Final Panel, now first)
+function OpeningPanel({
+  pillars,
+}: {
+  pillars: ReturnType<typeof createPillars>;
+}) {
   const panelRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(panelRef, { once: true });
-  const [currentRole, setCurrentRole] = useState(0);
-
-  // Cycle through roles
-  useEffect(() => {
-    if (!isInView) return;
-
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 2500);
-
-    return () => clearInterval(interval);
-  }, [isInView]);
-
-  return (
-    <div
-      ref={panelRef}
-      className="panel relative flex h-screen w-screen shrink-0 items-center justify-center overflow-hidden bg-[#faf8f5]"
-    >
-      {/* Animated Background */}
-      <div className="absolute inset-0">
-        {/* Radial glow that follows current role color */}
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: `radial-gradient(ellipse 80% 50% at 50% 50%, ${roles[currentRole].color}15 0%, transparent 70%)`,
-          }}
-          transition={{ duration: 1 }}
-        />
-        {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
-      </div>
-
-      {/* Animated vertical lines */}
-      <div className="absolute inset-0 flex justify-between px-[15%]">
-        {[0, 1, 2].map((i) => (
-          <motion.div
-            key={i}
-            initial={{ scaleY: 0, opacity: 0 }}
-            animate={isInView ? { scaleY: 1, opacity: 0.2 } : {}}
-            transition={{ duration: 1.5, delay: 0.3 + i * 0.2 }}
-            className="h-full w-px origin-top"
-            style={{ backgroundColor: roles[i].color }}
-          />
-        ))}
-      </div>
-
-      {/* Corner accents */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="absolute left-8 top-8 h-20 w-20 border-l-2 border-t-2 lg:left-12 lg:top-12 lg:h-28 lg:w-28"
-        style={{ borderColor: `${roles[currentRole].color}30` }}
-      />
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.6 }}
-        className="absolute bottom-8 right-8 h-20 w-20 border-b-2 border-r-2 lg:bottom-12 lg:right-12 lg:h-28 lg:w-28"
-        style={{ borderColor: `${roles[currentRole].color}30` }}
-      />
-
-      {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center px-8">
-        {/* WE ARE THE - Static with decorative lines */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1 }}
-          className="mb-6 flex items-center gap-6"
-        >
-          <motion.div
-            initial={{ width: 0 }}
-            animate={isInView ? { width: 60 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="h-px bg-gradient-to-r from-transparent to-[#c9a962]/40"
-          />
-          <span className="font-Satoshi text-base font-light uppercase tracking-[0.5em] text-neutral-500 sm:text-lg lg:text-xl">
-            We Are The
-          </span>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={isInView ? { width: 60 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="h-px bg-gradient-to-l from-transparent to-[#c9a962]/40"
-          />
-        </motion.div>
-
-        {/* Cycling Role Text with enhanced animation */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="relative mb-6 flex min-h-[80px] items-center justify-center sm:min-h-[100px] md:min-h-[120px] lg:min-h-[140px] xl:min-h-[160px]"
-        >
-          <AnimatePresence mode="wait">
-            <motion.h2
-              key={currentRole}
-              initial={{ opacity: 0, y: 80, rotateX: -15 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              exit={{ opacity: 0, y: -80, rotateX: 15 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="font-SchnyderS text-5xl font-light tracking-tight sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
-              style={{ color: roles[currentRole].color }}
-            >
-              {roles[currentRole].text}
-            </motion.h2>
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Role indicator dots */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mb-10 flex items-center gap-4"
-        >
-          {roles.map((role, index) => (
-            <button
-              key={role.text}
-              onClick={() => setCurrentRole(index)}
-              className="group relative flex items-center gap-3"
-            >
-              {/* Dot */}
-              <motion.div
-                className="relative h-3 w-3 rounded-full border-2 transition-all duration-300"
-                style={{
-                  borderColor: index === currentRole ? role.color : "rgba(201,169,98,0.3)",
-                  backgroundColor: index === currentRole ? role.color : "transparent",
-                }}
-              >
-                {/* Pulse effect for active */}
-                {index === currentRole && (
-                  <motion.div
-                    className="absolute inset-0 rounded-full"
-                    style={{ backgroundColor: role.color }}
-                    animate={{ scale: [1, 1.8, 1.8], opacity: [0.5, 0, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                )}
-              </motion.div>
-              {/* Label on hover/active */}
-              <motion.span
-                initial={{ opacity: 0, x: -10 }}
-                animate={{
-                  opacity: index === currentRole ? 1 : 0,
-                  x: index === currentRole ? 0 : -10,
-                }}
-                transition={{ duration: 0.3 }}
-                className="absolute left-5 whitespace-nowrap font-Satoshi text-[10px] uppercase tracking-widest"
-                style={{ color: role.color }}
-              >
-                {role.text}
-              </motion.span>
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Animated divider line */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={isInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="mb-8 h-px w-32 origin-center"
-          style={{ backgroundColor: `${roles[currentRole].color}40` }}
-        />
-
-        {/* Sub-headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.7 }}
-        >
-          <span className="font-SchnyderS text-2xl font-light italic text-neutral-500 sm:text-3xl lg:text-4xl">
-            We are all three.
-          </span>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 1 }}
-          className="absolute -bottom-32 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3"
-        >
-          <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]/60">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ x: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex items-center gap-2 text-[#c9a962]/60"
-          >
-            <div className="h-px w-6 bg-[#c9a962]/40" />
-            <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
-          </motion.div>
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-// Final Panel - "We Are All Three" with Stats
-function FinalPanel({ pillars }: { pillars: ReturnType<typeof createPillars> }) {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(panelRef, { once: true, margin: "-10%" });
-  const statsInView = useInView(statsRef, { once: true, margin: "-20%" });
 
   return (
     <div
@@ -520,66 +262,26 @@ function FinalPanel({ pillars }: { pillars: ReturnType<typeof createPillars> }) 
           className="mb-10 max-w-3xl space-y-4 text-center"
         >
           <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600 sm:text-base lg:text-lg">
-            Mouhajer International Design & Contracting (MIDC) is more than a construction firm;
-            we are the architects of experience. As a premier turnkey solution provider based in
-            Dubai and Abu Dhabi, we specialize in transforming ambitious concepts into award-winning realities.
+            Mouhajer International Design & Contracting (MIDC) is more than a
+            construction firm; we are the architects of experience. As a premier
+            turnkey solution provider based in Dubai and Abu Dhabi, we
+            specialize in transforming ambitious concepts into award-winning
+            realities.
           </p>
           <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-500 sm:text-base lg:text-lg">
-            From the intricate luxury of 5-star hospitality to the personalized grandeur of private
-            residences, our reputation is built on a seamless fusion of aesthetic mastery and
-            engineering rigor. We do not just build spaces; we curate environments that stand the test of time.
+            From the intricate luxury of 5-star hospitality to the personalized
+            grandeur of private residences, our reputation is built on a
+            seamless fusion of aesthetic mastery and engineering rigor. We do
+            not just build spaces; we curate environments that stand the test of
+            time.
           </p>
-        </motion.div>
-
-        {/* Stats Grid */}
-        <motion.div
-          ref={statsRef}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="mb-10 grid w-full max-w-4xl grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1 + index * 0.1 }}
-              className="group relative text-center"
-            >
-              {/* Animated border line */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={isInView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.8, delay: 1.2 + index * 0.1 }}
-                className="absolute -top-3 left-1/2 h-px w-12 -translate-x-1/2 origin-center bg-[#c9a962]/30"
-              />
-
-              {/* Number */}
-              <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962] sm:text-5xl lg:text-6xl">
-                <AnimatedCounter
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  isInView={statsInView}
-                />
-              </div>
-
-              {/* Label */}
-              <div className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-neutral-500 sm:text-xs">
-                {stat.label}
-              </div>
-
-              {/* Hover glow effect */}
-              <div className="absolute -inset-4 -z-10 rounded-lg bg-[#c9a962]/0 transition-all duration-500 group-hover:bg-[#c9a962]/5" />
-            </motion.div>
-          ))}
         </motion.div>
 
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.3 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
         >
           <Link
             href="/about"
@@ -624,8 +326,8 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
   // Create pillars with images
   const pillars = createPillars(images);
 
-  // Total panels: Intro + 3 Pillars + Final = 5 panels
-  const totalPanels = 5;
+  // Total panels: Opening + 3 Pillars = 4 panels
+  const totalPanels = 4;
 
   useEffect(() => {
     if (!sectionRef.current || !containerRef.current) return;
@@ -667,13 +369,10 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
     };
   }, []);
 
-  const panelLabels = ["Intro", ...pillars.map((p) => p.subtitle), "Complete"];
+  const panelLabels = ["Who We Are", ...pillars.map((p) => p.subtitle)];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden bg-[#faf8f5]"
-    >
+    <section ref={sectionRef} className="relative overflow-hidden bg-[#faf8f5]">
       {/* Progress Bar - Top */}
       <div className="absolute left-0 top-0 z-50 h-[2px] w-full bg-[#c9a962]/10">
         <motion.div
@@ -682,30 +381,19 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
         />
       </div>
 
-      {/* Current Panel Indicator - Top Left */}
-      <div className="absolute left-8 top-8 z-50 hidden lg:block">
-        <span className="font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-500">
-          {panelLabels[currentPanel]}
-        </span>
-      </div>
-
       {/* Horizontal Scroll Container */}
       <div ref={containerRef} className="flex h-screen">
-        {/* Panel 1: Introduction */}
-        <IntroPanel />
+        {/* Panel 1: Opening - We Are All Three */}
+        <OpeningPanel pillars={pillars} />
 
-        {/* Panels 2-4: Three Pillars with alternating layout */}
+        {/* Panels 2-4: Three Pillars - Image left, text right */}
         {pillars.map((pillar, index) => (
           <PillarPanel
             key={pillar.id}
             pillar={pillar}
             index={index}
-            isEven={index % 2 === 0}
           />
         ))}
-
-        {/* Panel 5: Final - We Are All Three with Stats */}
-        <FinalPanel pillars={pillars} />
       </div>
 
       {/* Bottom Navigation */}
@@ -717,8 +405,8 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
               i === currentPanel
                 ? "w-10 bg-[#c9a962]"
                 : i < currentPanel
-                ? "w-4 bg-[#c9a962]/50"
-                : "w-4 bg-neutral-300"
+                  ? "w-4 bg-[#c9a962]/50"
+                  : "w-4 bg-neutral-300"
             }`}
           />
         ))}
@@ -741,8 +429,8 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                   i === currentPanel
                     ? "border-[#c9a962] bg-[#c9a962]"
                     : i < currentPanel
-                    ? "border-[#c9a962]/50 bg-[#c9a962]/50"
-                    : "border-neutral-300 bg-transparent"
+                      ? "border-[#c9a962]/50 bg-[#c9a962]/50"
+                      : "border-neutral-300 bg-transparent"
                 }`}
               />
             </div>

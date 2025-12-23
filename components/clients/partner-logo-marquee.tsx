@@ -41,7 +41,6 @@ export function PartnerLogoMarquee() {
       className="relative overflow-hidden bg-neutral-950 py-24 lg:py-32"
     >
       {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
       <div className="relative z-10">
         {/* Section Header */}

@@ -368,6 +368,44 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
   const [hoveredSubLink, setHoveredSubLink] = useState<SubLink | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Clear timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Delayed close to prevent flickering when moving between menu items
+  const handleMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setActiveMenu(null);
+      setHoveredSubLink(null);
+    }, 150); // 150ms delay before closing
+  };
+
+  // Cancel close when entering menu area
+  const handleMouseEnter = (href: string, hasSubLinks: boolean) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    if (hasSubLinks) {
+      setActiveMenu(href);
+      setHoveredSubLink(null);
+    }
+  };
+
+  // Cancel timeout when entering dropdown area
+  const handleDropdownMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
@@ -406,16 +444,8 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
             key={item.href}
             className="relative"
             role="none"
-            onMouseEnter={() => {
-              if (item.subLinks) {
-                setActiveMenu(item.href);
-                setHoveredSubLink(null);
-              }
-            }}
-            onMouseLeave={() => {
-              setActiveMenu(null);
-              setHoveredSubLink(null);
-            }}
+            onMouseEnter={() => handleMouseEnter(item.href, !!item.subLinks)}
+            onMouseLeave={handleMouseLeave}
           >
             {item.subLinks ? (
               <>
@@ -453,7 +483,9 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
                           transition={{ duration: 0.2, ease: 'easeOut' }}
-                          className="absolute left-0 top-full z-40 mt-3 w-64"
+                          className="absolute left-0 top-full z-40 w-64 pt-3"
+                          onMouseEnter={handleDropdownMouseEnter}
+                          onMouseLeave={handleMouseLeave}
                         >
                           <div className="overflow-hidden rounded-xl border border-white/10 bg-neutral-950/98 shadow-2xl shadow-black/50 backdrop-blur-xl">
                             {/* Top accent */}
@@ -501,6 +533,8 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                           opacity: { duration: 0.25 }
                         }}
                         className="fixed left-1/2 top-[88px] z-40 -translate-x-1/2"
+                        onMouseEnter={handleDropdownMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                       >
                         {/* Premium container with subtle shadow */}
                         <div className={`relative w-[95vw] overflow-hidden rounded-lg border border-white/8 bg-linear-to-br from-neutral-900/98 via-neutral-950/98 to-black/98 shadow-2xl shadow-black/40 backdrop-blur-2xl ${
@@ -514,9 +548,9 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
 
                         <div className="relative grid grid-cols-12 gap-0">
                           {/* Left Side - SubLinks Grid with enhanced spacing */}
-                          <div className={`${(item.subLinks?.length ?? 0) > 4 ? 'col-span-8' : 'col-span-7'} border-r border-white/6 p-10`}>
+                          <div className={`${(item.subLinks?.length ?? 0) > 4 ? 'col-span-8' : 'col-span-7'} border-r border-white/6 p-6 lg:p-8`}>
                             {/* Premium header */}
-                            <div className="mb-8 flex items-center gap-3">
+                            <div className="mb-5 flex items-center gap-3">
                               <div className="rounded-full bg-white/5 p-2 backdrop-blur-sm">
                                 <Sparkles size={14} className="text-neutral-400" />
                               </div>
@@ -552,7 +586,7 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                                   >
                                     {/* Show image only if it exists and has content */}
                                     {subLink.image && (
-                                      <div className="relative h-36 overflow-hidden bg-neutral-900/60">
+                                      <div className="relative h-28 overflow-hidden bg-neutral-900/60">
                                         <Image
                                           src={subLink.image}
                                           alt={subLink.label}
@@ -575,7 +609,7 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                                     )}
 
                                     {/* Content - compact for 6+ items without images */}
-                                    <div className={`${(item.subLinks?.length ?? 0) > 4 && !subLink.image ? 'p-4' : 'p-5'}`}>
+                                    <div className={`${(item.subLinks?.length ?? 0) > 4 && !subLink.image ? 'p-3' : 'p-4'}`}>
                                       <div className="mb-2 flex items-center justify-between">
                                         <h4 className={`font-light tracking-wide text-white transition-colors duration-300 ${
                                           (item.subLinks?.length ?? 0) > 4 && !subLink.image ? 'text-[13px]' : 'text-[15px]'
@@ -606,7 +640,7 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
 
                           {/* Right Side - Dynamic Preview based on hovered item */}
                           {item.featured && (
-                            <div className={`${(item.subLinks?.length ?? 0) > 4 ? 'col-span-4' : 'col-span-5'} p-10`}>
+                            <div className={`${(item.subLinks?.length ?? 0) > 4 ? 'col-span-4' : 'col-span-5'} p-6 lg:p-8`}>
                               <motion.div
                                 initial={{ opacity: 0, x: 30 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -618,7 +652,7 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                                 className="h-full"
                               >
                                 {/* Premium badge - changes based on hover state */}
-                                <div className="mb-6 flex items-center gap-3">
+                                <div className="mb-4 flex items-center gap-3">
                                   <div className="h-px flex-1 bg-gradient-to-r from-neutral-700 to-transparent" />
                                   <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-sm">
                                     <Award size={12} className="text-neutral-400" />
@@ -633,7 +667,7 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                                   className="group/featured block"
                                 >
                                   {/* Dynamic image - shows hovered item's image or featured */}
-                                  <div className="relative mb-6 h-56 overflow-hidden rounded-lg bg-neutral-900/60 shadow-lg shadow-black/20">
+                                  <div className="relative mb-4 h-40 overflow-hidden rounded-lg bg-neutral-900/60 shadow-lg shadow-black/20">
                                     <AnimatePresence mode="wait">
                                       <motion.div
                                         key={hoveredSubLink?.href || 'featured'}
@@ -670,10 +704,10 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                                       exit={{ opacity: 0, y: -10 }}
                                       transition={{ duration: 0.2 }}
                                     >
-                                      <h4 className="mb-3 text-[17px] font-light leading-snug tracking-wide text-white transition-all duration-300 group-hover/featured:text-neutral-200">
+                                      <h4 className="mb-2 text-[15px] font-light leading-snug tracking-wide text-white transition-all duration-300 group-hover/featured:text-neutral-200">
                                         {hoveredSubLink?.label || item.featured.title}
                                       </h4>
-                                      <p className="mb-6 text-[13px] font-light leading-relaxed text-neutral-400 transition-colors duration-300 group-hover/featured:text-neutral-300">
+                                      <p className="mb-4 text-[12px] font-light leading-relaxed text-neutral-400 transition-colors duration-300 group-hover/featured:text-neutral-300">
                                         {hoveredSubLink?.description || item.featured.description}
                                       </p>
                                     </motion.div>
@@ -696,18 +730,20 @@ export function EnhancedMegaMenu({ megaMenuImages: propImages }: EnhancedMegaMen
                         </div>
 
                         {/* Premium footer with better spacing */}
-                        <div className="border-t border-white/[0.06] bg-gradient-to-r from-neutral-900/60 via-neutral-950/60 to-black/60 px-10 py-5 backdrop-blur-sm">
-                          <div className="flex items-center justify-between">
+                        <div className="border-t border-white/[0.06] bg-gradient-to-r from-neutral-900/60 via-neutral-950/60 to-black/60 px-6 py-3 backdrop-blur-sm lg:px-8 lg:py-4">
+                          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                             <Link
                               href={item.href}
-                              className="group/footer flex items-center gap-2 text-[13px] font-light tracking-wide text-neutral-400 transition-colors duration-300 hover:text-white"
+                              className="group/footer flex items-center gap-2 text-[12px] font-light tracking-wide text-neutral-400 transition-colors duration-300 hover:text-white lg:text-[13px]"
+                              onClick={() => setActiveMenu(null)}
                             >
                               <span>{t('viewAll')} {item.label}</span>
                               <ArrowRight size={14} className="transition-transform duration-300 group-hover/footer:translate-x-1" />
                             </Link>
                             <Link
                               href="/contact"
-                              className="group/cta relative overflow-hidden rounded-full border border-white/15 bg-white/5 px-6 py-2.5 text-[11px] font-light tracking-[0.15em] text-white backdrop-blur-sm transition-all duration-300 hover:border-white/30 hover:bg-white hover:text-neutral-950 hover:shadow-lg hover:shadow-white/20"
+                              className="group/cta relative overflow-hidden rounded-full border border-white/15 bg-white/5 px-5 py-2 text-center text-[10px] font-light tracking-[0.12em] text-white backdrop-blur-sm transition-all duration-300 hover:border-white/30 hover:bg-white hover:text-neutral-950 hover:shadow-lg hover:shadow-white/20 sm:px-6 sm:py-2.5 lg:text-[11px] lg:tracking-[0.15em]"
+                              onClick={() => setActiveMenu(null)}
                             >
                               <span className="relative z-10">{t('getInTouch')}</span>
                               <div className="absolute inset-0 -translate-x-full bg-white transition-transform duration-300 group-hover/cta:translate-x-0" />

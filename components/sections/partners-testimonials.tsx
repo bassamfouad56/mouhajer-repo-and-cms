@@ -1,54 +1,42 @@
 'use client';
 
-import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
-import { motion, useInView, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import { useRef, useState, useCallback, useEffect } from 'react';
+import { motion, useInView, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Quote, Building2, Hotel, Briefcase } from 'lucide-react';
 import { SafeImage } from '@/components/safe-image';
-import { urlForImage } from '@/sanity/lib/image';
 
-// Types for Sanity data
-interface SanityClient {
-  _id: string;
+// Partner data with logo support
+interface Partner {
   name: string;
-  logo?: { asset?: { _ref?: string } };
-  category?: string;
-  featured?: boolean;
-  isConfidential?: boolean;
+  logo?: string; // Optional - falls back to text if not provided
 }
 
-interface SanityTestimonial {
-  _id: string;
-  name: string;
-  role?: string;
-  company?: string;
-  image?: { asset?: { _ref?: string } };
-  quote: string;
-  rating?: number;
-  featured?: boolean;
-}
+const partners: Record<string, Partner[]> = {
+  developers: [
+    { name: 'Emaar', logo: '/partners/Layer 792.png' },
+    { name: 'Nakheel', logo: '/partners/Layer 793.png' },
+    { name: 'Meydan', logo: '/partners/meydan-logo.png' },
+    { name: 'Sobha', logo: '/partners/Layer 796.png' },
+    { name: 'Wasl', logo: '/partners/Layer 798.png' },
+    { name: 'Meraas', logo: '/partners/Layer 799.png' },
+  ],
+  hospitality: [
+    { name: 'Marriott', logo: '/partners/Marriott_International.png' },
+    { name: 'Ritz-Carlton', logo: '/partners/1200px-RitzCarlton.svg.png' },
+    { name: 'Sofitel', logo: '/partners/Sofitel-JBR-Logo-2019-01_white.png' },
+    { name: 'Radisson', logo: '/partners/2880px-Radisson_Blu_logo.svg.png' },
+    { name: 'Hyatt', logo: '/partners/hyatt-logo.png' },
+    { name: 'Sheraton', logo: '/partners/Layer 801.png' },
+  ],
+  corporate: [
+    { name: 'DMCC', logo: '/partners/DMCC-logo.png' },
+    { name: 'JLT', logo: '/partners/Layer 816.png' },
+    { name: 'SBK Holding', logo: '/partners/Layer 817.png' },
+    { name: 'ADNH', logo: '/partners/adnh-logo.png' },
+  ],
+};
 
-// Helper to get image URL from Sanity
-function getSanityImageUrl(image: any, width = 200, height = 100): string {
-  if (!image?.asset) return '';
-  try {
-    return urlForImage(image).width(width).height(height).url();
-  } catch {
-    return '';
-  }
-}
-
-// Transform Sanity testimonial to display format
-interface DisplayTestimonial {
-  id: string | number;
-  quote: string;
-  author: string;
-  role: string;
-  company: string;
-  image: string;
-}
-
-// Fallback testimonials when Sanity data is not available
-const fallbackTestimonials: DisplayTestimonial[] = [
+const testimonials = [
   {
     id: 1,
     quote: 'One of the standout qualities of MIDC is their dedication to meeting project timelines without compromising quality. MIDC has consistently demonstrated a strong commitment to meeting project timelines while maintaining high-quality standards. Their clear communication and attention to detail helped keep projects on track, even when handling complex requirements.',
@@ -75,148 +63,94 @@ const fallbackTestimonials: DisplayTestimonial[] = [
   },
 ];
 
-// Transform Sanity testimonials to display format
-function transformTestimonials(sanityTestimonials: SanityTestimonial[]): DisplayTestimonial[] {
-  return sanityTestimonials.map(t => ({
-    id: t._id,
-    quote: t.quote,
-    author: t.name,
-    role: t.role || '',
-    company: t.company || '',
-    image: getSanityImageUrl(t.image, 200, 200),
-  }));
-}
+// Background images for visual richness - using placeholder until project images are available
+const backgroundImages = [
+  '/placeholder.jpg',
+  '/placeholder.jpg',
+  '/placeholder.jpg',
+];
 
-// Props interfaces
-interface PartnersSectionProps {
-  clients?: SanityClient[];
-}
+// Partner Display Component - Logo with text fallback
+function PartnerLogo({ partner }: { partner: Partner }) {
+  if (partner.logo) {
+    return (
+      <div className="group relative flex h-16 w-28 items-center justify-center overflow-hidden border border-white/10 bg-white/2 p-3 transition-all duration-300 hover:border-[#d4af37]/30 hover:bg-white/5 sm:h-20 sm:w-36 sm:p-4">
+        <SafeImage
+          src={partner.logo}
+          alt={partner.name}
+          width={120}
+          height={60}
+          className="max-h-full w-auto object-contain opacity-70 brightness-0 invert transition-all duration-300 group-hover:opacity-100"
+        />
+      </div>
+    );
+  }
 
-interface TestimonialsSectionProps {
-  testimonials?: SanityTestimonial[];
+  // Text fallback for partners without logos
+  return (
+    <span className="inline-block border border-white/10 bg-white/[0.02] px-5 py-2.5 font-Satoshi text-sm font-light text-white/70 transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/10 hover:text-white">
+      {partner.name}
+    </span>
+  );
 }
-
-interface PartnersTestimonialsProps {
-  clients?: SanityClient[];
-  testimonials?: SanityTestimonial[];
-}
-
-// Category mapping for clients
-const CATEGORY_CONFIG = {
-  developers: {
-    label: 'Developers',
-    icon: Building2,
-    description: 'Premier real estate developers shaping the UAE skyline',
-    keywords: ['developer', 'developers', 'real-estate', 'real estate'],
-  },
-  hospitality: {
-    label: 'Hospitality',
-    icon: Hotel,
-    description: 'World-renowned hotel brands and hospitality groups',
-    keywords: ['hospitality', 'hotel', 'hotels', 'resort', 'resorts'],
-  },
-  corporate: {
-    label: 'Corporate',
-    icon: Briefcase,
-    description: 'Leading corporate entities and business groups',
-    keywords: ['corporate', 'business', 'office', 'commercial'],
-  },
-};
 
 // ============================================
 // PARTNERS SECTION
 // ============================================
-export function PartnersSection({ clients = [] }: PartnersSectionProps) {
+export function PartnersSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
-  // Mouse tracking for 3D effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  }, [mouseX, mouseY]);
-
-  // Group clients by category
-  const partnerCategories = useMemo(() => {
-    // Filter out confidential clients and those without logos
-    const visibleClients = clients.filter(c => !c.isConfidential && c.logo?.asset);
-
-    // Group clients by category
-    const groupedClients: Record<string, SanityClient[]> = {
-      developers: [],
-      hospitality: [],
-      corporate: [],
-    };
-
-    visibleClients.forEach(client => {
-      const category = (client.category || '').toLowerCase();
-
-      // Match category to group based on keywords
-      if (CATEGORY_CONFIG.developers.keywords.some(k => category.includes(k))) {
-        groupedClients.developers.push(client);
-      } else if (CATEGORY_CONFIG.hospitality.keywords.some(k => category.includes(k))) {
-        groupedClients.hospitality.push(client);
-      } else {
-        // Default to corporate for uncategorized
-        groupedClients.corporate.push(client);
-      }
-    });
-
-    // Build category array - only include categories with clients
-    return Object.entries(CATEGORY_CONFIG)
-      .filter(([key]) => groupedClients[key].length > 0)
-      .map(([key, config]) => ({
-        key: key as keyof typeof CATEGORY_CONFIG,
-        label: config.label,
-        icon: config.icon,
-        description: config.description,
-        partners: groupedClients[key].map(client => ({
-          name: client.name,
-          logo: getSanityImageUrl(client.logo, 200, 100),
-        })),
-      }));
-  }, [clients]);
-
-  // Don't render if no clients
-  if (partnerCategories.length === 0) {
-    return null;
-  }
+  const partnerCategories = [
+    {
+      key: 'developers',
+      label: 'Developers',
+      partnerList: partners.developers,
+      icon: Building2,
+      description: 'Premier real estate developers shaping the UAE skyline'
+    },
+    {
+      key: 'hospitality',
+      label: 'Hospitality',
+      partnerList: partners.hospitality,
+      icon: Hotel,
+      description: 'World-renowned hotel brands and hospitality groups'
+    },
+    {
+      key: 'corporate',
+      label: 'Corporate',
+      partnerList: partners.corporate,
+      icon: Briefcase,
+      description: 'Leading corporate entities and business groups'
+    },
+  ];
 
   return (
     <section
       ref={sectionRef}
-      onMouseMove={handleMouseMove}
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40"
     >
       {/* Subtle grid pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(to right, rgba(201,169,98,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(201,169,98,0.3) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }}
       />
 
       {/* Floating orbs - subtle gold accents */}
       <motion.div
-        className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#c9a962]/[0.08] blur-[150px]"
+        className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#d4af37]/[0.05] blur-[150px]"
         animate={{ y: [0, -40, 0], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute right-[15%] bottom-[20%] h-80 w-80 rounded-full bg-[#c9a962]/[0.05] blur-[120px]"
+        className="absolute right-[15%] bottom-[20%] h-80 w-80 rounded-full bg-[#d4af37]/[0.03] blur-[120px]"
         animate={{ y: [0, 50, 0], opacity: [0.2, 0.4, 0.2] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1800px] px-6 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-[1600px] px-6 lg:px-12">
         {/* Header */}
         <div className="mb-16 text-center lg:mb-24">
           <motion.div
@@ -225,36 +159,36 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
               Strategic Partners
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
           </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl xl:text-7xl"
+            className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
           >
             Trusted by The
             <br />
-            <span className="text-[#c9a962]">Region&apos;s Visionaries</span>
+            <span className="text-white/30">Region&apos;s Visionaries</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto max-w-2xl font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg"
+            className="mx-auto max-w-2xl font-Satoshi text-base font-light leading-relaxed text-white/60 lg:text-lg"
           >
             Collaborating with the most prestigious developers, hospitality brands,
             and corporate entities to create extraordinary spaces.
           </motion.p>
         </div>
 
-        {/* Partner Categories - 3D Cards */}
+        {/* Partner Categories */}
         <div className="grid gap-8 md:grid-cols-3 lg:gap-12">
           {partnerCategories.map((category, categoryIndex) => {
             const Icon = category.icon;
@@ -264,66 +198,46 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 + categoryIndex * 0.15 }}
-                className="group relative"
+                className="group relative h-full"
               >
-                <div
-                  className="relative overflow-hidden border border-[#c9a962]/20 bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/40 hover:bg-white/90 lg:p-10"
-                  style={{ transformStyle: 'preserve-3d' }}
-                >
+                <div className="relative flex h-full flex-col overflow-hidden border border-white/10 bg-white/2 p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white/4 lg:p-10">
                   {/* Icon and Label */}
                   <div className="mb-6 flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10">
-                      <Icon className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
+                    <div className="flex h-12 w-12 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/10">
+                      <Icon className="h-5 w-5 text-[#d4af37]" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <h3 className="font-SchnyderS text-2xl font-light text-neutral-900 lg:text-3xl">
+                      <h3 className="font-SchnyderS text-2xl font-light text-white lg:text-3xl">
                         {category.label}
                       </h3>
-                      <p className="font-Satoshi text-xs font-light text-neutral-500">
-                        {category.partners.length} Partners
+                      <p className="font-Satoshi text-xs font-light text-white/40">
+                        {category.partnerList.length} Partners
                       </p>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
+                  <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-white/60">
                     {category.description}
                   </p>
 
-                  {/* Partner Logos Grid */}
-                  <div className="grid grid-cols-3 gap-3">
-                    {category.partners.map((partner, index) => (
+                  {/* Partner Logos */}
+                  <div className="flex flex-wrap items-center gap-3">
+                    {category.partnerList.map((partner, index) => (
                       <motion.div
                         key={partner.name}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={isInView ? { opacity: 1, scale: 1 } : {}}
                         transition={{ duration: 0.4, delay: 0.5 + categoryIndex * 0.1 + index * 0.05 }}
-                        className="group relative flex h-16 items-center justify-center border border-[#c9a962]/20 bg-white/60 px-3 py-2 transition-all duration-300 hover:border-[#c9a962]/40 hover:bg-[#c9a962]/10"
                       >
-                        {partner.logo ? (
-                          <SafeImage
-                            src={partner.logo}
-                            alt={partner.name}
-                            width={100}
-                            height={40}
-                            className="h-auto max-h-10 w-auto max-w-full object-contain opacity-70 transition-all duration-300 group-hover:opacity-100"
-                          />
-                        ) : (
-                          <span className="whitespace-nowrap font-Satoshi text-xs font-light text-neutral-500 transition-colors duration-300 group-hover:text-neutral-900">
-                            {partner.name}
-                          </span>
-                        )}
-                        {/* Tooltip on hover */}
-                        <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 font-Satoshi text-[10px] text-white/90 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                          {partner.name}
-                        </div>
+                        <PartnerLogo partner={partner} />
                       </motion.div>
                     ))}
                   </div>
 
                   {/* Decorative corners */}
-                  <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-[#c9a962]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-[#c9a962]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-[#d4af37]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-[#d4af37]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
               </motion.div>
             );
@@ -332,272 +246,254 @@ export function PartnersSection({ clients = [] }: PartnersSectionProps) {
       </div>
 
       {/* Corner decorations */}
-      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-[#c9a962]/10 lg:block" />
-      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-[#c9a962]/10 lg:block" />
+      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-white/5 lg:block" />
+      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-white/5 lg:block" />
     </section>
   );
 }
 
 
 // ============================================
-// TESTIMONIALS SECTION - Redesigned
+// TESTIMONIALS SECTION
 // ============================================
-export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: TestimonialsSectionProps) {
+export function TestimonialsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [direction, setDirection] = useState(0);
 
-  // Use Sanity testimonials if available, otherwise fallback
-  const testimonials = useMemo(() => {
-    if (sanityTestimonials.length > 0) {
-      return transformTestimonials(sanityTestimonials);
-    }
-    return fallbackTestimonials;
-  }, [sanityTestimonials]);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const backgroundScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1, 1.1]);
 
   const nextTestimonial = useCallback(() => {
-    setDirection(1);
     setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-  }, [testimonials.length]);
+  }, []);
 
   const prevTestimonial = useCallback(() => {
-    setDirection(-1);
     setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  }, [testimonials.length]);
+  }, []);
 
   // Auto-advance testimonials
   useEffect(() => {
-    if (testimonials.length === 0) return;
-    const interval = setInterval(() => {
-      setDirection(1);
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 8000);
+    const interval = setInterval(nextTestimonial, 8000);
     return () => clearInterval(interval);
-  }, [testimonials.length]);
-
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 100 : -100,
-      opacity: 0,
-    }),
-  };
+  }, [nextTestimonial]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        {/* Animated gradient background */}
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              'radial-gradient(ellipse 100% 100% at 0% 0%, rgba(201,169,98,0.08) 0%, transparent 50%)',
-              'radial-gradient(ellipse 100% 100% at 100% 100%, rgba(201,169,98,0.08) 0%, transparent 50%)',
-              'radial-gradient(ellipse 100% 100% at 0% 0%, rgba(201,169,98,0.08) 0%, transparent 50%)',
-            ],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-        />
-        {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:80px_80px]" />
-      </div>
-
-      {/* Large Quote Mark - Background Decoration */}
+      {/* Background */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 1.5 }}
-        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="absolute inset-0"
+        style={{ y: backgroundY, scale: backgroundScale }}
       >
-        <Quote className="h-[60vh] w-[60vh] text-[#c9a962]/[0.02]" strokeWidth={0.3} />
+        {backgroundImages.map((src, index) => (
+          <motion.div
+            key={`testimonial-bg-${index}`}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: index === activeTestimonial ? 0.2 : 0 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+          >
+            <SafeImage
+              src={src}
+              alt="Luxury interior background"
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        ))}
+
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-neutral-950/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-transparent to-neutral-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-transparent to-neutral-950" />
+
+        {/* Grid pattern */}
       </motion.div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-12">
-        {/* Header - Minimal */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-16 text-center lg:mb-24"
-        >
-          <span className="mb-4 inline-block font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
-            Testimonials
-          </span>
-          <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
-            Words That
-            <span className="block text-[#c9a962]">Inspire Us</span>
-          </h2>
-        </motion.div>
+      {/* Floating orbs */}
+      <motion.div
+        className="absolute right-[10%] top-[30%] h-72 w-72 rounded-full bg-[#d4af37]/[0.04] blur-[120px]"
+        animate={{ y: [0, -30, 0], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute left-[20%] bottom-[20%] h-64 w-64 rounded-full bg-white/[0.02] blur-[100px]"
+        animate={{ y: [0, 40, 0], opacity: [0.2, 0.4, 0.2] }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+      />
 
-        {/* Main Testimonial Display */}
-        <div className="relative">
-          {/* Navigation Arrows - Floating on sides */}
-          <button
-            onClick={prevTestimonial}
-            className="absolute -left-4 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center border border-[#c9a962]/20 bg-white/80 p-4 backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 lg:-left-8 lg:flex xl:-left-16"
-            aria-label="Previous testimonial"
-          >
-            <ArrowLeft className="h-5 w-5 text-neutral-600" strokeWidth={1.5} />
-          </button>
-          <button
-            onClick={nextTestimonial}
-            className="absolute -right-4 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center border border-[#c9a962]/20 bg-white/80 p-4 backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 lg:-right-8 lg:flex xl:-right-16"
-            aria-label="Next testimonial"
-          >
-            <ArrowRight className="h-5 w-5 text-neutral-600" strokeWidth={1.5} />
-          </button>
-
-          {/* Testimonial Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            {/* Corner accents */}
-            <div className="absolute -left-3 -top-3 h-12 w-12 border-l-2 border-t-2 border-[#c9a962]/30" />
-            <div className="absolute -bottom-3 -right-3 h-12 w-12 border-b-2 border-r-2 border-[#c9a962]/30" />
-
-            <div className="relative overflow-hidden border border-[#c9a962]/20 bg-white/70 backdrop-blur-sm">
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={activeTestimonial}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative px-8 py-12 lg:px-16 lg:py-16"
-                >
-                  {/* Quote Icon */}
-                  <div className="mb-8 flex justify-center">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#c9a962]/30 bg-[#c9a962]/5">
-                      <Quote className="h-7 w-7 text-[#c9a962]" strokeWidth={1} />
-                    </div>
-                  </div>
-
-                  {/* Quote Text */}
-                  <blockquote className="mx-auto mb-10 max-w-4xl text-center">
-                    <p className="font-SchnyderS text-2xl font-light leading-relaxed text-neutral-700 sm:text-3xl lg:text-4xl">
-                      &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
-                    </p>
-                  </blockquote>
-
-                  {/* Author Info - Centered */}
-                  <div className="flex flex-col items-center">
-                    {/* Divider */}
-                    <div className="mb-8 h-px w-16 bg-gradient-to-r from-transparent via-[#c9a962]/50 to-transparent" />
-
-                    {/* Author Image */}
-                    <div className="relative mb-5">
-                      <div className="relative h-20 w-20 overflow-hidden rounded-full">
-                        <SafeImage
-                          src={testimonials[activeTestimonial].image}
-                          alt={testimonials[activeTestimonial].author}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      {/* Ring decoration */}
-                      <div className="absolute -inset-1 rounded-full border border-[#c9a962]/20" />
-                      <div className="absolute -inset-2 rounded-full border border-[#c9a962]/10" />
-                    </div>
-
-                    {/* Author Details */}
-                    <div className="text-center">
-                      <div className="mb-1 font-SchnyderS text-2xl font-light text-neutral-900">
-                        {testimonials[activeTestimonial].author}
-                      </div>
-                      <div className="mb-1 font-Satoshi text-sm font-light text-neutral-500">
-                        {testimonials[activeTestimonial].role}
-                      </div>
-                      <div className="font-Satoshi text-sm font-medium uppercase tracking-wider text-[#c9a962]">
-                        {testimonials[activeTestimonial].company}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </motion.div>
-
-          {/* Progress Indicators - Below Card */}
+      <div className="relative z-10 mx-auto max-w-[1600px] px-6 lg:px-12">
+        {/* Header */}
+        <div className="mb-12 text-center lg:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-10 flex items-center justify-center gap-4"
+            transition={{ duration: 0.6 }}
+            className="mb-6 flex items-center justify-center gap-4"
           >
-            {/* Mobile Navigation */}
-            <button
-              onClick={prevTestimonial}
-              className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/20 transition-all duration-300 hover:border-[#c9a962]/50 lg:hidden"
-              aria-label="Previous"
-            >
-              <ArrowLeft className="h-4 w-4 text-neutral-500" strokeWidth={1.5} />
-            </button>
-
-            {/* Dots */}
-            <div className="flex items-center gap-3">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setDirection(index > activeTestimonial ? 1 : -1);
-                    setActiveTestimonial(index);
-                  }}
-                  className="group relative"
-                  aria-label={`Go to testimonial ${index + 1}`}
-                >
-                  <div
-                    className={`h-2 rounded-full transition-all duration-500 ${
-                      index === activeTestimonial
-                        ? 'w-10 bg-[#c9a962]'
-                        : 'w-2 bg-white/20 hover:bg-white/40'
-                    }`}
-                  />
-                  {/* Active pulse effect */}
-                  {index === activeTestimonial && (
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-[#c9a962]"
-                      animate={{ scale: [1, 1.5, 1.5], opacity: [0.5, 0, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile Navigation */}
-            <button
-              onClick={nextTestimonial}
-              className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/20 transition-all duration-300 hover:border-[#c9a962]/50 lg:hidden"
-              aria-label="Next"
-            >
-              <ArrowRight className="h-4 w-4 text-neutral-500" strokeWidth={1.5} />
-            </button>
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
+              Client Voices
+            </span>
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
           </motion.div>
 
-          {/* Testimonial Counter */}
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
+          >
+            What Our
+            <br />
+            <span className="text-white/30">Partners Say</span>
+          </motion.h2>
         </div>
+
+        {/* Testimonial Card - Full Width Cinematic */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="relative mx-auto max-w-5xl"
+        >
+          <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-sm">
+            {/* Large Quote Icon - Background */}
+            <div className="absolute -right-8 -top-8 opacity-[0.03]">
+              <Quote className="h-64 w-64 text-[#d4af37]" strokeWidth={0.5} />
+            </div>
+
+            {/* Content Grid */}
+            <div className="grid lg:grid-cols-5">
+              {/* Image Side */}
+              <div className="relative h-64 overflow-hidden lg:col-span-2 lg:h-auto lg:min-h-[500px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTestimonial}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.05 }}
+                    transition={{ duration: 0.8 }}
+                    className="absolute inset-0"
+                  >
+                    <SafeImage
+                      src={backgroundImages[activeTestimonial]}
+                      alt="Project showcase"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-neutral-950/50 to-neutral-950 lg:via-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent lg:hidden" />
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Quote icon overlay */}
+                <div className="absolute left-6 top-6 flex h-14 w-14 items-center justify-center border border-[#d4af37]/40 bg-neutral-950/60 backdrop-blur-sm">
+                  <Quote className="h-6 w-6 text-[#d4af37]" strokeWidth={1} />
+                </div>
+
+                {/* Corner frame */}
+                <div className="absolute bottom-0 left-0 h-24 w-24 border-b-2 border-l-2 border-[#d4af37]/30" />
+              </div>
+
+              {/* Content Side */}
+              <div className="p-8 lg:col-span-3 lg:p-12 xl:p-16">
+                <div className="relative min-h-[300px]">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTestimonial}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -30 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {/* Quote */}
+                      <p className="mb-10 font-Satoshi text-lg font-light italic leading-relaxed text-white/70 lg:text-xl xl:text-2xl">
+                        &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
+                      </p>
+
+                      {/* Author */}
+                      <div className="flex items-center gap-5 border-t border-white/10 pt-8">
+                        <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-[#d4af37]/30">
+                          <SafeImage
+                            src={testimonials[activeTestimonial].image}
+                            alt={testimonials[activeTestimonial].author}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div>
+                          <div className="font-SchnyderS text-xl font-light text-white lg:text-2xl">
+                            {testimonials[activeTestimonial].author}
+                          </div>
+                          <div className="font-Satoshi text-sm font-light text-white/50">
+                            {testimonials[activeTestimonial].role}
+                          </div>
+                          <div className="font-Satoshi text-sm font-light text-[#d4af37]/70">
+                            {testimonials[activeTestimonial].company}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Navigation */}
+                <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-8">
+                  {/* Progress dots */}
+                  <div className="flex gap-3">
+                    {testimonials.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setActiveTestimonial(index)}
+                        className="group relative h-2 overflow-hidden"
+                        aria-label={`Go to testimonial ${index + 1}`}
+                      >
+                        <div className={`h-full transition-all duration-500 ${
+                          index === activeTestimonial ? 'w-12 bg-[#d4af37]' : 'w-2 bg-white/20 hover:bg-white/40'
+                        }`} />
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Arrows */}
+                  <div className="flex gap-3">
+                    <button
+                      onClick={prevTestimonial}
+                      className="flex h-12 w-12 items-center justify-center border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/10"
+                      aria-label="Previous testimonial"
+                    >
+                      <ArrowLeft className="h-5 w-5 text-white/50" strokeWidth={1.5} />
+                    </button>
+                    <button
+                      onClick={nextTestimonial}
+                      className="flex h-12 w-12 items-center justify-center border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/10"
+                      aria-label="Next testimonial"
+                    >
+                      <ArrowRight className="h-5 w-5 text-white/50" strokeWidth={1.5} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Corner accents */}
+            <div className="absolute right-0 top-0 h-20 w-20 border-r-2 border-t-2 border-[#d4af37]/20" />
+          </div>
+        </motion.div>
       </div>
 
       {/* Corner decorations */}
-      <div className="absolute left-8 top-24 hidden h-24 w-24 border-l border-t border-[#c9a962]/10 lg:block" />
-      <div className="absolute bottom-24 right-8 hidden h-24 w-24 border-b border-r border-[#c9a962]/10 lg:block" />
+      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-white/5 lg:block" />
+      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-white/5 lg:block" />
     </section>
   );
 }
@@ -606,11 +502,18 @@ export function TestimonialsSection({ testimonials: sanityTestimonials = [] }: T
 // ============================================
 // COMBINED EXPORT (for backwards compatibility)
 // ============================================
-export function PartnersTestimonials({ clients = [], testimonials = [] }: PartnersTestimonialsProps) {
+interface PartnersTestimonialsProps {
+  clients?: unknown[];
+  testimonials?: unknown[];
+}
+
+export function PartnersTestimonials({ clients, testimonials }: PartnersTestimonialsProps = {}) {
+  // Note: clients and testimonials props are accepted for API compatibility
+  // but this version uses hardcoded data for the stable design
   return (
     <>
-      <PartnersSection clients={clients} />
-      <TestimonialsSection testimonials={testimonials} />
+      <PartnersSection />
+      <TestimonialsSection />
     </>
   );
 }

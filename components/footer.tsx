@@ -70,7 +70,6 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#faf8f5] px-6 py-20 lg:px-12">
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
 
       <div className="relative z-10 mx-auto max-w-[1800px]">
         {/* Animated top divider */}

@@ -200,7 +200,6 @@ export default function EnhancedIndustriesPageContent({
 
       {/* CTA Section */}
       <section className="relative overflow-hidden bg-neutral-950 px-6 py-24 lg:px-12 lg:py-32">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
         <div className="relative mx-auto max-w-3xl text-center">
           <h2 className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl">

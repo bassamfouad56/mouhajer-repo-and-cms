@@ -134,7 +134,6 @@ export function LuxuryGallery() {
       {/* Background */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px]" />
 
         {/* Ambient glow */}
         <div className="absolute left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.02] blur-[150px]" />

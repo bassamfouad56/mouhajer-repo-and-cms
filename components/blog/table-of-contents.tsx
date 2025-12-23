@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { List, ChevronDown, ChevronUp } from 'lucide-react';
+import { List, X, ChevronRight } from 'lucide-react';
 
 interface TOCItem {
   id: string;
@@ -14,179 +14,230 @@ interface TableOfContentsProps {
   content: any[];
 }
 
-export default function TableOfContents({ content }: TableOfContentsProps) {
-  const [headings, setHeadings] = useState<TOCItem[]>([]);
-  const [activeId, setActiveId] = useState<string>('');
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const isManualScrolling = useRef(false);
+function extractHeadings(content: any[]): TOCItem[] {
+  const headings: TOCItem[] = [];
 
-  // Extract headings from PortableText content
-  useEffect(() => {
-    if (!content) return;
+  content.forEach((block, index) => {
+    if (block._type === 'block' && ['h2', 'h3'].includes(block.style)) {
+      const text = block.children
+        ?.map((child: any) => child.text || '')
+        .join('') || '';
 
-    const extractedHeadings: TOCItem[] = [];
-    let headingIndex = 0;
-
-    content.forEach((block) => {
-      if (block._type === 'block' && ['h2', 'h3'].includes(block.style)) {
-        const text = block.children
-          ?.map((child: any) => child.text)
-          .join('') || '';
-
-        if (text) {
-          const id = `heading-${headingIndex}-${text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`;
-          extractedHeadings.push({
-            id,
-            text,
-            level: block.style === 'h2' ? 2 : 3,
-          });
-          headingIndex++;
-        }
+      if (text.trim()) {
+        const id = `heading-${index}-${text.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 50)}`;
+        headings.push({
+          id,
+          text: text.trim(),
+          level: block.style === 'h2' ? 2 : 3,
+        });
       }
-    });
+    }
+  });
 
-    setHeadings(extractedHeadings);
-  }, [content]);
+  return headings;
+}
 
-  // Scroll-based active heading detection
+export default function TableOfContents({ content }: TableOfContentsProps) {
+  const [activeId, setActiveId] = useState<string>('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const headings = useMemo(() => extractHeadings(content), [content]);
+
+  // Track scroll progress
+  useEffect(() => {
+    const handleScroll = () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      setScrollProgress(scrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Intersection Observer for active section
   useEffect(() => {
     if (headings.length === 0) return;
 
-    const handleScroll = () => {
-      // Don't update during manual scroll (click navigation)
-      if (isManualScrolling.current) return;
-
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const headerOffset = 150; // Account for sticky header
-
-      // Find which heading is currently in view
-      let currentHeading = headings[0]?.id || '';
-
-      for (let i = 0; i < headings.length; i++) {
-        const element = document.getElementById(headings[i].id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          const elementTop = rect.top;
-
-          // If the heading is in the top portion of the viewport, it's active
-          if (elementTop <= headerOffset + 50) {
-            currentHeading = headings[i].id;
-          } else {
-            // Once we find a heading below the threshold, stop
-            break;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
           }
-        }
-      }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    );
 
-      setActiveId(currentHeading);
-    };
+    headings.forEach((heading) => {
+      const element = document.getElementById(heading.id);
+      if (element) observer.observe(element);
+    });
 
-    // Throttle scroll handler
-    let rafId: number;
-    const throttledScroll = () => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(() => {
-        handleScroll();
-        rafId = 0;
-      });
-    };
-
-    window.addEventListener('scroll', throttledScroll, { passive: true });
-
-    // Initial check after DOM is ready
-    setTimeout(handleScroll, 100);
-
-    return () => {
-      window.removeEventListener('scroll', throttledScroll);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
+    return () => observer.disconnect();
   }, [headings]);
 
-  const scrollToHeading = useCallback((id: string) => {
+  // Add IDs to headings in DOM
+  useEffect(() => {
+    if (headings.length === 0) return;
+    const articleHeadings = document.querySelectorAll('article h2, article h3');
+    let headingIndex = 0;
+    articleHeadings.forEach((element) => {
+      if (headingIndex < headings.length) {
+        element.id = headings[headingIndex].id;
+        headingIndex++;
+      }
+    });
+  }, [headings]);
+
+  const scrollToHeading = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      // Set flag to prevent scroll handler from overriding
-      isManualScrolling.current = true;
-      setActiveId(id);
-
-      const offset = 120;
+      const offset = 100;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      // Reset flag after scroll completes
-      setTimeout(() => {
-        isManualScrolling.current = false;
-      }, 1000);
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      setIsOpen(false);
     }
-  }, []);
+  };
 
-  if (headings.length === 0) return null;
+  if (headings.length < 3) return null;
+
+  const activeIndex = headings.findIndex((h) => h.id === activeId);
 
   return (
-    <div className="rounded-lg border border-neutral-200 bg-white">
-      {/* Header */}
-      <button
-        onClick={() => setIsCollapsed(!isCollapsed)}
-        className="flex w-full items-center justify-between p-4 lg:cursor-default"
+    <>
+      {/* Floating TOC Button */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1 }}
+        className="fixed left-6 top-1/2 z-40 -translate-y-1/2 hidden lg:block"
       >
-        <h3 className="flex items-center gap-2 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-700">
-          <List size={16} />
-          On This Page
-        </h3>
-        <span className="lg:hidden">
-          {isCollapsed ? <ChevronDown size={18} /> : <ChevronUp size={18} />}
-        </span>
-      </button>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="group relative flex items-center gap-3 rounded-full border border-neutral-200 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-sm transition-all hover:border-[#c9a962] hover:shadow-xl"
+        >
+          {/* Progress Ring */}
+          <div className="relative">
+            <svg className="h-8 w-8 -rotate-90" viewBox="0 0 36 36">
+              <circle
+                cx="18" cy="18" r="14"
+                fill="none"
+                stroke="#e5e5e5"
+                strokeWidth="3"
+              />
+              <circle
+                cx="18" cy="18" r="14"
+                fill="none"
+                stroke="#c9a962"
+                strokeWidth="3"
+                strokeDasharray="87.96"
+                strokeDashoffset={`${87.96 - (scrollProgress / 100) * 87.96}`}
+                strokeLinecap="round"
+              />
+            </svg>
+            <List size={14} className="absolute inset-0 m-auto text-neutral-600" />
+          </div>
+          <span className="font-Satoshi text-xs font-medium text-neutral-600 opacity-0 transition-opacity group-hover:opacity-100">
+            Contents
+          </span>
+        </button>
+      </motion.div>
 
-      {/* TOC List */}
-      <AnimatePresence initial={false}>
-        {!isCollapsed && (
-          <motion.nav
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden border-t border-neutral-100"
-            aria-label="Table of contents"
-          >
-            <ul className="space-y-0.5 p-4 pt-2">
-              {headings.map((heading) => {
-                const isActive = activeId === heading.id;
-                return (
-                  <li key={heading.id}>
-                    <button
-                      onClick={() => scrollToHeading(heading.id)}
-                      className={`group flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-left font-Satoshi text-sm transition-all duration-200 ${
-                        heading.level === 3 ? 'pl-6' : ''
-                      } ${
-                        isActive
-                          ? 'bg-[#c9a962]/10 font-medium text-[#c9a962]'
-                          : 'font-light text-neutral-600 hover:bg-neutral-50 hover:text-neutral-950'
-                      }`}
-                    >
-                      {/* Active indicator */}
-                      <span
-                        className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full transition-all duration-200 ${
-                          isActive
-                            ? 'bg-[#c9a962]'
-                            : 'bg-neutral-300 group-hover:bg-neutral-400'
+      {/* TOC Panel */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/10 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.div
+              initial={{ x: -320, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -320, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed left-0 top-0 z-50 h-full w-80 overflow-hidden border-r border-neutral-200 bg-white shadow-2xl"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-neutral-100 px-6 py-5">
+                <div>
+                  <h3 className="font-SchnyderS text-lg font-light text-neutral-900">
+                    Table of Contents
+                  </h3>
+                  <p className="font-Satoshi text-xs text-neutral-400">
+                    {activeIndex + 1} of {headings.length} sections
+                  </p>
+                </div>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-full p-2 text-neutral-400 transition-colors hover:bg-neutral-100 hover:text-neutral-600"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="h-0.5 bg-neutral-100">
+                <motion.div
+                  className="h-full bg-[#c9a962]"
+                  animate={{ width: `${scrollProgress}%` }}
+                />
+              </div>
+
+              {/* Headings List */}
+              <nav className="h-full overflow-y-auto px-4 py-6">
+                <ul className="space-y-1">
+                  {headings.map((heading, index) => (
+                    <li key={heading.id}>
+                      <button
+                        onClick={() => scrollToHeading(heading.id)}
+                        className={`group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-all ${
+                          heading.level === 3 ? 'ml-4' : ''
+                        } ${
+                          activeId === heading.id
+                            ? 'bg-[#c9a962]/10'
+                            : 'hover:bg-neutral-50'
                         }`}
-                      />
-                      <span className="leading-tight">{heading.text}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </motion.nav>
+                      >
+                        {/* Number */}
+                        <span className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full font-Satoshi text-[10px] font-medium transition-colors ${
+                          activeId === heading.id
+                            ? 'bg-[#c9a962] text-white'
+                            : 'bg-neutral-100 text-neutral-400 group-hover:bg-neutral-200'
+                        }`}>
+                          {index + 1}
+                        </span>
+                        {/* Text */}
+                        <span className={`flex-1 font-Satoshi text-sm leading-snug transition-colors ${
+                          activeId === heading.id
+                            ? 'font-medium text-neutral-900'
+                            : 'text-neutral-600 group-hover:text-neutral-900'
+                        }`}>
+                          {heading.text}
+                        </span>
+                        {/* Arrow */}
+                        <ChevronRight size={14} className={`flex-shrink-0 transition-all ${
+                          activeId === heading.id
+                            ? 'text-[#c9a962]'
+                            : 'text-neutral-300 group-hover:text-neutral-400'
+                        }`} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 }

@@ -10,7 +10,7 @@ interface CategoryTabsProps {
 }
 
 export function CategoryTabs({ selected, onChange, counts }: CategoryTabsProps) {
-  const categories: Exclude<MainCategory, 'all'>[] = ['residential', 'commercial', 'hospitality', 'ongoing'];
+  const categories: MainCategory[] = ['all', 'residential', 'commercial', 'hospitality', 'ongoing'];
 
   return (
     <section className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur-sm">
@@ -18,8 +18,10 @@ export function CategoryTabs({ selected, onChange, counts }: CategoryTabsProps) 
         <div className="hide-scrollbar flex items-center gap-1 overflow-x-auto">
           {categories.map((category) => {
             const isActive = selected === category;
-            const metadata = CATEGORY_METADATA[category];
-            const count = counts?.[category];
+            const metadata = category === 'all'
+              ? { label: 'All Projects', icon: '📁', description: 'View all projects' }
+              : CATEGORY_METADATA[category];
+            const count = category === 'all' ? undefined : counts?.[category];
 
             return (
               <button

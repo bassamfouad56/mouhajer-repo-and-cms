@@ -10,16 +10,22 @@ const certifications = [
     name: 'ISO 9001:2015',
     description: 'Quality Management System',
     detail: 'Ensuring consistent quality in every project delivery',
+    image: '/certifications/iso-9001.svg',
+    color: '#c9a962',
   },
   {
     name: 'ISO 14001:2015',
     description: 'Environmental Management',
     detail: 'Committed to sustainable construction practices',
+    image: '/certifications/iso-14001.svg',
+    color: '#4ade80',
   },
   {
     name: 'ISO 45001:2018',
     description: 'Occupational Health & Safety',
     detail: 'Zero-compromise approach to workplace safety',
+    image: '/certifications/iso-45001.svg',
+    color: '#60a5fa',
   },
 ];
 
@@ -125,7 +131,6 @@ export function CertificationsAwards() {
         style={{ y: backgroundY }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
         <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a962]/[0.03] blur-[120px]" />
         <motion.div
           className="absolute left-[10%] top-[20%] h-32 w-32 rounded-full bg-[#c9a962]/[0.02] blur-3xl"
@@ -206,15 +211,21 @@ export function CertificationsAwards() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="group relative overflow-hidden border border-white/5 bg-white/[0.02] p-5 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/20 hover:bg-white/[0.04]"
+                className="group relative h-full overflow-hidden border border-white/5 bg-white/2 p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/20 hover:bg-white/4"
               >
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10">
-                    <CheckCircle2 className="h-5 w-5 text-[#c9a962]" strokeWidth={1} />
+                <div className="flex h-full flex-col items-center text-center">
+                  {/* ISO Badge Image */}
+                  <div className="relative mb-4 h-24 w-24">
+                    <img
+                      src={cert.image}
+                      alt={cert.name}
+                      className="h-full w-full object-contain"
+                    />
                   </div>
-                  <div>
-                    <div className="font-SchnyderS text-lg font-light text-white">{cert.name}</div>
-                    <div className="font-Satoshi text-sm font-light text-white/60">{cert.description}</div>
+                  <div className="flex-1">
+                    <div className="mb-1 font-SchnyderS text-xl font-light text-white">{cert.name}</div>
+                    <div className="mb-2 font-Satoshi text-sm font-light text-white/60">{cert.description}</div>
+                    <div className="font-Satoshi text-xs font-light text-white/40">{cert.detail}</div>
                   </div>
                 </div>
               </motion.div>

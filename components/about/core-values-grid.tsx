@@ -44,7 +44,6 @@ export function CoreValuesGrid() {
     >
       {/* Background Pattern */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
       </div>
 
       {/* Radial Gradient Overlay */}

@@ -77,7 +77,14 @@
       "Bash(pnpm remove:*)",
       "Bash(npx tsc:*)",
       "Bash(set:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(vercel link:*)",
+      "Bash(vercel ls:*)",
+      "Bash(vercel logs:*)",
+      "Bash(git show:*)",
+      "Bash(xargs:*)",
+      "Bash(vercel alias:*)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

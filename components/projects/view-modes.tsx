@@ -19,6 +19,19 @@ const getProjectImageUrl = (mainImage: any, width: number, height: number): stri
   }
 };
 
+// Taxonomy reference types for filtering
+interface TaxonomyRef {
+  _id: string;
+  title: string;
+  slug: { current: string };
+}
+
+interface LocationRef {
+  _id: string;
+  name: string;
+  slug: { current: string };
+}
+
 // Types - expects pre-processed strings (localized by parent component)
 export interface SanityProject {
   _id: string;
@@ -26,10 +39,18 @@ export interface SanityProject {
   slug: { current: string };
   excerpt?: string;
   mainImage?: any;
+  // Display fields (for backwards compatibility)
   category?: string;
   location?: string;
-  year?: string;
+  year?: number | string;
   featured?: boolean;
+  // New taxonomy fields for filtering
+  legacyCategory?: string;
+  sector?: TaxonomyRef;
+  projectType?: TaxonomyRef;
+  locationRef?: LocationRef;
+  services?: TaxonomyRef[];
+  status?: string;
 }
 
 export type ViewMode =

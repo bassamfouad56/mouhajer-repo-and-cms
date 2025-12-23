@@ -191,7 +191,6 @@ export function PhasesSectionCinematic() {
         />
 
         {/* Geometric pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.02)_1px,transparent_1px)] bg-size-[80px_80px]" />
 
         {/* Floating orbs */}
         <motion.div
@@ -542,7 +541,6 @@ const PhaseCard = ({
 
         {/* Subtle background pattern for the card */}
         <div className="absolute inset-0 opacity-[0.03]">
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,#c9a962_1px,transparent_1px),linear-gradient(-45deg,#c9a962_1px,transparent_1px)] bg-size-[20px_20px]" />
         </div>
 
         <div className={`grid lg:grid-cols-2 ${isEven ? '' : 'lg:grid-flow-dense'}`}>

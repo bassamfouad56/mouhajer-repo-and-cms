@@ -35,7 +35,6 @@ export function About({ mainImage }: AboutProps) {
       className="relative overflow-hidden bg-gradient-to-b from-neutral-50 via-white to-neutral-50 px-6 py-32 lg:px-12 lg:py-48"
     >
       {/* Decorative Background Elements */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.01)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,black,transparent)]" />
       <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-purple-100/30 blur-3xl" />
       <div className="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-blue-100/30 blur-3xl" />
       <div className="mx-auto max-w-[1800px]">

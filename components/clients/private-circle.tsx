@@ -80,7 +80,6 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
       {/* Background */}
       <div className="absolute inset-0">
         {/* Subtle Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
         {/* Glow Effect */}
         <div className="absolute right-1/4 top-1/2 h-[800px] w-[800px] -translate-y-1/2 rounded-full bg-[#c9a962]/[0.02] blur-[150px]" />
       </div>

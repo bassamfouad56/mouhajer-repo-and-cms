@@ -17,21 +17,21 @@ async function getPosts(locale: string) {
     const query = `
       *[_type == "post"] | order(publishedAt desc) {
         _id,
-        title,
+        "title": coalesce(title[$locale], title.en, title),
         slug,
-        excerpt,
+        "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
         mainImage,
         category,
-        "author": author->{
-          name,
-          image
+        "author": {
+          "name": author.name,
+          "image": author.image
         },
         publishedAt,
         readTime,
         featured,
         "tags": tags[]->{
           _id,
-          "name": name[$locale],
+          "name": coalesce(name[$locale], name.en, name),
           slug
         }
       }

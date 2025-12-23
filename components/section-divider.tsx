@@ -248,7 +248,6 @@ export function LuxuryTransition({
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `linear-gradient(to right, #c9a962 1px, transparent 1px), linear-gradient(to bottom, #c9a962 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }}
       />

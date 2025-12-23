@@ -184,7 +184,6 @@ export function WhoWeAreVideoBanner({ images = [] }: WhoWeAreVideoBannerProps) {
       </div>
 
       {/* Background Subtle Pattern */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
     </section>
   );
 }

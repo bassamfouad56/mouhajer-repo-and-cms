@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { HeroVideo } from "@/components/sections/hero-video";
@@ -12,35 +13,51 @@ import { CertificationsAwards } from "@/components/sections/certifications-award
 import { SectorsExpertise } from "@/components/sections/sectors-expertise";
 import { Contact } from "@/components/sections/contact";
 import { FAQSection } from "@/components/sections/faq";
-import { SectionDivider, LuxuryTransition, SimpleAnimatedDivider } from "@/components/section-divider";
+import {
+  // SectionDivider,
+  LuxuryTransition,
+  SimpleAnimatedDivider,
+} from "@/components/section-divider";
 
 // Homepage FAQ content from content.md
 const homepageFAQs = [
   {
-    question: 'Do you handle the full construction scope from empty land?',
-    answer: 'Yes. We are a licensed main contractor capable of executing the complete lifecycle—from land clearing and piling through to final handover. This is rare in the UAE\'s fragmented market.',
+    question: "Do you handle the full construction scope from empty land?",
+    answer:
+      "Yes. We are a licensed main contractor capable of executing the complete lifecycle—from land clearing and piling through to final handover. This is rare in the UAE's fragmented market.",
   },
   {
-    question: 'Who manages the government approvals?',
-    answer: 'We do. Our in-house team handles all permit applications, inspections, and compliance requirements with DDA, Civil Defence, DEWA, and other authorities.',
+    question: "Who manages the government approvals?",
+    answer:
+      "We do. Our in-house team handles all permit applications, inspections, and compliance requirements with DDA, Civil Defence, DEWA, and other authorities.",
   },
   {
-    question: 'Do you manufacture your own furniture?',
-    answer: 'Yes. We own a 30,000 sq. ft. manufacturing facility where we produce custom joinery, fire-rated doors, wardrobes, and bespoke furniture pieces in-house.',
+    question: "Do you manufacture your own furniture?",
+    answer:
+      "Yes. We own a 30,000 sq. ft. manufacturing facility where we produce custom joinery, fire-rated doors, wardrobes, and bespoke furniture pieces in-house.",
   },
   {
-    question: 'Can you renovate my hotel while it stays open?',
-    answer: 'Yes. We specialize in live-environment hospitality renovations. Our phased approach ensures minimal guest disruption while maintaining strict safety and quality standards.',
+    question: "Can you renovate my hotel while it stays open?",
+    answer:
+      "Yes. We specialize in live-environment hospitality renovations. Our phased approach ensures minimal guest disruption while maintaining strict safety and quality standards.",
   },
   {
-    question: 'Do you provide maintenance after handover?',
-    answer: 'Yes. We offer comprehensive Annual Maintenance Contracts (AMCs) and ongoing support to protect your investment long after the keys are handed over.',
+    question: "Do you provide maintenance after handover?",
+    answer:
+      "Yes. We offer comprehensive Annual Maintenance Contracts (AMCs) and ongoing support to protect your investment long after the keys are handed over.",
   },
 ];
 
 import { LogoMarquee } from "@/components/logo-marquee";
 import { client } from "@/sanity/lib/client";
-import { projectsQuery, servicesQuery, industriesQuery, siteSettingsQuery, clientsQuery, featuredTestimonialsQuery } from "@/sanity/lib/queries";
+import {
+  projectsQuery,
+  servicesQuery,
+  industriesQuery,
+  siteSettingsQuery,
+  clientsQuery,
+  featuredTestimonialsQuery,
+} from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
 
 export const revalidate = 3600; // Revalidate every hour
@@ -51,35 +68,31 @@ async function getProjects(locale: string) {
 
     // Helper to get image URL from Sanity
     const getImageUrl = (image: any): string => {
-      if (!image?.asset) return '';
+      if (!image?.asset) return "";
       try {
-        return urlForImage(image)
-          .width(1200)
-          .height(800)
-          .auto('format')
-          .url();
+        return urlForImage(image).width(1200).height(800).auto("format").url();
       } catch {
-        return '';
+        return "";
       }
     };
 
     // Helper to extract localized string from i18n field
     // Handles both plain strings and {en, ar} objects from Sanity i18n
     const getLocalizedString = (field: any): string => {
-      if (!field) return '';
+      if (!field) return "";
       // If it's already a string, return it
-      if (typeof field === 'string') return field;
+      if (typeof field === "string") return field;
       // If it's an i18n object, extract the correct locale
-      if (typeof field === 'object' && field !== null) {
-        return field[locale] || field.en || field.ar || '';
+      if (typeof field === "object" && field !== null) {
+        return field[locale] || field.en || field.ar || "";
       }
-      return '';
+      return "";
     };
 
     // Transform Sanity projects to match WordPress format expected by PortfolioShowcase
     const transformedProjects = (sanityProjects || []).map((project: any) => ({
-      id: project._id || '',
-      slug: project.slug?.current || '',
+      id: project._id || "",
+      slug: project.slug?.current || "",
       title: getLocalizedString(project.title),
       excerpt: getLocalizedString(project.excerpt),
       featuredImage: {
@@ -91,7 +104,7 @@ async function getProjects(locale: string) {
       acfFields: {
         location: getLocalizedString(project.location),
         projectType: getLocalizedString(project.category),
-        yearCompleted: project.year || '',
+        yearCompleted: project.year || "",
       },
       // Keep original Sanity data for components that need it
       _sanityData: project,
@@ -99,7 +112,7 @@ async function getProjects(locale: string) {
 
     return transformedProjects;
   } catch (error) {
-    console.error('Error fetching projects from Sanity:', error);
+    console.error("Error fetching projects from Sanity:", error);
     return [];
   }
 }
@@ -109,7 +122,7 @@ async function getServices(locale: string) {
     const services = await client.fetch(servicesQuery, { locale });
     return services || [];
   } catch (error) {
-    console.error('Error fetching services from Sanity:', error);
+    console.error("Error fetching services from Sanity:", error);
     return [];
   }
 }
@@ -119,7 +132,7 @@ async function getIndustries(locale: string) {
     const industries = await client.fetch(industriesQuery, { locale });
     return industries || [];
   } catch (error) {
-    console.error('Error fetching industries from Sanity:', error);
+    console.error("Error fetching industries from Sanity:", error);
     return [];
   }
 }
@@ -129,17 +142,19 @@ async function getClients(locale: string) {
     const clients = await client.fetch(clientsQuery, { locale });
     return clients || [];
   } catch (error) {
-    console.error('Error fetching clients from Sanity:', error);
+    console.error("Error fetching clients from Sanity:", error);
     return [];
   }
 }
 
 async function getTestimonials(locale: string) {
   try {
-    const testimonials = await client.fetch(featuredTestimonialsQuery, { locale });
+    const testimonials = await client.fetch(featuredTestimonialsQuery, {
+      locale,
+    });
     return testimonials || [];
   } catch (error) {
-    console.error('Error fetching testimonials from Sanity:', error);
+    console.error("Error fetching testimonials from Sanity:", error);
     return [];
   }
 }
@@ -151,54 +166,58 @@ async function getSiteSettings() {
 
     // Helper to get image URL from Sanity
     const getImageUrl = (image: any, width = 1920, height = 1080): string => {
-      if (!image?.asset) return '';
+      if (!image?.asset) return "";
       try {
         return urlForImage(image)
           .width(width)
           .height(height)
-          .auto('format')
+          .auto("format")
           .url();
       } catch {
-        return '';
+        return "";
       }
     };
 
     if (!settings) {
       return {
-        founderImage: '',
-        founderName: 'Mariam Mouhajer',
-        founderTitle: 'Founder & Creative Director',
-        founderQuote: '',
-        contactBackgroundImage: '',
-        statsBackgroundImage: '',
-        aboutImage: '',
-        heroImage: '',
+        founderImage: "",
+        founderName: "Mariam Mouhajer",
+        founderTitle: "Founder & Creative Director",
+        founderQuote: "",
+        contactBackgroundImage: "",
+        statsBackgroundImage: "",
+        aboutImage: "",
+        heroImage: "",
       };
     }
 
     return {
       founderImage: getImageUrl(settings.founderImage, 800, 1000),
-      founderName: settings.founderName || 'Mariam Mouhajer',
-      founderTitle: settings.founderTitle || 'Founder & Creative Director',
-      founderQuote: settings.founderQuote || '',
+      founderName: settings.founderName || "Mariam Mouhajer",
+      founderTitle: settings.founderTitle || "Founder & Creative Director",
+      founderQuote: settings.founderQuote || "",
       contactBackgroundImage: getImageUrl(settings.contactBackgroundImage),
       statsBackgroundImage: getImageUrl(settings.statsBackgroundImage),
       aboutImage: getImageUrl(settings.aboutImage, 1200, 1500),
       heroImage: getImageUrl(settings.heroImage),
       whyChooseUsImage: getImageUrl(settings.whyChooseUsImage, 1200, 800),
-      whyChooseUsSecondaryImage: getImageUrl(settings.whyChooseUsSecondaryImage, 600, 800),
+      whyChooseUsSecondaryImage: getImageUrl(
+        settings.whyChooseUsSecondaryImage,
+        600,
+        800
+      ),
     };
   } catch (error) {
-    console.error('Error fetching site settings from Sanity:', error);
+    console.error("Error fetching site settings from Sanity:", error);
     return {
-      founderImage: '',
-      founderName: 'Mariam Mouhajer',
-      founderTitle: 'Founder & Creative Director',
-      founderQuote: '',
-      contactBackgroundImage: '',
-      statsBackgroundImage: '',
-      aboutImage: '',
-      heroImage: '',
+      founderImage: "",
+      founderName: "Mariam Mouhajer",
+      founderTitle: "Founder & Creative Director",
+      founderQuote: "",
+      contactBackgroundImage: "",
+      statsBackgroundImage: "",
+      aboutImage: "",
+      heroImage: "",
     };
   }
 }
@@ -210,20 +229,20 @@ async function getProjectImagesByCategory(locale: string) {
 
     const getImageUrl = (project: any): string => {
       // Return empty string if project is undefined or null
-      if (!project) return '';
+      if (!project) return "";
 
       if (project.mainImage?.asset) {
         try {
           return urlForImage(project.mainImage)
             .width(1200)
             .height(800)
-            .auto('format')
+            .auto("format")
             .url();
         } catch {
-          return '';
+          return "";
         }
       }
-      return '';
+      return "";
     };
 
     const allProjects = projects || [];
@@ -231,68 +250,88 @@ async function getProjectImagesByCategory(locale: string) {
     // Return default empty values if no projects
     if (allProjects.length === 0) {
       return {
-        promise: { landOwners: '', propertyOwners: '' },
-        whoWeAre: { contractor: '', designer: '', manufacturer: '' },
+        promise: { landOwners: "", propertyOwners: "" },
+        whoWeAre: { contractor: "", designer: "", manufacturer: "" },
         capabilities: [],
-        sectors: { hospitality: '', residential: '', commercial: '' },
+        sectors: { hospitality: "", residential: "", commercial: "" },
       };
     }
 
     // Categorize projects by type
-    const hospitality = allProjects.filter((p: any) =>
-      p?.category?.toLowerCase()?.includes('hospitality') ||
-      p?.category?.toLowerCase()?.includes('hotel')
+    const hospitality = allProjects.filter(
+      (p: any) =>
+        p?.category?.toLowerCase()?.includes("hospitality") ||
+        p?.category?.toLowerCase()?.includes("hotel")
     );
-    const residential = allProjects.filter((p: any) =>
-      p?.category?.toLowerCase()?.includes('residential') ||
-      p?.category?.toLowerCase()?.includes('villa')
+    const residential = allProjects.filter(
+      (p: any) =>
+        p?.category?.toLowerCase()?.includes("residential") ||
+        p?.category?.toLowerCase()?.includes("villa")
     );
-    const commercial = allProjects.filter((p: any) =>
-      p?.category?.toLowerCase()?.includes('commercial') ||
-      p?.category?.toLowerCase()?.includes('office') ||
-      p?.category?.toLowerCase()?.includes('retail')
+    const commercial = allProjects.filter(
+      (p: any) =>
+        p?.category?.toLowerCase()?.includes("commercial") ||
+        p?.category?.toLowerCase()?.includes("office") ||
+        p?.category?.toLowerCase()?.includes("retail")
     );
 
     return {
       // For MouhajerPromise - 2 images (construction/renovation focus)
       promise: {
-        landOwners: getImageUrl(allProjects[0]) || getImageUrl(allProjects[1]) || '',
-        propertyOwners: getImageUrl(allProjects[2]) || getImageUrl(allProjects[3]) || '',
+        landOwners:
+          getImageUrl(allProjects[0]) || getImageUrl(allProjects[1]) || "",
+        propertyOwners:
+          getImageUrl(allProjects[2]) || getImageUrl(allProjects[3]) || "",
       },
       // For WhoWeAreCinematic - 3 images (contractor, designer, manufacturer)
       whoWeAre: {
-        contractor: getImageUrl(allProjects[0]) || '',
-        designer: getImageUrl(allProjects[1]) || '',
-        manufacturer: getImageUrl(allProjects[2]) || '',
+        contractor: getImageUrl(allProjects[0]) || "",
+        designer: getImageUrl(allProjects[1]) || "",
+        manufacturer: getImageUrl(allProjects[2]) || "",
       },
       // For CapabilitiesCarousel - 6 images
       capabilities: allProjects.slice(0, 6).map((p: any) => ({
         url: getImageUrl(p),
-        alt: p?.title || 'MIDC Project',
+        alt: p?.title || "MIDC Project",
       })),
       // For SectorsExpertise - 3 images by category
       sectors: {
-        hospitality: getImageUrl(hospitality[0]) || getImageUrl(allProjects[0]) || '',
-        residential: getImageUrl(residential[0]) || getImageUrl(allProjects[1]) || '',
-        commercial: getImageUrl(commercial[0]) || getImageUrl(allProjects[2]) || '',
+        hospitality:
+          getImageUrl(hospitality[0]) || getImageUrl(allProjects[0]) || "",
+        residential:
+          getImageUrl(residential[0]) || getImageUrl(allProjects[1]) || "",
+        commercial:
+          getImageUrl(commercial[0]) || getImageUrl(allProjects[2]) || "",
       },
     };
   } catch (error) {
-    console.error('Error fetching project images:', error);
+    console.error("Error fetching project images:", error);
     return {
-      promise: { landOwners: '', propertyOwners: '' },
-      whoWeAre: { contractor: '', designer: '', manufacturer: '' },
+      promise: { landOwners: "", propertyOwners: "" },
+      whoWeAre: { contractor: "", designer: "", manufacturer: "" },
       capabilities: [],
-      sectors: { hospitality: '', residential: '', commercial: '' },
+      sectors: { hospitality: "", residential: "", commercial: "" },
     };
   }
 }
 
-export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
 
   // Fetch data from Sanity CMS
-  const [projects, services, industries, projectImages, siteSettings, clients, testimonials] = await Promise.all([
+  const [
+    projects,
+    services,
+    industries,
+    projectImages,
+    siteSettings,
+    clients,
+    testimonials,
+  ] = await Promise.all([
     getProjects(locale),
     getServices(locale),
     getIndustries(locale),
@@ -311,7 +350,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <HeroVideo />
 
         {/* Transition: Hero to Promise */}
-        <SectionDivider variant="line" theme="dark" />
+        {/* <SectionDivider variant="line" theme="light" /> */}
 
         {/* Section 2: The Mouhajer Promise */}
         <MouhajerPromise images={projectImages.promise} />
@@ -320,7 +359,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <WhoWeAreCinematic images={projectImages.whoWeAre} />
 
         {/* Transition: Who We Are to Stats */}
-        <LuxuryTransition theme="dark" />
+        {/* <LuxuryTransition theme="light" /> */}
 
         {/* Section 4: Stats Banner */}
         <StatsBanner />
@@ -329,7 +368,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <LogoMarquee clients={clients} />
 
         {/* Transition: Logo Marquee to Founder */}
-        <SimpleAnimatedDivider theme="dark" />
+        {/* <SimpleAnimatedDivider theme="light" /> */}
 
         {/* Section 5: Founder's Message */}
         <FounderMessage
@@ -340,48 +379,48 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         />
 
         {/* Transition: Founder to Capabilities */}
-        <SectionDivider variant="diamond" theme="dark" />
+        {/* <SectionDivider variant="diamond" theme="light" /> */}
 
         {/* Section 6: Our Capabilities */}
         <CapabilitiesCarousel images={projectImages.capabilities} />
 
         {/* Transition: Capabilities to Portfolio */}
-        <LuxuryTransition theme="dark" />
+        {/* <LuxuryTransition theme="light" /> */}
 
         {/* Section 7: Portfolio of Excellence */}
         <PortfolioShowcase projects={projects} />
 
         {/* Transition: Portfolio to Sectors */}
-        <SectionDivider variant="gradient" theme="dark" />
+        {/* <SectionDivider variant="gradient" theme="light" /> */}
 
         {/* Section 8: Sectors of Expertise */}
         <SectorsExpertise images={projectImages.sectors} />
 
         {/* Transition: Sectors to Partners */}
-        <SimpleAnimatedDivider theme="dark" />
+        {/* <SimpleAnimatedDivider theme="light" /> */}
 
         {/* Section 9: Strategic Partners & Testimonials */}
         <PartnersTestimonials clients={clients} testimonials={testimonials} />
 
         {/* Transition: Partners to Awards */}
-        <SectionDivider variant="dots" theme="dark" />
+        {/* <SectionDivider variant="dots" theme="light" /> */}
 
         {/* Section 10: Certifications & Awards */}
         <CertificationsAwards />
 
         {/* Transition: Awards to FAQ */}
-        <LuxuryTransition theme="dark" />
+        {/* <LuxuryTransition theme="light" /> */}
 
         {/* Section 11: FAQ */}
         <FAQSection
           title="Clarity Before Commitment"
           subtitle="Find answers to common questions about our construction and design services."
           faqs={homepageFAQs}
-          variant="dark"
+          variant="light"
         />
 
         {/* Transition: FAQ to Contact */}
-        <SectionDivider variant="minimal" theme="dark" />
+        {/* <SectionDivider variant="minimal" theme="light" /> */}
 
         {/* Section 12: Contact */}
         <Contact backgroundImage={siteSettings.contactBackgroundImage} />

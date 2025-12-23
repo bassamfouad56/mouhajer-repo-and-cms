@@ -113,11 +113,13 @@ export default function ServicesPageContent({
         <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/85 via-[#faf8f5]/70 to-[#faf8f5]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#faf8f5]/50 via-transparent to-[#faf8f5]/50" />
 
+        {/* Dark top gradient for header visibility */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-neutral-950/70 via-neutral-950/30 to-transparent" />
+
         {/* Subtle Grid Pattern */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(201,169,98,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(201,169,98,0.3) 1px, transparent 1px)`,
             backgroundSize: '60px 60px',
           }}
         />
@@ -311,7 +313,6 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(to right, rgba(201,169,98,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(201,169,98,0.3) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }}
       />
@@ -597,7 +598,6 @@ function ServicePillarsSection({
       className="relative overflow-hidden bg-[#faf8f5] py-32 sm:py-40 lg:py-48"
     >
       {/* Minimal Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:80px_80px] opacity-50" />
 
       <div className="mx-auto max-w-[1800px] px-6 lg:px-16 xl:px-24">
         {/* Section Header */}
@@ -637,10 +637,10 @@ function ServicePillarsSection({
                   delay: index * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group relative"
+                className="group relative h-full"
               >
-                <Link href={service.ctaLink} className="block">
-                  <div className="relative overflow-hidden border border-[#c9a962]/20 bg-white/70 transition-all duration-500 hover:border-[#c9a962]/40 hover:bg-white/90">
+                <Link href={service.ctaLink} className="block h-full">
+                  <div className="relative flex h-full flex-col overflow-hidden border border-[#c9a962]/20 bg-white/70 transition-all duration-500 hover:border-[#c9a962]/40 hover:bg-white/90">
                     {/* Top Section: Image + Number */}
                     <div className="relative">
                       {/* Image */}
@@ -660,7 +660,7 @@ function ServicePillarsSection({
                     </div>
 
                     {/* Content Section */}
-                    <div className="p-8 lg:p-10">
+                    <div className="flex flex-1 flex-col p-8 lg:p-10">
                       {/* Subtitle */}
                       <div className="mb-3 font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#c9a962]">
                         {service.subtitle}
@@ -672,7 +672,7 @@ function ServicePillarsSection({
                       </h3>
 
                       {/* Description - Always visible */}
-                      <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-neutral-600">
+                      <p className="mb-6 flex-1 font-Satoshi text-base font-light leading-relaxed text-neutral-600">
                         {service.description}
                       </p>
 

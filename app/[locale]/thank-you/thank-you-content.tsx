@@ -53,7 +53,6 @@ export default function ThankYouContent() {
         className="relative min-h-[60vh] overflow-hidden bg-neutral-950 px-6 py-32 lg:px-12 lg:py-40"
       >
         {/* Background Effects */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/10 blur-[150px]" />
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
@@ -186,7 +185,6 @@ export default function ThankYouContent() {
         className="relative bg-neutral-950 px-6 py-24 lg:px-12 lg:py-32"
       >
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <motion.div

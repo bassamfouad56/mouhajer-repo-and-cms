@@ -333,7 +333,6 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
             <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-transparent to-neutral-950/30" />
 
             {/* Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
 
             {/* Hero Content */}
             <motion.div
@@ -687,7 +686,6 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
         {/* CTA Section with Background */}
         <section className="relative overflow-hidden bg-neutral-950 px-6 py-32 lg:px-12">
           {/* Background Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px]" />
           <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[150px]" />
           <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[150px]" />
 

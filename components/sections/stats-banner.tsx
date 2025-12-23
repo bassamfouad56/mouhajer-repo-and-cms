@@ -147,7 +147,7 @@ export function StatsBanner() {
       >
         {backgroundImages.map((image, index) => (
           <motion.div
-            key={image.src}
+            key={`bg-image-${index}`}
             className="absolute inset-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: index === activeImage ? 1 : 0 }}
@@ -172,7 +172,6 @@ export function StatsBanner() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/50 via-transparent to-[#faf8f5]/50" />
 
         {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(38,36,32,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(38,36,32,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
       </motion.div>
 
       {/* Top border line */}

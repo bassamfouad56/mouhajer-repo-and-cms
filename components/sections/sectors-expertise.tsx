@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useState, useMemo } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Hotel, Home, Building2, Sparkles } from 'lucide-react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Hotel, Home, Building2 } from 'lucide-react';
 import Link from 'next/link';
 import { SafeImage } from '@/components/safe-image';
 import { useTranslations } from 'next-intl';
@@ -34,6 +34,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
       link: '/industries/luxury-hospitality',
       icon: Hotel,
       stats: { projects: '50+', value: 'AED 500M+' },
+      accent: '#c9a962',
     },
     {
       id: 'residential',
@@ -48,6 +49,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
       link: '/industries/high-end-residential',
       icon: Home,
       stats: { projects: '300+', value: 'AED 2B+' },
+      accent: '#a8a29e',
     },
     {
       id: 'commercial',
@@ -62,12 +64,13 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
       link: '/industries/commercial-corporate',
       icon: Building2,
       stats: { projects: '100+', value: 'AED 300M+' },
+      accent: '#78716c',
     },
   ];
+
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [isAnyHovered, setIsAnyHovered] = useState(false);
 
   // Default fallback images for each sector
   const fallbackImages: Record<string, string> = {
@@ -84,84 +87,54 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
     }));
   }, [images]);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
-
   const handleHover = (id: string | null) => {
     setHoveredId(id);
-    setIsAnyHovered(id !== null);
   };
 
   return (
     <section
       ref={sectionRef}
       id="sectors"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40 scroll-mt-24"
+      className="relative overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40 scroll-mt-24"
     >
-      {/* Animated Background */}
-      <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5] via-white to-[#faf8f5]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:80px_80px]" />
+      {/* Background Pattern */}
 
-        {/* Floating gradient orbs */}
-        <motion.div
-          className="absolute left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute right-1/4 bottom-1/4 h-[500px] w-[500px] rounded-full bg-white/[0.02] blur-[120px]"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
-      </motion.div>
-
-      <div className="relative z-10 mx-auto max-w-[1600px] px-6 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
-        <div className="mb-16 text-center lg:mb-24">
+        <div className="mb-16 lg:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="mb-6 flex items-center justify-center gap-4"
+            className="mb-4 flex items-center gap-4"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <Sparkles className="h-4 w-4 text-[#c9a962]" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-neutral-500">
+            <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
               {t('label')}
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-[#c9a962]" />
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl"
-          >
-            {t('titleLine1')}
-            <br />
-            <span className="text-neutral-400">{t('titleLine2')}</span>
-          </motion.h2>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl"
+            >
+              {t('titleLine1')}
+              <br />
+              <span className="text-neutral-400">{t('titleLine2')}</span>
+            </motion.h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto max-w-2xl font-Satoshi text-base font-light text-neutral-600 lg:text-lg"
-          >
-            {t('description')}
-          </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="max-w-md font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-right lg:text-lg"
+            >
+              {t('description')}
+            </motion.p>
+          </div>
         </div>
 
         {/* Industries Grid */}
@@ -169,50 +142,28 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
           {sectors.map((sector, index) => {
             const Icon = sector.icon;
             const isHovered = hoveredId === sector.id;
-            const isOtherHovered = isAnyHovered && !isHovered;
 
             return (
               <motion.div
                 key={sector.id}
-                initial={{ opacity: 0, y: 60 }}
+                initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 + index * 0.15 }}
-                className="relative"
+                className="group relative h-full"
                 onMouseEnter={() => handleHover(sector.id)}
                 onMouseLeave={() => handleHover(null)}
               >
-                <Link href={sector.link} className="block">
-                  <motion.div
-                    className="relative overflow-hidden"
-                    animate={{
-                      scale: isHovered ? 1.05 : isOtherHovered ? 0.95 : 1,
-                      opacity: isOtherHovered ? 0.5 : 1,
-                      zIndex: isHovered ? 20 : 1,
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      ease: [0.25, 0.1, 0.25, 1],
-                    }}
-                    style={{
-                      transformOrigin: 'center center',
-                    }}
-                  >
-                    {/* Card Container */}
-                    <motion.div
-                      className="relative aspect-[3/4] overflow-hidden border border-[#c9a962]/10 bg-white/70"
-                      animate={{
-                        borderColor: isHovered ? 'rgba(201, 169, 98, 0.3)' : 'rgba(255, 255, 255, 0.05)',
-                      }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      {/* Background Image */}
+                <Link href={sector.link} className="block h-full">
+                  <div className="relative flex h-full flex-col overflow-hidden border border-neutral-200 bg-white transition-all duration-500 hover:border-[#c9a962]/30 hover:shadow-xl">
+                    {/* Image Container */}
+                    <div className="relative aspect-[4/3] overflow-hidden">
                       <motion.div
                         className="absolute inset-0"
                         animate={{
-                          scale: isHovered ? 1.15 : 1,
+                          scale: isHovered ? 1.08 : 1,
                         }}
                         transition={{
-                          duration: 1.2,
+                          duration: 0.8,
                           ease: [0.25, 0.1, 0.25, 1],
                         }}
                       >
@@ -224,199 +175,83 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                         />
                       </motion.div>
 
-                      {/* Gradient Overlays */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-[#faf8f5]/60 to-[#faf8f5]/20"
-                        animate={{
-                          opacity: isHovered ? 0.85 : 0.9,
-                        }}
-                        transition={{ duration: 0.4 }}
-                      />
+                      {/* Light overlay for better contrast */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 via-neutral-900/20 to-transparent" />
 
-                      {/* Golden Accent Glow on Hover */}
-                      <AnimatePresence>
-                        {isHovered && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.4 }}
-                            className="absolute inset-0 bg-gradient-to-t from-[#c9a962]/20 via-transparent to-transparent"
-                          />
-                        )}
-                      </AnimatePresence>
-
-                      {/* Content */}
-                      <div className="relative z-10 flex h-full flex-col justify-between p-6 lg:p-8">
-                        {/* Top - Icon */}
-                        <div className="flex items-start justify-end">
-                          <motion.div
-                            className="flex h-12 w-12 items-center justify-center border lg:h-14 lg:w-14"
-                            animate={{
-                              borderColor: isHovered ? 'rgba(201, 169, 98, 0.5)' : 'rgba(255, 255, 255, 0.1)',
-                              backgroundColor: isHovered ? 'rgba(201, 169, 98, 0.1)' : 'transparent',
-                            }}
-                            transition={{ duration: 0.4 }}
-                          >
-                            <Icon
-                              className="h-5 w-5 lg:h-6 lg:w-6"
-                              strokeWidth={1}
-                              style={{
-                                color: isHovered ? '#c9a962' : 'rgba(255, 255, 255, 0.4)',
-                              }}
-                            />
-                          </motion.div>
-                        </div>
-
-                        {/* Bottom - Title & Info */}
-                        <div>
-                          {/* Stats - Only visible on hover */}
-                          <AnimatePresence>
-                            {isHovered && (
-                              <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 10 }}
-                                transition={{ duration: 0.4 }}
-                                className="mb-6 flex gap-6"
-                              >
-                                <div>
-                                  <div className="font-SchnyderS text-2xl font-light text-[#c9a962]">
-                                    {sector.stats.projects}
-                                  </div>
-                                  <div className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/40">
-                                    {t('projectsLabel')}
-                                  </div>
-                                </div>
-                                <div className="h-10 w-px bg-white/10" />
-                                <div>
-                                  <div className="font-SchnyderS text-2xl font-light text-[#c9a962]">
-                                    {sector.stats.value}
-                                  </div>
-                                  <div className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/40">
-                                    {t('valueDelivered')}
-                                  </div>
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-
-                          {/* Subtitle */}
-                          <motion.div
-                            className="mb-2 font-Satoshi text-xs font-light uppercase tracking-[0.2em]"
-                            animate={{
-                              color: isHovered ? 'rgba(201, 169, 98, 0.8)' : 'rgba(255, 255, 255, 0.4)',
-                            }}
-                            transition={{ duration: 0.4 }}
-                          >
-                            {sector.subtitle}
-                          </motion.div>
-
-                          {/* Title */}
-                          <motion.h3
-                            className="mb-4 font-SchnyderS text-3xl font-light tracking-tight text-white lg:text-4xl"
-                            animate={{
-                              y: isHovered ? -5 : 0,
-                            }}
-                            transition={{ duration: 0.4 }}
-                          >
-                            {sector.title}
-                          </motion.h3>
-
-                          {/* Description - Expands on hover */}
-                          <motion.div
-                            initial={false}
-                            animate={{
-                              height: isHovered ? 'auto' : 0,
-                              opacity: isHovered ? 1 : 0,
-                            }}
-                            transition={{
-                              duration: 0.5,
-                              ease: [0.25, 0.1, 0.25, 1],
-                            }}
-                            className="overflow-hidden"
-                          >
-                            <p className="mb-4 font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
-                              {sector.description}
-                            </p>
-
-                            {/* Features */}
-                            <div className="mb-6 flex flex-wrap gap-2">
-                              {sector.features.map((feature, i) => (
-                                <motion.span
-                                  key={i}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ duration: 0.3, delay: i * 0.1 }}
-                                  className="border border-[#c9a962]/30 bg-[#c9a962]/5 px-3 py-1.5 font-Satoshi text-[10px] font-light text-neutral-700"
-                                >
-                                  {feature}
-                                </motion.span>
-                              ))}
-                            </div>
-                          </motion.div>
-
-                          {/* Divider */}
-                          <motion.div
-                            className="mb-4 h-px w-full"
-                            animate={{
-                              backgroundColor: isHovered ? 'rgba(201, 169, 98, 0.3)' : 'rgba(255, 255, 255, 0.1)',
-                            }}
-                            transition={{ duration: 0.4 }}
-                          />
-
-                          {/* CTA */}
-                          <motion.div
-                            className="flex items-center gap-2 font-Satoshi text-sm font-light"
-                            animate={{
-                              color: isHovered ? '#c9a962' : 'rgba(255, 255, 255, 0.5)',
-                            }}
-                            transition={{ duration: 0.4 }}
-                          >
-                            <span>{tCommon('explore')}</span>
-                            <motion.div
-                              animate={{
-                                x: isHovered ? 8 : 0,
-                              }}
-                              transition={{ duration: 0.4 }}
-                            >
-                              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                            </motion.div>
-                          </motion.div>
-                        </div>
+                      {/* Icon Badge */}
+                      <div className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center border border-white/20 bg-white/10 backdrop-blur-sm">
+                        <Icon className="h-5 w-5 text-white" strokeWidth={1.5} />
                       </div>
 
-                      {/* Corner Accents */}
-                      <motion.div
-                        className="absolute right-0 top-0 h-20 w-20 border-r border-t"
-                        animate={{
-                          borderColor: isHovered ? 'rgba(201, 169, 98, 0.4)' : 'rgba(255, 255, 255, 0.05)',
-                        }}
-                        transition={{ duration: 0.4 }}
-                      />
-                      <motion.div
-                        className="absolute bottom-0 left-0 h-20 w-20 border-b border-l"
-                        animate={{
-                          borderColor: isHovered ? 'rgba(201, 169, 98, 0.4)' : 'rgba(255, 255, 255, 0.05)',
-                        }}
-                        transition={{ duration: 0.4 }}
-                      />
+                      {/* Stats Overlay - Bottom of image */}
+                      <div className="absolute bottom-4 left-4 flex gap-4">
+                        <div>
+                          <div className="font-SchnyderS text-2xl font-light text-white">
+                            {sector.stats.projects}
+                          </div>
+                          <div className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/70">
+                            {t('projectsLabel')}
+                          </div>
+                        </div>
+                        <div className="h-10 w-px bg-white/20" />
+                        <div>
+                          <div className="font-SchnyderS text-2xl font-light text-white">
+                            {sector.stats.value}
+                          </div>
+                          <div className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/70">
+                            {t('valueDelivered')}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-                      {/* Shimmer Effect on Hover */}
-                      <AnimatePresence>
-                        {isHovered && (
-                          <motion.div
-                            initial={{ x: '-100%', opacity: 0 }}
-                            animate={{ x: '200%', opacity: 0.1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 1, ease: 'easeInOut' }}
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent"
-                            style={{ transform: 'skewX(-20deg)' }}
-                          />
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  </motion.div>
+                    {/* Content */}
+                    <div className="flex flex-1 flex-col p-6 lg:p-8">
+                      {/* Subtitle */}
+                      <div
+                        className="mb-2 font-Satoshi text-xs font-medium uppercase tracking-[0.2em]"
+                        style={{ color: sector.accent }}
+                      >
+                        {sector.subtitle}
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="mb-3 font-SchnyderS text-2xl font-light tracking-tight text-neutral-900 lg:text-3xl">
+                        {sector.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="mb-6 flex-1 font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
+                        {sector.description}
+                      </p>
+
+                      {/* Features Tags */}
+                      <div className="mb-6 flex flex-wrap gap-2">
+                        {sector.features.map((feature, i) => (
+                          <span
+                            key={i}
+                            className="border border-neutral-200 bg-neutral-50 px-3 py-1.5 font-Satoshi text-[10px] font-light uppercase tracking-wider text-neutral-600"
+                          >
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* CTA */}
+                      <div className="flex items-center gap-2 font-Satoshi text-sm font-light text-neutral-900 transition-colors group-hover:text-[#c9a962]">
+                        <span>{tCommon('explore')}</span>
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+                      </div>
+                    </div>
+
+                    {/* Accent Line */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 h-1 bg-[#c9a962]"
+                      initial={{ width: '0%' }}
+                      animate={{ width: isHovered ? '100%' : '0%' }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </div>
                 </Link>
               </motion.div>
             );
@@ -428,17 +263,15 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-20 text-center lg:mt-28"
+          className="mt-16 text-center lg:mt-20"
         >
-          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
-
-          <p className="mb-6 font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
+          <p className="mb-6 font-Satoshi text-sm font-light text-neutral-500">
             {t('ctaQuestion')}
           </p>
 
           <Link
             href="#contact"
-            className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]"
+            className="group relative inline-flex items-center gap-3 overflow-hidden border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]"
           >
             <span>{t('ctaButton')}</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
@@ -446,9 +279,19 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
         </motion.div>
       </div>
 
-      {/* Decorative Lines */}
-      <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#c9a962]/10 to-transparent" />
-      <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#c9a962]/10 to-transparent" />
+      {/* Corner Decorations */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="absolute left-8 top-24 hidden h-16 w-16 border-l border-t border-[#c9a962]/20 lg:block"
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, delay: 0.6 }}
+        className="absolute bottom-24 right-8 hidden h-16 w-16 border-b border-r border-[#c9a962]/20 lg:block"
+      />
     </section>
   );
 }

@@ -7,9 +7,10 @@ import { Eye, Users } from 'lucide-react';
 interface ViewCounterProps {
   postId: string;
   initialViews?: number;
+  variant?: 'light' | 'dark';
 }
 
-export default function ViewCounter({ postId, initialViews = 0 }: ViewCounterProps) {
+export default function ViewCounter({ postId, initialViews = 0, variant = 'light' }: ViewCounterProps) {
   const [views, setViews] = useState(initialViews);
   const [readingNow, setReadingNow] = useState(0);
   const [hasTracked, setHasTracked] = useState(false);
@@ -84,15 +85,18 @@ export default function ViewCounter({ postId, initialViews = 0 }: ViewCounterPro
     return count.toString();
   };
 
+  const textColor = variant === 'dark' ? 'text-white/50' : 'text-neutral-500';
+  const iconColor = variant === 'dark' ? 'text-white/40' : 'text-neutral-400';
+
   return (
-    <div className="flex items-center gap-4 font-Satoshi text-sm font-light text-neutral-500">
+    <div className={`flex items-center gap-4 font-Satoshi text-sm font-light ${textColor}`}>
       {/* Total Views */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="flex items-center gap-1.5"
       >
-        <Eye size={16} className="text-neutral-400" />
+        <Eye size={14} className={iconColor} />
         <span>{formatViews(views)} views</span>
       </motion.div>
 

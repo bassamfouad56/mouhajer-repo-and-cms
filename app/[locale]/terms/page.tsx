@@ -12,11 +12,24 @@ export default function TermsOfService() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-white px-6 py-32 lg:px-12">
+      <main className="min-h-screen bg-white">
+        {/* Dark hero section for header visibility */}
+        <section className="relative bg-neutral-950 px-6 pb-16 pt-32 lg:px-12">
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-6 flex items-center gap-4">
+              <div className="h-px w-12 bg-[#c9a962]/50" />
+              <span className="text-[10px] font-light uppercase tracking-[0.3em] text-white/50">
+                Legal
+              </span>
+            </div>
+            <h1 className="text-4xl font-light tracking-tight text-white lg:text-5xl">
+              Terms of Service
+            </h1>
+          </div>
+        </section>
+
+        <div className="px-6 py-16 lg:px-12">
         <div className="mx-auto max-w-4xl">
-          <h1 className="mb-8 text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
-            Terms of Service
-          </h1>
 
           <div className="space-y-8 text-neutral-700">
             <p className="text-sm text-neutral-500">
@@ -230,6 +243,7 @@ export default function TermsOfService() {
               </p>
             </section>
           </div>
+        </div>
         </div>
       </main>
       <LogoMarquee />

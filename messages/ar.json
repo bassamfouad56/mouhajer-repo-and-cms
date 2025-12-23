@@ -467,6 +467,33 @@
     "supplierRegistration": {
       "title": "تسجيل الموردين",
       "description": "انضم إلى شبكة موردينا الموثوقين"
+    },
+    "section": {
+      "beginYourJourney": "ابدأ رحلتك",
+      "letsCreate": "لنبدع",
+      "somethingExtraordinary": "شيئاً استثنائياً",
+      "readyToTransform": "هل أنت مستعد لتحويل رؤيتك إلى واقع؟ فريقنا من الخبراء هنا لإرشادك في كل خطوة من الرحلة.",
+      "emailLabel": "البريد الإلكتروني",
+      "phoneLabel": "الهاتف",
+      "locationLabel": "الموقع",
+      "forInquiries": "للاستفسارات والعروض",
+      "availableDuringHours": "متاح خلال ساعات العمل",
+      "dubaiAbuDhabiOffices": "مكاتب دبي وأبوظبي",
+      "businessHours": "ساعات العمل",
+      "dubaiAbuDhabi": "دبي وأبوظبي",
+      "mondayFriday": "الإثنين - الجمعة",
+      "saturday": "السبت",
+      "sunday": "الأحد",
+      "closed": "مغلق",
+      "availableForProjects": "متاح لمشاريع جديدة",
+      "transformVision": "حوّل",
+      "visionIntoReality": "رؤيتك إلى واقع",
+      "whetherEnvisioning": "سواء كنت تتخيل فيلا فاخرة أو جناح فندق 5 نجوم أو مساحة تجارية مرموقة، فريقنا يقدم التميز المطلق.",
+      "freeConsultation": "استشارة مجانية",
+      "detailedProposals": "عروض تفصيلية",
+      "fixedPricing": "أسعار ثابتة",
+      "dedicatedTeam": "فريق متخصص",
+      "bookAConsultation": "احجز استشارة"
     }
   },
   "Careers": {

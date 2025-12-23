@@ -51,7 +51,6 @@ export function Projects3DCarousel({ projects }: Projects3DCarouselProps) {
     >
       {/* Animated Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:80px_80px] opacity-20" />
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -302,6 +301,19 @@ export function Projects3DCarousel({ projects }: Projects3DCarouselProps) {
                             {currentProject.acfFields.description}
                           </motion.p>
                         )}
+
+                        {/* Explore Project Link - Ghost Style */}
+                        <motion.div
+                          className="mt-8"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.55, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          <span className="inline-flex items-center gap-2 text-sm font-light tracking-widest text-white/60 transition-all duration-300 group-hover:gap-4 group-hover:text-white">
+                            EXPLORE PROJECT
+                            <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:rotate-45" />
+                          </span>
+                        </motion.div>
                       </div>
 
                       {/* Bottom Accent Line */}
@@ -362,20 +374,20 @@ export function Projects3DCarousel({ projects }: Projects3DCarouselProps) {
           </motion.button>
         </div>
 
-        {/* View All Link */}
+        {/* View All Projects - Primary Button */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-20 text-center"
         >
-          <a
+          <Link
             href="/projects"
-            className="group inline-flex items-center gap-3 border-b border-white/40 pb-2 text-sm font-light tracking-widest text-white transition-all hover:gap-5 hover:border-white focus-visible:gap-5 focus-visible:border-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-white px-10 py-5 text-sm font-medium tracking-widest text-neutral-950 transition-all duration-500 hover:bg-[#c9a962] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
           >
-            EXPLORE ALL PROJECTS
-            <ArrowUpRight size={16} className="transition-transform group-hover:rotate-45 group-focus-visible:rotate-45" />
-          </a>
+            VIEW ALL PROJECTS
+            <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:rotate-45" strokeWidth={2} />
+          </Link>
         </motion.div>
       </div>
     </section>

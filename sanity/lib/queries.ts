@@ -34,13 +34,33 @@ export const siteSettingsQuery = groq`
 export const projectsQuery = groq`
   *[_type == "project" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) {
     _id,
-    title,
+    "title": coalesce(title[$locale], title.en, title),
     slug,
-    "excerpt": coalesce(excerpt, description),
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, coalesce(excerpt, description)),
     "mainImage": coalesce(mainImage, featuredImage),
-    category,
-    location,
+    "legacyCategory": category,
+    "sector": sector->{
+      _id,
+      "title": coalesce(title[$locale], title.en, title),
+      slug
+    },
+    "projectType": projectType->{
+      _id,
+      "title": coalesce(title[$locale], title.en, title),
+      slug
+    },
+    "location": location->{
+      _id,
+      "name": coalesce(name[$locale], name.en, name),
+      slug
+    },
+    "services": services[]->{
+      _id,
+      "title": coalesce(title[$locale], title.en, title),
+      slug
+    },
     "year": coalesce(year, yearCompleted),
+    status,
     featured,
     publishedAt,
     __i18n_lang
@@ -97,9 +117,9 @@ export const featuredProjectsQuery = groq`
 export const servicesQuery = groq`
   *[_type == "service" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
     _id,
-    title,
+    "title": coalesce(title[$locale], title.en, title),
     slug,
-    excerpt,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
     mainImage,
     icon,
     featured,
@@ -111,15 +131,26 @@ export const servicesQuery = groq`
 export const serviceBySlugQuery = groq`
   *[_type == "service" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
     _id,
-    title,
+    "title": coalesce(title[$locale], title.en, title),
     slug,
-    excerpt,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
     mainImage,
     icon,
-    features,
-    process,
+    "features": features[] {
+      "title": coalesce(title[$locale], title.en, title),
+      "description": coalesce(description[$locale], description.en, description)
+    },
+    "process": process[] {
+      step,
+      "title": coalesce(title[$locale], title.en, title),
+      "description": coalesce(description[$locale], description.en, description)
+    },
     content,
-    seo,
+    "seo": {
+      "metaTitle": coalesce(seo.metaTitle[$locale], seo.metaTitle.en, seo.metaTitle),
+      "metaDescription": coalesce(seo.metaDescription[$locale], seo.metaDescription.en, seo.metaDescription),
+      "keywords": seo.keywords
+    },
     __i18n_lang,
     "relatedProjects": relatedProjects[]-> {
       _id,
@@ -137,9 +168,9 @@ export const serviceBySlugQuery = groq`
 export const industriesQuery = groq`
   *[_type == "industry" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
     _id,
-    title,
+    "title": coalesce(title[$locale], title.en, title),
     slug,
-    excerpt,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
     mainImage,
     icon,
     featured,
@@ -151,15 +182,25 @@ export const industriesQuery = groq`
 export const industryBySlugQuery = groq`
   *[_type == "industry" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
     _id,
-    title,
+    "title": coalesce(title[$locale], title.en, title),
     slug,
-    excerpt,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
     mainImage,
     icon,
-    challenges,
-    solutions,
+    "challenges": challenges[] {
+      "title": coalesce(title[$locale], title.en, title),
+      "description": coalesce(description[$locale], description.en, description)
+    },
+    "solutions": solutions[] {
+      "title": coalesce(title[$locale], title.en, title),
+      "description": coalesce(description[$locale], description.en, description)
+    },
     content,
-    seo,
+    "seo": {
+      "metaTitle": coalesce(seo.metaTitle[$locale], seo.metaTitle.en, seo.metaTitle),
+      "metaDescription": coalesce(seo.metaDescription[$locale], seo.metaDescription.en, seo.metaDescription),
+      "keywords": seo.keywords
+    },
     __i18n_lang,
     "relatedProjects": relatedProjects[]-> {
       _id,
@@ -172,7 +213,7 @@ export const industryBySlugQuery = groq`
     },
     "relatedServices": relatedServices[]-> {
       _id,
-      title,
+      "title": coalesce(title[$locale], title.en, title),
       slug,
       mainImage,
       __i18n_lang
@@ -184,16 +225,20 @@ export const industryBySlugQuery = groq`
 export const postsQuery = groq`
   *[_type == "post" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) {
     _id,
-    title,
+    "title": coalesce(title[$locale], title.en, title),
     slug,
-    excerpt,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
     mainImage,
     category,
-    author,
+    "author": {
+      "name": author.name,
+      "role": coalesce(author.role[$locale], author.role.en, author.role),
+      "image": author.image
+    },
     readTime,
     "tags": tags[]->{
       _id,
-      "name": name[$locale],
+      "name": coalesce(name[$locale], name.en, name),
       slug
     },
     featured,
@@ -205,19 +250,15 @@ export const postsQuery = groq`
 export const postBySlugQuery = groq`
   *[_type == "post" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
     _id,
-    title,
+    "title": coalesce(title[$locale], title.en, title),
     slug,
-    excerpt,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
     mainImage,
     category,
-    "author": author->{
-      name,
-      role,
-      bio,
-      "image": image {
-        asset,
-        alt
-      }
+    "author": {
+      "name": author.name,
+      "role": coalesce(author.role[$locale], author.role.en, author.role),
+      "image": author.image
     },
     content,
     readTime,
@@ -227,7 +268,11 @@ export const postBySlugQuery = groq`
       slug
     },
     publishedAt,
-    seo,
+    "seo": {
+      "metaTitle": coalesce(seo.metaTitle[$locale], seo.metaTitle.en, seo.metaTitle),
+      "metaDescription": coalesce(seo.metaDescription[$locale], seo.metaDescription.en, seo.metaDescription),
+      "keywords": seo.keywords
+    },
     __i18n_lang,
     "relatedProjects": relatedProjects[]-> {
       _id,
@@ -243,12 +288,16 @@ export const postBySlugQuery = groq`
 export const featuredPostsQuery = groq`
   *[_type == "post" && featured == true && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) [0...3] {
     _id,
-    title,
+    "title": coalesce(title[$locale], title.en, title),
     slug,
-    excerpt,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
     mainImage,
     category,
-    author,
+    "author": {
+      "name": author.name,
+      "role": coalesce(author.role[$locale], author.role.en, author.role),
+      "image": author.image
+    },
     readTime,
     publishedAt,
     __i18n_lang
@@ -273,16 +322,20 @@ export const projectsByCategoryQuery = groq`
 export const postsByCategoryQuery = groq`
   *[_type == "post" && category == $category && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(publishedAt desc) {
     _id,
-    title,
+    "title": coalesce(title[$locale], title.en, title),
     slug,
-    excerpt,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
     mainImage,
     category,
-    author,
+    "author": {
+      "name": author.name,
+      "role": coalesce(author.role[$locale], author.role.en, author.role),
+      "image": author.image
+    },
     readTime,
     "tags": tags[]->{
       _id,
-      "name": name[$locale],
+      "name": coalesce(name[$locale], name.en, name),
       slug
     },
     publishedAt,
@@ -310,10 +363,10 @@ export const testimonialsQuery = groq`
   *[_type == "testimonial" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
     _id,
     name,
-    role,
-    company,
+    "role": coalesce(role[$locale], role.en, role),
+    "company": coalesce(company[$locale], company.en, company),
     image,
-    quote,
+    "quote": coalesce(quote[$locale], quote.en, quote),
     rating,
     featured,
     order,
@@ -325,10 +378,10 @@ export const featuredTestimonialsQuery = groq`
   *[_type == "testimonial" && featured == true && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) [0...6] {
     _id,
     name,
-    role,
-    company,
+    "role": coalesce(role[$locale], role.en, role),
+    "company": coalesce(company[$locale], company.en, company),
     image,
-    quote,
+    "quote": coalesce(quote[$locale], quote.en, quote),
     rating,
     __i18n_lang
   }

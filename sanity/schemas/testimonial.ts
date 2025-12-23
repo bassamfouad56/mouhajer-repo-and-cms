@@ -14,13 +14,21 @@ export default defineType({
     defineField({
       name: 'role',
       title: 'Role / Position',
-      type: 'string',
+      type: 'object',
       description: 'e.g., CEO, Director, Homeowner',
+      fields: [
+        { name: 'en', type: 'string', title: 'English' },
+        { name: 'ar', type: 'string', title: 'Arabic' },
+      ],
     }),
     defineField({
       name: 'company',
       title: 'Company',
-      type: 'string',
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'string', title: 'English' },
+        { name: 'ar', type: 'string', title: 'Arabic' },
+      ],
     }),
     defineField({
       name: 'image',
@@ -40,8 +48,11 @@ export default defineType({
     defineField({
       name: 'quote',
       title: 'Testimonial Quote',
-      type: 'text',
-      rows: 5,
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'text', title: 'English', rows: 5 },
+        { name: 'ar', type: 'text', title: 'Arabic', rows: 5 },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -94,7 +105,7 @@ export default defineType({
   preview: {
     select: {
       title: 'name',
-      subtitle: 'company',
+      subtitle: 'company.en',
       media: 'image',
       featured: 'featured',
     },

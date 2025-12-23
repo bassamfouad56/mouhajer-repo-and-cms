@@ -6,6 +6,7 @@ import { ChevronDown, Award, Play, Pause, Volume2, VolumeX } from 'lucide-react'
 import gsap from 'gsap';
 import SplitType from 'split-type';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MagneticButton } from '@/components/magnetic-button';
 import { useTranslations } from 'next-intl';
 
@@ -17,6 +18,8 @@ export function HeroVideo() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hasVideoError, setHasVideoError] = useState(false);
+  const [videoExists, setVideoExists] = useState(true);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -66,6 +69,36 @@ export function HeroVideo() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Check if video file exists and handle errors
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleError = () => {
+      setHasVideoError(true);
+      setVideoExists(false);
+      setIsLoaded(true);
+    };
+
+    const handleCanPlay = () => {
+      setVideoExists(true);
+      setHasVideoError(false);
+      // Try to play the video
+      video.play().catch(() => {
+        // Autoplay was prevented, that's okay
+        setIsVideoPlaying(false);
+      });
+    };
+
+    video.addEventListener('error', handleError);
+    video.addEventListener('canplay', handleCanPlay);
+
+    return () => {
+      video.removeEventListener('error', handleError);
+      video.removeEventListener('canplay', handleCanPlay);
+    };
+  }, []);
+
   const toggleVideo = () => {
     if (videoRef.current) {
       if (isVideoPlaying) {
@@ -90,22 +123,37 @@ export function HeroVideo() {
       id="home"
       className="relative h-screen min-h-[600px] max-h-[1200px] overflow-hidden bg-neutral-950"
     >
-      {/* Video Background */}
+      {/* Video/Image Background */}
       <motion.div
         style={{ scale: videoScale }}
         className="absolute inset-0"
       >
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="h-full w-full object-cover"
-          onLoadedData={() => setIsLoaded(true)}
-        >
-          <source src="/banner-2s.mp4" type="video/mp4" />
-        </video>
+        {/* Fallback Image - Always rendered, shows when video fails */}
+        <div className={`absolute inset-0 transition-opacity duration-1000 ${videoExists && !hasVideoError ? 'opacity-0' : 'opacity-100'}`}>
+          <Image
+            src="/founder/CID_2106_00_COVER.jpg"
+            alt="Mouhajer International Design"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        {/* Video - Only show if exists and no error */}
+        {videoExists && (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className={`h-full w-full object-cover transition-opacity duration-1000 ${hasVideoError ? 'opacity-0' : 'opacity-100'}`}
+            onLoadedData={() => setIsLoaded(true)}
+            onError={() => setHasVideoError(true)}
+          >
+            <source src="/banner-2s.mp4" type="video/mp4" />
+          </video>
+        )}
 
         {/* Cinematic Overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/60 via-neutral-950/30 to-neutral-950/80" />
@@ -132,36 +180,38 @@ export function HeroVideo() {
         </div>
       </motion.div>
 
-      {/* Video Controls - Bottom Left */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isLoaded ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 2.2 }}
-        className="absolute bottom-6 left-4 z-20 flex items-center gap-3 sm:bottom-8 sm:left-6 lg:bottom-12 lg:left-12"
-      >
-        <button
-          onClick={toggleVideo}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/60 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10 hover:text-white"
-          aria-label={isVideoPlaying ? 'Pause video' : 'Play video'}
+      {/* Video Controls - Bottom Left (only show if video exists and no error) */}
+      {videoExists && !hasVideoError && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isLoaded ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 2.2 }}
+          className="absolute bottom-6 left-4 z-20 flex items-center gap-3 sm:bottom-8 sm:left-6 lg:bottom-12 lg:left-12"
         >
-          {isVideoPlaying ? (
-            <Pause className="h-4 w-4" />
-          ) : (
-            <Play className="h-4 w-4 ml-0.5" />
-          )}
-        </button>
-        <button
-          onClick={toggleMute}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/60 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10 hover:text-white"
-          aria-label={isMuted ? 'Unmute' : 'Mute'}
-        >
-          {isMuted ? (
-            <VolumeX className="h-4 w-4" />
-          ) : (
-            <Volume2 className="h-4 w-4" />
-          )}
-        </button>
-      </motion.div>
+          <button
+            onClick={toggleVideo}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/60 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10 hover:text-white"
+            aria-label={isVideoPlaying ? 'Pause video' : 'Play video'}
+          >
+            {isVideoPlaying ? (
+              <Pause className="h-4 w-4" />
+            ) : (
+              <Play className="h-4 w-4 ml-0.5" />
+            )}
+          </button>
+          <button
+            onClick={toggleMute}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/60 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10 hover:text-white"
+            aria-label={isMuted ? 'Unmute' : 'Mute'}
+          >
+            {isMuted ? (
+              <VolumeX className="h-4 w-4" />
+            ) : (
+              <Volume2 className="h-4 w-4" />
+            )}
+          </button>
+        </motion.div>
+      )}
 
       {/* Main Content */}
       <motion.div

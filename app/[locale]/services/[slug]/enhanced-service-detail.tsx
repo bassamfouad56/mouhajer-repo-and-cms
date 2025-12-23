@@ -170,7 +170,6 @@ export default function EnhancedServiceDetail({
           </motion.div>
 
           {/* Grid overlay */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-size-[80px_80px]" />
 
           <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-6 py-12 lg:px-12">
             {/* Top Navigation */}
@@ -319,7 +318,7 @@ export default function EnhancedServiceDetail({
                     <motion.div
                       key={index}
                       variants={fadeInUp}
-                      className="group rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-neutral-300 hover:shadow-xl"
+                      className="group flex h-full flex-col rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition-all hover:border-neutral-300 hover:shadow-xl"
                     >
                       <div className="mb-4 inline-flex rounded-full bg-neutral-950 p-3">
                         <CheckIcon className="h-6 w-6 text-white" strokeWidth={1} />
@@ -327,7 +326,7 @@ export default function EnhancedServiceDetail({
                       <h4 className="mb-3 text-xl font-light text-neutral-950">
                         {feature.title}
                       </h4>
-                      <p className="font-light leading-relaxed text-neutral-600">
+                      <p className="flex-1 font-light leading-relaxed text-neutral-600">
                         {feature.description}
                       </p>
                     </motion.div>
@@ -343,7 +342,6 @@ export default function EnhancedServiceDetail({
           <Section delay={2}>
             <div className="relative bg-neutral-950 px-6 py-24 lg:px-12 lg:py-32">
               {/* Grid pattern */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-size-[80px_80px]" />
 
               <div className="relative mx-auto max-w-7xl">
                 <motion.div
@@ -368,21 +366,21 @@ export default function EnhancedServiceDetail({
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      className="relative"
+                      className="relative h-full"
                     >
                       {/* Connection line */}
                       {index < processSteps.length - 1 && (
                         <div className="absolute left-full top-12 hidden h-px w-full bg-white/10 lg:block" />
                       )}
 
-                      <div className="relative rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+                      <div className="relative flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
                         <div className="mb-4 text-6xl font-light text-white/20">
                           {String(step.step || index + 1).padStart(2, '0')}
                         </div>
                         <h4 className="mb-3 text-xl font-light text-white">
                           {step.title}
                         </h4>
-                        <p className="font-light leading-relaxed text-white/70">
+                        <p className="flex-1 font-light leading-relaxed text-white/70">
                           {step.description}
                         </p>
                       </div>

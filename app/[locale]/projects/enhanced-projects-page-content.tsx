@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, lazy, Suspense } from 'react';
+import { useRef, useState, useEffect, useMemo, lazy, Suspense } from 'react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -33,19 +33,36 @@ import {
   type SanityProject,
 } from '@/components/projects/view-modes';
 
-// Type for raw Sanity data with potential i18n fields
+// Type for raw Sanity data - now pre-localized by query
 type I18nField = string | { en?: string; ar?: string };
+
+// Taxonomy reference types
+interface TaxonomyRef {
+  _id: string;
+  title: string;
+  slug: { current: string };
+}
+
+interface LocationRef {
+  _id: string;
+  name: string;
+  slug: { current: string };
+}
+
 interface RawSanityProject {
   _id: string;
-  title: I18nField;
+  title: string;  // Pre-localized by query
   slug: { current: string };
-  excerpt?: I18nField;
+  excerpt?: string;  // Pre-localized by query
   mainImage?: any;
-  category?: I18nField;
-  location?: I18nField;
-  year?: string;
+  legacyCategory?: string;  // Old category field for backwards compatibility
+  sector?: TaxonomyRef;
+  projectType?: TaxonomyRef;
+  location?: LocationRef;
+  services?: TaxonomyRef[];
+  year?: number;
+  status?: string;
   featured?: boolean;
-  services?: Array<{ _id: string; title: I18nField; slug: { current: string } }>;
 }
 
 // YouTube video ID for hero background
@@ -77,7 +94,7 @@ interface ProjectsPageContentProps {
   initialCategory?: MainCategory;
 }
 
-// Helper to extract localized string from i18n field
+// Helper to extract localized string from i18n field (for legacy support)
 function getLocalizedString(field: I18nField | undefined, locale: string): string {
   if (!field) return '';
   if (typeof field === 'string') return field;
@@ -87,14 +104,26 @@ function getLocalizedString(field: I18nField | undefined, locale: string): strin
   return '';
 }
 
-// Helper to normalize project i18n fields to strings
+// Helper to normalize project - maps new taxonomy fields to display strings
 function normalizeProject(project: RawSanityProject, locale: string): SanityProject {
   return {
-    ...project,
-    title: getLocalizedString(project.title, locale),
-    excerpt: getLocalizedString(project.excerpt, locale),
-    category: getLocalizedString(project.category, locale),
-    location: getLocalizedString(project.location, locale),
+    _id: project._id,
+    title: project.title || '',
+    slug: project.slug,
+    excerpt: project.excerpt || '',
+    mainImage: project.mainImage,
+    featured: project.featured,
+    year: project.year,
+    status: project.status,
+    // Map taxonomy refs to display strings for backwards compatibility
+    category: project.sector?.title || project.legacyCategory || '',
+    location: project.location?.name || '',
+    // Pass through taxonomy refs for filtering
+    legacyCategory: project.legacyCategory,
+    sector: project.sector,
+    projectType: project.projectType,
+    locationRef: project.location,
+    services: project.services,
   };
 }
 
@@ -195,41 +224,68 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
 
   // Helper function to check if project matches filters
   const matchesFilters = (project: SanityProject) => {
-    // Search filter
+    // Main category filter - use sector slug OR legacy category
+    if (filters.category && filters.category !== 'all') {
+      if (filters.category === 'ongoing') {
+        // Check year >= current year OR status is 'in-progress'
+        const currentYear = new Date().getFullYear();
+        const projectYear = typeof project.year === 'number' ? project.year : parseInt(String(project.year)) || 0;
+        const isOngoing = projectYear >= currentYear || project.status === 'in-progress';
+        if (!isOngoing) return false;
+      } else {
+        // Match against sector slug or legacy category
+        const sectorSlug = project.sector?.slug?.current?.toLowerCase() || '';
+        const sectorTitle = project.sector?.title?.toLowerCase() || '';
+        const legacyCategory = project.legacyCategory?.toLowerCase() || '';
+
+        // Check if any match the filter category
+        const categoryMatches =
+          sectorSlug === filters.category ||
+          sectorSlug.includes(filters.category) ||
+          sectorTitle.includes(filters.category) ||
+          legacyCategory === filters.category ||
+          legacyCategory.includes(filters.category);
+
+        if (!categoryMatches) return false;
+      }
+    }
+
+    // Search filter - search across multiple fields including taxonomy
     if (filters.search.trim()) {
       const query = filters.search.toLowerCase().trim();
       const matchesSearch =
         project.title?.toLowerCase().includes(query) ||
-        project.category?.toLowerCase().includes(query) ||
+        project.sector?.title?.toLowerCase().includes(query) ||
+        project.projectType?.title?.toLowerCase().includes(query) ||
+        project.locationRef?.name?.toLowerCase().includes(query) ||
         project.location?.toLowerCase().includes(query) ||
         project.excerpt?.toLowerCase().includes(query);
       if (!matchesSearch) return false;
     }
 
-    // Project Type filter (client-side refinement)
-    // Check if project category/type matches selected project types
+    // Project Type filter - use projectType slug and title
     if (filters.projectTypes.length > 0) {
-      const projectCategory = project.category?.toLowerCase() || '';
-      const matchesType = filters.projectTypes.some(type =>
-        projectCategory.includes(type.toLowerCase()) ||
-        project.title?.toLowerCase().includes(type.toLowerCase())
-      );
+      const typeSlug = project.projectType?.slug?.current?.toLowerCase() || '';
+      const typeTitle = project.projectType?.title?.toLowerCase() || '';
+      const matchesType = filters.projectTypes.some(type => {
+        const typeLower = type.toLowerCase();
+        return typeSlug.includes(typeLower) || typeTitle.includes(typeLower);
+      });
       if (!matchesType) return false;
     }
 
-    // Location filter (client-side refinement)
+    // Location filter - use locationRef name
     if (filters.locations.length > 0) {
-      const projectLocation = project.location?.toLowerCase() || '';
+      const locationName = project.locationRef?.name?.toLowerCase() || project.location?.toLowerCase() || '';
       const matchesLocation = filters.locations.some(loc =>
-        projectLocation.includes(loc.toLowerCase())
+        locationName.includes(loc.toLowerCase())
       );
       if (!matchesLocation) return false;
     }
 
-    // Service filter (check if project has any of the selected services)
+    // Service filter - use service slugs from services array
     if (filters.services.length > 0) {
-      const projectServices = (project as any).services || [];
-      const projectServiceSlugs = projectServices.map((s: any) => s.slug?.current || '');
+      const projectServiceSlugs = project.services?.map(s => s.slug?.current) || [];
       const matchesService = filters.services.some(serviceSlug =>
         projectServiceSlugs.includes(serviceSlug)
       );
@@ -246,14 +302,32 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
   // All filtered projects combined
   const allFilteredProjects = [...filteredFeaturedProjects, ...filteredRegularProjects];
 
-  // Calculate category counts (simplified - in production this would come from server)
-  // Note: These counts are approximate when viewing filtered results
-  const categoryCounts: CategoryCount = {
-    residential: normalizedProjects.length, // Will be accurate on category pages
-    commercial: normalizedProjects.length,
-    hospitality: normalizedProjects.length,
-    ongoing: normalizedProjects.length,
-  };
+  // Calculate category counts based on actual project data (using sector for taxonomy)
+  const categoryCounts: CategoryCount = useMemo(() => ({
+    residential: normalizedProjects.filter(p => {
+      const sectorSlug = p.sector?.slug?.current?.toLowerCase() || '';
+      const sectorTitle = p.sector?.title?.toLowerCase() || '';
+      const legacy = p.legacyCategory?.toLowerCase() || '';
+      return sectorSlug.includes('resid') || sectorTitle.includes('resid') || legacy.includes('resid');
+    }).length,
+    commercial: normalizedProjects.filter(p => {
+      const sectorSlug = p.sector?.slug?.current?.toLowerCase() || '';
+      const sectorTitle = p.sector?.title?.toLowerCase() || '';
+      const legacy = p.legacyCategory?.toLowerCase() || '';
+      return sectorSlug.includes('commer') || sectorTitle.includes('commer') || legacy.includes('commer');
+    }).length,
+    hospitality: normalizedProjects.filter(p => {
+      const sectorSlug = p.sector?.slug?.current?.toLowerCase() || '';
+      const sectorTitle = p.sector?.title?.toLowerCase() || '';
+      const legacy = p.legacyCategory?.toLowerCase() || '';
+      return sectorSlug.includes('hospit') || sectorTitle.includes('hospit') || legacy.includes('hospit');
+    }).length,
+    ongoing: normalizedProjects.filter(p => {
+      const currentYear = new Date().getFullYear();
+      const projectYear = typeof p.year === 'number' ? p.year : parseInt(String(p.year)) || 0;
+      return projectYear >= currentYear || p.status === 'in-progress';
+    }).length,
+  }), [normalizedProjects]);
 
   // Render the active view
   const renderProjectsView = (projectsToRender: SanityProject[]) => {
@@ -284,7 +358,13 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
   };
 
   // Check if view uses combined projects (no featured/regular separation)
-  const usesCombinedView = ['horizontal', 'split-screen', 'stacked-cards', 'infinite-scroll'].includes(viewMode);
+  // Also use combined view when any filter is active
+  const hasActiveFilters = filters.category !== 'all' ||
+    filters.projectTypes.length > 0 ||
+    filters.locations.length > 0 ||
+    filters.services.length > 0 ||
+    filters.search.trim() !== '';
+  const usesCombinedView = hasActiveFilters || ['horizontal', 'split-screen', 'stacked-cards', 'infinite-scroll'].includes(viewMode);
 
   return (
     <main className="relative bg-white">
@@ -370,7 +450,6 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
         />
 
         {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
         {/* Floating Decorative Lines */}
         <div className="absolute inset-0 overflow-hidden">
@@ -633,10 +712,15 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
                 renderProjectsView(allFilteredProjects)
               ) : (
                 <NoProjectsFound
-                  searchQuery={searchQuery}
+                  searchQuery={filters.search}
                   onClear={() => {
-                    setSearchQuery('');
-                    setSelectedCategory('all');
+                    setFilters({
+                      category: 'all',
+                      projectTypes: [],
+                      locations: [],
+                      services: [],
+                      search: '',
+                    });
                   }}
                 />
               )}
@@ -711,7 +795,6 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
           </div>
 
           {/* Grid Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
           <div className="relative z-10 mx-auto max-w-[1400px]">
             <div className="mb-16 text-center">
@@ -853,16 +936,17 @@ function IndustryCard({ industry, index, locale }: { industry: SanityIndustry; i
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className="h-full"
     >
       <Link
         href={`/industries/${industry.slug.current}`}
-        className="group block border border-neutral-200 p-8 transition-all duration-500 hover:border-neutral-950 hover:bg-neutral-950"
+        className="group flex h-full flex-col border border-neutral-200 p-8 transition-all duration-500 hover:border-neutral-950 hover:bg-neutral-950"
       >
         <h3 className="mb-2 font-SchnyderS text-xl font-light tracking-tight text-neutral-950 transition-colors duration-500 group-hover:text-white">
           {title}
         </h3>
         {excerpt && (
-          <p className="font-Satoshi text-sm font-light text-neutral-600 transition-colors duration-500 group-hover:text-neutral-300">
+          <p className="flex-1 font-Satoshi text-sm font-light text-neutral-600 transition-colors duration-500 group-hover:text-neutral-300">
             {excerpt}
           </p>
         )}

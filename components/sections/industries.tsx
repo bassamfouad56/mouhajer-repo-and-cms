@@ -39,7 +39,6 @@ export function Industries({ industries, services = [], projects = [] }: Industr
       className="relative overflow-hidden bg-gradient-to-b from-[#faf8f5] via-[#f8f6f3] to-[#faf8f5] px-6 py-32 lg:px-12 lg:py-48"
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(38,36,32,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(38,36,32,0.03)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
       <div className="absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
       <div className="absolute bottom-0 right-1/4 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
 
@@ -205,11 +204,11 @@ function IndustryCard({
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.05 }}
-      className="group relative cursor-pointer"
+      className="group relative h-full cursor-pointer"
       onClick={onSelect}
     >
       {/* Card */}
-      <div className={`relative h-full overflow-hidden bg-white/60 backdrop-blur-sm transition-all duration-500 ${
+      <div className={`relative flex h-full flex-col overflow-hidden bg-white/60 backdrop-blur-sm transition-all duration-500 ${
         isSelected ? 'bg-white/90' : 'hover:bg-white/80'
       }`}>
         {/* Top Border */}
@@ -217,7 +216,7 @@ function IndustryCard({
           isSelected ? 'via-[#c9a962]' : 'group-hover:via-[#c9a962]/50'
         }`} />
 
-        <div className="p-8">
+        <div className="flex flex-1 flex-col p-8">
           {/* Icon */}
           <div className="mb-6">
             <div className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-500 ${
@@ -237,7 +236,7 @@ function IndustryCard({
           </h3>
 
           {/* Description */}
-          <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-[#3d3a36]/70">
+          <p className="mb-6 flex-1 font-Satoshi text-sm font-light leading-relaxed text-[#3d3a36]/70">
             {industry.excerpt || industry.acfFields?.description || ''}
           </p>
 

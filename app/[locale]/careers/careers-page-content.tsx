@@ -73,8 +73,6 @@ export default function CareersPageContent() {
               className="h-full w-full"
               style={{
                 backgroundImage: `
-                  linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
                 `,
                 backgroundSize: "100px 100px",
               }}
@@ -318,7 +316,7 @@ function BenefitCard({
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group"
+      className="group flex h-full flex-col"
     >
       <div className="mb-6 inline-flex h-16 w-16 items-center justify-center border border-neutral-200 transition-colors group-hover:border-neutral-950">
         <Icon className="h-8 w-8 text-neutral-950" strokeWidth={1} />
@@ -326,7 +324,7 @@ function BenefitCard({
       <h3 className="mb-3 text-xl font-light tracking-tight text-neutral-950">
         {benefit.title}
       </h3>
-      <p className="font-light leading-relaxed text-neutral-600">
+      <p className="flex-1 font-light leading-relaxed text-neutral-600">
         {benefit.description}
       </p>
     </motion.div>

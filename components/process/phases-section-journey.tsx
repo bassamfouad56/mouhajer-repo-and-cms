@@ -160,7 +160,6 @@ export function PhasesSectionJourney() {
   return (
     <section ref={containerRef} className="relative bg-[#faf8f5] py-32">
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.03)_1px,transparent_1px)] bg-[size:80px_80px]" />
 
       <div className="container relative z-10 mx-auto px-6 lg:px-12">
         {/* Section Header */}

@@ -174,7 +174,6 @@ export function PhasesSection() {
 
       {/* Final CTA Section */}
       <div className="relative overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -228,9 +227,7 @@ function PhaseBlock({
     <div ref={blockRef} className={`relative overflow-hidden ${phase.bgColor} py-24 sm:py-32 lg:py-40`}>
       {/* Background Pattern */}
       {phase.bgColor === 'bg-neutral-100' ? (
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
       ) : (
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
       )}
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">

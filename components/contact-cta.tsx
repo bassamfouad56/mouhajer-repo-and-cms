@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { MagneticButton } from '@/components/magnetic-button';
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { MagneticButton } from "@/components/magnetic-button";
 
 interface ContactCTAProps {
   /** Custom source identifier (overrides automatic path detection) */
@@ -12,7 +12,7 @@ interface ContactCTAProps {
   /** Button text */
   text?: string;
   /** Button variant */
-  variant?: 'primary' | 'secondary' | 'gold';
+  variant?: "primary" | "secondary" | "gold";
   /** Additional CSS classes */
   className?: string;
   /** Show arrow icon */
@@ -35,9 +35,9 @@ interface ContactCTAProps {
  */
 export function ContactCTA({
   source,
-  text = 'Start Your Project',
-  variant = 'primary',
-  className = '',
+  text = "Start Your Project",
+  variant = "primary",
+  className = "",
   showArrow = true,
   fullWidth = false,
 }: ContactCTAProps) {
@@ -49,31 +49,31 @@ export function ContactCTA({
     if (source) return source;
 
     // Remove locale prefix and get the page name
-    const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
+    const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}(\/|$)/, "/");
 
     // Handle homepage
-    if (pathWithoutLocale === '/' || pathWithoutLocale === '') {
-      return 'home';
+    if (pathWithoutLocale === "/" || pathWithoutLocale === "") {
+      return "home";
     }
 
     // Clean up the path: remove leading slash, replace remaining slashes with dashes
     const cleanPath = pathWithoutLocale
-      .replace(/^\//, '')
-      .replace(/\//g, '-')
-      .replace(/-+$/, ''); // Remove trailing dashes
+      .replace(/^\//, "")
+      .replace(/\//g, "-")
+      .replace(/-+$/, ""); // Remove trailing dashes
 
-    return cleanPath || 'home';
+    return cleanPath || "home";
   };
 
   const sourceParam = getSourceFromPath();
-  const contactUrl = `/contact?source=${encodeURIComponent(sourceParam)}`;
+  const contactUrl = `/contact/book-consultation`;
 
   const variantStyles = {
     primary:
-      'border-neutral-950 bg-neutral-950 text-white hover:bg-transparent hover:text-neutral-950',
+      "border-neutral-950 bg-neutral-950 text-white hover:bg-transparent hover:text-neutral-950",
     secondary:
-      'border-neutral-950 bg-transparent text-neutral-950 hover:bg-neutral-950 hover:text-white',
-    gold: 'border-[#c9a962] bg-[#c9a962] text-neutral-950 hover:bg-transparent hover:text-[#c9a962] shadow-[0_0_30px_rgba(201,169,98,0.2)] hover:shadow-[0_0_40px_rgba(201,169,98,0.3)]',
+      "border-neutral-950 bg-transparent text-neutral-950 hover:bg-neutral-950 hover:text-white",
+    gold: "border-[#c9a962] bg-[#c9a962] text-neutral-950 hover:bg-transparent hover:text-[#c9a962] shadow-[0_0_30px_rgba(201,169,98,0.2)] hover:shadow-[0_0_40px_rgba(201,169,98,0.3)]",
   };
 
   return (
@@ -85,7 +85,7 @@ export function ContactCTA({
           px-6 py-3 text-[10px] font-light uppercase tracking-[0.15em]
           transition-all sm:gap-3 sm:px-8 sm:py-4 sm:text-xs
           ${variantStyles[variant]}
-          ${fullWidth ? 'w-full' : 'w-auto'}
+          ${fullWidth ? "w-full" : "w-auto"}
           ${className}
         `}
       >
@@ -107,9 +107,9 @@ export function ContactCTA({
  */
 export function ContactCTAAnimated({
   source,
-  text = 'Start Your Project',
-  variant = 'primary',
-  className = '',
+  text = "Start Your Project",
+  variant = "primary",
+  className = "",
   showArrow = true,
   fullWidth = false,
   delay = 0,

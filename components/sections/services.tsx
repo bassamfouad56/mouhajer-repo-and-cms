@@ -23,7 +23,6 @@ export function Services({ services }: ServicesProps) {
       className="relative overflow-hidden bg-gradient-to-b from-[#faf8f5] via-[#f8f6f3] to-[#faf8f5] px-6 py-32 lg:px-12 lg:py-48"
     >
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(38,36,32,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(38,36,32,0.03)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
 
       {/* Gradient Orbs */}
       <div className="absolute left-0 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
@@ -123,12 +122,12 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="group relative overflow-hidden bg-white/60 backdrop-blur-sm transition-all duration-500 hover:bg-white/90"
+      className="group relative flex h-full flex-col overflow-hidden bg-white/60 backdrop-blur-sm transition-all duration-500 hover:bg-white/90"
     >
       {/* Top Border Accent */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent transition-all duration-500 group-hover:via-[#c9a962]" />
 
-      <div className="p-10">
+      <div className="flex flex-1 flex-col p-10">
         {/* Icon */}
         <div className="mb-8">
           <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#e8e6e3] text-[#3d3a36]/60 transition-all duration-500 group-hover:border-[#c9a962] group-hover:text-[#c9a962]">
@@ -143,14 +142,14 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
         {/* Description */}
         <div
-          className="mb-8 font-Satoshi text-base font-light leading-relaxed text-[#3d3a36]/70"
+          className="mb-8 flex-1 font-Satoshi text-base font-light leading-relaxed text-[#3d3a36]/70"
           dangerouslySetInnerHTML={{
             __html: service.excerpt || service.content?.substring(0, 150) + '...' || ''
           }}
         />
 
         {/* Divider */}
-        <div className="mb-6 h-px w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent" />
+        <div className="mb-6 mt-auto h-px w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent" />
 
         {/* Learn More Link */}
         <div className="flex items-center gap-3 font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60 transition-all group-hover:gap-5 group-hover:text-[#c9a962]">

@@ -83,7 +83,6 @@ export function StatsShowcase({ backgroundImage }: StatsShowcaseProps) {
       </motion.div>
 
       {/* Decorative Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] opacity-20" />
 
       <div className="relative z-10 mx-auto max-w-[1800px]">
         {/* Section Header with enhanced animations */}

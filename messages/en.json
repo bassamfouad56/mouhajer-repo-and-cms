@@ -467,6 +467,33 @@
     "supplierRegistration": {
       "title": "Supplier Registration",
       "description": "Join our network of trusted suppliers"
+    },
+    "section": {
+      "beginYourJourney": "Begin Your Journey",
+      "letsCreate": "Let's Create",
+      "somethingExtraordinary": "Something Extraordinary",
+      "readyToTransform": "Ready to transform your vision into reality? Our team of experts is here to guide you through every step of the journey.",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "locationLabel": "Location",
+      "forInquiries": "For inquiries and proposals",
+      "availableDuringHours": "Available during business hours",
+      "dubaiAbuDhabiOffices": "Dubai & Abu Dhabi offices",
+      "businessHours": "Business Hours",
+      "dubaiAbuDhabi": "Dubai & Abu Dhabi",
+      "mondayFriday": "Monday - Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "closed": "Closed",
+      "availableForProjects": "Available for New Projects",
+      "transformVision": "Transform Your",
+      "visionIntoReality": "Vision Into Reality",
+      "whetherEnvisioning": "Whether you're envisioning a luxury villa, a 5-star hotel suite, or a prestigious commercial space, our team delivers uncompromising excellence.",
+      "freeConsultation": "Free Consultation",
+      "detailedProposals": "Detailed Proposals",
+      "fixedPricing": "Fixed Pricing",
+      "dedicatedTeam": "Dedicated Team",
+      "bookAConsultation": "Book a Consultation"
     }
   },
   "Careers": {

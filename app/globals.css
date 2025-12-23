@@ -316,3 +316,73 @@ html.lenis body {
 .mega-menu-scroll::-webkit-scrollbar-thumb:hover {
   background: var(--color-medium-gray);
 }
+
+/* Reading Mode Styles */
+body.reading-mode-active header,
+body.reading-mode-active footer {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+body.reading-mode-active {
+  background: #ffffff;
+}
+
+body.reading-mode-active.reading-mode-dark {
+  background: #1a1a1a;
+}
+
+/* Reading Mode Font Sizes */
+.reading-font-small .reading-mode p,
+.reading-font-small .reading-mode li {
+  font-size: 14px !important;
+  line-height: 1.8 !important;
+}
+
+.reading-font-medium .reading-mode p,
+.reading-font-medium .reading-mode li {
+  font-size: 18px !important;
+  line-height: 1.9 !important;
+}
+
+.reading-font-large .reading-mode p,
+.reading-font-large .reading-mode li {
+  font-size: 22px !important;
+  line-height: 2 !important;
+}
+
+/* Reading Mode Dark Theme */
+.reading-dark.reading-mode {
+  background: #1a1a1a !important;
+}
+
+.reading-dark.reading-mode h1,
+.reading-dark.reading-mode h2,
+.reading-dark.reading-mode h3,
+.reading-dark.reading-mode h4 {
+  color: #ffffff !important;
+}
+
+.reading-dark.reading-mode p,
+.reading-dark.reading-mode li,
+.reading-dark.reading-mode span {
+  color: #e0e0e0 !important;
+}
+
+.reading-dark.reading-mode a {
+  color: #c9a962 !important;
+}
+
+.reading-dark.reading-mode blockquote {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: #c9a962 !important;
+}
+
+/* Focus Mode - center content and increase max-width */
+.reading-mode.reading-mode {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+}

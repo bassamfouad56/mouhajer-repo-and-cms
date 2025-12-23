@@ -2,36 +2,21 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { LogoMarquee } from '@/components/logo-marquee';
 import { client } from '@/sanity/lib/client';
 import { postBySlugQuery } from '@/sanity/lib/queries';
-import { getLocalizedValue } from '@/lib/error-handling';
-import BlogPostContent from '../../../blog/[slug]/blog-post-content';
+import JournalArticleContent from './journal-article-content';
 
-interface SanityPost {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  excerpt?: string;
-  mainImage?: any;
-  category?: string;
-  author?: {
-    name: string;
-    role?: string;
-    bio?: string;
-    image?: any;
-  };
-  content?: any[];
-  readTime?: number;
-  tags?: Array<{ _id: string; name: string; slug?: { current: string } } | string>;
-  publishedAt: string;
-  seo?: {
-    metaTitle?: string;
-    metaDescription?: string;
-    keywords?: string[];
-  };
-  relatedProjects?: any[];
-}
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
+
+const VALID_CATEGORIES = [
+  'design-trends',
+  'project-stories',
+  'behind-the-scenes',
+  'materials-craft',
+  'engineering',
+  'founders-insights'
+] as const;
 
 interface JournalPostPageProps {
   params: Promise<{
@@ -41,146 +26,96 @@ interface JournalPostPageProps {
   }>;
 }
 
-async function getPost(slug: string, locale: string): Promise<SanityPost | null> {
+// Fetch post by slug
+async function getPost(slug: string, locale: string) {
   try {
     const post = await client.fetch(postBySlugQuery, { slug, locale });
-    return post || null;
+    return post;
   } catch (error) {
-    console.error('Error fetching post from Sanity:', error);
+    console.error('Error fetching post:', error);
     return null;
   }
 }
 
-async function getRelatedPosts(category: string, currentPostId: string, locale: string): Promise<SanityPost[]> {
+// Fetch related posts (same category, excluding current)
+async function getRelatedPosts(category: string, currentSlug: string, locale: string) {
   try {
     const query = `
-      *[_type == "post" && category == $category && _id != $currentPostId] | order(publishedAt desc)[0...3] {
+      *[_type == "post" && category == $category && slug.current != $currentSlug] | order(publishedAt desc) [0...3] {
         _id,
-        title,
+        "title": coalesce(title[$locale], title.en, title),
         slug,
-        excerpt,
+        "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
         mainImage,
         category,
-        "author": author->{
-          name,
-          role,
-          bio,
-          "image": image {
-            asset,
-            alt
-          }
+        "author": {
+          "name": author.name,
+          "image": author.image
         },
-        publishedAt,
         readTime,
-        "tags": tags[]->{
-          _id,
-          "name": coalesce(name[$locale], name.en, name),
-          slug
-        }
+        publishedAt
       }
     `;
-
-    const posts = await client.fetch(query, { category, currentPostId, locale });
+    const posts = await client.fetch(query, { category, currentSlug, locale });
     return posts || [];
   } catch (error) {
-    console.error('Error fetching related posts from Sanity:', error);
+    console.error('Error fetching related posts:', error);
     return [];
   }
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: JournalPostPageProps): Promise<Metadata> {
-  const { slug, locale, category } = await params;
-
-  // Decode URL-encoded category (e.g., "Cost%20Management" -> "Cost Management")
-  const decodedCategory = decodeURIComponent(category);
-
+  const { slug, locale } = await params;
   const post = await getPost(slug, locale);
 
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: 'Article Not Found | MIDC Journal',
     };
   }
-
-  // Verify post category matches URL category (decoded)
-  if (post.category !== decodedCategory) {
-    return {
-      title: 'Post Not Found',
-    };
-  }
-
-  const postTitle = getLocalizedValue(post.title, locale, 'Post');
-  const postExcerpt = getLocalizedValue(post.excerpt, locale, '');
-  const seoTitle = getLocalizedValue(post.seo?.metaTitle, locale);
-  const seoDescription = getLocalizedValue(post.seo?.metaDescription, locale);
-
-  const description = seoDescription || postExcerpt;
 
   return {
-    title: seoTitle || `${postTitle} | Journal | MIDC`,
-    description,
+    title: `${post.title} | MIDC Journal`,
+    description: post.excerpt || post.seo?.metaDescription || `Read ${post.title} on MIDC Journal`,
     openGraph: {
-      title: seoTitle || postTitle,
-      description,
+      title: post.title,
+      description: post.excerpt || '',
       type: 'article',
       publishedTime: post.publishedAt,
+      authors: post.author?.name ? [post.author.name] : undefined,
     },
-    keywords: post.seo?.keywords,
   };
 }
 
-// Skip static generation at build time - use ISR instead
-// Pages will be generated on-demand and cached
-export async function generateStaticParams() {
-  return [];
-}
-
-export const dynamicParams = true;
-export const revalidate = 3600;
-
 export default async function JournalPostPage({ params }: JournalPostPageProps) {
-  const { category, slug, locale } = await params;
+  const { slug, locale, category } = await params;
 
-  // Decode URL-encoded category (e.g., "Cost%20Management" -> "Cost Management")
-  const decodedCategory = decodeURIComponent(category);
+  // Validate category
+  if (!VALID_CATEGORIES.includes(category as typeof VALID_CATEGORIES[number])) {
+    notFound();
+  }
 
+  // Fetch post data
   const post = await getPost(slug, locale);
 
   if (!post) {
     notFound();
   }
 
-  // Verify post category matches URL category (decoded)
-  if (post.category !== decodedCategory) {
-    notFound();
-  }
-
-  // Get related posts from same category
-  const relatedPosts = await getRelatedPosts(decodedCategory, post._id, locale);
-
-  // Transform post with localized values
-  const localizedPost = {
-    ...post,
-    title: getLocalizedValue(post.title, locale, ''),
-    excerpt: getLocalizedValue(post.excerpt, locale, ''),
-    category: getLocalizedValue(post.category, locale, ''),
-  };
-
-  // Transform related posts with localized values
-  const localizedRelatedPosts = relatedPosts.map((p) => ({
-    ...p,
-    title: getLocalizedValue(p.title, locale, ''),
-    excerpt: getLocalizedValue(p.excerpt, locale, ''),
-    category: getLocalizedValue(p.category, locale, ''),
-  }));
+  // Fetch related posts
+  const relatedPosts = await getRelatedPosts(post.category || category, slug, locale);
 
   return (
     <>
       <Header />
-      <BlogPostContent post={localizedPost} relatedPosts={localizedRelatedPosts} />
-      <LogoMarquee />
+      <JournalArticleContent
+        post={post}
+        relatedPosts={relatedPosts}
+        locale={locale}
+        category={category}
+      />
       <Footer />
     </>
   );

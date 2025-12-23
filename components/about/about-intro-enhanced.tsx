@@ -36,7 +36,6 @@ export function AboutIntroEnhanced() {
       {/* Animated Background Pattern */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.01)_1px,transparent_1px)] bg-[size:60px_60px]"
           style={{ y: decorY1 }}
         />
         {/* Gradient orbs */}

@@ -62,7 +62,6 @@ export function WhyChooseUs({ mainImage, secondaryImage }: WhyChooseUsProps) {
       className="relative overflow-hidden bg-gradient-to-b from-neutral-50 via-white to-neutral-50 px-6 py-32 lg:px-12 lg:py-48"
     >
       {/* Decorative Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.01)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,black,transparent)]" />
 
       <div className="mx-auto max-w-[1800px]">
         {/* Section Header */}
@@ -166,7 +165,7 @@ export function WhyChooseUs({ mainImage, secondaryImage }: WhyChooseUsProps) {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}
-                className="group relative"
+                className="group relative flex h-full flex-col"
               >
                 {/* Icon */}
                 <div className="mb-4 inline-flex items-center justify-center">
@@ -183,7 +182,7 @@ export function WhyChooseUs({ mainImage, secondaryImage }: WhyChooseUsProps) {
                 <h3 className="mb-3 text-xl font-light tracking-tight text-neutral-950">
                   {reason.title}
                 </h3>
-                <p className="font-light leading-relaxed text-neutral-600">
+                <p className="flex-1 font-light leading-relaxed text-neutral-600">
                   {reason.description}
                 </p>
 

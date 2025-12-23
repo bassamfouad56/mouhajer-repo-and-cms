@@ -146,7 +146,6 @@ function HeroSection() {
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
         <div className="absolute left-0 top-0 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_top_left,rgba(201,169,98,0.08)_0%,transparent_70%)]" />
         <div className="absolute bottom-0 right-0 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_bottom_right,rgba(201,169,98,0.05)_0%,transparent_70%)]" />
       </div>

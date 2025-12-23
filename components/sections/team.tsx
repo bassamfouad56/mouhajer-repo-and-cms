@@ -56,7 +56,6 @@ export function Team() {
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.01)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,black,transparent)]" />
         <div className="absolute right-1/3 top-0 h-96 w-96 rounded-full bg-purple-100/30 blur-3xl" />
         <div className="absolute bottom-1/3 left-1/3 h-96 w-96 rounded-full bg-blue-100/30 blur-3xl" />
       </div>

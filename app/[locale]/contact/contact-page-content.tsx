@@ -277,7 +277,6 @@ export default function ContactPageContent({
       >
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-[0.02]">
-          <div className="h-full w-full bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:80px_80px]" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6">
@@ -452,7 +451,6 @@ export default function ContactPageContent({
       >
         {/* Subtle grid */}
         <div className="absolute inset-0 opacity-[0.03]">
-          <div className="h-full w-full bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:100px_100px]" />
         </div>
 
         {/* Ambient glow */}
@@ -491,9 +489,9 @@ export default function ContactPageContent({
               initial={{ opacity: 0, y: 40 }}
               animate={servicesInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="group relative"
+              className="group relative h-full"
             >
-              <div className="relative overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-[#c9a962]/20 hover:bg-white/[0.04] lg:p-12">
+              <div className="relative flex h-full flex-col overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-[#c9a962]/20 hover:bg-white/[0.04] lg:p-12">
                 <div className="relative">
                   <span className="mb-6 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
                     New Project
@@ -531,10 +529,10 @@ export default function ContactPageContent({
               initial={{ opacity: 0, y: 40 }}
               animate={servicesInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="group relative"
+              className="group relative h-full"
             >
-              <div className="relative overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-white/10 hover:bg-white/[0.04] lg:p-12">
-                <div className="relative">
+              <div className="relative flex h-full flex-col overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-white/10 hover:bg-white/[0.04] lg:p-12">
+                <div className="relative flex flex-1 flex-col">
                   <span className="mb-6 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
                     Partnerships
                   </span>

@@ -8,7 +8,11 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'string', title: 'English' },
+        { name: 'ar', type: 'string', title: 'Arabic' },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -24,9 +28,11 @@ export default defineType({
     defineField({
       name: 'excerpt',
       title: 'Excerpt',
-      type: 'text',
-      rows: 3,
-      validation: (Rule) => Rule.max(200),
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'text', title: 'English', rows: 3 },
+        { name: 'ar', type: 'text', title: 'Arabic', rows: 3 },
+      ],
     }),
     defineField({
       name: 'mainImage',
@@ -59,14 +65,21 @@ export default defineType({
           fields: [
             {
               name: 'title',
-              type: 'string',
+              type: 'object',
               title: 'Challenge Title',
+              fields: [
+                { name: 'en', type: 'string', title: 'English' },
+                { name: 'ar', type: 'string', title: 'Arabic' },
+              ],
             },
             {
               name: 'description',
-              type: 'text',
+              type: 'object',
               title: 'Description',
-              rows: 2,
+              fields: [
+                { name: 'en', type: 'text', title: 'English', rows: 2 },
+                { name: 'ar', type: 'text', title: 'Arabic', rows: 2 },
+              ],
             },
           ],
         },
@@ -82,14 +95,21 @@ export default defineType({
           fields: [
             {
               name: 'title',
-              type: 'string',
+              type: 'object',
               title: 'Solution Title',
+              fields: [
+                { name: 'en', type: 'string', title: 'English' },
+                { name: 'ar', type: 'string', title: 'Arabic' },
+              ],
             },
             {
               name: 'description',
-              type: 'text',
+              type: 'object',
               title: 'Description',
-              rows: 2,
+              fields: [
+                { name: 'en', type: 'text', title: 'English', rows: 2 },
+                { name: 'ar', type: 'text', title: 'Arabic', rows: 2 },
+              ],
             },
           ],
         },
@@ -142,16 +162,21 @@ export default defineType({
       fields: [
         {
           name: 'metaTitle',
-          type: 'string',
+          type: 'object',
           title: 'Meta Title',
-          validation: (Rule) => Rule.max(60),
+          fields: [
+            { name: 'en', type: 'string', title: 'English' },
+            { name: 'ar', type: 'string', title: 'Arabic' },
+          ],
         },
         {
           name: 'metaDescription',
-          type: 'text',
+          type: 'object',
           title: 'Meta Description',
-          rows: 3,
-          validation: (Rule) => Rule.max(160),
+          fields: [
+            { name: 'en', type: 'text', title: 'English', rows: 3 },
+            { name: 'ar', type: 'text', title: 'Arabic', rows: 3 },
+          ],
         },
         {
           name: 'keywords',
@@ -164,14 +189,14 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'title.en',
       media: 'mainImage',
       order: 'order',
     },
     prepare(selection) {
       const { title, media, order } = selection
       return {
-        title,
+        title: title || 'Untitled',
         subtitle: order ? `Order: ${order}` : 'No order set',
         media,
       }

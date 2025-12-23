@@ -136,20 +136,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     relatedPosts.push(...additionalPosts);
   }
 
-  // Transform post with localized values
+  // Transform post with localized values and ensure required fields have defaults
   const localizedPost = {
     ...post,
-    title: getLocalizedValue(post.title, locale, ''),
-    excerpt: getLocalizedValue(post.excerpt, locale, ''),
-    category: postCategory,
+    _id: post._id || '',
+    title: getLocalizedValue(post.title, locale, 'Untitled') || 'Untitled',
+    excerpt: getLocalizedValue(post.excerpt, locale, '') || '',
+    category: postCategory || '',
+    publishedAt: post.publishedAt || new Date().toISOString(),
+    slug: post.slug || { current: '' },
+    content: post.content || [],
+    author: post.author || { name: 'MIDC Team' },
   };
 
-  // Transform related posts with localized values
+  // Transform related posts with localized values and ensure required fields have defaults
   const localizedRelatedPosts = relatedPosts.map((p) => ({
     ...p,
-    title: getLocalizedValue(p.title, locale, ''),
-    excerpt: getLocalizedValue(p.excerpt, locale, ''),
-    category: getLocalizedValue(p.category, locale, ''),
+    _id: p._id || '',
+    title: getLocalizedValue(p.title, locale, 'Untitled') || 'Untitled',
+    excerpt: getLocalizedValue(p.excerpt, locale, '') || '',
+    category: getLocalizedValue(p.category, locale, '') || '',
+    publishedAt: p.publishedAt || new Date().toISOString(),
+    slug: p.slug || { current: '' },
   }));
 
   return (

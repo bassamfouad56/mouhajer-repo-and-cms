@@ -1,9 +1,9 @@
 'use client';
 
-import { useRef, useState, useMemo } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { SafeImage } from '@/components/safe-image';
-import { ArrowRight, Plus } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { getProjectPlaceholder } from '@/lib/image-utils';
 import { useTranslations } from 'next-intl';
@@ -14,423 +14,356 @@ interface CapabilitiesCarouselProps {
 
 export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps) {
   const t = useTranslations('Capabilities');
-  const tCommon = useTranslations('Common');
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const defaultCapabilities = [
+  const capabilities = [
     {
       id: 1,
+      stage: '01',
       badge: t('items.build.badge'),
       title: t('items.build.title'),
       shortTitle: t('items.build.shortTitle'),
       description: t('items.build.description'),
       link: '/services/civil-construction',
-      imageAlt: 'Construction site with modern building',
-      color: '#BA9051',
+      image: images[0]?.url || '/placeholder.jpg',
     },
     {
       id: 2,
+      stage: '02',
       badge: t('items.design.badge'),
       title: t('items.design.title'),
       shortTitle: t('items.design.shortTitle'),
       description: t('items.design.description'),
       link: '/services/interior-architecture',
-      imageAlt: 'Luxury interior design concept',
-      color: '#C9A961',
+      image: images[1]?.url || '/placeholder.jpg',
     },
     {
       id: 3,
+      stage: '03',
       badge: t('items.power.badge'),
       title: t('items.power.title'),
       shortTitle: t('items.power.shortTitle'),
       description: t('items.power.description'),
       link: '/services/mep-engineering',
-      imageAlt: 'MEP engineering systems',
-      color: '#D4B872',
+      image: images[2]?.url || '/placeholder.jpg',
     },
     {
       id: 4,
+      stage: '04',
       badge: t('items.make.badge'),
       title: t('items.make.title'),
       shortTitle: t('items.make.shortTitle'),
       description: t('items.make.description'),
       link: '/services/manufacturing-joinery',
-      imageAlt: 'Custom millwork and furniture',
-      color: '#BA9051',
+      image: images[3]?.url || '/placeholder.jpg',
     },
     {
       id: 5,
+      stage: '05',
       badge: t('items.install.badge'),
       title: t('items.install.title'),
       shortTitle: t('items.install.shortTitle'),
       description: t('items.install.description'),
       link: '/services/fit-out-execution',
-      imageAlt: 'Luxury interior finishing details',
-      color: '#C9A961',
+      image: images[4]?.url || '/placeholder.jpg',
     },
     {
       id: 6,
+      stage: '06',
       badge: t('items.care.badge'),
       title: t('items.care.title'),
       shortTitle: t('items.care.shortTitle'),
       description: t('items.care.description'),
       link: '/services/handover-maintenance',
-      imageAlt: 'Completed luxury property handover',
-      color: '#D4B872',
+      image: images[5]?.url || '/placeholder.jpg',
     },
   ];
+
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Default fallback images for each capability
-  const fallbackImages = [
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-  ];
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
 
-  // Merge default capabilities with images
-  const capabilities = useMemo(() => {
-    return defaultCapabilities.map((cap, index) => ({
-      ...cap,
-      image: images[index]?.url || fallbackImages[index] || '/placeholder.jpg',
-    }));
-  }, [images]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
+  const backgroundScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
 
   return (
     <section
       ref={sectionRef}
       id="capabilities"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#faf8f5] py-24 lg:py-32 scroll-mt-24"
+      className="relative min-h-screen overflow-hidden bg-[#0a0a0a]"
     >
-      {/* Background */}
+      {/* Full-screen background images - all preloaded, opacity controlled */}
       <div className="absolute inset-0">
-        {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5] via-[#f8f6f3] to-[#faf8f5]" />
+        {/* All background images rendered, visibility controlled by opacity */}
+        {capabilities.map((capability, index) => (
+          <motion.div
+            key={capability.id}
+            className="absolute inset-0"
+            initial={false}
+            animate={{
+              opacity: hoveredIndex === index ? 1 : 0,
+              scale: hoveredIndex === index ? 1 : 1.05,
+            }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.div
+              className="absolute inset-0"
+              style={{ y: backgroundY, scale: backgroundScale }}
+            >
+              <SafeImage
+                src={capability.image}
+                alt={capability.title}
+                fallbackSrc={getProjectPlaceholder(capability.title, 'commercial')}
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
+            </motion.div>
+            {/* Gradient overlays for readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/80" />
+            {/* Gold tint overlay */}
+            <div className="absolute inset-0 bg-[#c9a962]/5 mix-blend-overlay" />
+          </motion.div>
+        ))}
 
-        {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(38,36,32,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(38,36,32,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
-
-        {/* Animated accent lines */}
+        {/* Default state - subtle gradient */}
         <motion.div
-          className="absolute left-0 top-1/4 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent"
-          animate={{ opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute left-0 top-3/4 h-px w-full bg-gradient-to-r from-transparent via-[#262420]/10 to-transparent"
-          animate={{ opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 5, repeat: Infinity, delay: 2 }}
-        />
-
-        {/* Corner gradients */}
-        <div className="absolute left-0 top-0 h-[500px] w-[500px] bg-[radial-gradient(ellipse_at_top_left,rgba(201,169,98,0.08)_0%,transparent_70%)]" />
-        <div className="absolute bottom-0 right-0 h-[500px] w-[500px] bg-[radial-gradient(ellipse_at_bottom_right,rgba(201,169,98,0.05)_0%,transparent_70%)]" />
+          className="absolute inset-0 pointer-events-none"
+          animate={{ opacity: hoveredIndex === null ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,169,98,0.08),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(201,169,98,0.05),transparent_50%)]" />
+        </motion.div>
       </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 mx-auto max-w-[1800px] px-6 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-[1600px] px-6 py-32 lg:px-16 lg:py-44">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-16 lg:mb-20"
-        >
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <div className="mb-4 flex items-center gap-4">
-                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-                <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
-                  {t('heading')}
-                </span>
-              </div>
-              <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-[#262420] sm:text-5xl lg:text-6xl xl:text-7xl">
-                {t('titleLine1')}
-                <br />
-                <span className="text-[#3d3a36]/40">{t('titleLine2')}</span>
-              </h2>
-            </div>
-            <p className="max-w-md font-Satoshi text-base font-light text-[#3d3a36]/60 lg:text-right lg:text-lg">
-              {t('description')}
-              <span className="text-[#262420]/80"> {t('descriptionHighlight')}</span>
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Horizontal Accordion Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-16"
-        >
-          {/* Desktop: Horizontal expanding cards */}
-          <div className="hidden lg:flex lg:h-[500px] lg:gap-2">
-            {capabilities.map((cap, index) => {
-              const isActive = activeIndex === index;
-              const isHovered = hoveredIndex === index;
-
-              return (
-                <motion.div
-                  key={cap.id}
-                  className="relative cursor-pointer overflow-hidden"
-                  initial={false}
-                  animate={{
-                    flex: isActive ? 4 : 1,
-                  }}
-                  transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-                  onMouseEnter={() => {
-                    setActiveIndex(index);
-                    setHoveredIndex(index);
-                  }}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                >
-                  {/* Background Image */}
-                  <div className="absolute inset-0">
-                    <SafeImage
-                      src={cap.image}
-                      alt={cap.imageAlt}
-                      fallbackSrc={getProjectPlaceholder(cap.title, 'commercial')}
-                      fill
-                      className="object-cover transition-transform duration-700"
-                      style={{ transform: isHovered ? 'scale(1.05)' : 'scale(1)' }}
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                    />
-                    {/* Overlay */}
-                    <div className={`absolute inset-0 transition-all duration-500 ${
-                      isActive
-                        ? 'bg-gradient-to-t from-[#262420]/90 via-[#262420]/60 to-[#262420]/20'
-                        : 'bg-[#262420]/75'
-                    }`} />
-                  </div>
-
-                  {/* Collapsed State - Vertical Label */}
-                  <AnimatePresence>
-                    {!isActive && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute inset-0 flex flex-col items-center justify-center"
-                      >
-                        <span
-                          className="font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white/60"
-                          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
-                        >
-                          {cap.shortTitle}
-                        </span>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  {/* Expanded State - Full Content */}
-                  <AnimatePresence>
-                    {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="absolute inset-0 flex flex-col justify-end p-8 lg:p-10"
-                      >
-                        {/* Badge */}
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.5, delay: 0.3 }}
-                          className="mb-4 inline-flex w-fit items-center gap-2 border border-[#c9a962]/30 bg-[#262420]/50 px-4 py-2 backdrop-blur-sm"
-                        >
-                          <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
-                            {cap.badge}
-                          </span>
-                        </motion.div>
-
-                        {/* Title */}
-                        <motion.h3
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: 0.4 }}
-                          className="mb-4 font-SchnyderS text-3xl font-light text-white lg:text-4xl xl:text-5xl"
-                        >
-                          {cap.title}
-                        </motion.h3>
-
-                        {/* Description */}
-                        <motion.p
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: 0.5 }}
-                          className="mb-6 max-w-lg font-Satoshi text-base font-light leading-relaxed text-white/60"
-                        >
-                          {cap.description}
-                        </motion.p>
-
-                        {/* Link */}
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: 0.6 }}
-                        >
-                          <Link
-                            href={cap.link}
-                            className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/10 px-6 py-3 font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962] backdrop-blur-sm transition-all hover:bg-[#c9a962]/20 hover:gap-4"
-                          >
-                            {tCommon('learnMore')}
-                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
-                          </Link>
-                        </motion.div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  {/* Hover indicator line */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-1 bg-[#c9a962]"
-                    initial={{ width: '0%' }}
-                    animate={{ width: isActive ? '100%' : isHovered ? '100%' : '0%' }}
-                    transition={{ duration: 0.5 }}
-                  />
-
-                  {/* Side border accent */}
-                  <div className="absolute right-0 top-0 h-full w-px bg-[#262420]/10" />
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Mobile: Stacked accordion */}
-          <div className="space-y-3 lg:hidden">
-            {capabilities.map((cap, index) => {
-              const isActive = activeIndex === index;
-
-              return (
-                <motion.div
-                  key={cap.id}
-                  className="relative overflow-hidden border border-[#262420]/10 bg-white/50"
-                  initial={false}
-                  animate={{
-                    height: isActive ? 'auto' : 80,
-                  }}
-                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                >
-                  {/* Header - Always visible */}
-                  <button
-                    onClick={() => setActiveIndex(index)}
-                    className="flex w-full items-center justify-between p-5"
-                  >
-                    <div className="text-left">
-                      <span className="block font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
-                        {cap.badge}
-                      </span>
-                      <span className="font-SchnyderS text-lg font-light text-[#262420]">
-                        {cap.title}
-                      </span>
-                    </div>
-                    <motion.div
-                      animate={{ rotate: isActive ? 45 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Plus className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
-                    </motion.div>
-                  </button>
-
-                  {/* Expanded Content */}
-                  <AnimatePresence>
-                    {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="px-5 pb-5"
-                      >
-                        {/* Image */}
-                        <div className="relative mb-4 aspect-video overflow-hidden">
-                          <SafeImage
-                            src={cap.image}
-                            alt={cap.imageAlt}
-                            fallbackSrc={getProjectPlaceholder(cap.title, 'commercial')}
-                            fill
-                            className="object-cover"
-                            sizes="100vw"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#262420]/60 to-transparent" />
-                        </div>
-
-                        {/* Description */}
-                        <p className="mb-4 font-Satoshi text-sm font-light leading-relaxed text-[#3d3a36]/70">
-                          {cap.description}
-                        </p>
-
-                        {/* Link */}
-                        <Link
-                          href={cap.link}
-                          className="inline-flex items-center gap-2 font-Satoshi text-xs font-light text-[#c9a962] transition-all hover:gap-3"
-                        >
-                          {tCommon('learnMore')}
-                          <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
-                        </Link>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-
-        {/* Progress Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-16 flex items-center justify-center"
+          transition={{ duration: 1 }}
+          className="mb-24 lg:mb-32"
         >
-          <div className="flex items-center gap-2">
-            {capabilities.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`h-1 transition-all duration-300 ${
-                  index === activeIndex
-                    ? 'w-12 bg-[#c9a962]'
-                    : 'w-4 bg-[#262420]/20 hover:bg-[#262420]/40'
-                }`}
-              />
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-end">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mb-8"
+              >
+                <span className="inline-flex items-center gap-4 font-Satoshi text-[11px] font-semibold uppercase tracking-[0.5em] text-[#c9a962]">
+                  <span className="h-px w-12 bg-[#c9a962]" />
+                  {t('heading')}
+                </span>
+              </motion.div>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="font-SchnyderS text-6xl font-light tracking-tight text-white sm:text-7xl lg:text-[5.5rem] leading-[0.9]"
+              >
+                {t('titleLine1')}
+                <br />
+                <span className="text-[#c9a962]">{t('titleLine2')}</span>
+              </motion.h2>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="lg:pb-4"
+            >
+              <p className="font-Satoshi text-lg font-light leading-relaxed text-neutral-400">
+                {t('description')}
+                <span className="text-white font-normal"> {t('descriptionHighlight')}</span>
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Capabilities - Accordion Style */}
+        <div className="relative">
+          {capabilities.map((capability, index) => (
+            <motion.div
+              key={capability.id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="group relative"
+            >
+              <Link href={capability.link} className="block">
+                <div
+                  className={`relative border-t transition-all duration-500 ${
+                    hoveredIndex === index
+                      ? 'border-[#c9a962]/50 bg-[#c9a962]/5'
+                      : 'border-white/10'
+                  }`}
+                >
+                  {/* Content Row */}
+                  <div className="relative z-10 grid grid-cols-12 items-center gap-4 py-6 lg:gap-6 lg:py-10">
+                    {/* Title */}
+                    <div className="col-span-12 lg:col-span-5">
+                      <motion.h3
+                        className="font-SchnyderS text-2xl font-light text-white lg:text-4xl"
+                        animate={{
+                          color: hoveredIndex === index ? '#ffffff' : 'rgba(255,255,255,0.8)',
+                        }}
+                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        {capability.title}
+                      </motion.h3>
+                    </div>
+
+                    {/* Description - Reveals on hover */}
+                    <div className="col-span-12 lg:col-span-5 lg:pl-8">
+                      <motion.div
+                        className="overflow-hidden"
+                        initial={false}
+                        animate={{
+                          height: hoveredIndex === index ? 'auto' : 0,
+                          opacity: hoveredIndex === index ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <p className="font-Satoshi text-sm font-light leading-relaxed text-white/70 lg:text-base">
+                          {capability.description}
+                        </p>
+                      </motion.div>
+
+                      {/* Badge - Shows when not hovered */}
+                      <motion.span
+                        className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]/50"
+                        animate={{
+                          opacity: hoveredIndex === index ? 0 : 1,
+                          height: hoveredIndex === index ? 0 : 'auto',
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {capability.badge}
+                      </motion.span>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="col-span-12 lg:col-span-2 flex justify-end">
+                      <motion.div
+                        className="flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-500 lg:h-14 lg:w-14"
+                        animate={{
+                          borderColor: hoveredIndex === index ? '#c9a962' : 'rgba(255,255,255,0.2)',
+                          backgroundColor: hoveredIndex === index ? '#c9a962' : 'transparent',
+                          scale: hoveredIndex === index ? 1.1 : 1,
+                        }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <motion.div
+                          animate={{
+                            x: hoveredIndex === index ? 4 : 0,
+                            color: hoveredIndex === index ? '#0a0a0a' : 'rgba(255,255,255,0.6)',
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <ArrowRight className="h-5 w-5" strokeWidth={1.5} />
+                        </motion.div>
+                      </motion.div>
+                    </div>
+                  </div>
+
+                  {/* Bottom accent line */}
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#c9a962] via-[#e8d5a3] to-transparent"
+                    initial={{ width: '0%' }}
+                    animate={{
+                      width: hoveredIndex === index ? '100%' : '0%',
+                    }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+
+          {/* Last border */}
+          <div className="border-t border-white/10" />
+        </div>
+
+        {/* Process visualization */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 1 }}
+          className="mt-20 lg:mt-28"
+        >
+          <div className="flex items-center justify-center gap-3 lg:gap-6">
+            {capabilities.map((cap, index) => (
+              <div key={index} className="flex items-center gap-3 lg:gap-6">
+                <motion.button
+                  className="relative flex flex-col items-center gap-3"
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  whileHover={{ scale: 1.1 }}
+                >
+                  <motion.div
+                    className="h-3 w-3 rounded-full border transition-all duration-300"
+                    animate={{
+                      borderColor: hoveredIndex === index ? '#c9a962' : 'rgba(255,255,255,0.3)',
+                      backgroundColor: hoveredIndex === index ? '#c9a962' : 'transparent',
+                      scale: hoveredIndex === index ? 1.3 : 1,
+                    }}
+                  />
+                  <span
+                    className={`hidden font-Satoshi text-[10px] font-medium uppercase tracking-wider transition-colors duration-300 lg:block ${
+                      hoveredIndex === index ? 'text-[#c9a962]' : 'text-neutral-500'
+                    }`}
+                  >
+                    {cap.shortTitle}
+                  </span>
+                </motion.button>
+                {index < capabilities.length - 1 && (
+                  <motion.div
+                    className="h-px w-6 lg:w-12"
+                    animate={{
+                      backgroundColor:
+                        hoveredIndex !== null && index < hoveredIndex
+                          ? 'rgba(201,169,98,0.5)'
+                          : 'rgba(255,255,255,0.15)',
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+              </div>
             ))}
           </div>
         </motion.div>
 
-        {/* Bottom CTA */}
+        {/* CTA */}
         <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="mt-16 flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-8"
         >
-          <div className="inline-flex flex-col items-center gap-6 sm:flex-row sm:gap-8">
-            <span className="font-Satoshi text-sm font-light text-[#3d3a36]/60">
-              {t('ctaPrompt')}
-            </span>
-            <Link
-              href="/services"
-              className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all hover:bg-transparent hover:text-[#c9a962] hover:gap-4"
-            >
-              {t('ctaButton')}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
-            </Link>
-          </div>
+          <span className="font-Satoshi text-sm font-light text-neutral-500">
+            {t('ctaPrompt')}
+          </span>
+          <Link
+            href="/services"
+            className="group relative inline-flex items-center gap-4 overflow-hidden rounded-full bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-semibold uppercase tracking-[0.2em] text-[#0a0a0a] transition-all duration-500 hover:bg-white"
+          >
+            <span>{t('ctaButton')}</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2} />
+          </Link>
         </motion.div>
       </div>
-
-      {/* Corner decorations */}
-      <div className="pointer-events-none absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-[#c9a962]/10 lg:block" />
-      <div className="pointer-events-none absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-[#c9a962]/10 lg:block" />
     </section>
   );
 }

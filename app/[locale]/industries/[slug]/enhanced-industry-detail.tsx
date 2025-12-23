@@ -138,7 +138,6 @@ export default function EnhancedIndustryDetail({
         {/* Background Effects with Parallax */}
         <motion.div
           style={{ y }}
-          className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]"
         />
         <div className="absolute left-0 top-0 h-[600px] w-[600px] rounded-full bg-blue-500/10 blur-[120px]" />
         <div className="absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-purple-500/10 blur-[120px]" />
@@ -804,10 +803,11 @@ function OtherIndustryCard({ industry, index }: { industry: Industry; index: num
       transition={{ duration: 0.6, delay: index * 0.1 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      className="h-full"
     >
       <Link
         href={`/industries/${industry.slug}`}
-        className="group block border border-neutral-200 p-8 transition-all hover:border-neutral-950 hover:bg-neutral-950"
+        className="group flex h-full flex-col border border-neutral-200 p-8 transition-all hover:border-neutral-950 hover:bg-neutral-950"
       >
         <div className="mb-6 flex items-center justify-between">
           <motion.div
@@ -826,7 +826,7 @@ function OtherIndustryCard({ industry, index }: { industry: Industry; index: num
           {industry.title}
         </h3>
 
-        <p className="text-sm font-light leading-relaxed text-neutral-600 transition-colors group-hover:text-neutral-300">
+        <p className="flex-1 text-sm font-light leading-relaxed text-neutral-600 transition-colors group-hover:text-neutral-300">
           {(industry.excerpt || '').replace(/<[^>]*>/g, '').substring(0, 100)}...
         </p>
       </Link>

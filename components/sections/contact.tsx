@@ -1,66 +1,88 @@
-'use client';
+"use client";
 
-import { useRef, useState, useCallback } from 'react';
-import { motion, useInView, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { ArrowRight, MapPin, Phone, Mail, Clock, Sparkles } from 'lucide-react';
-import { ContactCTA } from '@/components/contact-cta';
-import { SafeImage } from '@/components/safe-image';
+import { useRef, useState, useCallback } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+import { ArrowRight, MapPin, Phone, Mail, Clock, Sparkles } from "lucide-react";
+import { ContactCTA } from "@/components/contact-cta";
+import { SafeImage } from "@/components/safe-image";
 
 interface ContactProps {
   backgroundImage?: string;
+  theme?: "light" | "dark";
 }
 
-export function Contact({ backgroundImage }: ContactProps) {
+export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
+  const isDark = theme === "dark";
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
   // Parallax effects
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const backgroundScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.05]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const backgroundScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1.1, 1, 1.05]
+  );
 
   // Mouse tracking for subtle 3D effect
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springConfig = { stiffness: 100, damping: 30 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [2, -2]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-2, 2]), springConfig);
+  const rotateX = useSpring(
+    useTransform(mouseY, [-0.5, 0.5], [2, -2]),
+    springConfig
+  );
+  const rotateY = useSpring(
+    useTransform(mouseX, [-0.5, 0.5], [-2, 2]),
+    springConfig
+  );
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  }, [mouseX, mouseY]);
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      const rect = sectionRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      mouseX.set(x);
+      mouseY.set(y);
+    },
+    [mouseX, mouseY]
+  );
 
   const contactInfo = [
     {
-      label: 'Email',
-      value: process.env.NEXT_PUBLIC_EMAIL || 'info@mouhajerdesign.com',
-      href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || 'info@mouhajerdesign.com'}`,
+      label: "Email",
+      value: process.env.NEXT_PUBLIC_EMAIL || "info@mouhajerdesign.com",
+      href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || "info@mouhajerdesign.com"}`,
       icon: Mail,
-      description: 'For inquiries and proposals',
+      description: "For inquiries and proposals",
     },
     {
-      label: 'Phone',
-      value: process.env.NEXT_PUBLIC_PHONE || '+971-4-323-4567',
-      href: `tel:${process.env.NEXT_PUBLIC_PHONE || '+971-4-323-4567'}`,
+      label: "Phone",
+      value: process.env.NEXT_PUBLIC_PHONE || "+971-4-323-4567",
+      href: `tel:${process.env.NEXT_PUBLIC_PHONE || "+971-4-323-4567"}`,
       icon: Phone,
-      description: 'Available during business hours',
+      description: "Available during business hours",
     },
     {
-      label: 'Location',
-      value: 'Dubai, United Arab Emirates',
-      href: '#',
+      label: "Location",
+      value: "Dubai, United Arab Emirates",
+      href: "#",
       icon: MapPin,
-      description: 'Dubai & Abu Dhabi offices',
+      description: "Dubai & Abu Dhabi offices",
     },
   ];
 
@@ -69,7 +91,9 @@ export function Contact({ backgroundImage }: ContactProps) {
       ref={sectionRef}
       id="contact"
       onMouseMove={handleMouseMove}
-      className="relative flex min-h-screen items-center overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40"
+      className={`relative flex min-h-screen items-center overflow-hidden py-24 sm:py-32 lg:py-40 ${
+        isDark ? "bg-[#0a0a0a]" : "bg-[#faf8f5]"
+      }`}
     >
       {/* Cinematic Background */}
       <motion.div
@@ -86,24 +110,28 @@ export function Contact({ backgroundImage }: ContactProps) {
           />
         )}
         {/* Multi-layer overlays for depth */}
-        <div className="absolute inset-0 bg-[#faf8f5]/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#faf8f5] via-[#faf8f5]/80 to-[#faf8f5]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-transparent to-[#faf8f5]/80" />
+        <div className={`absolute inset-0 ${isDark ? "bg-[#0a0a0a]/90" : "bg-[#faf8f5]/90"}`} />
+        <div className={`absolute inset-0 ${isDark ? "bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]" : "bg-gradient-to-r from-[#faf8f5] via-[#faf8f5]/80 to-[#faf8f5]"}`} />
+        <div className={`absolute inset-0 ${isDark ? "bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/80" : "bg-gradient-to-t from-[#faf8f5] via-transparent to-[#faf8f5]/80"}`} />
 
         {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(201,169,98,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,98,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
       </motion.div>
 
       {/* Floating accent orbs */}
       <motion.div
         className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#c9a962]/[0.03] blur-[150px]"
         animate={{ y: [0, -40, 0], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="absolute right-[15%] bottom-[20%] h-80 w-80 rounded-full bg-white/[0.02] blur-[120px]"
         animate={{ y: [0, 50, 0], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2,
+        }}
       />
 
       {/* Content */}
@@ -118,7 +146,7 @@ export function Contact({ backgroundImage }: ContactProps) {
           >
             <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
             <Sparkles className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-neutral-500">
+            <span className={`font-Satoshi text-xs font-light uppercase tracking-[0.4em] ${isDark ? "text-neutral-400" : "text-neutral-500"}`}>
               Begin Your Journey
             </span>
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
@@ -128,21 +156,21 @@ export function Contact({ backgroundImage }: ContactProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl xl:text-7xl"
+            className={`mb-6 font-SchnyderS text-4xl font-light tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl ${isDark ? "text-white" : "text-neutral-900"}`}
           >
             Let&apos;s Create
             <br />
-            <span className="text-neutral-400">Something Extraordinary</span>
+            <span className={isDark ? "text-neutral-500" : "text-neutral-400"}>Something Extraordinary</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto max-w-2xl font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg"
+            className={`mx-auto max-w-2xl font-Satoshi text-base font-light leading-relaxed lg:text-lg ${isDark ? "text-neutral-400" : "text-neutral-600"}`}
           >
-            Ready to transform your vision into reality? Our team of experts is here to guide you
-            through every step of the journey.
+            Ready to transform your vision into reality? Our team of experts is
+            here to guide you through every step of the journey.
           </motion.p>
         </div>
 
@@ -168,33 +196,45 @@ export function Contact({ backgroundImage }: ContactProps) {
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   onMouseEnter={() => setHoveredItem(index)}
                   onMouseLeave={() => setHoveredItem(null)}
-                  className="group relative block overflow-hidden border border-[#c9a962]/20 bg-white/60 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/40 hover:bg-white/80"
+                  className={`group relative block overflow-hidden border backdrop-blur-sm transition-all duration-500 ${
+                    isDark
+                      ? "border-[#c9a962]/20 bg-white/5 hover:border-[#c9a962]/40 hover:bg-white/10"
+                      : "border-[#c9a962]/20 bg-white/60 hover:border-[#c9a962]/40 hover:bg-white/80"
+                  }`}
                 >
                   <div className="relative z-10 flex items-center gap-6 p-6 lg:p-8">
                     {/* Icon */}
                     <motion.div
                       className="flex h-16 w-16 shrink-0 items-center justify-center border transition-all duration-500"
                       animate={{
-                        borderColor: isHovered ? 'rgba(201, 169, 98, 0.5)' : 'rgba(201, 169, 98, 0.2)',
-                        backgroundColor: isHovered ? 'rgba(201, 169, 98, 0.1)' : 'rgba(201, 169, 98, 0.05)',
+                        borderColor: isHovered
+                          ? "rgba(201, 169, 98, 0.5)"
+                          : "rgba(201, 169, 98, 0.2)",
+                        backgroundColor: isHovered
+                          ? "rgba(201, 169, 98, 0.1)"
+                          : "rgba(201, 169, 98, 0.05)",
                       }}
                     >
                       <Icon
                         className="h-6 w-6 transition-colors duration-500"
                         strokeWidth={1}
-                        style={{ color: isHovered ? '#c9a962' : 'rgba(201, 169, 98, 0.6)' }}
+                        style={{
+                          color: isHovered
+                            ? "#c9a962"
+                            : "rgba(201, 169, 98, 0.6)",
+                        }}
                       />
                     </motion.div>
 
                     {/* Content */}
                     <div className="flex-1">
-                      <div className="mb-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] text-neutral-500 transition-colors duration-500 group-hover:text-[#c9a962]">
+                      <div className={`mb-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-[#c9a962] ${isDark ? "text-neutral-400" : "text-neutral-500"}`}>
                         {item.label}
                       </div>
-                      <div className="mb-1 font-SchnyderS text-xl font-light text-neutral-900 transition-colors duration-500 group-hover:text-neutral-900 lg:text-2xl">
+                      <div className={`mb-1 font-SchnyderS text-xl font-light transition-colors duration-500 lg:text-2xl ${isDark ? "text-white group-hover:text-white" : "text-neutral-900 group-hover:text-neutral-900"}`}>
                         {item.value}
                       </div>
-                      <div className="font-Satoshi text-xs font-light text-neutral-500">
+                      <div className={`font-Satoshi text-xs font-light ${isDark ? "text-neutral-500" : "text-neutral-500"}`}>
                         {item.description}
                       </div>
                     </div>
@@ -204,18 +244,21 @@ export function Contact({ backgroundImage }: ContactProps) {
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-[#c9a962]/20 transition-all duration-500 group-hover:border-[#c9a962]/40 group-hover:bg-[#c9a962]/10"
                       animate={{ x: isHovered ? 5 : 0 }}
                     >
-                      <ArrowRight className="h-4 w-4 text-[#c9a962]/60 transition-colors duration-500 group-hover:text-[#c9a962]" strokeWidth={1.5} />
+                      <ArrowRight
+                        className="h-4 w-4 text-[#c9a962]/60 transition-colors duration-500 group-hover:text-[#c9a962]"
+                        strokeWidth={1.5}
+                      />
                     </motion.div>
                   </div>
 
                   {/* Hover shimmer effect */}
                   {isHovered && (
                     <motion.div
-                      initial={{ x: '-100%', opacity: 0 }}
-                      animate={{ x: '200%', opacity: 0.1 }}
-                      transition={{ duration: 1, ease: 'easeInOut' }}
+                      initial={{ x: "-100%", opacity: 0 }}
+                      animate={{ x: "200%", opacity: 0.1 }}
+                      transition={{ duration: 1, ease: "easeInOut" }}
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent"
-                      style={{ transform: 'skewX(-20deg)' }}
+                      style={{ transform: "skewX(-20deg)" }}
                     />
                   )}
 
@@ -231,34 +274,60 @@ export function Contact({ backgroundImage }: ContactProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="border border-[#c9a962]/20 bg-white/60 p-6 backdrop-blur-sm lg:p-8"
+              className={`border border-[#c9a962]/20 p-6 backdrop-blur-sm lg:p-8 ${isDark ? "bg-white/5" : "bg-white/60"}`}
             >
               <div className="mb-6 flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
                   <Clock className="h-5 w-5 text-[#c9a962]" strokeWidth={1} />
                 </div>
                 <div>
-                  <h4 className="font-SchnyderS text-lg font-light text-neutral-900">Business Hours</h4>
-                  <p className="font-Satoshi text-xs font-light text-neutral-500">Dubai & Abu Dhabi</p>
+                  <h4 className={`font-SchnyderS text-lg font-light ${isDark ? "text-white" : "text-neutral-900"}`}>
+                    Business Hours
+                  </h4>
+                  <p className={`font-Satoshi text-xs font-light ${isDark ? "text-neutral-400" : "text-neutral-500"}`}>
+                    Dubai & Abu Dhabi
+                  </p>
                 </div>
               </div>
 
               <div className="space-y-4">
                 {[
-                  { day: 'Monday - Friday', hours: '9:00 AM - 6:00 PM', active: true },
-                  { day: 'Saturday', hours: '10:00 AM - 4:00 PM', active: true },
-                  { day: 'Sunday', hours: 'Closed', active: false },
+                  {
+                    day: "Monday - Friday",
+                    hours: "9:00 AM - 6:00 PM",
+                    active: true,
+                  },
+                  {
+                    day: "Saturday",
+                    hours: "10:00 AM - 4:00 PM",
+                    active: true,
+                  },
+                  { day: "Sunday", hours: "Closed", active: false },
                 ].map((schedule, index) => (
                   <div key={index}>
                     <div className="flex items-center justify-between">
-                      <span className={`font-Satoshi text-sm font-light ${schedule.active ? 'text-neutral-700' : 'text-neutral-400'}`}>
+                      <span
+                        className={`font-Satoshi text-sm font-light ${
+                          schedule.active
+                            ? isDark ? "text-neutral-300" : "text-neutral-700"
+                            : isDark ? "text-neutral-600" : "text-neutral-400"
+                        }`}
+                      >
                         {schedule.day}
                       </span>
-                      <span className={`font-Satoshi text-sm font-light ${schedule.active ? 'text-[#c9a962]' : 'text-neutral-400'}`}>
+                      <span
+                        className={`font-Satoshi text-sm font-light ${
+                          schedule.active
+                            ? "text-[#c9a962]"
+                            : isDark ? "text-neutral-600" : "text-neutral-400"
+                        }`}
+                      >
                         {schedule.hours}
                       </span>
                     </div>
-                    {index < 2 && <div className="mt-4 h-px w-full bg-[#c9a962]/10" />}
+                    {index < 2 && (
+                      <div className="mt-4 h-px w-full bg-[#c9a962]/10" />
+                    )}
                   </div>
                 ))}
               </div>
@@ -273,10 +342,14 @@ export function Contact({ backgroundImage }: ContactProps) {
             style={{
               rotateX,
               rotateY,
-              transformStyle: 'preserve-3d',
+              transformStyle: "preserve-3d",
             }}
           >
-            <div className="relative h-full overflow-hidden border border-[#c9a962]/20 bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-sm">
+            <div className={`relative h-full overflow-hidden border border-[#c9a962]/20 backdrop-blur-sm ${
+              isDark
+                ? "bg-gradient-to-br from-white/10 to-white/5"
+                : "bg-gradient-to-br from-white/80 to-white/60"
+            }`}>
               {/* Decorative background pattern */}
               <div className="absolute inset-0 opacity-30">
                 <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#c9a962]/[0.05] blur-[100px]" />
@@ -303,7 +376,7 @@ export function Contact({ backgroundImage }: ContactProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.7 }}
-                  className="mb-6 font-SchnyderS text-3xl font-light text-neutral-900 lg:text-4xl xl:text-5xl"
+                  className={`mb-6 font-SchnyderS text-3xl font-light lg:text-4xl xl:text-5xl ${isDark ? "text-white" : "text-neutral-900"}`}
                 >
                   Transform Your
                   <br />
@@ -315,10 +388,11 @@ export function Contact({ backgroundImage }: ContactProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.8 }}
-                  className="mb-10 max-w-md font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg"
+                  className={`mb-10 max-w-md font-Satoshi text-base font-light leading-relaxed lg:text-lg ${isDark ? "text-neutral-400" : "text-neutral-600"}`}
                 >
-                  Whether you&apos;re envisioning a luxury villa, a 5-star hotel suite, or a prestigious
-                  commercial space, our team delivers uncompromising excellence.
+                  Whether you&apos;re envisioning a luxury villa, a 5-star hotel
+                  suite, or a prestigious commercial space, our team delivers
+                  uncompromising excellence.
                 </motion.p>
 
                 {/* Features list */}
@@ -329,14 +403,16 @@ export function Contact({ backgroundImage }: ContactProps) {
                   className="mb-10 grid grid-cols-2 gap-4"
                 >
                   {[
-                    'Free Consultation',
-                    'Detailed Proposals',
-                    'Fixed Pricing',
-                    'Dedicated Team',
+                    "Free Consultation",
+                    "Detailed Proposals",
+                    "Fixed Pricing",
+                    "Dedicated Team",
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <div className="h-1.5 w-1.5 rounded-full bg-[#c9a962]" />
-                      <span className="font-Satoshi text-sm font-light text-neutral-600">{feature}</span>
+                      <span className={`font-Satoshi text-sm font-light ${isDark ? "text-neutral-400" : "text-neutral-600"}`}>
+                        {feature}
+                      </span>
                     </div>
                   ))}
                 </motion.div>
@@ -355,7 +431,7 @@ export function Contact({ backgroundImage }: ContactProps) {
                 </motion.div>
 
                 {/* Trust indicator */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.6, delay: 1.1 }}
@@ -369,7 +445,7 @@ export function Contact({ backgroundImage }: ContactProps) {
                   <div className="font-Satoshi text-xs font-light text-neutral-500">
                     <span className="text-neutral-700">400+</span> projects delivered with excellence
                   </div>
-                </motion.div>
+                </motion.div> */}
               </div>
 
               {/* Corner frame accents */}
