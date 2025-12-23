@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { SafeImage } from '@/components/safe-image';
 import { ArrowRight } from 'lucide-react';
@@ -15,6 +15,41 @@ interface CapabilitiesCarouselProps {
 export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps) {
   const t = useTranslations('Capabilities');
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  // Combined active index for both hover and focus
+  const activeIndex = focusedIndex ?? hoveredIndex;
+
+  // Keyboard navigation handler
+  const handleKeyDown = useCallback((e: React.KeyboardEvent, index: number, totalItems: number) => {
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setFocusedIndex(Math.min(index + 1, totalItems - 1));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setFocusedIndex(Math.max(index - 1, 0));
+        break;
+      case 'Home':
+        e.preventDefault();
+        setFocusedIndex(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        setFocusedIndex(totalItems - 1);
+        break;
+    }
+  }, []);
+
+  // Focus the appropriate link when focusedIndex changes
+  useEffect(() => {
+    if (focusedIndex !== null && listRef.current) {
+      const links = listRef.current.querySelectorAll<HTMLAnchorElement>('[data-capability-link]');
+      links[focusedIndex]?.focus();
+    }
+  }, [focusedIndex]);
 
   const capabilities = [
     {
@@ -105,8 +140,8 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
             className="absolute inset-0"
             initial={false}
             animate={{
-              opacity: hoveredIndex === index ? 1 : 0,
-              scale: hoveredIndex === index ? 1 : 1.05,
+              opacity: activeIndex === index ? 1 : 0,
+              scale: activeIndex === index ? 1 : 1.05,
             }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
@@ -134,7 +169,7 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
         {/* Default state - subtle gradient */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
-          animate={{ opacity: hoveredIndex === null ? 1 : 0 }}
+          animate={{ opacity: activeIndex === null ? 1 : 0 }}
           transition={{ duration: 0.4 }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,169,98,0.08),transparent_50%)]" />
@@ -191,7 +226,12 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
         </motion.div>
 
         {/* Capabilities - Accordion Style */}
-        <div className="relative">
+        <div
+          ref={listRef}
+          className="relative"
+          role="list"
+          aria-label={t('heading')}
+        >
           {capabilities.map((capability, index) => (
             <motion.div
               key={capability.id}
@@ -201,11 +241,20 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               className="group relative"
+              role="listitem"
             >
-              <Link href={capability.link} className="block">
+              <Link
+                href={capability.link}
+                className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] rounded"
+                data-capability-link
+                aria-label={`${capability.title}: ${capability.description}`}
+                onFocus={() => setFocusedIndex(index)}
+                onBlur={() => setFocusedIndex(null)}
+                onKeyDown={(e) => handleKeyDown(e, index, capabilities.length)}
+              >
                 <div
                   className={`relative border-t transition-all duration-500 ${
-                    hoveredIndex === index
+                    activeIndex === index
                       ? 'border-[#c9a962]/50 bg-[#c9a962]/5'
                       : 'border-white/10'
                   }`}
@@ -217,7 +266,7 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                       <motion.h3
                         className="font-SchnyderS text-2xl font-light text-white lg:text-4xl"
                         animate={{
-                          color: hoveredIndex === index ? '#ffffff' : 'rgba(255,255,255,0.8)',
+                          color: activeIndex === index ? '#ffffff' : 'rgba(255,255,255,0.8)',
                         }}
                         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                       >
@@ -231,8 +280,8 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                         className="overflow-hidden"
                         initial={false}
                         animate={{
-                          height: hoveredIndex === index ? 'auto' : 0,
-                          opacity: hoveredIndex === index ? 1 : 0,
+                          height: activeIndex === index ? 'auto' : 0,
+                          opacity: activeIndex === index ? 1 : 0,
                         }}
                         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                       >
@@ -241,12 +290,12 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                         </p>
                       </motion.div>
 
-                      {/* Badge - Shows when not hovered */}
+                      {/* Badge - Shows when not hovered/focused */}
                       <motion.span
                         className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]/50"
                         animate={{
-                          opacity: hoveredIndex === index ? 0 : 1,
-                          height: hoveredIndex === index ? 0 : 'auto',
+                          opacity: activeIndex === index ? 0 : 1,
+                          height: activeIndex === index ? 0 : 'auto',
                         }}
                         transition={{ duration: 0.3 }}
                       >
@@ -259,16 +308,16 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                       <motion.div
                         className="flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-500 lg:h-14 lg:w-14"
                         animate={{
-                          borderColor: hoveredIndex === index ? '#c9a962' : 'rgba(255,255,255,0.2)',
-                          backgroundColor: hoveredIndex === index ? '#c9a962' : 'transparent',
-                          scale: hoveredIndex === index ? 1.1 : 1,
+                          borderColor: activeIndex === index ? '#c9a962' : 'rgba(255,255,255,0.2)',
+                          backgroundColor: activeIndex === index ? '#c9a962' : 'transparent',
+                          scale: activeIndex === index ? 1.1 : 1,
                         }}
                         transition={{ duration: 0.4 }}
                       >
                         <motion.div
                           animate={{
-                            x: hoveredIndex === index ? 4 : 0,
-                            color: hoveredIndex === index ? '#0a0a0a' : 'rgba(255,255,255,0.6)',
+                            x: activeIndex === index ? 4 : 0,
+                            color: activeIndex === index ? '#0a0a0a' : 'rgba(255,255,255,0.6)',
                           }}
                           transition={{ duration: 0.3 }}
                         >
@@ -283,7 +332,7 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                     className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#c9a962] via-[#e8d5a3] to-transparent"
                     initial={{ width: '0%' }}
                     animate={{
-                      width: hoveredIndex === index ? '100%' : '0%',
+                      width: activeIndex === index ? '100%' : '0%',
                     }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   />
@@ -307,22 +356,25 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
             {capabilities.map((cap, index) => (
               <div key={index} className="flex items-center gap-3 lg:gap-6">
                 <motion.button
-                  className="relative flex flex-col items-center gap-3"
+                  className="relative flex flex-col items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] rounded-full"
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
+                  onFocus={() => setFocusedIndex(index)}
+                  onBlur={() => setFocusedIndex(null)}
                   whileHover={{ scale: 1.1 }}
+                  aria-label={`${cap.shortTitle} - capability ${index + 1} of ${capabilities.length}`}
                 >
                   <motion.div
                     className="h-3 w-3 rounded-full border transition-all duration-300"
                     animate={{
-                      borderColor: hoveredIndex === index ? '#c9a962' : 'rgba(255,255,255,0.3)',
-                      backgroundColor: hoveredIndex === index ? '#c9a962' : 'transparent',
-                      scale: hoveredIndex === index ? 1.3 : 1,
+                      borderColor: activeIndex === index ? '#c9a962' : 'rgba(255,255,255,0.3)',
+                      backgroundColor: activeIndex === index ? '#c9a962' : 'transparent',
+                      scale: activeIndex === index ? 1.3 : 1,
                     }}
                   />
                   <span
                     className={`hidden font-Satoshi text-[10px] font-medium uppercase tracking-wider transition-colors duration-300 lg:block ${
-                      hoveredIndex === index ? 'text-[#c9a962]' : 'text-neutral-500'
+                      activeIndex === index ? 'text-[#c9a962]' : 'text-neutral-500'
                     }`}
                   >
                     {cap.shortTitle}
@@ -333,7 +385,7 @@ export function CapabilitiesCarousel({ images = [] }: CapabilitiesCarouselProps)
                     className="h-px w-6 lg:w-12"
                     animate={{
                       backgroundColor:
-                        hoveredIndex !== null && index < hoveredIndex
+                        activeIndex !== null && index < activeIndex
                           ? 'rgba(201,169,98,0.5)'
                           : 'rgba(255,255,255,0.15)',
                     }}

@@ -345,7 +345,7 @@ export default async function Home({
     <>
       <Header />
 
-      <main className="relative">
+      <main id="main-content" className="relative" role="main" aria-label="Main content">
         {/* Section 1: Hero with Video */}
         <HeroVideo />
 

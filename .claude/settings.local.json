@@ -74,17 +74,7 @@
       "Bash(npx tsc --noEmit)",
       "Bash(vercel env pull:*)",
       "Bash(del \"\\?\\D:\\wbsite\\mouhajer-new-marketing-website\\nul\")",
-      "Bash(pnpm remove:*)",
-      "Bash(npx tsc:*)",
-      "Bash(set:*)",
-      "Bash(python3:*)",
-      "Bash(vercel link:*)",
-      "Bash(vercel ls:*)",
-      "Bash(vercel logs:*)",
-      "Bash(git show:*)",
-      "Bash(xargs:*)",
-      "Bash(vercel alias:*)",
-      "Bash(git log:*)"
+      "Bash(git merge:*)"
     ],
     "deny": [],
     "ask": []

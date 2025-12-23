@@ -19,6 +19,13 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { NoiseTexture } from "@/components/noise-texture";
 import { LocaleProvider } from "@/components/providers/locale-provider";
 import { MegaMenuImagesServerProvider } from "@/components/providers/mega-menu-images-server-provider";
+// Accessibility
+import { SkipLink } from "@/components/accessibility/skip-link";
+// Conversion optimization
+import { ExitIntentPopup } from "@/components/exit-intent-popup";
+import { ScrollTriggeredCTA } from "@/components/conversion/scroll-triggered-cta";
+import { SocialProofNotifications } from "@/components/conversion/social-proof-notifications";
+import { MobileCTABar } from "@/components/conversion/mobile-cta-bar";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -124,6 +131,9 @@ export default async function LocaleLayout({
       <MegaMenuImagesServerProvider>
         <NextIntlClientProvider messages={messages}>
           <CartProvider>
+            {/* Accessibility: Skip to main content link */}
+            <SkipLink />
+
             <SmoothScrollProvider>
               {children}
             </SmoothScrollProvider>
@@ -142,6 +152,18 @@ export default async function LocaleLayout({
 
             {/* Shopping Cart Sidebar */}
             <CartSidebar />
+
+            {/* Conversion: Exit Intent Popup */}
+            <ExitIntentPopup />
+
+            {/* Conversion: Scroll-triggered CTA (desktop) */}
+            <ScrollTriggeredCTA />
+
+            {/* Conversion: Social Proof Notifications */}
+            <SocialProofNotifications />
+
+            {/* Conversion: Mobile CTA Bar */}
+            <MobileCTABar />
 
             {/* Preview Mode Banner */}
             {isDraftMode && <PreviewBanner />}
