@@ -26,7 +26,7 @@ import ReactionButtons from '@/components/blog/reaction-buttons';
 import NewsletterCTA from '@/components/blog/newsletter-cta';
 import { ReadingModeProvider, ReadingModeToggle, ReadingModeWrapper } from '@/components/blog/reading-mode';
 import TableOfContents from '@/components/blog/table-of-contents';
-import Comments from '@/components/blog/comments';
+// import Comments from '@/components/blog/comments';
 import TextHighlighter from '@/components/blog/text-highlighter';
 import AudioPlayer from '@/components/blog/audio-player';
 import SocialShare from '@/components/blog/social-share';
@@ -664,8 +664,8 @@ export default function JournalArticleContent({
                 <ReactionButtons postId={post._id} />
               </motion.div>
 
-              {/* Comments Section */}
-              <Comments postSlug={post.slug.current} postTitle={post.title} />
+              {/* Comments Section - Disabled */}
+              {/* <Comments postSlug={post.slug.current} postTitle={post.title} /> */}
             </div>
           </section>
         </article>

@@ -1,19 +1,22 @@
 import Script from "next/script";
-import NextTopLoader from 'nextjs-toploader';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { draftMode } from 'next/headers';
+import NextTopLoader from "nextjs-toploader";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { PageTransition } from "@/components/page-transition";
-import { OrganizationStructuredData, LocalBusinessStructuredData } from "@/components/structured-data";
+import {
+  OrganizationStructuredData,
+  LocalBusinessStructuredData,
+} from "@/components/structured-data";
 import WhatsAppButton from "@/components/whatsapp-button";
 import AIChatbot from "@/components/ai-chatbot";
 import { BackToTop } from "@/components/back-to-top";
 import { CartProvider } from "@/lib/cart-context";
 import { CartSidebar } from "@/components/cart-sidebar";
 import { PreviewBanner } from "@/components/preview-banner";
-import { locales, getDirection, type Locale } from '@/i18n/config';
+import { locales, getDirection, type Locale } from "@/i18n/config";
 import { Preloader } from "@/components/preloader";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { NoiseTexture } from "@/components/noise-texture";
@@ -33,7 +36,7 @@ export function generateStaticParams() {
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: Readonly<{
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -41,7 +44,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!locales.includes(locale as typeof locales[number])) {
+  if (!locales.includes(locale as (typeof locales)[number])) {
     notFound();
   }
 
@@ -98,7 +101,7 @@ export default async function LocaleLayout({
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
       )}
@@ -134,9 +137,7 @@ export default async function LocaleLayout({
             {/* Accessibility: Skip to main content link */}
             <SkipLink />
 
-            <SmoothScrollProvider>
-              {children}
-            </SmoothScrollProvider>
+            <SmoothScrollProvider>{children}</SmoothScrollProvider>
 
             {/* Always-visible WhatsApp Button */}
             <WhatsAppButton
@@ -160,7 +161,7 @@ export default async function LocaleLayout({
             <ScrollTriggeredCTA />
 
             {/* Conversion: Social Proof Notifications */}
-            <SocialProofNotifications />
+            {/* <SocialProofNotifications /> */}
 
             {/* Conversion: Mobile CTA Bar */}
             <MobileCTABar />
