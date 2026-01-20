@@ -1,20 +1,9 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import {
-  motion,
-  useInView,
-} from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { SafeImage } from "@/components/safe-image";
-
-// Register GSAP plugins
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 interface WhoWeAreCinematicProps {
   images?: {
@@ -24,417 +13,437 @@ interface WhoWeAreCinematicProps {
   };
 }
 
-// Pillar data - images will be passed as props
-const createPillars = (images?: WhoWeAreCinematicProps["images"]) => [
+// Panel data with rich content
+const createPanels = (images?: WhoWeAreCinematicProps["images"]) => [
   {
-    id: "contractor",
+    id: "build",
+    number: "01",
+    label: "We Build",
     title: "The Main Contractor",
-    subtitle: "We Build",
+    subtitle: "From Foundation to Finish",
     description:
-      "We hold the trade license to execute heavy civil works. From excavation and piling to the concrete superstructure, our own teams are on site daily.",
+      "We hold the trade license to execute heavy civil works. From excavation and piling to the concrete superstructure, our own teams are on site daily — ensuring quality control at every pour, every weld, every connection.",
+    longDescription:
+      "Our construction division operates with full autonomy, equipped with the latest machinery and a workforce trained to international standards. We don't subcontract the critical path — we own it.",
     image: images?.contractor || "/placeholder.jpg",
     accent: "#c9a962",
+    capabilities: [
+      { title: "Civil Works", desc: "Excavation, piling, foundations" },
+      { title: "Structural", desc: "Concrete & steel frameworks" },
+      { title: "MEP Systems", desc: "Mechanical, electrical, plumbing" },
+      { title: "Finishing", desc: "Premium interior finishes" },
+    ],
   },
   {
-    id: "designer",
-    title: "The Designer",
-    subtitle: "We Create",
+    id: "design",
+    number: "02",
+    label: "We Design",
+    title: "The Design Studio",
+    subtitle: "Vision Meets Feasibility",
     description:
-      "Our creative team designs the vision, but because they work alongside the builders, every drawing is validated for cost and feasibility before you see it.",
+      "Our creative team designs the vision, but because they work alongside the builders, every drawing is validated for cost and feasibility before you see it. No surprises, no value engineering disappointments.",
+    longDescription:
+      "Architecture and interiors conceived with construction intelligence. Our designers understand material costs, installation complexities, and timeline implications — creating designs that are as buildable as they are beautiful.",
     image: images?.designer || "/placeholder.jpg",
     accent: "#a8a29e",
+    capabilities: [
+      { title: "Architecture", desc: "Concept to construction docs" },
+      { title: "Interiors", desc: "Space planning & styling" },
+      { title: "3D Visualization", desc: "Photorealistic renders" },
+      { title: "Documentation", desc: "Full permit packages" },
+    ],
   },
   {
-    id: "manufacturer",
-    title: "The Manufacturer",
-    subtitle: "We Craft",
+    id: "make",
+    number: "03",
+    label: "We Make",
+    title: "The Mouhajer Factory",
+    subtitle: "Crafted Locally, Delivered Precisely",
     description:
-      "We manufacture your fire-rated doors, wardrobes, and custom furniture in our own local facility, ensuring perfect fit and zero shipping delays.",
+      "Why wait for imports? We manufacture your fire-rated doors, wardrobes, and custom furniture in our own local facility — ensuring perfect fit, zero shipping delays, and the ability to adjust on the fly.",
+    longDescription:
+      "Our 20,000 sqft manufacturing facility houses CNC machinery, spray booths, and skilled craftsmen. From bespoke joinery to metal fabrication, we control the quality and timeline of every custom element.",
     image: images?.manufacturer || "/placeholder.jpg",
     accent: "#78716c",
+    capabilities: [
+      { title: "Joinery", desc: "Doors, wardrobes, millwork" },
+      { title: "Furniture", desc: "Custom beds, tables, seating" },
+      { title: "Metalwork", desc: "Railings, screens, fixtures" },
+      { title: "Custom Pieces", desc: "One-of-a-kind creations" },
+    ],
   },
 ];
 
-// Split Screen Panel Component - Image always on left, text on right
-function PillarPanel({
-  pillar,
-  index,
-}: {
-  pillar: ReturnType<typeof createPillars>[0];
-  index: number;
-}) {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(panelRef, { once: true, margin: "-10%" });
-
-  return (
-    <div
-      ref={panelRef}
-      className="panel relative flex h-screen w-screen shrink-0 overflow-hidden"
-    >
-      {/* Split Layout - Image on Left, Content on Right */}
-      <div className="flex h-full w-full flex-row">
-        {/* Image Side */}
-        <div className="relative h-full w-1/2">
-          <motion.div
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0"
-          >
-            <SafeImage
-              src={pillar.image}
-              alt={pillar.title}
-              fill
-              className="object-cover"
-              priority={index === 0}
-            />
-            {/* Subtle overlay */}
-            <div className="absolute inset-0 bg-[#faf8f5]/20" />
-          </motion.div>
-        </div>
-
-        {/* Content Side */}
-        <div className="relative flex h-full w-1/2 items-center bg-[#faf8f5]">
-          {/* Background Pattern */}
-
-          {/* Accent Line */}
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute left-0 top-0 h-full w-px origin-top"
-            style={{ backgroundColor: pillar.accent }}
-          />
-
-          <div className="relative z-10 px-12 pl-16 lg:px-20 lg:pl-24">
-            {/* Subtitle */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-4 flex items-center gap-4"
-            >
-              <span
-                className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em]"
-                style={{ color: pillar.accent }}
-              >
-                {pillar.subtitle}
-              </span>
-              <div
-                className="h-px w-12"
-                style={{ backgroundColor: pillar.accent }}
-              />
-            </motion.div>
-
-            {/* Title */}
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mb-8 font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl"
-            >
-              {pillar.title}
-            </motion.h2>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mb-10 max-w-md font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg"
-            >
-              {pillar.description}
-            </motion.p>
-
-            {/* Decorative Element */}
-            <motion.div
-              initial={{ opacity: 0, width: 0 }}
-              animate={isInView ? { opacity: 1, width: 60 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="h-px"
-              style={{ backgroundColor: `${pillar.accent}40` }}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Opening Panel - "We Are All Three" (Previously Final Panel, now first)
-function OpeningPanel({
-  pillars,
-}: {
-  pillars: ReturnType<typeof createPillars>;
-}) {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(panelRef, { once: true, margin: "-10%" });
-
-  return (
-    <div
-      ref={panelRef}
-      className="panel relative flex h-screen w-screen shrink-0 overflow-hidden"
-    >
-      {/* Background with all three images blended */}
-      <div className="absolute inset-0">
-        {pillars.map((pillar, i) => (
-          <motion.div
-            key={pillar.id}
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 0.15 } : {}}
-            transition={{ duration: 1, delay: i * 0.2 }}
-            className="absolute inset-0"
-            style={{
-              clipPath: `polygon(${i * 33}% 0, ${(i + 1) * 33}% 0, ${(i + 1) * 33}% 100%, ${i * 33}% 100%)`,
-            }}
-          >
-            <SafeImage
-              src={pillar.image}
-              alt=""
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-        ))}
-        <div className="absolute inset-0 bg-[#faf8f5]/85" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/50 via-transparent to-[#faf8f5]/90" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-8">
-        {/* Three Cards Preview */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-8 flex gap-4"
-        >
-          {pillars.map((pillar, i) => (
-            <motion.div
-              key={pillar.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-              className="group relative h-16 w-24 overflow-hidden border border-[#c9a962]/20 bg-white/60 backdrop-blur-sm lg:h-20 lg:w-32"
-            >
-              <SafeImage
-                src={pillar.image}
-                alt={pillar.title}
-                fill
-                className="object-cover opacity-80 transition-opacity duration-300 group-hover:opacity-100"
-              />
-              <div className="absolute bottom-1.5 left-2 font-Satoshi text-[8px] uppercase tracking-wider text-neutral-700 lg:text-[9px]">
-                {pillar.subtitle}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Main Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-4 text-center"
-        >
-          <h2 className="font-SchnyderS text-2xl font-light tracking-tight text-neutral-700 sm:text-3xl lg:text-4xl">
-            The Main Contractor. The Designer. The Manufacturer.
-          </h2>
-        </motion.div>
-
-        {/* Sub-headline */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="mb-8"
-        >
-          <span className="font-SchnyderS text-4xl font-light italic text-[#c9a962] sm:text-5xl lg:text-6xl">
-            We are all three.
-          </span>
-        </motion.div>
-
-        {/* Body Copy */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="mb-10 max-w-3xl space-y-4 text-center"
-        >
-          <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600 sm:text-base lg:text-lg">
-            Mouhajer International Design & Contracting (MIDC) is more than a
-            construction firm; we are the architects of experience. As a premier
-            turnkey solution provider based in Dubai and Abu Dhabi, we
-            specialize in transforming ambitious concepts into award-winning
-            realities.
-          </p>
-          <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-500 sm:text-base lg:text-lg">
-            From the intricate luxury of 5-star hospitality to the personalized
-            grandeur of private residences, our reputation is built on a
-            seamless fusion of aesthetic mastery and engineering rigor. We do
-            not just build spaces; we curate environments that stand the test of
-            time.
-          </p>
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.9 }}
-        >
-          <Link
-            href="/about"
-            className="group relative inline-flex items-center gap-4 overflow-hidden border border-[#c9a962] bg-transparent px-10 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-900 transition-all duration-500 hover:text-neutral-950"
-          >
-            {/* Background fill on hover */}
-            <span className="absolute inset-0 -translate-x-full bg-[#c9a962] transition-transform duration-500 group-hover:translate-x-0" />
-
-            <span className="relative z-10">Explore the MIDC Legacy</span>
-            <ArrowUpRight
-              className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-              strokeWidth={1.5}
-            />
-          </Link>
-        </motion.div>
-      </div>
-
-      {/* Corner Accents */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="absolute left-8 top-8 h-16 w-16 border-l border-t border-[#c9a962]/20"
-      />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, delay: 0.6 }}
-        className="absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#c9a962]/20"
-      />
-    </div>
-  );
-}
-
-// Main Component with Horizontal Scroll
 export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [currentPanel, setCurrentPanel] = useState(0);
+  const panels = createPanels(images);
 
-  // Create pillars with images
-  const pillars = createPillars(images);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
 
-  // Total panels: Opening + 3 Pillars = 4 panels
-  const totalPanels = 4;
+  // Transform vertical scroll to horizontal scroll
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-200%"]);
 
-  useEffect(() => {
-    if (!sectionRef.current || !containerRef.current) return;
-
-    const container = containerRef.current;
-    const panels = gsap.utils.toArray<HTMLElement>(".panel");
-
-    // Kill any existing ScrollTrigger instances for this section
-    ScrollTrigger.getAll().forEach((st) => {
-      if (st.vars.trigger === sectionRef.current) {
-        st.kill();
-      }
-    });
-
-    // Create horizontal scroll animation
-    const scrollTween = gsap.to(panels, {
-      xPercent: -100 * (panels.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        pin: true,
-        scrub: 0.8,
-        snap: 1 / (panels.length - 1),
-        end: () => "+=" + container.offsetWidth * (panels.length - 1),
-        onUpdate: (self) => {
-          setProgress(self.progress);
-          setCurrentPanel(Math.round(self.progress * (panels.length - 1)));
-        },
-      },
-    });
-
-    return () => {
-      scrollTween.kill();
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.vars.trigger === sectionRef.current) {
-          st.kill();
-        }
-      });
-    };
-  }, []);
-
-  const panelLabels = ["Who We Are", ...pillars.map((p) => p.subtitle)];
+  // Overall progress for indicators
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-[#faf8f5]">
-      {/* Progress Bar - Top */}
-      <div className="absolute left-0 top-0 z-50 h-[2px] w-full bg-[#c9a962]/10">
-        <motion.div
-          className="h-full bg-[#c9a962]"
-          style={{ width: `${progress * 100}%` }}
-        />
-      </div>
-
-      {/* Horizontal Scroll Container */}
-      <div ref={containerRef} className="flex h-screen">
-        {/* Panel 1: Opening - We Are All Three */}
-        <OpeningPanel pillars={pillars} />
-
-        {/* Panels 2-4: Three Pillars - Image left, text right */}
-        {pillars.map((pillar, index) => (
-          <PillarPanel
-            key={pillar.id}
-            pillar={pillar}
-            index={index}
-          />
-        ))}
-      </div>
-
-      {/* Bottom Navigation */}
-      <div className="absolute bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3">
-        {Array.from({ length: totalPanels }).map((_, i) => (
-          <div
-            key={i}
-            className={`h-1 rounded-full transition-all duration-500 ${
-              i === currentPanel
-                ? "w-10 bg-[#c9a962]"
-                : i < currentPanel
-                  ? "w-4 bg-[#c9a962]/50"
-                  : "w-4 bg-neutral-300"
-            }`}
-          />
-        ))}
-      </div>
-
-      {/* Side Navigation - Desktop */}
-      <div className="absolute right-8 top-1/2 z-50 hidden -translate-y-1/2 lg:block">
-        <div className="flex flex-col items-end gap-6">
-          {panelLabels.map((label, i) => (
-            <div key={label} className="flex items-center gap-4">
-              <span
-                className={`font-Satoshi text-[10px] uppercase tracking-wider transition-all duration-300 ${
-                  i === currentPanel ? "text-neutral-600" : "text-transparent"
-                }`}
-              >
-                {label}
+    <section
+      ref={sectionRef}
+      className="relative h-[400vh] bg-neutral-950 md:h-[500vh] lg:h-[600vh]"
+    >
+      {/* Sticky Container */}
+      <div className="sticky top-0 h-screen overflow-hidden">
+        {/* Fixed Header - with navbar offset */}
+        <div className="absolute left-0 right-0 top-0 z-40 px-4 pb-4 pt-20 sm:px-6 sm:pb-6 sm:pt-24 lg:px-12 lg:pb-8 lg:pt-28">
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col items-center gap-3 lg:flex-row lg:items-start lg:justify-between lg:gap-4"
+          >
+            {/* Left: Title */}
+            <div className="text-center lg:text-left">
+              <span className="mb-2 inline-block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962] sm:text-[10px] sm:tracking-[0.4em]">
+                Who We Are
               </span>
-              <div
-                className={`h-3 w-3 rounded-full border transition-all duration-300 ${
-                  i === currentPanel
-                    ? "border-[#c9a962] bg-[#c9a962]"
-                    : i < currentPanel
-                      ? "border-[#c9a962]/50 bg-[#c9a962]/50"
-                      : "border-neutral-300 bg-transparent"
-                }`}
+              <h2 className="font-SchnyderS text-2xl font-light tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                <span className="block sm:inline">
+                  The Contractor. The Designer.
+                </span>{" "}
+                <span className="text-[#c9a962]">The Maker.</span>
+              </h2>
+            </div>
+
+            {/* Right: Tagline - Hidden on mobile */}
+            <div className="hidden lg:block">
+              <p className="max-w-xs text-right font-Satoshi text-sm font-light leading-relaxed text-white/50">
+                Three disciplines. One integrated team.
+                <br />
+                <span className="text-[#c9a962]">We are all three.</span>
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Progress Bar */}
+          <div className="mx-auto mt-4 max-w-4xl sm:mt-6 lg:mt-8">
+            <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-white/10">
+              <motion.div
+                className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#c9a962] to-[#e8d5a3]"
+                style={{ width: progressWidth }}
               />
             </div>
+            {/* Panel Indicators */}
+            <div className="mt-3 flex justify-between sm:mt-4">
+              {panels.map((panel, index) => (
+                <motion.div
+                  key={panel.id}
+                  className="flex items-center gap-1 sm:gap-2"
+                  style={{
+                    opacity: useTransform(
+                      scrollYProgress,
+                      [
+                        Math.max(0, (index - 0.5) / panels.length),
+                        index / panels.length,
+                        (index + 0.5) / panels.length,
+                        Math.min(1, (index + 1) / panels.length),
+                      ],
+                      [0.3, 1, 1, index === panels.length - 1 ? 1 : 0.3]
+                    ),
+                  }}
+                >
+                  <span
+                    className="font-Satoshi text-[8px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.3em] lg:text-xs"
+                    style={{ color: panel.accent }}
+                  >
+                    {panel.label}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Horizontal Scroll Container */}
+        <motion.div className="flex h-full" style={{ x }}>
+          {panels.map((panel, index) => (
+            <div
+              key={panel.id}
+              className="relative flex h-full w-screen shrink-0"
+            >
+              {/* Full Background Image */}
+              <motion.div
+                className="absolute inset-0"
+                style={{
+                  scale: useTransform(
+                    scrollYProgress,
+                    [
+                      index / panels.length,
+                      (index + 0.5) / panels.length,
+                      (index + 1) / panels.length,
+                    ],
+                    [1.1, 1, 1.05]
+                  ),
+                }}
+              >
+                <SafeImage
+                  src={panel.image}
+                  alt={panel.title}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
+                {/* Cinematic Overlays - Stronger on mobile for readability */}
+                <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/60 to-neutral-950/30 sm:via-neutral-950/40 sm:to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent sm:from-neutral-950/60" />
+                <div className="absolute inset-0 bg-neutral-950/40 sm:bg-neutral-950/30" />
+              </motion.div>
+
+              {/* Content Container */}
+              <div className="relative z-10 flex h-full w-full flex-col justify-end px-4 pb-20 pt-44 sm:px-6 sm:pb-24 sm:pt-52 lg:flex-row lg:items-center lg:justify-start lg:px-12 lg:pb-16 lg:pt-64 xl:px-20">
+                {/* Main Content */}
+                <div className="max-w-full sm:max-w-xl lg:max-w-3xl">
+                  {/* Panel Label */}
+                  <motion.div
+                    className="mb-4 flex items-center gap-3 sm:mb-6 sm:gap-4"
+                    style={{
+                      opacity: useTransform(
+                        scrollYProgress,
+                        [
+                          Math.max(0, index / panels.length - 0.05),
+                          index / panels.length + 0.08,
+                        ],
+                        [0, 1]
+                      ),
+                      y: useTransform(
+                        scrollYProgress,
+                        [
+                          Math.max(0, index / panels.length - 0.05),
+                          index / panels.length + 0.1,
+                        ],
+                        [40, 0]
+                      ),
+                    }}
+                  >
+                    <div
+                      className="h-0.5 w-8 sm:h-1 sm:w-12"
+                      style={{ backgroundColor: panel.accent }}
+                    />
+                    <span
+                      className="font-Satoshi text-[10px] uppercase tracking-[0.2em] sm:text-xs sm:tracking-[0.3em]"
+                      style={{ color: panel.accent }}
+                    >
+                      {panel.label}
+                    </span>
+                  </motion.div>
+
+                  {/* Title */}
+                  <motion.h3
+                    className="mb-2 font-SchnyderS text-3xl font-light leading-[1.1] text-white sm:mb-3 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+                    style={{
+                      opacity: useTransform(
+                        scrollYProgress,
+                        [
+                          Math.max(0, index / panels.length),
+                          index / panels.length + 0.1,
+                        ],
+                        [0, 1]
+                      ),
+                      y: useTransform(
+                        scrollYProgress,
+                        [
+                          Math.max(0, index / panels.length),
+                          index / panels.length + 0.12,
+                        ],
+                        [60, 0]
+                      ),
+                    }}
+                  >
+                    {panel.title}
+                  </motion.h3>
+
+                  {/* Subtitle */}
+                  <motion.p
+                    className="mb-4 font-Satoshi text-sm font-light tracking-wide text-white/60 sm:mb-6 sm:text-base lg:text-xl"
+                    style={{
+                      opacity: useTransform(
+                        scrollYProgress,
+                        [
+                          Math.max(0, index / panels.length + 0.02),
+                          index / panels.length + 0.12,
+                        ],
+                        [0, 1]
+                      ),
+                    }}
+                  >
+                    {panel.subtitle}
+                  </motion.p>
+
+                  {/* Main Description */}
+                  <motion.p
+                    className="mb-6 max-w-md font-Satoshi text-sm font-light leading-relaxed text-white/70 sm:mb-8 sm:max-w-xl sm:text-base lg:text-lg lg:leading-relaxed"
+                    style={{
+                      opacity: useTransform(
+                        scrollYProgress,
+                        [
+                          Math.max(0, index / panels.length + 0.04),
+                          index / panels.length + 0.14,
+                        ],
+                        [0, 1]
+                      ),
+                      y: useTransform(
+                        scrollYProgress,
+                        [
+                          Math.max(0, index / panels.length + 0.04),
+                          index / panels.length + 0.16,
+                        ],
+                        [30, 0]
+                      ),
+                    }}
+                  >
+                    {panel.description}
+                  </motion.p>
+
+                  {/* Capabilities Grid */}
+                  <motion.div
+                    className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4"
+                    style={{
+                      opacity: useTransform(
+                        scrollYProgress,
+                        [
+                          Math.max(0, index / panels.length + 0.08),
+                          index / panels.length + 0.18,
+                        ],
+                        [0, 1]
+                      ),
+                    }}
+                  >
+                    {panel.capabilities.map((cap, capIndex) => (
+                      <motion.div
+                        key={cap.title}
+                        className="group relative overflow-hidden rounded-sm border border-white/10 bg-white/5 p-3 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 sm:p-4 lg:p-5"
+                        style={{
+                          y: useTransform(
+                            scrollYProgress,
+                            [
+                              Math.max(
+                                0,
+                                index / panels.length + 0.08 + capIndex * 0.02
+                              ),
+                              index / panels.length + 0.2 + capIndex * 0.02,
+                            ],
+                            [20, 0]
+                          ),
+                        }}
+                      >
+                        {/* Accent line */}
+                        <div
+                          className="absolute left-0 top-0 h-full w-[2px] transition-all duration-300 group-hover:w-1"
+                          style={{ backgroundColor: panel.accent }}
+                        />
+                        <h4 className="mb-0.5 font-Satoshi text-xs font-medium text-white sm:mb-1 sm:text-sm lg:text-base">
+                          {cap.title}
+                        </h4>
+                        <p className="font-Satoshi text-[10px] font-light leading-tight text-white/50 sm:text-xs lg:text-sm">
+                          {cap.desc}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Panel Divider */}
+              {index < panels.length - 1 && (
+                <div className="absolute right-0 top-1/2 hidden h-2/3 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-white/20 to-transparent lg:block" />
+              )}
+            </div>
           ))}
+        </motion.div>
+
+        {/* Bottom Navigation */}
+        <div className="absolute bottom-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-4 sm:bottom-6 sm:gap-6 lg:bottom-10 lg:gap-8">
+          {panels.map((panel, index) => (
+            <motion.div
+              key={panel.id}
+              className="relative"
+              style={{
+                scale: useTransform(
+                  scrollYProgress,
+                  [
+                    Math.max(0, (index - 0.3) / panels.length),
+                    index / panels.length,
+                    (index + 0.7) / panels.length,
+                    Math.min(1, (index + 1) / panels.length),
+                  ],
+                  [0.8, 1.2, 1.2, index === panels.length - 1 ? 1.2 : 0.8]
+                ),
+              }}
+            >
+              <motion.div
+                className="h-1.5 rounded-full transition-all duration-500 sm:h-2"
+                style={{
+                  width: useTransform(
+                    scrollYProgress,
+                    [
+                      Math.max(0, (index - 0.3) / panels.length),
+                      index / panels.length,
+                      (index + 0.7) / panels.length,
+                      Math.min(1, (index + 1) / panels.length),
+                    ],
+                    [6, 32, 32, index === panels.length - 1 ? 32 : 6]
+                  ),
+                  backgroundColor: useTransform(
+                    scrollYProgress,
+                    [
+                      Math.max(0, (index - 0.3) / panels.length),
+                      index / panels.length,
+                      (index + 0.7) / panels.length,
+                      Math.min(1, (index + 1) / panels.length),
+                    ],
+                    [
+                      "rgba(255,255,255,0.2)",
+                      panel.accent,
+                      panel.accent,
+                      index === panels.length - 1
+                        ? panel.accent
+                        : "rgba(255,255,255,0.2)",
+                    ]
+                  ),
+                }}
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Mobile Scroll Hint */}
+        <motion.div
+          className="absolute bottom-4 right-4 z-40 flex items-center gap-2 sm:hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+        >
+          <motion.div
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown className="h-4 w-4 text-[#c9a962]" />
+          </motion.div>
+        </motion.div>
+
+        {/* Desktop Scroll Hint */}
+
+        {/* Corner Decorations - Hidden on very small screens */}
+        <div className="pointer-events-none absolute bottom-6 left-4 z-30 hidden h-12 w-12 sm:block sm:left-6 lg:left-12 lg:h-16 lg:w-16">
+          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
+          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+        </div>
+        <div className="pointer-events-none absolute right-4 top-6 z-30 hidden h-12 w-12 sm:block sm:right-6 lg:right-12 lg:h-16 lg:w-16">
+          <div className="absolute right-0 top-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
+          <div className="absolute right-0 top-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
         </div>
       </div>
     </section>

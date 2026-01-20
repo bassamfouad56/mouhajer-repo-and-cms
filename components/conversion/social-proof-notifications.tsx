@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Clock, CheckCircle } from 'lucide-react';
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapPin, Clock, CheckCircle } from "lucide-react";
 
 interface Notification {
   id: number;
@@ -10,28 +10,85 @@ interface Notification {
   location: string;
   action: string;
   timeAgo: string;
-  type: 'inquiry' | 'consultation' | 'project';
+  type: "inquiry" | "consultation" | "project";
 }
 
 // Simulated social proof notifications
 const NOTIFICATIONS: Notification[] = [
-  { id: 1, name: 'Ahmed', location: 'Dubai Marina', action: 'requested a consultation', timeAgo: '2 minutes ago', type: 'consultation' },
-  { id: 2, name: 'Sarah', location: 'Abu Dhabi', action: 'started a villa project', timeAgo: '5 minutes ago', type: 'project' },
-  { id: 3, name: 'Mohammed', location: 'Palm Jumeirah', action: 'inquired about fit-out services', timeAgo: '8 minutes ago', type: 'inquiry' },
-  { id: 4, name: 'Fatima', location: 'Jumeirah', action: 'booked a design consultation', timeAgo: '12 minutes ago', type: 'consultation' },
-  { id: 5, name: 'Omar', location: 'Business Bay', action: 'requested office renovation', timeAgo: '15 minutes ago', type: 'inquiry' },
-  { id: 6, name: 'Layla', location: 'Al Barsha', action: 'started a kitchen project', timeAgo: '20 minutes ago', type: 'project' },
-  { id: 7, name: 'Khalid', location: 'Downtown Dubai', action: 'inquired about luxury interiors', timeAgo: '25 minutes ago', type: 'inquiry' },
-  { id: 8, name: 'Aisha', location: 'Emirates Hills', action: 'booked a site visit', timeAgo: '30 minutes ago', type: 'consultation' },
+  {
+    id: 1,
+    name: "Ahmed",
+    location: "Dubai Marina",
+    action: "requested a consultation",
+    timeAgo: "2 minutes ago",
+    type: "consultation",
+  },
+  {
+    id: 2,
+    name: "Sarah",
+    location: "Abu Dhabi",
+    action: "started a villa project",
+    timeAgo: "5 minutes ago",
+    type: "project",
+  },
+  {
+    id: 3,
+    name: "Mohammed",
+    location: "Palm Jumeirah",
+    action: "inquired about fit-out services",
+    timeAgo: "8 minutes ago",
+    type: "inquiry",
+  },
+  {
+    id: 4,
+    name: "Fatima",
+    location: "Jumeirah",
+    action: "booked a design consultation",
+    timeAgo: "12 minutes ago",
+    type: "consultation",
+  },
+  {
+    id: 5,
+    name: "Omar",
+    location: "Business Bay",
+    action: "requested office renovation",
+    timeAgo: "15 minutes ago",
+    type: "inquiry",
+  },
+  {
+    id: 6,
+    name: "Layla",
+    location: "Al Barsha",
+    action: "started a kitchen project",
+    timeAgo: "20 minutes ago",
+    type: "project",
+  },
+  {
+    id: 7,
+    name: "Khalid",
+    location: "Downtown Dubai",
+    action: "inquired about luxury interiors",
+    timeAgo: "25 minutes ago",
+    type: "inquiry",
+  },
+  {
+    id: 8,
+    name: "Aisha",
+    location: "Emirates Hills",
+    action: "booked a site visit",
+    timeAgo: "30 minutes ago",
+    type: "consultation",
+  },
 ];
 
-const STORAGE_KEY = 'midc_social_proof_disabled';
+const STORAGE_KEY = "midc_social_proof_disabled";
 const INITIAL_DELAY = 15000; // 15 seconds before first notification
 const INTERVAL = 45000; // 45 seconds between notifications
 const DISPLAY_DURATION = 6000; // 6 seconds display time
 
 export function SocialProofNotifications() {
-  const [currentNotification, setCurrentNotification] = useState<Notification | null>(null);
+  const [currentNotification, setCurrentNotification] =
+    useState<Notification | null>(null);
   const [isEnabled, setIsEnabled] = useState(true);
   const [notificationIndex, setNotificationIndex] = useState(0);
 
@@ -83,7 +140,7 @@ export function SocialProofNotifications() {
   const handleDismiss = () => {
     setCurrentNotification(null);
     setIsEnabled(false);
-    sessionStorage.setItem(STORAGE_KEY, 'true');
+    sessionStorage.setItem(STORAGE_KEY, "true");
   };
 
   return (
@@ -93,7 +150,7 @@ export function SocialProofNotifications() {
           initial={{ opacity: 0, x: -100, y: 20 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           exit={{ opacity: 0, x: -100, y: 20 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+          transition={{ type: "spring", damping: 25, stiffness: 200 }}
           className="fixed bottom-24 left-6 z-50 max-w-xs"
         >
           <div
@@ -101,7 +158,7 @@ export function SocialProofNotifications() {
             onClick={handleDismiss}
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && handleDismiss()}
+            onKeyDown={(e) => e.key === "Enter" && handleDismiss()}
             aria-label="Dismiss notification"
           >
             {/* Subtle pulse animation */}
@@ -119,8 +176,12 @@ export function SocialProofNotifications() {
               {/* Content */}
               <div className="min-w-0 flex-1">
                 <p className="font-Satoshi text-sm text-neutral-900">
-                  <span className="font-medium">{currentNotification.name}</span>{' '}
-                  <span className="text-neutral-600">{currentNotification.action}</span>
+                  <span className="font-medium">
+                    {currentNotification.name}
+                  </span>{" "}
+                  <span className="text-neutral-600">
+                    {currentNotification.action}
+                  </span>
                 </p>
                 <div className="mt-1 flex items-center gap-3 text-xs text-neutral-500">
                   <span className="flex items-center gap-1">

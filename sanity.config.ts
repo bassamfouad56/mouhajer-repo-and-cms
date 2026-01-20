@@ -4,13 +4,14 @@ import { visionTool } from '@sanity/vision'
 import { documentInternationalization } from '@sanity/document-internationalization'
 import { media } from 'sanity-plugin-media'
 import { schemaTypes } from './sanity/schemas'
+import { projectId, dataset } from './sanity/env'
 
 export default defineConfig({
   name: 'default',
   title: 'Mouhajer Design',
 
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'r97logzc',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  projectId,
+  dataset,
 
   basePath: '/studio',
 

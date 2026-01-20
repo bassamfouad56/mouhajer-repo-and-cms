@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
@@ -18,11 +18,11 @@ import {
   Linkedin,
   Mail,
   Copy,
-} from 'lucide-react';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { LogoMarquee } from '@/components/logo-marquee';
-import type { JobPosition } from '../jobs-data';
+} from "lucide-react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { LogoMarquee } from "@/components/logo-marquee";
+import type { JobPosition } from "../jobs-data";
 
 interface JobDetailContentProps {
   job: JobPosition;
@@ -32,31 +32,31 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const handleShare = (platform: 'linkedin' | 'email' | 'copy') => {
-    const url = typeof window !== 'undefined' ? window.location.href : '';
+  const handleShare = (platform: "linkedin" | "email" | "copy") => {
+    const url = typeof window !== "undefined" ? window.location.href : "";
     const title = `${job.title} at MIDC`;
     const text = `Check out this job opportunity: ${job.title} at Mouhajer International Design & Contracting`;
 
     switch (platform) {
-      case 'linkedin':
+      case "linkedin":
         window.open(
           `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-          '_blank'
+          "_blank"
         );
         break;
-      case 'email':
-        window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n\n' + url)}`;
+      case "email":
+        window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + "\n\n" + url)}`;
         break;
-      case 'copy':
+      case "copy":
         navigator.clipboard.writeText(url);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
@@ -68,10 +68,10 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
   // Format posted date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
+    return date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
     });
   };
 
@@ -89,7 +89,7 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
               style={{
                 backgroundImage: `
                 `,
-                backgroundSize: '80px 80px',
+                backgroundSize: "80px 80px",
               }}
             />
           </div>
@@ -98,7 +98,7 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
           <motion.div
             className="absolute right-[15%] top-[30%] h-px w-32 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
             animate={{ x: [0, 30, 0], opacity: [0.2, 0.5, 0.2] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           />
 
           <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
@@ -146,7 +146,9 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
                 )}
                 <div className="flex items-center gap-2">
                   <Calendar size={16} className="text-[#c9a962]" />
-                  <span className="font-Satoshi text-sm">Posted {formatDate(job.postedDate)}</span>
+                  <span className="font-Satoshi text-sm">
+                    Posted {formatDate(job.postedDate)}
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -208,7 +210,10 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
                         transition={{ delay: index * 0.05 }}
                         className="flex items-start gap-4"
                       >
-                        <CheckCircle size={18} className="mt-0.5 flex-shrink-0 text-[#c9a962]" />
+                        <CheckCircle
+                          size={18}
+                          className="mt-0.5 flex-shrink-0 text-[#c9a962]"
+                        />
                         <span className="font-Satoshi text-base font-light leading-relaxed text-neutral-600">
                           {item}
                         </span>
@@ -271,26 +276,32 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
                     </h3>
                     <div className="flex gap-3">
                       <button
-                        onClick={() => handleShare('linkedin')}
+                        onClick={() => handleShare("linkedin")}
                         className="flex h-10 w-10 items-center justify-center border border-neutral-200 text-neutral-600 transition-all hover:border-[#0077b5] hover:bg-[#0077b5] hover:text-white"
                       >
                         <Linkedin size={18} />
                       </button>
                       <button
-                        onClick={() => handleShare('email')}
+                        onClick={() => handleShare("email")}
                         className="flex h-10 w-10 items-center justify-center border border-neutral-200 text-neutral-600 transition-all hover:border-neutral-950 hover:bg-neutral-950 hover:text-white"
                       >
                         <Mail size={18} />
                       </button>
                       <button
-                        onClick={() => handleShare('copy')}
+                        onClick={() => handleShare("copy")}
                         className="flex h-10 w-10 items-center justify-center border border-neutral-200 text-neutral-600 transition-all hover:border-neutral-950 hover:bg-neutral-950 hover:text-white"
                       >
-                        {copied ? <CheckCircle size={18} className="text-green-500" /> : <Copy size={18} />}
+                        {copied ? (
+                          <CheckCircle size={18} className="text-green-500" />
+                        ) : (
+                          <Copy size={18} />
+                        )}
                       </button>
                     </div>
                     {copied && (
-                      <p className="mt-2 font-Satoshi text-xs text-green-600">Link copied!</p>
+                      <p className="mt-2 font-Satoshi text-xs text-green-600">
+                        Link copied!
+                      </p>
                     )}
                   </div>
 
@@ -351,13 +362,16 @@ export default function JobDetailContent({ job }: JobDetailContentProps) {
 // Application Form Section
 function ApplicationFormSection({ job }: { job: JobPosition }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    linkedIn: '',
-    coverLetter: '',
+    name: "",
+    email: "",
+    phone: "",
+    linkedIn: "",
+    coverLetter: "",
   });
   const [resume, setResume] = useState<File | null>(null);
   const [portfolio, setPortfolio] = useState<File | null>(null);
@@ -369,19 +383,19 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
 
     try {
       const data = new FormData();
-      data.append('name', formData.name);
-      data.append('email', formData.email);
-      data.append('phone', formData.phone);
-      data.append('linkedIn', formData.linkedIn);
-      data.append('position', job.title);
-      data.append('positionId', job.id);
-      data.append('department', job.department);
-      data.append('coverLetter', formData.coverLetter);
-      if (resume) data.append('resume', resume);
-      if (portfolio) data.append('portfolio', portfolio);
+      data.append("name", formData.name);
+      data.append("email", formData.email);
+      data.append("phone", formData.phone);
+      data.append("linkedIn", formData.linkedIn);
+      data.append("position", job.title);
+      data.append("positionId", job.id);
+      data.append("department", job.department);
+      data.append("coverLetter", formData.coverLetter);
+      if (resume) data.append("resume", resume);
+      if (portfolio) data.append("portfolio", portfolio);
 
-      const response = await fetch('/api/apply', {
-        method: 'POST',
+      const response = await fetch("/api/apply", {
+        method: "POST",
         body: data,
       });
 
@@ -389,23 +403,30 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
 
       if (result.success) {
         setMessage({
-          type: 'success',
-          text: 'Your application has been submitted successfully! We will review it and get back to you soon.',
+          type: "success",
+          text: "Your application has been submitted successfully! We will review it and get back to you soon.",
         });
         // Reset form
-        setFormData({ name: '', email: '', phone: '', linkedIn: '', coverLetter: '' });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          linkedIn: "",
+          coverLetter: "",
+        });
         setResume(null);
         setPortfolio(null);
       } else {
         setMessage({
-          type: 'error',
-          text: result.message || 'Failed to submit application. Please try again.',
+          type: "error",
+          text:
+            result.message || "Failed to submit application. Please try again.",
         });
       }
     } catch (error) {
       setMessage({
-        type: 'error',
-        text: 'An error occurred. Please try again later.',
+        type: "error",
+        text: "An error occurred. Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
@@ -438,7 +459,9 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
                 type="text"
                 required
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
                 placeholder="John Doe"
               />
@@ -451,7 +474,9 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
                 type="email"
                 required
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
                 placeholder="john@example.com"
               />
@@ -468,7 +493,9 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
                 type="tel"
                 required
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
                 className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
                 placeholder="+971 50 123 4567"
               />
@@ -480,7 +507,9 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
               <input
                 type="url"
                 value={formData.linkedIn}
-                onChange={(e) => setFormData({ ...formData, linkedIn: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, linkedIn: e.target.value })
+                }
                 className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
                 placeholder="https://linkedin.com/in/yourprofile"
               />
@@ -510,7 +539,7 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
                   {resume ? (
                     <span className="text-[#c9a962]">{resume.name}</span>
                   ) : (
-                    'Click to upload (PDF, DOC, DOCX - Max 10MB)'
+                    "Click to upload (PDF, DOC, DOCX - Max 10MB)"
                   )}
                 </span>
               </label>
@@ -539,7 +568,7 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
                   {portfolio ? (
                     <span className="text-[#c9a962]">{portfolio.name}</span>
                   ) : (
-                    'Click to upload portfolio (PDF, ZIP - Max 25MB)'
+                    "Click to upload portfolio (PDF, ZIP - Max 25MB)"
                   )}
                 </span>
               </label>
@@ -554,7 +583,9 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
             <textarea
               rows={6}
               value={formData.coverLetter}
-              onChange={(e) => setFormData({ ...formData, coverLetter: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, coverLetter: e.target.value })
+              }
               placeholder="Tell us why you're a great fit for this position and what excites you about joining MIDC..."
               className="w-full border border-white/20 bg-white/5 px-4 py-3 font-Satoshi text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-[#c9a962]"
             />
@@ -564,9 +595,9 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
           {message && (
             <div
               className={`rounded px-4 py-3 font-Satoshi text-sm ${
-                message.type === 'success'
-                  ? 'bg-green-500/20 text-green-400'
-                  : 'bg-red-500/20 text-red-400'
+                message.type === "success"
+                  ? "bg-green-500/20 text-green-400"
+                  : "bg-red-500/20 text-red-400"
               }`}
             >
               {message.text}
@@ -579,12 +610,12 @@ function ApplicationFormSection({ job }: { job: JobPosition }) {
             disabled={isSubmitting}
             className="w-full border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-xs uppercase tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962] disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {isSubmitting ? 'Submitting...' : 'Submit Application'}
+            {isSubmitting ? "Submitting..." : "Submit Application"}
           </button>
 
           {/* Privacy Note */}
           <p className="text-center font-Satoshi text-xs text-white/40">
-            By submitting this form, you agree to our{' '}
+            By submitting this form, you agree to our{" "}
             <Link href="/privacy" className="text-[#c9a962] underline">
               Privacy Policy
             </Link>

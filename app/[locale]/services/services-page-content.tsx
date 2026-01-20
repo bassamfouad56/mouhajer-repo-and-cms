@@ -16,7 +16,9 @@ import { urlForImage } from "@/sanity/lib/image";
 import { FAQSection } from "@/components/sections/faq";
 
 // Type for multilingual fields that can be either a string or an object with locale keys
-type MultilingualField = string | { ar?: string; en?: string; [key: string]: string | undefined };
+type MultilingualField =
+  | string
+  | { ar?: string; en?: string; [key: string]: string | undefined };
 
 interface SanityService {
   _id: string;
@@ -25,7 +27,10 @@ interface SanityService {
   excerpt?: MultilingualField;
   mainImage?: any;
   icon?: string;
-  features?: Array<{ title: MultilingualField; description: MultilingualField }>;
+  features?: Array<{
+    title: MultilingualField;
+    description: MultilingualField;
+  }>;
   order?: number;
 }
 
@@ -48,11 +53,14 @@ interface ServicesPageContentProps {
 }
 
 // Helper function to safely get localized text
-function getLocalizedText(field: MultilingualField | undefined, locale: string = 'en'): string {
-  if (!field) return '';
-  if (typeof field === 'string') return field;
+function getLocalizedText(
+  field: MultilingualField | undefined,
+  locale: string = "en"
+): string {
+  if (!field) return "";
+  if (typeof field === "string") return field;
   // Try the requested locale first, then 'en', then any available value
-  return field[locale] || field.en || Object.values(field).find(v => v) || '';
+  return field[locale] || field.en || Object.values(field).find((v) => v) || "";
 }
 
 // Smooth parallax hook
@@ -63,8 +71,8 @@ function useParallax(value: MotionValue<number>, distance: number) {
 export default function ServicesPageContent({
   services = [],
   projects = [],
-  locale = 'en',
-  heroImage = '',
+  locale = "en",
+  heroImage = "",
 }: ServicesPageContentProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const isHeroInView = useInView(heroRef, { once: true });
@@ -80,9 +88,14 @@ export default function ServicesPageContent({
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
   // Get first project image as fallback if no heroImage from Sanity
-  const bannerImage = heroImage || (projects[0]?.mainImage
-    ? urlForImage(projects[0].mainImage)?.width(2560).height(1440).url() || '/placeholder.jpg'
-    : '/placeholder.jpg');
+  const fallbackImage =
+    "/website%202.0%20content/services/inside%20services/the%20art%20of%20integrated%20construction/construction-+%20more%20labor.jpg";
+  const bannerImage =
+    heroImage ||
+    (projects[0]?.mainImage
+      ? urlForImage(projects[0].mainImage)?.width(2560).height(1440).url() ||
+        fallbackImage
+      : fallbackImage);
 
   return (
     <main className="relative bg-[#faf8f5]">
@@ -120,7 +133,7 @@ export default function ServicesPageContent({
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundSize: '60px 60px',
+            backgroundSize: "60px 60px",
           }}
         />
 
@@ -190,49 +203,7 @@ export default function ServicesPageContent({
             >
               Design. Build. Engineering. One Point of Responsibility.
             </motion.p>
-
-            {/* Stats Row */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className="flex items-center justify-center gap-8 sm:gap-16"
-            >
-              {[
-                { number: '6', label: 'Core Services' },
-                { number: '1', label: 'Point of Contact' },
-                { number: '0', label: 'Outsourcing' },
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="font-SchnyderS text-4xl font-light text-neutral-900 sm:text-5xl">
-                    {stat.number}
-                  </div>
-                  <div className="mt-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] text-neutral-500">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
           </div>
-        </motion.div>
-
-        {/* Minimal Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isHeroInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-3"
-          >
-            <span className="font-Satoshi text-[9px] font-light uppercase tracking-[0.3em] text-neutral-500">
-              Scroll
-            </span>
-            <ChevronDown className="h-4 w-4 text-neutral-500" />
-          </motion.div>
         </motion.div>
 
         {/* Bottom Border Accent */}
@@ -256,28 +227,35 @@ export default function ServicesPageContent({
         titleHighlight="& Answers"
         faqs={[
           {
-            question: "Do you handle the full construction scope from empty land?",
-            answer: "Yes. We are a licensed Building Contractor (G+12). We handle excavation, concrete, structural steel, and all civil works. You do not need a separate builder.",
+            question:
+              "Do you handle the full construction scope from empty land?",
+            answer:
+              "Yes. We are a licensed Building Contractor (G+12). We handle excavation, concrete, structural steel, and all civil works. You do not need a separate builder.",
           },
           {
             question: "Who manages the government approvals?",
-            answer: "We do. Our in-house engineering team handles all permits and NOCs from Dubai Municipality, Civil Defence, DEWA, and master developers like Nakheel or Emaar.",
+            answer:
+              "We do. Our in-house engineering team handles all permits and NOCs from Dubai Municipality, Civil Defence, DEWA, and master developers like Nakheel or Emaar.",
           },
           {
             question: "Do you manufacture your own furniture?",
-            answer: "Yes. We own a dedicated joinery and furniture factory. We custom-make doors, wardrobes, kitchens, and loose furniture to fit your space perfectly.",
+            answer:
+              "Yes. We own a dedicated joinery and furniture factory. We custom-make doors, wardrobes, kitchens, and loose furniture to fit your space perfectly.",
           },
           {
             question: "Can you renovate my hotel while it stays open?",
-            answer: 'Yes. We specialize in "live environment" renovations. We phase the work to ensure your guests are undisturbed and your revenue stream continues.',
+            answer:
+              'Yes. We specialize in "live environment" renovations. We phase the work to ensure your guests are undisturbed and your revenue stream continues.',
           },
           {
             question: "Do you only do design, or can you build it too?",
-            answer: "We are a full Turnkey Solution Provider. We can design your project and then build it using our in-house construction and MEP teams. This is the preferred route for 90% of our clients as it guarantees quality and budget control.",
+            answer:
+              "We are a full Turnkey Solution Provider. We can design your project and then build it using our in-house construction and MEP teams. This is the preferred route for 90% of our clients as it guarantees quality and budget control.",
           },
           {
             question: "Do you provide maintenance after handover?",
-            answer: "Yes. We offer comprehensive annual maintenance contracts to ensure your AC, lighting, and finishes remain in showroom condition.",
+            answer:
+              "Yes. We offer comprehensive annual maintenance contracts to ensure your AC, lighting, and finishes remain in showroom condition.",
           },
         ]}
         showCTA={false}
@@ -290,7 +268,13 @@ export default function ServicesPageContent({
 }
 
 // Section 1: Turnkey Solution with Real Project Parallax - Dark Theme
-function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityProject[]; locale?: string }) {
+function TurnkeySolutionSection({
+  projects,
+  locale = "en",
+}: {
+  projects: SanityProject[];
+  locale?: string;
+}) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-200px" });
 
@@ -313,7 +297,7 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundSize: '60px 60px',
+          backgroundSize: "60px 60px",
         }}
       />
 
@@ -417,7 +401,7 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
                 />
               ) : (
                 <Image
-                  src="/placeholder.jpg"
+                  src="/website%202.0%20content/services/inside%20services/we%20do%20not%20outsource%20your%20vision/_MID3905-HDR.jpg"
                   alt="MIDC Turnkey Design Project"
                   fill
                   className="object-cover"
@@ -467,7 +451,7 @@ function TurnkeySolutionSection({ projects, locale = 'en' }: { projects: SanityP
 function ServicePillarsSection({
   sanityServices,
   sanityProjects,
-  locale = 'en',
+  locale = "en",
 }: {
   sanityServices: SanityService[];
   sanityProjects: SanityProject[];
@@ -476,14 +460,18 @@ function ServicePillarsSection({
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  // Local project images for fallback
+  // Local project images for fallback (URL encoded)
   const localImages = {
-    civil: "/placeholder.jpg",
-    architecture: "/placeholder.jpg",
-    mep: "/placeholder.jpg",
-    manufacturing: "/placeholder.jpg",
-    fitout: "/placeholder.jpg",
-    handover: "/placeholder.jpg",
+    civil: "/website%202.0%20content/services/civil%20construction/MID5703.jpg",
+    architecture:
+      "/website%202.0%20content/services/interior%20architecture/_MIDnf71-HDR.jpg",
+    mep: "/website%202.0%20content/services/MEP%20Engineering/_MID5351.jpg",
+    manufacturing:
+      "/website%202.0%20content/services/manufacturing%20and%20joinery/quality-control-at-workshop-2025-01-31-00-41-33-utc.jpg",
+    fitout:
+      "/website%202.0%20content/services/fitout%20execution/_MID1778-HDR.jpg",
+    handover:
+      "/website%202.0%20content/services/inside%20services/we%20do%20not%20outsource%20your%20vision/_MID3905-HDR.jpg",
   };
 
   const services = [
@@ -624,7 +612,8 @@ function ServicePillarsSection({
         <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
           {services.map((service, index) => {
             const imageSource = service.mainImage
-              ? urlForImage(service.mainImage)?.width(800).height(600).url() || ''
+              ? urlForImage(service.mainImage)?.width(800).height(600).url() ||
+                ""
               : service.localImage;
 
             return (
@@ -656,7 +645,6 @@ function ServicePillarsSection({
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-[#faf8f5]/40 to-transparent" />
                       </div>
-
                     </div>
 
                     {/* Content Section */}
@@ -723,7 +711,7 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
 
   // Determine which image source to use
   const imageSource = service.mainImage
-    ? urlForImage(service.mainImage)?.width(900).height(1200).url() || ''
+    ? urlForImage(service.mainImage)?.width(900).height(1200).url() || ""
     : service.localImage;
 
   return (
@@ -816,7 +804,6 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
     </motion.div>
   );
 }
-
 
 // CTA - Clean and Professional
 function IntegratedPathCTA() {

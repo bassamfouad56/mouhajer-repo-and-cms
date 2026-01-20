@@ -2,39 +2,41 @@
  * Sanity Data Migration Script
  *
  * This script migrates data from the old Sanity project (b6q28exv)
- * to the new Sanity project (r97logzc)
+ * to the new Sanity project (b6q28exv)
  *
  * Run with: npx tsx scripts/migrate-sanity-data.ts
  */
 
-import { createClient } from '@sanity/client';
+import { createClient } from "@sanity/client";
 
 // Old Sanity project credentials
 const oldClient = createClient({
-  projectId: 'b6q28exv',
-  dataset: 'production',
-  apiVersion: '2024-11-21',
-  token: 'sknLI9zeZYMWy8WFthsEaS6oC2xjQIpqnXMCDftesR41VXIAscgOEZLU2b7fzFxb6nJEp8p3LR6pqcDtY0UH4bAB6OguiCLuZHyuZVXlmUiDyu8waCgyS1nn6eeSDxDjWRNOkk7vaHhajaYwpgMYHTzy81ke8Amanrtq0k16Pvvh5ZStg32d',
+  projectId: "b6q28exv",
+  dataset: "production",
+  apiVersion: "2024-11-21",
+  token:
+    "sknLI9zeZYMWy8WFthsEaS6oC2xjQIpqnXMCDftesR41VXIAscgOEZLU2b7fzFxb6nJEp8p3LR6pqcDtY0UH4bAB6OguiCLuZHyuZVXlmUiDyu8waCgyS1nn6eeSDxDjWRNOkk7vaHhajaYwpgMYHTzy81ke8Amanrtq0k16Pvvh5ZStg32d",
   useCdn: false,
 });
 
 // New Sanity project credentials
 const newClient = createClient({
-  projectId: 'r97logzc',
-  dataset: 'production',
-  apiVersion: '2024-11-21',
-  token: 'skiIzl2j9bAUcxtrJGS2MFp1JccNsjBPTSwzGGuydjQpIkCqtx6tt6jDtKKsZaarRfFHApyFrWH64y0RYkFPm7pLOAErsezEPJ5tGAn48O3ruOLA9n6scz2zWZsF6JOPNwSAMWpsupJlNrTVMoJ2Jju6OCcVB5RAs2kFKXtDVOO2jZ04eTZJ',
+  projectId: "b6q28exv",
+  dataset: "production",
+  apiVersion: "2024-11-21",
+  token:
+    "skiIzl2j9bAUcxtrJGS2MFp1JccNsjBPTSwzGGuydjQpIkCqtx6tt6jDtKKsZaarRfFHApyFrWH64y0RYkFPm7pLOAErsezEPJ5tGAn48O3ruOLA9n6scz2zWZsF6JOPNwSAMWpsupJlNrTVMoJ2Jju6OCcVB5RAs2kFKXtDVOO2jZ04eTZJ",
   useCdn: false,
 });
 
 // Document types to migrate
 const DOCUMENT_TYPES = [
-  'project',
-  'service',
-  'industry',
-  'post',
-  'client',
-  'testimonial',
+  "project",
+  "service",
+  "industry",
+  "post",
+  "client",
+  "testimonial",
 ];
 
 interface MigrationStats {
@@ -87,7 +89,9 @@ async function migrateDocumentType(type: string): Promise<MigrationStats> {
       }
     }
 
-    console.log(`   ✨ Completed: ${stats.migratedCount}/${stats.oldCount} successful`);
+    console.log(
+      `   ✨ Completed: ${stats.migratedCount}/${stats.oldCount} successful`
+    );
   } catch (error: any) {
     console.error(`   💥 Error fetching ${type} documents: ${error.message}`);
     stats.errors.push(`Fetch error: ${error.message}`);
@@ -98,7 +102,7 @@ async function migrateDocumentType(type: string): Promise<MigrationStats> {
 
 async function migrateAssets(): Promise<MigrationStats> {
   const stats: MigrationStats = {
-    type: 'assets',
+    type: "assets",
     oldCount: 0,
     migratedCount: 0,
     failedCount: 0,
@@ -120,11 +124,13 @@ async function migrateAssets(): Promise<MigrationStats> {
       return stats;
     }
 
-    console.log(`   ℹ️  Note: Assets need to be manually uploaded to the new project`);
+    console.log(
+      `   ℹ️  Note: Assets need to be manually uploaded to the new project`
+    );
     console.log(`   ℹ️  or use Sanity CLI: sanity dataset export + import`);
 
     // Assets can't be easily migrated via API, need manual process
-    stats.errors.push('Assets require manual migration via Sanity CLI');
+    stats.errors.push("Assets require manual migration via Sanity CLI");
   } catch (error: any) {
     console.error(`   💥 Error checking assets: ${error.message}`);
     stats.errors.push(`Asset check error: ${error.message}`);
@@ -134,37 +140,41 @@ async function migrateAssets(): Promise<MigrationStats> {
 }
 
 async function testConnections() {
-  console.log('🔌 Testing Sanity connections...\n');
+  console.log("🔌 Testing Sanity connections...\n");
 
   try {
-    console.log('   Testing OLD project (b6q28exv)...');
+    console.log("   Testing OLD project (b6q28exv)...");
     const oldProjects = await oldClient.fetch(`*[_type == "project"][0...1]`);
-    console.log(`   ✅ Old project connected (found ${oldProjects.length} sample documents)`);
+    console.log(
+      `   ✅ Old project connected (found ${oldProjects.length} sample documents)`
+    );
   } catch (error: any) {
     console.error(`   ❌ Old project connection failed: ${error.message}`);
-    throw new Error('Cannot connect to old Sanity project');
+    throw new Error("Cannot connect to old Sanity project");
   }
 
   try {
-    console.log('   Testing NEW project (r97logzc)...');
+    console.log("   Testing NEW project (b6q28exv)...");
     const newProjects = await newClient.fetch(`*[_type == "project"][0...1]`);
-    console.log(`   ✅ New project connected (found ${newProjects.length} existing documents)`);
+    console.log(
+      `   ✅ New project connected (found ${newProjects.length} existing documents)`
+    );
   } catch (error: any) {
     console.error(`   ❌ New project connection failed: ${error.message}`);
-    throw new Error('Cannot connect to new Sanity project');
+    throw new Error("Cannot connect to new Sanity project");
   }
 }
 
 async function main() {
-  console.log('🚀 Starting Sanity Data Migration');
-  console.log('=====================================\n');
+  console.log("🚀 Starting Sanity Data Migration");
+  console.log("=====================================\n");
 
   try {
     // Test connections first
     await testConnections();
 
-    console.log('\n📊 Migration Summary');
-    console.log('=====================================');
+    console.log("\n📊 Migration Summary");
+    console.log("=====================================");
 
     const allStats: MigrationStats[] = [];
 
@@ -179,15 +189,15 @@ async function main() {
     allStats.push(assetStats);
 
     // Print final summary
-    console.log('\n\n📈 FINAL SUMMARY');
-    console.log('=====================================');
+    console.log("\n\n📈 FINAL SUMMARY");
+    console.log("=====================================");
 
     let totalOld = 0;
     let totalMigrated = 0;
     let totalFailed = 0;
 
     allStats.forEach((stats) => {
-      if (stats.type !== 'assets') {
+      if (stats.type !== "assets") {
         totalOld += stats.oldCount;
         totalMigrated += stats.migratedCount;
         totalFailed += stats.failedCount;
@@ -204,24 +214,32 @@ async function main() {
       }
     });
 
-    console.log('\n=====================================');
+    console.log("\n=====================================");
     console.log(`Total documents: ${totalOld}`);
     console.log(`✅ Successfully migrated: ${totalMigrated}`);
     console.log(`❌ Failed: ${totalFailed}`);
-    console.log(`📊 Success rate: ${totalOld > 0 ? Math.round((totalMigrated / totalOld) * 100) : 0}%`);
+    console.log(
+      `📊 Success rate: ${totalOld > 0 ? Math.round((totalMigrated / totalOld) * 100) : 0}%`
+    );
 
     if (totalFailed === 0) {
-      console.log('\n🎉 Migration completed successfully!');
+      console.log("\n🎉 Migration completed successfully!");
     } else {
-      console.log('\n⚠️  Migration completed with some errors. Check the log above.');
+      console.log(
+        "\n⚠️  Migration completed with some errors. Check the log above."
+      );
     }
 
-    console.log('\n📝 Next Steps:');
-    console.log('   1. Verify data in Sanity Studio: https://r97logzc.sanity.studio');
-    console.log('   2. If assets are missing, use: sanity dataset export + import');
-    console.log('   3. Restart your Next.js dev server to use new project');
+    console.log("\n📝 Next Steps:");
+    console.log(
+      "   1. Verify data in Sanity Studio: https://b6q28exv.sanity.studio"
+    );
+    console.log(
+      "   2. If assets are missing, use: sanity dataset export + import"
+    );
+    console.log("   3. Restart your Next.js dev server to use new project");
   } catch (error: any) {
-    console.error('\n💥 Migration failed:', error.message);
+    console.error("\n💥 Migration failed:", error.message);
     process.exit(1);
   }
 }

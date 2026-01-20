@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { CheckCircle2, TrendingUp, Shield } from 'lucide-react';
-import { urlForImage } from '@/sanity/lib/image';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { CheckCircle2, TrendingUp, Shield } from "lucide-react";
+import { urlForImage } from "@/sanity/lib/image";
 
 interface SanityClient {
   _id: string;
@@ -27,46 +27,51 @@ interface CompanyWeKeepProps {
 const highlights = [
   {
     icon: CheckCircle2,
-    text: 'Framework contracts with government-backed developers',
+    text: "Framework contracts with government-backed developers",
   },
   {
     icon: TrendingUp,
-    text: 'Consistent repeat business from hospitality leaders',
+    text: "Consistent repeat business from hospitality leaders",
   },
   {
     icon: Shield,
-    text: 'Preferred partner for projects that cannot afford mistakes',
+    text: "Preferred partner for projects that cannot afford mistakes",
   },
 ];
 
 // Fallback case studies if no Sanity data
 const defaultCaseStudies = [
   {
-    client: 'Abu Dhabi National Hotels (ADNH)',
-    projects: ['Sheraton Renovation', 'Radisson Blu Upgrade'],
+    client: "Abu Dhabi National Hotels (ADNH)",
+    projects: ["Sheraton Renovation", "Radisson Blu Upgrade"],
     description:
-      'When ADNH needed to renovate the Sheraton, they called us. When they needed to upgrade the Radisson Blu, they called us again.',
+      "When ADNH needed to renovate the Sheraton, they called us. When they needed to upgrade the Radisson Blu, they called us again.",
   },
   {
-    client: 'Wasl Asset Management',
-    projects: ['Park Hyatt Villas', 'Emirates Golf Club'],
+    client: "Wasl Asset Management",
+    projects: ["Park Hyatt Villas", "Emirates Golf Club"],
     description:
-      'When Wasl needed a partner for the Park Hyatt villas, they chose MIDC. Trust earned through flawless execution.',
+      "When Wasl needed a partner for the Park Hyatt villas, they chose MIDC. Trust earned through flawless execution.",
   },
 ];
 
 export function CompanyWeKeep({ clients = [] }: CompanyWeKeepProps) {
   // Transform Sanity clients into case studies format
-  const caseStudies = clients.length > 0
-    ? clients.slice(0, 4).map((client) => ({
-        client: client.name,
-        projects: client.projects || (client.projectsText ? client.projectsText.split(', ') : []),
-        description: client.description || `Trusted partner for ${client.name}'s premium projects.`,
-        logo: client.logo,
-      }))
-    : defaultCaseStudies;
+  const caseStudies =
+    clients.length > 0
+      ? clients.slice(0, 4).map((client) => ({
+          client: client.name,
+          projects:
+            client.projects ||
+            (client.projectsText ? client.projectsText.split(", ") : []),
+          description:
+            client.description ||
+            `Trusted partner for ${client.name}'s premium projects.`,
+          logo: client.logo,
+        }))
+      : defaultCaseStudies;
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -181,7 +186,6 @@ export function CompanyWeKeep({ clients = [] }: CompanyWeKeepProps) {
               <p className="max-w-2xl font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg">
                 {study.description}
               </p>
-
             </motion.div>
           ))}
         </div>

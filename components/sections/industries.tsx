@@ -1,22 +1,20 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Industry, Service, Project } from '@/lib/wordpress';
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Industry, Service, Project } from "@/lib/wordpress";
 import {
   Building2,
   Home,
   Hotel,
   Store,
-  Hospital,
   GraduationCap,
   Utensils,
   Briefcase,
   ArrowRight,
   Users,
   Award,
-  TrendingUp,
-} from 'lucide-react';
+} from "lucide-react";
 
 interface IndustriesProps {
   industries: Industry[];
@@ -24,9 +22,13 @@ interface IndustriesProps {
   projects?: Project[];
 }
 
-export function Industries({ industries, services = [], projects = [] }: IndustriesProps) {
+export function Industries({
+  industries,
+  services = [],
+  projects = [],
+}: IndustriesProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
 
   // Render only CMS industries
@@ -84,11 +86,15 @@ export function Industries({ industries, services = [], projects = [] }: Industr
               industry={industry}
               index={index}
               isSelected={selectedIndustry === industry.id}
-              onSelect={() => setSelectedIndustry(industry.id === selectedIndustry ? null : industry.id)}
-              relatedServices={services.filter(s =>
+              onSelect={() =>
+                setSelectedIndustry(
+                  industry.id === selectedIndustry ? null : industry.id
+                )
+              }
+              relatedServices={services.filter((s) =>
                 industry.acfFields?.relatedServices?.includes(s.id)
               )}
-              relatedProjects={projects.filter(p =>
+              relatedProjects={projects.filter((p) =>
                 industry.acfFields?.relatedProjects?.includes(p.id)
               )}
             />
@@ -108,7 +114,9 @@ export function Industries({ industries, services = [], projects = [] }: Industr
                 <Building2 className="h-8 w-8 text-[#c9a962]" />
               </div>
             </div>
-            <div className="mb-2 font-SchnyderS text-4xl font-light text-[#262420]">8+</div>
+            <div className="mb-2 font-SchnyderS text-4xl font-light text-[#262420]">
+              8+
+            </div>
             <div className="font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60">
               INDUSTRIES SERVED
             </div>
@@ -119,7 +127,9 @@ export function Industries({ industries, services = [], projects = [] }: Industr
                 <Award className="h-8 w-8 text-[#c9a962]" />
               </div>
             </div>
-            <div className="mb-2 font-SchnyderS text-4xl font-light text-[#262420]">150+</div>
+            <div className="mb-2 font-SchnyderS text-4xl font-light text-[#262420]">
+              150+
+            </div>
             <div className="font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60">
               PROJECTS COMPLETED
             </div>
@@ -130,7 +140,9 @@ export function Industries({ industries, services = [], projects = [] }: Industr
                 <Users className="h-8 w-8 text-[#c9a962]" />
               </div>
             </div>
-            <div className="mb-2 font-SchnyderS text-4xl font-light text-[#262420]">98%</div>
+            <div className="mb-2 font-SchnyderS text-4xl font-light text-[#262420]">
+              98%
+            </div>
             <div className="font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60">
               CLIENT SATISFACTION
             </div>
@@ -150,10 +162,13 @@ export function Industries({ industries, services = [], projects = [] }: Industr
           </p>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:bg-transparent hover:text-[#c9a962]"
+            className="group inline-flex items-center gap-3 border border-neutral-950 bg-neutral-950 px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.15em] text-white transition-all hover:bg-transparent hover:text-neutral-950"
           >
             <span>DISCUSS YOUR PROJECT</span>
-            <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
+            <ArrowRight
+              size={18}
+              className="transition-transform group-hover:translate-x-2"
+            />
           </a>
         </motion.div>
       </div>
@@ -177,25 +192,25 @@ function IndustryCard({
   relatedProjects: Project[];
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-50px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
   // Get icon component based on industry title
   const getIcon = (title: string) => {
     const iconMap: { [key: string]: typeof Home } = {
-      'Residential': Home,
-      'Commercial': Building2,
-      'Hospitality': Hotel,
-      'Retail': Store,
-      'Healthcare': Hospital,
-      'Education': GraduationCap,
-      'Restaurant & F&B': Utensils,
-      'Corporate': Briefcase,
+      Residential: Home,
+      Commercial: Building2,
+      Hospitality: Hotel,
+      Retail: Store,
+      Education: GraduationCap,
+      "Restaurant & F&B": Utensils,
+      Corporate: Briefcase,
     };
     const IconComponent = iconMap[title] || Building2;
     return <IconComponent className="h-6 w-6" />;
   };
 
-  const projectCount = industry.acfFields?.stats?.projectsCompleted || relatedProjects.length || 0;
+  const projectCount =
+    industry.acfFields?.stats?.projectsCompleted || relatedProjects.length || 0;
   const serviceCount = relatedServices.length || 0;
 
   return (
@@ -208,36 +223,46 @@ function IndustryCard({
       onClick={onSelect}
     >
       {/* Card */}
-      <div className={`relative flex h-full flex-col overflow-hidden bg-white/60 backdrop-blur-sm transition-all duration-500 ${
-        isSelected ? 'bg-white/90' : 'hover:bg-white/80'
-      }`}>
+      <div
+        className={`relative flex h-full flex-col overflow-hidden bg-white/60 backdrop-blur-sm transition-all duration-500 ${
+          isSelected ? "bg-white/90" : "hover:bg-white/80"
+        }`}
+      >
         {/* Top Border */}
-        <div className={`h-1 w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent transition-all duration-500 ${
-          isSelected ? 'via-[#c9a962]' : 'group-hover:via-[#c9a962]/50'
-        }`} />
+        <div
+          className={`h-1 w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent transition-all duration-500 ${
+            isSelected ? "via-[#c9a962]" : "group-hover:via-[#c9a962]/50"
+          }`}
+        />
 
         <div className="flex flex-1 flex-col p-8">
           {/* Icon */}
           <div className="mb-6">
-            <div className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-500 ${
-              isSelected
-                ? 'border-[#c9a962] bg-[#c9a962] text-white'
-                : 'border-[#e8e6e3] text-[#3d3a36]/60 group-hover:border-[#c9a962]/50'
-            }`}>
+            <div
+              className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-500 ${
+                isSelected
+                  ? "border-[#c9a962] bg-[#c9a962] text-white"
+                  : "border-[#e8e6e3] text-[#3d3a36]/60 group-hover:border-[#c9a962]/50"
+              }`}
+            >
               {getIcon(industry.title)}
             </div>
           </div>
 
           {/* Title */}
-          <h3 className={`mb-4 font-SchnyderS text-xl font-light tracking-tight transition-all duration-500 lg:text-2xl ${
-            isSelected ? 'text-[#262420]' : 'text-[#262420]/90 group-hover:text-[#262420]'
-          }`}>
+          <h3
+            className={`mb-4 font-SchnyderS text-xl font-light tracking-tight transition-all duration-500 lg:text-2xl ${
+              isSelected
+                ? "text-[#262420]"
+                : "text-[#262420]/90 group-hover:text-[#262420]"
+            }`}
+          >
             {industry.title}
           </h3>
 
           {/* Description */}
           <p className="mb-6 flex-1 font-Satoshi text-sm font-light leading-relaxed text-[#3d3a36]/70">
-            {industry.excerpt || industry.acfFields?.description || ''}
+            {industry.excerpt || industry.acfFields?.description || ""}
           </p>
 
           {/* Stats */}
@@ -263,7 +288,7 @@ function IndustryCard({
           <motion.div
             initial={false}
             animate={{
-              height: isSelected ? 'auto' : 0,
+              height: isSelected ? "auto" : 0,
               opacity: isSelected ? 1 : 0,
             }}
             transition={{ duration: 0.3 }}
@@ -275,7 +300,7 @@ function IndustryCard({
                   RELATED SERVICES
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {relatedServices.slice(0, 3).map(service => (
+                  {relatedServices.slice(0, 3).map((service) => (
                     <span
                       key={service.id}
                       className="rounded-full border border-[#e8e6e3] px-3 py-1 font-Satoshi text-xs font-light text-[#3d3a36]/70"
@@ -292,7 +317,7 @@ function IndustryCard({
                   FEATURED PROJECTS
                 </div>
                 <div className="space-y-2">
-                  {relatedProjects.slice(0, 2).map(project => (
+                  {relatedProjects.slice(0, 2).map((project) => (
                     <div
                       key={project.id}
                       className="font-Satoshi text-sm font-light text-[#262420]/80"
@@ -306,27 +331,32 @@ function IndustryCard({
           </motion.div>
 
           {/* Learn More */}
-          <div className={`flex items-center gap-2 font-Satoshi text-xs font-light tracking-wider transition-all ${
-            isSelected
-              ? 'gap-4 text-[#c9a962]'
-              : 'text-[#3d3a36]/60 group-hover:gap-4 group-hover:text-[#c9a962]'
-          }`}>
-            <span>{isSelected ? 'SHOW LESS' : 'EXPLORE'}</span>
+          <div
+            className={`flex items-center gap-2 font-Satoshi text-xs font-light tracking-wider transition-all ${
+              isSelected
+                ? "gap-4 text-[#c9a962]"
+                : "text-[#3d3a36]/60 group-hover:gap-4 group-hover:text-[#c9a962]"
+            }`}
+          >
+            <span>{isSelected ? "SHOW LESS" : "EXPLORE"}</span>
             <ArrowRight
               size={14}
               className={`transition-all ${
-                isSelected ? 'rotate-90' : 'group-hover:translate-x-1'
+                isSelected ? "rotate-90" : "group-hover:translate-x-1"
               }`}
             />
           </div>
         </div>
 
         {/* Decorative Elements */}
-        <div className={`absolute -right-12 -top-12 h-32 w-32 rounded-full blur-3xl transition-all duration-500 ${
-          isSelected ? 'bg-[#c9a962]/10' : 'bg-[#c9a962]/5 group-hover:bg-[#c9a962]/10'
-        }`} />
+        <div
+          className={`absolute -right-12 -top-12 h-32 w-32 rounded-full blur-3xl transition-all duration-500 ${
+            isSelected
+              ? "bg-[#c9a962]/10"
+              : "bg-[#c9a962]/5 group-hover:bg-[#c9a962]/10"
+          }`}
+        />
       </div>
     </motion.div>
   );
 }
-

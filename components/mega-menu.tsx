@@ -26,10 +26,10 @@ const megaMenuItems: MegaMenuItem[] = [
     label: 'Projects',
     isPage: true,
     subLinks: [
-      { href: '/projects?category=residential', label: 'Residential', description: 'Luxury homes & apartments' },
-      { href: '/projects?category=commercial', label: 'Commercial', description: 'Offices & retail spaces' },
-      { href: '/projects?category=hospitality', label: 'Hospitality', description: 'Hotels & restaurants' },
-      { href: '/projects?category=institutional', label: 'Institutional', description: 'Educational & healthcare' },
+      { href: '/projects?filter=residential', label: 'Residential', description: 'Luxury homes & apartments' },
+      { href: '/projects?filter=commercial', label: 'Commercial', description: 'Offices & retail spaces' },
+      { href: '/projects?filter=hospitality', label: 'Hospitality', description: 'Hotels & restaurants' },
+      { href: '/projects?filter=institutional', label: 'Institutional', description: 'Educational facilities' },
     ],
   },
   {

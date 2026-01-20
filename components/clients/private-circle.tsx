@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Crown, Lock, MapPin, Shield } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Crown, Lock, MapPin, Shield } from "lucide-react";
 
 interface SanityClient {
   _id: string;
@@ -18,23 +18,23 @@ interface PrivateCircleProps {
 // Fallback exclusive locations if no Sanity data
 const defaultExclusiveLocations = [
   {
-    name: 'Jumeirah Bay',
-    subtitle: 'Bulgari Island',
+    name: "Jumeirah Bay",
+    subtitle: "Bulgari Island",
     icon: Crown,
   },
   {
-    name: 'District One',
-    subtitle: 'MBR City',
+    name: "District One",
+    subtitle: "MBR City",
     icon: Crown,
   },
   {
-    name: 'Palm Jumeirah',
-    subtitle: 'The Fronds',
+    name: "Palm Jumeirah",
+    subtitle: "The Fronds",
     icon: Crown,
   },
   {
-    name: 'Emirates Hills',
-    subtitle: 'The Beverly Hills of Dubai',
+    name: "Emirates Hills",
+    subtitle: "The Beverly Hills of Dubai",
     icon: Crown,
   },
 ];
@@ -42,35 +42,36 @@ const defaultExclusiveLocations = [
 const vipFeatures = [
   {
     icon: Lock,
-    title: 'Absolute Discretion',
+    title: "Absolute Discretion",
     description:
-      'NDAs signed. No names disclosed. Your privacy is our priority.',
+      "NDAs signed. No names disclosed. Your privacy is our priority.",
   },
   {
     icon: Shield,
-    title: 'White-Glove Service',
+    title: "White-Glove Service",
     description:
-      'Personal oversight by Eng. Maher on every high-net-worth project.',
+      "Personal oversight by Eng. Maher on every high-net-worth project.",
   },
   {
     icon: MapPin,
-    title: 'Elite Addresses',
+    title: "Elite Addresses",
     description:
-      'We build in the most exclusive residential developments in the UAE.',
+      "We build in the most exclusive residential developments in the UAE.",
   },
 ];
 
 export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
   // Transform Sanity clients or use defaults
-  const exclusiveLocations = clients.length > 0
-    ? clients.map((client) => ({
-        name: client.name,
-        subtitle: client.projectsText || '',
-        icon: Crown,
-      }))
-    : defaultExclusiveLocations;
+  const exclusiveLocations =
+    clients.length > 0
+      ? clients.map((client) => ({
+          name: client.name,
+          subtitle: client.projectsText || "",
+          icon: Crown,
+        }))
+      : defaultExclusiveLocations;
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -119,10 +120,9 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
               The Unnamed Elite.
             </span>
             <br />
-            <br />
-            A significant portion of Eng. Maher&apos;s work is for high-net-worth
-            individuals who value their privacy above all else. While we cannot
-            list their names, we can list where they live.
+            <br />A significant portion of Eng. Maher&apos;s work is for
+            high-net-worth individuals who value their privacy above all else.
+            While we cannot list their names, we can list where they live.
           </motion.p>
         </div>
 
@@ -213,8 +213,8 @@ export function PrivateCircle({ clients = [] }: PrivateCircleProps) {
         >
           <div className="mx-auto max-w-2xl border-t border-white/10 pt-8">
             <p className="font-Satoshi text-base font-light italic leading-relaxed text-white/50 lg:text-lg">
-              &quot;Our most discerning clients choose us not for what we say, but
-              for what we never will say.&quot;
+              &quot;Our most discerning clients choose us not for what we say,
+              but for what we never will say.&quot;
             </p>
           </div>
         </motion.div>

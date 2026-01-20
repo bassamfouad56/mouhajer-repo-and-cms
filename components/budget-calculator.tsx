@@ -51,7 +51,10 @@ const roomTypes: Record<ProjectType, RoomType[]> = {
   ],
 };
 
-const finishLevels: Record<FinishLevel, { name: string; multiplier: number; description: string }> = {
+const finishLevels: Record<
+  FinishLevel,
+  { name: string; multiplier: number; description: string }
+> = {
   standard: {
     name: "Standard",
     multiplier: 1,
@@ -76,7 +79,9 @@ interface BudgetCalculatorProps {
 export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
   const [step, setStep] = useState<"input" | "results" | "contact">("input");
   const [projectType, setProjectType] = useState<ProjectType>("residential");
-  const [selectedRooms, setSelectedRooms] = useState<Record<string, number>>({});
+  const [selectedRooms, setSelectedRooms] = useState<Record<string, number>>(
+    {}
+  );
   const [finishLevel, setFinishLevel] = useState<FinishLevel>("premium");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -173,8 +178,12 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
           <Calculator className="h-6 w-6 text-[#c9a962]" />
         </div>
         <div>
-          <h3 className="text-xl font-medium text-neutral-900">Budget Estimator</h3>
-          <p className="text-sm text-neutral-500">Get an instant project estimate</p>
+          <h3 className="text-xl font-medium text-neutral-900">
+            Budget Estimator
+          </h3>
+          <p className="text-sm text-neutral-500">
+            Get an instant project estimate
+          </p>
         </div>
       </div>
 
@@ -207,7 +216,9 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                   >
                     <Icon
                       className={`h-5 w-5 ${
-                        projectType === id ? "text-[#c9a962]" : "text-neutral-400"
+                        projectType === id
+                          ? "text-[#c9a962]"
+                          : "text-neutral-400"
                       }`}
                     />
                     <span className="text-xs font-medium">{name}</span>
@@ -228,7 +239,9 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                     className="flex items-center gap-3 rounded-lg border border-neutral-200 p-3"
                   >
                     <span className="text-lg">{room.icon}</span>
-                    <span className="flex-1 text-sm text-neutral-700">{room.name}</span>
+                    <span className="flex-1 text-sm text-neutral-700">
+                      {room.name}
+                    </span>
                     <input
                       type="number"
                       min="0"
@@ -251,35 +264,38 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                 Finish Level
               </label>
               <div className="space-y-2">
-                {(Object.entries(finishLevels) as [FinishLevel, typeof finishLevels.standard][]).map(
-                  ([level, config]) => (
-                    <button
-                      key={level}
-                      onClick={() => setFinishLevel(level)}
-                      className={`flex w-full items-center gap-3 rounded-lg border-2 p-3 text-left transition-all ${
+                {(
+                  Object.entries(finishLevels) as [
+                    FinishLevel,
+                    typeof finishLevels.standard,
+                  ][]
+                ).map(([level, config]) => (
+                  <button
+                    key={level}
+                    onClick={() => setFinishLevel(level)}
+                    className={`flex w-full items-center gap-3 rounded-lg border-2 p-3 text-left transition-all ${
+                      finishLevel === level
+                        ? "border-[#c9a962] bg-[#c9a962]/5"
+                        : "border-neutral-200 hover:border-neutral-300"
+                    }`}
+                  >
+                    <div
+                      className={`h-4 w-4 rounded-full border-2 ${
                         finishLevel === level
-                          ? "border-[#c9a962] bg-[#c9a962]/5"
-                          : "border-neutral-200 hover:border-neutral-300"
+                          ? "border-[#c9a962] bg-[#c9a962]"
+                          : "border-neutral-300"
                       }`}
-                    >
-                      <div
-                        className={`h-4 w-4 rounded-full border-2 ${
-                          finishLevel === level
-                            ? "border-[#c9a962] bg-[#c9a962]"
-                            : "border-neutral-300"
-                        }`}
-                      />
-                      <div className="flex-1">
-                        <div className="text-sm font-medium text-neutral-900">
-                          {config.name}
-                        </div>
-                        <div className="text-xs text-neutral-500">
-                          {config.description}
-                        </div>
+                    />
+                    <div className="flex-1">
+                      <div className="text-sm font-medium text-neutral-900">
+                        {config.name}
                       </div>
-                    </button>
-                  )
-                )}
+                      <div className="text-xs text-neutral-500">
+                        {config.description}
+                      </div>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -332,8 +348,8 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
               <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-500" />
               <p className="text-xs text-blue-700">
                 This is an indicative estimate. Actual costs depend on specific
-                requirements, materials, and site conditions. Get a detailed quote
-                from our team.
+                requirements, materials, and site conditions. Get a detailed
+                quote from our team.
               </p>
             </div>
 
@@ -341,13 +357,13 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
             <div className="flex gap-3">
               <button
                 onClick={() => setStep("input")}
-                className="flex-1 rounded-lg border border-neutral-200 py-3 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-50"
+                className="flex-1 border border-neutral-950 bg-transparent py-3 font-Satoshi text-xs font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-neutral-950 hover:text-white"
               >
                 Adjust Estimate
               </button>
               <button
                 onClick={() => setStep("contact")}
-                className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#c9a962] py-3 text-sm font-medium text-black transition-colors hover:bg-[#c4a030]"
+                className="flex flex-1 items-center justify-center gap-2 border border-neutral-950 bg-neutral-950 py-3 font-Satoshi text-xs font-medium uppercase tracking-wider text-white transition-all hover:bg-transparent hover:text-neutral-950"
               >
                 Get Detailed Quote
                 <ArrowRight className="h-4 w-4" />
@@ -449,7 +465,8 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                   Request Received!
                 </h4>
                 <p className="mb-6 text-neutral-600">
-                  Our team will contact you within 24 hours with a detailed quote.
+                  Our team will contact you within 24 hours with a detailed
+                  quote.
                 </p>
                 <Link
                   href="/projects"

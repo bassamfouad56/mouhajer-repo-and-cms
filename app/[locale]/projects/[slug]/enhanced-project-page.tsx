@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect, useCallback } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Project } from '@/lib/wordpress';
-import { motion, useScroll, useTransform, AnimatePresence, useInView } from 'framer-motion';
+import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Project } from "@/lib/wordpress";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+  useInView,
+} from "framer-motion";
 import {
   ArrowRight,
   MapPin,
@@ -28,10 +34,14 @@ import {
   Gem,
   Shield,
   TrendingUp,
-} from 'lucide-react';
-import { ImageGalleryModal } from '@/components/image-gallery-modal';
-import { BeforeAfterSlider } from '@/components/before-after-slider';
-import { getSafeImageUrl, filterValidImages, isNonEmptyArray } from '@/lib/error-handling';
+  Video,
+  Image as ImageIcon,
+} from "lucide-react";
+import { ImageGalleryModal } from "@/components/image-gallery-modal";
+import {
+  getSafeImageUrl,
+  filterValidImages,
+} from "@/lib/error-handling";
 
 interface ProjectPageClientProps {
   project: Project;
@@ -52,10 +62,10 @@ function HeroBanner({
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
@@ -65,7 +75,7 @@ function HeroBanner({
       <motion.div style={{ y, scale }} className="absolute inset-0">
         <Image
           src={heroImage}
-          alt={project.title || 'Project'}
+          alt={project.title || "Project"}
           fill
           className="object-cover"
           priority
@@ -74,18 +84,10 @@ function HeroBanner({
         {/* Cinematic Overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/60 via-neutral-950/30 to-neutral-950" />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/50 via-transparent to-neutral-950/50" />
-
-        {/* Animated Vignette */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,10,0.4)_100%)]"
-        />
       </motion.div>
 
       {/* Decorative Lines */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="pointer-events-none absolute inset-0">
         <motion.div
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
@@ -97,12 +99,6 @@ function HeroBanner({
           animate={{ scaleY: 1 }}
           transition={{ duration: 1.5, delay: 0.7 }}
           className="absolute right-[10%] top-0 h-full w-px origin-top bg-gradient-to-b from-[#c9a962]/30 via-[#c9a962]/10 to-transparent"
-        />
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.5, delay: 1 }}
-          className="absolute bottom-0 left-0 h-px w-full origin-left bg-gradient-to-r from-transparent via-[#c9a962]/50 to-transparent"
         />
       </div>
 
@@ -126,273 +122,230 @@ function HeroBanner({
           </motion.div>
         )}
 
-        {/* Project Type Label */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-8 flex items-center gap-6"
-        >
+        {/* Project Type Label - Only show if data exists */}
+        {project.acfFields?.projectType && (
           <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: 64 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="h-px bg-gradient-to-r from-transparent to-white/40"
-          />
-          <span className="text-xs font-light uppercase tracking-[0.5em] text-white/60">
-            {project.acfFields?.projectType || 'Luxury Project'}
-          </span>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: 64 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="h-px bg-gradient-to-l from-transparent to-white/40"
-          />
-        </motion.div>
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-8 flex items-center gap-6"
+          >
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: 64 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              className="h-px bg-gradient-to-r from-transparent to-white/40"
+            />
+            <span className="text-xs font-light uppercase tracking-[0.5em] text-white/60">
+              {project.acfFields.projectType}
+            </span>
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: 64 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              className="h-px bg-gradient-to-l from-transparent to-white/40"
+            />
+          </motion.div>
+        )}
 
         {/* Project Title */}
         <motion.h1
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.5, type: 'spring', damping: 20 }}
+          transition={{
+            duration: 1.2,
+            delay: 0.5,
+            type: "spring",
+            damping: 20,
+          }}
           className="mb-10 max-w-6xl text-center font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
         >
           {project.title}
         </motion.h1>
 
-        {/* Location */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex items-center gap-3 rounded-full bg-white/5 px-6 py-3 backdrop-blur-sm"
-        >
-          <MapPin className="h-4 w-4 text-[#c9a962]" />
-          <span className="text-sm font-light tracking-wide text-white/80">
-            {project.acfFields?.location || 'United Arab Emirates'}
-          </span>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-16 left-1/2 -translate-x-1/2"
-        >
+        {/* Location - Only show if data exists */}
+        {project.acfFields?.location && (
           <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="flex flex-col items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex items-center gap-3 rounded-full bg-white/5 px-6 py-3 backdrop-blur-sm"
           >
-            <span className="text-[10px] font-light uppercase tracking-[0.4em] text-white/40">
-              Discover
+            <MapPin className="h-4 w-4 text-[#c9a962]" />
+            <span className="text-sm font-light tracking-wide text-white/80">
+              {project.acfFields.location}
             </span>
-            <div className="h-16 w-px bg-gradient-to-b from-white/50 to-transparent" />
           </motion.div>
-        </motion.div>
+        )}
       </motion.div>
     </section>
   );
 }
 
 // ============================================
-// 2. PROJECT OVERVIEW SECTION
+// 2. OVERVIEW + CHALLENGE (Side by Side)
 // ============================================
-function OverviewSection({ project }: { project: Project }) {
+function OverviewChallengeSection({
+  project,
+  image,
+}: {
+  project: Project;
+  image: string;
+}) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 lg:py-48">
-      {/* Background Pattern */}
-
-      {/* Decorative Element */}
-      <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        animate={isInView ? { scale: 1, opacity: 0.03 } : {}}
-        transition={{ duration: 1.5 }}
-        className="absolute -right-64 top-1/2 h-[800px] w-[800px] -translate-y-1/2 rounded-full bg-[#c9a962]"
-      />
-
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white py-24 lg:py-32"
+    >
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        {/* Section Label */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-16 flex items-center gap-6"
-        >
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-            <Target className="h-7 w-7 text-[#c9a962]" />
-          </div>
-          <div>
-            <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
-              01
-            </span>
-            <h2 className="mt-1 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
-              Project Overview
-            </h2>
-          </div>
-        </motion.div>
-
-        {/* Content */}
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
+        {/* Two Column Layout */}
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+          {/* Left: Overview */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
           >
-            <p className="text-xl font-light leading-relaxed text-neutral-600 lg:text-2xl">
-              {project.acfFields?.projectDescription || project.excerpt ||
-                'A comprehensive design and build project showcasing our commitment to luxury, innovation, and uncompromising excellence in every detail.'}
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid grid-cols-2 gap-8"
-          >
-            {[
-              { value: project.acfFields?.projectSize || '15,000', label: 'Square Meters', icon: Layers },
-              { value: project.acfFields?.duration || '10', label: 'Months Duration', icon: Clock },
-              { value: '277', label: 'Rooms Renovated', icon: Building },
-              { value: '140M', label: 'AED Budget', icon: TrendingUp },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                className="group"
-              >
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-100 transition-colors group-hover:bg-[#c9a962]/10">
-                  <stat.icon className="h-5 w-5 text-neutral-400 transition-colors group-hover:text-[#c9a962]" />
-                </div>
-                <span className="font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
-                  {stat.value}
-                </span>
-                <p className="mt-1 text-sm font-light text-neutral-500">{stat.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 3. THE CHALLENGE SECTION
-// ============================================
-function ChallengeSection({ project, image }: { project: Project; image: string }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
-
-  return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-neutral-950 py-32 lg:py-48">
-      {/* Background */}
-      <div className="absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-[#c9a962]/5 to-transparent" />
-
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1 }}
-            className="relative"
-          >
-            <motion.div style={{ y: imageY }} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-              <Image
-                src={image}
-                alt="The Challenge"
-                fill
-                className="object-cover"
-                sizes="50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 to-transparent" />
-            </motion.div>
-
-            {/* Floating Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="absolute -bottom-8 -right-8 flex h-32 w-32 items-center justify-center rounded-2xl bg-[#c9a962] shadow-2xl lg:h-40 lg:w-40"
-            >
-              <div className="text-center">
-                <span className="font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">10</span>
-                <p className="text-xs font-light uppercase tracking-wider text-neutral-950/70">Months</p>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="flex flex-col justify-center"
-          >
-            {/* Section Label */}
-            <div className="mb-12 flex items-center gap-6">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#c9a962]">
-                <Lightbulb className="h-7 w-7 text-neutral-950" />
+            <div className="mb-8 flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-950">
+                <Target className="h-5 w-5 text-[#c9a962]" />
               </div>
               <div>
-                <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                  01
+                </span>
+                <h2 className="font-SchnyderS text-3xl font-light text-neutral-950 lg:text-4xl">
+                  Overview
+                </h2>
+              </div>
+            </div>
+
+            {(project.acfFields?.projectDescription || project.excerpt) && (
+              <p className="mb-8 text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
+                {project.acfFields?.projectDescription || project.excerpt}
+              </p>
+            )}
+
+            {/* Quick Stats - Only show if data exists */}
+            {(() => {
+              const stats: Array<{ value: string; label: string; icon: React.ComponentType<{ className?: string }> }> = [];
+              if (project.acfFields?.projectSize || project.acfFields?.area) {
+                stats.push({
+                  value: (project.acfFields?.projectSize || project.acfFields?.area) as string,
+                  label: "Square Meters",
+                  icon: Layers,
+                });
+              }
+              if (project.acfFields?.duration || project.acfFields?.durationMonths) {
+                stats.push({
+                  value: (project.acfFields?.duration || project.acfFields?.durationMonths) as string,
+                  label: "Months Duration",
+                  icon: Clock,
+                });
+              }
+              if (stats.length === 0) return null;
+              return (
+                <div className="grid grid-cols-2 gap-6">
+                  {stats.map((stat, index) => (
+                    <motion.div
+                      key={stat.label}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                      className="rounded-2xl bg-neutral-50 p-6"
+                    >
+                      <stat.icon className="mb-3 h-5 w-5 text-[#c9a962]" />
+                      <span className="font-SchnyderS text-3xl font-light text-neutral-950">
+                        {stat.value}
+                      </span>
+                      <p className="mt-1 text-sm font-light text-neutral-500">
+                        {stat.label}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              );
+            })()}
+          </motion.div>
+
+          {/* Right: The Challenge */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="mb-8 flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#c9a962]">
+                <Lightbulb className="h-5 w-5 text-neutral-950" />
+              </div>
+              <div>
+                <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
                   02
                 </span>
-                <h2 className="mt-1 font-SchnyderS text-4xl font-light text-white lg:text-5xl">
+                <h2 className="font-SchnyderS text-3xl font-light text-neutral-950 lg:text-4xl">
                   The Challenge
                 </h2>
               </div>
             </div>
 
-            <p className="mb-10 text-lg font-light leading-relaxed text-white/70 lg:text-xl">
-              {project.acfFields?.challenge ||
-                'The client presented a formidable challenge: execute a comprehensive modernization within an incredibly aggressive timeline while maintaining the highest standards of luxury and quality.'}
-            </p>
+            {project.acfFields?.challenge && (
+              <p className="mb-8 text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
+                {project.acfFields.challenge}
+              </p>
+            )}
 
-            {/* Challenge Points */}
-            <div className="space-y-6">
-              {[
-                'Complete renovation of 277 rooms in 10 months',
-                'AED 140 Million budget with zero compromise on quality',
-                'Maintain heritage architectural guidelines',
-                'Seamless coordination of multiple specialized teams',
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="flex items-start gap-4"
-                >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#c9a962]/10">
-                    <CheckCircle2 className="h-4 w-4 text-[#c9a962]" />
-                  </div>
-                  <span className="font-light text-white/80">{item}</span>
-                </motion.div>
-              ))}
-            </div>
+            {/* Challenge Points - Only show if data exists */}
+            {project.acfFields?.challengePoints && project.acfFields.challengePoints.length > 0 && (
+              <div className="space-y-4">
+                {project.acfFields.challengePoints
+                  .slice(0, 4)
+                  .map((item: string, index: number) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
+                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#c9a962]/10">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-[#c9a962]" />
+                      </div>
+                      <span className="text-sm font-light text-neutral-700">
+                        {item}
+                      </span>
+                    </motion.div>
+                  ))}
+              </div>
+            )}
           </motion.div>
         </div>
+
+        {/* Featured Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="relative mt-20 aspect-[21/9] overflow-hidden rounded-2xl"
+        >
+          <Image
+            src={image}
+            alt="Project Overview"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/30 to-transparent" />
+        </motion.div>
       </div>
     </section>
   );
 }
 
 // ============================================
-// 4. DESIGN APPROACH SECTION
+// 3. DESIGN APPROACH SECTION
 // ============================================
 function DesignApproachSection({
   project,
@@ -402,188 +355,201 @@ function DesignApproachSection({
   images: Array<{ sourceUrl: string; altText?: string }>;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  const approaches = project.acfFields?.designApproach || [];
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-neutral-100 py-32 lg:py-48">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-neutral-100 py-24 lg:py-32"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Label */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-20 text-center"
+          className="mb-16 text-center"
         >
-          <div className="mb-8 flex items-center justify-center gap-6">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-              <Sparkles className="h-7 w-7 text-[#c9a962]" />
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-950">
+              <Sparkles className="h-5 w-5 text-[#c9a962]" />
             </div>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
           </div>
-          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
-            Philosophy
+          <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+            03 — Philosophy
           </span>
-          <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-6xl">
+          <h2 className="mt-3 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
             Design Approach
           </h2>
         </motion.div>
 
-        {/* Content */}
-        <div className="grid gap-12 lg:grid-cols-3 lg:gap-8">
-          {[
-            {
-              icon: Gem,
-              title: 'Heritage & Innovation',
-              desc: 'Bridging the hotel\'s historic charm with modern luxury expectations, creating a timeless aesthetic.',
-            },
-            {
-              icon: Shield,
-              title: 'Premium Materials',
-              desc: 'Only the finest materials sourced globally, ensuring lasting beauty and uncompromising durability.',
-            },
-            {
-              icon: Wrench,
-              title: 'Precision Execution',
-              desc: 'Engineering and design teams working in parallel for seamless delivery without quality compromise.',
-            },
-          ].map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-              className="group text-center"
-            >
-              <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-white shadow-sm transition-all duration-500 group-hover:bg-neutral-950 group-hover:shadow-xl">
-                <item.icon className="h-8 w-8 text-neutral-400 transition-colors group-hover:text-[#c9a962]" />
-              </div>
-              <h3 className="mb-4 text-xl font-medium text-neutral-950">{item.title}</h3>
-              <p className="font-light leading-relaxed text-neutral-600">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
+        {/* Content - Show approach text or approach items array */}
+        {project.acfFields?.approach && approaches.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mx-auto max-w-4xl"
+          >
+            <div className="rounded-2xl bg-white p-8 lg:p-12">
+              {project.acfFields.approach.split('\n\n').map((paragraph, index) => (
+                <p
+                  key={index}
+                  className={`text-lg font-light leading-relaxed text-neutral-600 ${
+                    index > 0 ? 'mt-6' : ''
+                  }`}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </motion.div>
+        )}
+        {approaches.length > 0 && (
+          <div className="grid gap-8 lg:grid-cols-3">
+            {approaches.map((item: { icon?: unknown; title: string; desc: string }, index: number) => {
+              const IconComponent = item.icon as React.ComponentType<{ className?: string }> || Gem;
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+                  className="group rounded-2xl bg-white p-8 text-center transition-all duration-500 hover:bg-neutral-950"
+                >
+                  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-100 transition-all duration-500 group-hover:bg-[#c9a962]">
+                    <IconComponent className="h-7 w-7 text-neutral-400 transition-colors group-hover:text-neutral-950" />
+                  </div>
+                  <h3 className="mb-3 text-lg font-medium text-neutral-950 transition-colors group-hover:text-white">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm font-light leading-relaxed text-neutral-600 transition-colors group-hover:text-white/70">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
 
         {/* Image Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="mt-24 grid grid-cols-4 gap-4"
-        >
-          {images.slice(0, 4).map((image, index) => (
-            <div
-              key={index}
-              className={`relative overflow-hidden rounded-xl ${
-                index === 0 ? 'col-span-2 row-span-2 aspect-square' : 'aspect-[4/3]'
-              }`}
-            >
-              <Image
-                src={image.sourceUrl}
-                alt={image.altText || `Design ${index + 1}`}
-                fill
-                className="object-cover transition-transform duration-700 hover:scale-110"
-                sizes={index === 0 ? '50vw' : '25vw'}
-              />
-            </div>
-          ))}
-        </motion.div>
+        {images.length > 2 && (
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="mt-16 grid grid-cols-3 gap-4"
+          >
+            {images.slice(1, 4).map((image, index) => (
+              <div
+                key={index}
+                className="relative aspect-[4/3] overflow-hidden rounded-xl"
+              >
+                <Image
+                  src={image.sourceUrl}
+                  alt={image.altText || `Design ${index + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-700 hover:scale-110"
+                  sizes="33vw"
+                />
+              </div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </section>
   );
 }
 
 // ============================================
-// 5. SCOPE OF WORK SECTION
+// 4. SCOPE OF WORK SECTION
 // ============================================
 function ScopeOfWorkSection({ project }: { project: Project }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  const scopeItems = [
-    {
-      title: 'Civil & Structural',
-      desc: 'Complete overhaul of corridors, guest rooms, and public facility structures with modern engineering standards.',
-      icon: Building,
-    },
-    {
-      title: 'Interior Design & Fit-Out',
-      desc: 'End-to-end execution including gypsum works, wall cladding, premium flooring, and custom millwork.',
-      icon: Layers,
-    },
-    {
-      title: 'FF&E Installation',
-      desc: 'Sourcing and installation of custom bespoke furniture, lighting fixtures, and soft furnishings.',
-      icon: Gem,
-    },
-    {
-      title: 'MEP Engineering',
-      desc: 'Full upgrade of electrical and mechanical systems to meet modern energy and safety standards.',
-      icon: Wrench,
-    },
-  ];
+  const scopeItems = project.acfFields?.scopeOfWork || [];
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 lg:py-48">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white py-24 lg:py-32"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Label */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-20"
+          className="mb-12"
         >
-          <div className="mb-8 flex items-center gap-6">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-              <Wrench className="h-7 w-7 text-[#c9a962]" />
+          <div className="mb-6 flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-950">
+              <Wrench className="h-5 w-5 text-[#c9a962]" />
             </div>
             <div>
-              <h2 className="font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
+              <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                04
+              </span>
+              <h2 className="font-SchnyderS text-3xl font-light text-neutral-950 lg:text-4xl">
                 Scope of Work
               </h2>
             </div>
           </div>
         </motion.div>
 
-        {/* Scope Items */}
-        <div className="grid gap-6 md:grid-cols-2">
-          {scopeItems.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="group relative overflow-hidden rounded-3xl bg-neutral-50 p-10 transition-all duration-500 hover:bg-neutral-950"
-            >
-
-              <div className="relative">
-                <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm transition-colors group-hover:bg-[#c9a962]">
-                  <item.icon className="h-7 w-7 text-neutral-600 transition-colors group-hover:text-neutral-950" />
-                </div>
-                <h3 className="mb-4 text-xl font-medium text-neutral-950 transition-colors group-hover:text-white">
-                  {item.title}
-                </h3>
-                <p className="font-light leading-relaxed text-neutral-600 transition-colors group-hover:text-white/70">
-                  {item.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Scope Items - Only show if data exists */}
+        {scopeItems.length > 0 && (
+          <div className="grid gap-4 md:grid-cols-2">
+            {scopeItems.map((item: { title: string; desc: string; icon?: unknown }, index: number) => {
+              const IconComponent = item.icon as React.ComponentType<{ className?: string }> || Building;
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  className="group flex items-start gap-5 rounded-2xl bg-neutral-50 p-6 transition-all duration-500 hover:bg-neutral-950"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white transition-colors group-hover:bg-[#c9a962]">
+                    <IconComponent className="h-5 w-5 text-neutral-600 transition-colors group-hover:text-neutral-950" />
+                  </div>
+                  <div>
+                    <h3 className="mb-2 font-medium text-neutral-950 transition-colors group-hover:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm font-light text-neutral-600 transition-colors group-hover:text-white/70">
+                      {item.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
 // ============================================
-// 6. THE OUTCOME SECTION
+// 5. THE OUTCOME SECTION
 // ============================================
 function OutcomeSection({ project }: { project: Project }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  const outcomes = project.acfFields?.outcomes || [];
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-neutral-950 py-32 lg:py-48">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-neutral-950 py-24 lg:py-32"
+    >
       {/* Background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,169,98,0.1),transparent_50%)]" />
 
@@ -593,19 +559,19 @@ function OutcomeSection({ project }: { project: Project }) {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-20 text-center"
+          className="mb-12 text-center"
         >
-          <div className="mb-8 flex items-center justify-center gap-6">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#c9a962]">
-              <Award className="h-7 w-7 text-neutral-950" />
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#c9a962]">
+              <Award className="h-5 w-5 text-neutral-950" />
             </div>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </div>
-          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
-            Results
+          <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+            05 — Results
           </span>
-          <h2 className="mt-4 font-SchnyderS text-4xl font-light text-white lg:text-6xl">
+          <h2 className="mt-3 font-SchnyderS text-4xl font-light text-white lg:text-5xl">
             The Outcome
           </h2>
         </motion.div>
@@ -617,33 +583,33 @@ function OutcomeSection({ project }: { project: Project }) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mx-auto max-w-4xl text-center"
         >
-          <p className="mb-16 text-xl font-light leading-relaxed text-white/80 lg:text-2xl">
-            {project.acfFields?.outcome ||
-              'Delivered on time and within budget, the newly renovated property stands as a testament to our capacity for large-scale commercial execution, earning prestigious industry recognition.'}
-          </p>
+          {project.acfFields?.outcome && (
+            <p className="mb-12 text-lg font-light leading-relaxed text-white/80 lg:text-xl">
+              {project.acfFields.outcome}
+            </p>
+          )}
 
-          {/* Achievement Stats */}
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            {[
-              { value: '100%', label: 'On Time Delivery' },
-              { value: '5-Star', label: 'Award Winner' },
-              { value: 'Zero', label: 'Quality Compromises' },
-              { value: 'Full', label: 'Client Satisfaction' },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="border-l border-white/10 pl-6 text-left"
-              >
-                <span className="font-SchnyderS text-4xl font-light text-[#c9a962] lg:text-5xl">
-                  {stat.value}
-                </span>
-                <p className="mt-2 text-sm font-light text-white/50">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
+          {/* Achievement Stats - Only show if data exists */}
+          {outcomes.length > 0 && (
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+              {outcomes.map((stat: { value: string; label: string }, index: number) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  className="border-l border-white/10 pl-4 text-left"
+                >
+                  <span className="font-SchnyderS text-3xl font-light text-[#c9a962] lg:text-4xl">
+                    {stat.value}
+                  </span>
+                  <p className="mt-1 text-sm font-light text-white/50">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
@@ -651,262 +617,116 @@ function OutcomeSection({ project }: { project: Project }) {
 }
 
 // ============================================
-// 7. PROJECT DETAILS SECTION
+// 6. PROJECT DETAILS SECTION
 // ============================================
 function ProjectDetailsSection({ project }: { project: Project }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const details = [
-    { label: 'Location', value: project.acfFields?.location || 'Abu Dhabi, UAE', icon: MapPin },
-    { label: 'Client', value: project.acfFields?.client || 'ADNH', icon: Users },
-    { label: 'Status', value: project.acfFields?.status || 'Completed', icon: CheckCircle2 },
-    { label: 'Type', value: project.acfFields?.projectType || 'Hotel / Hospitality', icon: Building },
-    { label: 'Duration', value: project.acfFields?.duration || 'May 2021 - Nov 2021', icon: Calendar },
-    { label: 'Completion', value: project.acfFields?.completionDate || 'November 2021', icon: Clock },
-  ];
-
-  const services = ['Interior Design', 'Fit-Out & Construction', 'FF&E', 'MEP Engineering'];
+    project.acfFields?.location
+      ? { label: "Location", value: project.acfFields.location, icon: MapPin }
+      : null,
+    project.acfFields?.client
+      ? { label: "Client", value: project.acfFields.client, icon: Users }
+      : null,
+    project.acfFields?.status
+      ? { label: "Status", value: project.acfFields.status, icon: CheckCircle2 }
+      : null,
+    project.acfFields?.projectType
+      ? { label: "Type", value: project.acfFields.projectType, icon: Building }
+      : null,
+    project.acfFields?.projectDates || project.acfFields?.duration
+      ? { label: "Dates", value: project.acfFields?.projectDates || project.acfFields?.duration, icon: Calendar }
+      : null,
+  ].filter(Boolean) as Array<{ label: string; value: string; icon: React.ComponentType<{ className?: string }> }>;
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 lg:py-48">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white py-24 lg:py-32"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Label */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-20"
+          className="mb-12"
         >
-          <div className="mb-8 flex items-center gap-6">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-              <Layers className="h-7 w-7 text-[#c9a962]" />
+          <div className="mb-6 flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-950">
+              <Layers className="h-5 w-5 text-[#c9a962]" />
             </div>
             <div>
-              <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+              <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
                 06
               </span>
-              <h2 className="mt-1 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
+              <h2 className="font-SchnyderS text-3xl font-light text-neutral-950 lg:text-4xl">
                 Project Details
               </h2>
             </div>
           </div>
         </motion.div>
 
-        {/* Details Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {details.map((item, index) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
-              className="flex items-start gap-5 rounded-2xl bg-neutral-50 p-8"
-            >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white">
-                <item.icon className="h-5 w-5 text-[#c9a962]" />
-              </div>
-              <div>
-                <span className="text-xs font-light uppercase tracking-wider text-neutral-400">
+        {/* Details Grid - Only show if there are details */}
+        {details.length > 0 && (
+          <div className={`grid gap-4 sm:grid-cols-2 ${details.length >= 5 ? 'lg:grid-cols-5' : details.length >= 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'}`}>
+            {details.map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                className="rounded-2xl bg-neutral-50 p-6"
+              >
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white">
+                  <item.icon className="h-4 w-4 text-[#c9a962]" />
+                </div>
+                <span className="text-[10px] font-light uppercase tracking-wider text-neutral-400">
                   {item.label}
                 </span>
                 <p className="mt-1 font-medium text-neutral-950">{item.value}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Services Tags */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-12 rounded-2xl bg-neutral-950 p-10"
-        >
-          <span className="text-xs font-light uppercase tracking-wider text-white/40">
-            Services Delivered
-          </span>
-          <div className="mt-6 flex flex-wrap gap-3">
-            {services.map((service) => (
-              <span
-                key={service}
-                className="rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-6 py-3 text-sm font-light text-[#c9a962]"
-              >
-                {service}
-              </span>
+              </motion.div>
             ))}
           </div>
-        </motion.div>
+        )}
       </div>
     </section>
   );
 }
 
 // ============================================
-// 8. GALLERY CAROUSEL SECTION
+// 7. OUTCOME & RESULTS SECTION
+// (Before/After, Gallery, Videos, Testimonial)
 // ============================================
-function GallerySection({
+function OutcomeResultsSection({
+  project,
   images,
   onImageClick,
 }: {
+  project: Project;
   images: Array<{ sourceUrl: string; altText?: string }>;
   onImageClick: (index: number) => void;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-
-  useEffect(() => {
-    if (!isAutoPlaying || images.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, images.length]);
-
-  if (images.length === 0) return null;
-
-  return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-neutral-950 py-32 lg:py-48">
-      {/* Section Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        className="mb-20 px-6 text-center lg:px-12"
-      >
-        <div className="mb-8 flex items-center justify-center gap-6">
-          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-          <span className="text-xs font-medium uppercase tracking-[0.4em] text-[#c9a962]">
-            Visual Journey
-          </span>
-          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
-        </div>
-        <h2 className="font-SchnyderS text-4xl font-light text-white lg:text-6xl">
-          Project Gallery
-        </h2>
-      </motion.div>
-
-      {/* Main Carousel */}
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="relative aspect-video overflow-hidden rounded-3xl">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="absolute inset-0 cursor-pointer"
-              onClick={() => onImageClick(currentIndex)}
-            >
-              <Image
-                src={images[currentIndex].sourceUrl}
-                alt={images[currentIndex].altText || `Gallery ${currentIndex + 1}`}
-                fill
-                className="object-cover"
-                sizes="100vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/50 via-transparent to-neutral-950/20" />
-
-              {/* Expand Icon */}
-              <div className="absolute bottom-8 right-8 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-md transition-colors hover:bg-white/20">
-                <Maximize2 className="h-6 w-6 text-white" />
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation */}
-          <button
-            onClick={() => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)}
-            className="absolute left-8 top-1/2 flex h-16 w-16 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 backdrop-blur-md transition-all hover:bg-white/20"
-          >
-            <ChevronLeft className="h-8 w-8 text-white" />
-          </button>
-          <button
-            onClick={() => setCurrentIndex((prev) => (prev + 1) % images.length)}
-            className="absolute right-8 top-1/2 flex h-16 w-16 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 backdrop-blur-md transition-all hover:bg-white/20"
-          >
-            <ChevronRight className="h-8 w-8 text-white" />
-          </button>
-        </div>
-
-        {/* Thumbnails */}
-        <div className="mt-8 flex items-center justify-center gap-4">
-          {images.slice(0, 7).map((image, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`relative h-20 w-28 overflow-hidden rounded-xl transition-all ${
-                currentIndex === index
-                  ? 'ring-2 ring-[#c9a962] ring-offset-4 ring-offset-neutral-950'
-                  : 'opacity-40 hover:opacity-70'
-              }`}
-            >
-              <Image
-                src={image.sourceUrl}
-                alt={image.altText || `Thumb ${index + 1}`}
-                fill
-                className="object-cover"
-                sizes="112px"
-              />
-            </button>
-          ))}
-          {images.length > 7 && (
-            <div className="flex h-20 w-28 items-center justify-center rounded-xl bg-white/10 text-sm text-white/60">
-              +{images.length - 7}
-            </div>
-          )}
-        </div>
-
-        {/* Controls */}
-        <div className="mt-8 flex items-center justify-center gap-6">
-          <button
-            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
-          >
-            {isAutoPlaying ? <Pause className="h-5 w-5 text-white" /> : <Play className="h-5 w-5 text-white" />}
-          </button>
-          <span className="text-sm text-white/40">
-            {currentIndex + 1} / {images.length}
-          </span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 9. BEFORE & AFTER COMPARISON SECTION
-// ============================================
-function BeforeAfterSection({
-  images,
-}: {
-  images: Array<{ sourceUrl: string; altText?: string }>;
-}) {
-  const [activeIndex, setActiveIndex] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  // Use pairs of images for before/after (or same image for demo)
+  // Before/After pairs
   const beforeAfterPairs = [
     {
       before: images[2]?.sourceUrl || images[0]?.sourceUrl,
       after: images[0]?.sourceUrl,
-      label: 'Guest Room Transformation',
+      label: "Transformation 1",
     },
     {
       before: images[4]?.sourceUrl || images[1]?.sourceUrl,
       after: images[1]?.sourceUrl,
-      label: 'Lobby Renovation',
-    },
-    {
-      before: images[6]?.sourceUrl || images[2]?.sourceUrl,
-      after: images[3]?.sourceUrl || images[2]?.sourceUrl,
-      label: 'Corridor Upgrade',
+      label: "Transformation 2",
     },
   ];
 
@@ -930,25 +750,26 @@ function BeforeAfterSection({
     };
 
     if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-      window.addEventListener('touchmove', handleTouchMove);
-      window.addEventListener('touchend', handleMouseUp);
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("touchmove", handleTouchMove);
+      window.addEventListener("touchend", handleMouseUp);
     }
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleMouseUp);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleMouseUp);
     };
   }, [isDragging, handleMove, handleMouseUp]);
 
-  if (images.length < 2) return null;
-
-  const currentPair = beforeAfterPairs[activeIndex];
+  const currentPair = beforeAfterPairs[currentIndex] || beforeAfterPairs[0];
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 lg:py-48">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-neutral-100 py-24 lg:py-32"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
@@ -956,261 +777,215 @@ function BeforeAfterSection({
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="mb-16 text-center"
         >
-          <div className="mb-8 flex items-center justify-center gap-6">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950">
-              <Layers className="h-7 w-7 text-[#c9a962]" />
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-950">
+              <TrendingUp className="h-5 w-5 text-[#c9a962]" />
             </div>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
           </div>
-          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
-            Transformation
+          <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+            07 — Showcase
           </span>
-          <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-6xl">
-            Before & After
+          <h2 className="mt-3 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
+            Outcome & Results
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-600">
-            Drag the slider to reveal the stunning transformation
-          </p>
         </motion.div>
 
-        {/* Comparison Slider */}
+        {/* Before/After Slider */}
+        {images.length >= 2 && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-16"
+          >
+            <h3 className="mb-6 text-center font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-600">
+              Before & After
+            </h3>
+            <div
+              ref={containerRef}
+              className="group relative mx-auto aspect-[16/9] max-w-5xl cursor-ew-resize overflow-hidden rounded-2xl shadow-xl"
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleMouseDown}
+              onClick={(e) => !isDragging && handleMove(e.clientX)}
+            >
+              {/* After Image */}
+              <div className="absolute inset-0">
+                <Image
+                  src={currentPair.after}
+                  alt="After"
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+                <div className="absolute bottom-6 right-6 flex items-center gap-2 rounded-full bg-[#c9a962] px-4 py-2">
+                  <Sparkles className="h-4 w-4 text-neutral-950" />
+                  <span className="text-xs font-medium uppercase text-neutral-950">
+                    After
+                  </span>
+                </div>
+              </div>
+
+              {/* Before Image (Clipped) */}
+              <div
+                className="absolute inset-0 z-10 overflow-hidden"
+                style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+              >
+                <Image
+                  src={currentPair.before}
+                  alt="Before"
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+                <div className="absolute inset-0 bg-neutral-950/10" />
+                <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-neutral-950 px-4 py-2">
+                  <Clock className="h-4 w-4 text-white/70" />
+                  <span className="text-xs font-medium uppercase text-white">
+                    Before
+                  </span>
+                </div>
+              </div>
+
+              {/* Slider Handle */}
+              <div
+                className="absolute bottom-0 top-0 z-20 w-1"
+                style={{
+                  left: `${sliderPosition}%`,
+                  transform: "translateX(-50%)",
+                }}
+              >
+                <div className="h-full w-1 bg-white shadow-lg" />
+                <div className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-neutral-950">
+                  <div className="flex items-center gap-0.5">
+                    <ChevronLeft className="h-4 w-4 text-[#c9a962]" />
+                    <ChevronRight className="h-4 w-4 text-[#c9a962]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tabs */}
+            {beforeAfterPairs.length > 1 && (
+              <div className="mt-6 flex justify-center gap-3">
+                {beforeAfterPairs.map((pair, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setCurrentIndex(index);
+                      setSliderPosition(50);
+                    }}
+                    className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
+                      currentIndex === index
+                        ? "bg-neutral-950 text-white"
+                        : "bg-white text-neutral-600 hover:bg-neutral-200"
+                    }`}
+                  >
+                    {pair.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </motion.div>
+        )}
+
+        {/* Image Gallery Grid */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          ref={containerRef}
-          className="group relative aspect-[16/10] cursor-ew-resize overflow-hidden rounded-3xl shadow-2xl"
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleMouseDown}
-          onClick={(e) => !isDragging && handleMove(e.clientX)}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mb-16"
         >
-          {/* After Image (Right/Bottom) */}
-          <div className="absolute inset-0">
-            <Image
-              src={currentPair.after}
-              alt="After renovation"
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
-            />
-            {/* After Label */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.5 }}
-              className="absolute bottom-8 right-8 z-20 flex items-center gap-3 rounded-full bg-[#c9a962] px-6 py-3 shadow-lg"
-            >
-              <Sparkles className="h-4 w-4 text-neutral-950" />
-              <span className="text-sm font-medium uppercase tracking-wider text-neutral-950">
-                After
-              </span>
-            </motion.div>
+          <div className="mb-6 flex items-center justify-between">
+            <h3 className="font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-600">
+              <ImageIcon className="mb-0.5 mr-2 inline-block h-4 w-4" />
+              Project Gallery
+            </h3>
+            <span className="text-sm text-neutral-400">
+              {images.length} images
+            </span>
           </div>
-
-          {/* Before Image (Left/Top - Clipped) */}
-          <div
-            className="absolute inset-0 z-10 overflow-hidden"
-            style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-          >
-            <Image
-              src={currentPair.before}
-              alt="Before renovation"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-            {/* Before Label */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.5 }}
-              className="absolute bottom-8 left-8 z-20 flex items-center gap-3 rounded-full bg-neutral-950 px-6 py-3 shadow-lg"
-            >
-              <Clock className="h-4 w-4 text-white/70" />
-              <span className="text-sm font-medium uppercase tracking-wider text-white">
-                Before
-              </span>
-            </motion.div>
-            {/* Dark overlay for before */}
-            <div className="absolute inset-0 bg-neutral-950/10" />
-          </div>
-
-          {/* Slider Handle */}
-          <div
-            className="absolute bottom-0 top-0 z-30 w-1"
-            style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
-          >
-            {/* Vertical Line */}
-            <div className="h-full w-1 bg-white shadow-[0_0_20px_rgba(255,255,255,0.5)]" />
-
-            {/* Handle Circle */}
-            <motion.div
-              animate={{ scale: isDragging ? 1.2 : 1 }}
-              className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-neutral-950 shadow-2xl transition-shadow hover:shadow-[0_0_30px_rgba(201,169,98,0.5)]"
-            >
-              <div className="flex items-center gap-1">
-                <ChevronLeft className="h-5 w-5 text-[#c9a962]" />
-                <ChevronRight className="h-5 w-5 text-[#c9a962]" />
-              </div>
-            </motion.div>
-
-            {/* Top Arrow */}
-            <div className="absolute left-1/2 top-4 -translate-x-1/2">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {images.slice(0, 8).map((image, index) => (
               <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm"
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl"
+                onClick={() => onImageClick(index)}
               >
-                <ChevronLeft className="h-4 w-4 -rotate-90 text-white" />
-              </motion.div>
-            </div>
-
-            {/* Bottom Arrow */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-              <motion.div
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm"
-              >
-                <ChevronRight className="h-4 w-4 -rotate-90 text-white" />
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Instruction Overlay */}
-          <AnimatePresence>
-            {!isDragging && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="pointer-events-none absolute left-1/2 top-8 z-40 -translate-x-1/2"
-              >
-                <div className="flex items-center gap-2 rounded-full bg-neutral-950/80 px-5 py-2.5 backdrop-blur-md">
-                  <ChevronLeft className="h-4 w-4 text-[#c9a962]" />
-                  <span className="text-xs font-light uppercase tracking-wider text-white">
-                    Drag to Compare
-                  </span>
-                  <ChevronRight className="h-4 w-4 text-[#c9a962]" />
+                <Image
+                  src={image.sourceUrl}
+                  alt={image.altText || `Gallery ${index + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="25vw"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-neutral-950/0 transition-colors group-hover:bg-neutral-950/40">
+                  <Maximize2 className="h-6 w-6 text-white opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
               </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Corner Accents */}
-          <div className="pointer-events-none absolute left-4 top-4 h-12 w-12 border-l-2 border-t-2 border-white/30" />
-          <div className="pointer-events-none absolute right-4 top-4 h-12 w-12 border-r-2 border-t-2 border-[#c9a962]/50" />
-          <div className="pointer-events-none absolute bottom-4 left-4 h-12 w-12 border-b-2 border-l-2 border-white/30" />
-          <div className="pointer-events-none absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-[#c9a962]/50" />
-        </motion.div>
-
-        {/* Comparison Selector */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
-        >
-          {beforeAfterPairs.map((pair, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setActiveIndex(index);
-                setSliderPosition(50);
-              }}
-              className={`group relative overflow-hidden rounded-xl px-6 py-3 transition-all ${
-                activeIndex === index
-                  ? 'bg-neutral-950 text-white'
-                  : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
-              }`}
-            >
-              <span className="relative z-10 text-sm font-medium">{pair.label}</span>
-              {activeIndex === index && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute inset-0 bg-neutral-950"
-                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Progress Indicator */}
-        <div className="mt-8 flex items-center justify-center gap-2">
-          {beforeAfterPairs.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setActiveIndex(index);
-                setSliderPosition(50);
-              }}
-              className={`h-2 rounded-full transition-all ${
-                activeIndex === index ? 'w-8 bg-[#c9a962]' : 'w-2 bg-neutral-300 hover:bg-neutral-400'
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 10. TESTIMONIAL SECTION
-// ============================================
-function TestimonialSection({ project }: { project: Project }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-
-  return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-[#c9a962] py-32 lg:py-48">
-      <div className="relative mx-auto max-w-5xl px-6 text-center lg:px-12">
-        {/* Quote Icon */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-12 flex justify-center"
-        >
-          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-neutral-950">
-            <Quote className="h-12 w-12 text-[#c9a962]" />
+            ))}
           </div>
         </motion.div>
 
-        {/* Quote */}
-        <motion.blockquote
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <p className="font-SchnyderS text-3xl font-light leading-relaxed text-neutral-950 sm:text-4xl lg:text-5xl">
-            &ldquo;{project.acfFields?.testimonial ||
-              'Creating the new guidelines of Sheraton in 10 months only. The transformation was absolute, turning a classic property into a modern icon of opulence.'}&rdquo;
-          </p>
-        </motion.blockquote>
+        {/* Video Placeholder */}
+        {project.acfFields?.videoUrl && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-16"
+          >
+            <h3 className="mb-6 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-600">
+              <Video className="mb-0.5 mr-2 inline-block h-4 w-4" />
+              Behind the Scenes
+            </h3>
+            <div className="relative aspect-video overflow-hidden rounded-2xl bg-neutral-950">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#c9a962]">
+                  <Play className="ml-1 h-8 w-8 text-neutral-950" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
-        {/* Attribution */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12"
-        >
-          <div className="mb-4 mx-auto h-px w-16 bg-neutral-950/30" />
-          <span className="text-sm font-medium text-neutral-950">
-            {project.acfFields?.testimonialAuthor || 'ADNH Management'}
-          </span>
-        </motion.div>
+        {/* Testimonial - Only show if data exists */}
+        {project.acfFields?.testimonial && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="rounded-3xl bg-[#c9a962] p-10 text-center lg:p-16"
+          >
+            <div className="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-neutral-950">
+              <Quote className="h-8 w-8 text-[#c9a962]" />
+            </div>
+            <blockquote className="mx-auto max-w-3xl">
+              <p className="font-SchnyderS text-2xl font-light leading-relaxed text-neutral-950 lg:text-3xl">
+                &ldquo;{project.acfFields.testimonial}&rdquo;
+              </p>
+            </blockquote>
+            {project.acfFields?.testimonialAuthor && (
+              <>
+                <div className="mx-auto mt-8 h-px w-16 bg-neutral-950/30" />
+                <p className="mt-4 text-sm font-medium text-neutral-950">
+                  {project.acfFields.testimonialAuthor}
+                </p>
+              </>
+            )}
+          </motion.div>
+        )}
       </div>
     </section>
   );
 }
 
 // ============================================
-// 11. PROJECT NAVIGATION SECTION (Prev/Next)
+// 8. PROJECT NAVIGATION (Prev/Next)
 // ============================================
 function ProjectNavigationSection({
   allProjects,
@@ -1220,12 +995,17 @@ function ProjectNavigationSection({
   currentSlug: string;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  // Find current project index and get prev/next
   const currentIndex = allProjects.findIndex((p) => p.slug === currentSlug);
-  const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : allProjects[allProjects.length - 1];
-  const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : allProjects[0];
+  const prevProject =
+    currentIndex > 0
+      ? allProjects[currentIndex - 1]
+      : allProjects[allProjects.length - 1];
+  const nextProject =
+    currentIndex < allProjects.length - 1
+      ? allProjects[currentIndex + 1]
+      : allProjects[0];
 
   if (allProjects.length < 2) return null;
 
@@ -1235,9 +1015,8 @@ function ProjectNavigationSection({
         {/* Previous Project */}
         <Link
           href={`/projects/${prevProject.slug}`}
-          className="group relative h-[50vh] min-h-[400px] overflow-hidden"
+          className="group relative h-[40vh] min-h-[300px] overflow-hidden"
         >
-          {/* Background Image */}
           <motion.div
             initial={{ scale: 1.1 }}
             whileHover={{ scale: 1 }}
@@ -1245,8 +1024,8 @@ function ProjectNavigationSection({
             className="absolute inset-0"
           >
             <Image
-              src={prevProject.featuredImage?.node?.sourceUrl || '/placeholder.jpg'}
-              alt={prevProject.title || 'Previous Project'}
+              src={prevProject.featuredImage?.node?.sourceUrl || "/placeholder.jpg"}
+              alt={prevProject.title || "Previous Project"}
               fill
               className="object-cover"
               sizes="50vw"
@@ -1254,48 +1033,30 @@ function ProjectNavigationSection({
             <div className="absolute inset-0 bg-neutral-950/60 transition-colors group-hover:bg-neutral-950/40" />
           </motion.div>
 
-          {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="relative z-10 flex h-full flex-col justify-center px-8 lg:px-16"
+            className="relative z-10 flex h-full flex-col justify-center px-8 lg:px-12"
           >
-            <div className="mb-6 flex items-center gap-4">
-              <motion.div
-                whileHover={{ x: -8 }}
-                transition={{ duration: 0.3 }}
-                className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm transition-colors group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10"
-              >
-                <ChevronLeft className="h-6 w-6 text-white transition-colors group-hover:text-[#c9a962]" />
-              </motion.div>
-              <span className="text-xs font-light uppercase tracking-[0.3em] text-white/50">
-                Previous Project
+            <div className="mb-4 flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 transition-colors group-hover:border-[#c9a962]/50">
+                <ChevronLeft className="h-5 w-5 text-white transition-colors group-hover:text-[#c9a962]" />
+              </div>
+              <span className="text-xs font-light uppercase tracking-wider text-white/50">
+                Previous
               </span>
             </div>
-            <h3 className="font-SchnyderS text-3xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-4xl xl:text-5xl">
+            <h3 className="font-SchnyderS text-2xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-3xl">
               {prevProject.title}
             </h3>
-            <p className="mt-4 text-sm font-light text-white/60">
-              {prevProject.acfFields?.projectType || 'Luxury Project'}
-            </p>
           </motion.div>
-
-          {/* Hover Line */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileHover={{ scaleX: 1 }}
-            transition={{ duration: 0.4 }}
-            className="absolute bottom-0 left-0 h-1 w-full origin-left bg-[#c9a962]"
-          />
         </Link>
 
         {/* Next Project */}
         <Link
           href={`/projects/${nextProject.slug}`}
-          className="group relative h-[50vh] min-h-[400px] overflow-hidden border-l border-white/10"
+          className="group relative h-[40vh] min-h-[300px] overflow-hidden border-l border-white/10"
         >
-          {/* Background Image */}
           <motion.div
             initial={{ scale: 1.1 }}
             whileHover={{ scale: 1 }}
@@ -1303,8 +1064,8 @@ function ProjectNavigationSection({
             className="absolute inset-0"
           >
             <Image
-              src={nextProject.featuredImage?.node?.sourceUrl || '/placeholder.jpg'}
-              alt={nextProject.title || 'Next Project'}
+              src={nextProject.featuredImage?.node?.sourceUrl || "/placeholder.jpg"}
+              alt={nextProject.title || "Next Project"}
               fill
               className="object-cover"
               sizes="50vw"
@@ -1312,55 +1073,31 @@ function ProjectNavigationSection({
             <div className="absolute inset-0 bg-neutral-950/60 transition-colors group-hover:bg-neutral-950/40" />
           </motion.div>
 
-          {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="relative z-10 flex h-full flex-col items-end justify-center px-8 text-right lg:px-16"
+            className="relative z-10 flex h-full flex-col items-end justify-center px-8 text-right lg:px-12"
           >
-            <div className="mb-6 flex items-center gap-4">
-              <span className="text-xs font-light uppercase tracking-[0.3em] text-white/50">
-                Next Project
+            <div className="mb-4 flex items-center gap-3">
+              <span className="text-xs font-light uppercase tracking-wider text-white/50">
+                Next
               </span>
-              <motion.div
-                whileHover={{ x: 8 }}
-                transition={{ duration: 0.3 }}
-                className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm transition-colors group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10"
-              >
-                <ChevronRight className="h-6 w-6 text-white transition-colors group-hover:text-[#c9a962]" />
-              </motion.div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 transition-colors group-hover:border-[#c9a962]/50">
+                <ChevronRight className="h-5 w-5 text-white transition-colors group-hover:text-[#c9a962]" />
+              </div>
             </div>
-            <h3 className="font-SchnyderS text-3xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-4xl xl:text-5xl">
+            <h3 className="font-SchnyderS text-2xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-3xl">
               {nextProject.title}
             </h3>
-            <p className="mt-4 text-sm font-light text-white/60">
-              {nextProject.acfFields?.projectType || 'Luxury Project'}
-            </p>
           </motion.div>
-
-          {/* Hover Line */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileHover={{ scaleX: 1 }}
-            transition={{ duration: 0.4 }}
-            className="absolute bottom-0 right-0 h-1 w-full origin-right bg-[#c9a962]"
-          />
         </Link>
-      </div>
-
-      {/* Center Divider with "Or" */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 md:block">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-neutral-950">
-          <span className="font-SchnyderS text-xl font-light text-white/60">or</span>
-        </div>
       </div>
     </section>
   );
 }
 
 // ============================================
-// 12. RELATED PROJECTS SECTION
+// 9. RELATED PROJECTS SECTION
 // ============================================
 function RelatedProjectsSection({
   projects,
@@ -1370,62 +1107,61 @@ function RelatedProjectsSection({
   currentSlug: string;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const filtered = projects?.filter((p) => p.slug !== currentSlug).slice(0, 3) || [];
 
   if (filtered.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-white py-32 lg:py-48">
+    <section ref={sectionRef} className="relative overflow-hidden bg-white py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="mb-20 flex items-end justify-between"
+          className="mb-12 flex items-end justify-between"
         >
           <div>
-            <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+            <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
               Explore More
             </span>
-            <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 lg:text-5xl">
+            <h2 className="mt-2 font-SchnyderS text-3xl font-light text-neutral-950 lg:text-4xl">
               Related Projects
             </h2>
           </div>
           <Link
             href="/projects"
-            className="group hidden items-center gap-2 text-sm font-light text-neutral-600 transition-colors hover:text-neutral-950 md:flex"
+            className="group hidden items-center gap-2 text-sm font-light text-neutral-600 hover:text-neutral-950 md:flex"
           >
             View All
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {filtered.map((project, index) => (
             <motion.div
               key={project.slug}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
             >
               <Link href={`/projects/${project.slug}`} className="group block">
-                <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-2xl">
+                <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-xl">
                   <Image
-                    src={project.featuredImage?.node?.sourceUrl || '/placeholder.jpg'}
-                    alt={project.title || 'Project'}
+                    src={project.featuredImage?.node?.sourceUrl || "/placeholder.jpg"}
+                    alt={project.title || "Project"}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="33vw"
                   />
-                  <div className="absolute inset-0 bg-neutral-950/0 transition-colors group-hover:bg-neutral-950/20" />
                 </div>
-                <span className="text-xs font-light uppercase tracking-wider text-neutral-400">
-                  {project.acfFields?.projectType || 'Luxury Project'}
-                </span>
-                <h3 className="mt-2 font-SchnyderS text-2xl font-light text-neutral-950 transition-colors group-hover:text-[#c9a962]">
+                {project.acfFields?.projectType && (
+                  <span className="text-[10px] font-light uppercase tracking-wider text-neutral-400">
+                    {project.acfFields.projectType}
+                  </span>
+                )}
+                <h3 className="mt-1 font-SchnyderS text-xl font-light text-neutral-950 transition-colors group-hover:text-[#c9a962]">
                   {project.title}
                 </h3>
               </Link>
@@ -1454,15 +1190,16 @@ export function EnhancedProjectPageClient({
     project.featuredImage?.node,
   ]).map((img) => ({
     sourceUrl: getSafeImageUrl(img?.sourceUrl),
-    altText: img?.altText || project.title || 'Project image',
+    altText: img?.altText || project.title || "Project image",
   }));
 
-  // Ensure heroImage is never empty - Next.js Image requires a valid src
-  const heroImage = (galleryImages[0]?.sourceUrl && galleryImages[0].sourceUrl !== '')
-    ? galleryImages[0].sourceUrl
-    : (project.featuredImage?.node?.sourceUrl && project.featuredImage.node.sourceUrl !== '')
-      ? project.featuredImage.node.sourceUrl
-      : '/founder/CID_2106_00_COVER.jpg';
+  const heroImage =
+    galleryImages[0]?.sourceUrl && galleryImages[0].sourceUrl !== ""
+      ? galleryImages[0].sourceUrl
+      : project.featuredImage?.node?.sourceUrl &&
+          project.featuredImage.node.sourceUrl !== ""
+        ? project.featuredImage.node.sourceUrl
+        : "/founder/CID_2106_00_COVER.jpg";
 
   const handleImageClick = (index: number) => {
     setSelectedImageIndex(index);
@@ -1472,49 +1209,44 @@ export function EnhancedProjectPageClient({
   return (
     <>
       <main className="overflow-hidden">
-        {/* 1. Hero Banner */}
+        {/* 1. Hero Banner - Project Name */}
         <HeroBanner project={project} heroImage={heroImage} />
 
-        {/* 2. Overview */}
-        <OverviewSection project={project} />
-
-        {/* 3. The Challenge */}
-        <ChallengeSection
+        {/* 2. Overview + Challenge (Side by Side) */}
+        <OverviewChallengeSection
           project={project}
           image={galleryImages[1]?.sourceUrl || heroImage}
         />
 
-        {/* 4. Design Approach */}
+        {/* 3. Design Approach */}
         <DesignApproachSection project={project} images={galleryImages} />
 
-        {/* 5. Scope of Work */}
+        {/* 4. Scope of Work */}
         <ScopeOfWorkSection project={project} />
 
-        {/* 6. The Outcome */}
+        {/* 5. The Outcome */}
         <OutcomeSection project={project} />
 
-        {/* 7. Project Details */}
+        {/* 6. Project Details (Location, Client, Status, Type, Dates) */}
         <ProjectDetailsSection project={project} />
 
-        {/* 8. Gallery */}
-        <GallerySection images={galleryImages} onImageClick={handleImageClick} />
-
-        {/* 9. Before & After */}
-        <BeforeAfterSection images={galleryImages} />
-
-        {/* 10. Testimonial */}
-        <TestimonialSection project={project} />
-
-        {/* 11. Project Navigation (Prev/Next) */}
-        <ProjectNavigationSection
-          allProjects={allProjects}
-          currentSlug={project.slug || ''}
+        {/* 7. Outcome & Results (Before/After, Gallery, Videos, Testimonial) */}
+        <OutcomeResultsSection
+          project={project}
+          images={galleryImages}
+          onImageClick={handleImageClick}
         />
 
-        {/* 12. Related Projects */}
+        {/* 8. Project Navigation (Prev/Next) */}
+        <ProjectNavigationSection
+          allProjects={allProjects}
+          currentSlug={project.slug || ""}
+        />
+
+        {/* 9. Related Projects */}
         <RelatedProjectsSection
           projects={relatedProjects.length > 0 ? relatedProjects : allProjects}
-          currentSlug={project.slug || ''}
+          currentSlug={project.slug || ""}
         />
       </main>
 

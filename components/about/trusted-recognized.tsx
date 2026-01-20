@@ -1,46 +1,64 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import Image from 'next/image';
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 
 const pressLogos = [
-  { name: 'Arabian Business', logo: '/press/arabian-business.svg' },
-  { name: 'Gulf News', logo: '/press/gulf-news.svg' },
-  { name: 'Construction Week', logo: '/press/construction-week.svg' },
-  { name: 'Hotelier Middle East', logo: '/press/hotelier-me.svg' },
-  { name: 'Architectural Digest ME', logo: '/press/architectural-digest.svg' },
-  { name: 'Forbes Middle East', logo: '/press/forbes-me.svg' },
+  { name: "Arabian Business", logo: "/press/arabian-business.svg" },
+  { name: "Gulf News", logo: "/press/gulf-news.svg" },
+  { name: "Construction Week", logo: "/press/construction-week.svg" },
+  { name: "Hotelier Middle East", logo: "/press/hotelier-me.svg" },
+  { name: "Architectural Digest ME", logo: "/press/architectural-digest.svg" },
+  { name: "Forbes Middle East", logo: "/press/forbes-me.svg" },
 ];
 
 export function TrustedRecognized() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-100 py-24 sm:py-28 lg:py-32"
+      className="relative overflow-hidden py-24 sm:py-28 lg:py-32"
     >
-      {/* Background elements */}
+      {/* Full-bleed background image with parallax */}
+      <motion.div
+        style={{ y: bgY, scale: bgScale }}
+        className="absolute inset-0"
+      >
+        <SafeImage
+          src="/team/MID8563.jpg"
+          alt="MIDC Team"
+          fill
+          className="object-cover"
+        />
+        {/* Elegant light overlay */}
+        <div className="absolute inset-0 bg-[#faf8f5]/92" />
+      </motion.div>
+
+      {/* Background gradient elements */}
       <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(201,169,98,0.06)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(201,169,98,0.04)_0%,transparent_50%)]" />
         <motion.div
           style={{ y: bgY }}
           className="absolute -left-1/4 top-1/3 h-[500px] w-[500px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]"
         />
         <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], ['5%', '-10%']) }}
+          style={{ y: useTransform(scrollYProgress, [0, 1], ["5%", "-10%"]) }}
           className="absolute -right-1/4 bottom-1/3 h-[400px] w-[400px] rounded-full bg-neutral-300/30 blur-[120px]"
         />
-
-        {/* Subtle grid */}
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">

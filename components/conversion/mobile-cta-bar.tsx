@@ -83,10 +83,10 @@ export function MobileCTABar() {
               {/* Book consultation - Primary CTA */}
               <Link
                 href="/en/contact/book-consultation"
-                className="flex flex-[2] items-center justify-center gap-2 rounded-xl bg-[#c9a962] px-4 py-3 transition-colors active:bg-[#b8984f]"
+                className="flex flex-[2] items-center justify-center gap-2 border border-neutral-950 bg-neutral-950 px-4 py-3 transition-all active:scale-[0.98]"
               >
-                <Calendar size={18} className="text-neutral-950" />
-                <span className="font-Satoshi text-xs font-semibold text-neutral-950">Free Consultation</span>
+                <Calendar size={18} className="text-white" />
+                <span className="font-Satoshi text-xs font-semibold uppercase tracking-wider text-white">Free Consultation</span>
               </Link>
             </div>
 

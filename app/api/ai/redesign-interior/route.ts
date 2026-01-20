@@ -1,47 +1,58 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { analyzeImageWithOllama, checkOllamaHealth } from '@/lib/ai/ollama-client';
-import { generateImageWithComfyUIImg2Img, checkComfyUIHealth } from '@/lib/ai/comfyui-client';
-import { Resend } from 'resend';
+import { NextRequest, NextResponse } from "next/server";
+import {
+  analyzeImageWithOllama,
+  checkOllamaHealth,
+} from "@/lib/ai/ollama-client";
+import {
+  generateImageWithComfyUIImg2Img,
+  checkComfyUIHealth,
+} from "@/lib/ai/comfyui-client";
+import { Resend } from "resend";
 
 // Force dynamic to prevent static analysis during build
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 // Initialize Resend only if API key is available
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 // Contact information for engineer callback
-const ENGINEER_PHONE = '+971 52 304 1482';
-const ENGINEER_EMAIL = 'info@mouhajerdesign.com';
+const ENGINEER_PHONE = "+971 52 304 1482";
+const ENGINEER_EMAIL = "mouhajergallery@gmail.com";
 
 // Email configuration - use verified domain or Resend test domain
 // To use custom domain: verify mouhajerdesign.com in Resend dashboard
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Mouhajer Design Studio <onboarding@resend.dev>';
+const FROM_EMAIL =
+  process.env.RESEND_FROM_EMAIL ||
+  "Mouhajer Design Studio <onboarding@resend.dev>";
 
 export async function POST(request: NextRequest) {
   try {
     // Lazy load Sanity client to avoid build-time initialization
-    const { client: sanityClient } = await import('@/sanity/lib/client');
+    const { client: sanityClient } = await import("@/sanity/lib/client");
 
     const formData = await request.formData();
 
-    const email = formData.get('email') as string;
-    const uploadedImage = formData.get('image') as File | null;
-    const prompt = formData.get('prompt') as string || 'Redesign this interior space with modern luxury aesthetics';
-    const serviceCategory = formData.get('serviceCategory') as string || 'interior';
-    const requestEngineerCallback = formData.get('requestEngineerCallback') === 'true';
+    const email = formData.get("email") as string;
+    const uploadedImage = formData.get("image") as File | null;
+    const prompt =
+      (formData.get("prompt") as string) ||
+      "Redesign this interior space with modern luxury aesthetics";
+    const serviceCategory =
+      (formData.get("serviceCategory") as string) || "interior";
+    const requestEngineerCallback =
+      formData.get("requestEngineerCallback") === "true";
 
     // Validation
     if (!email) {
-      return NextResponse.json(
-        { error: 'Email is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
     if (!uploadedImage) {
       return NextResponse.json(
-        { error: 'Please upload an interior image' },
+        { error: "Please upload an interior image" },
         { status: 400 }
       );
     }
@@ -50,15 +61,15 @@ export async function POST(request: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Invalid email address' },
+        { error: "Invalid email address" },
         { status: 400 }
       );
     }
 
     // Validate file type
-    if (!uploadedImage.type.startsWith('image/')) {
+    if (!uploadedImage.type.startsWith("image/")) {
       return NextResponse.json(
-        { error: 'Please upload a valid image file' },
+        { error: "Please upload a valid image file" },
         { status: 400 }
       );
     }
@@ -73,10 +84,13 @@ export async function POST(request: NextRequest) {
     const demoMode = !ollamaHealthy || !comfyUIHealthy;
 
     if (demoMode) {
-      console.log('[Redesign] Running in demo mode - AI services unavailable:', {
-        ollama: ollamaHealthy ? 'online' : 'offline',
-        comfyUI: comfyUIHealthy ? 'online' : 'offline',
-      });
+      console.log(
+        "[Redesign] Running in demo mode - AI services unavailable:",
+        {
+          ollama: ollamaHealthy ? "online" : "offline",
+          comfyUI: comfyUIHealthy ? "online" : "offline",
+        }
+      );
     }
 
     const startTime = Date.now();
@@ -84,16 +98,16 @@ export async function POST(request: NextRequest) {
     // Convert uploaded image to base64
     const bytes = await uploadedImage.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const uploadedImageBase64 = buffer.toString('base64');
+    const uploadedImageBase64 = buffer.toString("base64");
 
-    let imageAnalysis = '';
+    let imageAnalysis = "";
     let generatedImageBuffer: Buffer | null = null;
 
     if (!demoMode) {
       // Full AI mode - analyze and generate
       try {
         // Analyze the uploaded interior image with LLaVA
-        console.log('[Redesign] Analyzing uploaded interior image...');
+        console.log("[Redesign] Analyzing uploaded interior image...");
         imageAnalysis = await analyzeImageWithOllama(
           uploadedImageBase64,
           `Analyze this interior space in detail. Describe:
@@ -105,10 +119,10 @@ export async function POST(request: NextRequest) {
           6. Overall atmosphere and mood
 
           Based on this, suggest how to transform it into a modern luxury space with MIDC signature style - blending European precision with Arabic warmth.`,
-          'llava'
+          "llava"
         );
 
-        console.log('[Redesign] Image analysis:', imageAnalysis);
+        console.log("[Redesign] Image analysis:", imageAnalysis);
 
         // Create enhanced prompt for redesign
         const enhancedPrompt = `Transform this interior space: ${imageAnalysis}
@@ -126,10 +140,11 @@ export async function POST(request: NextRequest) {
         Style: Luxury interior design, photorealistic 3D render, architectural visualization, 8K quality`;
 
         // Generate redesigned image with img2img
-        console.log('[Redesign] Generating redesigned image...');
+        console.log("[Redesign] Generating redesigned image...");
         generatedImageBuffer = await generateImageWithComfyUIImg2Img({
           prompt: enhancedPrompt,
-          negative_prompt: 'low quality, blurry, distorted, unrealistic, amateur, sketchy, bad design, cluttered, messy, poor lighting, cheap materials',
+          negative_prompt:
+            "low quality, blurry, distorted, unrealistic, amateur, sketchy, bad design, cluttered, messy, poor lighting, cheap materials",
           input_image: uploadedImageBase64,
           width: 1024,
           height: 768,
@@ -139,13 +154,18 @@ export async function POST(request: NextRequest) {
           seed: -1,
         });
       } catch (aiError) {
-        console.error('[Redesign] AI processing failed, switching to demo mode:', aiError);
+        console.error(
+          "[Redesign] AI processing failed, switching to demo mode:",
+          aiError
+        );
         // Continue in demo mode
       }
     }
 
     const generationTime = Math.round((Date.now() - startTime) / 1000);
-    console.log(`[Redesign] Processing completed in ${generationTime}s (demo mode: ${demoMode || !generatedImageBuffer})`);
+    console.log(
+      `[Redesign] Processing completed in ${generationTime}s (demo mode: ${demoMode || !generatedImageBuffer})`
+    );
 
     // Upload images to Sanity
     let generatedImageAsset = null;
@@ -153,20 +173,24 @@ export async function POST(request: NextRequest) {
 
     try {
       // Always upload the original image
-      uploadedImageAsset = await sanityClient.assets.upload('image', buffer, {
-        filename: `original-interior-${Date.now()}.${uploadedImage.type.split('/')[1]}`,
+      uploadedImageAsset = await sanityClient.assets.upload("image", buffer, {
+        filename: `original-interior-${Date.now()}.${uploadedImage.type.split("/")[1]}`,
         contentType: uploadedImage.type,
       });
 
       // Only upload generated image if we have one
       if (generatedImageBuffer) {
-        generatedImageAsset = await sanityClient.assets.upload('image', generatedImageBuffer, {
-          filename: `ai-redesign-${Date.now()}.png`,
-          contentType: 'image/png',
-        });
+        generatedImageAsset = await sanityClient.assets.upload(
+          "image",
+          generatedImageBuffer,
+          {
+            filename: `ai-redesign-${Date.now()}.png`,
+            contentType: "image/png",
+          }
+        );
       }
     } catch (uploadError) {
-      console.error('[Redesign] Sanity upload error:', uploadError);
+      console.error("[Redesign] Sanity upload error:", uploadError);
       // Continue without Sanity - just send email
     }
 
@@ -174,33 +198,41 @@ export async function POST(request: NextRequest) {
     let lead = null;
     try {
       lead = await sanityClient.create({
-        _type: 'lead',
+        _type: "lead",
         email,
-        prompt: 'Interior Redesign Request',
+        prompt: "Interior Redesign Request",
         serviceCategory,
-        uploadedImage: uploadedImageAsset ? {
-          _type: 'image',
-          asset: {
-            _type: 'reference',
-            _ref: uploadedImageAsset._id,
-          },
-        } : undefined,
-        generatedImage: generatedImageAsset ? {
-          _type: 'image',
-          asset: {
-            _type: 'reference',
-            _ref: generatedImageAsset._id,
-          },
-        } : undefined,
-        status: demoMode || !generatedImageBuffer ? 'demo_pending' : 'processing',
-        modelUsed: demoMode || !generatedImageBuffer ? 'Demo Mode' : 'SDXL img2img + LLaVA',
+        uploadedImage: uploadedImageAsset
+          ? {
+              _type: "image",
+              asset: {
+                _type: "reference",
+                _ref: uploadedImageAsset._id,
+              },
+            }
+          : undefined,
+        generatedImage: generatedImageAsset
+          ? {
+              _type: "image",
+              asset: {
+                _type: "reference",
+                _ref: generatedImageAsset._id,
+              },
+            }
+          : undefined,
+        status:
+          demoMode || !generatedImageBuffer ? "demo_pending" : "processing",
+        modelUsed:
+          demoMode || !generatedImageBuffer
+            ? "Demo Mode"
+            : "SDXL img2img + LLaVA",
         generationTime,
         engineerCallbackRequested: requestEngineerCallback,
-        imageAnalysis: imageAnalysis || 'AI analysis pending - demo mode',
+        imageAnalysis: imageAnalysis || "AI analysis pending - demo mode",
         createdAt: new Date().toISOString(),
       });
     } catch (leadError) {
-      console.error('[Redesign] Failed to create lead:', leadError);
+      console.error("[Redesign] Failed to create lead:", leadError);
       // Continue - we can still send email
     }
 
@@ -211,9 +243,9 @@ export async function POST(request: NextRequest) {
     // Asset ID format: image-{hash}-{width}x{height}-{format}
     const getSanityImageUrl = (assetId: string): string => {
       // Remove 'image-' prefix and convert last hyphen to dot for extension
-      const parts = assetId.replace('image-', '').split('-');
+      const parts = assetId.replace("image-", "").split("-");
       const extension = parts.pop(); // Get last part (format like 'png', 'jpg')
-      const rest = parts.join('-'); // Hash and dimensions
+      const rest = parts.join("-"); // Hash and dimensions
       return `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${rest}.${extension}`;
     };
 
@@ -230,19 +262,19 @@ export async function POST(request: NextRequest) {
 
     try {
       if (!resend) {
-        console.log('[Redesign] Resend not configured, skipping email');
-        emailError = 'Email service not configured';
+        console.log("[Redesign] Resend not configured, skipping email");
+        emailError = "Email service not configured";
         if (lead) {
           await sanityClient
             .patch(lead._id)
-            .set({ status: 'completed' })
+            .set({ status: "completed" })
             .commit();
         }
       } else {
         // Different email for demo mode vs full AI mode
         const emailSubject = isDemo
-          ? 'Your Interior Redesign Request Received!'
-          : 'Your AI Interior Redesign is Ready!';
+          ? "Your Interior Redesign Request Received!"
+          : "Your AI Interior Redesign is Ready!";
 
         const emailBody = isDemo
           ? `
@@ -272,12 +304,16 @@ export async function POST(request: NextRequest) {
                     </p>
                   </div>
 
-                  ${originalImageUrl ? `
+                  ${
+                    originalImageUrl
+                      ? `
                   <div style="margin: 30px 0;">
                     <h3 style="color: #1a1a1a; font-size: 16px; margin-bottom: 15px;">Your Submitted Space</h3>
                     <img src="${originalImageUrl}" alt="Your Interior" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                   </div>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
                   <div style="background: #f0f0f0; padding: 20px; border-radius: 8px; margin: 30px 0;">
                     <h3 style="margin: 0 0 15px 0; color: #1a1a1a; font-size: 18px;">What Happens Next?</h3>
@@ -290,7 +326,7 @@ export async function POST(request: NextRequest) {
                   </div>
 
                   <div style="text-align: center; margin: 30px 0;">
-                    <a href="https://wa.me/971523041482?text=${encodeURIComponent('Hi! I just submitted my interior photo for redesign.')}" style="display: inline-block; background: #25D366; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">WhatsApp Us</a>
+                    <a href="https://wa.me/971523041482?text=${encodeURIComponent("Hi! I just submitted my interior photo for redesign.")}" style="display: inline-block; background: #25D366; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">WhatsApp Us</a>
                     <a href="tel:+971523041482" style="display: inline-block; background: #c9a962; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">Call Now</a>
                   </div>
 
@@ -324,35 +360,51 @@ export async function POST(request: NextRequest) {
                     Thank you for using our AI Interior Redesign tool! Our AI has analyzed your space and created a stunning redesign concept inspired by luxury design principles.
                   </p>
 
-                  ${requestEngineerCallback ? `
+                  ${
+                    requestEngineerCallback
+                      ? `
                   <div style="background: #c9a962; color: #1a1a1a; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center;">
                     <h3 style="margin: 0 0 10px 0; font-size: 18px;">Engineer Callback Scheduled</h3>
                     <p style="margin: 0; font-size: 14px;">
                       One of our design engineers will contact you within <strong>15 minutes</strong> to discuss your project!
                     </p>
                   </div>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
-                  ${originalImageUrl ? `
+                  ${
+                    originalImageUrl
+                      ? `
                   <div style="margin: 30px 0;">
                     <h3 style="color: #1a1a1a; font-size: 16px; margin-bottom: 15px;">Your Original Space</h3>
                     <img src="${originalImageUrl}" alt="Original Interior" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                   </div>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
-                  ${generatedImageUrl ? `
+                  ${
+                    generatedImageUrl
+                      ? `
                   <div style="margin: 30px 0;">
                     <h3 style="color: #1a1a1a; font-size: 16px; margin-bottom: 15px;">AI Redesigned Concept</h3>
                     <img src="${generatedImageUrl}" alt="AI Redesigned Interior" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
                   </div>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
-                  ${imageAnalysis ? `
+                  ${
+                    imageAnalysis
+                      ? `
                   <div style="background: #f8f8f8; padding: 20px; border-radius: 8px; margin: 25px 0;">
                     <h3 style="margin: 0 0 15px 0; color: #1a1a1a; font-size: 16px;">AI Design Analysis</h3>
-                    <p style="margin: 0; font-size: 13px; color: #666; white-space: pre-line; line-height: 1.7;">${imageAnalysis.substring(0, 500)}${imageAnalysis.length > 500 ? '...' : ''}</p>
+                    <p style="margin: 0; font-size: 13px; color: #666; white-space: pre-line; line-height: 1.7;">${imageAnalysis.substring(0, 500)}${imageAnalysis.length > 500 ? "..." : ""}</p>
                   </div>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
                   <div style="background: #f0f0f0; padding: 20px; border-radius: 8px; margin: 30px 0;">
                     <h3 style="margin: 0 0 15px 0; color: #1a1a1a; font-size: 18px;">Ready to Make It Real?</h3>
@@ -360,7 +412,7 @@ export async function POST(request: NextRequest) {
                       Our team of expert designers and engineers can bring this concept to life. Let's discuss your project!
                     </p>
                     <div style="text-align: center;">
-                      <a href="https://wa.me/971523041482?text=${encodeURIComponent('Hi! I just received my AI interior redesign and would like to discuss bringing it to life.')}" style="display: inline-block; background: #25D366; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">WhatsApp Us</a>
+                      <a href="https://wa.me/971523041482?text=${encodeURIComponent("Hi! I just received my AI interior redesign and would like to discuss bringing it to life.")}" style="display: inline-block; background: #25D366; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">WhatsApp Us</a>
                       <a href="tel:+971523041482" style="display: inline-block; background: #c9a962; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">Call Now</a>
                     </div>
                   </div>
@@ -369,7 +421,7 @@ export async function POST(request: NextRequest) {
                     <p style="font-size: 12px; color: #999; margin: 0;">
                       <strong>Generation Details:</strong><br>
                       Time: ${generationTime} seconds | Technology: SDXL + LLaVA Vision AI<br>
-                      ${lead ? `Reference ID: ${lead._id}` : ''}
+                      ${lead ? `Reference ID: ${lead._id}` : ""}
                     </p>
                   </div>
 
@@ -393,10 +445,13 @@ export async function POST(request: NextRequest) {
 
         if (emailResult.data?.id) {
           emailSent = true;
-          console.log('[Redesign] Email sent successfully:', emailResult.data.id);
+          console.log(
+            "[Redesign] Email sent successfully:",
+            emailResult.data.id
+          );
         } else if (emailResult.error) {
-          emailError = emailResult.error.message || 'Failed to send email';
-          console.error('[Redesign] Email send error:', emailResult.error);
+          emailError = emailResult.error.message || "Failed to send email";
+          console.error("[Redesign] Email send error:", emailResult.error);
         }
 
         // Update lead status if we have one
@@ -404,7 +459,7 @@ export async function POST(request: NextRequest) {
           await sanityClient
             .patch(lead._id)
             .set({
-              status: 'sent',
+              status: "sent",
               emailSentAt: new Date().toISOString(),
             })
             .commit();
@@ -421,25 +476,25 @@ export async function POST(request: NextRequest) {
               <p><strong>Client Email:</strong> ${email}</p>
               <p><strong>Request Time:</strong> ${new Date().toLocaleString()}</p>
               <p><strong>Callback Window:</strong> Within 15 minutes</p>
-              <p><strong>Mode:</strong> ${isDemo ? 'Demo/Manual Follow-up Required' : 'AI Generated'}</p>
-              ${lead ? `<p><strong>Lead ID:</strong> ${lead._id}</p>` : ''}
+              <p><strong>Mode:</strong> ${isDemo ? "Demo/Manual Follow-up Required" : "AI Generated"}</p>
+              ${lead ? `<p><strong>Lead ID:</strong> ${lead._id}</p>` : ""}
               <hr>
-              ${imageAnalysis ? `<p><strong>AI Analysis:</strong></p><p style="white-space: pre-line;">${imageAnalysis}</p><hr>` : ''}
-              ${originalImageUrl ? `<p>Original Image: ${originalImageUrl}</p>` : ''}
-              ${generatedImageUrl ? `<p>Generated Design: ${generatedImageUrl}</p>` : ''}
+              ${imageAnalysis ? `<p><strong>AI Analysis:</strong></p><p style="white-space: pre-line;">${imageAnalysis}</p><hr>` : ""}
+              ${originalImageUrl ? `<p>Original Image: ${originalImageUrl}</p>` : ""}
+              ${generatedImageUrl ? `<p>Generated Design: ${generatedImageUrl}</p>` : ""}
             `,
           });
         }
       }
     } catch (err) {
-      console.error('[Redesign] Failed to send email:', err);
-      emailError = err instanceof Error ? err.message : 'Email sending failed';
+      console.error("[Redesign] Failed to send email:", err);
+      emailError = err instanceof Error ? err.message : "Email sending failed";
       // Don't fail the request if email fails
       if (lead) {
         try {
           await sanityClient
             .patch(lead._id)
-            .set({ status: 'completed' })
+            .set({ status: "completed" })
             .commit();
         } catch {
           // Ignore Sanity errors
@@ -451,12 +506,13 @@ export async function POST(request: NextRequest) {
     let responseMessage: string;
     if (emailSent) {
       responseMessage = isDemo
-        ? 'Request received! Check your email for confirmation. Our team will contact you within 15 minutes.'
-        : 'Interior redesign generated successfully! Check your email.';
+        ? "Request received! Check your email for confirmation. Our team will contact you within 15 minutes."
+        : "Interior redesign generated successfully! Check your email.";
     } else {
-      responseMessage = 'Request received! Our team will contact you within 15 minutes to discuss your project.';
+      responseMessage =
+        "Request received! Our team will contact you within 15 minutes to discuss your project.";
       if (emailError) {
-        console.warn('[Redesign] Email not sent:', emailError);
+        console.warn("[Redesign] Email not sent:", emailError);
       }
     }
 
@@ -474,14 +530,13 @@ export async function POST(request: NextRequest) {
         emailError: emailError || undefined,
       },
     });
-
   } catch (error) {
-    console.error('[Redesign] Error:', error);
+    console.error("[Redesign] Error:", error);
 
     return NextResponse.json(
       {
-        error: 'Failed to generate redesign',
-        details: error instanceof Error ? error.message : 'Unknown error',
+        error: "Failed to generate redesign",
+        details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     );
@@ -496,10 +551,10 @@ export async function GET() {
   ]);
 
   return NextResponse.json({
-    status: ollamaHealthy && comfyUIHealthy ? 'healthy' : 'degraded',
+    status: ollamaHealthy && comfyUIHealthy ? "healthy" : "degraded",
     services: {
-      ollama: ollamaHealthy ? 'online' : 'offline',
-      comfyUI: comfyUIHealthy ? 'online' : 'offline',
+      ollama: ollamaHealthy ? "online" : "offline",
+      comfyUI: comfyUIHealthy ? "online" : "offline",
     },
     timestamp: new Date().toISOString(),
   });

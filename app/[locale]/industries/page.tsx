@@ -20,11 +20,13 @@ type Props = {
 async function getIndustries(locale: string) {
   try {
     const industries = await client.fetch(industriesQuery, { locale });
-    // Deduplicate by slug (for i18n variants)
+    // Deduplicate by slug (for i18n variants) and filter out healthcare
     const seenSlugs = new Set<string>();
     const filteredIndustries = (industries || []).filter(
       (industry: { slug?: { current?: string } }) => {
         const slug = industry.slug?.current || '';
+        // Filter out healthcare
+        if (slug === 'healthcare') return false;
         if (seenSlugs.has(slug)) return false;
         seenSlugs.add(slug);
         return true;

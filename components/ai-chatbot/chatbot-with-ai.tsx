@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Sparkles } from 'lucide-react';
-import { AIImageGenerator } from './ai-image-generator';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageCircle, X, Sparkles } from "lucide-react";
+import { AIImageGenerator } from "./ai-image-generator";
 
 /**
  * Example integration of AI Image Generator with your chatbot
@@ -43,8 +43,12 @@ export function ChatbotWithAI() {
                   <span className="font-SchnyderS text-white text-lg">M</span>
                 </div>
                 <div>
-                  <h3 className="font-SchnyderS text-white text-base">MIDC Assistant</h3>
-                  <p className="font-Satoshi text-xs text-white/70">Always here to help</p>
+                  <h3 className="font-SchnyderS text-white text-base">
+                    MIDC Assistant
+                  </h3>
+                  <p className="font-Satoshi text-xs text-white/70">
+                    Always here to help
+                  </p>
                 </div>
               </div>
               <button
@@ -65,10 +69,13 @@ export function ChatbotWithAI() {
                 <div className="flex-1">
                   <div className="rounded-2xl rounded-tl-sm bg-white p-4 shadow-sm">
                     <p className="font-Satoshi text-sm text-neutral-700">
-                      Welcome to MIDC! I'm here to help you with your design and construction needs.
+                      Welcome to MIDC! I'm here to help you with your design and
+                      construction needs.
                     </p>
                   </div>
-                  <p className="mt-1 px-1 font-Satoshi text-xs text-neutral-400">Just now</p>
+                  <p className="mt-1 px-1 font-Satoshi text-xs text-neutral-400">
+                    Just now
+                  </p>
                 </div>
               </div>
 
@@ -86,7 +93,8 @@ export function ChatbotWithAI() {
                           Try Our AI Design Studio
                         </h4>
                         <p className="font-Satoshi text-sm text-neutral-600 mb-4">
-                          Describe your vision, and our AI will create a luxury design concept for you in seconds.
+                          Describe your vision, and our AI will create a luxury
+                          design concept for you in seconds.
                         </p>
                         <button
                           onClick={() => {
@@ -101,7 +109,9 @@ export function ChatbotWithAI() {
                       </div>
                     </div>
                   </div>
-                  <p className="mt-1 px-1 font-Satoshi text-xs text-neutral-400">Just now</p>
+                  <p className="mt-1 px-1 font-Satoshi text-xs text-neutral-400">
+                    Just now
+                  </p>
                 </div>
               </div>
 

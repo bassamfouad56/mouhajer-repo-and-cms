@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
-import { getFeaturedPartners } from '@/lib/partner-logos';
-import { ArrowUpRight } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import { getFeaturedPartners } from "@/lib/partner-logos";
+import { ArrowUpRight } from "lucide-react";
 
 const categoryDescriptions: Record<string, string> = {
-  hospitality: 'World-class hotel groups and hospitality leaders',
-  developer: 'Visionary real estate developers shaping the UAE skyline',
-  luxury: 'Premium furniture and lifestyle brands',
-  corporate: 'Industry-leading technology and infrastructure partners',
+  hospitality: "World-class hotel groups and hospitality leaders",
+  developer: "Visionary real estate developers shaping the UAE skyline",
+  luxury: "Premium furniture and lifestyle brands",
+  corporate: "Industry-leading technology and infrastructure partners",
 };
 
 export function FeaturedPartnerships() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const featuredPartners = getFeaturedPartners();
 
@@ -60,8 +60,8 @@ export function FeaturedPartnerships() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto max-w-2xl font-Satoshi text-lg text-white/50"
           >
-            Our partnerships with industry leaders reflect our commitment to excellence
-            and our capability to deliver at the highest standards.
+            Our partnerships with industry leaders reflect our commitment to
+            excellence and our capability to deliver at the highest standards.
           </motion.p>
         </div>
 
@@ -129,16 +129,18 @@ export function FeaturedPartnerships() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mt-20 grid gap-8 border-t border-white/5 pt-16 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {Object.entries(categoryDescriptions).map(([category, description]) => (
-            <div key={category} className="text-center">
-              <h4 className="mb-2 font-Satoshi text-xs font-medium uppercase tracking-widest text-[#c9a962]">
-                {category}
-              </h4>
-              <p className="font-Satoshi text-sm leading-relaxed text-white/40">
-                {description}
-              </p>
-            </div>
-          ))}
+          {Object.entries(categoryDescriptions).map(
+            ([category, description]) => (
+              <div key={category} className="text-center">
+                <h4 className="mb-2 font-Satoshi text-xs font-medium uppercase tracking-widest text-[#c9a962]">
+                  {category}
+                </h4>
+                <p className="font-Satoshi text-sm leading-relaxed text-white/40">
+                  {description}
+                </p>
+              </div>
+            )
+          )}
         </motion.div>
       </div>
     </section>

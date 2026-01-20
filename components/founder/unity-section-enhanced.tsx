@@ -1,44 +1,48 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { Palette, Hammer, Zap, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import { MagneticButton } from '@/components/animations/magnetic-button';
-import { SVGLineDraw, SVGCircleDraw, SVGPathDraw } from '@/components/animations/svg-line-draw';
-import { RevealText } from '@/components/animations/reveal-text';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { Palette, Hammer, Zap, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { MagneticButton } from "@/components/animations/magnetic-button";
+import {
+  SVGLineDraw,
+  SVGCircleDraw,
+  SVGPathDraw,
+} from "@/components/animations/svg-line-draw";
+import { RevealText } from "@/components/animations/reveal-text";
 
 const teams = [
   {
-    id: 'design',
+    id: "design",
     icon: Palette,
-    title: 'The Design Team',
-    description: 'knows their concepts are buildable.',
-    color: '#8b5cf6',
+    title: "The Design Team",
+    description: "knows their concepts are buildable.",
+    color: "#8b5cf6",
   },
   {
-    id: 'construction',
+    id: "construction",
     icon: Hammer,
-    title: 'The Construction Team',
-    description: 'respects the artistic intent.',
-    color: '#c9a962',
+    title: "The Construction Team",
+    description: "respects the artistic intent.",
+    color: "#c9a962",
   },
   {
-    id: 'mep',
+    id: "mep",
     icon: Zap,
-    title: 'The MEP Team',
-    description: 'ensures the systems support the beauty.',
-    color: '#3b82f6',
+    title: "The MEP Team",
+    description: "ensures the systems support the beauty.",
+    color: "#3b82f6",
   },
 ];
 
-function TeamCard({ team, index }: { team: typeof teams[0]; index: number }) {
+function TeamCard({ team, index }: { team: (typeof teams)[0]; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-15%' });
+  const isInView = useInView(cardRef, { once: true, margin: "-15%" });
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
@@ -69,7 +73,12 @@ function TeamCard({ team, index }: { team: typeof teams[0]; index: number }) {
           className="relative mb-6 inline-flex h-14 w-14"
           initial={{ scale: 0, rotate: -180 }}
           animate={isInView ? { scale: 1, rotate: 0 } : {}}
-          transition={{ duration: 0.8, delay: index * 0.15 + 0.3, type: 'spring', stiffness: 100 }}
+          transition={{
+            duration: 0.8,
+            delay: index * 0.15 + 0.3,
+            type: "spring",
+            stiffness: 100,
+          }}
         >
           <SVGCircleDraw
             size={56}
@@ -82,7 +91,11 @@ function TeamCard({ team, index }: { team: typeof teams[0]; index: number }) {
             className="absolute inset-0 flex items-center justify-center transition-all duration-500 group-hover:scale-110"
             style={{ backgroundColor: `${team.color}10` }}
           >
-            <Icon className="h-6 w-6 transition-transform duration-500 group-hover:rotate-12" style={{ color: team.color }} strokeWidth={1} />
+            <Icon
+              className="h-6 w-6 transition-transform duration-500 group-hover:rotate-12"
+              style={{ color: team.color }}
+              strokeWidth={1}
+            />
           </div>
         </motion.div>
 
@@ -92,7 +105,7 @@ function TeamCard({ team, index }: { team: typeof teams[0]; index: number }) {
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: index * 0.15 + 0.4 }}
           className="mb-3 font-SchnyderS text-xl font-light text-neutral-900 transition-all duration-500 group-hover:translate-x-1 lg:text-2xl"
-          style={{ color: isInView ? '#171717' : team.color }}
+          style={{ color: isInView ? "#171717" : team.color }}
         >
           {team.title}
         </motion.h3>
@@ -140,14 +153,14 @@ function TeamCard({ team, index }: { team: typeof teams[0]; index: number }) {
 
 export function UnitySectionEnhanced() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
   return (
     <section
@@ -173,11 +186,23 @@ export function UnitySectionEnhanced() {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <SVGLineDraw width={80} height={1} strokeColor="rgba(255,255,255,0.3)" duration={1.5} delay={0.2} />
+            <SVGLineDraw
+              width={80}
+              height={1}
+              strokeColor="rgba(255,255,255,0.3)"
+              duration={1.5}
+              delay={0.2}
+            />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
               Leadership Philosophy
             </span>
-            <SVGLineDraw width={80} height={1} strokeColor="rgba(255,255,255,0.3)" duration={1.5} delay={0.2} />
+            <SVGLineDraw
+              width={80}
+              height={1}
+              strokeColor="rgba(255,255,255,0.3)"
+              duration={1.5}
+              delay={0.2}
+            />
           </motion.div>
 
           <div className="text-center">
@@ -198,12 +223,15 @@ export function UnitySectionEnhanced() {
             className="mx-auto max-w-3xl space-y-6 text-center font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg"
           >
             <p>
-              Many CEOs outsource their problems.{' '}
-              <span className="font-medium text-neutral-900">Eng. Maher brings them in-house.</span>
+              Many CEOs outsource their problems.{" "}
+              <span className="font-medium text-neutral-900">
+                Eng. Maher brings them in-house.
+              </span>
             </p>
             <p>
-              He built MIDC as a turnkey powerhouse because he wanted his designers to sit next to
-              his engineers. He wanted the person drawing the joinery to know the person building it.
+              He built MIDC as a turnkey powerhouse because he wanted his
+              designers to sit next to his engineers. He wanted the person
+              drawing the joinery to know the person building it.
             </p>
             <p className="text-neutral-500">
               This unity creates a culture of mutual respect and efficiency.
@@ -243,8 +271,11 @@ export function UnitySectionEnhanced() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mb-8 text-center font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg"
             >
-              Eng. Maher sits at the head of this table, not to dictate, but to{' '}
-              <span className="font-medium text-neutral-900">orchestrate this collaboration</span>.
+              Eng. Maher sits at the head of this table, not to dictate, but to{" "}
+              <span className="font-medium text-neutral-900">
+                orchestrate this collaboration
+              </span>
+              .
             </motion.p>
 
             {/* Quote card with 3D effect */}
@@ -254,7 +285,7 @@ export function UnitySectionEnhanced() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="group relative border-l-2 bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:bg-white/90"
-              style={{ borderColor: '#c9a962' }}
+              style={{ borderColor: "#c9a962" }}
             >
               <RevealText
                 className="font-SchnyderS text-xl font-light italic text-neutral-700 lg:text-2xl"
@@ -262,7 +293,8 @@ export function UnitySectionEnhanced() {
                 stagger={0.015}
                 animationType="luxury"
               >
-                "The magic happens when everyone understands they are building something bigger than themselves."
+                "The magic happens when everyone understands they are building
+                something bigger than themselves."
               </RevealText>
 
               {/* Glowing accent */}
@@ -285,7 +317,10 @@ export function UnitySectionEnhanced() {
               className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-900 transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962]/20"
             >
               <span>See Our Integrated Process</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1} />
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                strokeWidth={1}
+              />
             </Link>
           </MagneticButton>
         </motion.div>

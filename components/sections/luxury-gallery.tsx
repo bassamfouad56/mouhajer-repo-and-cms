@@ -1,128 +1,139 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { SafeImage } from '@/components/safe-image';
-import { X, ArrowLeft, ArrowRight, Expand } from 'lucide-react';
+import { useRef, useState } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import { SafeImage } from "@/components/safe-image";
+import { X, ArrowLeft, ArrowRight, Expand } from "lucide-react";
 
 const galleryImages = [
   {
     id: 1,
-    src: '',
-    alt: 'Luxury living room with marble floors and golden accents',
-    category: 'Living Spaces',
-    title: 'Grand Living Room',
-    aspect: 'tall', // tall, wide, or square
+    src: "",
+    alt: "Luxury living room with marble floors and golden accents",
+    category: "Living Spaces",
+    title: "Grand Living Room",
+    aspect: "tall", // tall, wide, or square
   },
   {
     id: 2,
-    src: '',
-    alt: 'Modern luxury kitchen with island',
-    category: 'Kitchen',
-    title: 'Gourmet Kitchen',
-    aspect: 'wide',
+    src: "",
+    alt: "Modern luxury kitchen with island",
+    category: "Kitchen",
+    title: "Gourmet Kitchen",
+    aspect: "wide",
   },
   {
     id: 3,
-    src: '',
-    alt: 'Elegant master bedroom suite',
-    category: 'Bedroom',
-    title: 'Master Suite',
-    aspect: 'square',
+    src: "",
+    alt: "Elegant master bedroom suite",
+    category: "Bedroom",
+    title: "Master Suite",
+    aspect: "square",
   },
   {
     id: 4,
-    src: '',
-    alt: 'Luxury villa exterior at dusk',
-    category: 'Exterior',
-    title: 'Villa Entrance',
-    aspect: 'wide',
+    src: "",
+    alt: "Luxury villa exterior at dusk",
+    category: "Exterior",
+    title: "Villa Entrance",
+    aspect: "wide",
   },
   {
     id: 5,
-    src: '',
-    alt: 'Luxurious bathroom with freestanding tub',
-    category: 'Bathroom',
-    title: 'Spa Bathroom',
-    aspect: 'tall',
+    src: "",
+    alt: "Luxurious bathroom with freestanding tub",
+    category: "Bathroom",
+    title: "Spa Bathroom",
+    aspect: "tall",
   },
   {
     id: 6,
-    src: '',
-    alt: 'Modern dining room with chandelier',
-    category: 'Dining',
-    title: 'Formal Dining',
-    aspect: 'square',
+    src: "",
+    alt: "Modern dining room with chandelier",
+    category: "Dining",
+    title: "Formal Dining",
+    aspect: "square",
   },
   {
     id: 7,
-    src: '',
-    alt: 'Contemporary villa with pool',
-    category: 'Exterior',
-    title: 'Pool Terrace',
-    aspect: 'wide',
+    src: "",
+    alt: "Contemporary villa with pool",
+    category: "Exterior",
+    title: "Pool Terrace",
+    aspect: "wide",
   },
   {
     id: 8,
-    src: '',
-    alt: 'Luxury office space',
-    category: 'Office',
-    title: 'Executive Office',
-    aspect: 'square',
+    src: "",
+    alt: "Luxury office space",
+    category: "Office",
+    title: "Executive Office",
+    aspect: "square",
   },
   {
     id: 9,
-    src: '',
-    alt: 'Elegant hallway with artwork',
-    category: 'Living Spaces',
-    title: 'Gallery Corridor',
-    aspect: 'tall',
+    src: "",
+    alt: "Elegant hallway with artwork",
+    category: "Living Spaces",
+    title: "Gallery Corridor",
+    aspect: "tall",
   },
   {
     id: 10,
-    src: '',
-    alt: 'Modern minimalist living room',
-    category: 'Living Spaces',
-    title: 'Contemporary Lounge',
-    aspect: 'wide',
+    src: "",
+    alt: "Modern minimalist living room",
+    category: "Living Spaces",
+    title: "Contemporary Lounge",
+    aspect: "wide",
   },
   {
     id: 11,
-    src: '',
-    alt: 'Luxury walk-in closet',
-    category: 'Bedroom',
-    title: 'Dressing Room',
-    aspect: 'square',
+    src: "",
+    alt: "Luxury walk-in closet",
+    category: "Bedroom",
+    title: "Dressing Room",
+    aspect: "square",
   },
   {
     id: 12,
-    src: '',
-    alt: 'Rooftop terrace with city views',
-    category: 'Exterior',
-    title: 'Rooftop Lounge',
-    aspect: 'tall',
+    src: "",
+    alt: "Rooftop terrace with city views",
+    category: "Exterior",
+    title: "Rooftop Lounge",
+    aspect: "tall",
   },
 ];
 
 export function LuxuryGallery() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-  const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [selectedImage, setSelectedImage] = useState<
+    (typeof galleryImages)[0] | null
+  >(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
-  const navigateImage = (direction: 'prev' | 'next') => {
+  const navigateImage = (direction: "prev" | "next") => {
     if (!selectedImage) return;
-    const currentIndex = galleryImages.findIndex(img => img.id === selectedImage.id);
-    const newIndex = direction === 'next'
-      ? (currentIndex + 1) % galleryImages.length
-      : (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    const currentIndex = galleryImages.findIndex(
+      (img) => img.id === selectedImage.id
+    );
+    const newIndex =
+      direction === "next"
+        ? (currentIndex + 1) % galleryImages.length
+        : (currentIndex - 1 + galleryImages.length) % galleryImages.length;
     setSelectedImage(galleryImages[newIndex]);
   };
 
@@ -173,7 +184,8 @@ export function LuxuryGallery() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="max-w-md font-Satoshi text-base font-light text-white/50 lg:text-right"
             >
-              Every space tells a story of craftsmanship, attention to detail, and uncompromising quality.
+              Every space tells a story of craftsmanship, attention to detail,
+              and uncompromising quality.
             </motion.p>
           </div>
         </div>
@@ -187,19 +199,25 @@ export function LuxuryGallery() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 + index * 0.05 }}
               className={`group relative cursor-pointer overflow-hidden ${
-                image.aspect === 'tall' ? 'row-span-2' :
-                image.aspect === 'wide' ? 'col-span-2 md:col-span-1 lg:col-span-2' :
-                ''
+                image.aspect === "tall"
+                  ? "row-span-2"
+                  : image.aspect === "wide"
+                    ? "col-span-2 md:col-span-1 lg:col-span-2"
+                    : ""
               }`}
               onMouseEnter={() => setHoveredId(image.id)}
               onMouseLeave={() => setHoveredId(null)}
               onClick={() => setSelectedImage(image)}
             >
-              <div className={`relative overflow-hidden ${
-                image.aspect === 'tall' ? 'aspect-[3/5]' :
-                image.aspect === 'wide' ? 'aspect-[16/9]' :
-                'aspect-square'
-              }`}>
+              <div
+                className={`relative overflow-hidden ${
+                  image.aspect === "tall"
+                    ? "aspect-[3/5]"
+                    : image.aspect === "wide"
+                      ? "aspect-[16/9]"
+                      : "aspect-square"
+                }`}
+              >
                 <SafeImage
                   src={image.src}
                   alt={image.alt}
@@ -215,7 +233,10 @@ export function LuxuryGallery() {
                 <motion.div
                   className="absolute inset-0 border-2 border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/40"
                   animate={{
-                    borderColor: hoveredId === image.id ? 'rgba(201, 169, 98, 0.4)' : 'rgba(201, 169, 98, 0)',
+                    borderColor:
+                      hoveredId === image.id
+                        ? "rgba(201, 169, 98, 0.4)"
+                        : "rgba(201, 169, 98, 0)",
                   }}
                 />
 
@@ -223,7 +244,10 @@ export function LuxuryGallery() {
                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: hoveredId === image.id ? 1 : 0, y: hoveredId === image.id ? 0 : 10 }}
+                    animate={{
+                      opacity: hoveredId === image.id ? 1 : 0,
+                      y: hoveredId === image.id ? 0 : 10,
+                    }}
                     transition={{ duration: 0.3 }}
                   >
                     <span className="mb-1 block font-Satoshi text-[10px] font-light uppercase tracking-wider text-[#c9a962]">
@@ -239,7 +263,10 @@ export function LuxuryGallery() {
                 <motion.div
                   className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center bg-neutral-950/50 backdrop-blur-sm"
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: hoveredId === image.id ? 1 : 0, scale: hoveredId === image.id ? 1 : 0.8 }}
+                  animate={{
+                    opacity: hoveredId === image.id ? 1 : 0,
+                    scale: hoveredId === image.id ? 1 : 0.8,
+                  }}
                   transition={{ duration: 0.3 }}
                 >
                   <Expand className="h-4 w-4 text-white" strokeWidth={1.5} />
@@ -289,13 +316,19 @@ export function LuxuryGallery() {
 
             {/* Navigation */}
             <button
-              onClick={(e) => { e.stopPropagation(); navigateImage('prev'); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigateImage("prev");
+              }}
               className="absolute left-6 top-1/2 z-50 flex h-12 w-12 -translate-y-1/2 items-center justify-center border border-white/10 bg-white/5 transition-all hover:border-white/30 hover:bg-white/10"
             >
               <ArrowLeft className="h-5 w-5 text-white" strokeWidth={1.5} />
             </button>
             <button
-              onClick={(e) => { e.stopPropagation(); navigateImage('next'); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigateImage("next");
+              }}
               className="absolute right-6 top-1/2 z-50 flex h-12 w-12 -translate-y-1/2 items-center justify-center border border-white/10 bg-white/5 transition-all hover:border-white/30 hover:bg-white/10"
             >
               <ArrowRight className="h-5 w-5 text-white" strokeWidth={1.5} />
@@ -332,7 +365,9 @@ export function LuxuryGallery() {
 
             {/* Image counter */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-Satoshi text-sm font-light text-white/50">
-              {galleryImages.findIndex(img => img.id === selectedImage.id) + 1} / {galleryImages.length}
+              {galleryImages.findIndex((img) => img.id === selectedImage.id) +
+                1}{" "}
+              / {galleryImages.length}
             </div>
           </motion.div>
         )}

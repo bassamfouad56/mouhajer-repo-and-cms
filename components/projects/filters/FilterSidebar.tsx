@@ -1,7 +1,12 @@
-'use client';
+"use client";
 
-import { ProjectFilters, FilterOption, getProjectTypesForCategory, LOCATION_OPTIONS } from '@/types/filters';
-import { FilterSection, FilterCheckbox } from './FilterSection';
+import {
+  ProjectFilters,
+  FilterOption,
+  getProjectTypesForCategory,
+  LOCATION_OPTIONS,
+} from "@/types/filters";
+import { FilterSection, FilterCheckbox } from "./FilterSection";
 
 interface SanityService {
   _id: string;
@@ -27,7 +32,10 @@ export function FilterSidebar({
   serviceCounts,
 }: FilterSidebarProps) {
   const projectTypes = getProjectTypesForCategory(filters.category);
-  const hasActiveFilters = filters.projectTypes.length > 0 || filters.locations.length > 0 || filters.services.length > 0;
+  const hasActiveFilters =
+    filters.projectTypes.length > 0 ||
+    filters.locations.length > 0 ||
+    filters.services.length > 0;
 
   // Handlers
   const toggleProjectType = (type: string) => {
@@ -64,7 +72,7 @@ export function FilterSidebar({
   };
 
   return (
-    <aside className="h-fit border-r border-neutral-200 bg-white lg:sticky lg:top-20">
+    <aside className="h-fit border-r border-neutral-200 bg-white">
       <div className="p-6">
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">
@@ -122,9 +130,10 @@ export function FilterSidebar({
           <FilterSection title="Services" defaultExpanded>
             <div className="space-y-1">
               {services.map((service) => {
-                const serviceTitle = typeof service.title === 'string'
-                  ? service.title
-                  : service.title?.en || service.title?.ar || '';
+                const serviceTitle =
+                  typeof service.title === "string"
+                    ? service.title
+                    : service.title?.en || service.title?.ar || "";
                 const serviceSlug = service.slug.current;
 
                 return (

@@ -15,6 +15,8 @@ import AIChatbot from "@/components/ai-chatbot";
 import { BackToTop } from "@/components/back-to-top";
 import { CartProvider } from "@/lib/cart-context";
 import { CartSidebar } from "@/components/cart-sidebar";
+import { SearchProvider } from "@/lib/algolia/search-context";
+import { SearchOverlay } from "@/components/search/search-overlay";
 import { PreviewBanner } from "@/components/preview-banner";
 import { locales, getDirection, type Locale } from "@/i18n/config";
 import { Preloader } from "@/components/preloader";
@@ -134,40 +136,45 @@ export default async function LocaleLayout({
       <MegaMenuImagesServerProvider>
         <NextIntlClientProvider messages={messages}>
           <CartProvider>
-            {/* Accessibility: Skip to main content link */}
-            <SkipLink />
+            <SearchProvider>
+              {/* Accessibility: Skip to main content link */}
+              <SkipLink />
 
-            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+              <SmoothScrollProvider>{children}</SmoothScrollProvider>
 
-            {/* Always-visible WhatsApp Button */}
-            <WhatsAppButton
-              phoneNumber="971523041482"
-              message="Hello! I'm interested in learning more about your design services."
-            />
+              {/* Global Search Overlay */}
+              <SearchOverlay />
 
-            {/* AI Chatbot */}
-            <AIChatbot />
+              {/* Always-visible WhatsApp Button */}
+              <WhatsAppButton
+                phoneNumber="971523041482"
+                message="Hello! I'm interested in learning more about your design services."
+              />
 
-            {/* Back to Top Button */}
-            <BackToTop />
+              {/* AI Chatbot */}
+              <AIChatbot />
 
-            {/* Shopping Cart Sidebar */}
-            <CartSidebar />
+              {/* Back to Top Button */}
+              <BackToTop />
 
-            {/* Conversion: Exit Intent Popup */}
-            <ExitIntentPopup />
+              {/* Shopping Cart Sidebar */}
+              <CartSidebar />
 
-            {/* Conversion: Scroll-triggered CTA (desktop) */}
-            <ScrollTriggeredCTA />
+              {/* Conversion: Exit Intent Popup */}
+              <ExitIntentPopup />
 
-            {/* Conversion: Social Proof Notifications */}
-            {/* <SocialProofNotifications /> */}
+              {/* Conversion: Scroll-triggered CTA (desktop) */}
+              <ScrollTriggeredCTA />
 
-            {/* Conversion: Mobile CTA Bar */}
-            <MobileCTABar />
+              {/* Conversion: Social Proof Notifications */}
+              {/* <SocialProofNotifications /> */}
 
-            {/* Preview Mode Banner */}
-            {isDraftMode && <PreviewBanner />}
+              {/* Conversion: Mobile CTA Bar */}
+              <MobileCTABar />
+
+              {/* Preview Mode Banner */}
+              {isDraftMode && <PreviewBanner />}
+            </SearchProvider>
           </CartProvider>
         </NextIntlClientProvider>
       </MegaMenuImagesServerProvider>

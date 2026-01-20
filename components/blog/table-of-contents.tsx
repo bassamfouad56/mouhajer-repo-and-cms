@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { List, X, ChevronRight } from 'lucide-react';
+import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { List, X, ChevronRight } from "lucide-react";
 
 interface TOCItem {
   id: string;
@@ -18,17 +18,19 @@ function extractHeadings(content: any[]): TOCItem[] {
   const headings: TOCItem[] = [];
 
   content.forEach((block, index) => {
-    if (block._type === 'block' && ['h2', 'h3'].includes(block.style)) {
-      const text = block.children
-        ?.map((child: any) => child.text || '')
-        .join('') || '';
+    if (block._type === "block" && ["h2", "h3"].includes(block.style)) {
+      const text =
+        block.children?.map((child: any) => child.text || "").join("") || "";
 
       if (text.trim()) {
-        const id = `heading-${index}-${text.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 50)}`;
+        const id = `heading-${index}-${text
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .slice(0, 50)}`;
         headings.push({
           id,
           text: text.trim(),
-          level: block.style === 'h2' ? 2 : 3,
+          level: block.style === "h2" ? 2 : 3,
         });
       }
     }
@@ -38,7 +40,7 @@ function extractHeadings(content: any[]): TOCItem[] {
 }
 
 export default function TableOfContents({ content }: TableOfContentsProps) {
-  const [activeId, setActiveId] = useState<string>('');
+  const [activeId, setActiveId] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -48,13 +50,15 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   useEffect(() => {
     const handleScroll = () => {
       const winScroll = document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
       setScrollProgress(scrolled);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Intersection Observer for active section
@@ -69,7 +73,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
           }
         });
       },
-      { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
     );
 
     headings.forEach((heading) => {
@@ -83,7 +87,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   // Add IDs to headings in DOM
   useEffect(() => {
     if (headings.length === 0) return;
-    const articleHeadings = document.querySelectorAll('article h2, article h3');
+    const articleHeadings = document.querySelectorAll("article h2, article h3");
     let headingIndex = 0;
     articleHeadings.forEach((element) => {
       if (headingIndex < headings.length) {
@@ -99,7 +103,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
       const offset = 100;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
       setIsOpen(false);
     }
   };
@@ -125,13 +129,17 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
           <div className="relative">
             <svg className="h-8 w-8 -rotate-90" viewBox="0 0 36 36">
               <circle
-                cx="18" cy="18" r="14"
+                cx="18"
+                cy="18"
+                r="14"
                 fill="none"
                 stroke="#e5e5e5"
                 strokeWidth="3"
               />
               <circle
-                cx="18" cy="18" r="14"
+                cx="18"
+                cy="18"
+                r="14"
                 fill="none"
                 stroke="#c9a962"
                 strokeWidth="3"
@@ -140,7 +148,10 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                 strokeLinecap="round"
               />
             </svg>
-            <List size={14} className="absolute inset-0 m-auto text-neutral-600" />
+            <List
+              size={14}
+              className="absolute inset-0 m-auto text-neutral-600"
+            />
           </div>
           <span className="font-Satoshi text-xs font-medium text-neutral-600 opacity-0 transition-opacity group-hover:opacity-100">
             Contents
@@ -163,7 +174,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
               initial={{ x: -320, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -320, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed left-0 top-0 z-50 h-full w-80 overflow-hidden border-r border-neutral-200 bg-white shadow-2xl"
             >
               {/* Header */}
@@ -200,35 +211,42 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                       <button
                         onClick={() => scrollToHeading(heading.id)}
                         className={`group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-all ${
-                          heading.level === 3 ? 'ml-4' : ''
+                          heading.level === 3 ? "ml-4" : ""
                         } ${
                           activeId === heading.id
-                            ? 'bg-[#c9a962]/10'
-                            : 'hover:bg-neutral-50'
+                            ? "bg-[#c9a962]/10"
+                            : "hover:bg-neutral-50"
                         }`}
                       >
                         {/* Number */}
-                        <span className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full font-Satoshi text-[10px] font-medium transition-colors ${
-                          activeId === heading.id
-                            ? 'bg-[#c9a962] text-white'
-                            : 'bg-neutral-100 text-neutral-400 group-hover:bg-neutral-200'
-                        }`}>
+                        <span
+                          className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full font-Satoshi text-[10px] font-medium transition-colors ${
+                            activeId === heading.id
+                              ? "bg-[#c9a962] text-white"
+                              : "bg-neutral-100 text-neutral-400 group-hover:bg-neutral-200"
+                          }`}
+                        >
                           {index + 1}
                         </span>
                         {/* Text */}
-                        <span className={`flex-1 font-Satoshi text-sm leading-snug transition-colors ${
-                          activeId === heading.id
-                            ? 'font-medium text-neutral-900'
-                            : 'text-neutral-600 group-hover:text-neutral-900'
-                        }`}>
+                        <span
+                          className={`flex-1 font-Satoshi text-sm leading-snug transition-colors ${
+                            activeId === heading.id
+                              ? "font-medium text-neutral-900"
+                              : "text-neutral-600 group-hover:text-neutral-900"
+                          }`}
+                        >
                           {heading.text}
                         </span>
                         {/* Arrow */}
-                        <ChevronRight size={14} className={`flex-shrink-0 transition-all ${
-                          activeId === heading.id
-                            ? 'text-[#c9a962]'
-                            : 'text-neutral-300 group-hover:text-neutral-400'
-                        }`} />
+                        <ChevronRight
+                          size={14}
+                          className={`flex-shrink-0 transition-all ${
+                            activeId === heading.id
+                              ? "text-[#c9a962]"
+                              : "text-neutral-300 group-hover:text-neutral-400"
+                          }`}
+                        />
                       </button>
                     </li>
                   ))}

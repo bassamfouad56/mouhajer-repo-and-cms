@@ -1,18 +1,28 @@
-'use client';
+"use client";
 
-import { useRef, useState, useEffect, useMemo, lazy, Suspense } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { urlForImage } from '@/sanity/lib/image';
-import { SafeImage } from '@/components/safe-image';
-import { Search, X } from 'lucide-react';
-import { CategoryTabs } from '@/components/projects/filters/CategoryTabs';
-import { FilterSidebar } from '@/components/projects/filters/FilterSidebar';
-import { AppliedFilters } from '@/components/projects/filters/AppliedFilters';
-import type { ProjectFilters, MainCategory, CategoryCount } from '@/types/filters';
-import { VideoBackground } from '@/components/projects/video-background';
+import { useRef, useState, useEffect, useMemo, lazy, Suspense } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { urlForImage, getSafeImageUrl } from "@/sanity/lib/image";
+import { SafeImage } from "@/components/safe-image";
+import { Search, X } from "lucide-react";
+import { CategoryTabs } from "@/components/projects/filters/CategoryTabs";
+import { FilterSidebar } from "@/components/projects/filters/FilterSidebar";
+import { AppliedFilters } from "@/components/projects/filters/AppliedFilters";
+import type {
+  ProjectFilters,
+  MainCategory,
+  CategoryCount,
+} from "@/types/filters";
+import { VideoBackground } from "@/components/projects/video-background";
 
 // Import all view modes
 import {
@@ -31,7 +41,7 @@ import {
   type ViewMode,
   type GridColumns,
   type SanityProject,
-} from '@/components/projects/view-modes';
+} from "@/components/projects/view-modes";
 
 // Type for raw Sanity data - now pre-localized by query
 type I18nField = string | { en?: string; ar?: string };
@@ -51,11 +61,11 @@ interface LocationRef {
 
 interface RawSanityProject {
   _id: string;
-  title: string;  // Pre-localized by query
+  title: string; // Pre-localized by query
   slug: { current: string };
-  excerpt?: string;  // Pre-localized by query
+  excerpt?: string; // Pre-localized by query
   mainImage?: any;
-  legacyCategory?: string;  // Old category field for backwards compatibility
+  legacyCategory?: string; // Old category field for backwards compatibility
   sector?: TaxonomyRef;
   projectType?: TaxonomyRef;
   location?: LocationRef;
@@ -66,7 +76,7 @@ interface RawSanityProject {
 }
 
 // YouTube video ID for hero background
-const HERO_VIDEO_ID = '9JeB0zJtPuM';
+const HERO_VIDEO_ID = "9JeB0zJtPuM";
 
 interface SanityIndustry {
   _id: string;
@@ -95,29 +105,35 @@ interface ProjectsPageContentProps {
 }
 
 // Helper to extract localized string from i18n field (for legacy support)
-function getLocalizedString(field: I18nField | undefined, locale: string): string {
-  if (!field) return '';
-  if (typeof field === 'string') return field;
-  if (typeof field === 'object' && field !== null) {
-    return field[locale as keyof typeof field] || field.en || field.ar || '';
+function getLocalizedString(
+  field: I18nField | undefined,
+  locale: string
+): string {
+  if (!field) return "";
+  if (typeof field === "string") return field;
+  if (typeof field === "object" && field !== null) {
+    return field[locale as keyof typeof field] || field.en || field.ar || "";
   }
-  return '';
+  return "";
 }
 
 // Helper to normalize project - maps new taxonomy fields to display strings
-function normalizeProject(project: RawSanityProject, locale: string): SanityProject {
+function normalizeProject(
+  project: RawSanityProject,
+  locale: string
+): SanityProject {
   return {
     _id: project._id,
-    title: project.title || '',
+    title: project.title || "",
     slug: project.slug,
-    excerpt: project.excerpt || '',
+    excerpt: project.excerpt || "",
     mainImage: project.mainImage,
     featured: project.featured,
     year: project.year,
     status: project.status,
     // Map taxonomy refs to display strings for backwards compatibility
-    category: project.sector?.title || project.legacyCategory || '',
-    location: project.location?.name || '',
+    category: project.sector?.title || project.legacyCategory || "",
+    location: project.location?.name || "",
     // Pass through taxonomy refs for filtering
     legacyCategory: project.legacyCategory,
     sector: project.sector,
@@ -127,35 +143,71 @@ function normalizeProject(project: RawSanityProject, locale: string): SanityProj
   };
 }
 
-export default function EnhancedProjectsPageContent({ projects, industries, services, locale, initialCategory = 'all' }: ProjectsPageContentProps) {
+export default function EnhancedProjectsPageContent({
+  projects,
+  industries,
+  services,
+  locale,
+  initialCategory = "all",
+}: ProjectsPageContentProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const heroRef = useRef<HTMLDivElement>(null);
   const isHeroInView = useInView(heroRef, { once: true });
 
+  // Track navbar visibility for sticky sidebar positioning
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [lastNavScrollY, setLastNavScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 100) {
+        setIsNavbarVisible(true);
+      } else if (currentScrollY < lastNavScrollY) {
+        setIsNavbarVisible(true);
+      } else if (currentScrollY > lastNavScrollY && currentScrollY > 100) {
+        setIsNavbarVisible(false);
+      }
+
+      setLastNavScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastNavScrollY]);
+
   // Pre-process projects to normalize i18n fields
-  const normalizedProjects = projects.map(p => normalizeProject(p, locale));
+  const normalizedProjects = projects.map((p) => normalizeProject(p, locale));
 
   // Dynamic carousel images from Sanity projects
   const carouselImages = normalizedProjects
-    .filter(p => p.mainImage) // Only projects with images
+    .filter((p) => p.mainImage) // Only projects with images
     .slice(0, 24) // Limit to 24 images for smooth animation
-    .map(p => ({
-      src: urlForImage(p.mainImage)?.width(800).height(600).quality(90).url() || '',
-      title: p.title || '',
+    .map((p) => ({
+      src: getSafeImageUrl(p.mainImage, 800, 600, "/placeholder.jpg"),
+      title: p.title || "",
     }));
 
   // State for hovered carousel image
-  const [hoveredImage, setHoveredImage] = useState<{ src: string; title: string } | null>(null);
+  const [hoveredImage, setHoveredImage] = useState<{
+    src: string;
+    title: string;
+  } | null>(null);
 
   // Get initial values from URL
-  const viewFromUrl = (searchParams.get('view') as ViewMode) || 'grid';
-  const columnsFromUrl = searchParams.get('columns');
-  const searchFromUrl = searchParams.get('search') || '';
-  const filterFromUrl = (searchParams.get('filter') as MainCategory) || initialCategory;
-  const projectTypesFromUrl = searchParams.get('types')?.split(',').filter(Boolean) || [];
-  const locationsFromUrl = searchParams.get('locations')?.split(',').filter(Boolean) || [];
-  const servicesFromUrl = searchParams.get('services')?.split(',').filter(Boolean) || [];
+  const viewFromUrl = (searchParams.get("view") as ViewMode) || "grid";
+  const columnsFromUrl = searchParams.get("columns");
+  const searchFromUrl = searchParams.get("search") || "";
+  const filterFromUrl =
+    (searchParams.get("filter") as MainCategory) || initialCategory;
+  const projectTypesFromUrl =
+    searchParams.get("types")?.split(",").filter(Boolean) || [];
+  const locationsFromUrl =
+    searchParams.get("locations")?.split(",").filter(Boolean) || [];
+  const servicesFromUrl =
+    searchParams.get("services")?.split(",").filter(Boolean) || [];
 
   // New filter state
   const [filters, setFilters] = useState<ProjectFilters>({
@@ -173,7 +225,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
@@ -184,32 +236,32 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
     const params = new URLSearchParams();
 
     // Add filter (category) parameter
-    if (filters.category && filters.category !== 'all') {
-      params.set('filter', filters.category);
+    if (filters.category && filters.category !== "all") {
+      params.set("filter", filters.category);
     }
 
-    if (viewMode !== 'grid') {
-      params.set('view', viewMode);
+    if (viewMode !== "grid") {
+      params.set("view", viewMode);
     }
 
-    if (viewMode === 'grid' && gridColumns !== 3) {
-      params.set('columns', gridColumns.toString());
+    if (viewMode === "grid" && gridColumns !== 3) {
+      params.set("columns", gridColumns.toString());
     }
 
     if (filters.search.trim()) {
-      params.set('search', filters.search.trim());
+      params.set("search", filters.search.trim());
     }
 
     if (filters.projectTypes.length > 0) {
-      params.set('types', filters.projectTypes.join(','));
+      params.set("types", filters.projectTypes.join(","));
     }
 
     if (filters.locations.length > 0) {
-      params.set('locations', filters.locations.join(','));
+      params.set("locations", filters.locations.join(","));
     }
 
     if (filters.services.length > 0) {
-      params.set('services', filters.services.join(','));
+      params.set("services", filters.services.join(","));
     }
 
     const queryString = params.toString();
@@ -225,18 +277,22 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
   // Helper function to check if project matches filters
   const matchesFilters = (project: SanityProject) => {
     // Main category filter - use sector slug OR legacy category
-    if (filters.category && filters.category !== 'all') {
-      if (filters.category === 'ongoing') {
+    if (filters.category && filters.category !== "all") {
+      if (filters.category === "ongoing") {
         // Check year >= current year OR status is 'in-progress'
         const currentYear = new Date().getFullYear();
-        const projectYear = typeof project.year === 'number' ? project.year : parseInt(String(project.year)) || 0;
-        const isOngoing = projectYear >= currentYear || project.status === 'in-progress';
+        const projectYear =
+          typeof project.year === "number"
+            ? project.year
+            : parseInt(String(project.year)) || 0;
+        const isOngoing =
+          projectYear >= currentYear || project.status === "in-progress";
         if (!isOngoing) return false;
       } else {
         // Match against sector slug or legacy category
-        const sectorSlug = project.sector?.slug?.current?.toLowerCase() || '';
-        const sectorTitle = project.sector?.title?.toLowerCase() || '';
-        const legacyCategory = project.legacyCategory?.toLowerCase() || '';
+        const sectorSlug = project.sector?.slug?.current?.toLowerCase() || "";
+        const sectorTitle = project.sector?.title?.toLowerCase() || "";
+        const legacyCategory = project.legacyCategory?.toLowerCase() || "";
 
         // Check if any match the filter category
         const categoryMatches =
@@ -265,9 +321,9 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
 
     // Project Type filter - use projectType slug and title
     if (filters.projectTypes.length > 0) {
-      const typeSlug = project.projectType?.slug?.current?.toLowerCase() || '';
-      const typeTitle = project.projectType?.title?.toLowerCase() || '';
-      const matchesType = filters.projectTypes.some(type => {
+      const typeSlug = project.projectType?.slug?.current?.toLowerCase() || "";
+      const typeTitle = project.projectType?.title?.toLowerCase() || "";
+      const matchesType = filters.projectTypes.some((type) => {
         const typeLower = type.toLowerCase();
         return typeSlug.includes(typeLower) || typeTitle.includes(typeLower);
       });
@@ -276,8 +332,11 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
 
     // Location filter - use locationRef name
     if (filters.locations.length > 0) {
-      const locationName = project.locationRef?.name?.toLowerCase() || project.location?.toLowerCase() || '';
-      const matchesLocation = filters.locations.some(loc =>
+      const locationName =
+        project.locationRef?.name?.toLowerCase() ||
+        project.location?.toLowerCase() ||
+        "";
+      const matchesLocation = filters.locations.some((loc) =>
         locationName.includes(loc.toLowerCase())
       );
       if (!matchesLocation) return false;
@@ -285,8 +344,9 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
 
     // Service filter - use service slugs from services array
     if (filters.services.length > 0) {
-      const projectServiceSlugs = project.services?.map(s => s.slug?.current) || [];
-      const matchesService = filters.services.some(serviceSlug =>
+      const projectServiceSlugs =
+        project.services?.map((s) => s.slug?.current) || [];
+      const matchesService = filters.services.some((serviceSlug) =>
         projectServiceSlugs.includes(serviceSlug)
       );
       if (!matchesService) return false;
@@ -300,57 +360,76 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
   const filteredRegularProjects = regularProjects.filter(matchesFilters);
 
   // All filtered projects combined
-  const allFilteredProjects = [...filteredFeaturedProjects, ...filteredRegularProjects];
+  const allFilteredProjects = [
+    ...filteredFeaturedProjects,
+    ...filteredRegularProjects,
+  ];
 
   // Calculate category counts based on actual project data (using sector for taxonomy)
-  const categoryCounts: CategoryCount = useMemo(() => ({
-    residential: normalizedProjects.filter(p => {
-      const sectorSlug = p.sector?.slug?.current?.toLowerCase() || '';
-      const sectorTitle = p.sector?.title?.toLowerCase() || '';
-      const legacy = p.legacyCategory?.toLowerCase() || '';
-      return sectorSlug.includes('resid') || sectorTitle.includes('resid') || legacy.includes('resid');
-    }).length,
-    commercial: normalizedProjects.filter(p => {
-      const sectorSlug = p.sector?.slug?.current?.toLowerCase() || '';
-      const sectorTitle = p.sector?.title?.toLowerCase() || '';
-      const legacy = p.legacyCategory?.toLowerCase() || '';
-      return sectorSlug.includes('commer') || sectorTitle.includes('commer') || legacy.includes('commer');
-    }).length,
-    hospitality: normalizedProjects.filter(p => {
-      const sectorSlug = p.sector?.slug?.current?.toLowerCase() || '';
-      const sectorTitle = p.sector?.title?.toLowerCase() || '';
-      const legacy = p.legacyCategory?.toLowerCase() || '';
-      return sectorSlug.includes('hospit') || sectorTitle.includes('hospit') || legacy.includes('hospit');
-    }).length,
-    ongoing: normalizedProjects.filter(p => {
-      const currentYear = new Date().getFullYear();
-      const projectYear = typeof p.year === 'number' ? p.year : parseInt(String(p.year)) || 0;
-      return projectYear >= currentYear || p.status === 'in-progress';
-    }).length,
-  }), [normalizedProjects]);
+  const categoryCounts: CategoryCount = useMemo(
+    () => ({
+      residential: normalizedProjects.filter((p) => {
+        const sectorSlug = p.sector?.slug?.current?.toLowerCase() || "";
+        const sectorTitle = p.sector?.title?.toLowerCase() || "";
+        const legacy = p.legacyCategory?.toLowerCase() || "";
+        return (
+          sectorSlug.includes("resid") ||
+          sectorTitle.includes("resid") ||
+          legacy.includes("resid")
+        );
+      }).length,
+      commercial: normalizedProjects.filter((p) => {
+        const sectorSlug = p.sector?.slug?.current?.toLowerCase() || "";
+        const sectorTitle = p.sector?.title?.toLowerCase() || "";
+        const legacy = p.legacyCategory?.toLowerCase() || "";
+        return (
+          sectorSlug.includes("commer") ||
+          sectorTitle.includes("commer") ||
+          legacy.includes("commer")
+        );
+      }).length,
+      hospitality: normalizedProjects.filter((p) => {
+        const sectorSlug = p.sector?.slug?.current?.toLowerCase() || "";
+        const sectorTitle = p.sector?.title?.toLowerCase() || "";
+        const legacy = p.legacyCategory?.toLowerCase() || "";
+        return (
+          sectorSlug.includes("hospit") ||
+          sectorTitle.includes("hospit") ||
+          legacy.includes("hospit")
+        );
+      }).length,
+      ongoing: normalizedProjects.filter((p) => {
+        const currentYear = new Date().getFullYear();
+        const projectYear =
+          typeof p.year === "number" ? p.year : parseInt(String(p.year)) || 0;
+        return projectYear >= currentYear || p.status === "in-progress";
+      }).length,
+    }),
+    [normalizedProjects]
+  );
 
   // Render the active view
   const renderProjectsView = (projectsToRender: SanityProject[]) => {
     switch (viewMode) {
-      case 'grid':
+      case "grid":
         return <GridView projects={projectsToRender} columns={gridColumns} />;
-      case 'masonry':
+      case "masonry":
         return <MasonryView projects={projectsToRender} />;
-      case 'horizontal':
+      case "horizontal":
         return <HorizontalScrollView projects={projectsToRender} />;
-      case 'infinite-scroll':
+      case "infinite-scroll":
         return <InfiniteScrollView projects={projectsToRender} />;
-      case 'case-study':
+      case "case-study":
         return <CaseStudyView projects={projectsToRender} />;
-      case 'split-screen':
+      case "split-screen":
         return <SplitScreenView projects={projectsToRender} />;
-      case 'stacked-cards':
+      case "stacked-cards":
         return <StackedCardsView projects={projectsToRender} />;
-      case 'timeline':
+      case "timeline":
         return <TimelineView projects={projectsToRender} />;
-      case 'immersive-3d':
+      case "immersive-3d":
         return <Immersive3DView projects={projectsToRender} />;
-      case 'cinematic':
+      case "cinematic":
         return <CinematicView projects={projectsToRender} />;
       default:
         return <GridView projects={projectsToRender} columns={gridColumns} />;
@@ -359,12 +438,17 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
 
   // Check if view uses combined projects (no featured/regular separation)
   // Also use combined view when any filter is active
-  const hasActiveFilters = filters.category !== 'all' ||
+  const hasActiveFilters =
+    filters.category !== "all" ||
     filters.projectTypes.length > 0 ||
     filters.locations.length > 0 ||
     filters.services.length > 0 ||
-    filters.search.trim() !== '';
-  const usesCombinedView = hasActiveFilters || ['horizontal', 'split-screen', 'stacked-cards', 'infinite-scroll'].includes(viewMode);
+    filters.search.trim() !== "";
+  const usesCombinedView =
+    hasActiveFilters ||
+    ["horizontal", "split-screen", "stacked-cards", "infinite-scroll"].includes(
+      viewMode
+    );
 
   return (
     <main className="relative bg-white">
@@ -442,10 +526,11 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
         {/* Animated Grain Effect */}
         <motion.div
           className="absolute inset-0 opacity-[0.03]"
-          animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+          animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
           style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
           }}
         />
 
@@ -456,17 +541,27 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
           <motion.div
             className="absolute right-[15%] top-[25%] h-px w-40 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
             animate={{ x: [0, 50, 0], opacity: [0.2, 0.5, 0.2] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
             className="absolute left-[5%] top-[65%] h-px w-32 bg-gradient-to-r from-transparent via-white/20 to-transparent"
             animate={{ x: [0, -30, 0], opacity: [0.1, 0.3, 0.1] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
           />
           <motion.div
             className="absolute right-[25%] bottom-[20%] h-40 w-px bg-gradient-to-b from-transparent via-[#c9a962]/20 to-transparent"
             animate={{ y: [0, 20, 0], opacity: [0.1, 0.3, 0.1] }}
-            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2,
+            }}
           />
         </div>
 
@@ -493,7 +588,11 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 1.2,
+                delay: 0.3,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="mb-8 font-SchnyderS text-6xl font-light tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl"
             >
               400+ Projects.
@@ -505,34 +604,49 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 1.2,
+                delay: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="mb-16 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-white/70 sm:text-2xl"
             >
               From empty land to final handover. One team. One vision.
-              <br />No handover has ever been refused.
+              <br />
+              No handover has ever been refused.
             </motion.p>
 
             {/* Stats */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 1.2,
+                delay: 0.7,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="grid gap-12 sm:grid-cols-3"
             >
               <div className="border-l border-[#c9a962]/30 pl-6">
-                <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">400+</div>
+                <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">
+                  400+
+                </div>
                 <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
                   Completed Projects
                 </div>
               </div>
               <div className="border-l border-white/10 pl-6">
-                <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">24</div>
+                <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">
+                  24
+                </div>
                 <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
                   Years in Business
                 </div>
               </div>
               <div className="border-l border-white/10 pl-6">
-                <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">100%</div>
+                <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">
+                  100%
+                </div>
                 <div className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
                   Successful Handovers
                 </div>
@@ -553,7 +667,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
           <motion.div
             className="flex shrink-0 gap-4"
             animate={{ x: [0, -1920] }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
           >
             {[...carouselImages, ...carouselImages].map((image, index) => (
               <div
@@ -581,7 +695,7 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
           <motion.div
             className="flex shrink-0 gap-4"
             animate={{ x: [0, -1920] }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
           >
             {[...carouselImages, ...carouselImages].map((image, index) => (
               <div
@@ -620,7 +734,11 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
       <div className="mx-auto flex max-w-[1800px] gap-8 px-6 py-8 lg:px-12">
         {/* Filter Sidebar */}
         <aside className="hidden w-80 shrink-0 lg:block">
-          <div className="sticky top-24">
+          <div
+            className={`sticky transition-all duration-300 ${
+              isNavbarVisible ? "top-40" : "top-16"
+            }`}
+          >
             <FilterSidebar
               filters={filters}
               onChange={setFilters}
@@ -640,8 +758,8 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
                 <div
                   className={`flex items-center gap-2 border bg-white px-4 py-2 transition-all duration-300 ${
                     isSearchFocused
-                      ? 'border-neutral-950 shadow-md'
-                      : 'border-neutral-200 hover:border-neutral-300'
+                      ? "border-neutral-950 shadow-md"
+                      : "border-neutral-200 hover:border-neutral-300"
                   }`}
                 >
                   <Search size={16} className="text-neutral-400" />
@@ -649,14 +767,16 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
                     type="text"
                     placeholder="Search projects..."
                     value={filters.search}
-                    onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+                    onChange={(e) =>
+                      setFilters({ ...filters, search: e.target.value })
+                    }
                     onFocus={() => setIsSearchFocused(true)}
                     onBlur={() => setIsSearchFocused(false)}
                     className="w-full min-w-[200px] bg-transparent font-Satoshi text-sm text-neutral-950 outline-none placeholder:text-neutral-400 lg:w-64"
                   />
                   {filters.search && (
                     <button
-                      onClick={() => setFilters({ ...filters, search: '' })}
+                      onClick={() => setFilters({ ...filters, search: "" })}
                       className="text-neutral-400 transition-colors hover:text-neutral-950"
                     >
                       <X size={14} />
@@ -681,10 +801,14 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
           {/* Current View Mode Indicator */}
           <div className="mb-6 flex items-center justify-between border-b border-neutral-100 bg-neutral-50/50 px-4 py-3">
             <div className="flex items-center gap-3">
-              <span className="text-neutral-400">{VIEW_MODE_CONFIG[viewMode].icon}</span>
+              <span className="text-neutral-400">
+                {VIEW_MODE_CONFIG[viewMode].icon}
+              </span>
               <span className="font-Satoshi text-sm text-neutral-600">
-                <span className="font-medium text-neutral-950">{VIEW_MODE_CONFIG[viewMode].label}</span>
-                {' · '}
+                <span className="font-medium text-neutral-950">
+                  {VIEW_MODE_CONFIG[viewMode].label}
+                </span>
+                {" · "}
                 {VIEW_MODE_CONFIG[viewMode].description}
                 {filters.search && (
                   <span className="ml-2 text-neutral-400">
@@ -694,152 +818,124 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
               </span>
             </div>
             <span className="font-Satoshi text-sm text-neutral-500">
-              {allFilteredProjects.length} {allFilteredProjects.length === 1 ? 'project' : 'projects'}
+              {allFilteredProjects.length}{" "}
+              {allFilteredProjects.length === 1 ? "project" : "projects"}
             </span>
           </div>
 
           {/* Projects Display */}
-          <div className={`relative ${
-            ['horizontal', 'split-screen', 'stacked-cards'].includes(viewMode) ? '' : ''
-          }`}>
-        <div className={`mx-auto ${
-          ['horizontal', 'split-screen', 'stacked-cards'].includes(viewMode) ? '' : 'max-w-[1800px]'
-        }`}>
-          {/* For views that work best with all projects combined */}
-          {usesCombinedView ? (
-            <>
-              {allFilteredProjects.length > 0 ? (
-                renderProjectsView(allFilteredProjects)
+          <div
+            className={`relative ${
+              ["horizontal", "split-screen", "stacked-cards"].includes(viewMode)
+                ? ""
+                : ""
+            }`}
+          >
+            <div
+              className={`mx-auto ${
+                ["horizontal", "split-screen", "stacked-cards"].includes(
+                  viewMode
+                )
+                  ? ""
+                  : "max-w-[1800px]"
+              }`}
+            >
+              {/* For views that work best with all projects combined */}
+              {usesCombinedView ? (
+                <>
+                  {allFilteredProjects.length > 0 ? (
+                    renderProjectsView(allFilteredProjects)
+                  ) : (
+                    <NoProjectsFound
+                      searchQuery={filters.search}
+                      onClear={() => {
+                        setFilters({
+                          category: "all",
+                          projectTypes: [],
+                          locations: [],
+                          services: [],
+                          search: "",
+                        });
+                      }}
+                    />
+                  )}
+                </>
               ) : (
-                <NoProjectsFound
-                  searchQuery={filters.search}
-                  onClear={() => {
-                    setFilters({
-                      category: 'all',
-                      projectTypes: [],
-                      locations: [],
-                      services: [],
-                      search: '',
-                    });
-                  }}
-                />
-              )}
-            </>
-          ) : (
-            <>
-              {/* Featured Projects Section */}
-              {filteredFeaturedProjects.length > 0 && (
-                <div className="mb-24">
-                  <div className="mb-12 flex items-center justify-between">
-                    <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
-                      Featured Projects
-                    </h2>
-                    <div className="font-Satoshi text-sm text-neutral-500">
-                      {filteredFeaturedProjects.length} {filteredFeaturedProjects.length === 1 ? 'Project' : 'Projects'}
-                    </div>
-                  </div>
-                  {renderProjectsView(filteredFeaturedProjects)}
-                </div>
-              )}
-
-              {/* Regular Projects Section */}
-              {filteredRegularProjects.length > 0 && (
-                <div>
+                <>
+                  {/* Featured Projects Section */}
                   {filteredFeaturedProjects.length > 0 && (
-                    <div className="mb-12 flex items-center justify-between border-t border-neutral-200 pt-12">
-                      <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
-                        All Projects
-                      </h2>
-                      <div className="font-Satoshi text-sm text-neutral-500">
-                        {filteredRegularProjects.length}{' '}
-                        {filteredRegularProjects.length === 1 ? 'Project' : 'Projects'}
+                    <div className="mb-24">
+                      <div className="mb-12 flex items-center justify-between">
+                        <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
+                          Featured Projects
+                        </h2>
+                        <div className="font-Satoshi text-sm text-neutral-500">
+                          {filteredFeaturedProjects.length}{" "}
+                          {filteredFeaturedProjects.length === 1
+                            ? "Project"
+                            : "Projects"}
+                        </div>
                       </div>
+                      {renderProjectsView(filteredFeaturedProjects)}
                     </div>
                   )}
-                  {renderProjectsView(filteredRegularProjects)}
-                </div>
-              )}
 
-              {/* No Projects Found */}
-              {filteredFeaturedProjects.length === 0 && filteredRegularProjects.length === 0 && (
-                <NoProjectsFound
-                  searchQuery={filters.search}
-                  onClear={() => {
-                    setFilters({
-                      category: 'all',
-                      projectTypes: [],
-                      locations: [],
-                      search: '',
-                    });
-                  }}
-                />
+                  {/* Regular Projects Section */}
+                  {filteredRegularProjects.length > 0 && (
+                    <div>
+                      {filteredFeaturedProjects.length > 0 && (
+                        <div className="mb-12 flex items-center justify-between border-t border-neutral-200 pt-12">
+                          <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
+                            All Projects
+                          </h2>
+                          <div className="font-Satoshi text-sm text-neutral-500">
+                            {filteredRegularProjects.length}{" "}
+                            {filteredRegularProjects.length === 1
+                              ? "Project"
+                              : "Projects"}
+                          </div>
+                        </div>
+                      )}
+                      {renderProjectsView(filteredRegularProjects)}
+                    </div>
+                  )}
+
+                  {/* No Projects Found */}
+                  {filteredFeaturedProjects.length === 0 &&
+                    filteredRegularProjects.length === 0 && (
+                      <NoProjectsFound
+                        searchQuery={filters.search}
+                        onClear={() => {
+                          setFilters({
+                            category: "all",
+                            projectTypes: [],
+                            locations: [],
+                            search: "",
+                          });
+                        }}
+                      />
+                    )}
+                </>
               )}
-            </>
-          )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
       {/* Industries Section with Background */}
-      {industries.length > 0 && (
-        <section className="relative overflow-hidden bg-neutral-50 px-6 py-32 lg:px-12 lg:py-48">
-          {/* Background Image */}
-          <div className="absolute inset-0 opacity-5">
-            <SafeImage
-              src="/placeholder.jpg"
-              alt=""
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* Grid Pattern */}
-
-          <div className="relative z-10 mx-auto max-w-[1400px]">
-            <div className="mb-16 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="mb-4 flex items-center justify-center gap-4"
-              >
-                <div className="h-px w-12 bg-neutral-300" />
-                <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">
-                  Sectors of Excellence
-                </span>
-                <div className="h-px w-12 bg-neutral-300" />
-              </motion.div>
-              <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-950 lg:text-6xl">
-                Industries We Serve
-              </h2>
-              <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
-                Specialized expertise across multiple sectors
-              </p>
-            </div>
-
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {industries.slice(0, 8).map((industry, index) => (
-                <IndustryCard key={industry._id} industry={industry} index={index} locale={locale} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Professional CTA Section with Background */}
       <section className="relative overflow-hidden bg-neutral-950 px-6 py-32 lg:px-12">
         {/* Background Image */}
         <div className="absolute inset-0">
           <SafeImage
-            src="/placeholder.jpg"
+            src="/website%202.0%20content/projects/hospitality/_DSC3629-HDR.jpg"
             alt=""
             fill
             className="object-cover"
           />
           <div className="absolute inset-0 bg-neutral-950/85" />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/50 h-full" />
         </div>
 
         {/* Animated Lines */}
@@ -847,12 +943,17 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
           <motion.div
             className="absolute left-[10%] top-[30%] h-px w-24 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
             animate={{ x: [0, 30, 0], opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
             className="absolute right-[15%] bottom-[40%] h-px w-32 bg-gradient-to-r from-transparent via-white/20 to-transparent"
             animate={{ x: [0, -20, 0], opacity: [0.1, 0.3, 0.1] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
           />
         </div>
 
@@ -878,15 +979,26 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
             Start Your Project
           </h2>
           <p className="mb-10 font-Satoshi text-lg font-light text-white/60">
-            One team. From land to handover. Let&apos;s build something extraordinary.
+            One team. From land to handover. Let&apos;s build something
+            extraordinary.
           </p>
           <Link
             href="/#contact"
             className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962]/10 px-12 py-4 font-Satoshi text-xs uppercase tracking-[0.3em] text-[#c9a962] transition-all duration-500 hover:bg-[#c9a962] hover:text-neutral-950"
           >
             Get in Touch
-            <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <svg
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </Link>
         </div>
@@ -896,7 +1008,13 @@ export default function EnhancedProjectsPageContent({ projects, industries, serv
 }
 
 // No Projects Found Component
-function NoProjectsFound({ searchQuery, onClear }: { searchQuery?: string; onClear?: () => void }) {
+function NoProjectsFound({
+  searchQuery,
+  onClear,
+}: {
+  searchQuery?: string;
+  onClear?: () => void;
+}) {
   return (
     <div className="py-32 text-center">
       <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-neutral-100">
@@ -908,7 +1026,7 @@ function NoProjectsFound({ searchQuery, onClear }: { searchQuery?: string; onCle
       <p className="mb-6 font-Satoshi text-lg text-neutral-500">
         {searchQuery
           ? `No projects match "${searchQuery}". Try a different search term or category.`
-          : 'Try selecting a different category or adjusting your filters.'}
+          : "Try selecting a different category or adjusting your filters."}
       </p>
       {onClear && (
         <button
@@ -923,9 +1041,17 @@ function NoProjectsFound({ searchQuery, onClear }: { searchQuery?: string; onCle
 }
 
 // Industry Card Component
-function IndustryCard({ industry, index, locale }: { industry: SanityIndustry; index: number; locale: string }) {
+function IndustryCard({
+  industry,
+  index,
+  locale,
+}: {
+  industry: SanityIndustry;
+  index: number;
+  locale: string;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-50px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
   const title = getLocalizedString(industry.title, locale);
   const excerpt = getLocalizedString(industry.excerpt, locale);
@@ -935,7 +1061,11 @@ function IndustryCard({ industry, index, locale }: { industry: SanityIndustry; i
       ref={cardRef}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.8,
+        delay: index * 0.1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className="h-full"
     >
       <Link

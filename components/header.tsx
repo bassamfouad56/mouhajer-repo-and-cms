@@ -1,113 +1,160 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Menu, X, ChevronDown, ShoppingBag } from 'lucide-react';
-import { EnhancedMegaMenu } from './enhanced-mega-menu';
-import { LanguageSwitcher } from './language-switcher';
-import { useCart } from '@/lib/cart-context';
-import { useTranslations } from 'next-intl';
-import type { MegaMenuImages } from './server-header';
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X, ChevronDown, ShoppingBag, Search } from "lucide-react";
+import { EnhancedMegaMenu } from "./enhanced-mega-menu";
+import { LanguageSwitcher } from "./language-switcher";
+import { useCart } from "@/lib/cart-context";
+import { useSearch } from "@/lib/algolia/search-context";
+import { useTranslations } from "next-intl";
+import type { MegaMenuImages } from "./server-header";
 
 interface HeaderProps {
   megaMenuImages?: MegaMenuImages | null;
 }
 
 export function Header({ megaMenuImages }: HeaderProps) {
-  const t = useTranslations('Header');
-  const tProjects = useTranslations('Projects.categories');
-  const tServices = useTranslations('Services');
-  const tBlog = useTranslations('Blog.filterCategories');
+  const t = useTranslations("Header");
+  const tProjects = useTranslations("Projects.categories");
+  const tServices = useTranslations("Services");
+  const tBlog = useTranslations("Blog.filterCategories");
 
   const mobileNavItems = [
     {
-      href: '/',
-      label: t('home'),
-      isPage: true
+      href: "/",
+      label: t("home"),
+      isPage: true,
     },
     {
-      href: '/projects',
-      label: t('projects'),
+      href: "/projects",
+      label: t("projects"),
       isPage: true,
       subLinks: [
-        { href: '/projects?category=residential', label: tProjects('residential') },
-        { href: '/projects?category=commercial', label: tProjects('commercial') },
-        { href: '/projects?category=hospitality', label: tProjects('hospitality') },
-        { href: '/projects?category=institutional', label: tProjects('institutional') },
+        {
+          href: "/projects?filter=residential",
+          label: tProjects("residential"),
+        },
+        { href: "/projects?filter=commercial", label: tProjects("commercial") },
+        {
+          href: "/projects?filter=hospitality",
+          label: tProjects("hospitality"),
+        },
+        {
+          href: "/projects?filter=institutional",
+          label: tProjects("institutional"),
+        },
       ],
     },
     {
-      href: '/services',
-      label: t('services'),
+      href: "/services",
+      label: t("services"),
       isPage: true,
       subLinks: [
-        { href: '/services#interior-design', label: tServices('interiorDesign.title') },
-        { href: '/services#fitout', label: tServices('fitoutSolutions.title') },
-        { href: '/services#construction', label: tServices('constructionManagement.title') },
-        { href: '/services#mep', label: tServices('mepEngineering.title') },
+        {
+          href: "/services#interior-design",
+          label: tServices("interiorDesign.title"),
+        },
+        { href: "/services#fitout", label: tServices("fitoutSolutions.title") },
+        {
+          href: "/services#construction",
+          label: tServices("constructionManagement.title"),
+        },
+        { href: "/services#mep", label: tServices("mepEngineering.title") },
       ],
     },
     {
-      href: '/industries',
-      label: t('industries'),
+      href: "/industries",
+      label: t("industries"),
       isPage: true,
       subLinks: [
-        { href: '/industries/high-end-residential', label: tProjects('residential') },
-        { href: '/industries/luxury-hospitality', label: tProjects('hospitality') },
-        { href: '/industries/commercial-corporate', label: tProjects('commercial') },
+        {
+          href: "/industries/high-end-residential",
+          label: tProjects("residential"),
+        },
+        {
+          href: "/industries/luxury-hospitality",
+          label: tProjects("hospitality"),
+        },
+        {
+          href: "/industries/commercial-corporate",
+          label: tProjects("commercial"),
+        },
       ],
     },
     {
-      href: '/journal',
-      label: t('blog'),
+      href: "/journal",
+      label: t("blog"),
       isPage: true,
       subLinks: [
-        { href: '/journal/design-trends', label: 'Design Trends' },
-        { href: '/journal/project-stories', label: 'Project Stories' },
-        { href: '/journal/behind-the-scenes', label: 'Behind the Scenes' },
-        { href: '/journal/materials-craft', label: 'Materials & Craft' },
-        { href: '/journal/engineering', label: 'Engineering' },
-        { href: '/journal/founders-insights', label: "Founder's Insights" },
+        { href: "/journal/design-trends", label: "Design Trends" },
+        { href: "/journal/project-stories", label: "Project Stories" },
+        { href: "/journal/behind-the-scenes", label: "Behind the Scenes" },
+        { href: "/journal/materials-craft", label: "Materials & Craft" },
+        { href: "/journal/engineering", label: "Engineering" },
+        { href: "/journal/founders-insights", label: "Founder's Insights" },
       ],
     },
     {
-      href: '/showroom',
-      label: t('showroom'),
-      isPage: true
-    },
-    {
-      href: '/about',
-      label: t('about'),
+      href: "/showroom",
+      label: t("showroom"),
       isPage: true,
     },
     {
-      href: '/contact',
-      label: t('contact'),
+      href: "/about",
+      label: t("about"),
+      isPage: true,
+    },
+    {
+      href: "/contact",
+      label: t("contact"),
       isPage: true,
     },
   ];
   const pathname = usePathname();
   const { totalItems, openCart } = useCart();
+  const { openSearch } = useSearch();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
+  const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+
+      // Update background style
+      setIsScrolled(currentScrollY > 50);
+
+      // Determine scroll direction
+      if (currentScrollY < 100) {
+        // Always show header near top of page
+        setIsVisible(true);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up - show header
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down & past threshold - hide header
+        setIsVisible(false);
+      }
+
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   // Check if a nav item is active
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
-    if (href.startsWith('/#')) return pathname === '/';
+    if (href === "/") return pathname === "/";
+    if (href.startsWith("/#")) return pathname === "/";
     return pathname?.startsWith(href);
   };
 
@@ -115,12 +162,10 @@ export function Header({ megaMenuImages }: HeaderProps) {
     <>
       <motion.header
         initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-        className={`fixed top-0 z-40 w-full transition-all duration-500 ${
-          isScrolled
-            ? 'bg-neutral-950/80 backdrop-blur-xl'
-            : 'bg-transparent'
+        animate={{ y: isVisible || isMobileMenuOpen ? 0 : -100 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 z-50 w-full transition-colors duration-500 ${
+          isScrolled ? "bg-neutral-950/80 backdrop-blur-xl" : "bg-transparent"
         }`}
       >
         <div className="mx-auto max-w-[1800px] px-6 lg:px-12">
@@ -146,8 +191,26 @@ export function Header({ megaMenuImages }: HeaderProps) {
             <div className="flex items-center gap-6">
               <EnhancedMegaMenu megaMenuImages={megaMenuImages} />
 
+              {/* Search Button */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={openSearch}
+                className="group relative hidden items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur-sm transition-all hover:border-[#c9a962]/50 hover:bg-white/10 hover:text-white lg:flex"
+                aria-label="Search"
+              >
+                <Search
+                  size={16}
+                  className="text-white/60 transition-colors group-hover:text-[#c9a962]"
+                />
+                <span className="font-light">Search</span>
+                <kbd className="ml-2 hidden rounded bg-white/10 px-1.5 py-0.5 text-xs text-white/40 xl:inline-block">
+                  ⌘K
+                </kbd>
+              </motion.button>
+
               {/* Cart Button - Only show on showroom pages */}
-              {pathname?.includes('/showroom') && (
+              {pathname?.includes("/showroom") && (
                 <motion.button
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -172,36 +235,48 @@ export function Header({ megaMenuImages }: HeaderProps) {
               <LanguageSwitcher />
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="relative z-50 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 lg:hidden"
-              aria-label="Toggle menu"
-            >
-              <AnimatePresence mode="wait">
-                {isMobileMenuOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X size={24} />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu size={24} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
+            {/* Mobile Search & Menu Buttons */}
+            <div className="flex items-center gap-3 lg:hidden">
+              {/* Mobile Search Button */}
+              <button
+                onClick={openSearch}
+                className="relative z-50 text-white/80 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+                aria-label="Search"
+              >
+                <Search size={22} />
+              </button>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="relative z-50 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+                aria-label="Toggle menu"
+              >
+                <AnimatePresence mode="wait">
+                  {isMobileMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X size={24} />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu size={24} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </button>
+            </div>
           </div>
         </div>
       </motion.header>
@@ -219,9 +294,9 @@ export function Header({ megaMenuImages }: HeaderProps) {
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.nav
-              initial={{ x: '100%' }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
+              exit={{ x: "100%" }}
               transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
               className="fixed right-0 top-0 z-30 flex h-full w-full flex-col justify-center bg-neutral-950 px-8 lg:hidden"
             >
@@ -238,7 +313,9 @@ export function Header({ megaMenuImages }: HeaderProps) {
                         <button
                           onClick={() =>
                             setExpandedMobileItem(
-                              expandedMobileItem === item.href ? null : item.href
+                              expandedMobileItem === item.href
+                                ? null
+                                : item.href
                             )
                           }
                           className="flex w-full items-center justify-between text-left text-3xl font-light tracking-wider text-white transition-all hover:text-neutral-300"
@@ -247,7 +324,9 @@ export function Header({ megaMenuImages }: HeaderProps) {
                           <ChevronDown
                             size={24}
                             className={`transition-transform duration-300 ${
-                              expandedMobileItem === item.href ? 'rotate-180' : ''
+                              expandedMobileItem === item.href
+                                ? "rotate-180"
+                                : ""
                             }`}
                           />
                         </button>
@@ -255,7 +334,7 @@ export function Header({ megaMenuImages }: HeaderProps) {
                           {expandedMobileItem === item.href && (
                             <motion.div
                               initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
+                              animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.3 }}
                               className="mt-4 space-y-3 pl-6"
@@ -279,7 +358,9 @@ export function Header({ megaMenuImages }: HeaderProps) {
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`block text-3xl font-light tracking-wider transition-all hover:translate-x-2 hover:text-neutral-300 focus-visible:translate-x-2 focus-visible:text-neutral-300 focus-visible:outline-none ${
-                          isActive(item.href) ? 'text-neutral-300' : 'text-white'
+                          isActive(item.href)
+                            ? "text-neutral-300"
+                            : "text-white"
                         }`}
                       >
                         {item.label}

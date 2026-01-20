@@ -1,39 +1,43 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Shield, Award, HardHat, Lightbulb, Users } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Shield, Award, HardHat, Lightbulb, Users } from "lucide-react";
 
 export function CoreValuesGrid() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   // 100% VERBATIM from content.md lines 465-469
   const values = [
     {
       icon: Shield,
-      title: 'Integrity',
-      description: 'We operate with absolute transparency. Our "handshake is the contract."',
+      title: "Integrity",
+      description:
+        'We operate with absolute transparency. Our "handshake is the contract."',
     },
     {
       icon: Award,
-      title: 'Excellence',
-      description: 'We do not accept "good enough." We aim for the exceptional.',
+      title: "Excellence",
+      description:
+        'We do not accept "good enough." We aim for the exceptional.',
     },
     {
       icon: HardHat,
-      title: 'Safety',
-      description: 'We value human life above all. A safe site is a productive site.',
+      title: "Safety",
+      description:
+        "We value human life above all. A safe site is a productive site.",
     },
     {
       icon: Lightbulb,
-      title: 'Innovation',
-      description: 'We blend traditional craftsmanship with modern technology.',
+      title: "Innovation",
+      description: "We blend traditional craftsmanship with modern technology.",
     },
     {
       icon: Users,
-      title: 'Collaboration',
-      description: 'We work as one unit – Design, Build, and Engineering together.',
+      title: "Collaboration",
+      description:
+        "We work as one unit – Design, Build, and Engineering together.",
     },
   ];
 
@@ -43,13 +47,16 @@ export function CoreValuesGrid() {
       className="relative overflow-hidden bg-[#faf8f5] py-24 sm:py-32 lg:py-40"
     >
       {/* Background Pattern */}
-      <div className="absolute inset-0">
-      </div>
+      <div className="absolute inset-0"></div>
 
       {/* Radial Gradient Overlay */}
-      <div className="absolute inset-0" style={{
-        background: 'radial-gradient(ellipse at center, transparent 0%, rgba(201,169,98,0.02) 100%)',
-      }} />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 0%, rgba(201,169,98,0.02) 100%)",
+        }}
+      />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
@@ -118,7 +125,8 @@ export function CoreValuesGrid() {
           className="mt-16 text-center lg:mt-24"
         >
           <p className="mb-8 font-Satoshi text-lg font-light italic text-neutral-600">
-            These values guide every project we undertake and every relationship we build.
+            These values guide every project we undertake and every relationship
+            we build.
           </p>
           <a
             href="/contact"

@@ -1,8 +1,12 @@
-'use client';
+"use client";
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
-import { ProjectFilters, PROJECT_TYPES, LOCATION_OPTIONS } from '@/types/filters';
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import {
+  ProjectFilters,
+  PROJECT_TYPES,
+  LOCATION_OPTIONS,
+} from "@/types/filters";
 
 interface AppliedFiltersProps {
   filters: ProjectFilters;
@@ -10,7 +14,8 @@ interface AppliedFiltersProps {
 }
 
 export function AppliedFilters({ filters, onChange }: AppliedFiltersProps) {
-  const hasFilters = filters.projectTypes.length > 0 || filters.locations.length > 0;
+  const hasFilters =
+    filters.projectTypes.length > 0 || filters.locations.length > 0;
 
   if (!hasFilters) return null;
 
@@ -113,7 +118,10 @@ function FilterChip({ label, onRemove }: FilterChipProps) {
         className="flex items-center justify-center rounded-full transition-colors hover:bg-[#c9a962]/10"
         aria-label={`Remove ${label} filter`}
       >
-        <X className="h-3 w-3 text-neutral-500 transition-colors group-hover:text-[#c9a962]" strokeWidth={2.5} />
+        <X
+          className="h-3 w-3 text-neutral-500 transition-colors group-hover:text-[#c9a962]"
+          strokeWidth={2.5}
+        />
       </button>
     </motion.div>
   );

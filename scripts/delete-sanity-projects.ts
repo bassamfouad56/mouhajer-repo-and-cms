@@ -1,21 +1,21 @@
-import { config } from 'dotenv';
-import { resolve } from 'path';
-import { createClient } from '@sanity/client';
+import { config } from "dotenv";
+import { resolve } from "path";
+import { createClient } from "@sanity/client";
 
 // Load environment variables from .env.local
-config({ path: resolve(process.cwd(), '.env.local') });
+config({ path: resolve(process.cwd(), ".env.local") });
 
 // Initialize Sanity client
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'r97logzc',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-11-21',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "b6q28exv",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-11-21",
   token: process.env.SANITY_API_TOKEN,
   useCdn: false,
 });
 
 async function deleteAllProjects() {
-  console.log('🗑️  Deleting all projects from Sanity...\n');
+  console.log("🗑️  Deleting all projects from Sanity...\n");
 
   try {
     // First, get all project documents
@@ -23,7 +23,7 @@ async function deleteAllProjects() {
     console.log(`Found ${projects.length} projects to delete\n`);
 
     if (projects.length === 0) {
-      console.log('No projects found.');
+      console.log("No projects found.");
       return;
     }
 
@@ -31,16 +31,18 @@ async function deleteAllProjects() {
     for (const project of projects) {
       try {
         await client.delete(project._id);
-        console.log(`✓ Deleted: ${project.title?.en || project.title || project._id}`);
+        console.log(
+          `✓ Deleted: ${project.title?.en || project.title || project._id}`
+        );
       } catch (error) {
         console.error(`✗ Failed to delete ${project._id}:`, error);
       }
     }
 
-    console.log('\n✅ All projects deleted!');
+    console.log("\n✅ All projects deleted!");
 
     // Now delete orphaned assets (images)
-    console.log('\n🗑️  Cleaning up orphaned assets...');
+    console.log("\n🗑️  Cleaning up orphaned assets...");
 
     // Get all assets that were uploaded
     const assets = await client.fetch(`*[_type == "sanity.imageAsset"]{ _id }`);
@@ -54,7 +56,7 @@ async function deleteAllProjects() {
         batch.map(async (asset: { _id: string }) => {
           try {
             await client.delete(asset._id);
-            process.stdout.write('.');
+            process.stdout.write(".");
           } catch {
             // Asset might be in use, skip
           }
@@ -62,9 +64,9 @@ async function deleteAllProjects() {
       );
     }
 
-    console.log('\n\n✅ Cleanup complete!');
+    console.log("\n\n✅ Cleanup complete!");
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
 

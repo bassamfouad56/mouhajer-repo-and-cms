@@ -50,21 +50,22 @@ async function getPosts(locale: string, category: string) {
     const query = `
       *[_type == "post" && category == $category] | order(publishedAt desc) {
         _id,
-        title,
+        "title": coalesce(title[$locale], title.en, title),
         slug,
-        excerpt,
+        "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
         mainImage,
         category,
-        "author": author->{
-          name,
-          image
+        "author": {
+          "name": author.name,
+          "role": coalesce(author.role[$locale], author.role.en, author.role),
+          "image": author.image
         },
         publishedAt,
         readTime,
         featured,
         "tags": tags[]->{
           _id,
-          "name": name[$locale],
+          "name": coalesce(name[$locale], name.en, name),
           slug
         }
       }

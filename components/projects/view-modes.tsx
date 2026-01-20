@@ -1,22 +1,27 @@
-'use client';
+"use client";
 
-import { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import { urlForImage, getSafeImageUrl } from '@/sanity/lib/image';
-import { SafeImage } from '@/components/safe-image';
+import { useRef, useState, useEffect, useCallback } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { getSafeImageUrl } from "@/sanity/lib/image";
+import { SafeImage } from "@/components/safe-image";
 
 // Helper to safely get image URL from Sanity project
-const getProjectImageUrl = (mainImage: any, width: number, height: number): string => {
-  if (!mainImage) return '/placeholder.jpg';
-  try {
-    const builder = urlForImage(mainImage);
-    if (!builder) return '/placeholder.jpg';
-    return builder.width(width).height(height).url() || '/placeholder.jpg';
-  } catch {
-    return '/placeholder.jpg';
-  }
+const getProjectImageUrl = (
+  mainImage: any,
+  width: number,
+  height: number
+): string => {
+  return getSafeImageUrl(mainImage, width, height, "/placeholder.jpg");
 };
 
 // Taxonomy reference types for filtering
@@ -54,16 +59,16 @@ export interface SanityProject {
 }
 
 export type ViewMode =
-  | 'grid'
-  | 'masonry'
-  | 'horizontal'
-  | 'infinite-scroll'
-  | 'case-study'
-  | 'split-screen'
-  | 'stacked-cards'
-  | 'timeline'
-  | 'immersive-3d'
-  | 'cinematic';
+  | "grid"
+  | "masonry"
+  | "horizontal"
+  | "infinite-scroll"
+  | "case-study"
+  | "split-screen"
+  | "stacked-cards"
+  | "timeline"
+  | "immersive-3d"
+  | "cinematic";
 
 export type GridColumns = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -72,18 +77,18 @@ export type GridColumns = 1 | 2 | 3 | 4 | 5 | 6;
 // ============================================
 export function GridView({
   projects,
-  columns = 3
+  columns = 3,
 }: {
   projects: SanityProject[];
   columns?: GridColumns;
 }) {
   const gridColsClass = {
-    1: 'grid-cols-1',
-    2: 'grid-cols-1 md:grid-cols-2',
-    3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-    4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
-    5: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-5',
-    6: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-6',
+    1: "grid-cols-1",
+    2: "grid-cols-1 md:grid-cols-2",
+    3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+    4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+    5: "grid-cols-2 md:grid-cols-3 lg:grid-cols-5",
+    6: "grid-cols-2 md:grid-cols-3 lg:grid-cols-6",
   }[columns];
 
   return (
@@ -95,16 +100,26 @@ export function GridView({
   );
 }
 
-function GridCard({ project, index }: { project: SanityProject; index: number }) {
+function GridCard({
+  project,
+  index,
+}: {
+  project: SanityProject;
+  index: number;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-50px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
   return (
     <motion.div
       ref={cardRef}
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.05,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className="group"
     >
       <Link href={`/projects/${project.slug.current}`}>
@@ -167,12 +182,12 @@ export function MasonryView({ projects }: { projects: SanityProject[] }) {
   // Create varied sizes for bento effect
   const getSizeClass = (index: number) => {
     const patterns = [
-      'col-span-2 row-span-2', // Large
-      'col-span-1 row-span-1', // Small
-      'col-span-1 row-span-2', // Tall
-      'col-span-1 row-span-1', // Small
-      'col-span-2 row-span-1', // Wide
-      'col-span-1 row-span-1', // Small
+      "col-span-2 row-span-2", // Large
+      "col-span-1 row-span-1", // Small
+      "col-span-1 row-span-2", // Tall
+      "col-span-1 row-span-1", // Small
+      "col-span-2 row-span-1", // Wide
+      "col-span-1 row-span-1", // Small
     ];
     return patterns[index % patterns.length];
   };
@@ -194,14 +209,14 @@ export function MasonryView({ projects }: { projects: SanityProject[] }) {
 function MasonryCard({
   project,
   index,
-  sizeClass
+  sizeClass,
 }: {
   project: SanityProject;
   index: number;
   sizeClass: string;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-50px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
   return (
     <motion.div
@@ -255,14 +270,22 @@ function MasonryCard({
 // ============================================
 // VIEW MODE 3: HORIZONTAL SCROLL GALLERY
 // ============================================
-export function HorizontalScrollView({ projects }: { projects: SanityProject[] }) {
+export function HorizontalScrollView({
+  projects,
+}: {
+  projects: SanityProject[];
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end end'],
+    offset: ["start start", "end end"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', `-${(projects.length - 1) * 80}%`]);
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", `-${(projects.length - 1) * 80}%`]
+  );
 
   return (
     <div ref={containerRef} className="relative h-[300vh]">
@@ -277,7 +300,13 @@ export function HorizontalScrollView({ projects }: { projects: SanityProject[] }
   );
 }
 
-function HorizontalCard({ project, index }: { project: SanityProject; index: number }) {
+function HorizontalCard({
+  project,
+  index,
+}: {
+  project: SanityProject;
+  index: number;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 100 }}
@@ -303,7 +332,7 @@ function HorizontalCard({ project, index }: { project: SanityProject; index: num
           {/* Content */}
           <div className="absolute bottom-0 left-0 p-8 lg:p-12">
             <span className="mb-3 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
-              {project.category || 'Project'}
+              {project.category || "Project"}
             </span>
             <h3 className="mb-3 font-SchnyderS text-3xl font-light text-white lg:text-5xl">
               {project.title}
@@ -327,7 +356,11 @@ function HorizontalCard({ project, index }: { project: SanityProject; index: num
 // ============================================
 // VIEW MODE 4: INFINITE SCROLL (Multi-Column)
 // ============================================
-export function InfiniteScrollView({ projects }: { projects: SanityProject[] }) {
+export function InfiniteScrollView({
+  projects,
+}: {
+  projects: SanityProject[];
+}) {
   // Split projects into 3 columns
   const columns = [
     projects.filter((_, i) => i % 3 === 0),
@@ -342,12 +375,12 @@ export function InfiniteScrollView({ projects }: { projects: SanityProject[] }) 
           key={colIndex}
           className="flex flex-1 flex-col gap-4 lg:gap-6"
           animate={{
-            y: colIndex % 2 === 0 ? [0, -20, 0] : [0, 20, 0]
+            y: colIndex % 2 === 0 ? [0, -20, 0] : [0, 20, 0],
           }}
           transition={{
             duration: 20 + colIndex * 5,
             repeat: Infinity,
-            ease: 'linear',
+            ease: "linear",
           }}
         >
           {/* Duplicate for infinite effect */}
@@ -364,7 +397,13 @@ export function InfiniteScrollView({ projects }: { projects: SanityProject[] }) 
   );
 }
 
-function InfiniteCard({ project, index }: { project: SanityProject; index: number }) {
+function InfiniteCard({
+  project,
+  index,
+}: {
+  project: SanityProject;
+  index: number;
+}) {
   return (
     <div className="group relative aspect-[3/4] overflow-hidden">
       <Link href={`/projects/${project.slug.current}`} className="block h-full">
@@ -383,7 +422,9 @@ function InfiniteCard({ project, index }: { project: SanityProject; index: numbe
           <h3 className="font-SchnyderS text-lg font-light text-white">
             {project.title}
           </h3>
-          <span className="font-Satoshi text-xs text-white/60">{project.category}</span>
+          <span className="font-Satoshi text-xs text-white/60">
+            {project.category}
+          </span>
         </div>
       </Link>
     </div>
@@ -403,9 +444,15 @@ export function CaseStudyView({ projects }: { projects: SanityProject[] }) {
   );
 }
 
-function CaseStudyCard({ project, index }: { project: SanityProject; index: number }) {
+function CaseStudyCard({
+  project,
+  index,
+}: {
+  project: SanityProject;
+  index: number;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -462,9 +509,24 @@ function CaseStudyCard({ project, index }: { project: SanityProject; index: numb
 
               {project.location && (
                 <div className="mb-4 flex items-center gap-2 font-Satoshi text-sm text-neutral-500">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
                   </svg>
                   {project.location}
                 </div>
@@ -485,7 +547,12 @@ function CaseStudyCard({ project, index }: { project: SanityProject; index: numb
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </motion.svg>
               </div>
             </div>
@@ -512,21 +579,28 @@ export function SplitScreenView({ projects }: { projects: SanityProject[] }) {
               key={project._id}
               onClick={() => setActiveIndex(index)}
               className={`group w-full text-left transition-all duration-300 ${
-                activeIndex === index ? 'pl-4' : 'pl-0'
+                activeIndex === index ? "pl-4" : "pl-0"
               }`}
               whileHover={{ x: 8 }}
             >
-              <div className={`border-l-2 py-4 pl-6 transition-all duration-300 ${
-                activeIndex === index
-                  ? 'border-[#c9a962] bg-white'
-                  : 'border-transparent hover:border-neutral-300'
-              }`}>
+              <div
+                className={`border-l-2 py-4 pl-6 transition-all duration-300 ${
+                  activeIndex === index
+                    ? "border-[#c9a962] bg-white"
+                    : "border-transparent hover:border-neutral-300"
+                }`}
+              >
                 <span className="mb-1 block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-400">
-                  {project.category || 'Project'} {project.year && `· ${project.year}`}
+                  {project.category || "Project"}{" "}
+                  {project.year && `· ${project.year}`}
                 </span>
-                <h3 className={`font-SchnyderS text-2xl font-light transition-colors duration-300 lg:text-3xl ${
-                  activeIndex === index ? 'text-neutral-950' : 'text-neutral-400 group-hover:text-neutral-700'
-                }`}>
+                <h3
+                  className={`font-SchnyderS text-2xl font-light transition-colors duration-300 lg:text-3xl ${
+                    activeIndex === index
+                      ? "text-neutral-950"
+                      : "text-neutral-400 group-hover:text-neutral-700"
+                  }`}
+                >
                   {project.title}
                 </h3>
                 {activeIndex === index && project.location && (
@@ -558,7 +632,11 @@ export function SplitScreenView({ projects }: { projects: SanityProject[] }) {
             <Link href={`/projects/${projects[activeIndex]?.slug.current}`}>
               {projects[activeIndex]?.mainImage ? (
                 <Image
-                  src={getProjectImageUrl(projects[activeIndex].mainImage, 1200, 1000)}
+                  src={getProjectImageUrl(
+                    projects[activeIndex].mainImage,
+                    1200,
+                    1000
+                  )}
                   alt={projects[activeIndex].title}
                   fill
                   className="object-cover"
@@ -569,8 +647,18 @@ export function SplitScreenView({ projects }: { projects: SanityProject[] }) {
               <div className="absolute inset-0 bg-neutral-950/20" />
               <div className="absolute bottom-8 right-8 flex items-center gap-2 bg-white px-6 py-3 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-colors duration-300 hover:bg-[#c9a962] hover:text-white">
                 View Project
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </div>
             </Link>
@@ -611,11 +699,14 @@ export function StackedCardsView({ projects }: { projects: SanityProject[] }) {
                 x: translateX,
                 scale,
               }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <Link href={`/projects/${project.slug.current}`} className="block h-full">
+              <Link
+                href={`/projects/${project.slug.current}`}
+                className="block h-full"
+              >
                 <div className="relative h-full w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-white shadow-2xl">
                   {project.mainImage ? (
                     <Image
@@ -648,9 +739,13 @@ export function StackedCardsView({ projects }: { projects: SanityProject[] }) {
         {projects.slice(0, 8).map((_, index) => (
           <button
             key={index}
-            onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
+            onClick={() =>
+              setHoveredIndex(hoveredIndex === index ? null : index)
+            }
             className={`h-2 w-2 rounded-full transition-all duration-300 ${
-              hoveredIndex === index ? 'w-6 bg-[#c9a962]' : 'bg-neutral-300 hover:bg-neutral-400'
+              hoveredIndex === index
+                ? "w-6 bg-[#c9a962]"
+                : "bg-neutral-300 hover:bg-neutral-400"
             }`}
           />
         ))}
@@ -665,8 +760,8 @@ export function StackedCardsView({ projects }: { projects: SanityProject[] }) {
 export function TimelineView({ projects }: { projects: SanityProject[] }) {
   // Sort by year
   const sortedProjects = [...projects].sort((a, b) => {
-    const yearA = parseInt(a.year || '0');
-    const yearB = parseInt(b.year || '0');
+    const yearA = parseInt(a.year || "0");
+    const yearB = parseInt(b.year || "0");
     return yearB - yearA;
   });
 
@@ -692,14 +787,14 @@ export function TimelineView({ projects }: { projects: SanityProject[] }) {
 function TimelineCard({
   project,
   index,
-  isLeft
+  isLeft,
 }: {
   project: SanityProject;
   index: number;
   isLeft: boolean;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
 
   return (
     <motion.div
@@ -707,7 +802,7 @@ function TimelineCard({
       initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`relative flex items-center ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
+      className={`relative flex items-center ${isLeft ? "lg:flex-row" : "lg:flex-row-reverse"}`}
     >
       {/* Year marker */}
       <div className="absolute left-4 z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#c9a962] bg-white lg:left-1/2 lg:-translate-x-1/2">
@@ -715,14 +810,18 @@ function TimelineCard({
       </div>
 
       {/* Year label */}
-      <div className={`hidden font-SchnyderS text-5xl font-light text-neutral-200 lg:block lg:w-[calc(50%-60px)] ${
-        isLeft ? 'pr-8 text-right' : 'pl-8 text-left'
-      }`}>
-        {project.year || '—'}
+      <div
+        className={`hidden font-SchnyderS text-5xl font-light text-neutral-200 lg:block lg:w-[calc(50%-60px)] ${
+          isLeft ? "pr-8 text-right" : "pl-8 text-left"
+        }`}
+      >
+        {project.year || "—"}
       </div>
 
       {/* Card */}
-      <div className={`ml-16 w-full lg:ml-0 lg:w-[calc(50%-60px)] ${isLeft ? 'lg:pl-8' : 'lg:pr-8'}`}>
+      <div
+        className={`ml-16 w-full lg:ml-0 lg:w-[calc(50%-60px)] ${isLeft ? "lg:pl-8" : "lg:pr-8"}`}
+      >
         <Link href={`/projects/${project.slug.current}`}>
           <div className="group overflow-hidden rounded-lg bg-white shadow-lg transition-shadow duration-300 hover:shadow-xl">
             <div className="relative aspect-video overflow-hidden">
@@ -750,7 +849,9 @@ function TimelineCard({
                 {project.title}
               </h3>
               {project.location && (
-                <p className="font-Satoshi text-sm text-neutral-500">{project.location}</p>
+                <p className="font-Satoshi text-sm text-neutral-500">
+                  {project.location}
+                </p>
               )}
             </div>
           </div>
@@ -773,7 +874,11 @@ export function Immersive3DView({ projects }: { projects: SanityProject[] }) {
         </p>
         <div className="flex flex-wrap justify-center gap-4 px-4">
           {projects.map((project, index) => (
-            <Immersive3DCard key={project._id} project={project} index={index} />
+            <Immersive3DCard
+              key={project._id}
+              project={project}
+              index={index}
+            />
           ))}
         </div>
       </div>
@@ -781,7 +886,13 @@ export function Immersive3DView({ projects }: { projects: SanityProject[] }) {
   );
 }
 
-function Immersive3DCard({ project, index }: { project: SanityProject; index: number }) {
+function Immersive3DCard({
+  project,
+  index,
+}: {
+  project: SanityProject;
+  index: number;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
@@ -813,7 +924,7 @@ function Immersive3DCard({ project, index }: { project: SanityProject; index: nu
       onMouseLeave={handleMouseLeave}
       style={{
         transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-        transformStyle: 'preserve-3d',
+        transformStyle: "preserve-3d",
       }}
       className="group relative h-[300px] w-[250px] cursor-pointer overflow-hidden rounded-lg transition-transform duration-200 lg:h-[350px] lg:w-[300px]"
     >
@@ -838,7 +949,10 @@ function Immersive3DCard({ project, index }: { project: SanityProject; index: nu
           }}
         />
 
-        <div className="absolute inset-x-0 bottom-0 p-5" style={{ transform: 'translateZ(30px)' }}>
+        <div
+          className="absolute inset-x-0 bottom-0 p-5"
+          style={{ transform: "translateZ(30px)" }}
+        >
           <span className="mb-1 block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962]">
             {project.category}
           </span>
@@ -864,14 +978,24 @@ export function CinematicView({ projects }: { projects: SanityProject[] }) {
   );
 }
 
-function CinematicCard({ project, index }: { project: SanityProject; index: number }) {
+function CinematicCard({
+  project,
+  index,
+}: {
+  project: SanityProject;
+  index: number;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true });
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1, 1.15]);
+  const imageScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1.15, 1, 1.15]
+  );
   const contentY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
@@ -899,11 +1023,14 @@ function CinematicCard({ project, index }: { project: SanityProject; index: numb
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/60 via-transparent to-transparent" />
 
-          <motion.div style={{ y: contentY }} className="absolute bottom-0 left-0 right-0 p-8 lg:p-16">
+          <motion.div
+            style={{ y: contentY }}
+            className="absolute bottom-0 left-0 right-0 p-8 lg:p-16"
+          >
             <div className="mb-3 flex items-center gap-4">
               <div className="h-px w-12 bg-[#c9a962]" />
               <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
-                {project.category || 'Featured Project'}
+                {project.category || "Featured Project"}
               </span>
             </div>
             <h2 className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-white transition-all duration-500 group-hover:text-[#c9a962] lg:text-6xl xl:text-7xl">
@@ -912,8 +1039,18 @@ function CinematicCard({ project, index }: { project: SanityProject; index: numb
             <div className="mb-6 flex flex-wrap items-center gap-4 font-Satoshi text-sm text-white/60">
               {project.location && (
                 <span className="flex items-center gap-2">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
                   </svg>
                   {project.location}
                 </span>
@@ -934,8 +1071,18 @@ function CinematicCard({ project, index }: { project: SanityProject; index: numb
             {/* View button */}
             <div className="mt-6 inline-flex items-center gap-2 border-b border-white/30 pb-1 font-Satoshi text-xs uppercase tracking-[0.2em] text-white/80 transition-all duration-300 group-hover:border-[#c9a962] group-hover:text-[#c9a962]">
               Explore Project
-              <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <svg
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </div>
           </motion.div>
@@ -948,100 +1095,203 @@ function CinematicCard({ project, index }: { project: SanityProject; index: numb
 // ============================================
 // VIEW MODE SELECTOR COMPONENT
 // ============================================
-export const VIEW_MODE_CONFIG: Record<ViewMode, {
-  label: string;
-  icon: React.ReactNode;
-  description: string;
-}> = {
-  'grid': {
-    label: 'Grid',
+export const VIEW_MODE_CONFIG: Record<
+  ViewMode,
+  {
+    label: string;
+    icon: React.ReactNode;
+    description: string;
+  }
+> = {
+  grid: {
+    label: "Grid",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+        />
       </svg>
     ),
-    description: 'Classic grid layout with adjustable columns',
+    description: "Classic grid layout with adjustable columns",
   },
-  'masonry': {
-    label: 'Masonry',
+  masonry: {
+    label: "Masonry",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v6a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 14a1 1 0 011-1h4a1 1 0 011 1v5a1 1 0 01-1 1H5a1 1 0 01-1-1v-5zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v6a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 14a1 1 0 011-1h4a1 1 0 011 1v5a1 1 0 01-1 1H5a1 1 0 01-1-1v-5zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"
+        />
       </svg>
     ),
-    description: 'Dynamic bento grid with varied sizes',
+    description: "Dynamic bento grid with varied sizes",
   },
-  'horizontal': {
-    label: 'Horizontal',
+  horizontal: {
+    label: "Horizontal",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+        />
       </svg>
     ),
-    description: 'Cinematic horizontal scroll gallery',
+    description: "Cinematic horizontal scroll gallery",
   },
-  'infinite-scroll': {
-    label: 'Infinite',
+  "infinite-scroll": {
+    label: "Infinite",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+        />
       </svg>
     ),
-    description: 'Multi-column infinite scrolling effect',
+    description: "Multi-column infinite scrolling effect",
   },
-  'case-study': {
-    label: 'Case Study',
+  "case-study": {
+    label: "Case Study",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+        />
       </svg>
     ),
-    description: 'Detailed cards with descriptions',
+    description: "Detailed cards with descriptions",
   },
-  'split-screen': {
-    label: 'Split',
+  "split-screen": {
+    label: "Split",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+        />
       </svg>
     ),
-    description: 'Interactive list with preview panel',
+    description: "Interactive list with preview panel",
   },
-  'stacked-cards': {
-    label: 'Stacked',
+  "stacked-cards": {
+    label: "Stacked",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+        />
       </svg>
     ),
-    description: 'Fan-out card deck effect',
+    description: "Fan-out card deck effect",
   },
-  'timeline': {
-    label: 'Timeline',
+  timeline: {
+    label: "Timeline",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
       </svg>
     ),
-    description: 'Chronological journey view',
+    description: "Chronological journey view",
   },
-  'immersive-3d': {
-    label: '3D Cards',
+  "immersive-3d": {
+    label: "3D Cards",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
+        />
       </svg>
     ),
-    description: 'Interactive 3D perspective cards',
+    description: "Interactive 3D perspective cards",
   },
-  'cinematic': {
-    label: 'Cinematic',
+  cinematic: {
+    label: "Cinematic",
     icon: (
-      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+      <svg
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"
+        />
       </svg>
     ),
-    description: 'Ultra-wide cinematic hero cards',
+    description: "Ultra-wide cinematic hero cards",
   },
 };
 
@@ -1071,18 +1321,20 @@ export function ViewModeSelector({
 
         {/* Quick access buttons */}
         <div className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white p-1">
-          {(['grid', 'masonry', 'cinematic'] as ViewMode[]).map((view) => (
+          {(["grid", "masonry", "cinematic"] as ViewMode[]).map((view) => (
             <button
               key={view}
               onClick={() => onViewChange(view)}
               className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 font-Satoshi text-xs transition-all duration-200 ${
                 currentView === view
-                  ? 'bg-neutral-950 text-white'
-                  : 'text-neutral-600 hover:bg-neutral-100'
+                  ? "bg-neutral-950 text-white"
+                  : "text-neutral-600 hover:bg-neutral-100"
               }`}
             >
               {VIEW_MODE_CONFIG[view].icon}
-              <span className="hidden sm:inline">{VIEW_MODE_CONFIG[view].label}</span>
+              <span className="hidden sm:inline">
+                {VIEW_MODE_CONFIG[view].label}
+              </span>
             </button>
           ))}
 
@@ -1090,20 +1342,31 @@ export function ViewModeSelector({
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 font-Satoshi text-xs transition-all duration-200 ${
-              isExpanded || !['grid', 'masonry', 'cinematic'].includes(currentView)
-                ? 'bg-[#c9a962] text-white'
-                : 'text-neutral-600 hover:bg-neutral-100'
+              isExpanded ||
+              !["grid", "masonry", "cinematic"].includes(currentView)
+                ? "bg-[#c9a962] text-white"
+                : "text-neutral-600 hover:bg-neutral-100"
             }`}
           >
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+              />
             </svg>
             <span className="hidden sm:inline">More</span>
           </button>
         </div>
 
         {/* Grid column selector (only show when grid is active) */}
-        {currentView === 'grid' && onGridColumnsChange && (
+        {currentView === "grid" && onGridColumnsChange && (
           <div
             className="relative"
             onMouseEnter={() => setShowGridOptions(true)}
@@ -1111,8 +1374,18 @@ export function ViewModeSelector({
           >
             <button className="flex items-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-3 py-2 font-Satoshi text-xs text-neutral-600 transition-colors hover:border-neutral-300">
               <span>{gridColumns} Col</span>
-              <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg
+                className="h-3 w-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
 
@@ -1130,11 +1403,11 @@ export function ViewModeSelector({
                       onClick={() => onGridColumnsChange(cols)}
                       className={`w-full px-3 py-2 text-left font-Satoshi text-xs transition-colors ${
                         gridColumns === cols
-                          ? 'bg-neutral-950 text-white'
-                          : 'text-neutral-600 hover:bg-neutral-50'
+                          ? "bg-neutral-950 text-white"
+                          : "text-neutral-600 hover:bg-neutral-50"
                       }`}
                     >
-                      {cols} {cols === 1 ? 'Column' : 'Columns'}
+                      {cols} {cols === 1 ? "Column" : "Columns"}
                     </button>
                   ))}
                 </motion.div>
@@ -1149,7 +1422,7 @@ export function ViewModeSelector({
         {isExpanded && (
           <motion.div
             initial={{ opacity: 0, y: 10, height: 0 }}
-            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            animate={{ opacity: 1, y: 0, height: "auto" }}
             exit={{ opacity: 0, y: 10, height: 0 }}
             className="absolute right-0 top-full z-50 mt-2 w-[320px] overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-xl sm:w-[400px]"
           >
@@ -1162,8 +1435,18 @@ export function ViewModeSelector({
                   onClick={() => setIsExpanded(false)}
                   className="text-neutral-400 transition-colors hover:text-neutral-600"
                 >
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>
@@ -1178,17 +1461,23 @@ export function ViewModeSelector({
                     }}
                     className={`group rounded-lg border p-3 text-left transition-all duration-200 ${
                       currentView === view
-                        ? 'border-[#c9a962] bg-[#c9a962]/5'
-                        : 'border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50'
+                        ? "border-[#c9a962] bg-[#c9a962]/5"
+                        : "border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
                     }`}
                   >
                     <div className="mb-2 flex items-center gap-2">
-                      <div className={`${currentView === view ? 'text-[#c9a962]' : 'text-neutral-400 group-hover:text-neutral-600'}`}>
+                      <div
+                        className={`${currentView === view ? "text-[#c9a962]" : "text-neutral-400 group-hover:text-neutral-600"}`}
+                      >
                         {VIEW_MODE_CONFIG[view].icon}
                       </div>
-                      <span className={`font-Satoshi text-sm font-medium ${
-                        currentView === view ? 'text-[#c9a962]' : 'text-neutral-950'
-                      }`}>
+                      <span
+                        className={`font-Satoshi text-sm font-medium ${
+                          currentView === view
+                            ? "text-[#c9a962]"
+                            : "text-neutral-950"
+                        }`}
+                      >
                         {VIEW_MODE_CONFIG[view].label}
                       </span>
                     </div>

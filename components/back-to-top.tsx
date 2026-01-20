@@ -21,8 +21,11 @@ export function BackToTop() {
       setIsVisible(window.scrollY > 400);
 
       // Calculate scroll progress
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
       setScrollProgress(scrolled);
     };
@@ -83,7 +86,11 @@ export function BackToTop() {
           <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-neutral-950 shadow-lg transition-all group-hover:bg-neutral-900 group-hover:shadow-xl group-focus-visible:ring-2 group-focus-visible:ring-white group-focus-visible:ring-offset-2">
             <motion.div
               animate={{ y: [0, -2, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
               <ArrowUp className="h-5 w-5 text-white" strokeWidth={1.5} />
             </motion.div>

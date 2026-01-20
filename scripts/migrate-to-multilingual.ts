@@ -12,53 +12,53 @@
  * Run with: npx tsx scripts/migrate-to-multilingual.ts
  */
 
-import { createClient } from '@sanity/client';
+import { createClient } from "@sanity/client";
 
 // Sanity client configuration
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'r97logzc',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: '2024-11-21',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "b6q28exv",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  apiVersion: "2024-11-21",
   token: process.env.SANITY_API_TOKEN,
   useCdn: false,
 });
 
 // Document types to migrate
-const DOCUMENT_TYPES = ['service', 'industry', 'post', 'testimonial'] as const;
+const DOCUMENT_TYPES = ["service", "industry", "post", "testimonial"] as const;
 
 // Top-level fields to convert for each document type
 const FIELD_MAPPINGS: Record<string, string[]> = {
-  service: ['title', 'excerpt'],
-  industry: ['title', 'excerpt'],
-  post: ['title', 'excerpt'],
-  testimonial: ['role', 'company', 'quote'],
+  service: ["title", "excerpt"],
+  industry: ["title", "excerpt"],
+  post: ["title", "excerpt"],
+  testimonial: ["role", "company", "quote"],
 };
 
 // Nested array fields with their translatable subfields
 const NESTED_FIELD_MAPPINGS: Record<string, Record<string, string[]>> = {
   service: {
-    features: ['title', 'description'],
-    process: ['title', 'description'],
+    features: ["title", "description"],
+    process: ["title", "description"],
   },
   industry: {
-    challenges: ['title', 'description'],
-    solutions: ['title', 'description'],
+    challenges: ["title", "description"],
+    solutions: ["title", "description"],
   },
   post: {},
   testimonial: {},
 };
 
 // SEO fields (nested in seo object)
-const SEO_FIELDS = ['metaTitle', 'metaDescription'];
+const SEO_FIELDS = ["metaTitle", "metaDescription"];
 
 /**
  * Check if a field is already in multilingual format
  */
 function isMultilingual(value: unknown): boolean {
   return (
-    typeof value === 'object' &&
+    typeof value === "object" &&
     value !== null &&
-    ('en' in value || 'ar' in value)
+    ("en" in value || "ar" in value)
   );
 }
 
@@ -70,7 +70,7 @@ function toMultilingual(value: unknown): { en: string; ar: string } | null {
     return null;
   }
 
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     return { en: value, ar: value };
   }
 
@@ -85,7 +85,10 @@ function toMultilingual(value: unknown): { en: string; ar: string } | null {
 /**
  * Migrate a single document
  */
-async function migrateDocument(doc: Record<string, unknown>, type: string): Promise<boolean> {
+async function migrateDocument(
+  doc: Record<string, unknown>,
+  type: string
+): Promise<boolean> {
   const patches: Record<string, unknown> = {};
   let hasChanges = false;
 
@@ -93,7 +96,7 @@ async function migrateDocument(doc: Record<string, unknown>, type: string): Prom
   const fields = FIELD_MAPPINGS[type] || [];
   for (const field of fields) {
     const value = doc[field];
-    if (value && typeof value === 'string') {
+    if (value && typeof value === "string") {
       patches[field] = toMultilingual(value);
       hasChanges = true;
     }
@@ -109,7 +112,7 @@ async function migrateDocument(doc: Record<string, unknown>, type: string): Prom
         const newItem = { ...item };
         for (const nestedField of nestedFields) {
           const value = item[nestedField];
-          if (value && typeof value === 'string') {
+          if (value && typeof value === "string") {
             newItem[nestedField] = toMultilingual(value);
             arrayHasChanges = true;
           }
@@ -126,13 +129,13 @@ async function migrateDocument(doc: Record<string, unknown>, type: string): Prom
 
   // Migrate SEO fields
   const seo = doc.seo as Record<string, unknown> | undefined;
-  if (seo && typeof seo === 'object') {
+  if (seo && typeof seo === "object") {
     let seoHasChanges = false;
     const newSeo = { ...seo };
 
     for (const seoField of SEO_FIELDS) {
       const value = seo[seoField];
-      if (value && typeof value === 'string') {
+      if (value && typeof value === "string") {
         newSeo[seoField] = toMultilingual(value);
         seoHasChanges = true;
       }
@@ -147,7 +150,10 @@ async function migrateDocument(doc: Record<string, unknown>, type: string): Prom
   // Apply patches if there are changes
   if (hasChanges && Object.keys(patches).length > 0) {
     try {
-      await client.patch(doc._id as string).set(patches).commit();
+      await client
+        .patch(doc._id as string)
+        .set(patches)
+        .commit();
       return true;
     } catch (error) {
       console.error(`  Error migrating document ${doc._id}:`, error);
@@ -162,19 +168,25 @@ async function migrateDocument(doc: Record<string, unknown>, type: string): Prom
  * Main migration function
  */
 async function main() {
-  console.log('='.repeat(60));
-  console.log('Sanity Multilingual Migration Script');
-  console.log('='.repeat(60));
+  console.log("=".repeat(60));
+  console.log("Sanity Multilingual Migration Script");
+  console.log("=".repeat(60));
 
   // Check for API token
   if (!process.env.SANITY_API_TOKEN) {
-    console.error('\nError: SANITY_API_TOKEN environment variable is required.');
-    console.error('Set it with: export SANITY_API_TOKEN=your_token_here');
+    console.error(
+      "\nError: SANITY_API_TOKEN environment variable is required."
+    );
+    console.error("Set it with: export SANITY_API_TOKEN=your_token_here");
     process.exit(1);
   }
 
-  console.log('\nThis script will convert single-language fields to multilingual format.');
-  console.log('English content will be copied to Arabic fields as placeholders.\n');
+  console.log(
+    "\nThis script will convert single-language fields to multilingual format."
+  );
+  console.log(
+    "English content will be copied to Arabic fields as placeholders.\n"
+  );
 
   const stats = {
     total: 0,
@@ -184,9 +196,9 @@ async function main() {
   };
 
   for (const type of DOCUMENT_TYPES) {
-    console.log(`\n${'─'.repeat(50)}`);
+    console.log(`\n${"─".repeat(50)}`);
     console.log(`Processing: ${type}`);
-    console.log(`${'─'.repeat(50)}`);
+    console.log(`${"─".repeat(50)}`);
 
     try {
       // Fetch all documents of this type
@@ -202,9 +214,10 @@ async function main() {
       for (const doc of documents) {
         stats.total++;
         const title = doc.title;
-        const displayTitle = typeof title === 'string'
-          ? title
-          : (title as { en?: string })?.en || doc._id;
+        const displayTitle =
+          typeof title === "string"
+            ? title
+            : (title as { en?: string })?.en || doc._id;
 
         // Check if already migrated (title is already an object)
         if (isMultilingual(title)) {
@@ -225,8 +238,9 @@ async function main() {
         }
       }
 
-      console.log(`\n  Summary: ${typeMigrated} migrated, ${typeSkipped} skipped`);
-
+      console.log(
+        `\n  Summary: ${typeMigrated} migrated, ${typeSkipped} skipped`
+      );
     } catch (error) {
       console.error(`  Error fetching ${type} documents:`, error);
       stats.errors++;
@@ -234,21 +248,21 @@ async function main() {
   }
 
   // Print final summary
-  console.log('\n' + '='.repeat(60));
-  console.log('Migration Complete!');
-  console.log('='.repeat(60));
+  console.log("\n" + "=".repeat(60));
+  console.log("Migration Complete!");
+  console.log("=".repeat(60));
   console.log(`\n  Total documents:  ${stats.total}`);
   console.log(`  Migrated:         ${stats.migrated}`);
   console.log(`  Skipped:          ${stats.skipped}`);
   console.log(`  Errors:           ${stats.errors}`);
-  console.log('\nNext steps:');
-  console.log('  1. Update Sanity schemas to use multilingual field types');
-  console.log('  2. Update GROQ queries to extract locale-specific values');
-  console.log('  3. Translate Arabic content in Sanity Studio');
+  console.log("\nNext steps:");
+  console.log("  1. Update Sanity schemas to use multilingual field types");
+  console.log("  2. Update GROQ queries to extract locale-specific values");
+  console.log("  3. Translate Arabic content in Sanity Studio");
 }
 
 // Run the migration
 main().catch((error) => {
-  console.error('Migration failed:', error);
+  console.error("Migration failed:", error);
   process.exit(1);
 });

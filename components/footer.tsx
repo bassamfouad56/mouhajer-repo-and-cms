@@ -1,21 +1,38 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { FadeIn, StaggerContainer, StaggerItem, AnimatedLine, HoverLift } from './animations';
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  Instagram,
+  Facebook,
+  Linkedin,
+  Mail,
+  Phone,
+  MapPin,
+  ArrowRight,
+} from "lucide-react";
+import { useTranslations } from "next-intl";
+import {
+  FadeIn,
+  StaggerContainer,
+  StaggerItem,
+  AnimatedLine,
+  HoverLift,
+} from "./animations";
 
 export function Footer() {
-  const t = useTranslations('Footer');
-  const tHeader = useTranslations('Header');
-  const tServices = useTranslations('Services');
+  const t = useTranslations("Footer");
+  const tHeader = useTranslations("Header");
+  const tServices = useTranslations("Services");
   const currentYear = new Date().getFullYear();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,22 +40,28 @@ export function Footer() {
     setMessage(null);
 
     try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        setMessage({ type: 'success', text: t('newsletter.success') });
-        setEmail('');
+        setMessage({ type: "success", text: t("newsletter.success") });
+        setEmail("");
       } else {
-        setMessage({ type: 'error', text: data.message || 'Failed to subscribe' });
+        setMessage({
+          type: "error",
+          text: data.message || "Failed to subscribe",
+        });
       }
     } catch (error) {
-      setMessage({ type: 'error', text: 'An error occurred. Please try again.' });
+      setMessage({
+        type: "error",
+        text: "An error occurred. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -46,24 +69,27 @@ export function Footer() {
 
   const footerLinks = {
     company: [
-      { label: tHeader('home'), href: '/' },
-      { label: tHeader('about'), href: '/#about' },
-      { label: tHeader('projects'), href: '/projects' },
-      { label: tHeader('services'), href: '/services' },
-      { label: tHeader('blog'), href: '/journal' },
-      { label: tHeader('careers'), href: '/careers' },
-      { label: tHeader('contact'), href: '/contact' },
+      { label: tHeader("home"), href: "/" },
+      { label: tHeader("about"), href: "/#about" },
+      { label: tHeader("projects"), href: "/projects" },
+      { label: tHeader("services"), href: "/services" },
+      { label: tHeader("blog"), href: "/journal" },
+      { label: tHeader("careers"), href: "/careers" },
+      { label: tHeader("contact"), href: "/contact" },
     ],
     services: [
-      { label: tServices('interiorDesign.title'), href: '/services#services' },
-      { label: tServices('fitoutSolutions.title'), href: '/services#services' },
-      { label: tServices('manufacturingJoinery.title'), href: '/services#services' },
-      { label: tServices('mepEngineering.title'), href: '/services#services' },
+      { label: tServices("interiorDesign.title"), href: "/services#services" },
+      { label: tServices("fitoutSolutions.title"), href: "/services#services" },
+      {
+        label: tServices("manufacturingJoinery.title"),
+        href: "/services#services",
+      },
+      { label: tServices("mepEngineering.title"), href: "/services#services" },
     ],
     social: [
-      { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-      { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
-      { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+      { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+      { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+      { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
     ],
   };
 
@@ -73,7 +99,11 @@ export function Footer() {
 
       <div className="relative z-10 mx-auto max-w-[1800px]">
         {/* Animated top divider */}
-        <AnimatedLine className="mb-16" color="rgba(201,169,98,0.2)" fromCenter />
+        <AnimatedLine
+          className="mb-16"
+          color="rgba(201,169,98,0.2)"
+          fromCenter
+        />
 
         {/* Top Section */}
         <div className="mb-16 grid gap-12 lg:grid-cols-12 lg:gap-16">
@@ -86,18 +116,21 @@ export function Footer() {
                     src="/logo.svg"
                     alt="Mouhajer International Design"
                     fill
-                    className="object-contain"
+                    className="object-contain brightness-0"
                   />
                 </div>
               </HoverLift>
             </Link>
             <p className="mb-6 max-w-sm text-sm font-light leading-relaxed text-neutral-600">
-              Creating timeless, elegant spaces that reflect the unique personality
-              and lifestyle of our clients since 2009.
+              Creating timeless, elegant spaces that reflect the unique
+              personality and lifestyle of our clients since 2009.
             </p>
 
             {/* Contact Info with staggered animation */}
-            <StaggerContainer staggerDelay={0.1} className="space-y-3 text-sm font-light text-neutral-600">
+            <StaggerContainer
+              staggerDelay={0.1}
+              className="space-y-3 text-sm font-light text-neutral-600"
+            >
               <StaggerItem>
                 <a
                   href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
@@ -110,7 +143,7 @@ export function Footer() {
                     <Mail size={16} />
                   </motion.span>
                   <span className="relative">
-                    {process.env.NEXT_PUBLIC_EMAIL || 'info@mouhajerdesign.com'}
+                    {process.env.NEXT_PUBLIC_EMAIL || "info@mouhajerdesign.com"}
                     <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
                   </span>
                 </a>
@@ -127,7 +160,7 @@ export function Footer() {
                     <Phone size={16} />
                   </motion.span>
                   <span className="relative">
-                    {process.env.NEXT_PUBLIC_PHONE || '+971-4-323-4567'}
+                    {process.env.NEXT_PUBLIC_PHONE || "+971-4-323-4567"}
                     <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
                   </span>
                 </a>
@@ -144,7 +177,7 @@ export function Footer() {
           {/* Company Links */}
           <FadeIn direction="up" delay={0.1} className="lg:col-span-2">
             <h3 className="mb-6 text-sm font-light tracking-widest text-neutral-900">
-              {t('quickLinks').toUpperCase()}
+              {t("quickLinks").toUpperCase()}
             </h3>
             <StaggerContainer staggerDelay={0.05}>
               <ul className="space-y-3">
@@ -170,7 +203,7 @@ export function Footer() {
           {/* Services Links */}
           <FadeIn direction="up" delay={0.2} className="lg:col-span-2">
             <h3 className="mb-6 text-sm font-light tracking-widest text-neutral-900">
-              {t('services').toUpperCase()}
+              {t("services").toUpperCase()}
             </h3>
             <StaggerContainer staggerDelay={0.05}>
               <ul className="space-y-3">
@@ -196,15 +229,15 @@ export function Footer() {
           {/* Newsletter */}
           <FadeIn direction="up" delay={0.3} className="lg:col-span-4">
             <h3 className="mb-6 text-sm font-light tracking-widest text-neutral-900">
-              {t('newsletter.title').toUpperCase()}
+              {t("newsletter.title").toUpperCase()}
             </h3>
             <p className="mb-4 text-sm font-light text-neutral-600">
-              {t('newsletter.description')}
+              {t("newsletter.description")}
             </p>
             <form className="flex gap-2" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
-                placeholder={t('newsletter.placeholder')}
+                placeholder={t("newsletter.placeholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting}
@@ -216,21 +249,28 @@ export function Footer() {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 className="group relative overflow-hidden border border-[#c9a962] px-6 py-3 text-sm font-light tracking-wider text-[#c9a962] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  {isSubmitting ? '...' : t('newsletter.subscribe').toUpperCase()}
-                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  {isSubmitting
+                    ? "..."
+                    : t("newsletter.subscribe").toUpperCase()}
+                  <ArrowRight
+                    size={14}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </span>
                 <motion.span
                   className="absolute inset-0 bg-[#c9a962]"
-                  initial={{ x: '-100%' }}
+                  initial={{ x: "-100%" }}
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 />
                 <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 text-white opacity-0 transition-opacity group-hover:opacity-100">
-                  {isSubmitting ? '...' : t('newsletter.subscribe').toUpperCase()}
+                  {isSubmitting
+                    ? "..."
+                    : t("newsletter.subscribe").toUpperCase()}
                   <ArrowRight size={14} />
                 </span>
               </motion.button>
@@ -239,7 +279,7 @@ export function Footer() {
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`mt-3 text-sm ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}`}
+                className={`mt-3 text-sm ${message.type === "success" ? "text-green-400" : "text-red-400"}`}
               >
                 {message.text}
               </motion.p>
@@ -257,7 +297,11 @@ export function Footer() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 + index * 0.1 }}
-                  whileHover={{ y: -4, borderColor: '#c9a962', color: '#c9a962' }}
+                  whileHover={{
+                    y: -4,
+                    borderColor: "#c9a962",
+                    color: "#c9a962",
+                  }}
                   className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/30 text-neutral-600 transition-colors focus-visible:border-[#c9a962] focus-visible:text-[#c9a962] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5]"
                   aria-label={social.label}
                 >
@@ -272,16 +316,20 @@ export function Footer() {
         <AnimatedLine className="mb-8" color="rgba(201,169,98,0.2)" />
         <FadeIn direction="up" delay={0.4}>
           <div className="flex flex-col items-center justify-between gap-6 text-sm font-light text-neutral-500 lg:flex-row">
-            <div>
-              {t('copyright').replace('2025', String(currentYear))}
-            </div>
+            <div>{t("copyright").replace("2025", String(currentYear))}</div>
             <div className="flex gap-6">
-              <Link href="/privacy" className="group relative transition-colors hover:text-[#c9a962]">
-                <span>{t('privacy')}</span>
+              <Link
+                href="/privacy"
+                className="group relative transition-colors hover:text-[#c9a962]"
+              >
+                <span>{t("privacy")}</span>
                 <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
               </Link>
-              <Link href="/terms" className="group relative transition-colors hover:text-[#c9a962]">
-                <span>{t('terms')}</span>
+              <Link
+                href="/terms"
+                className="group relative transition-colors hover:text-[#c9a962]"
+              >
+                <span>{t("terms")}</span>
                 <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
               </Link>
             </div>

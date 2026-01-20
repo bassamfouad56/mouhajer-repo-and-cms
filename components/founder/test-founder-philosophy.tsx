@@ -1,49 +1,54 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
-import { SafeImage } from '@/components/safe-image';
-import { ArrowRight, BookOpen, Users, Target } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
+import { SafeImage } from "@/components/safe-image";
+import { ArrowRight, BookOpen, Users, Target } from "lucide-react";
 
 const principles = [
   {
-    id: 'discipline',
+    id: "discipline",
     icon: BookOpen,
-    title: 'London Discipline',
-    subtitle: 'The Mind',
-    description: 'European precision. Clean lines. Functional intelligence. Every design must answer "why" before "how."',
-    color: 'from-blue-500/10 to-blue-600/5',
-    accent: 'border-blue-500/30',
+    title: "London Discipline",
+    subtitle: "The Mind",
+    description:
+      'European precision. Clean lines. Functional intelligence. Every design must answer "why" before "how."',
+    color: "from-blue-500/10 to-blue-600/5",
+    accent: "border-blue-500/30",
   },
   {
-    id: 'warmth',
+    id: "warmth",
     icon: Users,
-    title: 'Arabian Warmth',
-    subtitle: 'The Heart',
-    description: 'Cultural richness. Hospitality embedded in every detail. Spaces that welcome, embrace, and elevate.',
-    color: 'from-amber-500/10 to-amber-600/5',
-    accent: 'border-amber-500/30',
+    title: "Arabian Warmth",
+    subtitle: "The Heart",
+    description:
+      "Cultural richness. Hospitality embedded in every detail. Spaces that welcome, embrace, and elevate.",
+    color: "from-amber-500/10 to-amber-600/5",
+    accent: "border-amber-500/30",
   },
   {
-    id: 'excellence',
+    id: "excellence",
     icon: Target,
-    title: 'Uncompromising Standard',
-    subtitle: 'The Result',
-    description: 'Where discipline meets warmth, excellence is born. We don\'t do "good enough." We do legendary.',
-    color: 'from-[#c9a962]/10 to-[#c9a962]/5',
-    accent: 'border-[#c9a962]/30',
+    title: "Uncompromising Standard",
+    subtitle: "The Result",
+    description:
+      'Where discipline meets warmth, excellence is born. We don\'t do "good enough." We do legendary.',
+    color: "from-[#c9a962]/10 to-[#c9a962]/5",
+    accent: "border-[#c9a962]/30",
   },
 ];
 
 const testimonials = [
   {
-    quote: "Working with MIDC isn't just hiring a contractor. It's partnering with perfectionists who care as much about your project as you do.",
+    quote:
+      "Working with MIDC isn't just hiring a contractor. It's partnering with perfectionists who care as much about your project as you do.",
     author: "Senior Executive",
     company: "ADNH - Abu Dhabi National Hotels",
   },
   {
-    quote: "Eng. Maher's attention to detail is legendary. He sees things most designers would miss, and he won't rest until it's perfect.",
+    quote:
+      "Eng. Maher's attention to detail is legendary. He sees things most designers would miss, and he won't rest until it's perfect.",
     author: "Project Director",
     company: "Emaar Properties",
   },
@@ -51,14 +56,14 @@ const testimonials = [
 
 export function TestFounderPhilosophy() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ['10%', '-10%']);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
 
   return (
     <section
@@ -72,7 +77,6 @@ export function TestFounderPhilosophy() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
-
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -95,7 +99,9 @@ export function TestFounderPhilosophy() {
           </h2>
 
           <p className="mx-auto max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
-            Eng. Maher Mouhajer doesn't choose between opposites. He harmonizes them. This is the MIDC philosophy—a design language spoken in three dialects.
+            Eng. Maher Mouhajer doesn't choose between opposites. He harmonizes
+            them. This is the MIDC philosophy—a design language spoken in three
+            dialects.
           </p>
         </motion.div>
 
@@ -115,11 +121,15 @@ export function TestFounderPhilosophy() {
                 className="group relative"
               >
                 {/* Card */}
-                <div className={`relative h-full border ${principle.accent} bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:bg-white/90 lg:p-10`}>
-
+                <div
+                  className={`relative h-full border ${principle.accent} bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:bg-white/90 lg:p-10`}
+                >
                   {/* Icon */}
                   <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#c9a962]/20 bg-[#c9a962]/10">
-                    <Icon className="h-8 w-8 text-[#c9a962]" strokeWidth={1.5} />
+                    <Icon
+                      className="h-8 w-8 text-[#c9a962]"
+                      strokeWidth={1.5}
+                    />
                   </div>
 
                   {/* Subtitle */}
@@ -149,12 +159,11 @@ export function TestFounderPhilosophy() {
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1 }}
           className="mb-32"
         >
           <div className="relative grid gap-12 overflow-hidden lg:grid-cols-2 lg:gap-16">
-
             {/* Left: Image */}
             <motion.div
               style={{ y: parallaxY }}
@@ -186,21 +195,26 @@ export function TestFounderPhilosophy() {
 
               <div className="mb-12 space-y-6 font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
                 <p>
-                  Eng. Maher Mouhajer is obsessed with one question:{' '}
-                  <span className="font-normal text-neutral-900">"Does this serve the client's life?"</span>
+                  Eng. Maher Mouhajer is obsessed with one question:{" "}
+                  <span className="font-normal text-neutral-900">
+                    "Does this serve the client's life?"
+                  </span>
                 </p>
                 <p>
-                  Not "Is it trendy?" Not "Will it photograph well?" But "Will it improve how they live, work, and feel?"
+                  Not "Is it trendy?" Not "Will it photograph well?" But "Will
+                  it improve how they live, work, and feel?"
                 </p>
                 <p className="text-neutral-500">
-                  This is why MIDC projects stand the test of time. They're designed for people, not portfolios.
+                  This is why MIDC projects stand the test of time. They're
+                  designed for people, not portfolios.
                 </p>
               </div>
 
               {/* Quote */}
               <div className="border-l-2 border-[#c9a962] pl-6">
                 <p className="mb-4 font-SchnyderS text-2xl font-light italic text-neutral-900 lg:text-3xl">
-                  "Every line, every material, every light fixture must earn its place by serving both beauty and purpose."
+                  "Every line, every material, every light fixture must earn its
+                  place by serving both beauty and purpose."
                 </p>
                 <div className="font-Satoshi text-sm font-light text-neutral-500">
                   — Eng. Maher Mouhajer
@@ -223,7 +237,8 @@ export function TestFounderPhilosophy() {
               What Clients Say
             </h3>
             <p className="mx-auto max-w-2xl font-Satoshi text-base font-light text-neutral-600">
-              The true measure of a founder's vision is what others experience when working with him.
+              The true measure of a founder's vision is what others experience
+              when working with him.
             </p>
           </div>
 
@@ -266,7 +281,8 @@ export function TestFounderPhilosophy() {
             Experience the MIDC Difference
           </h3>
           <p className="mx-auto mb-12 max-w-2xl font-Satoshi text-lg font-light text-neutral-600">
-            From international awards to the trust of the region's most prestigious brands, our work speaks for itself.
+            From international awards to the trust of the region's most
+            prestigious brands, our work speaks for itself.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-6">
@@ -275,7 +291,10 @@ export function TestFounderPhilosophy() {
               className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-[#c9a962]/90"
             >
               <span>View Our Awards</span>
-              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2" strokeWidth={1.5} />
+              <ArrowRight
+                className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2"
+                strokeWidth={1.5}
+              />
             </Link>
 
             <Link
@@ -283,11 +302,13 @@ export function TestFounderPhilosophy() {
               className="group inline-flex items-center gap-4 border border-[#c9a962]/30 bg-white/60 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-900 backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-white/80"
             >
               <span>Explore Our Work</span>
-              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2" strokeWidth={1.5} />
+              <ArrowRight
+                className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2"
+                strokeWidth={1.5}
+              />
             </Link>
           </div>
         </motion.div>
-
       </div>
     </section>
   );

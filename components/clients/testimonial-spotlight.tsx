@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { Quote, ChevronLeft, ChevronRight, Star, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import { urlForImage } from '@/sanity/lib/image';
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import {
+  Quote,
+  ChevronLeft,
+  ChevronRight,
+  Star,
+  ArrowRight,
+} from "lucide-react";
+import Link from "next/link";
+import { urlForImage } from "@/sanity/lib/image";
 
 interface SanityTestimonial {
   _id: string;
@@ -37,31 +43,31 @@ const defaultTestimonials = [
   {
     id: 1,
     quote:
-      'One of the standout qualities of MIDC is their dedication to meeting project timelines without compromising quality. Their clear communication and attention to detail helped keep projects on track, even when handling complex requirements.',
-    author: 'Ghaleb Al Najjar',
-    position: 'Consultant – Projects and Infrastructure',
-    company: 'Abu Dhabi National Hotels',
-    image: '',
+      "One of the standout qualities of MIDC is their dedication to meeting project timelines without compromising quality. Their clear communication and attention to detail helped keep projects on track, even when handling complex requirements.",
+    author: "Ghaleb Al Najjar",
+    position: "Consultant – Projects and Infrastructure",
+    company: "Abu Dhabi National Hotels",
+    image: "",
     rating: 5,
   },
   {
     id: 2,
     quote:
-      'MIDC has consistently demonstrated exceptional skill, professionalism, and a strong commitment to delivering high-quality outcomes. Their work on Hyatt Hotels Dubai surpassed our expectations.',
-    author: 'Sayed Mohammed Al Sayed',
-    position: 'Director of Area Procurement',
-    company: 'Grand Hyatt Hotels Dubai',
-    image: '',
+      "MIDC has consistently demonstrated exceptional skill, professionalism, and a strong commitment to delivering high-quality outcomes. Their work on Hyatt Hotels Dubai surpassed our expectations.",
+    author: "Sayed Mohammed Al Sayed",
+    position: "Director of Area Procurement",
+    company: "Grand Hyatt Hotels Dubai",
+    image: "",
     rating: 5,
   },
   {
     id: 3,
     quote:
-      'I did not want a house that felt like a hotel. I wanted a home that felt like art. Eng. Maher took my vague ideas and translated them into a reality that was sharper and more elegant than I could have imagined.',
-    author: 'Private Client',
-    position: 'Villa Owner',
-    company: 'Confidential',
-    image: '',
+      "I did not want a house that felt like a hotel. I wanted a home that felt like art. Eng. Maher took my vague ideas and translated them into a reality that was sharper and more elegant than I could have imagined.",
+    author: "Private Client",
+    position: "Villa Owner",
+    company: "Confidential",
+    image: "",
     rating: 5,
   },
 ];
@@ -72,27 +78,35 @@ export function TestimonialSpotlight({
   // Transform Sanity testimonials or use defaults
   // Sanity returns: name, role, image (not author, position, avatar)
   // Handle null/undefined safely (default value only works for undefined, not null)
-  const safeTestimonials = Array.isArray(sanityTestimonials) ? sanityTestimonials : [];
+  const safeTestimonials = Array.isArray(sanityTestimonials)
+    ? sanityTestimonials
+    : [];
 
   const testimonials =
     safeTestimonials.length > 0
       ? safeTestimonials.map((t, idx) => ({
           id: idx + 1,
-          quote: t.quote || '',
-          author: t.isConfidential ? 'Private Client' : (t.name || t.author || 'Anonymous'),
-          position: t.role || t.position || '',
+          quote: t.quote || "",
+          author: t.isConfidential
+            ? "Private Client"
+            : t.name || t.author || "Anonymous",
+          position: t.role || t.position || "",
           company: t.isConfidential
-            ? 'Confidential'
-            : t.company || t.client?.name || '',
-          image: (t.image || t.avatar)
-            ? urlForImage(t.image || t.avatar)?.width(200).height(200).url() || ''
-            : '',
+            ? "Confidential"
+            : t.company || t.client?.name || "",
+          image:
+            t.image || t.avatar
+              ? urlForImage(t.image || t.avatar)
+                  ?.width(200)
+                  .height(200)
+                  .url() || ""
+              : "",
           rating: t.rating || 5,
         }))
       : defaultTestimonials;
 
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeIndex, setActiveIndex] = useState(0);
 
   const nextTestimonial = () => {
@@ -100,7 +114,9 @@ export function TestimonialSpotlight({
   };
 
   const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setActiveIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
   };
 
   const activeTestimonial = testimonials[activeIndex];
@@ -163,12 +179,14 @@ export function TestimonialSpotlight({
 
               {/* Rating */}
               <div className="mb-6 flex gap-1 pt-4">
-                {Array.from({ length: activeTestimonial.rating }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-4 w-4 fill-[#c9a962] text-[#c9a962]"
-                  />
-                ))}
+                {Array.from({ length: activeTestimonial.rating }).map(
+                  (_, i) => (
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-[#c9a962] text-[#c9a962]"
+                    />
+                  )
+                )}
               </div>
 
               {/* Quote Text */}
@@ -183,7 +201,7 @@ export function TestimonialSpotlight({
                 {/* Avatar placeholder */}
                 <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10">
                   <span className="font-SchnyderS text-xl text-[#c9a962]">
-                    {activeTestimonial.author?.charAt(0) || 'A'}
+                    {activeTestimonial.author?.charAt(0) || "A"}
                   </span>
                 </div>
 
@@ -196,7 +214,7 @@ export function TestimonialSpotlight({
                     {activeTestimonial.position}
                     {activeTestimonial.company && (
                       <span className="text-[#c9a962]">
-                        {' '}
+                        {" "}
                         — {activeTestimonial.company}
                       </span>
                     )}
@@ -224,8 +242,8 @@ export function TestimonialSpotlight({
                   onClick={() => setActiveIndex(index)}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index === activeIndex
-                      ? 'w-8 bg-[#c9a962]'
-                      : 'w-2 bg-white/20 hover:bg-white/40'
+                      ? "w-8 bg-[#c9a962]"
+                      : "w-2 bg-white/20 hover:bg-white/40"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />

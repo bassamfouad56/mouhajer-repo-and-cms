@@ -33,18 +33,21 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
 
   const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
 
-  const handleAnswer = useCallback((questionId: string, optionId: string) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: optionId }));
+  const handleAnswer = useCallback(
+    (questionId: string, optionId: string) => {
+      setAnswers((prev) => ({ ...prev, [questionId]: optionId }));
 
-    // Auto-advance after short delay
-    setTimeout(() => {
-      if (currentQuestion < quizQuestions.length - 1) {
-        setCurrentQuestion((prev) => prev + 1);
-      } else {
-        setStep("email");
-      }
-    }, 300);
-  }, [currentQuestion]);
+      // Auto-advance after short delay
+      setTimeout(() => {
+        if (currentQuestion < quizQuestions.length - 1) {
+          setCurrentQuestion((prev) => prev + 1);
+        } else {
+          setStep("email");
+        }
+      }, 300);
+    },
+    [currentQuestion]
+  );
 
   const handleBack = () => {
     if (currentQuestion > 0) {
@@ -127,7 +130,8 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
 
             <p className="mb-8 text-neutral-600">
               Answer 6 simple questions to uncover your unique interior design
-              aesthetic. Get personalized recommendations from our award-winning team.
+              aesthetic. Get personalized recommendations from our award-winning
+              team.
             </p>
 
             <div className="mb-8 flex items-center justify-center gap-6 text-sm text-neutral-500">
@@ -270,9 +274,7 @@ export function StyleQuiz({ onComplete }: StyleQuizProps) {
                     disabled={isSubmitting}
                   />
                 </div>
-                {error && (
-                  <p className="mt-2 text-sm text-red-500">{error}</p>
-                )}
+                {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
               </div>
 
               <button

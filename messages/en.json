@@ -172,20 +172,20 @@
     "items": {
       "hospitality": {
         "title": "Luxury Hospitality",
-        "subtitle": "The Partner of Choice for 5-Star Brands",
-        "description": "We understand the delicate balance of hospitality renovation, upgrading operating assets without disrupting the guest experience. From grand lobbies to royal suites, we deliver high-spec interiors.",
+        "subtitle": "The Partner of Choice for 5-Star Brands.",
+        "description": "We understand the delicate balance of hospitality renovation, upgrading operating assets, without disrupting the guest experience. From grand lobbies to royal suites, we deliver high-spec interiors and robust MEP systems for the region's most iconic hotels.",
         "features": ["Live Environment Renovations", "5-Star Interior Fit-Out", "MEP Systems Integration"]
       },
       "residential": {
         "title": "High-End Residential",
-        "subtitle": "Creating Private Sanctuaries",
-        "description": "For over 25 years, MIDC has been the secret behind Dubai's most exclusive private addresses. We handle the complete lifecycle of luxury villas and penthouses.",
+        "subtitle": "Creating Private Sanctuaries.",
+        "description": "For over 25 years, MIDC has been the secret behind some of Dubai's most exclusive private addresses. We handle the complete lifecycle of luxury villas and penthouses, offering absolute discretion and bespoke manufacturing for joinery and stone works.",
         "features": ["Turnkey Villa Construction", "Bespoke Joinery", "Complete Privacy"]
       },
       "commercial": {
         "title": "Commercial & Corporate",
-        "subtitle": "Defining Business Environments",
-        "description": "We build spaces that empower business. Our design-build approach ensures functional, branded environments delivered on tight timelines.",
+        "subtitle": "Defining Business Environments.",
+        "description": "We build spaces that empower business. Whether it is a high-traffic F&B outlet or a corporate headquarters, our design-build approach ensures functional, branded environments delivered on tight timelines.",
         "features": ["Corporate Headquarters", "Retail & F&B Fit-Out", "Fast-Track Delivery"]
       }
     }
@@ -250,8 +250,7 @@
       "commercial": "Commercial",
       "hospitality": "Hospitality",
       "institutional": "Institutional",
-      "retail": "Retail",
-      "healthcare": "Healthcare"
+      "retail": "Retail"
     }
   },
   "Industries": {
@@ -301,17 +300,6 @@
         "Creative product display",
         "Specialized commercial lighting",
         "Distinctive customer experience"
-      ]
-    },
-    "healthcare": {
-      "title": "Healthcare",
-      "subtitle": "Clinics, Hospitals & Health Centers",
-      "description": "We design healthcare facilities that combine functionality, comfort, and compliance with medical standards.",
-      "features": [
-        "Clinics and medical centers",
-        "Operating rooms and laboratories",
-        "Comfortable waiting areas",
-        "Calm therapeutic environment"
       ]
     }
   },

@@ -74,27 +74,172 @@ export const projectBySlugQuery = groq`
     slug,
     "excerpt": coalesce(excerpt, description),
     "mainImage": coalesce(mainImage, featuredImage),
-    gallery,
+    gallery[] {
+      _key,
+      asset,
+      alt,
+      caption,
+      category
+    },
     category,
-    location,
     "year": coalesce(year, yearCompleted),
     area,
     client,
+    status,
+    featured,
+    duration,
+    budget,
+    units,
+    challenge,
+    approach,
+    scope,
+    outcome,
+    testimonial,
+    videoUrl,
     content,
     publishedAt,
     seo,
     __i18n_lang,
-    "services": services[]-> {
+    // Taxonomy references
+    "sector": sector->{
       _id,
       title,
       slug,
+      icon
+    },
+    "projectType": projectType->{
+      _id,
+      title,
+      slug
+    },
+    "location": location->{
+      _id,
+      name,
+      slug,
+      type
+    },
+    "services": services[]->{
+      _id,
+      title,
+      slug,
+      icon,
       __i18n_lang
     },
-    "industries": industries[]-> {
+    "tags": tags[]->{
+      _id,
+      name,
+      slug,
+      category,
+      icon
+    },
+    "industries": industries[]->{
       _id,
       title,
       slug,
       __i18n_lang
+    }
+  }
+`
+
+// Featured Project Query - includes all fields needed for featured template
+export const featuredProjectBySlugQuery = groq`
+  *[_type == "project" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
+    _id,
+    title,
+    slug,
+    "excerpt": coalesce(excerpt, description),
+    "mainImage": coalesce(mainImage, featuredImage),
+    gallery[] {
+      _key,
+      asset,
+      alt,
+      caption,
+      category
+    },
+    videoUrl,
+    featured,
+    status,
+    "year": coalesce(year, yearCompleted),
+    area,
+    client,
+    duration,
+    budget,
+    units,
+    challenge,
+    approach,
+    scope,
+    outcome,
+    testimonial,
+    content,
+    publishedAt,
+    seo,
+    __i18n_lang,
+    // Featured content fields
+    featuredContent {
+      heroVideo,
+      visionStatement,
+      highlightStats[] {
+        value,
+        label,
+        suffix
+      },
+      transformationTitle
+    },
+    // Taxonomy references
+    "sector": sector->{
+      _id,
+      title,
+      slug,
+      icon
+    },
+    "projectType": projectType->{
+      _id,
+      title,
+      slug
+    },
+    "location": location->{
+      _id,
+      name,
+      slug,
+      type,
+      "parent": parent->{
+        _id,
+        name,
+        slug
+      }
+    },
+    "services": services[]->{
+      _id,
+      title,
+      slug,
+      icon
+    },
+    "tags": tags[]->{
+      _id,
+      name,
+      slug,
+      category,
+      icon
+    },
+    "clientRef": clientRef->{
+      _id,
+      name,
+      logo
+    },
+    // Related featured projects for navigation
+    "relatedFeaturedProjects": *[_type == "project" && featured == true && slug.current != $slug] | order(publishedAt desc)[0...4] {
+      _id,
+      title,
+      slug,
+      "mainImage": coalesce(mainImage, featuredImage),
+      "sector": sector->{ title, slug }
+    },
+    // All featured projects for prev/next navigation
+    "allFeaturedProjects": *[_type == "project" && featured == true] | order(publishedAt desc) {
+      _id,
+      slug,
+      title,
+      "mainImage": coalesce(mainImage, featuredImage)
     }
   }
 `
@@ -157,9 +302,26 @@ export const serviceBySlugQuery = groq`
       title,
       slug,
       "mainImage": coalesce(mainImage, featuredImage),
+      gallery,
       category,
       location,
       __i18n_lang
+    },
+    // Auto-fetch projects that reference this service
+    "linkedProjects": *[_type == "project" && references(^._id)] | order(featured desc, publishedAt desc)[0...8] {
+      _id,
+      title,
+      slug,
+      "mainImage": coalesce(mainImage, featuredImage),
+      gallery
+    },
+    // Fallback: featured projects if no linked projects
+    "featuredProjects": *[_type == "project" && featured == true] | order(publishedAt desc)[0...8] {
+      _id,
+      title,
+      slug,
+      "mainImage": coalesce(mainImage, featuredImage),
+      gallery
     }
   }
 `
@@ -254,11 +416,18 @@ export const postBySlugQuery = groq`
     slug,
     "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
     mainImage,
+    gallery[] {
+      _key,
+      asset,
+      alt,
+      caption
+    },
     category,
     "author": {
       "name": author.name,
       "role": coalesce(author.role[$locale], author.role.en, author.role),
-      "image": author.image
+      "image": author.image,
+      "bio": author.bio
     },
     content,
     readTime,
@@ -268,6 +437,8 @@ export const postBySlugQuery = groq`
       slug
     },
     publishedAt,
+    viewCount,
+    reactions,
     "seo": {
       "metaTitle": coalesce(seo.metaTitle[$locale], seo.metaTitle.en, seo.metaTitle),
       "metaDescription": coalesce(seo.metaDescription[$locale], seo.metaDescription.en, seo.metaDescription),
@@ -534,7 +705,13 @@ export const projectWithTaxonomyQuery = groq`
     slug,
     excerpt,
     mainImage,
-    gallery,
+    gallery[] {
+      _key,
+      asset,
+      alt,
+      caption,
+      category
+    },
     year,
     area,
     status,
@@ -552,6 +729,17 @@ export const projectWithTaxonomyQuery = groq`
     content,
     videoUrl,
     seo,
+    // Featured content fields
+    featuredContent {
+      heroVideo,
+      visionStatement,
+      highlightStats[] {
+        value,
+        label,
+        suffix
+      },
+      transformationTitle
+    },
     "sector": sector->{
       _id,
       title,
@@ -954,7 +1142,18 @@ export const megaMenuImagesQuery = groq`
     _id,
     title,
     slug,
-    mainImage
+    // Use industry mainImage, or fallback to a matching project image based on slug
+    "mainImage": coalesce(
+      mainImage,
+      // Fallback: get image from a project that matches the industry category
+      select(
+        slug.current == "luxury-hospitality" => *[_type == "project" && category == "hospitality"][0].mainImage,
+        slug.current == "high-end-residential" => *[_type == "project" && category == "residential"][0].mainImage,
+        slug.current == "commercial-corporate" => *[_type == "project" && category == "commercial"][0].mainImage,
+        // Default fallback: any featured project
+        *[_type == "project" && featured == true][0].mainImage
+      )
+    )
   },
   "posts": {
     "designTrends": *[_type == "post" && category == "design-trends"][0] {
@@ -982,3 +1181,237 @@ export const megaMenuImagesQuery = groq`
     }
   }
 }`
+
+// ============================================
+// HOMEPAGE QUERY
+// ============================================
+
+export const homepageQuery = groq`
+  *[_type == "homepage"][0] {
+    _id,
+    sections[] {
+      _type,
+      _key,
+      enabled,
+
+      // Hero Section
+      _type == "heroSection" => {
+        "headline": headline[$locale],
+        "subheadline": subheadline[$locale],
+        videoUrl,
+        fallbackImage,
+        "primaryCta": {
+          "text": primaryCta.text[$locale],
+          "link": primaryCta.link
+        },
+        "secondaryCta": {
+          "text": secondaryCta.text[$locale],
+          "link": secondaryCta.link
+        },
+        showAwardBadge,
+        showScrollIndicator
+      },
+
+      // Unified Showcase Section
+      _type == "showcaseSection" => {
+        backgroundImage,
+        "clientTypes": clientTypes[] {
+          "title": title[$locale],
+          "subtitle": subtitle[$locale],
+          "stat": {
+            "value": stat.value,
+            "label": stat.label[$locale]
+          },
+          link
+        },
+        "panels": panels[] {
+          number,
+          "title": title[$locale],
+          "subtitle": subtitle[$locale],
+          "services": services[][$locale],
+          image,
+          link
+        }
+      },
+
+      // Stats Section
+      _type == "statsSection" => {
+        "stats": stats[] {
+          value,
+          suffix,
+          "label": label[$locale]
+        },
+        backgroundImages
+      },
+
+      // Logo Marquee Section
+      _type == "logoMarqueeSection" => {
+        "sectionTitle": sectionTitle[$locale],
+        displayMode,
+        "clients": select(
+          displayMode == "manual" => selectedClients[]-> {
+            _id,
+            name,
+            logo,
+            category
+          },
+          displayMode == "auto" => *[_type == "client" && featured == true] | order(order asc) {
+            _id,
+            name,
+            logo,
+            category
+          }
+        ),
+        animationSpeed
+      },
+
+      // Founder Section
+      _type == "founderSection" => {
+        "sectionTitle": sectionTitle[$locale],
+        founderName,
+        "founderTitle": founderTitle[$locale],
+        founderImage,
+        "quote": quote[$locale],
+        "message": message[$locale],
+        "ctaText": ctaText[$locale],
+        ctaLink
+      },
+
+      // Capabilities Section
+      _type == "capabilitiesSection" => {
+        "sectionTitle": sectionTitle[$locale],
+        "capabilities": capabilities[] {
+          "title": title[$locale],
+          "subtitle": subtitle[$locale],
+          "description": description[$locale],
+          image,
+          link
+        },
+        "ctaText": ctaText[$locale],
+        ctaLink
+      },
+
+      // Portfolio Section
+      _type == "portfolioSection" => {
+        "sectionTitle": sectionTitle[$locale],
+        "sectionSubtitle": sectionSubtitle[$locale],
+        displayMode,
+        maxProjects,
+        "projects": select(
+          displayMode == "manual" => featuredProjects[]-> {
+            _id,
+            title,
+            slug,
+            "excerpt": coalesce(excerpt, description),
+            "mainImage": coalesce(mainImage, featuredImage),
+            category,
+            "location": location->{name, slug},
+            "year": coalesce(year, yearCompleted)
+          },
+          displayMode == "auto" => *[_type == "project" && featured == true] | order(publishedAt desc)[0..^.maxProjects] {
+            _id,
+            title,
+            slug,
+            "excerpt": coalesce(excerpt, description),
+            "mainImage": coalesce(mainImage, featuredImage),
+            category,
+            "location": location->{name, slug},
+            "year": coalesce(year, yearCompleted)
+          }
+        ),
+        "ctaText": ctaText[$locale],
+        ctaLink
+      },
+
+      // Industries Section
+      _type == "industriesSection" => {
+        "sectionTitle": sectionTitle[$locale],
+        displayMode,
+        "industries": select(
+          displayMode == "manual" => featuredIndustries[]-> {
+            _id,
+            "title": coalesce(title[$locale], title.en, title),
+            slug,
+            "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
+            mainImage,
+            icon
+          },
+          displayMode == "auto" => *[_type == "industry" && featured == true] | order(order asc) {
+            _id,
+            "title": coalesce(title[$locale], title.en, title),
+            slug,
+            "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
+            mainImage,
+            icon
+          }
+        ),
+        "ctaText": ctaText[$locale],
+        ctaLink
+      },
+
+      // Partners & Testimonials Section
+      _type == "partnersSection" => {
+        "sectionTitle": sectionTitle[$locale],
+        showPartners,
+        showTestimonials,
+        "testimonials": featuredTestimonials[]-> {
+          _id,
+          name,
+          "role": coalesce(role[$locale], role.en, role),
+          "company": coalesce(company[$locale], company.en, company),
+          image,
+          "quote": coalesce(quote[$locale], quote.en, quote),
+          rating
+        }
+      },
+
+      // Certifications Section
+      _type == "certificationsSection" => {
+        "sectionTitle": sectionTitle[$locale],
+        "certifications": certifications[] {
+          name,
+          code,
+          "description": description[$locale],
+          icon
+        },
+        "awards": awards[] {
+          "title": title[$locale],
+          year,
+          organization,
+          certificate,
+          downloadUrl,
+          externalUrl
+        }
+      },
+
+      // FAQ Section
+      _type == "faqSection" => {
+        "sectionTitle": sectionTitle[$locale],
+        "sectionSubtitle": sectionSubtitle[$locale],
+        "faqs": faqs[] {
+          "question": question[$locale],
+          "answer": answer[$locale]
+        }
+      },
+
+      // Contact Section
+      _type == "contactSection" => {
+        "sectionTitle": sectionTitle[$locale],
+        "sectionSubtitle": sectionSubtitle[$locale],
+        backgroundImage,
+        theme,
+        "contactInfo": {
+          "email": contactInfo.email,
+          "phone": contactInfo.phone,
+          "address": contactInfo.address[$locale],
+          "hours": contactInfo.hours
+        }
+      }
+    },
+    "seo": {
+      "metaTitle": seo.metaTitle[$locale],
+      "metaDescription": seo.metaDescription[$locale],
+      "ogImage": seo.ogImage
+    }
+  }
+`

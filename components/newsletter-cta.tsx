@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, ArrowRight, CheckCircle2, Loader2, Sparkles } from "lucide-react";
+import {
+  Mail,
+  ArrowRight,
+  CheckCircle2,
+  Loader2,
+  Sparkles,
+} from "lucide-react";
 
 interface NewsletterCTAProps {
   variant?: "inline" | "card" | "banner";
@@ -109,7 +115,9 @@ export function NewsletterCTA({
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-light text-white md:text-2xl">{title}</h3>
+              <h3 className="text-xl font-light text-white md:text-2xl">
+                {title}
+              </h3>
               <p className="mt-1 text-sm text-neutral-400">{subtitle}</p>
             </div>
 
@@ -123,7 +131,10 @@ export function NewsletterCTA({
                 <span className="font-medium">You&apos;re subscribed!</span>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex w-full max-w-md gap-2">
+              <form
+                onSubmit={handleSubmit}
+                className="flex w-full max-w-md gap-2"
+              >
                 <div className="relative flex-1">
                   <input
                     type="email"
@@ -134,13 +145,15 @@ export function NewsletterCTA({
                     disabled={isSubmitting}
                   />
                   {error && (
-                    <p className="absolute -bottom-5 left-0 text-xs text-red-400">{error}</p>
+                    <p className="absolute -bottom-5 left-0 text-xs text-red-400">
+                      {error}
+                    </p>
                   )}
                 </div>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-2 rounded-lg bg-[#c9a962] px-6 py-3 text-sm font-medium text-black transition-all hover:bg-[#c4a030] disabled:opacity-50"
+                  className="flex items-center gap-2 border border-white bg-white px-6 py-3 font-Satoshi text-xs font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-white disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -175,7 +188,9 @@ export function NewsletterCTA({
         {/* Icon */}
         <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#c9a962]/10 px-3 py-1.5">
           <Sparkles className="h-4 w-4 text-[#c9a962]" />
-          <span className="text-xs font-medium text-[#c9a962]">Exclusive Access</span>
+          <span className="text-xs font-medium text-[#c9a962]">
+            Exclusive Access
+          </span>
         </div>
 
         {/* Content */}
@@ -192,7 +207,9 @@ export function NewsletterCTA({
             <CheckCircle2 className="h-6 w-6 text-green-400" />
             <div>
               <p className="font-medium text-white">Welcome to the club!</p>
-              <p className="text-sm text-neutral-400">Check your inbox for a welcome gift.</p>
+              <p className="text-sm text-neutral-400">
+                Check your inbox for a welcome gift.
+              </p>
             </div>
           </motion.div>
         ) : (
@@ -213,7 +230,7 @@ export function NewsletterCTA({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#c9a962] py-3.5 font-medium text-black transition-all hover:bg-[#c4a030] disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-2 border border-white bg-white py-3.5 font-Satoshi text-xs font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-white disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>

@@ -49,7 +49,12 @@ interface Message {
 }
 
 // Interior design upload flow states
-type DesignFlowStep = "idle" | "collecting_email" | "awaiting_upload" | "processing" | "completed";
+type DesignFlowStep =
+  | "idle"
+  | "collecting_email"
+  | "awaiting_upload"
+  | "processing"
+  | "completed";
 
 // Contact information
 const PHONE = "971523041482";
@@ -124,15 +129,59 @@ const chatbotResponses: { [key: string]: string } = {
 
 // Off-topic keywords that should trigger the outOfScope response
 const offTopicKeywords = [
-  "report", "analysis", "seo", "marketing", "website performance", "traffic",
-  "analytics", "bounce rate", "conversion", "google", "facebook", "instagram",
-  "social media strategy", "content strategy", "keywords", "ranking",
-  "stock", "crypto", "bitcoin", "investment", "finance", "loan", "mortgage",
-  "legal", "lawyer", "court", "lawsuit", "insurance", "medical", "doctor",
-  "recipe", "cooking", "movie", "music", "game", "sports", "news",
-  "politics", "election", "weather", "travel booking", "flight", "hotel booking",
-  "code", "programming", "javascript", "python", "software development",
-  "write me", "generate", "create a document", "write an essay", "write a report",
+  "report",
+  "analysis",
+  "seo",
+  "marketing",
+  "website performance",
+  "traffic",
+  "analytics",
+  "bounce rate",
+  "conversion",
+  "google",
+  "facebook",
+  "instagram",
+  "social media strategy",
+  "content strategy",
+  "keywords",
+  "ranking",
+  "stock",
+  "crypto",
+  "bitcoin",
+  "investment",
+  "finance",
+  "loan",
+  "mortgage",
+  "legal",
+  "lawyer",
+  "court",
+  "lawsuit",
+  "insurance",
+  "medical",
+  "doctor",
+  "recipe",
+  "cooking",
+  "movie",
+  "music",
+  "game",
+  "sports",
+  "news",
+  "politics",
+  "election",
+  "weather",
+  "travel booking",
+  "flight",
+  "hotel booking",
+  "code",
+  "programming",
+  "javascript",
+  "python",
+  "software development",
+  "write me",
+  "generate",
+  "create a document",
+  "write an essay",
+  "write a report",
 ];
 
 // Quick action buttons
@@ -148,38 +197,86 @@ const getSuggestions = (lastMessage: string): string[] => {
   const lower = lastMessage.toLowerCase();
 
   // After greeting
-  if (lower.includes("welcome") || lower.includes("hello") || lower.includes("help you")) {
-    return ["Tell me about your services", "Who is the founder?", "View your awards"];
+  if (
+    lower.includes("welcome") ||
+    lower.includes("hello") ||
+    lower.includes("help you")
+  ) {
+    return [
+      "Tell me about your services",
+      "Who is the founder?",
+      "View your awards",
+    ];
   }
 
   // After services info
-  if (lower.includes("service") || lower.includes("pillar") || lower.includes("offer")) {
-    return ["View your projects", "How much does it cost?", "Book a consultation"];
+  if (
+    lower.includes("service") ||
+    lower.includes("pillar") ||
+    lower.includes("offer")
+  ) {
+    return [
+      "View your projects",
+      "How much does it cost?",
+      "Book a consultation",
+    ];
   }
 
   // After project info
-  if (lower.includes("project") || lower.includes("portfolio") || lower.includes("partner")) {
-    return ["Tell me about your awards", "Book a consultation", "What's your process?"];
+  if (
+    lower.includes("project") ||
+    lower.includes("portfolio") ||
+    lower.includes("partner")
+  ) {
+    return [
+      "Tell me about your awards",
+      "Book a consultation",
+      "What's your process?",
+    ];
   }
 
   // After founder/about info
-  if (lower.includes("maher") || lower.includes("founder") || lower.includes("years")) {
+  if (
+    lower.includes("maher") ||
+    lower.includes("founder") ||
+    lower.includes("years")
+  ) {
     return ["View your services", "What awards have you won?", "Contact info"];
   }
 
   // After awards info
-  if (lower.includes("award") || lower.includes("iso") || lower.includes("certified")) {
+  if (
+    lower.includes("award") ||
+    lower.includes("iso") ||
+    lower.includes("certified")
+  ) {
     return ["View your projects", "Book a consultation", "Contact us"];
   }
 
   // After pricing discussion
-  if (lower.includes("price") || lower.includes("cost") || lower.includes("scope")) {
-    return ["Book a consultation", "Contact via WhatsApp", "View past projects"];
+  if (
+    lower.includes("price") ||
+    lower.includes("cost") ||
+    lower.includes("scope")
+  ) {
+    return [
+      "Book a consultation",
+      "Contact via WhatsApp",
+      "View past projects",
+    ];
   }
 
   // After consultation offer
-  if (lower.includes("consult") || lower.includes("meeting") || lower.includes("schedule")) {
-    return ["What services do you offer?", "Tell me about the founder", "View your portfolio"];
+  if (
+    lower.includes("consult") ||
+    lower.includes("meeting") ||
+    lower.includes("schedule")
+  ) {
+    return [
+      "What services do you offer?",
+      "Tell me about the founder",
+      "View your portfolio",
+    ];
   }
 
   // Default suggestions
@@ -280,7 +377,8 @@ export function AIChatbot() {
   // Check if user has scrolled up
   const handleScroll = () => {
     if (messagesContainerRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = messagesContainerRef.current;
+      const { scrollTop, scrollHeight, clientHeight } =
+        messagesContainerRef.current;
       setShowScrollButton(scrollHeight - scrollTop - clientHeight > 100);
     }
   };
@@ -312,7 +410,11 @@ export function AIChatbot() {
     }
   }, [isOpen, messages.length]);
 
-  const addMessage = (role: "user" | "assistant", content: string, error = false) => {
+  const addMessage = (
+    role: "user" | "assistant",
+    content: string,
+    error = false
+  ) => {
     const newMessage: Message = {
       id: nanoid(),
       role,
@@ -333,57 +435,124 @@ export function AIChatbot() {
     }
 
     // Greeting
-    if (["hello", "hi", "hey", "good morning", "good evening"].some((g) => lowerMessage.includes(g))) {
+    if (
+      ["hello", "hi", "hey", "good morning", "good evening"].some((g) =>
+        lowerMessage.includes(g)
+      )
+    ) {
       return chatbotResponses.greeting;
     }
 
     // Founder/CEO questions - IMPORTANT: Must come before general "who" questions
-    if (["founder", "ceo", "owner", "maher", "who started", "who founded", "who is the"].some((f) => lowerMessage.includes(f))) {
+    if (
+      [
+        "founder",
+        "ceo",
+        "owner",
+        "maher",
+        "who started",
+        "who founded",
+        "who is the",
+      ].some((f) => lowerMessage.includes(f))
+    ) {
       return chatbotResponses.founder;
     }
 
     // Awards and certifications
-    if (["award", "certificate", "iso", "recognition", "achievement", "accredit"].some((a) => lowerMessage.includes(a))) {
+    if (
+      [
+        "award",
+        "certificate",
+        "iso",
+        "recognition",
+        "achievement",
+        "accredit",
+      ].some((a) => lowerMessage.includes(a))
+    ) {
       return chatbotResponses.awards;
     }
 
     // About the company
-    if (["about", "company", "history", "background", "midc", "mouhajer"].some((a) => lowerMessage.includes(a))) {
+    if (
+      ["about", "company", "history", "background", "midc", "mouhajer"].some(
+        (a) => lowerMessage.includes(a)
+      )
+    ) {
       return chatbotResponses.about;
     }
 
     // Services
-    if (["service", "offer", "do you", "what can", "provide", "specialize"].some((s) => lowerMessage.includes(s))) {
+    if (
+      ["service", "offer", "do you", "what can", "provide", "specialize"].some(
+        (s) => lowerMessage.includes(s)
+      )
+    ) {
       return chatbotResponses.services;
     }
 
     // Projects
-    if (["project", "portfolio", "work", "example", "client", "partner"].some((p) => lowerMessage.includes(p))) {
+    if (
+      ["project", "portfolio", "work", "example", "client", "partner"].some(
+        (p) => lowerMessage.includes(p)
+      )
+    ) {
       return chatbotResponses.projects;
     }
 
     // Consultation
-    if (["consult", "meeting", "appointment", "book", "schedule"].some((c) => lowerMessage.includes(c))) {
+    if (
+      ["consult", "meeting", "appointment", "book", "schedule"].some((c) =>
+        lowerMessage.includes(c)
+      )
+    ) {
       return chatbotResponses.consultation;
     }
 
     // Pricing
-    if (["price", "cost", "fee", "budget", "quote", "how much", "expensive"].some((p) => lowerMessage.includes(p))) {
+    if (
+      ["price", "cost", "fee", "budget", "quote", "how much", "expensive"].some(
+        (p) => lowerMessage.includes(p)
+      )
+    ) {
       return chatbotResponses.pricing;
     }
 
     // Timeline
-    if (["timeline", "how long", "duration", "when", "time", "delivery"].some((t) => lowerMessage.includes(t))) {
+    if (
+      ["timeline", "how long", "duration", "when", "time", "delivery"].some(
+        (t) => lowerMessage.includes(t)
+      )
+    ) {
       return chatbotResponses.timeline;
     }
 
     // Contact
-    if (["contact", "reach", "phone", "email", "whatsapp", "call", "address", "location"].some((c) => lowerMessage.includes(c))) {
+    if (
+      [
+        "contact",
+        "reach",
+        "phone",
+        "email",
+        "whatsapp",
+        "call",
+        "address",
+        "location",
+      ].some((c) => lowerMessage.includes(c))
+    ) {
       return chatbotResponses.contact;
     }
 
     // Beneficial/value questions
-    if (["benefit", "help me", "why should", "what makes", "different", "advantage"].some((b) => lowerMessage.includes(b))) {
+    if (
+      [
+        "benefit",
+        "help me",
+        "why should",
+        "what makes",
+        "different",
+        "advantage",
+      ].some((b) => lowerMessage.includes(b))
+    ) {
       return chatbotResponses.about;
     }
 
@@ -425,7 +594,11 @@ export function AIChatbot() {
       addMessage("assistant", response);
     } catch (error) {
       console.error("[Chatbot] Error:", error);
-      addMessage("assistant", "Sorry, I encountered an error. Please try again.", true);
+      addMessage(
+        "assistant",
+        "Sorry, I encountered an error. Please try again.",
+        true
+      );
       setRetryMessage(message);
     } finally {
       setIsTyping(false);
@@ -487,13 +660,19 @@ export function AIChatbot() {
 
     // Validate file type
     if (!file.type.startsWith("image/")) {
-      addMessage("assistant", "Please upload a valid image file (JPG, PNG, etc.)");
+      addMessage(
+        "assistant",
+        "Please upload a valid image file (JPG, PNG, etc.)"
+      );
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      addMessage("assistant", "Image must be less than 10MB. Please choose a smaller file.");
+      addMessage(
+        "assistant",
+        "Image must be less than 10MB. Please choose a smaller file."
+      );
       return;
     }
 
@@ -528,7 +707,10 @@ export function AIChatbot() {
       const formData = new FormData();
       formData.append("email", userEmail);
       formData.append("image", file);
-      formData.append("prompt", "Redesign this interior space with a modern luxury aesthetic, incorporating elegant materials, sophisticated lighting, and premium finishes while maintaining the room's functional layout");
+      formData.append(
+        "prompt",
+        "Redesign this interior space with a modern luxury aesthetic, incorporating elegant materials, sophisticated lighting, and premium finishes while maintaining the room's functional layout"
+      );
       formData.append("serviceCategory", "interior");
       formData.append("requestEngineerCallback", "true");
 
@@ -573,7 +755,6 @@ export function AIChatbot() {
       setTimeout(() => {
         resetDesignFlow();
       }, 5000);
-
     } catch (error) {
       console.error("[Chatbot] Design processing error:", error);
       addMessage(
@@ -617,8 +798,12 @@ export function AIChatbot() {
     }, 300);
   };
 
-  const lastAssistantMessage = messages.filter((m) => m.role === "assistant").pop();
-  const suggestions = lastAssistantMessage ? getSuggestions(lastAssistantMessage.content) : [];
+  const lastAssistantMessage = messages
+    .filter((m) => m.role === "assistant")
+    .pop();
+  const suggestions = lastAssistantMessage
+    ? getSuggestions(lastAssistantMessage.content)
+    : [];
 
   return (
     <>
@@ -629,7 +814,12 @@ export function AIChatbot() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20, delay: 1.2 }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+              delay: 1.2,
+            }}
             onClick={() => setIsOpen(true)}
             aria-label="Open chat assistant"
             className="fixed bottom-6 right-24 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-neutral-950 shadow-2xl transition-all hover:scale-110 hover:bg-neutral-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
@@ -676,7 +866,9 @@ export function AIChatbot() {
                   <Bot className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-light sm:text-base">Mouhajer Assistant</h3>
+                  <h3 className="text-sm font-light sm:text-base">
+                    Mouhajer Assistant
+                  </h3>
                   <p className="text-[10px] text-white/60 sm:text-xs">
                     {isTyping ? "Typing..." : "Online • Ready to help"}
                   </p>
@@ -725,21 +917,32 @@ export function AIChatbot() {
                     onWheel={(e) => {
                       // Prevent scroll from propagating to the page
                       const container = e.currentTarget;
-                      const { scrollTop, scrollHeight, clientHeight } = container;
+                      const { scrollTop, scrollHeight, clientHeight } =
+                        container;
                       const isAtTop = scrollTop === 0;
-                      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+                      const isAtBottom =
+                        scrollTop + clientHeight >= scrollHeight - 1;
 
                       // Only stop propagation if we can scroll in that direction
-                      if ((e.deltaY < 0 && !isAtTop) || (e.deltaY > 0 && !isAtBottom)) {
+                      if (
+                        (e.deltaY < 0 && !isAtTop) ||
+                        (e.deltaY > 0 && !isAtBottom)
+                      ) {
                         e.stopPropagation();
-                      } else if ((e.deltaY < 0 && isAtTop) || (e.deltaY > 0 && isAtBottom)) {
+                      } else if (
+                        (e.deltaY < 0 && isAtTop) ||
+                        (e.deltaY > 0 && isAtBottom)
+                      ) {
                         // At boundary, prevent default to stop page scroll
                         e.preventDefault();
                         e.stopPropagation();
                       }
                     }}
                     className="relative flex-1 overflow-y-auto bg-neutral-50 p-3 sm:p-4"
-                    style={{ maxHeight: "calc(85vh - 180px)", overscrollBehavior: "contain" }}
+                    style={{
+                      maxHeight: "calc(85vh - 180px)",
+                      overscrollBehavior: "contain",
+                    }}
                   >
                     <div className="space-y-3 sm:space-y-4">
                       {messages.map((message) => (
@@ -758,9 +961,15 @@ export function AIChatbot() {
                             }`}
                           >
                             {message.role === "assistant" ? (
-                              <Bot className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.5} />
+                              <Bot
+                                className="h-3.5 w-3.5 sm:h-4 sm:w-4"
+                                strokeWidth={1.5}
+                              />
                             ) : (
-                              <User className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.5} />
+                              <User
+                                className="h-3.5 w-3.5 sm:h-4 sm:w-4"
+                                strokeWidth={1.5}
+                              />
                             )}
                           </div>
 
@@ -778,11 +987,17 @@ export function AIChatbot() {
                                 <div className="mb-2 overflow-hidden rounded-lg">
                                   <Image
                                     src={message.imageUrl}
-                                    alt={message.isImageUpload ? "Uploaded interior" : "AI redesigned space"}
+                                    alt={
+                                      message.isImageUpload
+                                        ? "Uploaded interior"
+                                        : "AI redesigned space"
+                                    }
                                     width={300}
                                     height={200}
                                     className="w-full h-auto object-cover"
-                                    unoptimized={message.imageUrl.startsWith("blob:")}
+                                    unoptimized={message.imageUrl.startsWith(
+                                      "blob:"
+                                    )}
                                   />
                                 </div>
                               )}
@@ -792,19 +1007,22 @@ export function AIChatbot() {
                               </div>
 
                               {/* Copy button */}
-                              {message.role === "assistant" && !message.imageUrl && (
-                                <button
-                                  onClick={() => copyMessage(message.content, message.id)}
-                                  className="absolute -right-1 -top-1 rounded-full bg-white p-1 opacity-0 shadow-md transition-opacity group-hover:opacity-100"
-                                  aria-label="Copy message"
-                                >
-                                  {copiedId === message.id ? (
-                                    <Check className="h-3 w-3 text-green-600" />
-                                  ) : (
-                                    <Copy className="h-3 w-3 text-neutral-400" />
-                                  )}
-                                </button>
-                              )}
+                              {message.role === "assistant" &&
+                                !message.imageUrl && (
+                                  <button
+                                    onClick={() =>
+                                      copyMessage(message.content, message.id)
+                                    }
+                                    className="absolute -right-1 -top-1 rounded-full bg-white p-1 opacity-0 shadow-md transition-opacity group-hover:opacity-100"
+                                    aria-label="Copy message"
+                                  >
+                                    {copiedId === message.id ? (
+                                      <Check className="h-3 w-3 text-green-600" />
+                                    ) : (
+                                      <Copy className="h-3 w-3 text-neutral-400" />
+                                    )}
+                                  </button>
+                                )}
                             </div>
 
                             {/* Timestamp */}
@@ -836,7 +1054,10 @@ export function AIChatbot() {
                           className="flex gap-2 sm:gap-3"
                         >
                           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-neutral-950 text-white sm:h-8 sm:w-8">
-                            <Bot className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.5} />
+                            <Bot
+                              className="h-3.5 w-3.5 sm:h-4 sm:w-4"
+                              strokeWidth={1.5}
+                            />
                           </div>
                           <div className="flex items-center gap-1 rounded-2xl bg-white px-4 py-3 shadow-sm">
                             {[0, 1, 2].map((i) => (
@@ -872,19 +1093,21 @@ export function AIChatbot() {
                       )}
 
                       {/* Smart suggestions */}
-                      {messages.length > 1 && !isTyping && suggestions.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 pt-2">
-                          {suggestions.slice(0, 3).map((suggestion, i) => (
-                            <button
-                              key={i}
-                              onClick={() => handleSuggestion(suggestion)}
-                              className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-[10px] font-light text-neutral-600 transition-all hover:border-[#c9a962]/50 hover:text-neutral-900 sm:text-xs"
-                            >
-                              {suggestion}
-                            </button>
-                          ))}
-                        </div>
-                      )}
+                      {messages.length > 1 &&
+                        !isTyping &&
+                        suggestions.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 pt-2">
+                            {suggestions.slice(0, 3).map((suggestion, i) => (
+                              <button
+                                key={i}
+                                onClick={() => handleSuggestion(suggestion)}
+                                className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-[10px] font-light text-neutral-600 transition-all hover:border-[#c9a962]/50 hover:text-neutral-900 sm:text-xs"
+                              >
+                                {suggestion}
+                              </button>
+                            ))}
+                          </div>
+                        )}
 
                       <div ref={messagesEndRef} />
                     </div>
@@ -982,7 +1205,9 @@ export function AIChatbot() {
                     {designFlowStep === "completed" && (
                       <div className="flex items-center justify-center gap-2 py-3 text-green-600">
                         <CheckCircle2 className="h-5 w-5" />
-                        <span className="text-sm font-medium">Design sent to your email!</span>
+                        <span className="text-sm font-medium">
+                          Design sent to your email!
+                        </span>
                       </div>
                     )}
 
@@ -1004,7 +1229,11 @@ export function AIChatbot() {
                           title="Upload a photo to redesign your space"
                           className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#c9a962]/50 bg-[#c9a962]/10 text-[#c9a962] transition-all hover:bg-[#c9a962]/20 hover:border-[#c9a962] disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2"
                         >
-                          <Upload className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+                          <Upload
+                            className="h-4 w-4"
+                            strokeWidth={1.5}
+                            aria-hidden="true"
+                          />
                         </button>
                         <input
                           ref={inputRef}
@@ -1022,13 +1251,19 @@ export function AIChatbot() {
                           aria-label="Send message"
                           className="flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-950 text-white transition-all hover:bg-neutral-900 disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
                         >
-                          <Send className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+                          <Send
+                            className="h-4 w-4"
+                            strokeWidth={1.5}
+                            aria-hidden="true"
+                          />
                         </button>
                       </form>
                     )}
 
                     <p className="mt-2 text-center text-[10px] text-neutral-400">
-                      Press <kbd className="rounded bg-neutral-100 px-1">Esc</kbd> to close
+                      Press{" "}
+                      <kbd className="rounded bg-neutral-100 px-1">Esc</kbd> to
+                      close
                     </p>
                   </div>
                 </motion.div>

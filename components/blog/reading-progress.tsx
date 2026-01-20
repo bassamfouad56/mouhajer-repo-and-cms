@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 interface ReadingProgressProps {
   targetRef?: React.RefObject<HTMLElement>;
@@ -12,7 +12,7 @@ export default function ReadingProgress({ targetRef }: ReadingProgressProps) {
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ['start start', 'end end'],
+    offset: ["start start", "end end"],
   });
 
   const scaleX = useSpring(scrollYProgress, {
@@ -22,7 +22,7 @@ export default function ReadingProgress({ targetRef }: ReadingProgressProps) {
   });
 
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (latest) => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
       if (latest >= 0.95 && !isComplete) {
         setIsComplete(true);
       }

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useRef, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
-import Link from 'next/link';
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import Link from "next/link";
 import {
   CheckCircle2,
   FileSearch,
@@ -11,270 +11,816 @@ import {
   ArrowRight,
   Mail,
   MessageCircle,
-  Home
-} from 'lucide-react';
+  Home,
+  Trophy,
+  Sparkles,
+} from "lucide-react";
+import { SafeImage } from "@/components/safe-image";
+
+// Project images for showcase
+const PROJECT_IMAGES = [
+  {
+    src: "/website%202.0%20content/projects/hospitality/_DSC3629-HDR.jpg",
+    title: "Address Boulevard VIP Suite",
+    category: "Hospitality",
+  },
+  {
+    src: "/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg",
+    title: "Sheraton Abu Dhabi",
+    category: "Hospitality",
+  },
+  {
+    src: "/website%202.0%20content/services/industries/highend%20residential/_MID0001-HDR-2.jpg",
+    title: "Address Boulevard Penthouse",
+    category: "Residential",
+  },
+  {
+    src: "/website%202.0%20content/services/industries/commercial%20and%20corporate/_MID1004-HDR.jpg",
+    title: "Corporate Excellence",
+    category: "Commercial",
+  },
+];
 
 export default function ThankYouContent() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const isHeroInView = useInView(heroRef, { once: true });
-  const stepsRef = useRef<HTMLDivElement>(null);
-  const isStepsInView = useInView(stepsRef, { once: true, margin: '-100px' });
-  const contactRef = useRef<HTMLDivElement>(null);
-  const isContactInView = useInView(contactRef, { once: true, margin: '-100px' });
-
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  return (
+    <main className="relative bg-[#faf8f5]">
+      {/* Cinematic Hero */}
+      <CinematicHero />
+
+      {/* What Happens Next Section */}
+      <WhatsNextSection />
+
+      {/* Project Preview Showcase */}
+      <ProjectShowcase />
+
+      {/* Promise Section */}
+      <PromiseSection />
+
+      {/* Contact Section */}
+      <ContactSection />
+
+      {/* Explore More CTA */}
+      <ExploreCTA />
+    </main>
+  );
+}
+
+// ============================================================================
+// CINEMATIC HERO
+// ============================================================================
+
+function CinematicHero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  return (
+    <section ref={heroRef} className="relative min-h-screen overflow-hidden">
+      {/* Background Image with Parallax */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ scale: imageScale, y: imageY }}
+      >
+        <SafeImage
+          src="/website%202.0%20content/projects/hospitality/_DSC3629-HDR.jpg"
+          alt="Luxury Interior"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/70 via-neutral-950/50 to-neutral-950/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/50 via-transparent to-neutral-950/50" />
+
+        {/* Subtle gold glow */}
+        <div className="absolute bottom-0 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#c9a962]/10 blur-[150px]" />
+      </motion.div>
+
+      {/* Film Grain */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
+        <div className="h-full w-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44IiBudW1PY3RhdmVzPSI0IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIi8+PC9zdmc+')] bg-repeat" />
+      </div>
+
+      {/* Corner Accents */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isLoaded ? { opacity: 1 } : {}}
+        transition={{ duration: 1, delay: 1 }}
+        className="pointer-events-none absolute inset-0 z-20"
+      >
+        <div className="absolute left-8 top-32 h-20 w-20 border-l border-t border-[#c9a962]/50 lg:left-16" />
+        <div className="absolute bottom-32 right-8 h-20 w-20 border-b border-r border-[#c9a962]/50 lg:right-16" />
+      </motion.div>
+
+      {/* Main Content */}
+      <motion.div
+        style={{ opacity, y }}
+        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-32 lg:px-12"
+      >
+        <div className="mx-auto max-w-4xl text-center">
+          {/* Success Icon */}
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={isLoaded ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
+            className="mb-10 inline-flex"
+          >
+            <div className="relative">
+              <div className="flex h-28 w-28 items-center justify-center border-2 border-emerald-400/40 bg-emerald-400/10 backdrop-blur-sm">
+                <CheckCircle2
+                  className="h-14 w-14 text-emerald-400"
+                  strokeWidth={1.5}
+                />
+              </div>
+              {/* Decorative corners */}
+              <div className="absolute -left-2 -top-2 h-4 w-4 border-l-2 border-t-2 border-emerald-400/60" />
+              <div className="absolute -bottom-2 -right-2 h-4 w-4 border-b-2 border-r-2 border-emerald-400/60" />
+            </div>
+          </motion.div>
+
+          {/* Label */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mb-6 flex items-center justify-center gap-4"
+          >
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-emerald-400/60" />
+            <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.4em] text-emerald-400">
+              Submission Confirmed
+            </span>
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-emerald-400/60" />
+          </motion.div>
+
+          {/* Main Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, delay: 0.7 }}
+            className="mb-8 font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+          >
+            Your Project is
+            <br />
+            <span className="text-[#c9a962]">Now in Our Queue</span>
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="mx-auto max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-white/70 lg:text-2xl"
+          >
+            We have received your consultation brief. A confirmation email has
+            been sent to the address you provided.
+          </motion.p>
+
+          {/* Response Time Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 1.1 }}
+            className="mt-12 inline-flex items-center gap-3 border border-[#c9a962]/40 bg-[#c9a962]/10 px-8 py-4 backdrop-blur-sm"
+          >
+            <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+            <span className="font-Satoshi text-sm font-light text-white">
+              Expected response:{" "}
+              <strong className="font-medium text-[#c9a962]">
+                Within 48 hours
+              </strong>
+            </span>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isLoaded ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8, delay: 1.5 }}
+        className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          className="flex flex-col items-center gap-3"
+        >
+          <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-white/40">
+            What Happens Next
+          </span>
+          <div className="h-12 w-px bg-gradient-to-b from-[#c9a962] to-transparent" />
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
+
+// ============================================================================
+// WHAT'S NEXT SECTION
+// ============================================================================
+
+function WhatsNextSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
   const steps = [
     {
       icon: FileSearch,
-      title: 'Review',
-      description: 'Your project details are currently being reviewed by our Senior Project Manager to assess scope and feasibility.',
+      title: "Review",
+      description:
+        "Your project details are being reviewed by our Senior Project Manager to assess scope and feasibility.",
+      image:
+        "/website%202.0%20content/services/industries/commercial%20and%20corporate/_MID1004-HDR.jpg",
     },
     {
       icon: UserCheck,
-      title: 'Assignment',
-      description: 'Based on your project type (Residential/Commercial/Hospitality), we are assigning the most relevant Technical Lead to your file.',
+      title: "Assignment",
+      description:
+        "Based on your project type, we assign the most relevant Technical Lead to your file.",
+      image:
+        "/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg",
     },
     {
       icon: Phone,
-      title: 'Contact',
-      description: 'You will receive a call or WhatsApp message from our team within 48 hours to schedule your discovery meeting.',
+      title: "Contact",
+      description:
+        "You will receive a call or WhatsApp message within 48 hours to schedule your discovery meeting.",
+      image:
+        "/website%202.0%20content/services/industries/highend%20residential/_MID0001-HDR-2.jpg",
     },
   ];
 
   return (
-    <main className="relative bg-white">
-      {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[60vh] overflow-hidden bg-neutral-950 px-6 py-32 lg:px-12 lg:py-40"
-      >
-        {/* Background Effects */}
-        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/10 blur-[150px]" />
+    <section ref={sectionRef} className="relative bg-[#faf8f5] py-32 lg:py-40">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, #c9a962 1px, transparent 0)`,
+            backgroundSize: "50px 50px",
+          }}
+        />
+      </div>
 
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          {/* Success Icon */}
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={isHeroInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 0.6, type: 'spring', stiffness: 200 }}
-            className="mb-8 inline-flex"
-          >
-            <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-emerald-500/30 bg-emerald-500/10 backdrop-blur-sm">
-              <CheckCircle2 className="h-12 w-12 text-emerald-400" strokeWidth={1.5} />
-            </div>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-6 text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl"
-          >
-            Your Project is Now in Our Queue.
-          </motion.h1>
-
-          {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-8 text-lg font-light leading-relaxed text-neutral-300 sm:text-xl"
-          >
-            We have successfully received your consultation brief. A confirmation email has been sent to the address you provided.
-          </motion.p>
-
-          {/* Confirmation Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-6 py-3 text-sm font-light text-emerald-300"
-          >
-            <CheckCircle2 className="h-4 w-4" />
-            <span>Submission Confirmed</span>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* What Happens Next Section */}
-      <section
-        ref={stepsRef}
-        className="relative bg-neutral-50 px-6 py-24 lg:px-12 lg:py-32"
-      >
-        <div className="mx-auto max-w-5xl">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isStepsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-16 text-center"
-          >
-            <div className="mb-4 flex items-center justify-center gap-4">
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-neutral-400" />
-              <span className="text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
-                Next Steps
-              </span>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-neutral-400" />
-            </div>
-            <h2 className="text-3xl font-light tracking-tight text-neutral-950 sm:text-4xl lg:text-5xl">
-              What Happens Next?
-            </h2>
-          </motion.div>
-
-          {/* Steps Grid */}
-          <div className="grid gap-8 md:grid-cols-3">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isStepsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-                className="group relative"
-              >
-                {/* Connector Line (hidden on mobile, visible on desktop) */}
-                {index < steps.length - 1 && (
-                  <div className="absolute left-full top-12 hidden h-px w-full bg-neutral-200 md:block" />
-                )}
-
-                <div className="relative border border-neutral-200 bg-white p-8 transition-all hover:border-neutral-300 hover:shadow-lg">
-                  {/* Step Number */}
-                  <div className="absolute -top-4 left-8 flex h-8 w-8 items-center justify-center bg-neutral-950 text-sm font-light text-white">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-
-                  {/* Icon */}
-                  <div className="mb-6 mt-4 flex h-14 w-14 items-center justify-center rounded-full border border-neutral-200 bg-neutral-50 transition-colors group-hover:border-neutral-950 group-hover:bg-neutral-950">
-                    <step.icon className="h-7 w-7 text-neutral-600 transition-colors group-hover:text-white" strokeWidth={1.5} />
-                  </div>
-
-                  {/* Content */}
-                  <h3 className="mb-3 text-xl font-light tracking-tight text-neutral-950">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm font-light leading-relaxed text-neutral-600">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-12">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="mb-20 text-center"
+        >
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+              The Process
+            </span>
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
           </div>
 
-          {/* Timeline Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isStepsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="mt-12 text-center"
-          >
-            <div className="inline-flex items-center gap-3 rounded-full border border-neutral-200 bg-white px-6 py-3 text-sm font-light text-neutral-600">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-              <span>Expected response time: <strong className="font-medium text-neutral-950">Within 48 hours</strong></span>
-            </div>
-          </motion.div>
+          <h2 className="font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
+            What Happens
+            <br />
+            <span className="text-[#c9a962]">Next?</span>
+          </h2>
+        </motion.div>
+
+        {/* Steps */}
+        <div className="space-y-24 lg:space-y-32">
+          {steps.map((step, index) => (
+            <StepCard
+              key={index}
+              step={step}
+              index={index}
+              isEven={index % 2 === 0}
+            />
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* Urgent Contact Section */}
-      <section
-        ref={contactRef}
-        className="relative bg-neutral-950 px-6 py-24 lg:px-12 lg:py-32"
+function StepCard({
+  step,
+  index,
+  isEven,
+}: {
+  step: { icon: any; title: string; description: string; image: string };
+  index: number;
+  isEven: boolean;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      className={`grid gap-12 lg:grid-cols-2 lg:gap-20 ${isEven ? "" : "lg:direction-rtl"}`}
+    >
+      {/* Image */}
+      <motion.div
+        initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className={`relative ${isEven ? "" : "lg:order-2"}`}
       >
-        {/* Background Pattern */}
+        <div className="group relative overflow-hidden">
+          <div className="aspect-[4/3] w-full">
+            <SafeImage
+              src={step.image}
+              alt={step.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/50 to-transparent" />
 
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isContactInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Icon */}
-            <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/5">
-              <MessageCircle className="h-8 w-8 text-white" strokeWidth={1.5} />
-            </div>
+          {/* Step Number */}
+          <div className="absolute bottom-6 left-6 flex h-16 w-16 items-center justify-center border border-[#c9a962] bg-neutral-950/80 backdrop-blur-sm">
+            <span className="font-SchnyderS text-3xl font-light text-[#c9a962]">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
+        </div>
 
-            <h2 className="mb-4 text-3xl font-light tracking-tight text-white sm:text-4xl">
-              Need to Speak Now?
-            </h2>
-            <p className="mb-10 text-lg font-light leading-relaxed text-neutral-400">
-              If your inquiry is time-sensitive or involves an active tender deadline, please contact our Executive Office directly.
-            </p>
+        {/* Decorative Frame */}
+        <div className="absolute -bottom-3 -right-3 h-full w-full border border-[#c9a962]/20 -z-10" />
+      </motion.div>
 
-            {/* Contact Info Cards */}
-            <div className="mb-10 grid gap-4 sm:grid-cols-2">
-              <motion.a
-                href={`tel:${process.env.NEXT_PUBLIC_PHONE || '+971-4-323-4567'}`}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isContactInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="group flex items-center gap-4 border border-white/10 bg-white/5 p-6 transition-all hover:border-white/20 hover:bg-white/10"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10">
-                  <Phone className="h-5 w-5 text-white" strokeWidth={1.5} />
-                </div>
-                <div className="text-left">
-                  <div className="mb-1 text-xs font-light uppercase tracking-wider text-white/50">
-                    Direct Line
-                  </div>
-                  <div className="text-lg font-light text-white group-hover:text-emerald-400">
-                    {process.env.NEXT_PUBLIC_PHONE || '+971-4-323-4567'}
-                  </div>
-                </div>
-              </motion.a>
+      {/* Content */}
+      <motion.div
+        initial={{ opacity: 0, x: isEven ? 40 : -40 }}
+        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className={`flex flex-col justify-center ${isEven ? "" : "lg:order-1"}`}
+      >
+        {/* Icon */}
+        <div className="mb-8 flex h-20 w-20 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
+          <step.icon className="h-10 w-10 text-[#c9a962]" strokeWidth={1.5} />
+        </div>
 
-              <motion.a
-                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || 'info@mouhajerdesign.com'}`}
-                initial={{ opacity: 0, x: 20 }}
-                animate={isContactInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="group flex items-center gap-4 border border-white/10 bg-white/5 p-6 transition-all hover:border-white/20 hover:bg-white/10"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10">
-                  <Mail className="h-5 w-5 text-white" strokeWidth={1.5} />
-                </div>
-                <div className="text-left">
-                  <div className="mb-1 text-xs font-light uppercase tracking-wider text-white/50">
-                    Email
-                  </div>
-                  <div className="text-lg font-light text-white group-hover:text-emerald-400">
-                    {process.env.NEXT_PUBLIC_EMAIL || 'info@mouhajerdesign.com'}
-                  </div>
-                </div>
-              </motion.a>
-            </div>
+        {/* Title */}
+        <h3 className="mb-6 font-SchnyderS text-4xl font-light text-neutral-900 lg:text-5xl">
+          {step.title}
+        </h3>
 
-            {/* Reference Note */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={isContactInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-10 text-sm font-light text-neutral-500"
-            >
-              (Please reference your Name or Organization when calling)
-            </motion.p>
+        {/* Description */}
+        <p className="font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
+          {step.description}
+        </p>
 
-            {/* Return Home Button */}
+        {/* Divider */}
+        <div className="mt-8 h-px w-24 bg-gradient-to-r from-[#c9a962] to-transparent" />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ============================================================================
+// PROJECT SHOWCASE
+// ============================================================================
+
+function ProjectShowcase() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-neutral-950 py-32 lg:py-40"
+    >
+      {/* Background */}
+      <div className="absolute left-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[#c9a962]/[0.05] blur-[200px]" />
+
+      {/* Film Grain */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
+        <div className="h-full w-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44IiBudW1PY3RhdmVzPSI0IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIi8+PC9zdmc+')] bg-repeat" />
+      </div>
+
+      {/* Corner Accents */}
+      <div className="pointer-events-none absolute left-8 top-20 h-16 w-16 border-l border-t border-[#c9a962]/30 lg:left-16" />
+      <div className="pointer-events-none absolute bottom-20 right-8 h-16 w-16 border-b border-r border-[#c9a962]/30 lg:right-16" />
+
+      <div className="relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="mb-16 px-6 text-center lg:px-12"
+        >
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+              While You Wait
+            </span>
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
+          </div>
+
+          <h2 className="font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Explore Our
+            <br />
+            <span className="text-[#c9a962]">Portfolio</span>
+          </h2>
+        </motion.div>
+
+        {/* Scrolling Projects */}
+        <motion.div style={{ x }} className="flex gap-6 px-6 lg:gap-8">
+          {[...PROJECT_IMAGES, ...PROJECT_IMAGES].map((project, index) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isContactInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 * (index % 4) }}
+              className="group relative w-[350px] flex-shrink-0 lg:w-[450px]"
             >
-              <Link
-                href="/"
-                className="group inline-flex items-center gap-3 border border-white bg-transparent px-10 py-5 text-xs font-light uppercase tracking-[0.2em] text-white transition-all hover:bg-white hover:text-neutral-950"
-              >
-                <Home className="h-4 w-4" strokeWidth={1.5} />
-                <span>Return to Homepage</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
-              </Link>
+              <div className="relative overflow-hidden">
+                <div className="aspect-[4/3] w-full">
+                  <SafeImage
+                    src={project.src}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-90" />
+
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 transition-transform duration-500 group-hover:translate-y-0">
+                  <div className="mb-2 font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
+                    {project.category}
+                  </div>
+                  <h3 className="font-SchnyderS text-2xl font-light text-white lg:text-3xl">
+                    {project.title}
+                  </h3>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* View All Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-16 text-center"
+        >
+          <Link
+            href="/projects"
+            className="group inline-flex items-center gap-3 border border-[#c9a962] bg-transparent px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-[#c9a962] transition-all hover:bg-[#c9a962] hover:text-neutral-950"
+          >
+            <span>VIEW ALL PROJECTS</span>
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// PROMISE SECTION
+// ============================================================================
+
+function PromiseSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-[#faf8f5] py-32 lg:py-40"
+    >
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="relative overflow-hidden">
+              <div className="aspect-[3/4] w-full">
+                <SafeImage
+                  src="/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg"
+                  alt="Luxury Interior"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              {/* Gold border accent */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#c9a962]/60 via-[#c9a962] to-[#c9a962]/60" />
+            </div>
+
+            {/* Decorative Frame */}
+            <div className="absolute -bottom-4 -right-4 h-full w-full border border-[#c9a962]/20 -z-10" />
+
+            {/* Award Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="absolute -right-6 top-8 bg-neutral-950 p-6 shadow-2xl lg:-right-12"
+            >
+              <Trophy
+                className="mb-3 h-8 w-8 text-[#c9a962]"
+                strokeWidth={1.5}
+              />
+              <div className="font-SchnyderS text-3xl font-light text-white">
+                5+
+              </div>
+              <div className="font-Satoshi text-xs font-light uppercase tracking-wider text-white/60">
+                International Awards
+              </div>
             </motion.div>
           </motion.div>
+
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex flex-col justify-center"
+          >
+            {/* Label */}
+            <div className="mb-6 flex items-center gap-4">
+              <Sparkles className="h-4 w-4 text-[#c9a962]" />
+              <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                Our Promise
+              </span>
+            </div>
+
+            {/* Quote */}
+            <blockquote className="mb-10 font-SchnyderS text-4xl font-light leading-[1.3] text-neutral-900 lg:text-5xl xl:text-6xl">
+              &ldquo;Every project we undertake carries the same commitment to
+              perfection.
+              <span className="text-[#c9a962]">
+                {" "}
+                Excellence is not our goal—it&apos;s our standard.
+              </span>
+              &rdquo;
+            </blockquote>
+
+            {/* Attribution */}
+            <div className="mb-10">
+              <div className="mb-2 font-Satoshi text-lg font-medium text-neutral-900">
+                Maher Mouhajer
+              </div>
+              <div className="font-Satoshi text-sm font-light text-neutral-500">
+                Founder & CEO
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="flex gap-12">
+              {[
+                { number: "25+", label: "Years Experience" },
+                { number: "200+", label: "Projects Delivered" },
+              ].map((stat, index) => (
+                <div key={index}>
+                  <div className="mb-1 font-SchnyderS text-4xl font-light text-[#c9a962]">
+                    {stat.number}
+                  </div>
+                  <div className="font-Satoshi text-xs font-light uppercase tracking-wider text-neutral-500">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// CONTACT SECTION
+// ============================================================================
+
+function ContactSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-neutral-950 py-32 lg:py-40"
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <SafeImage
+          src="/website%202.0%20content/services/industries/highend%20residential/_MID0001-HDR-2.jpg"
+          alt="Background"
+          fill
+          className="object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/90 to-neutral-950" />
+      </div>
+
+      {/* Film Grain */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
+        <div className="h-full w-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44IiBudW1PY3RhdmVzPSI0IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIi8+PC9zdmc+')] bg-repeat" />
+      </div>
+
+      {/* Corner Accents */}
+      <div className="pointer-events-none absolute left-8 top-20 h-16 w-16 border-l border-t border-[#c9a962]/30 lg:left-16" />
+      <div className="pointer-events-none absolute bottom-20 right-8 h-16 w-16 border-b border-r border-[#c9a962]/30 lg:right-16" />
+
+      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Icon */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={isInView ? { scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
+            className="mb-8 inline-flex"
+          >
+            <div className="flex h-20 w-20 items-center justify-center border border-[#c9a962]/40 bg-[#c9a962]/10">
+              <MessageCircle
+                className="h-10 w-10 text-[#c9a962]"
+                strokeWidth={1.5}
+              />
+            </div>
+          </motion.div>
+
+          {/* Title */}
+          <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Need to Speak
+            <br />
+            <span className="text-[#c9a962]">Now?</span>
+          </h2>
+
+          <p className="mb-12 font-Satoshi text-lg font-light leading-relaxed text-white/60">
+            If your inquiry is time-sensitive or involves an active tender
+            deadline, please contact our Executive Office directly.
+          </p>
+
+          {/* Contact Cards */}
+          <div className="mb-12 grid gap-6 sm:grid-cols-2">
+            <motion.a
+              href={`tel:${process.env.NEXT_PUBLIC_PHONE || "+971-4-323-4567"}`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="group flex items-center gap-5 border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-[#c9a962]/50 hover:bg-white/10"
+            >
+              <div className="flex h-14 w-14 items-center justify-center border border-[#c9a962]/40 bg-[#c9a962]/10">
+                <Phone className="h-6 w-6 text-[#c9a962]" strokeWidth={1.5} />
+              </div>
+              <div className="text-left">
+                <div className="mb-1 font-Satoshi text-xs font-light uppercase tracking-wider text-white/50">
+                  Direct Line
+                </div>
+                <div className="font-Satoshi text-lg font-light text-white transition-colors group-hover:text-[#c9a962]">
+                  {process.env.NEXT_PUBLIC_PHONE || "+971-4-323-4567"}
+                </div>
+              </div>
+            </motion.a>
+
+            <motion.a
+              href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || "info@mouhajerdesign.com"}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="group flex items-center gap-5 border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-[#c9a962]/50 hover:bg-white/10"
+            >
+              <div className="flex h-14 w-14 items-center justify-center border border-[#c9a962]/40 bg-[#c9a962]/10">
+                <Mail className="h-6 w-6 text-[#c9a962]" strokeWidth={1.5} />
+              </div>
+              <div className="text-left">
+                <div className="mb-1 font-Satoshi text-xs font-light uppercase tracking-wider text-white/50">
+                  Email
+                </div>
+                <div className="font-Satoshi text-lg font-light text-white transition-colors group-hover:text-[#c9a962]">
+                  {process.env.NEXT_PUBLIC_EMAIL || "info@mouhajerdesign.com"}
+                </div>
+              </div>
+            </motion.a>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="font-Satoshi text-sm font-light text-white/40"
+          >
+            (Please reference your Name or Organization when calling)
+          </motion.p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// EXPLORE CTA
+// ============================================================================
+
+function ExploreCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  return (
+    <section ref={sectionRef} className="relative bg-[#faf8f5] py-32 lg:py-40">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, #c9a962 1px, transparent 0)`,
+            backgroundSize: "50px 50px",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Label */}
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+              Continue Exploring
+            </span>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
+          </div>
+
+          {/* Title */}
+          <h2 className="mb-8 font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
+            Discover More
+            <br />
+            <span className="text-[#c9a962]">About Us</span>
+          </h2>
+
+          <p className="mx-auto mb-12 max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
+            While you wait for our team to reach out, explore our services,
+            award-winning projects, and learn more about the Mouhajer
+            difference.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              href="/"
+              className="group inline-flex items-center gap-3 border-2 border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-medium tracking-widest text-neutral-900 transition-all hover:bg-transparent hover:text-[#c9a962]"
+            >
+              <Home className="h-4 w-4" />
+              <span>RETURN HOME</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
+            </Link>
+            <Link
+              href="/about/awards"
+              className="group inline-flex items-center gap-3 border-2 border-neutral-300 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-700 transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+            >
+              <Trophy className="h-4 w-4" />
+              <span>VIEW AWARDS</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 }

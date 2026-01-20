@@ -14,16 +14,29 @@ interface SanityPost {
   slug: { current: string };
   excerpt?: string;
   mainImage?: any;
+  gallery?: Array<{
+    _key?: string;
+    asset?: any;
+    alt?: string;
+    caption?: string;
+  }>;
   category?: string;
   author?: {
     name: string;
     role?: string;
     image?: any;
+    bio?: string;
   };
   content?: any[];
   readTime?: number;
   tags?: string[];
   publishedAt: string;
+  viewCount?: number;
+  reactions?: {
+    helpful: number;
+    insightful: number;
+    loved: number;
+  };
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
@@ -146,7 +159,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     publishedAt: post.publishedAt || new Date().toISOString(),
     slug: post.slug || { current: '' },
     content: post.content || [],
+    gallery: post.gallery || [],
     author: post.author || { name: 'MIDC Team' },
+    viewCount: post.viewCount || 0,
+    reactions: post.reactions || { helpful: 0, insightful: 0, loved: 0 },
   };
 
   // Transform related posts with localized values and ensure required fields have defaults

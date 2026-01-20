@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
-import { urlForImage } from '@/sanity/lib/image';
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { urlForImage } from "@/sanity/lib/image";
 
 interface SanityTestimonial {
   _id: string;
@@ -33,51 +33,58 @@ const defaultTestimonials = [
   {
     id: 1,
     quote:
-      'One of the standout qualities of MIDC is their dedication to meeting project timelines without compromising quality. MIDC has consistently demonstrated a strong commitment to meeting project timelines while maintaining high-quality standards. Their clear communication and attention to detail helped keep projects on track, even when handling complex requirements.',
-    author: 'Ghaleb Al Najjar',
-    position: 'Consultant – Projects and Infrastructure',
-    company: 'Abu Dhabi National Hotels',
-    image: '',
+      "One of the standout qualities of MIDC is their dedication to meeting project timelines without compromising quality. MIDC has consistently demonstrated a strong commitment to meeting project timelines while maintaining high-quality standards. Their clear communication and attention to detail helped keep projects on track, even when handling complex requirements.",
+    author: "Ghaleb Al Najjar",
+    position: "Consultant – Projects and Infrastructure",
+    company: "Abu Dhabi National Hotels",
+    image: "",
     rating: 5,
   },
   {
     id: 2,
     quote:
-      'Throughout our collaboration, MIDC has consistently demonstrated exceptional skill, professionalism, and a strong commitment to delivering high-quality outcomes. They have been instrumental in the successful execution of our hotel refurbishment, design and built projects (Royal Suites, Prince Suites, Business Lounge, Luxury Villas valued up to 70M+). Their work on Hyatt Hotels Dubai surpassed our expectations, not only in terms of quality but also in their ability to manage the project within tight timelines. Their efficiency and proactive problem-solving approach were key factors in the project\'s success.',
-    author: 'Sayed Mohammed Al Sayed',
-    position: 'Director of Area Procurement',
-    company: 'Grand Hyatt Hotels Dubai',
-    image: '',
+      "Throughout our collaboration, MIDC has consistently demonstrated exceptional skill, professionalism, and a strong commitment to delivering high-quality outcomes. They have been instrumental in the successful execution of our hotel refurbishment, design and built projects (Royal Suites, Prince Suites, Business Lounge, Luxury Villas valued up to 70M+). Their work on Hyatt Hotels Dubai surpassed our expectations, not only in terms of quality but also in their ability to manage the project within tight timelines. Their efficiency and proactive problem-solving approach were key factors in the project's success.",
+    author: "Sayed Mohammed Al Sayed",
+    position: "Director of Area Procurement",
+    company: "Grand Hyatt Hotels Dubai",
+    image: "",
     rating: 5,
   },
   {
     id: 3,
     quote:
-      'I did not want a house that felt like a hotel. I wanted a home that felt like art. Eng. Maher took my vague ideas and translated them into a reality that was sharper and more elegant than I could have imagined. His presence on-site gave me total peace of mind.',
-    author: 'Private Client',
-    position: 'Villa Owner',
-    company: 'Confidential',
-    image: '',
+      "I did not want a house that felt like a hotel. I wanted a home that felt like art. Eng. Maher took my vague ideas and translated them into a reality that was sharper and more elegant than I could have imagined. His presence on-site gave me total peace of mind.",
+    author: "Private Client",
+    position: "Villa Owner",
+    company: "Confidential",
+    image: "",
     rating: 5,
   },
 ];
 
-export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: ClientTestimonialsProps) {
+export function ClientTestimonials({
+  testimonials: sanityTestimonials = [],
+}: ClientTestimonialsProps) {
   // Transform Sanity testimonials or use defaults
-  const testimonials = sanityTestimonials.length > 0
-    ? sanityTestimonials.map((t, idx) => ({
-        id: idx + 1,
-        quote: t.quote,
-        author: t.isConfidential ? 'Private Client' : t.author,
-        position: t.position || '',
-        company: t.isConfidential ? 'Confidential' : (t.company || t.client?.name || ''),
-        image: t.avatar ? urlForImage(t.avatar)?.width(200).height(200).url() || '' : '',
-        rating: t.rating || 5,
-      }))
-    : defaultTestimonials;
+  const testimonials =
+    sanityTestimonials.length > 0
+      ? sanityTestimonials.map((t, idx) => ({
+          id: idx + 1,
+          quote: t.quote,
+          author: t.isConfidential ? "Private Client" : t.author,
+          position: t.position || "",
+          company: t.isConfidential
+            ? "Confidential"
+            : t.company || t.client?.name || "",
+          image: t.avatar
+            ? urlForImage(t.avatar)?.width(200).height(200).url() || ""
+            : "",
+          rating: t.rating || 5,
+        }))
+      : defaultTestimonials;
 
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeIndex, setActiveIndex] = useState(0);
 
   const nextTestimonial = () => {
@@ -85,7 +92,9 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
   };
 
   const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setActiveIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
   };
 
   const activeTestimonial = testimonials[activeIndex];
@@ -156,12 +165,14 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
 
               {/* Rating */}
               <div className="mb-8 flex justify-center gap-1">
-                {Array.from({ length: activeTestimonial.rating }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-5 w-5 fill-[#c9a962] text-[#c9a962]"
-                  />
-                ))}
+                {Array.from({ length: activeTestimonial.rating }).map(
+                  (_, i) => (
+                    <Star
+                      key={i}
+                      className="h-5 w-5 fill-[#c9a962] text-[#c9a962]"
+                    />
+                  )
+                )}
               </div>
 
               {/* Quote Text */}
@@ -172,18 +183,8 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
               </blockquote>
 
               {/* Author Info */}
-              <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
-                {/* Avatar */}
-                <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-[#c9a962]/30">
-                  <img
-                    src={activeTestimonial.image}
-                    alt={activeTestimonial.author}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-
-                {/* Text Info */}
-                <div className="text-center sm:text-left">
+              <div className="flex flex-col items-center justify-center">
+                <div className="text-center">
                   <div className="mb-1 font-SchnyderS text-2xl font-light text-neutral-950">
                     {activeTestimonial.author}
                   </div>
@@ -216,8 +217,8 @@ export function ClientTestimonials({ testimonials: sanityTestimonials = [] }: Cl
                   onClick={() => setActiveIndex(index)}
                   className={`h-2 w-2 rounded-full transition-all duration-300 ${
                     index === activeIndex
-                      ? 'w-8 bg-[#c9a962]'
-                      : 'bg-neutral-300 hover:bg-neutral-400'
+                      ? "w-8 bg-[#c9a962]"
+                      : "bg-neutral-300 hover:bg-neutral-400"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />

@@ -1,12 +1,18 @@
-'use client';
+"use client";
 
-import { useRef, useState, useMemo } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import { urlForImage } from '@/sanity/lib/image';
-import { format } from 'date-fns';
-import { Eye, Clock, ArrowRight, Play, Search, X } from 'lucide-react';
+import { useRef, useState, useMemo } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { urlForImage } from "@/sanity/lib/image";
+import { format } from "date-fns";
+import { Eye, Clock, ArrowRight, Play, Search, X } from "lucide-react";
 
 interface SanityPost {
   _id: string;
@@ -34,11 +40,34 @@ interface BlogPageContentProps {
 const POSTS_PER_PAGE = 9;
 
 // Category colors for badges
-const categoryColors: Record<string, { bg: string; text: string; border: string; gradient: string }> = {
-  trends: { bg: 'bg-[#c9a962]/10', text: 'text-[#c9a962]', border: 'border-[#c9a962]/30', gradient: 'from-[#c9a962]/20' },
-  tips: { bg: 'bg-blue-500/10', text: 'text-blue-600', border: 'border-blue-500/30', gradient: 'from-blue-500/20' },
-  'case-studies': { bg: 'bg-green-500/10', text: 'text-green-600', border: 'border-green-500/30', gradient: 'from-green-500/20' },
-  news: { bg: 'bg-purple-500/10', text: 'text-purple-600', border: 'border-purple-500/30', gradient: 'from-purple-500/20' },
+const categoryColors: Record<
+  string,
+  { bg: string; text: string; border: string; gradient: string }
+> = {
+  trends: {
+    bg: "bg-[#c9a962]/10",
+    text: "text-[#c9a962]",
+    border: "border-[#c9a962]/30",
+    gradient: "from-[#c9a962]/20",
+  },
+  tips: {
+    bg: "bg-blue-500/10",
+    text: "text-blue-600",
+    border: "border-blue-500/30",
+    gradient: "from-blue-500/20",
+  },
+  "case-studies": {
+    bg: "bg-green-500/10",
+    text: "text-green-600",
+    border: "border-green-500/30",
+    gradient: "from-green-500/20",
+  },
+  news: {
+    bg: "bg-purple-500/10",
+    text: "text-purple-600",
+    border: "border-purple-500/30",
+    gradient: "from-purple-500/20",
+  },
 };
 
 // Helper to calculate reading time from content
@@ -59,9 +88,12 @@ function formatViews(count: number): string {
   return count.toString();
 }
 
-export default function BlogPageContent({ posts, categories }: BlogPageContentProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState('');
+export default function BlogPageContent({
+  posts,
+  categories,
+}: BlogPageContentProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -69,18 +101,23 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       const matchesCategory =
-        selectedCategory === 'all' || post.category === selectedCategory;
+        selectedCategory === "all" || post.category === selectedCategory;
       const matchesSearch =
-        searchQuery === '' ||
+        searchQuery === "" ||
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.excerpt?.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
   }, [posts, selectedCategory, searchQuery]);
 
-  const featuredPost = filteredPosts.find((p) => p.featured) || filteredPosts[0];
+  const featuredPost =
+    filteredPosts.find((p) => p.featured) || filteredPosts[0];
   const secondaryFeatured = filteredPosts.slice(1, 3);
-  const regularPosts = filteredPosts.filter((p) => p._id !== featuredPost?._id && !secondaryFeatured.find(sf => sf._id === p._id));
+  const regularPosts = filteredPosts.filter(
+    (p) =>
+      p._id !== featuredPost?._id &&
+      !secondaryFeatured.find((sf) => sf._id === p._id)
+  );
   const visiblePosts = regularPosts.slice(0, visibleCount);
   const hasMorePosts = visibleCount < regularPosts.length;
 
@@ -95,7 +132,6 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
 
   return (
     <main className="relative bg-white">
-
       {/* Search Modal */}
       <AnimatePresence>
         {isSearchOpen && (
@@ -115,7 +151,10 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
-                <Search size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/40" />
+                <Search
+                  size={24}
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-white/40"
+                />
                 <input
                   type="text"
                   placeholder="Search articles, topics, insights..."
@@ -134,7 +173,13 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
 
               {/* Quick search suggestions */}
               <div className="mt-8 flex flex-wrap gap-3">
-                {['Interior Design', 'Hospitality', 'Luxury Villas', 'Fit-Out', 'MEP Engineering'].map((term) => (
+                {[
+                  "Interior Design",
+                  "Hospitality",
+                  "Luxury Villas",
+                  "Fit-Out",
+                  "MEP Engineering",
+                ].map((term) => (
                   <button
                     key={term}
                     onClick={() => {
@@ -161,11 +206,11 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
                 Filter:
               </span>
               <button
-                onClick={() => handleCategoryChange('all')}
+                onClick={() => handleCategoryChange("all")}
                 className={`rounded-full px-5 py-2 font-Satoshi text-xs uppercase tracking-wider transition-all duration-300 ${
-                  selectedCategory === 'all'
-                    ? 'bg-neutral-950 text-white'
-                    : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950'
+                  selectedCategory === "all"
+                    ? "bg-neutral-950 text-white"
+                    : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950"
                 }`}
               >
                 All
@@ -179,10 +224,10 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
                     className={`rounded-full px-5 py-2 font-Satoshi text-xs uppercase tracking-wider transition-all duration-300 ${
                       selectedCategory === category
                         ? `${colors.bg} ${colors.text} border ${colors.border}`
-                        : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950'
+                        : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950"
                     }`}
                   >
-                    {category.replace('-', ' ')}
+                    {category.replace("-", " ")}
                   </button>
                 );
               })}
@@ -196,7 +241,8 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
                 <Search size={16} />
               </button>
               <span className="font-Satoshi text-xs font-light text-neutral-400">
-                {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'}
+                {filteredPosts.length}{" "}
+                {filteredPosts.length === 1 ? "article" : "articles"}
               </span>
             </div>
           </div>
@@ -240,7 +286,11 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
 
             <div className="grid gap-8 md:grid-cols-2">
               {secondaryFeatured.map((post, index) => (
-                <SecondaryFeaturedCard key={post._id} post={post} index={index} />
+                <SecondaryFeaturedCard
+                  key={post._id}
+                  post={post}
+                  index={index}
+                />
               ))}
             </div>
           </div>
@@ -269,63 +319,66 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-6">
             {[
               {
-                src: '/founder/CID_2106_00_COVER.jpg',
-                span: 'col-span-2 row-span-2',
-                aspect: 'aspect-square',
-                title: 'Grand Hyatt Prince Suite',
-                category: 'Hospitality',
-                slug: 'grand-hyatt-prince-suite'
+                src: "/founder/CID_2106_00_COVER.jpg",
+                span: "col-span-2 row-span-2",
+                aspect: "aspect-square",
+                title: "Grand Hyatt Prince Suite",
+                category: "Hospitality",
+                slug: "grand-hyatt-prince-suite",
               },
               {
-                src: '/founder/CID_2106_00_COVER.jpg',
-                span: '',
-                aspect: 'aspect-[4/5]',
-                title: 'Jumeirah Island Villa',
-                category: 'Residential',
-                slug: 'jumeirah-island-villa'
+                src: "/founder/CID_2106_00_COVER.jpg",
+                span: "",
+                aspect: "aspect-[4/5]",
+                title: "Jumeirah Island Villa",
+                category: "Residential",
+                slug: "jumeirah-island-villa",
               },
               {
-                src: '/founder/CID_2106_00_COVER.jpg',
-                span: '',
-                aspect: 'aspect-[4/5]',
-                title: 'Park Hyatt Villa',
-                category: 'Hospitality',
-                slug: 'park-hyatt-villa'
+                src: "/founder/CID_2106_00_COVER.jpg",
+                span: "",
+                aspect: "aspect-[4/5]",
+                title: "Park Hyatt Villa",
+                category: "Hospitality",
+                slug: "park-hyatt-villa",
               },
               {
-                src: '/founder/CID_2106_00_COVER.jpg',
-                span: 'col-span-2',
-                aspect: 'aspect-[2/1]',
-                title: 'District One Villa',
-                category: 'Residential',
-                slug: 'district-one-villa-79x'
+                src: "/founder/CID_2106_00_COVER.jpg",
+                span: "col-span-2",
+                aspect: "aspect-[2/1]",
+                title: "District One Villa",
+                category: "Residential",
+                slug: "district-one-villa-79x",
               },
               {
-                src: '/founder/CID_2106_00_COVER.jpg',
-                span: '',
-                aspect: 'aspect-square',
-                title: 'Ritz Carlton Villas',
-                category: 'Hospitality',
-                slug: 'ritz-carlton-villas'
+                src: "/founder/CID_2106_00_COVER.jpg",
+                span: "",
+                aspect: "aspect-square",
+                title: "Ritz Carlton Villas",
+                category: "Hospitality",
+                slug: "ritz-carlton-villas",
               },
               {
-                src: '/founder/CID_2106_00_COVER.jpg',
-                span: '',
-                aspect: 'aspect-square',
-                title: 'Jumeirah Bay Villa',
-                category: 'Residential',
-                slug: 'jumeirah-bay-villa'
+                src: "/founder/CID_2106_00_COVER.jpg",
+                span: "",
+                aspect: "aspect-square",
+                title: "Jumeirah Bay Villa",
+                category: "Residential",
+                slug: "jumeirah-bay-villa",
               },
             ].map((project, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
+                viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, delay: i * 0.1 }}
                 className={`group relative overflow-hidden bg-neutral-200 ${project.span} ${project.aspect}`}
               >
-                <Link href={`/projects/${project.slug}`} className="block h-full w-full">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="block h-full w-full"
+                >
                   <Image
                     src={project.src}
                     alt={project.title}
@@ -364,7 +417,10 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
               className="group inline-flex items-center gap-3 border border-neutral-950 px-10 py-4 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-neutral-950 hover:text-white"
             >
               <span>Explore All Projects</span>
-              <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              <ArrowRight
+                size={14}
+                className="transition-transform group-hover:translate-x-1"
+              />
             </Link>
           </motion.div>
         </div>
@@ -372,7 +428,10 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
 
       {/* Regular Posts Grid */}
       {visiblePosts.length > 0 && (
-        <section id="all-articles" className="relative bg-white px-6 py-24 lg:px-12">
+        <section
+          id="all-articles"
+          className="relative bg-white px-6 py-24 lg:px-12"
+        >
           <div className="mx-auto max-w-[1800px]">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -404,7 +463,8 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
                 className="mt-20 flex flex-col items-center gap-4"
               >
                 <span className="font-Satoshi text-sm font-light text-neutral-400">
-                  Showing {visiblePosts.length} of {regularPosts.length} articles
+                  Showing {visiblePosts.length} of {regularPosts.length}{" "}
+                  articles
                 </span>
                 <button
                   onClick={loadMore}
@@ -427,12 +487,13 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
               No articles found
             </h2>
             <p className="mb-8 font-Satoshi text-lg font-light text-neutral-500">
-              Try adjusting your search or filter to find what you&apos;re looking for.
+              Try adjusting your search or filter to find what you&apos;re
+              looking for.
             </p>
             <button
               onClick={() => {
-                setSelectedCategory('all');
-                setSearchQuery('');
+                setSelectedCategory("all");
+                setSearchQuery("");
               }}
               className="font-Satoshi text-sm font-light text-[#c9a962] underline transition-colors hover:text-neutral-950"
             >
@@ -471,14 +532,18 @@ export default function BlogPageContent({ posts, categories }: BlogPageContentPr
               <span className="text-[#c9a962]">Inspiration</span>
             </h2>
             <p className="mb-12 font-Satoshi text-xl font-light text-white/60">
-              Subscribe to receive exclusive insights, project showcases, and industry trends.
+              Subscribe to receive exclusive insights, project showcases, and
+              industry trends.
             </p>
             <Link
               href="/#contact"
               className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962] px-12 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]"
             >
               <span>Subscribe Now</span>
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-2"
+              />
             </Link>
           </motion.div>
         </div>
@@ -492,14 +557,14 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true });
   const readingTime = calculateReadingTime(post.excerpt, post.readTime);
-  const colors = categoryColors[post.category || ''] || categoryColors.news;
+  const colors = categoryColors[post.category || ""] || categoryColors.news;
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
     <motion.div
@@ -513,7 +578,10 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
       <motion.div style={{ y: imageY }} className="absolute inset-0">
         {post.mainImage ? (
           <Image
-            src={urlForImage(post.mainImage)?.width(1920).height(1080).url() || '/placeholder.jpg'}
+            src={
+              urlForImage(post.mainImage)?.width(1920).height(1080).url() ||
+              "/placeholder.jpg"
+            }
             alt={post.title}
             fill
             className="object-cover transition-all duration-1000 group-hover:scale-105"
@@ -539,8 +607,10 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="mb-6"
             >
-              <span className={`inline-block rounded-full border px-5 py-2 font-Satoshi text-xs uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}>
-                {post.category.replace('-', ' ')}
+              <span
+                className={`inline-block rounded-full border px-5 py-2 font-Satoshi text-xs uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}
+              >
+                {post.category.replace("-", " ")}
               </span>
             </motion.div>
           )}
@@ -553,7 +623,7 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
             className="mb-6 flex flex-wrap items-center gap-6 font-Satoshi text-sm font-light text-white/60"
           >
             {post.publishedAt && (
-              <span>{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</span>
+              <span>{format(new Date(post.publishedAt), "MMMM d, yyyy")}</span>
             )}
             <span className="flex items-center gap-2">
               <Clock size={14} />
@@ -603,7 +673,10 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
               className="group/link inline-flex items-center gap-4 border border-white/30 px-8 py-4 font-Satoshi text-sm uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962] hover:text-neutral-950"
             >
               <span>Read Full Article</span>
-              <ArrowRight size={16} className="transition-transform group-hover/link:translate-x-2" />
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover/link:translate-x-2"
+              />
             </Link>
           </motion.div>
         </div>
@@ -618,7 +691,9 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
           className="flex items-center gap-3 bg-[#c9a962] px-6 py-3"
         >
           <Play size={14} className="fill-current" />
-          <span className="font-Satoshi text-xs uppercase tracking-wider text-neutral-950">Featured</span>
+          <span className="font-Satoshi text-xs uppercase tracking-wider text-neutral-950">
+            Featured
+          </span>
         </motion.div>
       </div>
     </motion.div>
@@ -626,11 +701,17 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
 }
 
 // Secondary Featured Card
-function SecondaryFeaturedCard({ post, index }: { post: SanityPost; index: number }) {
+function SecondaryFeaturedCard({
+  post,
+  index,
+}: {
+  post: SanityPost;
+  index: number;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
   const readingTime = calculateReadingTime(post.excerpt, post.readTime);
-  const colors = categoryColors[post.category || ''] || categoryColors.news;
+  const colors = categoryColors[post.category || ""] || categoryColors.news;
 
   return (
     <motion.article
@@ -645,7 +726,10 @@ function SecondaryFeaturedCard({ post, index }: { post: SanityPost; index: numbe
         <div className="relative mb-8 aspect-[16/10] overflow-hidden bg-neutral-100">
           {post.mainImage ? (
             <Image
-              src={urlForImage(post.mainImage)?.width(1200).height(750).url() || '/placeholder.jpg'}
+              src={
+                urlForImage(post.mainImage)?.width(1200).height(750).url() ||
+                "/placeholder.jpg"
+              }
               alt={post.title}
               fill
               className="object-cover transition-all duration-1000 group-hover:scale-110"
@@ -660,8 +744,10 @@ function SecondaryFeaturedCard({ post, index }: { post: SanityPost; index: numbe
           {/* Category Badge */}
           {post.category && (
             <div className="absolute left-6 top-6">
-              <span className={`inline-block rounded-full border px-4 py-1.5 font-Satoshi text-xs uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}>
-                {post.category.replace('-', ' ')}
+              <span
+                className={`inline-block rounded-full border px-4 py-1.5 font-Satoshi text-xs uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}
+              >
+                {post.category.replace("-", " ")}
               </span>
             </div>
           )}
@@ -680,7 +766,7 @@ function SecondaryFeaturedCard({ post, index }: { post: SanityPost; index: numbe
           {/* Meta */}
           <div className="mb-4 flex items-center gap-4 font-Satoshi text-xs font-light text-neutral-500">
             {post.publishedAt && (
-              <span>{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</span>
+              <span>{format(new Date(post.publishedAt), "MMMM d, yyyy")}</span>
             )}
             <span className="flex items-center gap-1.5">
               <Clock size={12} />
@@ -708,16 +794,20 @@ function SecondaryFeaturedCard({ post, index }: { post: SanityPost; index: numbe
 // Post Card - Enhanced Design
 function PostCard({ post, index }: { post: SanityPost; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
   const readingTime = calculateReadingTime(post.excerpt, post.readTime);
-  const colors = categoryColors[post.category || ''] || categoryColors.news;
+  const colors = categoryColors[post.category || ""] || categoryColors.news;
 
   return (
     <motion.article
       ref={cardRef}
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.8,
+        delay: index * 0.1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className="group flex flex-col"
     >
       <Link href={`/blog/${post.slug.current}`} className="block">
@@ -725,7 +815,10 @@ function PostCard({ post, index }: { post: SanityPost; index: number }) {
         <div className="relative mb-6 aspect-[4/3] overflow-hidden bg-neutral-100">
           {post.mainImage ? (
             <Image
-              src={urlForImage(post.mainImage)?.width(800).height(600).url() || '/placeholder.jpg'}
+              src={
+                urlForImage(post.mainImage)?.width(800).height(600).url() ||
+                "/placeholder.jpg"
+              }
               alt={post.title}
               fill
               className="object-cover transition-all duration-700 group-hover:scale-110"
@@ -748,8 +841,10 @@ function PostCard({ post, index }: { post: SanityPost; index: number }) {
           {/* Category Badge */}
           {post.category && (
             <div className="absolute left-4 top-4">
-              <span className={`inline-block rounded-full border px-3 py-1 font-Satoshi text-[10px] uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}>
-                {post.category.replace('-', ' ')}
+              <span
+                className={`inline-block rounded-full border px-3 py-1 font-Satoshi text-[10px] uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}
+              >
+                {post.category.replace("-", " ")}
               </span>
             </div>
           )}
@@ -768,7 +863,7 @@ function PostCard({ post, index }: { post: SanityPost; index: number }) {
           {/* Meta Row */}
           <div className="mb-3 flex items-center gap-3 font-Satoshi text-xs font-light text-neutral-500">
             {post.publishedAt && (
-              <span>{format(new Date(post.publishedAt), 'MMM d, yyyy')}</span>
+              <span>{format(new Date(post.publishedAt), "MMM d, yyyy")}</span>
             )}
             {post.viewCount !== undefined && post.viewCount > 0 && (
               <>
@@ -797,7 +892,10 @@ function PostCard({ post, index }: { post: SanityPost; index: number }) {
           <div className="mt-auto pt-4">
             <span className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-neutral-400 transition-colors group-hover:text-[#c9a962]">
               Read Article
-              <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
+              <ArrowRight
+                size={12}
+                className="transition-transform group-hover:translate-x-1"
+              />
             </span>
           </div>
         </div>

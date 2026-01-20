@@ -1,8 +1,18 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Share2, X, Copy, Check, Twitter, Linkedin, Facebook, Mail, Link2 } from 'lucide-react';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Share2,
+  X,
+  Copy,
+  Check,
+  Twitter,
+  Linkedin,
+  Facebook,
+  Mail,
+  Link2,
+} from "lucide-react";
 
 interface SocialShareProps {
   title: string;
@@ -14,33 +24,34 @@ export default function SocialShare({ title, excerpt, url }: SocialShareProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const shareUrl = typeof window !== 'undefined' ? url || window.location.href : '';
+  const shareUrl =
+    typeof window !== "undefined" ? url || window.location.href : "";
   const shareText = excerpt || title;
 
   const shareLinks = [
     {
-      name: 'Twitter',
+      name: "Twitter",
       icon: Twitter,
-      color: 'hover:bg-[#1DA1F2]/10 hover:text-[#1DA1F2]',
+      color: "hover:bg-[#1DA1F2]/10 hover:text-[#1DA1F2]",
       url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
     },
     {
-      name: 'LinkedIn',
+      name: "LinkedIn",
       icon: Linkedin,
-      color: 'hover:bg-[#0A66C2]/10 hover:text-[#0A66C2]',
+      color: "hover:bg-[#0A66C2]/10 hover:text-[#0A66C2]",
       url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
     },
     {
-      name: 'Facebook',
+      name: "Facebook",
       icon: Facebook,
-      color: 'hover:bg-[#1877F2]/10 hover:text-[#1877F2]',
+      color: "hover:bg-[#1877F2]/10 hover:text-[#1877F2]",
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
     },
     {
-      name: 'Email',
+      name: "Email",
       icon: Mail,
-      color: 'hover:bg-neutral-100 hover:text-neutral-700',
-      url: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(shareText + '\n\n' + shareUrl)}`,
+      color: "hover:bg-neutral-100 hover:text-neutral-700",
+      url: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(shareText + "\n\n" + shareUrl)}`,
     },
   ];
 
@@ -50,12 +61,12 @@ export default function SocialShare({ title, excerpt, url }: SocialShareProps) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy:', err);
+      console.error("Failed to copy:", err);
     }
   };
 
   const handleShare = (url: string) => {
-    window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
+    window.open(url, "_blank", "noopener,noreferrer,width=600,height=400");
     setIsOpen(false);
   };
 
@@ -94,7 +105,7 @@ export default function SocialShare({ title, excerpt, url }: SocialShareProps) {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="fixed left-1/2 top-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl"
             >
               {/* Header */}
@@ -130,7 +141,10 @@ export default function SocialShare({ title, excerpt, url }: SocialShareProps) {
                 {/* Copy Link */}
                 <div className="mt-4">
                   <div className="flex items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 p-3">
-                    <Link2 size={16} className="flex-shrink-0 text-neutral-400" />
+                    <Link2
+                      size={16}
+                      className="flex-shrink-0 text-neutral-400"
+                    />
                     <input
                       type="text"
                       value={shareUrl}
@@ -141,12 +155,12 @@ export default function SocialShare({ title, excerpt, url }: SocialShareProps) {
                       onClick={copyLink}
                       className={`flex items-center gap-1 rounded-lg px-3 py-1.5 font-Satoshi text-xs font-medium transition-all ${
                         copied
-                          ? 'bg-green-100 text-green-600'
-                          : 'bg-white text-neutral-600 hover:bg-neutral-100'
+                          ? "bg-green-100 text-green-600"
+                          : "bg-white text-neutral-600 hover:bg-neutral-100"
                       }`}
                     >
                       {copied ? <Check size={12} /> : <Copy size={12} />}
-                      {copied ? 'Copied!' : 'Copy'}
+                      {copied ? "Copied!" : "Copy"}
                     </button>
                   </div>
                 </div>

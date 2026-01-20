@@ -1,11 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import {
@@ -184,11 +180,7 @@ export default function CareersPageContent() {
             {/* Jobs List */}
             <div className="mt-20 space-y-4">
               {jobPositions.map((job, index) => (
-                <JobCard
-                  key={job.id}
-                  job={job}
-                  index={index}
-                />
+                <JobCard key={job.id} job={job} index={index} />
               ))}
             </div>
           </div>
@@ -332,13 +324,7 @@ function BenefitCard({
 }
 
 // Job Card Component
-function JobCard({
-  job,
-  index,
-}: {
-  job: JobPosition;
-  index: number;
-}) {
+function JobCard({ job, index }: { job: JobPosition; index: number }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
@@ -417,4 +403,3 @@ function StatCard({ number, label }: { number: string; label: string }) {
     </motion.div>
   );
 }
-

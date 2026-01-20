@@ -193,7 +193,9 @@ export function ConsultationBookingCard({
         {/* Badge */}
         <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#c9a962]/10 px-3 py-1.5">
           <Calendar className="h-4 w-4 text-[#c9a962]" />
-          <span className="text-xs font-medium text-[#c9a962]">Free Consultation</span>
+          <span className="text-xs font-medium text-[#c9a962]">
+            Free Consultation
+          </span>
         </div>
 
         {/* Content */}
@@ -212,7 +214,10 @@ export function ConsultationBookingCard({
             { icon: Video, text: "Video or in-person" },
             { icon: MapPin, text: "Dubai & Abu Dhabi" },
           ].map(({ icon: Icon, text }, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm text-neutral-300">
+            <div
+              key={i}
+              className="flex items-center gap-2 text-sm text-neutral-300"
+            >
               <Icon className="h-4 w-4 text-[#c9a962]" />
               {text}
             </div>
@@ -238,7 +243,11 @@ export function ConsultationBookingCard({
 /**
  * Pre-configured MIDC Consultation Button
  */
-export function MIDCConsultationButton({ className = "" }: { className?: string }) {
+export function MIDCConsultationButton({
+  className = "",
+}: {
+  className?: string;
+}) {
   // Replace with actual MIDC Calendly URL
   const calendlyUrl = "https://calendly.com/mouhajerdesign/consultation";
 

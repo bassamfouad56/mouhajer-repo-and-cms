@@ -1,12 +1,12 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { LogoMarquee } from '@/components/logo-marquee';
-import { client } from '@/sanity/lib/client';
-import { groq } from 'next-sanity';
-import EnhancedProjectsPageContent from '../../enhanced-projects-page-content';
-import { getLocalizedValue } from '@/lib/error-handling';
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { LogoMarquee } from "@/components/logo-marquee";
+import { client } from "@/sanity/lib/client";
+import { groq } from "next-sanity";
+import EnhancedProjectsPageContent from "../../enhanced-projects-page-content";
+import { getLocalizedValue } from "@/lib/error-handling";
 
 export const revalidate = 3600;
 
@@ -97,17 +97,19 @@ async function getLocation(slug: string) {
     const location = await client.fetch(locationBySlugQuery, { slug });
     return location;
   } catch (error) {
-    console.error('Error fetching location:', error);
+    console.error("Error fetching location:", error);
     return null;
   }
 }
 
 async function getProjectsByLocation(locationSlug: string) {
   try {
-    const projects = await client.fetch(projectsByLocationQuery, { locationSlug });
+    const projects = await client.fetch(projectsByLocationQuery, {
+      locationSlug,
+    });
     return projects || [];
   } catch (error) {
-    console.error('Error fetching projects by location:', error);
+    console.error("Error fetching projects by location:", error);
     return [];
   }
 }
@@ -117,7 +119,7 @@ async function getLocations() {
     const locations = await client.fetch(locationsQuery);
     return locations || [];
   } catch (error) {
-    console.error('Error fetching locations:', error);
+    console.error("Error fetching locations:", error);
     return [];
   }
 }
@@ -127,7 +129,7 @@ async function getIndustries() {
     const industries = await client.fetch(industriesQuery);
     return industries || [];
   } catch (error) {
-    console.error('Error fetching industries:', error);
+    console.error("Error fetching industries:", error);
     return [];
   }
 }
@@ -147,20 +149,25 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { locale, location } = await params;
   const locationData = await getLocation(location);
 
   if (!locationData) {
     return {
-      title: 'Projects | MIDC',
+      title: "Projects | MIDC",
     };
   }
 
   const name = getLocalizedValue(locationData.name, locale, location);
-  const description = getLocalizedValue(locationData.description, locale, '');
-  const seoTitle = getLocalizedValue(locationData.seo?.metaTitle, locale) || `Interior Design Projects in ${name} | MIDC`;
-  const seoDescription = getLocalizedValue(locationData.seo?.metaDescription, locale) ||
+  const description = getLocalizedValue(locationData.description, locale, "");
+  const seoTitle =
+    getLocalizedValue(locationData.seo?.metaTitle, locale) ||
+    `Interior Design Projects in ${name} | MIDC`;
+  const seoDescription =
+    getLocalizedValue(locationData.seo?.metaDescription, locale) ||
     `Explore our luxury interior design, fit-out, and construction projects in ${name}. Award-winning commercial and residential projects.`;
 
   return {
@@ -196,21 +203,27 @@ export default async function LocationProjectsPage({ params }: PageProps) {
   const transformedProjects = projects.map((project: any) => ({
     id: project._id,
     databaseId: 0,
-    title: getLocalizedValue(project.title, locale, 'Project'),
+    title: getLocalizedValue(project.title, locale, "Project"),
     slug: project.slug?.current,
-    excerpt: getLocalizedValue(project.excerpt, locale, ''),
+    excerpt: getLocalizedValue(project.excerpt, locale, ""),
     date: project.publishedAt,
     featuredImage: {
       node: {
-        sourceUrl: project.mainImage ? `/api/sanity/image/${project.mainImage.asset._ref}` : '',
-        altText: getLocalizedValue(project.mainImage?.alt, locale) || getLocalizedValue(project.title, locale, ''),
+        sourceUrl: project.mainImage
+          ? `/api/sanity/image/${project.mainImage.asset._ref}`
+          : "",
+        altText:
+          getLocalizedValue(project.mainImage?.alt, locale) ||
+          getLocalizedValue(project.title, locale, ""),
       },
     },
     acfFields: {
       location: getLocalizedValue(project.location?.name, locale, locationName),
-      projectType: getLocalizedValue(project.projectType?.title, locale) || getLocalizedValue(project.sector?.title, locale, ''),
-      yearCompleted: project.year ? String(project.year) : '',
-      area: project.area ? String(project.area) : '',
+      projectType:
+        getLocalizedValue(project.projectType?.title, locale) ||
+        getLocalizedValue(project.sector?.title, locale, ""),
+      yearCompleted: project.year ? String(project.year) : "",
+      area: project.area ? String(project.area) : "",
     },
     _sanityData: project,
   }));
@@ -222,7 +235,10 @@ export default async function LocationProjectsPage({ params }: PageProps) {
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
           {/* Breadcrumb */}
           <nav className="mb-8 flex items-center gap-2 text-sm">
-            <a href={`/${locale}/projects`} className="text-white/50 hover:text-white transition-colors">
+            <a
+              href={`/${locale}/projects`}
+              className="text-white/50 hover:text-white transition-colors"
+            >
               Projects
             </a>
             <span className="text-white/30">/</span>
@@ -236,7 +252,11 @@ export default async function LocationProjectsPage({ params }: PageProps) {
             Projects in <span className="text-[#c9a962]">{locationName}</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg font-light text-white/70">
-            {getLocalizedValue(locationData.description, locale, `Explore our interior design and fit-out projects in ${locationName}.`)}
+            {getLocalizedValue(
+              locationData.description,
+              locale,
+              `Explore our interior design and fit-out projects in ${locationName}.`
+            )}
           </p>
 
           {/* Location Navigation */}
@@ -253,11 +273,11 @@ export default async function LocationProjectsPage({ params }: PageProps) {
                 href={`/${locale}/projects/location/${loc.slug?.current}`}
                 className={`rounded-full border px-5 py-2 text-sm font-light transition-all ${
                   loc.slug?.current === location
-                    ? 'border-[#c9a962] bg-[#c9a962] text-neutral-950'
-                    : 'border-white/20 bg-white/5 text-white/70 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 hover:text-white'
+                    ? "border-[#c9a962] bg-[#c9a962] text-neutral-950"
+                    : "border-white/20 bg-white/5 text-white/70 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 hover:text-white"
                 }`}
               >
-                {getLocalizedValue(loc.name, locale, '')}
+                {getLocalizedValue(loc.name, locale, "")}
               </a>
             ))}
           </div>

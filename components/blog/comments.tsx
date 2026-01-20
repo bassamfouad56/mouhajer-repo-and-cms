@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { MessageCircle, Github } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { MessageCircle, Github } from "lucide-react";
 
 interface CommentsProps {
   postSlug: string;
@@ -17,35 +17,48 @@ export default function Comments({ postSlug, postTitle }: CommentsProps) {
     if (!showComments) return;
 
     // Load Giscus script
-    const script = document.createElement('script');
-    script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo', process.env.NEXT_PUBLIC_GISCUS_REPO || 'mouhajer-international/blog-comments');
-    script.setAttribute('data-repo-id', process.env.NEXT_PUBLIC_GISCUS_REPO_ID || '');
-    script.setAttribute('data-category', process.env.NEXT_PUBLIC_GISCUS_CATEGORY || 'Blog Comments');
-    script.setAttribute('data-category-id', process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || '');
-    script.setAttribute('data-mapping', 'specific');
-    script.setAttribute('data-term', postSlug);
-    script.setAttribute('data-strict', '0');
-    script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '0');
-    script.setAttribute('data-input-position', 'top');
-    script.setAttribute('data-theme', 'light');
-    script.setAttribute('data-lang', 'en');
-    script.setAttribute('data-loading', 'lazy');
-    script.crossOrigin = 'anonymous';
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute(
+      "data-repo",
+      process.env.NEXT_PUBLIC_GISCUS_REPO ||
+        "mouhajer-international/blog-comments"
+    );
+    script.setAttribute(
+      "data-repo-id",
+      process.env.NEXT_PUBLIC_GISCUS_REPO_ID || ""
+    );
+    script.setAttribute(
+      "data-category",
+      process.env.NEXT_PUBLIC_GISCUS_CATEGORY || "Blog Comments"
+    );
+    script.setAttribute(
+      "data-category-id",
+      process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || ""
+    );
+    script.setAttribute("data-mapping", "specific");
+    script.setAttribute("data-term", postSlug);
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "top");
+    script.setAttribute("data-theme", "light");
+    script.setAttribute("data-lang", "en");
+    script.setAttribute("data-loading", "lazy");
+    script.crossOrigin = "anonymous";
     script.async = true;
 
     script.onload = () => setIsLoaded(true);
 
-    const container = document.getElementById('giscus-container');
+    const container = document.getElementById("giscus-container");
     if (container) {
       container.appendChild(script);
     }
 
     return () => {
-      const container = document.getElementById('giscus-container');
+      const container = document.getElementById("giscus-container");
       if (container) {
-        container.innerHTML = '';
+        container.innerHTML = "";
       }
     };
   }, [showComments, postSlug]);
@@ -96,7 +109,7 @@ export default function Comments({ postSlug, postTitle }: CommentsProps) {
       )}
 
       <p className="mt-4 text-center font-Satoshi text-xs font-light text-neutral-400">
-        Comments are powered by{' '}
+        Comments are powered by{" "}
         <a
           href="https://giscus.app"
           target="_blank"
@@ -104,8 +117,9 @@ export default function Comments({ postSlug, postTitle }: CommentsProps) {
           className="text-[#c9a962] hover:underline"
         >
           Giscus
-        </a>{' '}
-        using GitHub Discussions. Sign in with your GitHub account to participate.
+        </a>{" "}
+        using GitHub Discussions. Sign in with your GitHub account to
+        participate.
       </p>
     </motion.div>
   );

@@ -377,6 +377,80 @@ export default defineType({
         { name: 'role', type: 'string', title: 'Author Role' },
       ],
     }),
+    // ===== FEATURED PROJECT CONTENT =====
+    defineField({
+      name: 'featuredContent',
+      title: 'Featured Project Content',
+      type: 'object',
+      group: 'content',
+      hidden: ({ document }) => !document?.featured,
+      description: 'Additional content fields for featured projects (only visible when Featured is enabled)',
+      fields: [
+        {
+          name: 'heroVideo',
+          title: 'Hero Video URL',
+          type: 'url',
+          description: 'Direct video URL (MP4) or YouTube/Vimeo for cinematic hero background',
+        },
+        {
+          name: 'visionStatement',
+          title: 'Vision Statement',
+          type: 'object',
+          description: 'Extended intro text for the vision section',
+          fields: [
+            { name: 'en', title: 'English', type: 'text', rows: 4 },
+            { name: 'ar', title: 'Arabic', type: 'text', rows: 4 },
+          ],
+        },
+        {
+          name: 'highlightStats',
+          title: 'Highlight Statistics',
+          type: 'array',
+          description: 'Key metrics to showcase (max 6)',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                { name: 'value', title: 'Value', type: 'string', description: 'e.g., 342, 100, 5' },
+                {
+                  name: 'label',
+                  title: 'Label',
+                  type: 'object',
+                  fields: [
+                    { name: 'en', type: 'string', title: 'English' },
+                    { name: 'ar', type: 'string', title: 'Arabic' },
+                  ],
+                },
+                { name: 'suffix', title: 'Suffix', type: 'string', description: 'e.g., sqm, +, %, rooms' },
+              ],
+              preview: {
+                select: {
+                  value: 'value',
+                  suffix: 'suffix',
+                  label: 'label.en',
+                },
+                prepare({ value, suffix, label }) {
+                  return {
+                    title: `${value}${suffix || ''} - ${label || 'Untitled'}`,
+                  }
+                },
+              },
+            },
+          ],
+          validation: (Rule) => Rule.max(6),
+        },
+        {
+          name: 'transformationTitle',
+          title: 'Transformation Section Title',
+          type: 'object',
+          description: 'Custom title for the before/after section',
+          fields: [
+            { name: 'en', type: 'string', title: 'English' },
+            { name: 'ar', type: 'string', title: 'Arabic' },
+          ],
+        },
+      ],
+    }),
     defineField({
       name: 'content',
       title: 'Full Content',

@@ -1,38 +1,41 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 import {
   getAllPartners,
   getPartnersByCategory,
   type PartnerLogo,
-} from '@/lib/partner-logos';
+} from "@/lib/partner-logos";
 
-type Category = 'all' | 'hospitality' | 'developer' | 'luxury' | 'corporate';
+type Category = "all" | "hospitality" | "developer" | "luxury" | "corporate";
 
 const categories: { id: Category; label: string }[] = [
-  { id: 'all', label: 'All Partners' },
-  { id: 'hospitality', label: 'Hospitality' },
-  { id: 'developer', label: 'Developers' },
-  { id: 'luxury', label: 'Luxury Brands' },
-  { id: 'corporate', label: 'Corporate' },
+  { id: "all", label: "All Partners" },
+  { id: "hospitality", label: "Hospitality" },
+  { id: "developer", label: "Developers" },
+  { id: "luxury", label: "Luxury Brands" },
+  { id: "corporate", label: "Corporate" },
 ];
 
 export function PartnerLogoMarquee() {
-  const [activeCategory, setActiveCategory] = useState<Category>('all');
+  const [activeCategory, setActiveCategory] = useState<Category>("all");
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const allPartners = getAllPartners();
 
   const filteredPartners =
-    activeCategory === 'all'
+    activeCategory === "all"
       ? allPartners
-      : getPartnersByCategory(activeCategory as PartnerLogo['category']);
+      : getPartnersByCategory(activeCategory as PartnerLogo["category"]);
 
   // Split partners into two rows for opposite scrolling
-  const row1 = filteredPartners.slice(0, Math.ceil(filteredPartners.length / 2));
+  const row1 = filteredPartners.slice(
+    0,
+    Math.ceil(filteredPartners.length / 2)
+  );
   const row2 = filteredPartners.slice(Math.ceil(filteredPartners.length / 2));
 
   return (
@@ -73,8 +76,8 @@ export function PartnerLogoMarquee() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto max-w-2xl font-Satoshi text-lg text-white/50"
           >
-            Collaborating with the region&apos;s most prestigious hospitality groups,
-            developers, and luxury brands.
+            Collaborating with the region&apos;s most prestigious hospitality
+            groups, developers, and luxury brands.
           </motion.p>
 
           {/* Category Tabs */}
@@ -90,8 +93,8 @@ export function PartnerLogoMarquee() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`rounded-full px-5 py-2 font-Satoshi text-sm transition-all duration-300 ${
                   activeCategory === cat.id
-                    ? 'bg-[#c9a962] text-neutral-950'
-                    : 'border border-white/10 text-white/60 hover:border-[#c9a962]/50 hover:text-white'
+                    ? "bg-[#c9a962] text-neutral-950"
+                    : "border border-white/10 text-white/60 hover:border-[#c9a962]/50 hover:text-white"
                 }`}
               >
                 {cat.label}
@@ -167,7 +170,8 @@ export function PartnerLogoMarquee() {
           className="mt-16 text-center"
         >
           <span className="font-Satoshi text-sm text-white/40">
-            {filteredPartners.length} {activeCategory === 'all' ? 'total' : activeCategory} partners
+            {filteredPartners.length}{" "}
+            {activeCategory === "all" ? "total" : activeCategory} partners
           </span>
         </motion.div>
       </div>

@@ -1,33 +1,36 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Layers, Calendar, MessageSquare } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Layers, Calendar, MessageSquare } from "lucide-react";
 
 const protocols = [
   {
-    id: 'parallel',
+    id: "parallel",
     icon: Layers,
-    title: 'Parallel Engineering',
-    description: 'Our MEP engineers solve cooling issues while the designers are drawing the ceiling, not after.',
+    title: "Parallel Engineering",
+    description:
+      "Our MEP engineers solve cooling issues while the designers are drawing the ceiling, not after.",
   },
   {
-    id: 'logistics',
+    id: "logistics",
     icon: Calendar,
-    title: 'Preventative Logistics',
-    description: 'We order materials based on a master schedule that predicts bottlenecks weeks in advance.',
+    title: "Preventative Logistics",
+    description:
+      "We order materials based on a master schedule that predicts bottlenecks weeks in advance.",
   },
   {
-    id: 'communication',
+    id: "communication",
     icon: MessageSquare,
-    title: 'Zero-Gap Communication',
-    description: 'The person who drew the joinery is the same person inspecting its installation.',
+    title: "Zero-Gap Communication",
+    description:
+      "The person who drew the joinery is the same person inspecting its installation.",
   },
 ];
 
 export function OrchestrationSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -74,15 +77,19 @@ export function OrchestrationSection() {
             className="max-w-4xl space-y-6 font-Satoshi text-base font-light leading-relaxed text-white/70 lg:text-lg"
           >
             <p>
-              Many firms can design a beautiful villa, and many can build a strong structure.
-              But very few can{' '}
-              <span className="font-medium text-white">synchronize the two perfectly</span>.
+              Many firms can design a beautiful villa, and many can build a
+              strong structure. But very few can{" "}
+              <span className="font-medium text-white">
+                synchronize the two perfectly
+              </span>
+              .
             </p>
             <p>
-              Our process is not a linear list of tasks; it is a synchronized ecosystem.
-              We use the{' '}
-              <span className="font-medium text-white">"MIDC Protocol"</span>, a rigorous workflow
-              where the Design, MEP, and Construction teams work in parallel, not in sequence.
+              Our process is not a linear list of tasks; it is a synchronized
+              ecosystem. We use the{" "}
+              <span className="font-medium text-white">"MIDC Protocol"</span>, a
+              rigorous workflow where the Design, MEP, and Construction teams
+              work in parallel, not in sequence.
             </p>
           </motion.div>
         </div>
@@ -128,8 +135,11 @@ export function OrchestrationSection() {
         >
           <div className="mx-auto max-w-3xl text-center">
             <p className="font-SchnyderS text-2xl font-light italic text-white/80 lg:text-3xl">
-              This isn&apos;t just "turnkey." It is{' '}
-              <span className="not-italic text-[#c9a962]">integrated precision</span>.
+              This isn&apos;t just "turnkey." It is{" "}
+              <span className="not-italic text-[#c9a962]">
+                integrated precision
+              </span>
+              .
             </p>
           </div>
         </motion.div>

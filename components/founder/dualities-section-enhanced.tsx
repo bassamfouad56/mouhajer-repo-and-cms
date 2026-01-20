@@ -1,47 +1,59 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { GraduationCap, Heart, Star, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import { MagneticButton } from '@/components/animations/magnetic-button';
-import { SVGLineDraw, SVGCircleDraw } from '@/components/animations/svg-line-draw';
-import { RevealText } from '@/components/animations/reveal-text';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { GraduationCap, Heart, Star, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { MagneticButton } from "@/components/animations/magnetic-button";
+import {
+  SVGLineDraw,
+  SVGCircleDraw,
+} from "@/components/animations/svg-line-draw";
+import { RevealText } from "@/components/animations/reveal-text";
 
 const philosophies = [
   {
-    id: 'london',
+    id: "london",
     icon: GraduationCap,
-    title: 'The London Discipline',
-    subtitle: 'The Mind',
-    description: 'Great design requires order. Educated in the UK, Eng. Maher applies a strict architectural discipline to every project. This ensures that even the most ornate spaces remain uncluttered and smart. We reject chaos. We embrace logic, flow, and function.',
-    color: '#3b82f6',
+    title: "The London Discipline",
+    subtitle: "The Mind",
+    description:
+      "Great design requires order. Educated in the UK, Eng. Maher applies a strict architectural discipline to every project. This ensures that even the most ornate spaces remain uncluttered and smart. We reject chaos. We embrace logic, flow, and function.",
+    color: "#3b82f6",
   },
   {
-    id: 'arabic',
+    id: "arabic",
     icon: Heart,
-    title: 'The Arabic Soul',
-    subtitle: 'The Heart',
-    description: 'Minimalism can often feel cold. We counter this with the warmth of our heritage. We infuse spaces with the texture, grandeur, and hospitality inherent in Arabic culture. This is the "Baroque" influence. It is a love for richness, gold, and detail, but tamed and polished for the modern executive.',
-    color: '#c9a962',
+    title: "The Arabic Soul",
+    subtitle: "The Heart",
+    description:
+      'Minimalism can often feel cold. We counter this with the warmth of our heritage. We infuse spaces with the texture, grandeur, and hospitality inherent in Arabic culture. This is the "Baroque" influence. It is a love for richness, gold, and detail, but tamed and polished for the modern executive.',
+    color: "#c9a962",
   },
   {
-    id: 'immaculate',
+    id: "immaculate",
     icon: Star,
-    title: 'The Immaculate Standard',
-    subtitle: 'The Result',
-    description: 'A design is only as good as its finish. Eng. Maher works with an all-rounded approach. He is obsessed with the final touch. Whether it is the joinery of a private villa or the lobby of a 5-star hotel, the result must be pristine. We create environments that do not just impress guests. They elevate the way they live.',
-    color: '#8b5cf6',
+    title: "The Immaculate Standard",
+    subtitle: "The Result",
+    description:
+      "A design is only as good as its finish. Eng. Maher works with an all-rounded approach. He is obsessed with the final touch. Whether it is the joinery of a private villa or the lobby of a 5-star hotel, the result must be pristine. We create environments that do not just impress guests. They elevate the way they live.",
+    color: "#8b5cf6",
   },
 ];
 
-function PhilosophyCard({ philosophy, index }: { philosophy: typeof philosophies[0]; index: number }) {
+function PhilosophyCard({
+  philosophy,
+  index,
+}: {
+  philosophy: (typeof philosophies)[0];
+  index: number;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-15%' });
+  const isInView = useInView(cardRef, { once: true, margin: "-15%" });
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
@@ -72,7 +84,12 @@ function PhilosophyCard({ philosophy, index }: { philosophy: typeof philosophies
             className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center"
             initial={{ scale: 0, rotate: -180 }}
             animate={isInView ? { scale: 1, rotate: 0 } : {}}
-            transition={{ duration: 0.8, delay: index * 0.1, type: 'spring', stiffness: 100 }}
+            transition={{
+              duration: 0.8,
+              delay: index * 0.1,
+              type: "spring",
+              stiffness: 100,
+            }}
           >
             <SVGCircleDraw
               size={64}
@@ -85,10 +102,13 @@ function PhilosophyCard({ philosophy, index }: { philosophy: typeof philosophies
               className="absolute inset-0 flex items-center justify-center transition-all duration-500 group-hover:scale-110"
               style={{ backgroundColor: `${philosophy.color}10` }}
             >
-              <Icon className="h-7 w-7 transition-colors duration-500" style={{ color: philosophy.color }} strokeWidth={1} />
+              <Icon
+                className="h-7 w-7 transition-colors duration-500"
+                style={{ color: philosophy.color }}
+                strokeWidth={1}
+              />
             </div>
           </motion.div>
-
         </div>
 
         {/* Content */}
@@ -108,7 +128,7 @@ function PhilosophyCard({ philosophy, index }: { philosophy: typeof philosophies
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: index * 0.1 + 0.6 }}
             className="mb-4 font-SchnyderS text-2xl font-light text-neutral-950 transition-colors duration-500 lg:text-3xl"
-            style={{ color: isInView ? 'inherit' : philosophy.color }}
+            style={{ color: isInView ? "inherit" : philosophy.color }}
           >
             {philosophy.title}
           </motion.h3>
@@ -158,14 +178,14 @@ function PhilosophyCard({ philosophy, index }: { philosophy: typeof philosophies
 
 export function DualitiesSectionEnhanced() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   return (
     <section
@@ -173,9 +193,7 @@ export function DualitiesSectionEnhanced() {
       className="relative overflow-hidden bg-neutral-100 py-24 sm:py-32 lg:py-40"
     >
       {/* Animated Background Pattern */}
-      <motion.div
-        style={{ y: bgY }}
-      />
+      <motion.div style={{ y: bgY }} />
 
       {/* Gradient orbs */}
       <div className="absolute left-0 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#3b82f6]/5 blur-[100px]" />
@@ -190,11 +208,23 @@ export function DualitiesSectionEnhanced() {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center gap-4"
           >
-            <SVGLineDraw width={60} height={1} strokeColor="#c9a962" duration={1.5} delay={0.2} />
+            <SVGLineDraw
+              width={60}
+              height={1}
+              strokeColor="#c9a962"
+              duration={1.5}
+              delay={0.2}
+            />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
               Design Philosophy
             </span>
-            <SVGLineDraw width={60} height={1} strokeColor="#c9a962" duration={1.5} delay={0.2} />
+            <SVGLineDraw
+              width={60}
+              height={1}
+              strokeColor="#c9a962"
+              duration={1.5}
+              delay={0.2}
+            />
           </motion.div>
 
           <RevealText
@@ -211,7 +241,8 @@ export function DualitiesSectionEnhanced() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="max-w-3xl font-Satoshi text-base font-light text-neutral-600 lg:text-lg"
           >
-            A design language spoken in two dialects: European precision and Arabian warmth.
+            A design language spoken in two dialects: European precision and
+            Arabian warmth.
           </motion.p>
         </div>
 
@@ -224,14 +255,17 @@ export function DualitiesSectionEnhanced() {
         >
           <div className="mx-auto max-w-4xl space-y-6 font-Satoshi text-base font-light leading-relaxed text-neutral-600 lg:text-lg">
             <p>
-              Eng. Maher Mouhajer does not believe in choosing between the past and the future.
-              His philosophy is built on the conviction that true luxury lies in the contrast.
+              Eng. Maher Mouhajer does not believe in choosing between the past
+              and the future. His philosophy is built on the conviction that
+              true luxury lies in the contrast.
             </p>
             <p>
-              By filtering his opulent Arabic heritage through the lens of his London education,
-              he has created a signature style that is unique to MIDC.{' '}
+              By filtering his opulent Arabic heritage through the lens of his
+              London education, he has created a signature style that is unique
+              to MIDC.{" "}
               <span className="font-medium text-neutral-950">
-                It is not just about how a room looks. It is about how a room feels.
+                It is not just about how a room looks. It is about how a room
+                feels.
               </span>
             </p>
           </div>
@@ -272,7 +306,8 @@ export function DualitiesSectionEnhanced() {
               stagger={0.015}
               animationType="luxury"
             >
-              We create spaces where the grandeur of history shakes hands with the clean lines of tomorrow.
+              We create spaces where the grandeur of history shakes hands with
+              the clean lines of tomorrow.
             </RevealText>
             <motion.div
               initial={{ scaleX: 0 }}
@@ -298,7 +333,10 @@ export function DualitiesSectionEnhanced() {
               className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all duration-500 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
             >
               <span>Explore What We Built Together</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1} />
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                strokeWidth={1}
+              />
             </Link>
           </MagneticButton>
         </motion.div>

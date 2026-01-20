@@ -6,16 +6,12 @@ import { X, Gift, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
 interface ExitIntentPopupProps {
   delay?: number; // Delay before popup can show (ms)
-  cooldownDays?: number; // Days before showing again after dismissal
 }
 
 const STORAGE_KEY = "midc_exit_popup_dismissed";
 const LEAD_STORAGE_KEY = "midc_exit_popup_converted";
 
-export function ExitIntentPopup({
-  delay = 5000,
-  cooldownDays = 7,
-}: ExitIntentPopupProps) {
+export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,7 +19,7 @@ export function ExitIntentPopup({
   const [error, setError] = useState("");
   const [canShow, setCanShow] = useState(false);
 
-  // Check if popup should be shown
+  // Check if popup should be shown - permanently dismissed once closed
   useEffect(() => {
     const checkCanShow = () => {
       // Don't show if already converted
@@ -31,16 +27,9 @@ export function ExitIntentPopup({
         return false;
       }
 
-      // Check dismissal cooldown
-      const dismissedAt = localStorage.getItem(STORAGE_KEY);
-      if (dismissedAt) {
-        const dismissedDate = new Date(parseInt(dismissedAt));
-        const cooldownEnd = new Date(dismissedDate);
-        cooldownEnd.setDate(cooldownEnd.getDate() + cooldownDays);
-
-        if (new Date() < cooldownEnd) {
-          return false;
-        }
+      // Don't show if already dismissed (permanent)
+      if (localStorage.getItem(STORAGE_KEY)) {
+        return false;
       }
 
       return true;
@@ -54,7 +43,7 @@ export function ExitIntentPopup({
     }, delay);
 
     return () => clearTimeout(timer);
-  }, [delay, cooldownDays]);
+  }, [delay]);
 
   // Exit intent detection
   const handleMouseLeave = useCallback(
@@ -167,8 +156,12 @@ export function ExitIntentPopup({
                     </h2>
 
                     <p className="mb-6 text-center text-neutral-600">
-                      Get a <span className="font-medium text-[#c9a962]">FREE Design Consultation</span> with
-                      our award-winning team. Plus, receive exclusive access to our 2025 Luxury Interior Trends Guide.
+                      Get a{" "}
+                      <span className="font-medium text-[#c9a962]">
+                        FREE Design Consultation
+                      </span>{" "}
+                      with our award-winning team. Plus, receive exclusive
+                      access to our 2025 Luxury Interior Trends Guide.
                     </p>
 
                     {/* Benefits */}
@@ -178,7 +171,10 @@ export function ExitIntentPopup({
                         "Budget planning assistance",
                         "Exclusive project portfolio access",
                       ].map((benefit, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm text-neutral-600">
+                        <li
+                          key={i}
+                          className="flex items-center gap-2 text-sm text-neutral-600"
+                        >
                           <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[#c9a962]" />
                           {benefit}
                         </li>
@@ -204,7 +200,7 @@ export function ExitIntentPopup({
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="flex w-full items-center justify-center gap-2 rounded-lg bg-neutral-950 px-6 py-3 text-sm font-medium text-white transition-all hover:bg-neutral-800 disabled:opacity-50"
+                        className="flex w-full items-center justify-center gap-2 border border-neutral-950 bg-neutral-950 px-6 py-3 font-Satoshi text-xs font-medium uppercase tracking-wider text-white transition-all hover:bg-transparent hover:text-neutral-950 disabled:opacity-50"
                       >
                         {isSubmitting ? (
                           <>
@@ -234,7 +230,8 @@ export function ExitIntentPopup({
                       You&apos;re In!
                     </h3>
                     <p className="text-neutral-600">
-                      Check your inbox for your free consultation details and design guide.
+                      Check your inbox for your free consultation details and
+                      design guide.
                     </p>
                   </div>
                 )}

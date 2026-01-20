@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import Image from 'next/image';
-import gsap from 'gsap';
-import SplitType from 'split-type';
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import Image from "next/image";
+import gsap from "gsap";
+import SplitType from "split-type";
 
 interface FounderHeroProps {
   heroImage?: string;
@@ -15,19 +15,19 @@ interface FounderHeroProps {
 
 export function FounderHero({
   heroImage,
-  founderName = 'Eng. Maher Mouhajer',
-  founderTitle = 'CEO & Founder',
+  founderName = "Eng. Maher Mouhajer",
+  founderTitle = "CEO & Founder",
 }: FounderHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Use Sanity image or fallback to local
-  const imageUrl = heroImage || '/founder/CEO Arabia.jpg';
+  const imageUrl = heroImage || "/founder/CEO Arabia.jpg";
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -38,8 +38,8 @@ export function FounderHero({
     if (!titleRef.current || !isLoaded) return;
 
     const split = new SplitType(titleRef.current, {
-      types: 'lines,words',
-      tagName: 'span',
+      types: "lines,words",
+      tagName: "span",
     });
 
     const tl = gsap.timeline({ delay: 0.6 });
@@ -50,7 +50,7 @@ export function FounderHero({
         opacity: 0,
         y: 80,
         rotateX: -60,
-        transformOrigin: 'center bottom'
+        transformOrigin: "center bottom",
       },
       {
         opacity: 1,
@@ -58,7 +58,7 @@ export function FounderHero({
         rotateX: 0,
         stagger: 0.035,
         duration: 1,
-        ease: 'power3.out',
+        ease: "power3.out",
       }
     );
 
@@ -78,10 +78,7 @@ export function FounderHero({
       className="relative h-screen min-h-[700px] max-h-[1000px] overflow-hidden bg-neutral-950"
     >
       {/* Hero Background - Professional Photo of Eng. Maher */}
-      <motion.div
-        style={{ scale: videoScale }}
-        className="absolute inset-0"
-      >
+      <motion.div style={{ scale: videoScale }} className="absolute inset-0">
         <Image
           src={imageUrl}
           alt={`${founderName} - ${founderTitle}`}
@@ -99,9 +96,13 @@ export function FounderHero({
         <div className="absolute inset-0 bg-linear-to-r from-neutral-950/70 via-transparent to-neutral-950/70" />
 
         {/* Vignette */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%)',
-        }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%)",
+          }}
+        />
       </motion.div>
 
       {/* Main Content */}
@@ -125,7 +126,10 @@ export function FounderHero({
           </motion.div>
 
           {/* Main Title */}
-          <div className="mb-8 overflow-hidden" style={{ perspective: '1000px' }}>
+          <div
+            className="mb-8 overflow-hidden"
+            style={{ perspective: "1000px" }}
+          >
             <h1
               ref={titleRef}
               className="font-SchnyderS text-4xl font-light leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
@@ -143,7 +147,8 @@ export function FounderHero({
             transition={{ duration: 0.8, delay: 1.2 }}
             className="mx-auto mb-12 max-w-3xl px-4 font-Satoshi text-base font-light leading-relaxed text-white/70 sm:px-0 sm:text-lg lg:text-xl"
           >
-            Eng. Maher Mouhajer: Curating visual splendor for the Middle East&apos;s most discerning clientele.
+            Eng. Maher Mouhajer: Curating visual splendor for the Middle
+            East&apos;s most discerning clientele.
           </motion.p>
 
           {/* Name Badge */}
@@ -174,7 +179,7 @@ export function FounderHero({
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center gap-2"
         >
           <span className="font-Satoshi text-[10px] font-light tracking-[0.2em] text-white/50">

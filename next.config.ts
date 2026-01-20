@@ -40,6 +40,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
       },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'seeklogo.com',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -74,6 +82,24 @@ const nextConfig: NextConfig = {
         source: '/:locale/blog/:slug',
         destination: '/:locale/journal/design-trends/:slug',
         permanent: true,
+      },
+    ];
+  },
+  // Headers to allow Sanity Studio to be embedded in iframe from Sanity Dashboard
+  async headers() {
+    return [
+      {
+        source: '/studio/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'ALLOW-FROM https://www.sanity.io',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' https://www.sanity.io https://*.sanity.io",
+          },
+        ],
       },
     ];
   },

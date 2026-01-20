@@ -1,20 +1,24 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { SafeImage } from '@/components/safe-image';
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { SafeImage } from "@/components/safe-image";
 
 export function TestFounderCraft() {
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const leftImageY = useTransform(scrollYProgress, [0, 1], ['15%', '-15%']);
-  const rightImageY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
-  const centerScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+  const leftImageY = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"]);
+  const rightImageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const centerScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.95, 1, 0.95]
+  );
 
   return (
     <section
@@ -25,12 +29,11 @@ export function TestFounderCraft() {
       <div className="absolute inset-0 bg-gradient-to-b from-white via-neutral-50/30 to-white" />
 
       <div className="relative z-10 mx-auto max-w-[1800px] px-6 lg:px-12">
-
         {/* Intro Text */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.9 }}
           className="mb-24 text-center"
         >
@@ -47,14 +50,14 @@ export function TestFounderCraft() {
           </h2>
 
           <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
-            Behind every immaculate finish lies an obsession with craft.
-            A dedication to details most will never notice, but everyone will feel.
+            Behind every immaculate finish lies an obsession with craft. A
+            dedication to details most will never notice, but everyone will
+            feel.
           </p>
         </motion.div>
 
         {/* Three Column Image Layout */}
         <div className="mb-32 grid gap-8 lg:grid-cols-3 lg:gap-12">
-
           {/* Left Image - Vertical */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -79,7 +82,8 @@ export function TestFounderCraft() {
               {/* Caption */}
               <div className="absolute bottom-8 left-8 right-8">
                 <p className="font-Satoshi text-sm font-light text-white/90">
-                  Every material is chosen not just for its beauty, but for how it ages, how it feels, how it serves.
+                  Every material is chosen not just for its beauty, but for how
+                  it ages, how it feels, how it serves.
                 </p>
               </div>
             </div>
@@ -136,12 +140,12 @@ export function TestFounderCraft() {
               {/* Caption */}
               <div className="absolute bottom-8 left-8 right-8">
                 <p className="font-Satoshi text-sm font-light text-white/90">
-                  From concept sketches to final installation, perfection is not negotiable. It's the only standard.
+                  From concept sketches to final installation, perfection is not
+                  negotiable. It's the only standard.
                 </p>
               </div>
             </div>
           </motion.div>
-
         </div>
 
         {/* Quote Section */}
@@ -168,7 +172,6 @@ export function TestFounderCraft() {
             </div>
           </div>
         </motion.div>
-
       </div>
     </section>
   );

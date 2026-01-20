@@ -1,20 +1,20 @@
-import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import { createClient, type SanityClient } from '@sanity/client';
+import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import { createClient, type SanityClient } from "@sanity/client";
 
 // Force dynamic to prevent static analysis during build
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // Sanity client for saving leads - only create if projectId is valid
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'r97logzc';
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "b6q28exv";
 const isValidProjectId = projectId && /^[a-z0-9-]+$/.test(projectId);
 
 let sanityClient: SanityClient | null = null;
 if (isValidProjectId) {
   sanityClient = createClient({
     projectId,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-    apiVersion: '2024-01-01',
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+    apiVersion: "2024-01-01",
     token: process.env.SANITY_API_TOKEN,
     useCdn: false,
   });
@@ -23,24 +23,33 @@ if (isValidProjectId) {
 // Map project type to Sanity service category
 function mapProjectTypeToCategory(projectType: string): string {
   const mapping: Record<string, string> = {
-    'Luxury Residential': 'residential',
-    'Hospitality / Hotel': 'hospitality',
-    'Commercial Fit-Out': 'commercial',
-    'Villa Renovation': 'residential',
-    'Office Interior': 'commercial',
-    'Other': 'interior',
+    "Luxury Residential": "residential",
+    "Hospitality / Hotel": "hospitality",
+    "Commercial Fit-Out": "commercial",
+    "Villa Renovation": "residential",
+    "Office Interior": "commercial",
+    Other: "interior",
   };
-  return mapping[projectType] || 'interior';
+  return mapping[projectType] || "interior";
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, phone, subject, message, projectType, budget, timeline } = await request.json();
+    const {
+      name,
+      email,
+      phone,
+      subject,
+      message,
+      projectType,
+      budget,
+      timeline,
+    } = await request.json();
 
     // Validate required fields
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: "Missing required fields" },
         { status: 400 }
       );
     }
@@ -49,28 +58,30 @@ export async function POST(request: NextRequest) {
     try {
       if (sanityClient) {
         await sanityClient.create({
-        _type: 'lead',
-        email,
-        prompt: `Contact Form: ${subject}\n\nMessage: ${message}`,
-        phoneNumber: phone || undefined,
-        projectBudget: budget || undefined,
-        timeline: timeline || undefined,
-        serviceCategory: projectType ? mapProjectTypeToCategory(projectType) : undefined,
-        status: 'new',
-        source: 'contact_form',
-        notes: `Name: ${name}\nProject Type: ${projectType || 'N/A'}\nSubject: ${subject}`,
-        createdAt: new Date().toISOString(),
+          _type: "lead",
+          email,
+          prompt: `Contact Form: ${subject}\n\nMessage: ${message}`,
+          phoneNumber: phone || undefined,
+          projectBudget: budget || undefined,
+          timeline: timeline || undefined,
+          serviceCategory: projectType
+            ? mapProjectTypeToCategory(projectType)
+            : undefined,
+          status: "new",
+          source: "contact_form",
+          notes: `Name: ${name}\nProject Type: ${projectType || "N/A"}\nSubject: ${subject}`,
+          createdAt: new Date().toISOString(),
         });
       }
     } catch (sanityError) {
-      console.error('Failed to save lead to Sanity:', sanityError);
+      console.error("Failed to save lead to Sanity:", sanityError);
       // Continue with email sending even if Sanity fails
     }
 
     // Create email transporter
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587'),
+      port: parseInt(process.env.SMTP_PORT || "587"),
       secure: false,
       auth: {
         user: process.env.SMTP_USER,
@@ -117,42 +128,58 @@ export async function POST(request: NextRequest) {
                   <div class="value"><a href="mailto:${email}">${email}</a></div>
                 </div>
 
-                ${phone ? `
+                ${
+                  phone
+                    ? `
                 <div class="field">
                   <div class="label">Phone</div>
                   <div class="value">${phone}</div>
                 </div>
-                ` : ''}
+                `
+                    : ""
+                }
 
                 <div class="field">
                   <div class="label">Subject</div>
                   <div class="value">${subject}</div>
                 </div>
 
-                ${projectType ? `
+                ${
+                  projectType
+                    ? `
                 <div class="field">
                   <div class="label">Project Type</div>
                   <div class="value">${projectType}</div>
                 </div>
-                ` : ''}
+                `
+                    : ""
+                }
 
-                ${budget ? `
+                ${
+                  budget
+                    ? `
                 <div class="field">
                   <div class="label">Budget Range</div>
                   <div class="value">${budget}</div>
                 </div>
-                ` : ''}
+                `
+                    : ""
+                }
 
-                ${timeline ? `
+                ${
+                  timeline
+                    ? `
                 <div class="field">
                   <div class="label">Timeline</div>
                   <div class="value">${timeline}</div>
                 </div>
-                ` : ''}
+                `
+                    : ""
+                }
 
                 <div class="field">
                   <div class="label">Message</div>
-                  <div class="value">${message.replace(/\n/g, '<br>')}</div>
+                  <div class="value">${message.replace(/\n/g, "<br>")}</div>
                 </div>
               </div>
               <div class="footer">
@@ -168,7 +195,7 @@ export async function POST(request: NextRequest) {
     const customerMailOptions = {
       from: process.env.SMTP_FROM || process.env.SMTP_USER,
       to: email,
-      subject: 'Thank you for contacting Mouhajer International Design',
+      subject: "Thank you for contacting Mouhajer International Design",
       html: `
         <!DOCTYPE html>
         <html>
@@ -210,13 +237,13 @@ export async function POST(request: NextRequest) {
     await transporter.sendMail(customerMailOptions);
 
     return NextResponse.json(
-      { message: 'Email sent successfully' },
+      { message: "Email sent successfully" },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Contact form error:', error);
+    console.error("Contact form error:", error);
     return NextResponse.json(
-      { error: 'Failed to send email' },
+      { error: "Failed to send email" },
       { status: 500 }
     );
   }

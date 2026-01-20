@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import { useRef, useState } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import {
   ArrowRight,
   ArrowLeft,
@@ -22,35 +28,43 @@ import {
   Clock,
   ShieldCheck,
   HelpCircle,
-} from 'lucide-react';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { LogoMarquee } from '@/components/logo-marquee';
-import { MagneticButton } from '@/components/magnetic-button';
-import { SafeImage } from '@/components/safe-image';
+} from "lucide-react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { LogoMarquee } from "@/components/logo-marquee";
+import { MagneticButton } from "@/components/magnetic-button";
+import { SafeImage } from "@/components/safe-image";
 
 // Form validation schema
 const supplierSchema = z.object({
   // Part 1: Company Profile
-  companyName: z.string().min(2, 'Company name is required'),
-  tradeLicenseNumber: z.string().min(2, 'Trade license number is required'),
-  hqCountry: z.string().min(1, 'Please select country'),
-  hqCity: z.string().min(2, 'City is required'),
-  website: z.string().url('Please enter a valid URL').or(z.string().length(0)).optional(),
-  contactPerson: z.string().min(2, 'Contact person name is required'),
-  contactDesignation: z.string().min(2, 'Designation is required'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().min(8, 'Phone number is required'),
+  companyName: z.string().min(2, "Company name is required"),
+  tradeLicenseNumber: z.string().min(2, "Trade license number is required"),
+  hqCountry: z.string().min(1, "Please select country"),
+  hqCity: z.string().min(2, "City is required"),
+  website: z
+    .string()
+    .url("Please enter a valid URL")
+    .or(z.string().length(0))
+    .optional(),
+  contactPerson: z.string().min(2, "Contact person name is required"),
+  contactDesignation: z.string().min(2, "Designation is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(8, "Phone number is required"),
 
   // Part 2: Category & Capacity
-  supplierType: z.string().min(1, 'Please select supplier type'),
-  primaryCategory: z.array(z.string()).min(1, 'Please select at least one category'),
+  supplierType: z.string().min(1, "Please select supplier type"),
+  primaryCategory: z
+    .array(z.string())
+    .min(1, "Please select at least one category"),
   categoryOther: z.string().optional(),
-  annualTurnover: z.string().min(1, 'Please select annual turnover'),
+  annualTurnover: z.string().min(1, "Please select annual turnover"),
 
   // Part 3: Compliance & Quality
   certifications: z.array(z.string()).optional(),
-  referenceProject1: z.string().min(2, 'Please provide at least one reference project'),
+  referenceProject1: z
+    .string()
+    .min(2, "Please provide at least one reference project"),
   referenceProject2: z.string().optional(),
   referenceProject3: z.string().optional(),
 
@@ -62,61 +76,64 @@ type SupplierFormData = z.infer<typeof supplierSchema>;
 
 // Form options
 const countryOptions = [
-  'United Arab Emirates',
-  'Saudi Arabia',
-  'Qatar',
-  'Italy',
-  'Turkey',
-  'China',
-  'United Kingdom',
-  'Germany',
-  'Other',
+  "United Arab Emirates",
+  "Saudi Arabia",
+  "Qatar",
+  "Italy",
+  "Turkey",
+  "China",
+  "United Kingdom",
+  "Germany",
+  "Other",
 ];
 
 const supplierTypeOptions = [
-  { value: 'manufacturer', label: 'Manufacturer (Direct)' },
-  { value: 'distributor', label: 'Authorized Distributor' },
-  { value: 'service-provider', label: 'Service Provider / Sub-Contractor' },
+  { value: "manufacturer", label: "Manufacturer (Direct)" },
+  { value: "distributor", label: "Authorized Distributor" },
+  { value: "service-provider", label: "Service Provider / Sub-Contractor" },
 ];
 
 const categoryOptions = [
-  { value: 'civil-materials', label: 'Civil Materials (Concrete/Steel)' },
-  { value: 'interior-finishes', label: 'Interior Finishes (Stone/Wood/Fabric)' },
-  { value: 'mep-equipment', label: 'MEP Equipment' },
-  { value: 'logistics', label: 'Logistics & Transport' },
+  { value: "civil-materials", label: "Civil Materials (Concrete/Steel)" },
+  {
+    value: "interior-finishes",
+    label: "Interior Finishes (Stone/Wood/Fabric)",
+  },
+  { value: "mep-equipment", label: "MEP Equipment" },
+  { value: "logistics", label: "Logistics & Transport" },
 ];
 
 const turnoverOptions = [
-  'Under 1M AED',
-  '1M - 5M AED',
-  '5M - 20M AED',
-  '20M - 50M AED',
-  '50M+ AED',
+  "Under 1M AED",
+  "1M - 5M AED",
+  "5M - 20M AED",
+  "20M - 50M AED",
+  "50M+ AED",
 ];
 
 const certificationOptions = [
-  { value: 'iso-9001', label: 'ISO 9001 (Quality)' },
-  { value: 'iso-14001', label: 'ISO 14001 (Environment)' },
-  { value: 'iso-45001', label: 'ISO 45001 (Safety)' },
-  { value: 'icv', label: 'ICV Certified (In-Country Value)' },
+  { value: "iso-9001", label: "ISO 9001 (Quality)" },
+  { value: "iso-14001", label: "ISO 14001 (Environment)" },
+  { value: "iso-45001", label: "ISO 45001 (Safety)" },
+  { value: "icv", label: "ICV Certified (In-Country Value)" },
 ];
 
 // FAQ data
 const faqData = [
   {
-    question: 'How long does the approval process take?',
+    question: "How long does the approval process take?",
     answer:
-      'Our Procurement Department reviews PQQ submissions on a weekly basis. If your profile matches our current requirements, you will be contacted within 10 working days for a formal audit.',
+      "Our Procurement Department reviews PQQ submissions on a weekly basis. If your profile matches our current requirements, you will be contacted within 10 working days for a formal audit.",
   },
   {
-    question: 'Do you require samples?',
+    question: "Do you require samples?",
     answer:
-      'Yes. If you are pre-qualified, the next step is often a physical sample submission to our Burj Vista HQ for inspection by our Design Team.',
+      "Yes. If you are pre-qualified, the next step is often a physical sample submission to our Burj Vista HQ for inspection by our Design Team.",
   },
   {
-    question: 'Do you accept international suppliers?',
+    question: "Do you accept international suppliers?",
     answer:
-      'Yes. We regularly source directly from Italy, Turkey, China, and the UK for our luxury projects. However, international suppliers must demonstrate robust logistics capabilities to handle shipping to Dubai, Doha, or Syria.',
+      "Yes. We regularly source directly from Italy, Turkey, China, and the UK for our luxury projects. However, international suppliers must demonstrate robust logistics capabilities to handle shipping to Dubai, Doha, or Syria.",
   },
 ];
 
@@ -127,13 +144,13 @@ export default function SupplierRegistrationPage() {
   const faqRef = useRef<HTMLElement>(null);
 
   const heroInView = useInView(heroRef, { once: true });
-  const introInView = useInView(introRef, { once: true, margin: '-100px' });
-  const formInView = useInView(formRef, { once: true, margin: '-100px' });
-  const faqInView = useInView(faqRef, { once: true, margin: '-100px' });
+  const introInView = useInView(introRef, { once: true, margin: "-100px" });
+  const formInView = useInView(formRef, { once: true, margin: "-100px" });
+  const faqInView = useInView(faqRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
@@ -144,7 +161,9 @@ export default function SupplierRegistrationPage() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedCertifications, setSelectedCertifications] = useState<string[]>([]);
+  const [selectedCertifications, setSelectedCertifications] = useState<
+    string[]
+  >([]);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   const {
@@ -171,19 +190,19 @@ export default function SupplierRegistrationPage() {
 
     if (step === 1) {
       fieldsToValidate = [
-        'companyName',
-        'tradeLicenseNumber',
-        'hqCountry',
-        'hqCity',
-        'contactPerson',
-        'contactDesignation',
-        'email',
-        'phone',
+        "companyName",
+        "tradeLicenseNumber",
+        "hqCountry",
+        "hqCity",
+        "contactPerson",
+        "contactDesignation",
+        "email",
+        "phone",
       ];
     } else if (step === 2) {
-      fieldsToValidate = ['supplierType', 'primaryCategory', 'annualTurnover'];
+      fieldsToValidate = ["supplierType", "primaryCategory", "annualTurnover"];
     } else if (step === 3) {
-      fieldsToValidate = ['referenceProject1'];
+      fieldsToValidate = ["referenceProject1"];
     }
 
     const isValid = await trigger(fieldsToValidate);
@@ -208,7 +227,7 @@ export default function SupplierRegistrationPage() {
       ? selectedCategories.filter((c) => c !== category)
       : [...selectedCategories, category];
     setSelectedCategories(newCategories);
-    setValue('primaryCategory', newCategories);
+    setValue("primaryCategory", newCategories);
   };
 
   const handleCertificationChange = (cert: string) => {
@@ -216,7 +235,7 @@ export default function SupplierRegistrationPage() {
       ? selectedCertifications.filter((c) => c !== cert)
       : [...selectedCertifications, cert];
     setSelectedCertifications(newCerts);
-    setValue('certifications', newCerts);
+    setValue("certifications", newCerts);
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -224,29 +243,29 @@ export default function SupplierRegistrationPage() {
     if (file) {
       // Validate file size (max 10MB)
       if (file.size > 10 * 1024 * 1024) {
-        alert('File must be less than 10MB');
+        alert("File must be less than 10MB");
         return;
       }
       // Validate file type
-      if (file.type !== 'application/pdf') {
-        alert('Please upload a PDF file only');
+      if (file.type !== "application/pdf") {
+        alert("Please upload a PDF file only");
         return;
       }
       setUploadedFile(file);
-      setValue('documents', file);
+      setValue("documents", file);
     }
   };
 
   const removeFile = () => {
     setUploadedFile(null);
-    setValue('documents', undefined);
+    setValue("documents", undefined);
   };
 
   const onSubmit = async (data: SupplierFormData) => {
     setIsSubmitting(true);
     try {
       // Simulate form submission
-      console.log('Supplier registration submitted:', data);
+      console.log("Supplier registration submitted:", data);
       await new Promise((resolve) => setTimeout(resolve, 2000));
       setSubmitSuccess(true);
       reset();
@@ -255,17 +274,32 @@ export default function SupplierRegistrationPage() {
       setUploadedFile(null);
       setCurrentStep(1);
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error("Form submission error:", error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const steps = [
-    { number: 1, title: 'Company Profile', subtitle: 'Basic Info', icon: Building2 },
-    { number: 2, title: 'Category & Capacity', subtitle: 'Your Services', icon: Package },
-    { number: 3, title: 'Compliance & Quality', subtitle: 'Certifications', icon: Award },
-    { number: 4, title: 'Documents', subtitle: 'Upload Files', icon: FileText },
+    {
+      number: 1,
+      title: "Company Profile",
+      subtitle: "Basic Info",
+      icon: Building2,
+    },
+    {
+      number: 2,
+      title: "Category & Capacity",
+      subtitle: "Your Services",
+      icon: Package,
+    },
+    {
+      number: 3,
+      title: "Compliance & Quality",
+      subtitle: "Certifications",
+      icon: Award,
+    },
+    { number: 4, title: "Documents", subtitle: "Upload Files", icon: FileText },
   ];
 
   return (
@@ -337,14 +371,19 @@ export default function SupplierRegistrationPage() {
               transition={{ duration: 2, repeat: Infinity }}
               className="flex flex-col items-center gap-2"
             >
-              <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">Scroll</span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">
+                Scroll
+              </span>
               <div className="h-8 w-px bg-gradient-to-b from-white/40 to-transparent" />
             </motion.div>
           </motion.div>
         </section>
 
         {/* Intro Section - Beyond the Transaction */}
-        <section ref={introRef} className="relative overflow-hidden bg-white py-24 lg:py-32">
+        <section
+          ref={introRef}
+          className="relative overflow-hidden bg-white py-24 lg:py-32"
+        >
           <div className="mx-auto max-w-5xl px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -356,10 +395,10 @@ export default function SupplierRegistrationPage() {
                 Beyond the Transaction.
               </h2>
               <p className="mx-auto max-w-3xl text-lg font-light leading-relaxed text-neutral-600">
-                At MIDC, we do not view our suppliers as vendors; we view them as extensions of our
-                own team. Whether you are supplying Italian marble for a Ritz-Carlton renovation or
-                architectural steel for a C1 Headquarter build, your product becomes part of our
-                legacy.
+                At MIDC, we do not view our suppliers as vendors; we view them
+                as extensions of our own team. Whether you are supplying Italian
+                marble for a Ritz-Carlton renovation or architectural steel for
+                a C1 Headquarter build, your product becomes part of our legacy.
               </p>
             </motion.div>
 
@@ -370,8 +409,8 @@ export default function SupplierRegistrationPage() {
               className="mb-12"
             >
               <p className="mb-8 text-center text-base font-light text-neutral-600">
-                We maintain a rigorous Pre-Qualification Process (PQQ). We are actively seeking
-                partners who share our commitment to:
+                We maintain a rigorous Pre-Qualification Process (PQQ). We are
+                actively seeking partners who share our commitment to:
               </p>
 
               <div className="grid gap-6 md:grid-cols-3">
@@ -380,7 +419,9 @@ export default function SupplierRegistrationPage() {
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 transition-colors group-hover:bg-[#c9a962]">
                     <Globe className="h-6 w-6 text-white transition-colors group-hover:text-neutral-950" />
                   </div>
-                  <h3 className="mb-3 text-xl font-medium text-neutral-950">Traceability</h3>
+                  <h3 className="mb-3 text-xl font-medium text-neutral-950">
+                    Traceability
+                  </h3>
                   <p className="text-sm font-light leading-relaxed text-neutral-600">
                     You know exactly where your raw materials come from.
                   </p>
@@ -391,9 +432,12 @@ export default function SupplierRegistrationPage() {
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 transition-colors group-hover:bg-[#c9a962]">
                     <Clock className="h-6 w-6 text-white transition-colors group-hover:text-neutral-950" />
                   </div>
-                  <h3 className="mb-3 text-xl font-medium text-neutral-950">Timeliness</h3>
+                  <h3 className="mb-3 text-xl font-medium text-neutral-950">
+                    Timeliness
+                  </h3>
                   <p className="text-sm font-light leading-relaxed text-neutral-600">
-                    You understand that &quot;Just-in-Time&quot; is a rule, not a suggestion.
+                    You understand that &quot;Just-in-Time&quot; is a rule, not
+                    a suggestion.
                   </p>
                 </div>
 
@@ -402,7 +446,9 @@ export default function SupplierRegistrationPage() {
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 transition-colors group-hover:bg-[#c9a962]">
                     <ShieldCheck className="h-6 w-6 text-white transition-colors group-hover:text-neutral-950" />
                   </div>
-                  <h3 className="mb-3 text-xl font-medium text-neutral-950">Quality</h3>
+                  <h3 className="mb-3 text-xl font-medium text-neutral-950">
+                    Quality
+                  </h3>
                   <p className="text-sm font-light leading-relaxed text-neutral-600">
                     You operate under ISO 9001 standards or equivalent.
                   </p>
@@ -413,7 +459,10 @@ export default function SupplierRegistrationPage() {
         </section>
 
         {/* Form Section */}
-        <section ref={formRef} className="relative overflow-hidden bg-neutral-50 py-24 lg:py-32">
+        <section
+          ref={formRef}
+          className="relative overflow-hidden bg-neutral-50 py-24 lg:py-32"
+        >
           <div className="mx-auto max-w-5xl px-6">
             {/* Section Header */}
             <motion.div
@@ -426,7 +475,8 @@ export default function SupplierRegistrationPage() {
                 Vendor Registration Application.
               </h2>
               <p className="mx-auto max-w-2xl text-base font-light leading-relaxed text-neutral-600">
-                Please complete all fields to be considered for our Approved Vendor List (AVL).
+                Please complete all fields to be considered for our Approved
+                Vendor List (AVL).
               </p>
             </motion.div>
 
@@ -446,8 +496,9 @@ export default function SupplierRegistrationPage() {
                     Pre-Qualification Request Submitted!
                   </h3>
                   <p className="text-green-700">
-                    Our Procurement Department will review your submission and contact you within 10
-                    working days if your profile matches our current requirements.
+                    Our Procurement Department will review your submission and
+                    contact you within 10 working days if your profile matches
+                    our current requirements.
                   </p>
                   <button
                     onClick={() => setSubmitSuccess(false)}
@@ -472,23 +523,26 @@ export default function SupplierRegistrationPage() {
                     {steps.map((step, index) => (
                       <div key={step.number} className="flex items-center">
                         <button
-                          onClick={() => step.number < currentStep && setCurrentStep(step.number)}
+                          onClick={() =>
+                            step.number < currentStep &&
+                            setCurrentStep(step.number)
+                          }
                           disabled={step.number > currentStep}
                           className={`flex items-center gap-3 transition-all ${
                             step.number > currentStep
-                              ? 'cursor-not-allowed opacity-50'
+                              ? "cursor-not-allowed opacity-50"
                               : step.number < currentStep
-                                ? 'cursor-pointer'
-                                : ''
+                                ? "cursor-pointer"
+                                : ""
                           }`}
                         >
                           <div
                             className={`flex h-12 w-12 items-center justify-center rounded-full transition-all ${
                               step.number === currentStep
-                                ? 'bg-neutral-950 text-white'
+                                ? "bg-neutral-950 text-white"
                                 : step.number < currentStep
-                                  ? 'bg-[#c9a962] text-neutral-950'
-                                  : 'bg-neutral-200 text-neutral-400'
+                                  ? "bg-[#c9a962] text-neutral-950"
+                                  : "bg-neutral-200 text-neutral-400"
                             }`}
                           >
                             {step.number < currentStep ? (
@@ -500,19 +554,25 @@ export default function SupplierRegistrationPage() {
                           <div className="hidden text-left md:block">
                             <p
                               className={`text-sm font-medium ${
-                                step.number === currentStep ? 'text-neutral-950' : 'text-neutral-400'
+                                step.number === currentStep
+                                  ? "text-neutral-950"
+                                  : "text-neutral-400"
                               }`}
                             >
                               {step.title}
                             </p>
-                            <p className="text-xs text-neutral-400">{step.subtitle}</p>
+                            <p className="text-xs text-neutral-400">
+                              {step.subtitle}
+                            </p>
                           </div>
                         </button>
 
                         {index < steps.length - 1 && (
                           <div
                             className={`mx-2 hidden h-px w-8 md:mx-4 md:block md:w-12 lg:w-16 ${
-                              step.number < currentStep ? 'bg-[#c9a962]' : 'bg-neutral-200'
+                              step.number < currentStep
+                                ? "bg-[#c9a962]"
+                                : "bg-neutral-200"
                             }`}
                           />
                         )}
@@ -556,11 +616,13 @@ export default function SupplierRegistrationPage() {
                               Registered Company Name *
                             </label>
                             <input
-                              {...register('companyName')}
+                              {...register("companyName")}
                               type="text"
                               placeholder="Your company name"
                               className={`w-full rounded-lg border ${
-                                errors.companyName ? 'border-red-300' : 'border-neutral-200'
+                                errors.companyName
+                                  ? "border-red-300"
+                                  : "border-neutral-200"
                               } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                             />
                             {errors.companyName && (
@@ -576,11 +638,13 @@ export default function SupplierRegistrationPage() {
                               Trade License Number *
                             </label>
                             <input
-                              {...register('tradeLicenseNumber')}
+                              {...register("tradeLicenseNumber")}
                               type="text"
                               placeholder="License number"
                               className={`w-full rounded-lg border ${
-                                errors.tradeLicenseNumber ? 'border-red-300' : 'border-neutral-200'
+                                errors.tradeLicenseNumber
+                                  ? "border-red-300"
+                                  : "border-neutral-200"
                               } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                             />
                             {errors.tradeLicenseNumber && (
@@ -596,9 +660,11 @@ export default function SupplierRegistrationPage() {
                               HQ Location - Country *
                             </label>
                             <select
-                              {...register('hqCountry')}
+                              {...register("hqCountry")}
                               className={`w-full rounded-lg border ${
-                                errors.hqCountry ? 'border-red-300' : 'border-neutral-200'
+                                errors.hqCountry
+                                  ? "border-red-300"
+                                  : "border-neutral-200"
                               } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                             >
                               <option value="">Select country</option>
@@ -621,15 +687,19 @@ export default function SupplierRegistrationPage() {
                               HQ Location - City *
                             </label>
                             <input
-                              {...register('hqCity')}
+                              {...register("hqCity")}
                               type="text"
                               placeholder="City"
                               className={`w-full rounded-lg border ${
-                                errors.hqCity ? 'border-red-300' : 'border-neutral-200'
+                                errors.hqCity
+                                  ? "border-red-300"
+                                  : "border-neutral-200"
                               } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                             />
                             {errors.hqCity && (
-                              <p className="mt-1 text-xs text-red-500">{errors.hqCity.message}</p>
+                              <p className="mt-1 text-xs text-red-500">
+                                {errors.hqCity.message}
+                              </p>
                             )}
                           </div>
 
@@ -639,7 +709,7 @@ export default function SupplierRegistrationPage() {
                               Company Website
                             </label>
                             <input
-                              {...register('website')}
+                              {...register("website")}
                               type="url"
                               placeholder="https://www.yourcompany.com"
                               className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none"
@@ -652,11 +722,13 @@ export default function SupplierRegistrationPage() {
                               Contact Person - Name *
                             </label>
                             <input
-                              {...register('contactPerson')}
+                              {...register("contactPerson")}
                               type="text"
                               placeholder="Full name"
                               className={`w-full rounded-lg border ${
-                                errors.contactPerson ? 'border-red-300' : 'border-neutral-200'
+                                errors.contactPerson
+                                  ? "border-red-300"
+                                  : "border-neutral-200"
                               } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                             />
                             {errors.contactPerson && (
@@ -672,11 +744,13 @@ export default function SupplierRegistrationPage() {
                               Contact Person - Designation *
                             </label>
                             <input
-                              {...register('contactDesignation')}
+                              {...register("contactDesignation")}
                               type="text"
                               placeholder="e.g., Sales Manager"
                               className={`w-full rounded-lg border ${
-                                errors.contactDesignation ? 'border-red-300' : 'border-neutral-200'
+                                errors.contactDesignation
+                                  ? "border-red-300"
+                                  : "border-neutral-200"
                               } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                             />
                             {errors.contactDesignation && (
@@ -692,15 +766,19 @@ export default function SupplierRegistrationPage() {
                               Email Address *
                             </label>
                             <input
-                              {...register('email')}
+                              {...register("email")}
                               type="email"
                               placeholder="contact@company.com"
                               className={`w-full rounded-lg border ${
-                                errors.email ? 'border-red-300' : 'border-neutral-200'
+                                errors.email
+                                  ? "border-red-300"
+                                  : "border-neutral-200"
                               } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                             />
                             {errors.email && (
-                              <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
+                              <p className="mt-1 text-xs text-red-500">
+                                {errors.email.message}
+                              </p>
                             )}
                           </div>
 
@@ -710,15 +788,19 @@ export default function SupplierRegistrationPage() {
                               Phone / WhatsApp *
                             </label>
                             <input
-                              {...register('phone')}
+                              {...register("phone")}
                               type="tel"
                               placeholder="+971 XX XXX XXXX"
                               className={`w-full rounded-lg border ${
-                                errors.phone ? 'border-red-300' : 'border-neutral-200'
+                                errors.phone
+                                  ? "border-red-300"
+                                  : "border-neutral-200"
                               } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                             />
                             {errors.phone && (
-                              <p className="mt-1 text-xs text-red-500">{errors.phone.message}</p>
+                              <p className="mt-1 text-xs text-red-500">
+                                {errors.phone.message}
+                              </p>
                             )}
                           </div>
                         </div>
@@ -755,17 +837,19 @@ export default function SupplierRegistrationPage() {
                                 key={type.value}
                                 className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all ${
                                   watchedValues.supplierType === type.value
-                                    ? 'border-neutral-950 bg-neutral-950 text-white'
-                                    : 'border-neutral-200 bg-neutral-50 hover:border-neutral-300'
+                                    ? "border-neutral-950 bg-neutral-950 text-white"
+                                    : "border-neutral-200 bg-neutral-50 hover:border-neutral-300"
                                 }`}
                               >
                                 <input
-                                  {...register('supplierType')}
+                                  {...register("supplierType")}
                                   type="radio"
                                   value={type.value}
                                   className="sr-only"
                                 />
-                                <span className="text-sm font-light">{type.label}</span>
+                                <span className="text-sm font-light">
+                                  {type.label}
+                                </span>
                               </label>
                             ))}
                           </div>
@@ -787,26 +871,30 @@ export default function SupplierRegistrationPage() {
                                 key={category.value}
                                 className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all ${
                                   selectedCategories.includes(category.value)
-                                    ? 'border-[#c9a962] bg-[#c9a962]/10'
-                                    : 'border-neutral-200 bg-neutral-50 hover:border-neutral-300'
+                                    ? "border-[#c9a962] bg-[#c9a962]/10"
+                                    : "border-neutral-200 bg-neutral-50 hover:border-neutral-300"
                                 }`}
                               >
                                 <input
                                   type="checkbox"
-                                  checked={selectedCategories.includes(category.value)}
-                                  onChange={() => handleCategoryChange(category.value)}
+                                  checked={selectedCategories.includes(
+                                    category.value
+                                  )}
+                                  onChange={() =>
+                                    handleCategoryChange(category.value)
+                                  }
                                   className="sr-only"
                                 />
                                 <div
                                   className={`flex h-5 w-5 items-center justify-center rounded border ${
                                     selectedCategories.includes(category.value)
-                                      ? 'border-[#c9a962] bg-[#c9a962]'
-                                      : 'border-neutral-300'
+                                      ? "border-[#c9a962] bg-[#c9a962]"
+                                      : "border-neutral-300"
                                   }`}
                                 >
-                                  {selectedCategories.includes(category.value) && (
-                                    <Check className="h-3 w-3 text-white" />
-                                  )}
+                                  {selectedCategories.includes(
+                                    category.value
+                                  ) && <Check className="h-3 w-3 text-white" />}
                                 </div>
                                 <span className="text-sm font-light text-neutral-950">
                                   {category.label}
@@ -818,7 +906,7 @@ export default function SupplierRegistrationPage() {
                           {/* Other category */}
                           <div className="mt-3">
                             <input
-                              {...register('categoryOther')}
+                              {...register("categoryOther")}
                               type="text"
                               placeholder="Other (please specify)"
                               className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none"
@@ -837,9 +925,11 @@ export default function SupplierRegistrationPage() {
                             Annual Turnover (AED) *
                           </label>
                           <select
-                            {...register('annualTurnover')}
+                            {...register("annualTurnover")}
                             className={`w-full rounded-lg border ${
-                              errors.annualTurnover ? 'border-red-300' : 'border-neutral-200'
+                              errors.annualTurnover
+                                ? "border-red-300"
+                                : "border-neutral-200"
                             } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                           >
                             <option value="">Select range</option>
@@ -888,26 +978,30 @@ export default function SupplierRegistrationPage() {
                                 key={cert.value}
                                 className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all ${
                                   selectedCertifications.includes(cert.value)
-                                    ? 'border-[#c9a962] bg-[#c9a962]/10'
-                                    : 'border-neutral-200 bg-neutral-50 hover:border-neutral-300'
+                                    ? "border-[#c9a962] bg-[#c9a962]/10"
+                                    : "border-neutral-200 bg-neutral-50 hover:border-neutral-300"
                                 }`}
                               >
                                 <input
                                   type="checkbox"
-                                  checked={selectedCertifications.includes(cert.value)}
-                                  onChange={() => handleCertificationChange(cert.value)}
+                                  checked={selectedCertifications.includes(
+                                    cert.value
+                                  )}
+                                  onChange={() =>
+                                    handleCertificationChange(cert.value)
+                                  }
                                   className="sr-only"
                                 />
                                 <div
                                   className={`flex h-5 w-5 items-center justify-center rounded border ${
                                     selectedCertifications.includes(cert.value)
-                                      ? 'border-[#c9a962] bg-[#c9a962]'
-                                      : 'border-neutral-300'
+                                      ? "border-[#c9a962] bg-[#c9a962]"
+                                      : "border-neutral-300"
                                   }`}
                                 >
-                                  {selectedCertifications.includes(cert.value) && (
-                                    <Check className="h-3 w-3 text-white" />
-                                  )}
+                                  {selectedCertifications.includes(
+                                    cert.value
+                                  ) && <Check className="h-3 w-3 text-white" />}
                                 </div>
                                 <span className="text-sm font-light text-neutral-950">
                                   {cert.label}
@@ -929,11 +1023,13 @@ export default function SupplierRegistrationPage() {
                           <div className="space-y-4">
                             <div>
                               <input
-                                {...register('referenceProject1')}
+                                {...register("referenceProject1")}
                                 type="text"
                                 placeholder="Project 1 (required)"
                                 className={`w-full rounded-lg border ${
-                                  errors.referenceProject1 ? 'border-red-300' : 'border-neutral-200'
+                                  errors.referenceProject1
+                                    ? "border-red-300"
+                                    : "border-neutral-200"
                                 } bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none`}
                               />
                               {errors.referenceProject1 && (
@@ -943,13 +1039,13 @@ export default function SupplierRegistrationPage() {
                               )}
                             </div>
                             <input
-                              {...register('referenceProject2')}
+                              {...register("referenceProject2")}
                               type="text"
                               placeholder="Project 2 (optional)"
                               className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none"
                             />
                             <input
-                              {...register('referenceProject3')}
+                              {...register("referenceProject3")}
                               type="text"
                               placeholder="Project 3 (optional)"
                               className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-light text-neutral-950 transition-all focus:border-neutral-400 focus:bg-white focus:outline-none"
@@ -1033,7 +1129,12 @@ export default function SupplierRegistrationPage() {
                                       {uploadedFile.name}
                                     </p>
                                     <p className="text-sm text-neutral-500">
-                                      {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB
+                                      {(
+                                        uploadedFile.size /
+                                        1024 /
+                                        1024
+                                      ).toFixed(2)}{" "}
+                                      MB
                                     </p>
                                   </div>
                                 </div>
@@ -1086,7 +1187,7 @@ export default function SupplierRegistrationPage() {
                           className="group flex items-center gap-3 rounded-full bg-[#c9a962] px-8 py-4 text-sm font-light tracking-wide text-neutral-950 transition-all hover:bg-[#c4a030] disabled:opacity-50"
                         >
                           {isSubmitting ? (
-                            'Submitting...'
+                            "Submitting..."
                           ) : (
                             <>
                               Submit for Pre-Qualification
@@ -1104,7 +1205,10 @@ export default function SupplierRegistrationPage() {
         </section>
 
         {/* FAQ Section - Procurement Protocols */}
-        <section ref={faqRef} className="relative overflow-hidden bg-white py-24 lg:py-32">
+        <section
+          ref={faqRef}
+          className="relative overflow-hidden bg-white py-24 lg:py-32"
+        >
           <div className="mx-auto max-w-4xl px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1129,18 +1233,22 @@ export default function SupplierRegistrationPage() {
                   className="overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50"
                 >
                   <button
-                    onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                    onClick={() =>
+                      setExpandedFaq(expandedFaq === index ? null : index)
+                    }
                     className="flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-neutral-100"
                   >
                     <div className="flex items-center gap-4">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-neutral-950">
                         <HelpCircle className="h-5 w-5 text-white" />
                       </div>
-                      <span className="text-base font-medium text-neutral-950">{faq.question}</span>
+                      <span className="text-base font-medium text-neutral-950">
+                        {faq.question}
+                      </span>
                     </div>
                     <ChevronDown
                       className={`h-5 w-5 shrink-0 text-neutral-400 transition-transform ${
-                        expandedFaq === index ? 'rotate-180' : ''
+                        expandedFaq === index ? "rotate-180" : ""
                       }`}
                     />
                   </button>
@@ -1148,7 +1256,7 @@ export default function SupplierRegistrationPage() {
                     {expandedFaq === index && (
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
+                        animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                         className="overflow-hidden"
@@ -1175,7 +1283,7 @@ export default function SupplierRegistrationPage() {
               <div className="inline-flex items-center gap-3 rounded-full border border-neutral-200 bg-neutral-50 px-8 py-4">
                 <Truck className="h-5 w-5 text-[#c9a962]" />
                 <span className="text-sm font-light text-neutral-600">
-                  Questions? Contact our Procurement Department at{' '}
+                  Questions? Contact our Procurement Department at{" "}
                   <a
                     href="mailto:procurement@midc.ae"
                     className="font-medium text-neutral-950 underline hover:text-[#c9a962]"

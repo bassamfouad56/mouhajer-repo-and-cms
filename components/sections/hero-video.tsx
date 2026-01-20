@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Award, Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { ChevronDown, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 import Link from 'next/link';
@@ -163,21 +163,6 @@ export function HeroVideo() {
         <div className="absolute inset-0" style={{
           background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)',
         }} />
-      </motion.div>
-
-      {/* Award Badge - Top Left */}
-      <motion.div
-        initial={{ opacity: 0, x: -30 }}
-        animate={isLoaded ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.8, delay: 1.8 }}
-        className="absolute left-4 top-24 z-20 sm:left-6 lg:left-12 lg:top-28"
-      >
-        <div className="flex items-center gap-2 border border-white/10 px-3 py-1.5 backdrop-blur-md sm:gap-3 sm:px-4 sm:py-2">
-          <Award className="h-3 w-3 text-white/60 sm:h-4 sm:w-4" strokeWidth={1} />
-          <span className="text-[10px] font-light tracking-wider text-white/60 sm:text-xs">
-            {t('badge')}
-          </span>
-        </div>
       </motion.div>
 
       {/* Video Controls - Bottom Left (only show if video exists and no error) */}

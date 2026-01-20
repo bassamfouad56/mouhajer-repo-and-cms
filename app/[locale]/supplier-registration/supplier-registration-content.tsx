@@ -1,56 +1,72 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ArrowLeft, CheckCircle2, ChevronDown, Upload, Building2, Package, Shield, FileText, Clock, AlertTriangle, Home } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle2,
+  ChevronDown,
+  Upload,
+  Building2,
+  Package,
+  Shield,
+  FileText,
+  Clock,
+  AlertTriangle,
+  Home,
+} from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // FAQ Data for Procurement Protocols
 const procurementFAQs = [
   {
-    question: 'How long does the approval process take?',
-    answer: 'Our Procurement Department reviews PQQ submissions on a weekly basis. If your profile matches our current requirements, you will be contacted within 10 working days for a formal audit.',
+    question: "How long does the approval process take?",
+    answer:
+      "Our Procurement Department reviews PQQ submissions on a weekly basis. If your profile matches our current requirements, you will be contacted within 10 working days for a formal audit.",
   },
   {
-    question: 'Do you require samples?',
-    answer: 'Yes. If you are pre-qualified, the next step is often a physical sample submission to our Burj Vista HQ for inspection by our Design Team.',
+    question: "Do you require samples?",
+    answer:
+      "Yes. If you are pre-qualified, the next step is often a physical sample submission to our Burj Vista HQ for inspection by our Design Team.",
   },
   {
-    question: 'Do you accept international suppliers?',
-    answer: 'Yes. We regularly source directly from Italy, Turkey, China, and the UK for our luxury projects. However, international suppliers must demonstrate robust logistics capabilities to handle shipping to Dubai, Doha, or Syria.',
+    question: "Do you accept international suppliers?",
+    answer:
+      "Yes. We regularly source directly from Italy, Turkey, China, and the UK for our luxury projects. However, international suppliers must demonstrate robust logistics capabilities to handle shipping to Dubai, Doha, or Syria.",
   },
 ];
 
 // Supplier categories
 const supplierTypes = [
-  { id: 'manufacturer', label: 'Manufacturer (Direct)' },
-  { id: 'distributor', label: 'Authorized Distributor' },
-  { id: 'service-provider', label: 'Service Provider / Sub-Contractor' },
+  { id: "manufacturer", label: "Manufacturer (Direct)" },
+  { id: "distributor", label: "Authorized Distributor" },
+  { id: "service-provider", label: "Service Provider / Sub-Contractor" },
 ];
 
 const primaryCategories = [
-  { id: 'civil', label: 'Civil Materials (Concrete/Steel)' },
-  { id: 'interior', label: 'Interior Finishes (Stone/Wood/Fabric)' },
-  { id: 'mep', label: 'MEP Equipment' },
-  { id: 'logistics', label: 'Logistics & Transport' },
-  { id: 'other', label: 'Other' },
+  { id: "civil", label: "Civil Materials (Concrete/Steel)" },
+  { id: "interior", label: "Interior Finishes (Stone/Wood/Fabric)" },
+  { id: "mep", label: "MEP Equipment" },
+  { id: "logistics", label: "Logistics & Transport" },
+  { id: "other", label: "Other" },
 ];
 
 const certifications = [
-  { id: 'iso9001', label: 'ISO 9001 (Quality)' },
-  { id: 'iso14001', label: 'ISO 14001 (Environment)' },
-  { id: 'iso45001', label: 'ISO 45001 (Safety)' },
-  { id: 'icv', label: 'ICV Certified (In-Country Value)' },
+  { id: "iso9001", label: "ISO 9001 (Quality)" },
+  { id: "iso14001", label: "ISO 14001 (Environment)" },
+  { id: "iso45001", label: "ISO 45001 (Safety)" },
+  { id: "icv", label: "ICV Certified (In-Country Value)" },
 ];
 
 const turnoverRanges = [
-  'Under AED 1 Million',
-  'AED 1-5 Million',
-  'AED 5-10 Million',
-  'AED 10-50 Million',
-  'AED 50-100 Million',
-  'Over AED 100 Million',
+  "Under AED 1 Million",
+  "AED 1-5 Million",
+  "AED 5-10 Million",
+  "AED 10-50 Million",
+  "AED 50-100 Million",
+  "Over AED 100 Million",
 ];
 
 interface FormData {
@@ -81,26 +97,26 @@ export default function SupplierRegistrationContent() {
   const router = useRouter();
 
   const [formData, setFormData] = useState<FormData>({
-    companyName: '',
-    tradeLicense: '',
-    hqLocation: '',
-    website: '',
-    contactPerson: '',
-    email: '',
-    phone: '',
-    supplierType: '',
-    primaryCategory: '',
-    otherCategory: '',
-    annualTurnover: '',
+    companyName: "",
+    tradeLicense: "",
+    hqLocation: "",
+    website: "",
+    contactPerson: "",
+    email: "",
+    phone: "",
+    supplierType: "",
+    primaryCategory: "",
+    otherCategory: "",
+    annualTurnover: "",
     certifications: [],
-    referenceProjects: '',
+    referenceProjects: "",
     documents: null,
   });
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
     // Simulate form submission and email sending
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsSubmitting(false);
     setIsSubmitted(true);
   };
@@ -167,7 +183,7 @@ function HeroSection() {
             Join Our Supply Chain.
           </h1>
           <p className="mx-auto mt-8 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-white/60 lg:text-2xl">
-            We build the best.{' '}
+            We build the best.{" "}
             <span className="text-[#c9a962]">We expect the best.</span>
           </p>
         </motion.div>
@@ -188,25 +204,29 @@ function HeroSection() {
 // Beyond the Transaction Section
 function BeyondTransactionSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const commitments = [
     {
-      title: 'Traceability',
-      description: 'You know exactly where your raw materials come from.',
+      title: "Traceability",
+      description: "You know exactly where your raw materials come from.",
     },
     {
-      title: 'Timeliness',
-      description: 'You understand that "Just-in-Time" is a rule, not a suggestion.',
+      title: "Timeliness",
+      description:
+        'You understand that "Just-in-Time" is a rule, not a suggestion.',
     },
     {
-      title: 'Quality',
-      description: 'You operate under ISO 9001 standards or equivalent.',
+      title: "Quality",
+      description: "You operate under ISO 9001 standards or equivalent.",
     },
   ];
 
   return (
-    <section ref={sectionRef} className="relative py-24 lg:py-32 border-t border-white/5">
+    <section
+      ref={sectionRef}
+      className="relative py-24 lg:py-32 border-t border-white/5"
+    >
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Left Column */}
@@ -235,14 +255,15 @@ function BeyondTransactionSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <p className="font-Satoshi text-lg font-light leading-relaxed text-white/70">
-              At MIDC, we do not view our suppliers as vendors; we view them as{' '}
-              <span className="text-white">extensions of our own team</span>. Whether you are supplying
-              Italian marble for a Ritz-Carlton renovation or architectural steel for a C1 Headquarter
-              build, your product becomes part of our legacy.
+              At MIDC, we do not view our suppliers as vendors; we view them as{" "}
+              <span className="text-white">extensions of our own team</span>.
+              Whether you are supplying Italian marble for a Ritz-Carlton
+              renovation or architectural steel for a C1 Headquarter build, your
+              product becomes part of our legacy.
             </p>
             <p className="mt-6 font-Satoshi text-base font-light text-white/50">
-              We maintain a rigorous Pre-Qualification Process (PQQ). We are actively seeking partners
-              who share our commitment to:
+              We maintain a rigorous Pre-Qualification Process (PQQ). We are
+              actively seeking partners who share our commitment to:
             </p>
           </motion.div>
         </div>
@@ -263,7 +284,10 @@ function BeyondTransactionSection() {
               className="group border border-white/10 bg-white/[0.02] p-8 transition-all hover:border-[#c9a962]/30 hover:bg-[#c9a962]/5"
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10">
-                <CheckCircle2 className="h-6 w-6 text-[#c9a962]" strokeWidth={1.5} />
+                <CheckCircle2
+                  className="h-6 w-6 text-[#c9a962]"
+                  strokeWidth={1.5}
+                />
               </div>
               <h3 className="mb-3 font-SchnyderS text-2xl font-light text-white">
                 {item.title}
@@ -298,14 +322,14 @@ function VendorRegistrationForm({
   isSubmitting,
 }: VendorRegistrationFormProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-  const [fileName, setFileName] = useState<string>('');
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [fileName, setFileName] = useState<string>("");
 
   const steps = [
-    { number: 1, title: 'Company Profile', icon: Building2 },
-    { number: 2, title: 'Category & Capacity', icon: Package },
-    { number: 3, title: 'Compliance & Quality', icon: Shield },
-    { number: 4, title: 'Document Upload', icon: FileText },
+    { number: 1, title: "Company Profile", icon: Building2 },
+    { number: 2, title: "Category & Capacity", icon: Package },
+    { number: 3, title: "Compliance & Quality", icon: Shield },
+    { number: 4, title: "Document Upload", icon: FileText },
   ];
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -318,7 +342,7 @@ function VendorRegistrationForm({
 
   const handleCertificationChange = (certId: string) => {
     const newCerts = formData.certifications.includes(certId)
-      ? formData.certifications.filter(c => c !== certId)
+      ? formData.certifications.filter((c) => c !== certId)
       : [...formData.certifications, certId];
     setFormData({ ...formData, certifications: newCerts });
   };
@@ -332,7 +356,10 @@ function VendorRegistrationForm({
   };
 
   return (
-    <section ref={sectionRef} className="relative py-24 lg:py-32 border-t border-white/5">
+    <section
+      ref={sectionRef}
+      className="relative py-24 lg:py-32 border-t border-white/5"
+    >
       <div className="mx-auto max-w-[1200px] px-6">
         {/* Header */}
         <motion.div
@@ -345,7 +372,8 @@ function VendorRegistrationForm({
             Vendor Registration Application
           </h2>
           <p className="mx-auto mt-4 max-w-xl font-Satoshi text-base font-light text-white/60">
-            Please complete all fields to be considered for our Approved Vendor List (AVL).
+            Please complete all fields to be considered for our Approved Vendor
+            List (AVL).
           </p>
         </motion.div>
 
@@ -363,8 +391,8 @@ function VendorRegistrationForm({
                   <div
                     className={`flex h-12 w-12 items-center justify-center border transition-all ${
                       currentStep >= step.number
-                        ? 'border-[#c9a962] bg-[#c9a962]/10 text-[#c9a962]'
-                        : 'border-white/20 bg-white/[0.02] text-white/40'
+                        ? "border-[#c9a962] bg-[#c9a962]/10 text-[#c9a962]"
+                        : "border-white/20 bg-white/[0.02] text-white/40"
                     }`}
                   >
                     <step.icon className="h-5 w-5" strokeWidth={1.5} />
@@ -376,7 +404,7 @@ function VendorRegistrationForm({
                 {index < steps.length - 1 && (
                   <div
                     className={`mx-4 h-px w-12 sm:w-24 lg:w-32 transition-all ${
-                      currentStep > step.number ? 'bg-[#c9a962]' : 'bg-white/10'
+                      currentStep > step.number ? "bg-[#c9a962]" : "bg-white/10"
                     }`}
                   />
                 )}
@@ -415,7 +443,12 @@ function VendorRegistrationForm({
                       type="text"
                       required
                       value={formData.companyName}
-                      onChange={e => setFormData({ ...formData, companyName: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          companyName: e.target.value,
+                        })
+                      }
                       className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="Company Legal Name"
                     />
@@ -428,7 +461,12 @@ function VendorRegistrationForm({
                       type="text"
                       required
                       value={formData.tradeLicense}
-                      onChange={e => setFormData({ ...formData, tradeLicense: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          tradeLicense: e.target.value,
+                        })
+                      }
                       className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="License Number"
                     />
@@ -444,7 +482,9 @@ function VendorRegistrationForm({
                       type="text"
                       required
                       value={formData.hqLocation}
-                      onChange={e => setFormData({ ...formData, hqLocation: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, hqLocation: e.target.value })
+                      }
                       className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="Country / City"
                     />
@@ -456,7 +496,9 @@ function VendorRegistrationForm({
                     <input
                       type="url"
                       value={formData.website}
-                      onChange={e => setFormData({ ...formData, website: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, website: e.target.value })
+                      }
                       className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="https://www.company.com"
                     />
@@ -471,7 +513,12 @@ function VendorRegistrationForm({
                     type="text"
                     required
                     value={formData.contactPerson}
-                    onChange={e => setFormData({ ...formData, contactPerson: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        contactPerson: e.target.value,
+                      })
+                    }
                     className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                     placeholder="Name & Designation"
                   />
@@ -486,7 +533,9 @@ function VendorRegistrationForm({
                       type="email"
                       required
                       value={formData.email}
-                      onChange={e => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
                       className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="email@company.com"
                     />
@@ -499,7 +548,9 @@ function VendorRegistrationForm({
                       type="tel"
                       required
                       value={formData.phone}
-                      onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
                       className="w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="+971 XX XXX XXXX"
                     />
@@ -527,33 +578,43 @@ function VendorRegistrationForm({
                     Supplier Type *
                   </label>
                   <div className="space-y-3">
-                    {supplierTypes.map(type => (
+                    {supplierTypes.map((type) => (
                       <label
                         key={type.id}
                         className={`flex cursor-pointer items-center gap-4 border p-4 transition-all ${
                           formData.supplierType === type.id
-                            ? 'border-[#c9a962]/50 bg-[#c9a962]/5'
-                            : 'border-white/10 bg-white/[0.02] hover:border-white/20'
+                            ? "border-[#c9a962]/50 bg-[#c9a962]/5"
+                            : "border-white/10 bg-white/[0.02] hover:border-white/20"
                         }`}
                       >
                         <div
                           className={`flex h-5 w-5 items-center justify-center border ${
                             formData.supplierType === type.id
-                              ? 'border-[#c9a962] bg-[#c9a962]'
-                              : 'border-white/30'
+                              ? "border-[#c9a962] bg-[#c9a962]"
+                              : "border-white/30"
                           }`}
                         >
                           {formData.supplierType === type.id && (
-                            <CheckCircle2 className="h-3 w-3 text-neutral-950" strokeWidth={2} />
+                            <CheckCircle2
+                              className="h-3 w-3 text-neutral-950"
+                              strokeWidth={2}
+                            />
                           )}
                         </div>
-                        <span className="font-Satoshi text-sm font-light text-white">{type.label}</span>
+                        <span className="font-Satoshi text-sm font-light text-white">
+                          {type.label}
+                        </span>
                         <input
                           type="radio"
                           name="supplierType"
                           value={type.id}
                           checked={formData.supplierType === type.id}
-                          onChange={e => setFormData({ ...formData, supplierType: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              supplierType: e.target.value,
+                            })
+                          }
                           className="hidden"
                         />
                       </label>
@@ -566,43 +627,58 @@ function VendorRegistrationForm({
                     Primary Category *
                   </label>
                   <div className="space-y-3">
-                    {primaryCategories.map(cat => (
+                    {primaryCategories.map((cat) => (
                       <label
                         key={cat.id}
                         className={`flex cursor-pointer items-center gap-4 border p-4 transition-all ${
                           formData.primaryCategory === cat.id
-                            ? 'border-[#c9a962]/50 bg-[#c9a962]/5'
-                            : 'border-white/10 bg-white/[0.02] hover:border-white/20'
+                            ? "border-[#c9a962]/50 bg-[#c9a962]/5"
+                            : "border-white/10 bg-white/[0.02] hover:border-white/20"
                         }`}
                       >
                         <div
                           className={`flex h-5 w-5 items-center justify-center border ${
                             formData.primaryCategory === cat.id
-                              ? 'border-[#c9a962] bg-[#c9a962]'
-                              : 'border-white/30'
+                              ? "border-[#c9a962] bg-[#c9a962]"
+                              : "border-white/30"
                           }`}
                         >
                           {formData.primaryCategory === cat.id && (
-                            <CheckCircle2 className="h-3 w-3 text-neutral-950" strokeWidth={2} />
+                            <CheckCircle2
+                              className="h-3 w-3 text-neutral-950"
+                              strokeWidth={2}
+                            />
                           )}
                         </div>
-                        <span className="font-Satoshi text-sm font-light text-white">{cat.label}</span>
+                        <span className="font-Satoshi text-sm font-light text-white">
+                          {cat.label}
+                        </span>
                         <input
                           type="radio"
                           name="primaryCategory"
                           value={cat.id}
                           checked={formData.primaryCategory === cat.id}
-                          onChange={e => setFormData({ ...formData, primaryCategory: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              primaryCategory: e.target.value,
+                            })
+                          }
                           className="hidden"
                         />
                       </label>
                     ))}
                   </div>
-                  {formData.primaryCategory === 'other' && (
+                  {formData.primaryCategory === "other" && (
                     <input
                       type="text"
                       value={formData.otherCategory}
-                      onChange={e => setFormData({ ...formData, otherCategory: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          otherCategory: e.target.value,
+                        })
+                      }
                       className="mt-4 w-full border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                       placeholder="Please specify category"
                     />
@@ -616,12 +692,19 @@ function VendorRegistrationForm({
                   <select
                     required
                     value={formData.annualTurnover}
-                    onChange={e => setFormData({ ...formData, annualTurnover: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        annualTurnover: e.target.value,
+                      })
+                    }
                     className="w-full border border-white/10 bg-neutral-950 px-4 py-3 font-Satoshi text-sm font-light text-white transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                   >
                     <option value="">Select Range</option>
-                    {turnoverRanges.map(range => (
-                      <option key={range} value={range}>{range}</option>
+                    {turnoverRanges.map((range) => (
+                      <option key={range} value={range}>
+                        {range}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -647,27 +730,32 @@ function VendorRegistrationForm({
                     Certifications Held
                   </label>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    {certifications.map(cert => (
+                    {certifications.map((cert) => (
                       <label
                         key={cert.id}
                         className={`flex cursor-pointer items-center gap-4 border p-4 transition-all ${
                           formData.certifications.includes(cert.id)
-                            ? 'border-[#c9a962]/50 bg-[#c9a962]/5'
-                            : 'border-white/10 bg-white/[0.02] hover:border-white/20'
+                            ? "border-[#c9a962]/50 bg-[#c9a962]/5"
+                            : "border-white/10 bg-white/[0.02] hover:border-white/20"
                         }`}
                       >
                         <div
                           className={`flex h-5 w-5 items-center justify-center border ${
                             formData.certifications.includes(cert.id)
-                              ? 'border-[#c9a962] bg-[#c9a962]'
-                              : 'border-white/30'
+                              ? "border-[#c9a962] bg-[#c9a962]"
+                              : "border-white/30"
                           }`}
                         >
                           {formData.certifications.includes(cert.id) && (
-                            <CheckCircle2 className="h-3 w-3 text-neutral-950" strokeWidth={2} />
+                            <CheckCircle2
+                              className="h-3 w-3 text-neutral-950"
+                              strokeWidth={2}
+                            />
                           )}
                         </div>
-                        <span className="font-Satoshi text-sm font-light text-white">{cert.label}</span>
+                        <span className="font-Satoshi text-sm font-light text-white">
+                          {cert.label}
+                        </span>
                         <input
                           type="checkbox"
                           checked={formData.certifications.includes(cert.id)}
@@ -690,7 +778,12 @@ function VendorRegistrationForm({
                     required
                     rows={6}
                     value={formData.referenceProjects}
-                    onChange={e => setFormData({ ...formData, referenceProjects: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        referenceProjects: e.target.value,
+                      })
+                    }
                     className="w-full resize-none border border-white/10 bg-white/[0.02] px-4 py-3 font-Satoshi text-sm font-light text-white placeholder-white/30 transition-colors focus:border-[#c9a962]/50 focus:outline-none"
                     placeholder="1. Project Name - Client - Year&#10;2. Project Name - Client - Year&#10;3. Project Name - Client - Year"
                   />
@@ -718,12 +811,15 @@ function VendorRegistrationForm({
                   </p>
                   <ul className="mb-8 space-y-2 text-left inline-block">
                     {[
-                      'Trade License Copy',
-                      'TRN (Tax Registration) Certificate',
-                      'Company Profile',
-                      'ISO Certificates (if applicable)',
+                      "Trade License Copy",
+                      "TRN (Tax Registration) Certificate",
+                      "Company Profile",
+                      "ISO Certificates (if applicable)",
                     ].map((item, index) => (
-                      <li key={index} className="flex items-center gap-3 font-Satoshi text-sm font-light text-white/50">
+                      <li
+                        key={index}
+                        className="flex items-center gap-3 font-Satoshi text-sm font-light text-white/50"
+                      >
                         <div className="h-1.5 w-1.5 rounded-full bg-[#c9a962]" />
                         {item}
                       </li>
@@ -732,7 +828,7 @@ function VendorRegistrationForm({
 
                   <label className="group inline-flex cursor-pointer items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/10 px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-[#c9a962] transition-all hover:bg-[#c9a962]/20">
                     <Upload className="h-5 w-5" strokeWidth={1.5} />
-                    {fileName || 'Choose File'}
+                    {fileName || "Choose File"}
                     <input
                       type="file"
                       accept=".pdf"
@@ -750,9 +846,10 @@ function VendorRegistrationForm({
 
                 <div className="border border-[#c9a962]/20 bg-[#c9a962]/5 p-6">
                   <p className="font-Satoshi text-sm font-light text-white/70">
-                    <span className="text-[#c9a962]">Important:</span> By submitting this application,
-                    you confirm that all information provided is accurate and that you consent to MIDC
-                    verifying the details with relevant authorities.
+                    <span className="text-[#c9a962]">Important:</span> By
+                    submitting this application, you confirm that all
+                    information provided is accurate and that you consent to
+                    MIDC verifying the details with relevant authorities.
                   </p>
                 </div>
               </motion.div>
@@ -766,10 +863,13 @@ function VendorRegistrationForm({
               onClick={prevStep}
               disabled={currentStep === 1}
               className={`group flex items-center gap-3 font-Satoshi text-sm font-light text-white/60 transition-all hover:text-white ${
-                currentStep === 1 ? 'invisible' : ''
+                currentStep === 1 ? "invisible" : ""
               }`}
             >
-              <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" strokeWidth={1.5} />
+              <ArrowLeft
+                className="h-4 w-4 transition-transform group-hover:-translate-x-1"
+                strokeWidth={1.5}
+              />
               Previous
             </button>
 
@@ -780,7 +880,10 @@ function VendorRegistrationForm({
                 className="group flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
               >
                 Next
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                <ArrowRight
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  strokeWidth={1.5}
+                />
               </button>
             ) : (
               <button
@@ -789,8 +892,13 @@ function VendorRegistrationForm({
                 disabled={isSubmitting}
                 className="group flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962] disabled:opacity-50"
               >
-                {isSubmitting ? 'Submitting...' : 'Submit for Pre-Qualification'}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                {isSubmitting
+                  ? "Submitting..."
+                  : "Submit for Pre-Qualification"}
+                <ArrowRight
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  strokeWidth={1.5}
+                />
               </button>
             )}
           </div>
@@ -803,11 +911,14 @@ function VendorRegistrationForm({
 // Procurement Protocols FAQ Section
 function ProcurementProtocolsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section ref={sectionRef} className="relative py-24 lg:py-32 border-t border-white/5">
+    <section
+      ref={sectionRef}
+      className="relative py-24 lg:py-32 border-t border-white/5"
+    >
       <div className="mx-auto max-w-[1000px] px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -827,10 +938,7 @@ function ProcurementProtocolsSection() {
           className="space-y-4"
         >
           {procurementFAQs.map((faq, index) => (
-            <div
-              key={index}
-              className="border border-white/10 bg-white/[0.02]"
-            >
+            <div key={index} className="border border-white/10 bg-white/[0.02]">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="flex w-full items-center justify-between p-6 text-left"
@@ -842,14 +950,17 @@ function ProcurementProtocolsSection() {
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
+                  <ChevronDown
+                    className="h-5 w-5 text-[#c9a962]"
+                    strokeWidth={1.5}
+                  />
                 </motion.div>
               </button>
               <AnimatePresence>
                 {openIndex === index && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
@@ -877,24 +988,26 @@ function ThankYouPage() {
 
   const vettingSteps = [
     {
-      days: 'Days 1-3',
-      title: 'Initial Screen',
-      description: 'We verify your Trade License and Tax Registration (TRN).',
+      days: "Days 1-3",
+      title: "Initial Screen",
+      description: "We verify your Trade License and Tax Registration (TRN).",
     },
     {
-      days: 'Days 4-7',
-      title: 'Technical Review',
-      description: 'Our engineers review your product specifications and previous project history.',
+      days: "Days 4-7",
+      title: "Technical Review",
+      description:
+        "Our engineers review your product specifications and previous project history.",
     },
     {
-      days: 'Days 8-10',
-      title: 'Compliance Audit',
-      description: 'We check your ISO certifications and safety records.',
+      days: "Days 8-10",
+      title: "Compliance Audit",
+      description: "We check your ISO certifications and safety records.",
     },
     {
-      days: 'Decision',
-      title: 'Final Notification',
-      description: 'You will receive a formal notification of your status (Approved / Rejected / More Info Required) via email.',
+      days: "Decision",
+      title: "Final Notification",
+      description:
+        "You will receive a formal notification of your status (Approved / Rejected / More Info Required) via email.",
     },
   ];
 
@@ -914,7 +1027,10 @@ function ThankYouPage() {
             transition={{ duration: 0.8 }}
           >
             <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10">
-              <CheckCircle2 className="h-12 w-12 text-[#c9a962]" strokeWidth={1} />
+              <CheckCircle2
+                className="h-12 w-12 text-[#c9a962]"
+                strokeWidth={1}
+              />
             </div>
             <h1 className="font-SchnyderS text-5xl font-light tracking-tight text-white sm:text-6xl lg:text-7xl">
               Application Logged.
@@ -939,7 +1055,8 @@ function ThankYouPage() {
               Procurement Review Process
             </h2>
             <p className="font-Satoshi text-base font-light text-white/60">
-              Thank you for your interest in partnering with Mouhajer International Design & Contracting.
+              Thank you for your interest in partnering with Mouhajer
+              International Design & Contracting.
             </p>
           </motion.div>
 
@@ -963,9 +1080,13 @@ function ThankYouPage() {
               >
                 <div className="mb-4 inline-flex items-center gap-2 border border-[#c9a962]/30 bg-[#c9a962]/10 px-3 py-1">
                   <Clock className="h-3 w-3 text-[#c9a962]" strokeWidth={1.5} />
-                  <span className="font-Satoshi text-xs font-light text-[#c9a962]">{step.days}</span>
+                  <span className="font-Satoshi text-xs font-light text-[#c9a962]">
+                    {step.days}
+                  </span>
                 </div>
-                <h3 className="mb-2 font-SchnyderS text-lg font-light text-white">{step.title}</h3>
+                <h3 className="mb-2 font-SchnyderS text-lg font-light text-white">
+                  {step.title}
+                </h3>
                 <p className="font-Satoshi text-sm font-light leading-relaxed text-white/50">
                   {step.description}
                 </p>
@@ -985,14 +1106,18 @@ function ThankYouPage() {
             className="border border-amber-500/20 bg-amber-500/5 p-8 lg:p-12"
           >
             <div className="flex items-start gap-4">
-              <AlertTriangle className="h-6 w-6 flex-shrink-0 text-amber-500" strokeWidth={1.5} />
+              <AlertTriangle
+                className="h-6 w-6 flex-shrink-0 text-amber-500"
+                strokeWidth={1.5}
+              />
               <div>
                 <h3 className="mb-3 font-SchnyderS text-xl font-light text-white">
                   Do Not Submit Duplicate Requests
                 </h3>
                 <p className="font-Satoshi text-sm font-light leading-relaxed text-white/60">
-                  Please do not re-submit your application or call the procurement desk regarding your
-                  status during the review period. Multiple submissions may result in your application
+                  Please do not re-submit your application or call the
+                  procurement desk regarding your status during the review
+                  period. Multiple submissions may result in your application
                   being flagged as spam.
                 </p>
               </div>

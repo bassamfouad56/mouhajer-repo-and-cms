@@ -1,31 +1,41 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { validateServicePrompt, enhancePromptForMIDC, analyzeImageWithOllama, checkOllamaHealth } from '@/lib/ai/ollama-client';
-import { generateImageWithComfyUI, checkComfyUIHealth } from '@/lib/ai/comfyui-client';
-import { Resend } from 'resend';
+import { NextRequest, NextResponse } from "next/server";
+import {
+  validateServicePrompt,
+  enhancePromptForMIDC,
+  analyzeImageWithOllama,
+  checkOllamaHealth,
+} from "@/lib/ai/ollama-client";
+import {
+  generateImageWithComfyUI,
+  checkComfyUIHealth,
+} from "@/lib/ai/comfyui-client";
+import { Resend } from "resend";
 
 // Force dynamic to prevent static analysis during build
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 // Initialize Resend only if API key is available
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 export async function POST(request: NextRequest) {
   try {
     // Lazy load Sanity client to avoid build-time initialization
-    const { client: sanityClient } = await import('@/sanity/lib/client');
+    const { client: sanityClient } = await import("@/sanity/lib/client");
 
     const formData = await request.formData();
 
-    const email = formData.get('email') as string;
-    const prompt = formData.get('prompt') as string;
-    const serviceCategory = formData.get('serviceCategory') as string;
-    const uploadedImage = formData.get('image') as File | null;
+    const email = formData.get("email") as string;
+    const prompt = formData.get("prompt") as string;
+    const serviceCategory = formData.get("serviceCategory") as string;
+    const uploadedImage = formData.get("image") as File | null;
 
     // Validation
     if (!email || !prompt) {
       return NextResponse.json(
-        { error: 'Email and prompt are required' },
+        { error: "Email and prompt are required" },
         { status: 400 }
       );
     }
@@ -34,7 +44,7 @@ export async function POST(request: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Invalid email address' },
+        { error: "Invalid email address" },
         { status: 400 }
       );
     }
@@ -48,10 +58,11 @@ export async function POST(request: NextRequest) {
     if (!ollamaHealthy || !comfyUIHealthy) {
       return NextResponse.json(
         {
-          error: 'AI services are temporarily unavailable. Please try again later.',
+          error:
+            "AI services are temporarily unavailable. Please try again later.",
           details: {
-            ollama: ollamaHealthy ? 'online' : 'offline',
-            comfyUI: comfyUIHealthy ? 'online' : 'offline',
+            ollama: ollamaHealthy ? "online" : "offline",
+            comfyUI: comfyUIHealthy ? "online" : "offline",
           },
         },
         { status: 503 }
@@ -63,7 +74,7 @@ export async function POST(request: NextRequest) {
     if (!validation.isValid) {
       return NextResponse.json(
         {
-          error: 'Prompt must be related to design or construction services',
+          error: "Prompt must be related to design or construction services",
           suggestion: validation.suggestion,
         },
         { status: 400 }
@@ -79,28 +90,31 @@ export async function POST(request: NextRequest) {
     if (uploadedImage) {
       const bytes = await uploadedImage.arrayBuffer();
       const buffer = Buffer.from(bytes);
-      uploadedImageBase64 = buffer.toString('base64');
+      uploadedImageBase64 = buffer.toString("base64");
 
       // Analyze uploaded image with LLaVA
       imageAnalysis = await analyzeImageWithOllama(
         uploadedImageBase64,
         `Describe this image in detail, focusing on architectural and design elements. How can we enhance this design for a luxury project?`,
-        'llava'
+        "llava"
       );
     }
 
     // Enhance the prompt using Ollama
     const enhancedPrompt = await enhancePromptForMIDC(
-      imageAnalysis ? `${prompt}. Reference image analysis: ${imageAnalysis}` : prompt,
+      imageAnalysis
+        ? `${prompt}. Reference image analysis: ${imageAnalysis}`
+        : prompt,
       serviceCategory || validation.category
     );
 
-    console.log('Enhanced prompt:', enhancedPrompt);
+    console.log("Enhanced prompt:", enhancedPrompt);
 
     // Generate image with ComfyUI
     const generatedImageBuffer = await generateImageWithComfyUI({
       prompt: enhancedPrompt,
-      negative_prompt: 'low quality, blurry, distorted, unrealistic, amateur, sketchy, bad architecture, poor design',
+      negative_prompt:
+        "low quality, blurry, distorted, unrealistic, amateur, sketchy, bad architecture, poor design",
       width: 1024,
       height: 768,
       steps: 30,
@@ -111,64 +125,74 @@ export async function POST(request: NextRequest) {
     const generationTime = Math.round((Date.now() - startTime) / 1000);
 
     // Upload generated image to Sanity
-    const imageAsset = await sanityClient.assets.upload('image', generatedImageBuffer, {
-      filename: `ai-generated-${Date.now()}.png`,
-      contentType: 'image/png',
-    });
+    const imageAsset = await sanityClient.assets.upload(
+      "image",
+      generatedImageBuffer,
+      {
+        filename: `ai-generated-${Date.now()}.png`,
+        contentType: "image/png",
+      }
+    );
 
     // Upload user's image to Sanity if provided
     let uploadedImageAsset;
     if (uploadedImage && uploadedImageBase64) {
-      const uploadedBuffer = Buffer.from(uploadedImageBase64, 'base64');
-      uploadedImageAsset = await sanityClient.assets.upload('image', uploadedBuffer, {
-        filename: `user-upload-${Date.now()}.${uploadedImage.type.split('/')[1]}`,
-        contentType: uploadedImage.type,
-      });
+      const uploadedBuffer = Buffer.from(uploadedImageBase64, "base64");
+      uploadedImageAsset = await sanityClient.assets.upload(
+        "image",
+        uploadedBuffer,
+        {
+          filename: `user-upload-${Date.now()}.${uploadedImage.type.split("/")[1]}`,
+          contentType: uploadedImage.type,
+        }
+      );
     }
 
     // Create lead in Sanity
     const lead = await sanityClient.create({
-      _type: 'lead',
+      _type: "lead",
       email,
       prompt,
       serviceCategory: serviceCategory || validation.category,
-      uploadedImage: uploadedImageAsset ? {
-        _type: 'image',
-        asset: {
-          _type: 'reference',
-          _ref: uploadedImageAsset._id,
-        },
-      } : undefined,
+      uploadedImage: uploadedImageAsset
+        ? {
+            _type: "image",
+            asset: {
+              _type: "reference",
+              _ref: uploadedImageAsset._id,
+            },
+          }
+        : undefined,
       generatedImage: {
-        _type: 'image',
+        _type: "image",
         asset: {
-          _type: 'reference',
+          _type: "reference",
           _ref: imageAsset._id,
         },
       },
-      status: 'processing',
-      modelUsed: 'SDXL + Llama3',
+      status: "processing",
+      modelUsed: "SDXL + Llama3",
       generationTime,
       createdAt: new Date().toISOString(),
     });
 
     // Generate image URL from Sanity CDN
-    const imageUrl = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${imageAsset._id.replace('image-', '').replace('-png', '.png')}`;
+    const imageUrl = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${imageAsset._id.replace("image-", "").replace("-png", ".png")}`;
 
     // Send email with generated image (if Resend is configured)
     try {
       if (!resend) {
-        console.log('Resend not configured, skipping email');
+        console.log("Resend not configured, skipping email");
         await sanityClient
           .patch(lead._id)
-          .set({ status: 'completed' })
+          .set({ status: "completed" })
           .commit();
       } else {
         await resend.emails.send({
-        from: 'MIDC AI Design Studio <noreply@midc.ae>',
-        to: email,
-        subject: 'Your AI-Generated Design Concept from MIDC',
-        html: `
+          from: "MIDC AI Design Studio <noreply@midc.ae>",
+          to: email,
+          subject: "Your AI-Generated Design Concept from MIDC",
+          html: `
           <!DOCTYPE html>
           <html>
             <head>
@@ -239,23 +263,20 @@ export async function POST(request: NextRequest) {
         await sanityClient
           .patch(lead._id)
           .set({
-            status: 'sent',
+            status: "sent",
             emailSentAt: new Date().toISOString(),
           })
           .commit();
       }
     } catch (emailError) {
-      console.error('Failed to send email:', emailError);
+      console.error("Failed to send email:", emailError);
       // Don't fail the request if email fails
-      await sanityClient
-        .patch(lead._id)
-        .set({ status: 'completed' })
-        .commit();
+      await sanityClient.patch(lead._id).set({ status: "completed" }).commit();
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Image generated successfully! Check your email.',
+      message: "Image generated successfully! Check your email.",
       data: {
         leadId: lead._id,
         imageUrl,
@@ -263,14 +284,13 @@ export async function POST(request: NextRequest) {
         enhancedPrompt,
       },
     });
-
   } catch (error) {
-    console.error('Image generation error:', error);
+    console.error("Image generation error:", error);
 
     return NextResponse.json(
       {
-        error: 'Failed to generate image',
-        details: error instanceof Error ? error.message : 'Unknown error',
+        error: "Failed to generate image",
+        details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     );
@@ -285,10 +305,10 @@ export async function GET() {
   ]);
 
   return NextResponse.json({
-    status: ollamaHealthy && comfyUIHealthy ? 'healthy' : 'degraded',
+    status: ollamaHealthy && comfyUIHealthy ? "healthy" : "degraded",
     services: {
-      ollama: ollamaHealthy ? 'online' : 'offline',
-      comfyUI: comfyUIHealthy ? 'online' : 'offline',
+      ollama: ollamaHealthy ? "online" : "offline",
+      comfyUI: comfyUIHealthy ? "online" : "offline",
     },
     timestamp: new Date().toISOString(),
   });

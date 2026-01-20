@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 
 export function CompanyStorySection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -14,8 +14,7 @@ export function CompanyStorySection() {
       className="relative overflow-hidden bg-[#F5F0E8] py-24 sm:py-32 lg:py-40"
     >
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
-      </div>
+      <div className="absolute inset-0 opacity-[0.03]"></div>
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
@@ -44,10 +43,19 @@ export function CompanyStorySection() {
             {/* Body - 100% VERBATIM from content.md lines 449-451 */}
             <div className="space-y-6 font-Satoshi text-base font-light leading-relaxed text-neutral-700 sm:text-lg">
               <p>
-                Founded in 1999, Mouhajer International Design & Contracting (MIDC) did not just appear on the landscape; we grew with the UAE. For over two decades, Maher Mouhajer has led a mission to professionalize the intersection of design and construction.
+                Founded in 1999, Mouhajer International Design & Contracting
+                (MIDC) did not just appear on the landscape; we grew with the
+                UAE. For over two decades, Maher Mouhajer has led a mission to
+                professionalize the intersection of design and construction.
               </p>
               <p>
-                What began at the turn of the millennium as a commitment to quality has evolved into a powerhouse firm. We spent our first two decades mastering the art of the private luxury villa and corporate fit-outs, building a quiet but powerful reputation among the UAE's elite. By the time we expanded into major hospitality renovations in 2020, we weren't just 'new entrants'; we were veterans ready to scale.
+                What began at the turn of the millennium as a commitment to
+                quality has evolved into a powerhouse firm. We spent our first
+                two decades mastering the art of the private luxury villa and
+                corporate fit-outs, building a quiet but powerful reputation
+                among the UAE's elite. By the time we expanded into major
+                hospitality renovations in 2020, we weren't just 'new entrants';
+                we were veterans ready to scale.
               </p>
             </div>
 
@@ -90,7 +98,6 @@ export function CompanyStorySection() {
               <div className="absolute left-4 top-4 h-24 w-24 border-l-2 border-t-2 border-[#c9a962]/30" />
               <div className="absolute bottom-4 right-4 h-24 w-24 border-b-2 border-r-2 border-[#c9a962]/30" />
             </div>
-
           </motion.div>
         </div>
       </div>

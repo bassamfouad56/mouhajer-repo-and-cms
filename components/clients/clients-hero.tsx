@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
-import { getAllPartners } from '@/lib/partner-logos';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import { getAllPartners } from "@/lib/partner-logos";
 
 interface ClientsHeroProps {
   heroImage?: string;
@@ -103,8 +103,7 @@ export function ClientsHero({ heroImage }: ClientsHeroProps) {
       </div>
 
       {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0">
-      </div>
+      <div className="absolute inset-0"></div>
 
       {/* Radial gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/90 via-neutral-950/70 to-neutral-950" />
@@ -162,19 +161,25 @@ export function ClientsHero({ heroImage }: ClientsHeroProps) {
           className="mt-16 grid grid-cols-3 gap-8 lg:gap-16"
         >
           <div className="text-center">
-            <div className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl">25+</div>
+            <div className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl">
+              25+
+            </div>
             <div className="mt-2 font-Satoshi text-xs uppercase tracking-widest text-white/40">
               Years Partnership
             </div>
           </div>
           <div className="text-center">
-            <div className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl">150+</div>
+            <div className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl">
+              150+
+            </div>
             <div className="mt-2 font-Satoshi text-xs uppercase tracking-widest text-white/40">
               Joint Projects
             </div>
           </div>
           <div className="text-center">
-            <div className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl">50+</div>
+            <div className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl">
+              50+
+            </div>
             <div className="mt-2 font-Satoshi text-xs uppercase tracking-widest text-white/40">
               Trusted Partners
             </div>

@@ -1,31 +1,34 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Eye, Target, Heart } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Eye, Target, Heart } from "lucide-react";
 
 export function VisionMissionSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const blocks = [
     {
       icon: Eye,
-      title: 'VISION',
+      title: "VISION",
       // 100% VERBATIM from content.md lines 453-454
-      content: 'At Mouhajer International Design and Contracting, we are committed to building a better future for our clients, our community and our planet. We believe that construction is not only a technical process, but also a creative one, where we can transform ideas into reality. Our vision is to be the leading construction company in the region, delivering innovative, sustainable and high-quality solutions for every project. We strive to exceed expectations, foster long-term relationships, and create value for all clients. We are proud of our diverse and talented team, our ethical and responsible practices, and our dedication to excellence and safety. We are MIDC, and we are building tomorrow today.',
+      content:
+        "At Mouhajer International Design and Contracting, we are committed to building a better future for our clients, our community and our planet. We believe that construction is not only a technical process, but also a creative one, where we can transform ideas into reality. Our vision is to be the leading construction company in the region, delivering innovative, sustainable and high-quality solutions for every project. We strive to exceed expectations, foster long-term relationships, and create value for all clients. We are proud of our diverse and talented team, our ethical and responsible practices, and our dedication to excellence and safety. We are MIDC, and we are building tomorrow today.",
     },
     {
       icon: Target,
-      title: 'MISSION',
+      title: "MISSION",
       // 100% VERBATIM from content.md lines 456-457
-      content: 'Our mission at MIDC is to provide high-quality construction services that meet the needs and expectations of our clients. We are committed to delivering projects on time, within budget, and with the highest standards of safety and quality. We are proud of our reputation as a reliable and trustworthy partner in the construction industry. We value our relationships with our clients, suppliers, subcontractors, and employees, and we strive to maintain a culture of integrity, professionalism, and excellence. We believe that our mission is not only to build structures, but also to build trust and long-term partnerships.',
+      content:
+        "Our mission at MIDC is to provide high-quality construction services that meet the needs and expectations of our clients. We are committed to delivering projects on time, within budget, and with the highest standards of safety and quality. We are proud of our reputation as a reliable and trustworthy partner in the construction industry. We value our relationships with our clients, suppliers, subcontractors, and employees, and we strive to maintain a culture of integrity, professionalism, and excellence. We believe that our mission is not only to build structures, but also to build trust and long-term partnerships.",
     },
     {
       icon: Heart,
-      title: 'COMMITMENT',
+      title: "COMMITMENT",
       // 100% VERBATIM from content.md lines 459-460
-      content: 'Our Commitment is a leading provider of high-quality and cost-effective building solutions in the MENA region. We have over two decades of experience in delivering projects across various sectors, such as residential, commercial, industrial, and institutional. We are committed to meeting the needs and expectations of our clients and partners, while adhering to the highest standards of safety, quality, and sustainability. Our team of skilled and experienced professionals is dedicated to delivering excellence in every aspect of our work, from planning and design to execution and maintenance. Whether you need a new home, office, factory, or school, we have the expertise and resources to make your vision a reality.',
+      content:
+        "Our Commitment is a leading provider of high-quality and cost-effective building solutions in the MENA region. We have over two decades of experience in delivering projects across various sectors, such as residential, commercial, industrial, and institutional. We are committed to meeting the needs and expectations of our clients and partners, while adhering to the highest standards of safety, quality, and sustainability. Our team of skilled and experienced professionals is dedicated to delivering excellence in every aspect of our work, from planning and design to execution and maintenance. Whether you need a new home, office, factory, or school, we have the expertise and resources to make your vision a reality.",
     },
   ];
 
@@ -35,8 +38,7 @@ export function VisionMissionSection() {
       className="relative overflow-hidden bg-white py-24 sm:py-32 lg:py-40"
     >
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.02]">
-      </div>
+      <div className="absolute inset-0 opacity-[0.02]"></div>
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}

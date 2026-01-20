@@ -1,28 +1,41 @@
-'use client';
+"use client";
 
-import { useRef, useMemo, useEffect, useState, Suspense, useCallback } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import {
+  useRef,
+  useMemo,
+  useEffect,
+  useState,
+  Suspense,
+  useCallback,
+} from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Environment,
   useTexture,
   Text,
   Preload,
-  PerformanceMonitor
-} from '@react-three/drei';
-import { EffectComposer, Bloom, ChromaticAberration, Vignette, Noise } from '@react-three/postprocessing';
-import { BlendFunction, KernelSize } from 'postprocessing';
-import * as THREE from 'three';
-import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
-import { urlForImage } from '@/sanity/lib/image';
+  PerformanceMonitor,
+} from "@react-three/drei";
+import {
+  EffectComposer,
+  Bloom,
+  ChromaticAberration,
+  Vignette,
+  Noise,
+} from "@react-three/postprocessing";
+import { BlendFunction, KernelSize } from "postprocessing";
+import * as THREE from "three";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { urlForImage } from "@/sanity/lib/image";
 
 // Helper function to safely get image URL
 function getImageUrl(image: any): string {
-  if (!image) return '/placeholder.jpg';
+  if (!image) return "/placeholder.jpg";
   try {
     return urlForImage(image).width(800).height(600).url();
   } catch {
-    return '/placeholder.jpg';
+    return "/placeholder.jpg";
   }
 }
 
@@ -58,7 +71,7 @@ const PHYSICS = {
 const HolographicMaterial = {
   uniforms: {
     time: { value: 0 },
-    color: { value: new THREE.Color('#c9a962') },
+    color: { value: new THREE.Color("#c9a962") },
     opacity: { value: 0.8 },
   },
   vertexShader: `
@@ -120,12 +133,14 @@ function ParticleField() {
   useFrame(({ clock }) => {
     if (!particlesRef.current) return;
 
-    const positions = particlesRef.current.geometry.attributes.position.array as Float32Array;
+    const positions = particlesRef.current.geometry.attributes.position
+      .array as Float32Array;
     const time = clock.getElapsedTime();
 
     for (let i = 0; i < count; i++) {
       positions[i * 3] += velocities[i * 3] + Math.sin(time + i) * 0.001;
-      positions[i * 3 + 1] += velocities[i * 3 + 1] + Math.cos(time + i) * 0.001;
+      positions[i * 3 + 1] +=
+        velocities[i * 3 + 1] + Math.cos(time + i) * 0.001;
       positions[i * 3 + 2] += velocities[i * 3 + 2];
 
       // Wrap around
@@ -166,14 +181,21 @@ function InfiniteGrid() {
   useFrame(({ clock }) => {
     if (gridRef.current) {
       gridRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.1) * 0.1;
-      gridRef.current.rotation.z = Math.cos(clock.getElapsedTime() * 0.1) * 0.05;
+      gridRef.current.rotation.z =
+        Math.cos(clock.getElapsedTime() * 0.1) * 0.05;
     }
   });
 
   return (
     <group ref={gridRef} position={[0, -5, 0]}>
-      <gridHelper args={[100, 100, '#333333', '#1a1a1a']} rotation={[0, 0, 0]} />
-      <gridHelper args={[100, 50, '#222222', '#111111']} position={[0, 0.01, 0]} />
+      <gridHelper
+        args={[100, 100, "#333333", "#1a1a1a"]}
+        rotation={[0, 0, 0]}
+      />
+      <gridHelper
+        args={[100, 50, "#222222", "#111111"]}
+        position={[0, 0.01, 0]}
+      />
     </group>
   );
 }
@@ -234,7 +256,7 @@ function ProjectCard3D({
   // Load texture
   const imageUrl = project.mainImage
     ? getImageUrl(project.mainImage)
-    : '/placeholder.jpg';
+    : "/placeholder.jpg";
 
   const texture = useTexture(imageUrl);
   texture.colorSpace = THREE.SRGBColorSpace;
@@ -247,8 +269,8 @@ function ProjectCard3D({
     const time = clock.getElapsedTime();
 
     // Calculate mouse influence
-    const mouseInfluenceX = (mousePosition.x * 2) * PHYSICS.mouseInfluence;
-    const mouseInfluenceY = (mousePosition.y * 2) * PHYSICS.mouseInfluence;
+    const mouseInfluenceX = mousePosition.x * 2 * PHYSICS.mouseInfluence;
+    const mouseInfluenceY = mousePosition.y * 2 * PHYSICS.mouseInfluence;
 
     // Update target with mouse influence
     targetPosition.current.x = gridPosition.x + mouseInfluenceX * 0.1;
@@ -334,16 +356,21 @@ function ProjectCard3D({
       </mesh>
 
       {/* Frame */}
-      <lineSegments position={[gridPosition.x, gridPosition.y, gridPosition.z + 0.01]}>
+      <lineSegments
+        position={[gridPosition.x, gridPosition.y, gridPosition.z + 0.01]}
+      >
         <edgesGeometry args={[new THREE.PlaneGeometry(3.6, 2.5)]} />
-        <lineBasicMaterial color={isHovered ? '#c9a962' : '#333333'} linewidth={2} />
+        <lineBasicMaterial
+          color={isHovered ? "#c9a962" : "#333333"}
+          linewidth={2}
+        />
       </lineSegments>
 
       {/* Title */}
       <Text
         position={[gridPosition.x, gridPosition.y - 1.5, gridPosition.z]}
         fontSize={0.18}
-        color={isHovered ? '#c9a962' : '#ffffff'}
+        color={isHovered ? "#c9a962" : "#ffffff"}
         anchorX="center"
         anchorY="middle"
         maxWidth={3}
@@ -354,7 +381,11 @@ function ProjectCard3D({
       {/* Category badge */}
       {project.category && (
         <Text
-          position={[gridPosition.x - 1.5, gridPosition.y + 1.4, gridPosition.z]}
+          position={[
+            gridPosition.x - 1.5,
+            gridPosition.y + 1.4,
+            gridPosition.z,
+          ]}
           fontSize={0.1}
           color="#c9a962"
           anchorX="left"
@@ -445,7 +476,7 @@ function Scene({ projects, mousePosition, onSelect }: SceneProps) {
       ))}
 
       {/* Fog for depth */}
-      <fog attach="fog" args={['#0a0a0a', 15, 50]} />
+      <fog attach="fog" args={["#0a0a0a", 15, 50]} />
 
       {/* Post-processing */}
       <EffectComposer>
@@ -473,7 +504,7 @@ function LoadingScreen() {
       <div className="text-center">
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
           className="mb-6 h-16 w-16 mx-auto border-2 border-[#c9a962] border-t-transparent rounded-full"
         />
         <motion.p
@@ -499,7 +530,7 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
 
   const imageUrl = project.mainImage
     ? getImageUrl(project.mainImage)
-    : '/placeholder.jpg';
+    : "/placeholder.jpg";
 
   return (
     <AnimatePresence>
@@ -514,17 +545,19 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
           initial={{ scale: 0.8, y: 50, rotateX: -15 }}
           animate={{ scale: 1, y: 0, rotateX: 0 }}
           exit={{ scale: 0.8, y: 50, rotateX: 15 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+          transition={{ type: "spring", damping: 25, stiffness: 200 }}
           className="relative max-w-5xl w-full mx-6"
           onClick={(e) => e.stopPropagation()}
-          style={{ perspective: '1000px' }}
+          style={{ perspective: "1000px" }}
         >
           {/* Close button */}
           <button
             onClick={onClose}
             className="absolute -top-12 right-0 text-white/60 hover:text-white transition-colors"
           >
-            <span className="font-Satoshi text-sm tracking-wider">CLOSE [ESC]</span>
+            <span className="font-Satoshi text-sm tracking-wider">
+              CLOSE [ESC]
+            </span>
           </button>
 
           {/* Image */}
@@ -599,8 +632,18 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
                   className="inline-flex items-center gap-3 px-8 py-4 bg-[#c9a962] text-black font-Satoshi text-sm tracking-wider hover:bg-white transition-colors"
                 >
                   VIEW PROJECT
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
                 </Link>
               </motion.div>
@@ -624,7 +667,9 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
 export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState(new THREE.Vector2(0, 0));
-  const [selectedProject, setSelectedProject] = useState<SanityProject | null>(null);
+  const [selectedProject, setSelectedProject] = useState<SanityProject | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [dpr, setDpr] = useState(1.5);
 
@@ -642,13 +687,13 @@ export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
   // Keyboard handler for closing overlay
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && selectedProject) {
+      if (e.key === "Escape" && selectedProject) {
         setSelectedProject(null);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedProject]);
 
   return (
@@ -677,7 +722,8 @@ export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
         className="absolute bottom-8 left-8 z-20"
       >
         <div className="font-Satoshi text-xs tracking-wider text-white/30">
-          <span className="text-[#c9a962]">{projects.length}</span> PROJECTS IN VIEW
+          <span className="text-[#c9a962]">{projects.length}</span> PROJECTS IN
+          VIEW
         </div>
       </motion.div>
 
@@ -688,7 +734,7 @@ export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
         gl={{
           antialias: true,
           alpha: false,
-          powerPreference: 'high-performance',
+          powerPreference: "high-performance",
         }}
         onCreated={() => setIsLoading(false)}
       >
@@ -696,7 +742,7 @@ export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
           onIncline={() => setDpr(Math.min(2, dpr + 0.5))}
           onDecline={() => setDpr(Math.max(1, dpr - 0.5))}
         >
-          <color attach="background" args={['#0a0a0a']} />
+          <color attach="background" args={["#0a0a0a"]} />
           <Suspense fallback={null}>
             <Scene
               projects={projects}

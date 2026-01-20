@@ -3,8 +3,7 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { AboutHero } from '@/components/about/about-hero';
 import { AboutIntroServer } from '@/components/about/about-intro-server';
-import { AboutEcosystem } from '@/components/about/about-ecosystem';
-import { TrustedRecognized } from '@/components/about/trusted-recognized';
+import { AboutJourney } from '@/components/about/about-journey';
 import { client } from '@/sanity/lib/client';
 import { featuredProjectsQuery } from '@/sanity/lib/queries';
 import { urlForImage } from '@/sanity/lib/image';
@@ -70,11 +69,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         {/* Main About Us Content - Cinematic with Project Images */}
         <AboutIntroServer projectImages={projectImages} />
 
-        {/* Explore the MIDC Ecosystem - 4 pillars linking to sub-pages */}
-        <AboutEcosystem />
-
-        {/* Trusted & Recognized - Press Logos */}
-        <TrustedRecognized />
+        {/* Combined Journey Section: Quote + Ecosystem + Press Logos with Scroll Reveal */}
+        <AboutJourney
+          quoteImage="/team/MID9563.jpg"
+          quote="Excellence is not a destination but a continuous journey of refinement."
+          quoteAuthor="MIDC Philosophy"
+        />
       </main>
       <Footer />
     </>

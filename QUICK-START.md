@@ -9,6 +9,7 @@ All pages have been professionally redesigned and migrated to Sanity CMS. The em
 ## 🎯 Immediate Next Steps
 
 ### 1. **Restart Your Development Server**
+
 ```bash
 # Stop current server (Ctrl+C if running)
 npm run dev
@@ -18,9 +19,10 @@ The empty image error should now be fixed. The SafeImage component will show pla
 
 ### 2. **Add Images to Sanity CMS** ⚠️ **CRITICAL**
 
-Open Sanity Studio: **https://r97logzc.sanity.studio**
+Open Sanity Studio: **https://b6q28exv.sanity.studio**
 
 Upload images for:
+
 - **Projects** (6 projects need images):
   - Sheraton Abu Dhabi Hotel & Resort
   - Palm Jumeirah Villa
@@ -50,7 +52,9 @@ Upload images for:
   - How We Renovated 272 Hotel Rooms Without Closing
 
 ### 3. **Test All Pages**
+
 Visit and verify:
+
 - ✅ http://localhost:4050/en (Home)
 - ✅ http://localhost:4050/en/services
 - ✅ http://localhost:4050/en/projects
@@ -62,6 +66,7 @@ Visit and verify:
 ## 📊 What Changed
 
 ### Pages Updated
+
 - ✅ Home Page - Sanity CMS, FAQ removed
 - ✅ Services Page - Professional design, Expert Insights
 - ✅ Projects Page - Minimal clean design
@@ -69,6 +74,7 @@ Visit and verify:
 - ✅ Blog Page - Clean minimal cards
 
 ### Design Improvements
+
 - ❌ Removed ALL Lucide icons (30+ instances)
 - ❌ Removed ALL cartoonish elements
 - ✅ Professional animations (1-1.2s duration)
@@ -76,7 +82,8 @@ Visit and verify:
 - ✅ Fixed empty image errors
 
 ### Sanity CMS
-- ✅ Project: r97logzc
+
+- ✅ Project: b6q28exv
 - ✅ 20 documents seeded
 - ✅ i18n support (EN/AR)
 - ✅ All pages use Sanity data
@@ -86,16 +93,19 @@ Visit and verify:
 ## 🛠️ Useful Commands
 
 ### Verify Sanity Data
+
 ```bash
 npx tsx scripts/verify-sanity-data.ts
 ```
 
 ### Test Sanity Connection
+
 ```bash
 npx tsx scripts/test-sanity-connection.ts
 ```
 
 ### Re-seed Data (if needed)
+
 ```bash
 npx tsx scripts/seed-sanity-data.ts
 ```
@@ -112,6 +122,7 @@ npx tsx scripts/seed-sanity-data.ts
 ## 🎉 You're All Set!
 
 Your website is now:
+
 - ✅ Awwwards-level professional
 - ✅ Powered by Sanity CMS
 - ✅ Image error fixed

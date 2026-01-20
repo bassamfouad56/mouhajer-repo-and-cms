@@ -1,48 +1,58 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, Sparkles, Send, Loader2, CheckCircle2, AlertCircle, X } from 'lucide-react';
-import Image from 'next/image';
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Upload,
+  Sparkles,
+  Send,
+  Loader2,
+  CheckCircle2,
+  AlertCircle,
+  X,
+} from "lucide-react";
+import Image from "next/image";
 
 interface AIImageGeneratorProps {
   onClose?: () => void;
 }
 
 export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
-  const [email, setEmail] = useState('');
-  const [prompt, setPrompt] = useState('');
-  const [serviceCategory, setServiceCategory] = useState('');
+  const [email, setEmail] = useState("");
+  const [prompt, setPrompt] = useState("");
+  const [serviceCategory, setServiceCategory] = useState("");
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
+  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(
+    null
+  );
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const serviceCategories = [
-    { value: 'residential', label: 'Residential Design' },
-    { value: 'commercial', label: 'Commercial Design' },
-    { value: 'hospitality', label: 'Hospitality Design' },
-    { value: 'mep', label: 'MEP Engineering' },
-    { value: 'interior', label: 'Interior Design' },
-    { value: 'landscape', label: 'Landscape Design' },
+    { value: "residential", label: "Residential Design" },
+    { value: "commercial", label: "Commercial Design" },
+    { value: "hospitality", label: "Hospitality Design" },
+    { value: "mep", label: "MEP Engineering" },
+    { value: "interior", label: "Interior Design" },
+    { value: "landscape", label: "Landscape Design" },
   ];
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       // Validate file type
-      if (!file.type.startsWith('image/')) {
-        setError('Please upload an image file');
+      if (!file.type.startsWith("image/")) {
+        setError("Please upload an image file");
         return;
       }
 
       // Validate file size (max 10MB)
       if (file.size > 10 * 1024 * 1024) {
-        setError('Image must be less than 10MB');
+        setError("Image must be less than 10MB");
         return;
       }
 
@@ -56,7 +66,7 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
     setUploadedImage(null);
     setPreviewUrl(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
 
@@ -68,7 +78,7 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
 
     // Validation
     if (!email || !prompt) {
-      setError('Please provide your email and describe your design vision');
+      setError("Please provide your email and describe your design vision");
       return;
     }
 
@@ -76,24 +86,24 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
 
     try {
       const formData = new FormData();
-      formData.append('email', email);
-      formData.append('prompt', prompt);
+      formData.append("email", email);
+      formData.append("prompt", prompt);
       if (serviceCategory) {
-        formData.append('serviceCategory', serviceCategory);
+        formData.append("serviceCategory", serviceCategory);
       }
       if (uploadedImage) {
-        formData.append('image', uploadedImage);
+        formData.append("image", uploadedImage);
       }
 
-      const response = await fetch('/api/ai/generate-image', {
-        method: 'POST',
+      const response = await fetch("/api/ai/generate-image", {
+        method: "POST",
         body: formData,
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to generate image');
+        throw new Error(data.error || "Failed to generate image");
       }
 
       setSuccess(true);
@@ -101,14 +111,13 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
 
       // Reset form after short delay
       setTimeout(() => {
-        setEmail('');
-        setPrompt('');
-        setServiceCategory('');
+        setEmail("");
+        setPrompt("");
+        setServiceCategory("");
         removeImage();
       }, 3000);
-
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to generate image');
+      setError(err instanceof Error ? err.message : "Failed to generate image");
     } finally {
       setIsGenerating(false);
     }
@@ -149,7 +158,8 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
             </h2>
           </div>
           <p className="font-Satoshi text-sm text-neutral-600">
-            Describe your vision, and our AI will create a luxury design concept tailored to MIDC's signature style.
+            Describe your vision, and our AI will create a luxury design concept
+            tailored to MIDC's signature style.
           </p>
         </div>
 
@@ -157,7 +167,10 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
         <form onSubmit={handleSubmit} className="p-8">
           {/* Email Input */}
           <div className="mb-6">
-            <label htmlFor="email" className="block font-Satoshi text-sm font-medium text-neutral-700 mb-2">
+            <label
+              htmlFor="email"
+              className="block font-Satoshi text-sm font-medium text-neutral-700 mb-2"
+            >
               Your Email <span className="text-red-500">*</span>
             </label>
             <input
@@ -174,7 +187,10 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
 
           {/* Service Category */}
           <div className="mb-6">
-            <label htmlFor="serviceCategory" className="block font-Satoshi text-sm font-medium text-neutral-700 mb-2">
+            <label
+              htmlFor="serviceCategory"
+              className="block font-Satoshi text-sm font-medium text-neutral-700 mb-2"
+            >
               Service Type
             </label>
             <select
@@ -195,7 +211,10 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
 
           {/* Prompt Textarea */}
           <div className="mb-6">
-            <label htmlFor="prompt" className="block font-Satoshi text-sm font-medium text-neutral-700 mb-2">
+            <label
+              htmlFor="prompt"
+              className="block font-Satoshi text-sm font-medium text-neutral-700 mb-2"
+            >
               Describe Your Vision <span className="text-red-500">*</span>
             </label>
             <textarea
@@ -209,7 +228,8 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
               disabled={isGenerating}
             />
             <p className="mt-2 font-Satoshi text-xs text-neutral-500">
-              Be specific about materials, colors, style, and atmosphere you envision.
+              Be specific about materials, colors, style, and atmosphere you
+              envision.
             </p>
           </div>
 
@@ -292,7 +312,8 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
                       Image Generated Successfully!
                     </p>
                     <p className="font-Satoshi text-sm text-green-600">
-                      We've sent the design to your email. Our team will reach out within 24 hours.
+                      We've sent the design to your email. Our team will reach
+                      out within 24 hours.
                     </p>
                   </div>
                 </div>

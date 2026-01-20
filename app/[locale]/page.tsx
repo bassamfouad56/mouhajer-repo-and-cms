@@ -3,14 +3,13 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { HeroVideo } from "@/components/sections/hero-video";
 import { StatsBanner } from "@/components/sections/stats-banner";
-import { MouhajerPromise } from "@/components/sections/mouhajer-promise";
-import { WhoWeAreCinematic } from "@/components/sections/who-we-are-cinematic";
+import { UnifiedShowcase } from "@/components/sections/unified-showcase";
 import { FounderMessage } from "@/components/sections/founder-message";
 import { CapabilitiesCarousel } from "@/components/sections/capabilities-carousel";
 import { PortfolioShowcase } from "@/components/sections/portfolio-showcase";
 import { PartnersTestimonials } from "@/components/sections/partners-testimonials";
 import { CertificationsAwards } from "@/components/sections/certifications-awards";
-import { SectorsExpertise } from "@/components/sections/sectors-expertise";
+import { IndustriesHorizontalScroll } from "@/components/sections/industries-horizontal-scroll";
 import { Contact } from "@/components/sections/contact";
 import { FAQSection } from "@/components/sections/faq";
 import {
@@ -19,32 +18,32 @@ import {
   SimpleAnimatedDivider,
 } from "@/components/section-divider";
 
-// Homepage FAQ content from content.md
+// Homepage FAQ content - exact content from document
 const homepageFAQs = [
   {
     question: "Do you handle the full construction scope from empty land?",
     answer:
-      "Yes. We are a licensed main contractor capable of executing the complete lifecycle—from land clearing and piling through to final handover. This is rare in the UAE's fragmented market.",
+      "Yes. We are a licensed Building Contractor (G+12). We handle excavation, concrete, structural steel, and all civil works. You do not need a separate builder.",
   },
   {
     question: "Who manages the government approvals?",
     answer:
-      "We do. Our in-house team handles all permit applications, inspections, and compliance requirements with DDA, Civil Defence, DEWA, and other authorities.",
+      "We do. Our in-house engineering team handles all permits and NOCs from Dubai Municipality, Civil Defence, DEWA, and master developers like Nakheel or Emaar.",
   },
   {
     question: "Do you manufacture your own furniture?",
     answer:
-      "Yes. We own a 30,000 sq. ft. manufacturing facility where we produce custom joinery, fire-rated doors, wardrobes, and bespoke furniture pieces in-house.",
+      "Yes. We own a dedicated joinery and furniture factory. We custom-make doors, wardrobes, kitchens, and loose furniture to fit your space perfectly.",
   },
   {
     question: "Can you renovate my hotel while it stays open?",
     answer:
-      "Yes. We specialize in live-environment hospitality renovations. Our phased approach ensures minimal guest disruption while maintaining strict safety and quality standards.",
+      'Yes. We specialize in "live environment" renovations. We phase the work to ensure your guests are undisturbed and your revenue stream continues.',
   },
   {
     question: "Do you provide maintenance after handover?",
     answer:
-      "Yes. We offer comprehensive Annual Maintenance Contracts (AMCs) and ongoing support to protect your investment long after the keys are handed over.",
+      "Yes. We offer comprehensive annual maintenance contracts to ensure your AC, lighting, and finishes remain in showroom condition.",
   },
 ];
 
@@ -222,99 +221,6 @@ async function getSiteSettings() {
   }
 }
 
-// Get project images organized by category for homepage sections
-async function getProjectImagesByCategory(locale: string) {
-  try {
-    const projects = await client.fetch(projectsQuery, { locale });
-
-    const getImageUrl = (project: any): string => {
-      // Return empty string if project is undefined or null
-      if (!project) return "";
-
-      if (project.mainImage?.asset) {
-        try {
-          return urlForImage(project.mainImage)
-            .width(1200)
-            .height(800)
-            .auto("format")
-            .url();
-        } catch {
-          return "";
-        }
-      }
-      return "";
-    };
-
-    const allProjects = projects || [];
-
-    // Return default empty values if no projects
-    if (allProjects.length === 0) {
-      return {
-        promise: { landOwners: "", propertyOwners: "" },
-        whoWeAre: { contractor: "", designer: "", manufacturer: "" },
-        capabilities: [],
-        sectors: { hospitality: "", residential: "", commercial: "" },
-      };
-    }
-
-    // Categorize projects by type
-    const hospitality = allProjects.filter(
-      (p: any) =>
-        p?.category?.toLowerCase()?.includes("hospitality") ||
-        p?.category?.toLowerCase()?.includes("hotel")
-    );
-    const residential = allProjects.filter(
-      (p: any) =>
-        p?.category?.toLowerCase()?.includes("residential") ||
-        p?.category?.toLowerCase()?.includes("villa")
-    );
-    const commercial = allProjects.filter(
-      (p: any) =>
-        p?.category?.toLowerCase()?.includes("commercial") ||
-        p?.category?.toLowerCase()?.includes("office") ||
-        p?.category?.toLowerCase()?.includes("retail")
-    );
-
-    return {
-      // For MouhajerPromise - 2 images (construction/renovation focus)
-      promise: {
-        landOwners:
-          getImageUrl(allProjects[0]) || getImageUrl(allProjects[1]) || "",
-        propertyOwners:
-          getImageUrl(allProjects[2]) || getImageUrl(allProjects[3]) || "",
-      },
-      // For WhoWeAreCinematic - 3 images (contractor, designer, manufacturer)
-      whoWeAre: {
-        contractor: getImageUrl(allProjects[0]) || "",
-        designer: getImageUrl(allProjects[1]) || "",
-        manufacturer: getImageUrl(allProjects[2]) || "",
-      },
-      // For CapabilitiesCarousel - 6 images
-      capabilities: allProjects.slice(0, 6).map((p: any) => ({
-        url: getImageUrl(p),
-        alt: p?.title || "MIDC Project",
-      })),
-      // For SectorsExpertise - 3 images by category
-      sectors: {
-        hospitality:
-          getImageUrl(hospitality[0]) || getImageUrl(allProjects[0]) || "",
-        residential:
-          getImageUrl(residential[0]) || getImageUrl(allProjects[1]) || "",
-        commercial:
-          getImageUrl(commercial[0]) || getImageUrl(allProjects[2]) || "",
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching project images:", error);
-    return {
-      promise: { landOwners: "", propertyOwners: "" },
-      whoWeAre: { contractor: "", designer: "", manufacturer: "" },
-      capabilities: [],
-      sectors: { hospitality: "", residential: "", commercial: "" },
-    };
-  }
-}
-
 export default async function Home({
   params,
 }: {
@@ -323,40 +229,46 @@ export default async function Home({
   const { locale } = await params;
 
   // Fetch data from Sanity CMS
-  const [
-    projects,
-    services,
-    industries,
-    projectImages,
-    siteSettings,
-    clients,
-    testimonials,
-  ] = await Promise.all([
-    getProjects(locale),
-    getServices(locale),
-    getIndustries(locale),
-    getProjectImagesByCategory(locale),
-    getSiteSettings(),
-    getClients(locale),
-    getTestimonials(locale),
-  ]);
+  const [projects, services, industries, siteSettings, clients, testimonials] =
+    await Promise.all([
+      getProjects(locale),
+      getServices(locale),
+      getIndustries(locale),
+      getSiteSettings(),
+      getClients(locale),
+      getTestimonials(locale),
+    ]);
 
   return (
     <>
       <Header />
 
-      <main id="main-content" className="relative" role="main" aria-label="Main content">
+      <main
+        id="main-content"
+        className="relative bg-neutral-950"
+        role="main"
+        aria-label="Main content"
+      >
         {/* Section 1: Hero with Video */}
         <HeroVideo />
 
-        {/* Transition: Hero to Promise */}
-        {/* <SectionDivider variant="line" theme="light" /> */}
-
-        {/* Section 2: The Mouhajer Promise */}
-        <MouhajerPromise images={projectImages.promise} />
-
-        {/* Section 3: Who We Are - Cinematic Horizontal Scroll Experience */}
-        <WhoWeAreCinematic images={projectImages.whoWeAre} />
+        {/* Section 2 & 3: Unified Showcase - Promise Cards + Who We Are Horizontal Scroll */}
+        <UnifiedShowcase
+          images={{
+            background:
+              "/website%202.0%20content/services/inside%20services/the%20art%20of%20integrated%20construction/construction-%2B%20more%20labor.jpg",
+            contractor:
+              "/website%202.0%20content/homepage/The%20Main%20Contractor/_MID9168.jpg",
+            designer:
+              "/website%202.0%20content/homepage/The%20Design%20Studio/_MID7172-HDR.jpg",
+            manufacturer:
+              "/website%202.0%20content/homepage/The%20Craftsmen/carpenter-examining-wooden-board-2025-01-29-08-16-13-utc.jpg",
+            landOwners:
+              "/website%202.0%20content/homepage/land%20owners/_MID9173.jpg",
+            propertyOwners:
+              "/website%202.0%20content/homepage/Property%20Owners/vlcsnap-2026-01-03-15h21m57s058.jpg",
+          }}
+        />
 
         {/* Transition: Who We Are to Stats */}
         {/* <LuxuryTransition theme="light" /> */}
@@ -382,7 +294,7 @@ export default async function Home({
         {/* <SectionDivider variant="diamond" theme="light" /> */}
 
         {/* Section 6: Our Capabilities */}
-        <CapabilitiesCarousel images={projectImages.capabilities} />
+        <CapabilitiesCarousel />
 
         {/* Transition: Capabilities to Portfolio */}
         {/* <LuxuryTransition theme="light" /> */}
@@ -393,8 +305,8 @@ export default async function Home({
         {/* Transition: Portfolio to Sectors */}
         {/* <SectionDivider variant="gradient" theme="light" /> */}
 
-        {/* Section 8: Sectors of Expertise */}
-        <SectorsExpertise images={projectImages.sectors} />
+        {/* Section 8: Industries We Transform - Horizontal Scroll */}
+        <IndustriesHorizontalScroll industries={industries} />
 
         {/* Transition: Sectors to Partners */}
         {/* <SimpleAnimatedDivider theme="light" /> */}

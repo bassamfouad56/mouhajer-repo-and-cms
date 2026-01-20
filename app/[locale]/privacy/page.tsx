@@ -198,7 +198,7 @@ export default function PrivacyPolicy() {
               >
                 <FileText className="h-4 w-4 text-white/60" strokeWidth={1.5} />
                 <span className="text-sm font-light text-white/80">
-                  Last Updated: November 21, 2024
+                  Effective Date: January 1, 2025
                 </span>
               </motion.div>
             </motion.div>

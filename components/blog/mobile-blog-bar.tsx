@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Share2, List, ArrowUp, X } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Share2, List, ArrowUp, X } from "lucide-react";
 
 interface MobileBlogBarProps {
   postTitle: string;
@@ -10,7 +10,11 @@ interface MobileBlogBarProps {
   showTOC?: boolean;
 }
 
-export default function MobileBlogBar({ postTitle, onTOCToggle, showTOC }: MobileBlogBarProps) {
+export default function MobileBlogBar({
+  postTitle,
+  onTOCToggle,
+  showTOC,
+}: MobileBlogBarProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
 
@@ -21,12 +25,12 @@ export default function MobileBlogBar({ postTitle, onTOCToggle, showTOC }: Mobil
       setIsVisible(scrollY > 500);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleShare = async () => {
@@ -47,38 +51,38 @@ export default function MobileBlogBar({ postTitle, onTOCToggle, showTOC }: Mobil
 
   const shareOptions = [
     {
-      name: 'Copy Link',
+      name: "Copy Link",
       action: () => {
         navigator.clipboard.writeText(window.location.href);
         setShowShareMenu(false);
       },
     },
     {
-      name: 'Twitter',
+      name: "Twitter",
       action: () => {
         window.open(
           `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(postTitle)}`,
-          '_blank'
+          "_blank"
         );
         setShowShareMenu(false);
       },
     },
     {
-      name: 'LinkedIn',
+      name: "LinkedIn",
       action: () => {
         window.open(
           `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(postTitle)}`,
-          '_blank'
+          "_blank"
         );
         setShowShareMenu(false);
       },
     },
     {
-      name: 'Facebook',
+      name: "Facebook",
       action: () => {
         window.open(
           `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,
-          '_blank'
+          "_blank"
         );
         setShowShareMenu(false);
       },
@@ -104,7 +108,9 @@ export default function MobileBlogBar({ postTitle, onTOCToggle, showTOC }: Mobil
                 className="flex flex-col items-center gap-1 text-neutral-600 transition-colors hover:text-neutral-950"
               >
                 <Share2 size={20} />
-                <span className="font-Satoshi text-[10px] uppercase tracking-wider">Share</span>
+                <span className="font-Satoshi text-[10px] uppercase tracking-wider">
+                  Share
+                </span>
               </button>
 
               {/* TOC Button */}
@@ -112,11 +118,15 @@ export default function MobileBlogBar({ postTitle, onTOCToggle, showTOC }: Mobil
                 <button
                   onClick={onTOCToggle}
                   className={`flex flex-col items-center gap-1 transition-colors ${
-                    showTOC ? 'text-[#c9a962]' : 'text-neutral-600 hover:text-neutral-950'
+                    showTOC
+                      ? "text-[#c9a962]"
+                      : "text-neutral-600 hover:text-neutral-950"
                   }`}
                 >
                   <List size={20} />
-                  <span className="font-Satoshi text-[10px] uppercase tracking-wider">Contents</span>
+                  <span className="font-Satoshi text-[10px] uppercase tracking-wider">
+                    Contents
+                  </span>
                 </button>
               )}
 
@@ -126,7 +136,9 @@ export default function MobileBlogBar({ postTitle, onTOCToggle, showTOC }: Mobil
                 className="flex flex-col items-center gap-1 text-neutral-600 transition-colors hover:text-neutral-950"
               >
                 <ArrowUp size={20} />
-                <span className="font-Satoshi text-[10px] uppercase tracking-wider">Top</span>
+                <span className="font-Satoshi text-[10px] uppercase tracking-wider">
+                  Top
+                </span>
               </button>
             </div>
           </motion.div>
@@ -145,14 +157,16 @@ export default function MobileBlogBar({ postTitle, onTOCToggle, showTOC }: Mobil
               className="fixed inset-0 z-50 bg-black/50"
             />
             <motion.div
-              initial={{ y: '100%' }}
+              initial={{ y: "100%" }}
               animate={{ y: 0 }}
-              exit={{ y: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="fixed bottom-0 left-0 right-0 z-50 rounded-t-2xl bg-white p-6"
             >
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="font-SchnyderS text-xl font-light">Share Article</h3>
+                <h3 className="font-SchnyderS text-xl font-light">
+                  Share Article
+                </h3>
                 <button
                   onClick={() => setShowShareMenu(false)}
                   className="rounded-full p-2 hover:bg-neutral-100"

@@ -1,33 +1,36 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Eye, Target, Heart, Sparkles } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Eye, Target, Heart, Sparkles } from "lucide-react";
 
 const pillars = [
   {
-    id: 'vision',
+    id: "vision",
     icon: Eye,
-    title: 'Vision',
-    content: 'At Mouhajer International Design and Contracting, we are committed to building a better future for our clients, our community and our planet. We believe that construction is not only a technical process, but also a creative one, where we can transform ideas into reality. Our vision is to be the leading construction company in the region, delivering innovative, sustainable and high-quality solutions for every project.',
+    title: "Vision",
+    content:
+      "At Mouhajer International Design and Contracting, we are committed to building a better future for our clients, our community and our planet. We believe that construction is not only a technical process, but also a creative one, where we can transform ideas into reality. Our vision is to be the leading construction company in the region, delivering innovative, sustainable and high-quality solutions for every project.",
   },
   {
-    id: 'mission',
+    id: "mission",
     icon: Target,
-    title: 'Mission',
-    content: 'Our mission at MIDC is to provide high-quality construction services that meet the needs and expectations of our clients. We are committed to delivering projects on time, within budget, and with the highest standards of safety and quality. We believe that our mission is not only to build structures, but also to build trust and long-term partnerships.',
+    title: "Mission",
+    content:
+      "Our mission at MIDC is to provide high-quality construction services that meet the needs and expectations of our clients. We are committed to delivering projects on time, within budget, and with the highest standards of safety and quality. We believe that our mission is not only to build structures, but also to build trust and long-term partnerships.",
   },
   {
-    id: 'commitment',
+    id: "commitment",
     icon: Heart,
-    title: 'Commitment',
-    content: 'Our Commitment is a leading provider of high-quality and cost-effective building solutions in the MENA region. We have over two decades of experience in delivering projects across various sectors. We are committed to meeting the needs and expectations of our clients and partners, while adhering to the highest standards of safety, quality, and sustainability.',
+    title: "Commitment",
+    content:
+      "Our Commitment is a leading provider of high-quality and cost-effective building solutions in the MENA region. We have over two decades of experience in delivering projects across various sectors. We are committed to meeting the needs and expectations of our clients and partners, while adhering to the highest standards of safety, quality, and sustainability.",
   },
 ];
 
 export function VisionMission() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -75,8 +78,8 @@ export function VisionMission() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto max-w-2xl font-Satoshi text-base font-light text-neutral-600 lg:text-lg"
           >
-            Founded in 1999, Mouhajer International Design & Contracting didn&apos;t just appear
-            on the landscape; we grew with the UAE.
+            Founded in 1999, Mouhajer International Design & Contracting
+            didn&apos;t just appear on the landscape; we grew with the UAE.
           </motion.p>
         </div>
 
@@ -96,10 +99,12 @@ export function VisionMission() {
                   {/* Icon */}
                   <div className="mb-8">
                     <div className="inline-flex h-16 w-16 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5 transition-all duration-300 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10">
-                      <Icon className="h-7 w-7 text-[#c9a962]" strokeWidth={1} />
+                      <Icon
+                        className="h-7 w-7 text-[#c9a962]"
+                        strokeWidth={1}
+                      />
                     </div>
                   </div>
-
 
                   {/* Title */}
                   <h3 className="mb-6 font-SchnyderS text-3xl font-light text-neutral-900 transition-colors group-hover:text-[#c9a962]">
@@ -129,10 +134,12 @@ export function VisionMission() {
         >
           <div className="mx-auto max-w-3xl border-t border-[#c9a962]/20 pt-12">
             <p className="font-SchnyderS text-xl font-light italic text-neutral-600 lg:text-2xl">
-              &ldquo;We spent our first two decades mastering the art of the private luxury villa
-              and corporate fit-outs, building a quiet but powerful reputation among the UAE&apos;s elite.
-              By the time we expanded into major hospitality renovations in 2020, we weren&apos;t
-              just new entrants; we were veterans ready to scale.&rdquo;
+              &ldquo;We spent our first two decades mastering the art of the
+              private luxury villa and corporate fit-outs, building a quiet but
+              powerful reputation among the UAE&apos;s elite. By the time we
+              expanded into major hospitality renovations in 2020, we
+              weren&apos;t just new entrants; we were veterans ready to
+              scale.&rdquo;
             </p>
           </div>
         </motion.div>

@@ -1,33 +1,33 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { BeforeAfterSlider } from '@/components/before-after-slider';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { BeforeAfterSlider } from "@/components/before-after-slider";
 
 const transformations = [
   {
     id: 1,
-    title: 'Villa Al Barsha',
-    category: 'Residential',
-    beforeImage: '',
-    afterImage: '',
-    beforeLabel: 'Before',
-    afterLabel: 'After',
+    title: "Villa Al Barsha",
+    category: "Residential",
+    beforeImage: "",
+    afterImage: "",
+    beforeLabel: "Before",
+    afterLabel: "After",
   },
   {
     id: 2,
-    title: 'Downtown Penthouse',
-    category: 'Luxury Residential',
-    beforeImage: '',
-    afterImage: '',
-    beforeLabel: 'Before',
-    afterLabel: 'After',
+    title: "Downtown Penthouse",
+    category: "Luxury Residential",
+    beforeImage: "",
+    afterImage: "",
+    beforeLabel: "Before",
+    afterLabel: "After",
   },
 ];
 
 export function TransformationShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -61,7 +61,8 @@ export function TransformationShowcase() {
 
           <p className="mx-auto mt-6 max-w-2xl font-Satoshi text-base font-light leading-relaxed text-neutral-600 sm:text-lg">
             From concept to completion, explore our dramatic renovations and see
-            how we transform ordinary spaces into extraordinary living experiences.
+            how we transform ordinary spaces into extraordinary living
+            experiences.
           </p>
         </motion.div>
 
@@ -108,7 +109,7 @@ export function TransformationShowcase() {
           className="mt-16 text-center"
         >
           <p className="font-Satoshi text-sm font-light text-neutral-500">
-            Every project tells a story of transformation.{' '}
+            Every project tells a story of transformation.{" "}
             <a
               href="/projects"
               className="text-[#c9a962] transition-colors duration-300 hover:text-[#c9a962]/80"

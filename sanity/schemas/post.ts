@@ -50,6 +50,32 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'gallery',
+      title: 'Image Gallery',
+      description: 'Add multiple images for the gallery section, masonry grid, and full-width breaks',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+            },
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
@@ -104,6 +130,21 @@ export default defineType({
           options: {
             hotspot: true,
           },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+            },
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+            },
+          ],
+        },
+        {
+          type: 'imageSeparator',
         },
       ],
     }),

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Quote } from 'lucide-react';
-import Link from 'next/link';
-import { SafeImage } from '@/components/safe-image';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, Quote } from "lucide-react";
+import Link from "next/link";
+import { SafeImage } from "@/components/safe-image";
 
 interface FounderMessageProps {
   founderImage?: string;
@@ -14,21 +14,26 @@ interface FounderMessageProps {
   backgroundImage?: string;
 }
 
+// Default founder image fallback
+const DEFAULT_FOUNDER_IMAGE = "/founder/mouhajer.png";
+
 export function FounderMessage({
   founderImage,
-  founderName = 'Eng. Maher Mouhajer',
-  founderTitle = 'CEO & Founder',
+  founderName = "Eng. Maher Mouhajer",
+  founderTitle = "CEO & Founder",
 }: FounderMessageProps) {
+  // Use Sanity image if available, otherwise fall back to local image
+  const displayImage = founderImage || DEFAULT_FOUNDER_IMAGE;
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   // Parallax effect
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.05]);
 
   return (
@@ -38,10 +43,7 @@ export function FounderMessage({
       className="relative overflow-hidden bg-neutral-950 scroll-mt-24"
     >
       {/* Background with Parallax */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ y: backgroundY }}
-      >
+      <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         {/* Subtle gradient background */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,169,98,0.08),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(201,169,98,0.05),transparent_50%)]" />
@@ -49,7 +51,6 @@ export function FounderMessage({
 
       {/* Main Content Container */}
       <div className="relative z-10 mx-auto max-w-[1800px] px-6 py-24 lg:px-12 lg:py-32">
-
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -60,16 +61,19 @@ export function FounderMessage({
           <div className="mb-6 flex items-center justify-center gap-4">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
             <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
-              A Message from Our Founder
+              Founder&apos;s Message
             </span>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
           </div>
+          <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl">
+            We Don&apos;t Just Draw.{" "}
+            <span className="text-[#c9a962]">We Build.</span>
+          </h2>
         </motion.div>
 
         {/* Editorial Layout - Centered Card Design */}
         <div className="mx-auto max-w-6xl">
           <div className="relative grid gap-0 overflow-hidden rounded-sm lg:grid-cols-[1fr_1.2fr]">
-
             {/* Left - Portrait Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -81,15 +85,13 @@ export function FounderMessage({
                 className="absolute inset-0"
                 style={{ scale: imageScale }}
               >
-                {founderImage && (
-                  <SafeImage
-                    src={founderImage}
-                    alt={`${founderName} - ${founderTitle}`}
-                    fill
-                    className="object-cover object-top"
-                    priority
-                  />
-                )}
+                <SafeImage
+                  src={displayImage}
+                  alt={`${founderName} - ${founderTitle}`}
+                  fill
+                  className="object-cover object-top"
+                  priority
+                />
               </motion.div>
 
               {/* Elegant Overlay */}
@@ -145,7 +147,8 @@ export function FounderMessage({
               >
                 <blockquote className="font-SchnyderS text-2xl font-light leading-[1.4] tracking-wide text-white sm:text-3xl lg:text-4xl">
                   <span className="text-[#c9a962]">"</span>
-                  Designing a palace on paper is easy. Building it on sand requires discipline.
+                  Designing a palace on paper is easy. Building it on sand
+                  requires discipline.
                   <span className="text-[#c9a962]">"</span>
                 </blockquote>
               </motion.div>
@@ -166,15 +169,18 @@ export function FounderMessage({
                 className="relative z-10 mb-10 space-y-5"
               >
                 <p className="font-Satoshi text-base font-light leading-[1.9] text-neutral-400 lg:text-lg">
-                  For over two decades, I have led a firm that refuses to outsource
-                  the hard work. Whether we are pouring the foundation for a new
-                  mega-mansion or fitting out a 5-star hotel lobby, my team controls
-                  the process from start to finish.
+                  For over two decades, I have led a firm that refuses to
+                  outsource the hard work. Whether we are pouring the foundation
+                  for a new mega-mansion or fitting out a 5-star hotel lobby, my
+                  team controls the process from start to finish.
                 </p>
                 <p className="font-Satoshi text-base font-light leading-[1.9] text-neutral-500 lg:text-lg">
                   My promise to you is simple:
-                  <span className="font-medium text-white"> The luxury you see in the render
-                  is exactly the quality you will touch in reality.</span>
+                  <span className="font-medium text-white">
+                    {" "}
+                    The luxury you see in the render is exactly the quality you
+                    will touch in reality.
+                  </span>
                 </p>
               </motion.div>
 
@@ -189,7 +195,10 @@ export function FounderMessage({
                   className="group inline-flex items-center gap-4 border border-[#c9a962]/30 bg-transparent px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-[#c9a962] transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962] hover:text-neutral-950"
                 >
                   <span>Read the Full Story</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                    strokeWidth={1.5}
+                  />
                 </Link>
               </motion.div>
 

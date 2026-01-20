@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
-import { SafeImage } from '@/components/safe-image';
-import { ArrowRight } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
+import { SafeImage } from "@/components/safe-image";
+import { ArrowRight } from "lucide-react";
 
 export function TestFounderLegacy() {
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
@@ -62,8 +62,9 @@ export function TestFounderLegacy() {
               </h2>
 
               <p className="max-w-3xl font-Satoshi text-xl font-light leading-relaxed text-white/80 lg:text-2xl">
-                From the lobbies of five-star hotels to the private suites of royalty,
-                Eng. Maher's work has become synonymous with uncompromising luxury in the Middle East.
+                From the lobbies of five-star hotels to the private suites of
+                royalty, Eng. Maher's work has become synonymous with
+                uncompromising luxury in the Middle East.
               </p>
             </motion.div>
           </div>
@@ -73,7 +74,6 @@ export function TestFounderLegacy() {
       {/* Projects Showcase Grid */}
       <div className="relative bg-neutral-950 py-32 lg:py-40">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
-
           {/* Intro */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -83,14 +83,13 @@ export function TestFounderLegacy() {
             className="mb-24 text-center"
           >
             <p className="mx-auto max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-white/60 lg:text-xl">
-              Every project is a chapter in a larger story. A testament to what happens
-              when vision, discipline, and craft converge.
+              Every project is a chapter in a larger story. A testament to what
+              happens when vision, discipline, and craft converge.
             </p>
           </motion.div>
 
           {/* Featured Projects - 2x2 Grid */}
           <div className="mb-32 grid gap-8 sm:grid-cols-2 lg:gap-12">
-
             {/* Project 1 */}
             <motion.div
               initial={{ opacity: 0, y: 60 }}
@@ -246,7 +245,6 @@ export function TestFounderLegacy() {
                 </span>
               </div>
             </motion.div>
-
           </div>
 
           {/* Bottom CTA */}
@@ -261,7 +259,8 @@ export function TestFounderLegacy() {
               This is Only the Beginning
             </h3>
             <p className="mx-auto mb-12 max-w-2xl font-Satoshi text-lg font-light text-white/60">
-              Explore the full portfolio of projects that define modern Arabian luxury.
+              Explore the full portfolio of projects that define modern Arabian
+              luxury.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-6">
@@ -270,7 +269,10 @@ export function TestFounderLegacy() {
                 className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962] px-12 py-6 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-[#c9a962]/90"
               >
                 <span>View Full Portfolio</span>
-                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2" strokeWidth={1.5} />
+                <ArrowRight
+                  className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2"
+                  strokeWidth={1.5}
+                />
               </Link>
 
               <Link
@@ -278,11 +280,13 @@ export function TestFounderLegacy() {
                 className="group inline-flex items-center gap-4 border border-white/20 bg-white/5 px-12 py-6 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/10"
               >
                 <span>See Our Awards</span>
-                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2" strokeWidth={1.5} />
+                <ArrowRight
+                  className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2"
+                  strokeWidth={1.5}
+                />
               </Link>
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>

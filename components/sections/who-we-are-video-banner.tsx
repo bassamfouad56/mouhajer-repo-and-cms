@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 interface CarouselImage {
   url: string;
@@ -18,31 +18,29 @@ interface WhoWeAreVideoBannerProps {
 
 export function WhoWeAreVideoBanner({ images = [] }: WhoWeAreVideoBannerProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
   const contentY = useTransform(scrollYProgress, [0, 1], [60, -60]);
   const imageY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   // Use provided Sanity images or fallback to local project images
-  const displayImages = images.length >= 3
-    ? images.slice(0, 4)
-    : [
-        { url: '/placeholder.jpg', alt: 'Commercial Interior' },
-        { url: '/placeholder.jpg', alt: 'Residential Interior' },
-        { url: '/placeholder.jpg', alt: 'Design & Fitout' },
-        { url: '/placeholder.jpg', alt: 'Custom Joinery' },
-      ];
+  const displayImages =
+    images.length >= 3
+      ? images.slice(0, 4)
+      : [
+          { url: "/placeholder.jpg", alt: "Commercial Interior" },
+          { url: "/placeholder.jpg", alt: "Residential Interior" },
+          { url: "/placeholder.jpg", alt: "Design & Fitout" },
+          { url: "/placeholder.jpg", alt: "Custom Joinery" },
+        ];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden bg-white"
-    >
+    <section ref={sectionRef} className="relative overflow-hidden bg-white">
       {/* Main Content */}
       <div className="mx-auto max-w-[1800px] px-6 py-24 lg:px-12 lg:py-32">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
@@ -82,12 +80,13 @@ export function WhoWeAreVideoBanner({ images = [] }: WhoWeAreVideoBannerProps) {
             >
               <p className="font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
                 Mouhajer International Design & Contracting (MIDC) is a premier
-                turnkey solution provider based in Dubai and Abu Dhabi, transforming
-                ambitious concepts into award-winning realities.
+                turnkey solution provider based in Dubai and Abu Dhabi,
+                transforming ambitious concepts into award-winning realities.
               </p>
               <p className="font-Satoshi text-base font-light leading-relaxed text-neutral-500">
                 From luxury hospitality to private residences, our reputation is
-                built on a seamless fusion of aesthetic mastery and engineering rigor.
+                built on a seamless fusion of aesthetic mastery and engineering
+                rigor.
               </p>
             </motion.div>
 
@@ -102,7 +101,10 @@ export function WhoWeAreVideoBanner({ images = [] }: WhoWeAreVideoBannerProps) {
                 className="group inline-flex items-center gap-3 border border-neutral-950 bg-neutral-950 px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.15em] text-white transition-all duration-500 hover:bg-transparent hover:text-neutral-950"
               >
                 Explore Our Story
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+                <ArrowRight
+                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                  strokeWidth={1.5}
+                />
               </Link>
             </motion.div>
           </motion.div>

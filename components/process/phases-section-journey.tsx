@@ -1,148 +1,163 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { Ear, Palette, Cpu, Package, Hammer, Key, Check, Circle } from 'lucide-react';
-import { SafeImage } from '@/components/safe-image';
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import {
+  Ear,
+  Palette,
+  Cpu,
+  Package,
+  Hammer,
+  Key,
+  Check,
+  Circle,
+} from "lucide-react";
+import { SafeImage } from "@/components/safe-image";
 
 const phases = [
   {
-    id: 'phase-01',
-    title: 'Discovery & Conceptualization',
-    headline: 'It Starts With Listening',
+    id: "phase-01",
+    title: "Discovery & Conceptualization",
+    headline: "It Starts With Listening",
     icon: Ear,
-    description: 'Before we draw a single line, we listen. Whether you are ADNH planning a hotel renovation or a private client building a villa in District One, we need to understand the "soul" of the project.',
+    description:
+      'Before we draw a single line, we listen. Whether you are ADNH planning a hotel renovation or a private client building a villa in District One, we need to understand the "soul" of the project.',
     points: [
       {
-        label: 'The Brief',
-        text: 'We define the functional needs and the aesthetic aspirations.',
+        label: "The Brief",
+        text: "We define the functional needs and the aesthetic aspirations.",
       },
       {
-        label: 'The Site Analysis',
-        text: 'We analyze the physical space to understand its light, flow, and structural limitations.',
+        label: "The Site Analysis",
+        text: "We analyze the physical space to understand its light, flow, and structural limitations.",
       },
       {
-        label: 'Feasibility Study',
-        text: 'We assess timeline, budget, and regulatory requirements upfront.',
+        label: "Feasibility Study",
+        text: "We assess timeline, budget, and regulatory requirements upfront.",
       },
     ],
-    duration: '2-3 weeks',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=1500&fit=crop',
+    duration: "2-3 weeks",
+    image: "/placeholder.jpg",
   },
   {
-    id: 'phase-02',
-    title: 'Design Development & Visualization',
-    headline: 'Where Imagination Meets Precision',
+    id: "phase-02",
+    title: "Design Development & Visualization",
+    headline: "Where Imagination Meets Precision",
     icon: Palette,
-    description: 'This is where Eng. Maher\'s vision takes shape. Unlike other firms that show you a mood board and hope for the best, we build the entire project digitally first.',
+    description:
+      "This is where Eng. Maher's vision takes shape. Unlike other firms that show you a mood board and hope for the best, we build the entire project digitally first.",
     points: [
       {
         label: 'The "Uncluttered Baroque"',
-        text: 'Our design team creates detailed concepts that merge the grandeur of Arabic heritage with modern restraint. We refine the ornamentation until it is sophisticated, not chaotic.',
+        text: "Our design team creates detailed concepts that merge the grandeur of Arabic heritage with modern restraint. We refine the ornamentation until it is sophisticated, not chaotic.",
       },
       {
-        label: 'Photorealistic 3D Renders',
-        text: 'We provide high-fidelity 3D visualizations that show you exactly how the light will hit the marble and how the velvet will look on the chairs.',
+        label: "Photorealistic 3D Renders",
+        text: "We provide high-fidelity 3D visualizations that show you exactly how the light will hit the marble and how the velvet will look on the chairs.",
       },
       {
-        label: 'Client Approval',
-        text: 'You don\'t have to guess. You see the final reality before we lay a single brick. We do not move forward until you are 100% in love with the design.',
+        label: "Client Approval",
+        text: "You don't have to guess. You see the final reality before we lay a single brick. We do not move forward until you are 100% in love with the design.",
       },
     ],
-    duration: '4-6 weeks',
-    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&h=1500&fit=crop',
+    duration: "4-6 weeks",
+    image: "/placeholder.jpg",
   },
   {
-    id: 'phase-03',
-    title: 'Technical Engineering (The MEP Core)',
-    headline: 'The Heartbeat of the Building',
+    id: "phase-03",
+    title: "Technical Engineering (The MEP Core)",
+    headline: "The Heartbeat of the Building",
     icon: Cpu,
-    description: 'Once the design is approved, our in-house MEP Division (Mechanical, Electrical, Plumbing) takes over. This is our biggest differentiator.',
+    description:
+      "Once the design is approved, our in-house MEP Division (Mechanical, Electrical, Plumbing) takes over. This is our biggest differentiator.",
     points: [
       {
-        label: 'Seamless Integration',
-        text: 'We design the AC ducts to fit perfectly within the decorative ceilings, so they are invisible.',
+        label: "Seamless Integration",
+        text: "We design the AC ducts to fit perfectly within the decorative ceilings, so they are invisible.",
       },
       {
-        label: 'Efficiency',
-        text: 'We calculate power and cooling loads to ensure the building runs efficiently for decades, as we did for the Park Hyatt villas.',
+        label: "Efficiency",
+        text: "We calculate power and cooling loads to ensure the building runs efficiently for decades, as we did for the Park Hyatt villas.",
       },
       {
-        label: 'Code Compliance',
-        text: 'All systems meet Dubai Municipality, Civil Defence, and DEWA requirements.',
+        label: "Code Compliance",
+        text: "All systems meet Dubai Municipality, Civil Defence, and DEWA requirements.",
       },
     ],
-    duration: '3-4 weeks',
-    image: 'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1200&h=1500&fit=crop',
+    duration: "3-4 weeks",
+    image: "/placeholder.jpg",
   },
   {
-    id: 'phase-04',
-    title: 'Planning & Material Control',
-    headline: 'Precision Logistics',
+    id: "phase-04",
+    title: "Planning & Material Control",
+    headline: "Precision Logistics",
     icon: Package,
-    description: 'A luxury project lives or dies by its materials. Based on our Material Control Procedures, we leave nothing to chance.',
+    description:
+      "A luxury project lives or dies by its materials. Based on our Material Control Procedures, we leave nothing to chance.",
     points: [
       {
-        label: 'Global Sourcing',
-        text: 'We source bespoke joinery, rare stones, and fabrics from around the world.',
+        label: "Global Sourcing",
+        text: "We source bespoke joinery, rare stones, and fabrics from around the world.",
       },
       {
-        label: 'Verification',
-        text: 'Every material sample is inspected and matched to the 3D render before ordering.',
+        label: "Verification",
+        text: "Every material sample is inspected and matched to the 3D render before ordering.",
       },
       {
-        label: 'Scheduling',
+        label: "Scheduling",
         text: 'We create a master timeline to prevent "site clutter" and ensure materials arrive exactly when needed.',
       },
     ],
-    duration: '2-4 weeks',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=1500&fit=crop',
+    duration: "2-4 weeks",
+    image: "/placeholder.jpg",
   },
   {
-    id: 'phase-05',
-    title: 'Execution & Safety',
-    headline: 'The Art of Construction',
+    id: "phase-05",
+    title: "Execution & Safety",
+    headline: "The Art of Construction",
     icon: Hammer,
-    description: 'This is where Eng. Maher\'s "On-Site Leadership" comes alive.',
+    description:
+      'This is where Eng. Maher\'s "On-Site Leadership" comes alive.',
     points: [
       {
-        label: 'HSE Standards',
-        text: 'We maintain a zero-tolerance policy for unsafe practices. A clean site is a safe site.',
+        label: "HSE Standards",
+        text: "We maintain a zero-tolerance policy for unsafe practices. A clean site is a safe site.",
       },
       {
-        label: 'Skilled Artisans',
+        label: "Skilled Artisans",
         text: 'We use our own teams for critical finishes: stone cladding, gypsum work, and painting, to ensure the "immaculate" finish we are famous for.',
       },
       {
-        label: 'Quality Assurance',
-        text: 'We inspect every layer. If a wall isn\'t perfectly straight, we take it down before the paint goes on.',
+        label: "Quality Assurance",
+        text: "We inspect every layer. If a wall isn't perfectly straight, we take it down before the paint goes on.",
       },
     ],
-    duration: '12-20 weeks',
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&h=1500&fit=crop',
+    duration: "12-20 weeks",
+    image: "/placeholder.jpg",
   },
   {
-    id: 'phase-06',
-    title: 'Handover & Legacy',
-    headline: 'The White-Glove Handover',
+    id: "phase-06",
+    title: "Handover & Legacy",
+    headline: "The White-Glove Handover",
     icon: Key,
-    description: 'We do not just hand over a set of keys. We hand over a functioning reality.',
+    description:
+      "We do not just hand over a set of keys. We hand over a functioning reality.",
     points: [
       {
-        label: 'The Snag List',
-        text: 'We are our own harshest critics. We perform a detailed snagging process to catch even the smallest imperfections.',
+        label: "The Snag List",
+        text: "We are our own harshest critics. We perform a detailed snagging process to catch even the smallest imperfections.",
       },
       {
-        label: 'Deep Cleaning',
-        text: 'We deliver the project immaculate and ready for immediate occupation.',
+        label: "Deep Cleaning",
+        text: "We deliver the project immaculate and ready for immediate occupation.",
       },
       {
-        label: 'Training',
-        text: 'We train your team on how to operate the new systems we installed.',
+        label: "Training",
+        text: "We train your team on how to operate the new systems we installed.",
       },
     ],
-    duration: '1-2 weeks',
-    image: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&h=1500&fit=crop',
+    duration: "1-2 weeks",
+    image: "/placeholder.jpg",
   },
 ];
 
@@ -152,7 +167,7 @@ export function PhasesSectionJourney() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start center', 'end center'],
+    offset: ["start center", "end center"],
   });
 
   const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -222,14 +237,14 @@ function PhaseStep({
   isActive,
   onInView,
 }: {
-  phase: typeof phases[0];
+  phase: (typeof phases)[0];
   index: number;
   isActive: boolean;
   onInView: () => void;
 }) {
   const stepRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(stepRef, {
-    margin: '-200px',
+    margin: "-200px",
     once: false,
     amount: 0.5,
   });
@@ -260,7 +275,9 @@ function PhaseStep({
               className="relative"
             >
               {/* Outer glow ring */}
-              <div className={`absolute inset-0 rounded-full bg-[#c9a962]/20 transition-all duration-500 ${isActive ? 'scale-150 opacity-100' : 'scale-100 opacity-0'}`} />
+              <div
+                className={`absolute inset-0 rounded-full bg-[#c9a962]/20 transition-all duration-500 ${isActive ? "scale-150 opacity-100" : "scale-100 opacity-0"}`}
+              />
 
               {/* Main circle */}
               <div className="relative flex h-24 w-24 items-center justify-center rounded-full border-2 border-[#c9a962] bg-white">

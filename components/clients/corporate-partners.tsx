@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Building2, Store, Briefcase, TrendingUp } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Building2, Store, Briefcase, TrendingUp } from "lucide-react";
 
 interface SanityClient {
   _id: string;
@@ -26,51 +26,56 @@ const iconMap: Record<string, typeof Building2> = {
 };
 
 const categoryLabels: Record<string, string> = {
-  corporate: 'Corporate Office',
-  retail: 'Commercial Retail',
-  manufacturing: 'Luxury Manufacturing',
+  corporate: "Corporate Office",
+  retail: "Commercial Retail",
+  manufacturing: "Luxury Manufacturing",
 };
 
 // Fallback partners if no Sanity data
 const defaultCorporatePartners = [
   {
-    name: 'Osoul',
-    project: 'C1 Headquarters, Abu Dhabi',
-    category: 'Corporate Office',
+    name: "Osoul",
+    project: "C1 Headquarters, Abu Dhabi",
+    category: "Corporate Office",
     icon: Building2,
   },
   {
-    name: 'Dubai Golf',
-    project: 'Villas & Resort Upgrades',
-    category: 'Luxury Residential',
+    name: "Dubai Golf",
+    project: "Villas & Resort Upgrades",
+    category: "Luxury Residential",
     icon: Briefcase,
   },
   {
-    name: 'Emaar Malls',
-    project: 'Retail Fit-outs',
-    category: 'Commercial Retail',
+    name: "Emaar Malls",
+    project: "Retail Fit-outs",
+    category: "Commercial Retail",
     icon: Store,
   },
   {
-    name: 'Louis Vuitton Manufactures',
-    project: 'Specialized Projects',
-    category: 'Luxury Manufacturing',
+    name: "Louis Vuitton Manufactures",
+    project: "Specialized Projects",
+    category: "Luxury Manufacturing",
     icon: TrendingUp,
   },
 ];
 
 export function CorporatePartners({ clients = [] }: CorporatePartnersProps) {
   // Transform Sanity clients or use defaults
-  const corporatePartners = clients.length > 0
-    ? clients.map((client, idx) => ({
-        name: client.name,
-        project: client.projectsText || '',
-        category: client.category ? (categoryLabels[client.category] || client.category) : 'Corporate',
-        icon: client.icon ? (iconMap[client.icon.toLowerCase()] || Building2) : [Building2, Briefcase, Store, TrendingUp][idx % 4],
-      }))
-    : defaultCorporatePartners;
+  const corporatePartners =
+    clients.length > 0
+      ? clients.map((client, idx) => ({
+          name: client.name,
+          project: client.projectsText || "",
+          category: client.category
+            ? categoryLabels[client.category] || client.category
+            : "Corporate",
+          icon: client.icon
+            ? iconMap[client.icon.toLowerCase()] || Building2
+            : [Building2, Briefcase, Store, TrendingUp][idx % 4],
+        }))
+      : defaultCorporatePartners;
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -180,7 +185,8 @@ export function CorporatePartners({ clients = [] }: CorporatePartnersProps) {
           <p className="max-w-3xl font-Satoshi text-lg font-light italic leading-relaxed text-neutral-700 lg:text-xl">
             &quot;Each corporate partnership is built on a foundation of brand
             understanding. We do not just build spaces—we protect and enhance
-            the visual identity our clients have spent decades cultivating.&quot;
+            the visual identity our clients have spent decades
+            cultivating.&quot;
           </p>
           <p className="mt-4 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-400">
             — Eng. Maher Mouhajer

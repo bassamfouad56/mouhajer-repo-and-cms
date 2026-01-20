@@ -1,68 +1,87 @@
-'use client';
+"use client";
 
-import { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, useInView, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { SafeImage } from '@/components/safe-image';
-import { Globe, GraduationCap, Heart, Star } from 'lucide-react';
+import { useRef, useState, useEffect, useCallback } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValue,
+} from "framer-motion";
+import { SafeImage } from "@/components/safe-image";
+import { Globe, GraduationCap, Heart, Star } from "lucide-react";
 
 const philosophies = [
   {
-    id: 'london',
+    id: "london",
     icon: GraduationCap,
-    title: 'The London Discipline',
-    subtitle: 'The Mind',
-    description: 'Great design requires order. Educated in the UK, Eng. Maher applies a strict architectural discipline to every project. This ensures that even the most ornate spaces remain uncluttered and smart. We reject chaos. We embrace logic, flow, and function.',
+    title: "The London Discipline",
+    subtitle: "The Mind",
+    description:
+      "Great design requires order. Educated in the UK, Eng. Maher applies a strict architectural discipline to every project. This ensures that even the most ornate spaces remain uncluttered and smart. We reject chaos. We embrace logic, flow, and function.",
   },
   {
-    id: 'arabic',
+    id: "arabic",
     icon: Heart,
-    title: 'The Arabic Soul',
-    subtitle: 'The Heart',
-    description: 'Minimalism can often feel cold. We counter this with the warmth of our heritage. We infuse spaces with the texture, grandeur, and hospitality inherent in Arabic culture. This is the "Baroque" influence—a love for richness, gold, and detail, but tamed and polished for the modern executive.',
+    title: "The Arabic Soul",
+    subtitle: "The Heart",
+    description:
+      'Minimalism can often feel cold. We counter this with the warmth of our heritage. We infuse spaces with the texture, grandeur, and hospitality inherent in Arabic culture. This is the "Baroque" influence—a love for richness, gold, and detail, but tamed and polished for the modern executive.',
   },
   {
-    id: 'immaculate',
+    id: "immaculate",
     icon: Star,
-    title: 'The Immaculate Standard',
-    subtitle: 'The Result',
-    description: 'A design is only as good as its finish. Eng. Maher works with an all-rounded approach. He is obsessed with the final touch. Whether it is the joinery of a private villa or the lobby of a 5-star hotel, the result must be pristine.',
+    title: "The Immaculate Standard",
+    subtitle: "The Result",
+    description:
+      "A design is only as good as its finish. Eng. Maher works with an all-rounded approach. He is obsessed with the final touch. Whether it is the joinery of a private villa or the lobby of a 5-star hotel, the result must be pristine.",
   },
 ];
 
 export function FounderSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ['10%', '-10%']);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   // Mouse tracking
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springConfig = { stiffness: 100, damping: 30 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [3, -3]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-3, 3]), springConfig);
+  const rotateX = useSpring(
+    useTransform(mouseY, [-0.5, 0.5], [3, -3]),
+    springConfig
+  );
+  const rotateY = useSpring(
+    useTransform(mouseX, [-0.5, 0.5], [-3, 3]),
+    springConfig
+  );
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-    setMousePosition({ x: e.clientX, y: e.clientY });
-  }, [mouseX, mouseY]);
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      mouseX.set(x);
+      mouseY.set(y);
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    },
+    [mouseX, mouseY]
+  );
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [handleMouseMove]);
 
   return (
@@ -72,7 +91,10 @@ export function FounderSection() {
     >
       {/* Background */}
 
-      <div ref={containerRef} className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
+      <div
+        ref={containerRef}
+        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12"
+      >
         {/* Header */}
         <div className="mb-16 lg:mb-24">
           <motion.div
@@ -105,7 +127,7 @@ export function FounderSection() {
           {/* Image Column */}
           <motion.div
             className="lg:col-span-2"
-            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
           >
             <motion.div
               initial={{ opacity: 0, x: -40 }}
@@ -144,15 +166,11 @@ export function FounderSection() {
                 <div className="absolute left-0 top-0 h-20 w-20 border-l-2 border-t-2 border-[#c9a962]/50" />
                 <div className="absolute bottom-0 right-0 h-20 w-20 border-b-2 border-r-2 border-[#c9a962]/50" />
               </motion.div>
-
             </motion.div>
           </motion.div>
 
           {/* Content Column */}
-          <motion.div
-            className="lg:col-span-3"
-            style={{ y: contentY }}
-          >
+          <motion.div className="lg:col-span-3" style={{ y: contentY }}>
             {/* Quote */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -164,7 +182,8 @@ export function FounderSection() {
                 &ldquo;
               </div>
               <p className="font-SchnyderS text-2xl font-light leading-relaxed text-neutral-950 lg:text-3xl">
-                We create spaces where the grandeur of history shakes hands with the clean lines of tomorrow.
+                We create spaces where the grandeur of history shakes hands with
+                the clean lines of tomorrow.
               </p>
               <div className="mt-4 h-1 w-16 bg-[#c9a962]/50" />
             </motion.div>
@@ -193,7 +212,10 @@ export function FounderSection() {
                   >
                     <div className="flex items-start gap-6">
                       <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5 transition-all duration-300 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10">
-                        <Icon className="h-5 w-5 text-[#c9a962]" strokeWidth={1} />
+                        <Icon
+                          className="h-5 w-5 text-[#c9a962]"
+                          strokeWidth={1}
+                        />
                       </div>
                       <div className="flex-grow">
                         <div className="mb-1 font-Satoshi text-xs font-light uppercase tracking-wider text-neutral-400">

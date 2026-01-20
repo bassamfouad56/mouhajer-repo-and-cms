@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Quote } from 'lucide-react';
-import gsap from 'gsap';
-import SplitType from 'split-type';
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown, Quote } from "lucide-react";
+import gsap from "gsap";
+import SplitType from "split-type";
 
 export function TestFounderHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,7 +13,7 @@ export function TestFounderHero() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -24,8 +24,8 @@ export function TestFounderHero() {
     if (!titleRef.current || !isLoaded) return;
 
     const split = new SplitType(titleRef.current, {
-      types: 'lines,words',
-      tagName: 'span',
+      types: "lines,words",
+      tagName: "span",
     });
 
     const tl = gsap.timeline({ delay: 0.6 });
@@ -36,7 +36,7 @@ export function TestFounderHero() {
         opacity: 0,
         y: 80,
         rotateX: -60,
-        transformOrigin: 'center bottom'
+        transformOrigin: "center bottom",
       },
       {
         opacity: 1,
@@ -44,7 +44,7 @@ export function TestFounderHero() {
         rotateX: 0,
         stagger: 0.035,
         duration: 1,
-        ease: 'power3.out',
+        ease: "power3.out",
       }
     );
 
@@ -64,10 +64,7 @@ export function TestFounderHero() {
       className="relative h-screen min-h-[700px] max-h-[1100px] overflow-hidden bg-neutral-950"
     >
       {/* Video Background */}
-      <motion.div
-        style={{ scale: videoScale }}
-        className="absolute inset-0"
-      >
+      <motion.div style={{ scale: videoScale }} className="absolute inset-0">
         <video
           autoPlay
           muted
@@ -84,9 +81,13 @@ export function TestFounderHero() {
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-transparent to-neutral-950/80" />
 
         {/* Vignette */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%)',
-        }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%)",
+          }}
+        />
       </motion.div>
 
       {/* Main Content */}
@@ -110,7 +111,10 @@ export function TestFounderHero() {
           </motion.div>
 
           {/* Main Title */}
-          <div className="mb-8 overflow-hidden" style={{ perspective: '1000px' }}>
+          <div
+            className="mb-8 overflow-hidden"
+            style={{ perspective: "1000px" }}
+          >
             <h1
               ref={titleRef}
               className="font-SchnyderS text-4xl font-light leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
@@ -128,7 +132,8 @@ export function TestFounderHero() {
             transition={{ duration: 0.8, delay: 1.2 }}
             className="mx-auto mb-12 max-w-3xl px-4 font-Satoshi text-base font-light leading-relaxed text-white/70 sm:px-0 sm:text-lg lg:text-xl"
           >
-            Eng. Maher Mouhajer: Curating visual splendor for the Middle East&apos;s most discerning clientele.
+            Eng. Maher Mouhajer: Curating visual splendor for the Middle
+            East&apos;s most discerning clientele.
           </motion.p>
 
           {/* Name Badge */}
@@ -156,18 +161,7 @@ export function TestFounderHero() {
         animate={isLoaded ? { opacity: 1 } : {}}
         transition={{ duration: 0.8, delay: 2 }}
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-2"
-        >
-          <span className="font-Satoshi text-[10px] font-light tracking-[0.2em] text-white/50">
-            SCROLL TO EXPLORE
-          </span>
-          <ChevronDown className="h-4 w-4 text-white/50" />
-        </motion.div>
-      </motion.div>
+      ></motion.div>
 
       {/* Decorative Corner Elements */}
       <div className="absolute left-0 top-0 h-32 w-32 border-l-2 border-t-2 border-[#c9a962]/20" />

@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { SafeImage } from '@/components/safe-image';
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { SafeImage } from "@/components/safe-image";
 
 export function TestFounderVision() {
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1, 1.2]);
@@ -22,10 +22,7 @@ export function TestFounderVision() {
       className="relative h-screen min-h-[800px] overflow-hidden bg-neutral-950"
     >
       {/* Parallax Background Image */}
-      <motion.div
-        style={{ scale: imageScale }}
-        className="absolute inset-0"
-      >
+      <motion.div style={{ scale: imageScale }} className="absolute inset-0">
         <SafeImage
           src="/founder/CEO Arabia.jpg"
           alt="Eng. Maher Mouhajer in contemplation"
@@ -39,9 +36,13 @@ export function TestFounderVision() {
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/60 via-transparent to-neutral-950/60" />
 
         {/* Film grain effect */}
-        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")',
-        }} />
+        <div
+          className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E\")",
+          }}
+        />
       </motion.div>
 
       {/* Content */}
@@ -85,8 +86,9 @@ export function TestFounderVision() {
             <div className="mb-16 h-px w-32 mx-auto bg-gradient-to-r from-transparent via-[#c9a962] to-transparent" />
 
             <p className="mx-auto max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-white/70 lg:text-xl">
-              For Eng. Maher Mouhajer, architecture is not about making a statement.
-              It's about creating environments where people live better, work smarter, and feel more.
+              For Eng. Maher Mouhajer, architecture is not about making a
+              statement. It's about creating environments where people live
+              better, work smarter, and feel more.
             </p>
           </motion.div>
         </div>

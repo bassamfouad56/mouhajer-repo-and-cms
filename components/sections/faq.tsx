@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
-import Link from 'next/link';
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import Link from "next/link";
 
 export interface FAQItem {
   question: string;
@@ -15,7 +15,7 @@ interface FAQSectionProps {
   titleHighlight?: string;
   subtitle?: string;
   faqs: FAQItem[];
-  variant?: 'light' | 'dark';
+  variant?: "light" | "dark";
   showCTA?: boolean;
   ctaText?: string;
   ctaLink?: string;
@@ -32,31 +32,30 @@ interface FAQSectionProps {
  * - Plus/X icon that rotates
  */
 export function FAQSection({
-  label = 'Expert Insights',
-  title = 'Questions',
-  titleHighlight = '& Answers',
+  label = "Expert Insights",
+  title = "Questions",
+  titleHighlight = "& Answers",
   subtitle,
   faqs,
-  variant = 'light',
+  variant = "light",
   showCTA = true,
-  ctaText = 'Get In Touch',
-  ctaLink = '/contact',
+  ctaText = "Get In Touch",
+  ctaLink = "/contact",
   defaultOpen = 0,
 }: FAQSectionProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(defaultOpen);
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  const isDark = variant === 'dark';
+  const isDark = variant === "dark";
 
   return (
     <section
       ref={sectionRef}
       className={`relative overflow-hidden px-6 py-24 sm:py-32 lg:px-12 lg:py-40 ${
-        isDark ? 'bg-neutral-950' : 'bg-white'
+        isDark ? "bg-neutral-950" : "bg-white"
       }`}
     >
-
       <div className="relative z-10 mx-auto max-w-[1200px]">
         {/* Section Header */}
         <motion.div
@@ -69,7 +68,7 @@ export function FAQSection({
           <div className="mb-4">
             <span
               className={`font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] ${
-                isDark ? 'text-white/40' : 'text-neutral-400'
+                isDark ? "text-white/40" : "text-neutral-400"
               }`}
             >
               {label}
@@ -79,7 +78,7 @@ export function FAQSection({
           {/* Title */}
           <h2
             className={`font-SchnyderS text-4xl font-light leading-tight tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl ${
-              isDark ? 'text-white' : 'text-neutral-950'
+              isDark ? "text-white" : "text-neutral-950"
             }`}
           >
             {title}
@@ -91,7 +90,7 @@ export function FAQSection({
           {subtitle && (
             <p
               className={`mt-6 max-w-xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
-                isDark ? 'text-white/50' : 'text-neutral-500'
+                isDark ? "text-white/50" : "text-neutral-500"
               }`}
             >
               {subtitle}
@@ -108,16 +107,18 @@ export function FAQSection({
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.08 }}
               className={`border-t last:border-b ${
-                isDark ? 'border-white/10' : 'border-neutral-200'
+                isDark ? "border-white/10" : "border-neutral-200"
               }`}
             >
               <button
-                onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                onClick={() =>
+                  setActiveIndex(activeIndex === index ? null : index)
+                }
                 className="group flex w-full items-start justify-between py-6 text-left transition-opacity hover:opacity-70 sm:py-8"
               >
                 <h3
                   className={`max-w-3xl pr-6 font-SchnyderS text-xl font-light sm:pr-8 sm:text-2xl lg:text-3xl ${
-                    isDark ? 'text-white' : 'text-neutral-950'
+                    isDark ? "text-white" : "text-neutral-950"
                   }`}
                 >
                   {faq.question}
@@ -129,10 +130,10 @@ export function FAQSection({
                 >
                   <div className="relative flex h-6 w-6 items-center justify-center">
                     <div
-                      className={`h-px w-4 ${isDark ? 'bg-white/40' : 'bg-neutral-400'}`}
+                      className={`h-px w-4 ${isDark ? "bg-white/40" : "bg-neutral-400"}`}
                     />
                     <div
-                      className={`absolute h-4 w-px ${isDark ? 'bg-white/40' : 'bg-neutral-400'}`}
+                      className={`absolute h-4 w-px ${isDark ? "bg-white/40" : "bg-neutral-400"}`}
                     />
                   </div>
                 </motion.div>
@@ -142,7 +143,7 @@ export function FAQSection({
                 {activeIndex === index && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                     className="overflow-hidden"
@@ -150,7 +151,7 @@ export function FAQSection({
                     <div className="pb-6 pr-12 sm:pb-8 sm:pr-16">
                       <p
                         className={`max-w-3xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
-                          isDark ? 'text-white/60' : 'text-neutral-600'
+                          isDark ? "text-white/60" : "text-neutral-600"
                         }`}
                       >
                         {faq.answer}
@@ -173,7 +174,7 @@ export function FAQSection({
           >
             <p
               className={`mb-6 font-Satoshi text-sm font-light sm:text-base ${
-                isDark ? 'text-white/50' : 'text-neutral-500'
+                isDark ? "text-white/50" : "text-neutral-500"
               }`}
             >
               Still have questions? We&apos;re here to help.
@@ -182,12 +183,14 @@ export function FAQSection({
               href={ctaLink}
               className={`group inline-flex items-center gap-3 border px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.2em] transition-all ${
                 isDark
-                  ? 'border-white/30 text-white hover:bg-white hover:text-neutral-950'
-                  : 'border-neutral-950 text-neutral-950 hover:bg-neutral-950 hover:text-white'
+                  ? "border-white/30 text-white hover:bg-white hover:text-neutral-950"
+                  : "border-neutral-950 text-neutral-950 hover:bg-neutral-950 hover:text-white"
               }`}
             >
               {ctaText}
-              <span className="transition-transform group-hover:translate-x-1">→</span>
+              <span className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
             </Link>
           </motion.div>
         )}
@@ -202,19 +205,19 @@ export function FAQSection({
  */
 interface AccordionProps {
   items: FAQItem[];
-  variant?: 'light' | 'dark';
+  variant?: "light" | "dark";
   defaultOpen?: number | null;
   className?: string;
 }
 
 export function Accordion({
   items,
-  variant = 'light',
+  variant = "light",
   defaultOpen = null,
-  className = '',
+  className = "",
 }: AccordionProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(defaultOpen);
-  const isDark = variant === 'dark';
+  const isDark = variant === "dark";
 
   return (
     <div className={`space-y-px ${className}`}>
@@ -222,7 +225,7 @@ export function Accordion({
         <div
           key={index}
           className={`border-t last:border-b ${
-            isDark ? 'border-white/10' : 'border-neutral-200'
+            isDark ? "border-white/10" : "border-neutral-200"
           }`}
         >
           <button
@@ -231,7 +234,7 @@ export function Accordion({
           >
             <h3
               className={`max-w-3xl pr-6 font-SchnyderS text-xl font-light sm:pr-8 sm:text-2xl lg:text-3xl ${
-                isDark ? 'text-white' : 'text-neutral-950'
+                isDark ? "text-white" : "text-neutral-950"
               }`}
             >
               {item.question}
@@ -243,10 +246,10 @@ export function Accordion({
             >
               <div className="relative flex h-6 w-6 items-center justify-center">
                 <div
-                  className={`h-px w-4 ${isDark ? 'bg-white/40' : 'bg-neutral-400'}`}
+                  className={`h-px w-4 ${isDark ? "bg-white/40" : "bg-neutral-400"}`}
                 />
                 <div
-                  className={`absolute h-4 w-px ${isDark ? 'bg-white/40' : 'bg-neutral-400'}`}
+                  className={`absolute h-4 w-px ${isDark ? "bg-white/40" : "bg-neutral-400"}`}
                 />
               </div>
             </motion.div>
@@ -256,7 +259,7 @@ export function Accordion({
             {activeIndex === index && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
+                animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="overflow-hidden"
@@ -264,7 +267,7 @@ export function Accordion({
                 <div className="pb-6 pr-12 sm:pb-8 sm:pr-16">
                   <p
                     className={`max-w-3xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
-                      isDark ? 'text-white/60' : 'text-neutral-600'
+                      isDark ? "text-white/60" : "text-neutral-600"
                     }`}
                   >
                     {item.answer}
@@ -288,19 +291,19 @@ interface FAQHeaderProps {
   title?: string;
   titleHighlight?: string;
   subtitle?: string;
-  variant?: 'light' | 'dark';
+  variant?: "light" | "dark";
   className?: string;
 }
 
 export function FAQHeader({
-  label = 'Expert Insights',
-  title = 'Questions',
-  titleHighlight = '& Answers',
+  label = "Expert Insights",
+  title = "Questions",
+  titleHighlight = "& Answers",
   subtitle,
-  variant = 'light',
-  className = '',
+  variant = "light",
+  className = "",
 }: FAQHeaderProps) {
-  const isDark = variant === 'dark';
+  const isDark = variant === "dark";
 
   return (
     <div className={className}>
@@ -308,7 +311,7 @@ export function FAQHeader({
       <div className="mb-4">
         <span
           className={`font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] ${
-            isDark ? 'text-white/40' : 'text-neutral-400'
+            isDark ? "text-white/40" : "text-neutral-400"
           }`}
         >
           {label}
@@ -318,7 +321,7 @@ export function FAQHeader({
       {/* Title */}
       <h2
         className={`font-SchnyderS text-4xl font-light leading-tight tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl ${
-          isDark ? 'text-white' : 'text-neutral-950'
+          isDark ? "text-white" : "text-neutral-950"
         }`}
       >
         {title}
@@ -330,7 +333,7 @@ export function FAQHeader({
       {subtitle && (
         <p
           className={`mt-6 max-w-xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
-            isDark ? 'text-white/50' : 'text-neutral-500'
+            isDark ? "text-white/50" : "text-neutral-500"
           }`}
         >
           {subtitle}

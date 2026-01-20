@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import Link from 'next/link';
-import { RefreshCw, BookOpen, ArrowLeft, Home } from 'lucide-react';
+import { useEffect } from "react";
+import Link from "next/link";
+import { RefreshCw, BookOpen, ArrowLeft, Home } from "lucide-react";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -12,7 +12,7 @@ interface ErrorProps {
 export default function JournalError({ error, reset }: ErrorProps) {
   useEffect(() => {
     // Log the error to console in development
-    console.error('Journal page error:', error);
+    console.error("Journal page error:", error);
   }, [error]);
 
   return (
@@ -38,11 +38,12 @@ export default function JournalError({ error, reset }: ErrorProps) {
 
         {/* Description */}
         <p className="mx-auto mb-8 max-w-md font-Satoshi text-lg font-light text-white/60">
-          We couldn&apos;t load this article. It may have been moved or is temporarily unavailable.
+          We couldn&apos;t load this article. It may have been moved or is
+          temporarily unavailable.
         </p>
 
         {/* Error details (only in development) */}
-        {process.env.NODE_ENV === 'development' && error.message && (
+        {process.env.NODE_ENV === "development" && error.message && (
           <div className="mx-auto mb-8 max-w-2xl rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-left">
             <p className="font-Satoshi text-sm text-red-400">
               <strong>Error:</strong> {error.message}

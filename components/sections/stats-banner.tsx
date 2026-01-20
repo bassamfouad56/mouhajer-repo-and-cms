@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useRef, useEffect, useState } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useRef, useEffect, useState } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface StatItemProps {
   value: number;
@@ -15,15 +15,15 @@ interface StatItemProps {
 function AnimatedCounter({
   value,
   suffix,
-  duration = 2.5
+  duration = 2.5,
 }: {
   value: number;
   suffix: string;
-  duration?: number
+  duration?: number;
 }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   useEffect(() => {
     if (!isInView) return;
@@ -48,14 +48,15 @@ function AnimatedCounter({
 
   return (
     <span ref={ref} className="tabular-nums">
-      {count}{suffix}
+      {count}
+      {suffix}
     </span>
   );
 }
 
 function StatItem({ value, suffix, label, delay }: StatItemProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <motion.div
@@ -89,36 +90,40 @@ function StatItem({ value, suffix, label, delay }: StatItemProps) {
 // Luxury interior images for the background carousel
 const backgroundImages = [
   {
-    src: '/placeholder.jpg',
-    alt: 'Luxury living room with marble floors',
+    src: "/placeholder.jpg",
+    alt: "Luxury living room with marble floors",
   },
   {
-    src: '/placeholder.jpg',
-    alt: 'Elegant master bedroom suite',
+    src: "/placeholder.jpg",
+    alt: "Elegant master bedroom suite",
   },
   {
-    src: '/placeholder.jpg',
-    alt: 'Modern luxury bathroom interior',
+    src: "/placeholder.jpg",
+    alt: "Modern luxury bathroom interior",
   },
   {
-    src: '/placeholder.jpg',
-    alt: 'Premium commercial interior',
+    src: "/placeholder.jpg",
+    alt: "Premium commercial interior",
   },
 ];
 
 export function StatsBanner() {
-  const t = useTranslations('Stats');
+  const t = useTranslations("Stats");
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeImage, setActiveImage] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const backgroundScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const backgroundScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1.1, 1, 1.1]
+  );
 
   // Auto-rotate background images
   useEffect(() => {
@@ -129,10 +134,10 @@ export function StatsBanner() {
   }, []);
 
   const stats = [
-    { value: 400, suffix: '+', label: t('projectsCompleted') },
-    { value: 20, suffix: '+', label: t('yearsExperience') },
-    { value: 10, suffix: '+', label: t('internationalAwards') },
-    { value: 100, suffix: '%', label: t('clientSatisfaction') },
+    { value: 400, suffix: "+", label: t("projectsCompleted") },
+    { value: 20, suffix: "+", label: t("yearsExperience") },
+    { value: 10, suffix: "+", label: t("internationalAwards") },
+    { value: 100, suffix: "%", label: t("clientSatisfaction") },
   ];
 
   return (
@@ -142,7 +147,7 @@ export function StatsBanner() {
     >
       {/* Background Images with Crossfade */}
       <motion.div
-        style={{ y: backgroundY, scale: backgroundScale }}
+        style={{ y: 0, scale: backgroundScale }}
         className="absolute inset-0"
       >
         {backgroundImages.map((image, index) => (
@@ -151,7 +156,7 @@ export function StatsBanner() {
             className="absolute inset-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: index === activeImage ? 1 : 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
           >
             <Image
               src={image.src}
@@ -194,12 +199,17 @@ export function StatsBanner() {
       <motion.div
         className="absolute left-[10%] top-1/4 h-32 w-px bg-gradient-to-b from-transparent via-[#c9a962]/20 to-transparent"
         animate={{ opacity: [0.3, 0.6, 0.3], y: [0, -20, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="absolute right-[15%] bottom-1/4 h-px w-24 bg-gradient-to-r from-transparent via-[#262420]/10 to-transparent"
         animate={{ opacity: [0.2, 0.5, 0.2], x: [0, 20, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2,
+        }}
       />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-12">
@@ -212,7 +222,7 @@ export function StatsBanner() {
         >
           <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
           <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
-            {t('heading')}
+            {t("heading")}
           </span>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
         </motion.div>
@@ -220,11 +230,7 @@ export function StatsBanner() {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 gap-8 sm:gap-12 lg:grid-cols-4 lg:gap-8">
           {stats.map((stat, index) => (
-            <StatItem
-              key={stat.label}
-              {...stat}
-              delay={index * 0.1}
-            />
+            <StatItem key={stat.label} {...stat} delay={index * 0.1} />
           ))}
         </div>
 
@@ -240,7 +246,9 @@ export function StatsBanner() {
               key={index}
               onClick={() => setActiveImage(index)}
               className={`h-1 transition-all duration-500 ${
-                index === activeImage ? 'w-8 bg-[#c9a962]' : 'w-2 bg-[#262420]/20 hover:bg-[#262420]/40'
+                index === activeImage
+                  ? "w-8 bg-[#c9a962]"
+                  : "w-2 bg-[#262420]/20 hover:bg-[#262420]/40"
               }`}
               aria-label={`View image ${index + 1}`}
             />

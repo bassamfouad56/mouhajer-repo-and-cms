@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Highlighter, Share2, X, Trash2 } from 'lucide-react';
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Highlighter, Share2, X, Trash2 } from "lucide-react";
 
 interface Highlight {
   id: string;
@@ -21,7 +21,7 @@ interface TextHighlighterProps {
 }
 
 export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
-  const [selectedText, setSelectedText] = useState('');
+  const [selectedText, setSelectedText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
   const [highlights, setHighlights] = useState<Highlight[]>([]);
@@ -42,7 +42,10 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
   // Save highlights to localStorage
   useEffect(() => {
     if (highlights.length > 0) {
-      localStorage.setItem(`highlights-${postSlug}`, JSON.stringify(highlights));
+      localStorage.setItem(
+        `highlights-${postSlug}`,
+        JSON.stringify(highlights)
+      );
     } else {
       localStorage.removeItem(`highlights-${postSlug}`);
     }
@@ -65,8 +68,8 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
     // Check if selection is within article content
     const range = selection.getRangeAt(0);
     const container = range.commonAncestorContainer;
-    const article = document.querySelector('article');
-    
+    const article = document.querySelector("article");
+
     if (!article?.contains(container)) {
       setShowPopup(false);
       return;
@@ -82,12 +85,12 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('mouseup', handleSelection);
-    document.addEventListener('touchend', handleSelection);
+    document.addEventListener("mouseup", handleSelection);
+    document.addEventListener("touchend", handleSelection);
 
     return () => {
-      document.removeEventListener('mouseup', handleSelection);
-      document.removeEventListener('touchend', handleSelection);
+      document.removeEventListener("mouseup", handleSelection);
+      document.removeEventListener("touchend", handleSelection);
     };
   }, [handleSelection]);
 
@@ -100,8 +103,8 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
       range: {
         startOffset: 0,
         endOffset: 0,
-        startPath: '',
-        endPath: '',
+        startPath: "",
+        endPath: "",
       },
       createdAt: Date.now(),
     };
@@ -115,7 +118,7 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
     if (!selectedText) return;
 
     const shareUrl = `${window.location.href}#:~:text=${encodeURIComponent(selectedText)}`;
-    
+
     if (navigator.share) {
       try {
         await navigator.share({
@@ -148,10 +151,10 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.15 }}
             style={{
-              position: 'fixed',
+              position: "fixed",
               left: popupPosition.x,
               top: popupPosition.y,
-              transform: 'translate(-50%, -100%)',
+              transform: "translate(-50%, -100%)",
               zIndex: 9999,
             }}
             className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white p-1 shadow-xl"
@@ -207,7 +210,7 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
               initial={{ x: -320 }}
               animate={{ x: 0 }}
               exit={{ x: -320 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed left-0 top-0 z-50 h-full w-80 overflow-y-auto border-r border-neutral-200 bg-white shadow-2xl"
             >
               <div className="sticky top-0 flex items-center justify-between border-b border-neutral-200 bg-white p-4">

@@ -7,7 +7,7 @@ import { createClient } from '@sanity/client';
 const SANITY_TOKEN = process.argv[2] || 'skIdC1DpshvpNTdrONZgWZGG2zntEBr11zcgNTRsDnEdEeKrvArJ3qhigwib5kuvXoMZQKwzUmFPSnPCz31G9Xg5VkdpTYd1mn06nUkhRJPcKSTWMTCFnI0jghMNITc5X5VEk8QMX4tKR9qhE93eYLj21DeWzZZG4kHhSQLvDpjVe9Uf0EIu';
 
 const client = createClient({
-  projectId: 'r97logzc',
+  projectId: 'b6q28exv',
   dataset: 'production',
   apiVersion: '2024-01-01',
   token: SANITY_TOKEN,

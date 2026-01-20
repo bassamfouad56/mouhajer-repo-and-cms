@@ -1,9 +1,17 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Service } from '@/lib/wordpress';
-import { ArrowRight, Sparkles, Ruler, Home, Building2, Palette, Lightbulb } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Service } from "@/lib/wordpress";
+import {
+  ArrowRight,
+  Sparkles,
+  Ruler,
+  Home,
+  Building2,
+  Palette,
+  Lightbulb,
+} from "lucide-react";
 
 interface ServicesProps {
   services: Service[];
@@ -11,7 +19,7 @@ interface ServicesProps {
 
 export function Services({ services }: ServicesProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   // Use placeholder services if none from WordPress
   const displayServices = services.length > 0 ? services : placeholderServices;
@@ -86,10 +94,13 @@ export function Services({ services }: ServicesProps) {
           </p>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:bg-transparent hover:text-[#c9a962] focus-visible:bg-transparent focus-visible:text-[#c9a962] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5]"
+            className="group inline-flex items-center gap-3 border border-neutral-950 bg-neutral-950 px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.15em] text-white transition-all hover:bg-transparent hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
           >
             <span>START YOUR PROJECT</span>
-            <ArrowRight size={18} className="transition-transform group-hover:translate-x-2 group-focus-visible:translate-x-2" />
+            <ArrowRight
+              size={18}
+              className="transition-transform group-hover:translate-x-2 group-focus-visible:translate-x-2"
+            />
           </a>
         </motion.div>
       </div>
@@ -99,18 +110,18 @@ export function Services({ services }: ServicesProps) {
 
 function ServiceCard({ service, index }: { service: Service; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-50px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
   // Get icon component based on service title
   const getIcon = (title: string) => {
     type IconType = typeof Home;
     const iconMap: { [key: string]: IconType } = {
-      'Interior Design': Home,
-      'Space Planning': Ruler,
-      'Custom Furniture': Palette,
-      'Lighting Design': Lightbulb,
-      'Commercial Design': Building2,
-      'Consultation': Sparkles,
+      "Interior Design": Home,
+      "Space Planning": Ruler,
+      "Custom Furniture": Palette,
+      "Lighting Design": Lightbulb,
+      "Commercial Design": Building2,
+      Consultation: Sparkles,
     };
     const IconComponent = iconMap[title] || Sparkles;
     return <IconComponent className="h-8 w-8" />;
@@ -144,7 +155,10 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         <div
           className="mb-8 flex-1 font-Satoshi text-base font-light leading-relaxed text-[#3d3a36]/70"
           dangerouslySetInnerHTML={{
-            __html: service.excerpt || service.content?.substring(0, 150) + '...' || ''
+            __html:
+              service.excerpt ||
+              service.content?.substring(0, 150) + "..." ||
+              "",
           }}
         />
 
@@ -154,7 +168,10 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         {/* Learn More Link */}
         <div className="flex items-center gap-3 font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60 transition-all group-hover:gap-5 group-hover:text-[#c9a962]">
           <span>LEARN MORE</span>
-          <ArrowRight size={18} className="transition-all group-hover:translate-x-2" />
+          <ArrowRight
+            size={18}
+            className="transition-all group-hover:translate-x-2"
+          />
         </div>
       </div>
 
@@ -171,69 +188,75 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 // Placeholder services
 const placeholderServices: Service[] = [
   {
-    id: '1',
+    id: "1",
     databaseId: 1,
-    slug: 'interior-design',
-    title: 'Interior Design',
-    excerpt: 'Complete interior design solutions for residential and commercial spaces, tailored to your unique vision and lifestyle.',
-    content: '',
+    slug: "interior-design",
+    title: "Interior Design",
+    excerpt:
+      "Complete interior design solutions for residential and commercial spaces, tailored to your unique vision and lifestyle.",
+    content: "",
     date: new Date().toISOString(),
     modified: new Date().toISOString(),
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
+    featuredImage: { node: { sourceUrl: "", altText: "" } },
   },
   {
-    id: '2',
+    id: "2",
     databaseId: 2,
-    slug: 'space-planning',
-    title: 'Space Planning',
-    excerpt: 'Optimize your space with intelligent layouts that enhance functionality while maintaining aesthetic excellence.',
-    content: '',
+    slug: "space-planning",
+    title: "Space Planning",
+    excerpt:
+      "Optimize your space with intelligent layouts that enhance functionality while maintaining aesthetic excellence.",
+    content: "",
     date: new Date().toISOString(),
     modified: new Date().toISOString(),
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
+    featuredImage: { node: { sourceUrl: "", altText: "" } },
   },
   {
-    id: '3',
+    id: "3",
     databaseId: 3,
-    slug: 'custom-furniture',
-    title: 'Custom Furniture',
-    excerpt: 'Bespoke furniture pieces designed and crafted to perfectly complement your interior design scheme.',
-    content: '',
+    slug: "custom-furniture",
+    title: "Custom Furniture",
+    excerpt:
+      "Bespoke furniture pieces designed and crafted to perfectly complement your interior design scheme.",
+    content: "",
     date: new Date().toISOString(),
     modified: new Date().toISOString(),
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
+    featuredImage: { node: { sourceUrl: "", altText: "" } },
   },
   {
-    id: '4',
+    id: "4",
     databaseId: 4,
-    slug: 'lighting-design',
-    title: 'Lighting Design',
-    excerpt: 'Strategic lighting solutions that create ambiance, highlight architectural features, and enhance daily living.',
-    content: '',
+    slug: "lighting-design",
+    title: "Lighting Design",
+    excerpt:
+      "Strategic lighting solutions that create ambiance, highlight architectural features, and enhance daily living.",
+    content: "",
     date: new Date().toISOString(),
     modified: new Date().toISOString(),
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
+    featuredImage: { node: { sourceUrl: "", altText: "" } },
   },
   {
-    id: '5',
+    id: "5",
     databaseId: 5,
-    slug: 'commercial-design',
-    title: 'Commercial Design',
-    excerpt: 'Professional workspace design that balances brand identity, employee wellbeing, and operational efficiency.',
-    content: '',
+    slug: "commercial-design",
+    title: "Commercial Design",
+    excerpt:
+      "Professional workspace design that balances brand identity, employee wellbeing, and operational efficiency.",
+    content: "",
     date: new Date().toISOString(),
     modified: new Date().toISOString(),
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
+    featuredImage: { node: { sourceUrl: "", altText: "" } },
   },
   {
-    id: '6',
+    id: "6",
     databaseId: 6,
-    slug: 'consultation',
-    title: 'Consultation',
-    excerpt: 'Expert design consultation services to guide your project from concept through to successful completion.',
-    content: '',
+    slug: "consultation",
+    title: "Consultation",
+    excerpt:
+      "Expert design consultation services to guide your project from concept through to successful completion.",
+    content: "",
     date: new Date().toISOString(),
     modified: new Date().toISOString(),
-    featuredImage: { node: { sourceUrl: '', altText: '' } },
+    featuredImage: { node: { sourceUrl: "", altText: "" } },
   },
 ];

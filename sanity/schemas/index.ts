@@ -4,6 +4,26 @@ import service from './service'
 import industry from './industry'
 import post from './post'
 
+// Object Types
+import imageSeparator from './objects/imageSeparator'
+
+// Homepage Section Types
+import heroSection from './objects/sections/heroSection'
+import showcaseSection from './objects/sections/showcaseSection'
+import statsSection from './objects/sections/statsSection'
+import logoMarqueeSection from './objects/sections/logoMarqueeSection'
+import founderSection from './objects/sections/founderSection'
+import capabilitiesSection from './objects/sections/capabilitiesSection'
+import portfolioSection from './objects/sections/portfolioSection'
+import industriesSection from './objects/sections/industriesSection'
+import partnersSection from './objects/sections/partnersSection'
+import certificationsSection from './objects/sections/certificationsSection'
+import faqSection from './objects/sections/faqSection'
+import contactSection from './objects/sections/contactSection'
+
+// Page Types
+import homepage from './homepage'
+
 // Taxonomy Types
 import projectType from './projectType'
 import location from './location'
@@ -26,6 +46,26 @@ export const schemaTypes = [
   service,
   industry,
   post,
+
+  // Object Types
+  imageSeparator,
+
+  // Homepage Sections (object types)
+  heroSection,
+  showcaseSection,
+  statsSection,
+  logoMarqueeSection,
+  founderSection,
+  capabilitiesSection,
+  portfolioSection,
+  industriesSection,
+  partnersSection,
+  certificationsSection,
+  faqSection,
+  contactSection,
+
+  // Pages
+  homepage,
 
   // Taxonomy
   projectType,

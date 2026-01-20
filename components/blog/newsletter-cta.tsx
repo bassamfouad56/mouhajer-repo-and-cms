@@ -1,50 +1,55 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowRight, Check, X } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, ArrowRight, Check, X } from "lucide-react";
 
 interface NewsletterCTAProps {
   category?: string;
   articleTitle?: string;
 }
 
-export default function NewsletterCTA({ category, articleTitle }: NewsletterCTAProps) {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+export default function NewsletterCTA({
+  category,
+  articleTitle,
+}: NewsletterCTAProps) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 
   // Check if already subscribed
   useEffect(() => {
-    const subscribed = localStorage.getItem('newsletter-subscribed');
-    const dismissed = sessionStorage.getItem('newsletter-dismissed');
+    const subscribed = localStorage.getItem("newsletter-subscribed");
+    const dismissed = sessionStorage.getItem("newsletter-dismissed");
     if (subscribed) setIsSubscribed(true);
     if (dismissed) setIsDismissed(true);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || status === 'loading') return;
+    if (!email || status === "loading") return;
 
-    setStatus('loading');
+    setStatus("loading");
 
     try {
       // Simulate API call - replace with actual newsletter API
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      setStatus('success');
-      localStorage.setItem('newsletter-subscribed', 'true');
+      setStatus("success");
+      localStorage.setItem("newsletter-subscribed", "true");
       setIsSubscribed(true);
     } catch (error) {
-      setStatus('error');
-      setTimeout(() => setStatus('idle'), 3000);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
     }
   };
 
   const handleDismiss = () => {
     setIsDismissed(true);
-    sessionStorage.setItem('newsletter-dismissed', 'true');
+    sessionStorage.setItem("newsletter-dismissed", "true");
   };
 
   // Don't show if already subscribed or dismissed
@@ -82,13 +87,17 @@ export default function NewsletterCTA({ category, articleTitle }: NewsletterCTAP
                 Stay Inspired
               </h3>
               <p className="font-Satoshi text-sm font-light leading-relaxed text-white/60">
-                Get the latest insights on design, architecture, and luxury living delivered to your inbox.
+                Get the latest insights on design, architecture, and luxury
+                living delivered to your inbox.
               </p>
             </div>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-3 sm:flex-row"
+          >
             <div className="relative flex-1">
               <input
                 type="email"
@@ -96,40 +105,43 @@ export default function NewsletterCTA({ category, articleTitle }: NewsletterCTAP
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                disabled={status === 'loading' || status === 'success'}
+                disabled={status === "loading" || status === "success"}
                 className="w-full rounded-full border border-white/20 bg-white/5 px-6 py-4 font-Satoshi text-sm text-white placeholder:text-white/40 focus:border-[#c9a962] focus:outline-none focus:ring-1 focus:ring-[#c9a962] disabled:opacity-50"
               />
             </div>
             <motion.button
               type="submit"
-              disabled={status === 'loading' || status === 'success'}
-              whileHover={{ scale: status === 'idle' ? 1.02 : 1 }}
-              whileTap={{ scale: status === 'idle' ? 0.98 : 1 }}
+              disabled={status === "loading" || status === "success"}
+              whileHover={{ scale: status === "idle" ? 1.02 : 1 }}
+              whileTap={{ scale: status === "idle" ? 0.98 : 1 }}
               className={`group flex items-center justify-center gap-2 rounded-full px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider transition-all ${
-                status === 'success'
-                  ? 'bg-green-500 text-white'
-                  : status === 'error'
-                  ? 'bg-red-500 text-white'
-                  : 'bg-[#c9a962] text-neutral-950 hover:bg-white'
+                status === "success"
+                  ? "bg-green-500 text-white"
+                  : status === "error"
+                    ? "bg-red-500 text-white"
+                    : "bg-[#c9a962] text-neutral-950 hover:bg-white"
               }`}
             >
-              {status === 'loading' ? (
+              {status === "loading" ? (
                 <motion.div
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   className="h-4 w-4 rounded-full border-2 border-neutral-950 border-t-transparent"
                 />
-              ) : status === 'success' ? (
+              ) : status === "success" ? (
                 <>
                   <Check size={16} />
                   <span>Subscribed!</span>
                 </>
-              ) : status === 'error' ? (
+              ) : status === "error" ? (
                 <span>Try Again</span>
               ) : (
                 <>
                   <span>Subscribe</span>
-                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  <ArrowRight
+                    size={14}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </>
               )}
             </motion.button>
@@ -137,7 +149,7 @@ export default function NewsletterCTA({ category, articleTitle }: NewsletterCTAP
 
           {/* Privacy Note */}
           <p className="mt-4 font-Satoshi text-[11px] font-light text-white/30">
-            No spam, ever. Unsubscribe at any time. Read our{' '}
+            No spam, ever. Unsubscribe at any time. Read our{" "}
             <a href="/privacy" className="underline hover:text-white/50">
               Privacy Policy
             </a>

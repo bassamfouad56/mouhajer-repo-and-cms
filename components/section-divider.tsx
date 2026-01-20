@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-type DividerVariant = 'line' | 'diamond' | 'gradient' | 'dots' | 'minimal';
-type DividerTheme = 'dark' | 'light';
+type DividerVariant = "line" | "diamond" | "gradient" | "dots" | "minimal";
+type DividerTheme = "dark" | "light";
 
 interface SectionDividerProps {
   variant?: DividerVariant;
@@ -13,7 +13,13 @@ interface SectionDividerProps {
 }
 
 // Elegant gradient line divider
-function GradientLineDivider({ theme, isInView }: { theme: DividerTheme; isInView: boolean }) {
+function GradientLineDivider({
+  theme,
+  isInView,
+}: {
+  theme: DividerTheme;
+  isInView: boolean;
+}) {
   return (
     <div className="flex items-center justify-center gap-4">
       <motion.div
@@ -39,8 +45,14 @@ function GradientLineDivider({ theme, isInView }: { theme: DividerTheme; isInVie
 }
 
 // Diamond accent divider
-function DiamondDivider({ theme, isInView }: { theme: DividerTheme; isInView: boolean }) {
-  const lineColor = theme === 'dark' ? 'bg-white/10' : 'bg-neutral-950/10';
+function DiamondDivider({
+  theme,
+  isInView,
+}: {
+  theme: DividerTheme;
+  isInView: boolean;
+}) {
+  const lineColor = theme === "dark" ? "bg-white/10" : "bg-neutral-950/10";
 
   return (
     <div className="flex items-center justify-center">
@@ -88,7 +100,13 @@ function DiamondDivider({ theme, isInView }: { theme: DividerTheme; isInView: bo
 }
 
 // Subtle gradient overlay divider
-function GradientOverlayDivider({ theme, isInView }: { theme: DividerTheme; isInView: boolean }) {
+function GradientOverlayDivider({
+  theme,
+  isInView,
+}: {
+  theme: DividerTheme;
+  isInView: boolean;
+}) {
   return (
     <div className="relative h-16 w-full">
       <motion.div
@@ -100,7 +118,7 @@ function GradientOverlayDivider({ theme, isInView }: { theme: DividerTheme; isIn
       <div className="absolute inset-0 flex items-center justify-center">
         <motion.div
           initial={{ width: 0, opacity: 0 }}
-          animate={isInView ? { width: '100%', opacity: 1 } : {}}
+          animate={isInView ? { width: "100%", opacity: 1 } : {}}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="h-px max-w-md bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
         />
@@ -110,7 +128,13 @@ function GradientOverlayDivider({ theme, isInView }: { theme: DividerTheme; isIn
 }
 
 // Dots divider
-function DotsDivider({ theme, isInView }: { theme: DividerTheme; isInView: boolean }) {
+function DotsDivider({
+  theme,
+  isInView,
+}: {
+  theme: DividerTheme;
+  isInView: boolean;
+}) {
   return (
     <div className="flex items-center justify-center gap-3">
       {[0, 1, 2].map((i) => (
@@ -118,8 +142,12 @@ function DotsDivider({ theme, isInView }: { theme: DividerTheme; isInView: boole
           key={i}
           initial={{ scale: 0, opacity: 0 }}
           animate={isInView ? { scale: 1, opacity: 1 } : {}}
-          transition={{ duration: 0.4, delay: 0.1 * i, ease: [0.22, 1, 0.36, 1] }}
-          className={`h-1.5 w-1.5 rounded-full ${i === 1 ? 'bg-[#c9a962]' : 'bg-[#c9a962]/40'}`}
+          transition={{
+            duration: 0.4,
+            delay: 0.1 * i,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className={`h-1.5 w-1.5 rounded-full ${i === 1 ? "bg-[#c9a962]" : "bg-[#c9a962]/40"}`}
         />
       ))}
     </div>
@@ -127,7 +155,13 @@ function DotsDivider({ theme, isInView }: { theme: DividerTheme; isInView: boole
 }
 
 // Minimal line divider
-function MinimalDivider({ theme, isInView }: { theme: DividerTheme; isInView: boolean }) {
+function MinimalDivider({
+  theme,
+  isInView,
+}: {
+  theme: DividerTheme;
+  isInView: boolean;
+}) {
   return (
     <motion.div
       initial={{ scaleX: 0, opacity: 0 }}
@@ -139,26 +173,26 @@ function MinimalDivider({ theme, isInView }: { theme: DividerTheme; isInView: bo
 }
 
 export function SectionDivider({
-  variant = 'line',
-  theme = 'dark',
-  className = '',
+  variant = "line",
+  theme = "dark",
+  className = "",
 }: SectionDividerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: '-50px' });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
-  const bgColor = theme === 'dark' ? 'bg-neutral-950' : 'bg-white';
+  const bgColor = theme === "dark" ? "bg-neutral-950" : "bg-white";
 
   const renderDivider = () => {
     switch (variant) {
-      case 'line':
+      case "line":
         return <GradientLineDivider theme={theme} isInView={isInView} />;
-      case 'diamond':
+      case "diamond":
         return <DiamondDivider theme={theme} isInView={isInView} />;
-      case 'gradient':
+      case "gradient":
         return <GradientOverlayDivider theme={theme} isInView={isInView} />;
-      case 'dots':
+      case "dots":
         return <DotsDivider theme={theme} isInView={isInView} />;
-      case 'minimal':
+      case "minimal":
         return <MinimalDivider theme={theme} isInView={isInView} />;
       default:
         return <GradientLineDivider theme={theme} isInView={isInView} />;
@@ -182,14 +216,14 @@ interface SimpleAnimatedDividerProps {
 }
 
 export function SimpleAnimatedDivider({
-  theme = 'dark',
-  className = '',
+  theme = "dark",
+  className = "",
 }: SimpleAnimatedDividerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: '-50px' });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
-  const lineColor = theme === 'dark' ? 'bg-white/20' : 'bg-neutral-950/20';
-  const bgColor = theme === 'dark' ? 'bg-neutral-950' : 'bg-white';
+  const lineColor = theme === "dark" ? "bg-white/20" : "bg-neutral-950/20";
+  const bgColor = theme === "dark" ? "bg-neutral-950" : "bg-white";
 
   return (
     <div
@@ -230,14 +264,14 @@ interface LuxuryTransitionProps {
 }
 
 export function LuxuryTransition({
-  theme = 'dark',
-  className = '',
+  theme = "dark",
+  className = "",
 }: LuxuryTransitionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: '-50px' });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
-  const bgColor = theme === 'dark' ? 'bg-neutral-950' : 'bg-white';
-  const lineColor = theme === 'dark' ? 'bg-white/10' : 'bg-neutral-950/10';
+  const bgColor = theme === "dark" ? "bg-neutral-950" : "bg-white";
+  const lineColor = theme === "dark" ? "bg-white/10" : "bg-neutral-950/10";
 
   return (
     <div
@@ -248,7 +282,7 @@ export function LuxuryTransition({
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundSize: '60px 60px',
+          backgroundSize: "60px 60px",
         }}
       />
 

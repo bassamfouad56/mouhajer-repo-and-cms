@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Hotel, Coffee, Sparkles, Clock } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Hotel, Coffee, Sparkles, Clock } from "lucide-react";
 
 interface SanityClient {
   _id: string;
@@ -18,33 +18,33 @@ interface HospitalityPartnersProps {
 // Fallback partners if no Sanity data
 const defaultPartners = [
   {
-    name: 'Abu Dhabi National Hotels (ADNH)',
-    projects: 'Sheraton, Radisson Blu',
+    name: "Abu Dhabi National Hotels (ADNH)",
+    projects: "Sheraton, Radisson Blu",
     icon: Hotel,
   },
   {
-    name: 'Wasl Asset Management',
-    projects: 'Park Hyatt, Emirates Golf Club',
+    name: "Wasl Asset Management",
+    projects: "Park Hyatt, Emirates Golf Club",
     icon: Sparkles,
   },
   {
-    name: 'Emaar Hospitality',
-    projects: 'Address Boulevard, Address Dubai Marina',
+    name: "Emaar Hospitality",
+    projects: "Address Boulevard, Address Dubai Marina",
     icon: Hotel,
   },
   {
-    name: 'Hyatt Hotels Corporation',
-    projects: 'Grand Hyatt Royal Suites',
+    name: "Hyatt Hotels Corporation",
+    projects: "Grand Hyatt Royal Suites",
     icon: Coffee,
   },
   {
-    name: 'The Ritz-Carlton',
-    projects: 'Abu Dhabi Grand Canal Villas',
+    name: "The Ritz-Carlton",
+    projects: "Abu Dhabi Grand Canal Villas",
     icon: Sparkles,
   },
   {
-    name: 'Dusit Thani',
-    projects: 'Dubai Renovation',
+    name: "Dusit Thani",
+    projects: "Dubai Renovation",
     icon: Hotel,
   },
 ];
@@ -59,34 +59,39 @@ const iconMap: Record<string, typeof Hotel> = {
 const capabilities = [
   {
     icon: Clock,
-    title: 'Live Environment Expertise',
+    title: "Live Environment Expertise",
     description:
-      'We work within operational hotels without disrupting guest experience',
+      "We work within operational hotels without disrupting guest experience",
   },
   {
     icon: Sparkles,
-    title: 'Absolute Perfection',
+    title: "Absolute Perfection",
     description:
-      'Zero tolerance for imperfections in high-visibility hospitality spaces',
+      "Zero tolerance for imperfections in high-visibility hospitality spaces",
   },
   {
     icon: Hotel,
-    title: 'Speed & Silence',
-    description: 'Fast-track delivery with minimal noise and disruption',
+    title: "Speed & Silence",
+    description: "Fast-track delivery with minimal noise and disruption",
   },
 ];
 
-export function HospitalityPartners({ clients = [] }: HospitalityPartnersProps) {
+export function HospitalityPartners({
+  clients = [],
+}: HospitalityPartnersProps) {
   // Transform Sanity clients or use defaults
-  const partners = clients.length > 0
-    ? clients.map((client, idx) => ({
-        name: client.name,
-        projects: client.projectsText || '',
-        icon: client.icon ? (iconMap[client.icon.toLowerCase()] || Hotel) : [Hotel, Sparkles, Coffee][idx % 3],
-      }))
-    : defaultPartners;
+  const partners =
+    clients.length > 0
+      ? clients.map((client, idx) => ({
+          name: client.name,
+          projects: client.projectsText || "",
+          icon: client.icon
+            ? iconMap[client.icon.toLowerCase()] || Hotel
+            : [Hotel, Sparkles, Coffee][idx % 3],
+        }))
+      : defaultPartners;
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section

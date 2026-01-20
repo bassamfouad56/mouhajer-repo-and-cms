@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface Reactions {
   helpful: number;
@@ -15,12 +15,15 @@ interface ReactionButtonsProps {
 }
 
 const reactionTypes = [
-  { key: 'helpful', emoji: '👏', label: 'Helpful' },
-  { key: 'insightful', emoji: '💡', label: 'Insightful' },
-  { key: 'loved', emoji: '❤️', label: 'Loved it' },
+  { key: "helpful", emoji: "👏", label: "Helpful" },
+  { key: "insightful", emoji: "💡", label: "Insightful" },
+  { key: "loved", emoji: "❤️", label: "Loved it" },
 ] as const;
 
-export default function ReactionButtons({ postId, initialReactions }: ReactionButtonsProps) {
+export default function ReactionButtons({
+  postId,
+  initialReactions,
+}: ReactionButtonsProps) {
   const [reactions, setReactions] = useState<Reactions>(
     initialReactions || { helpful: 0, insightful: 0, loved: 0 }
   );
@@ -54,7 +57,10 @@ export default function ReactionButtons({ postId, initialReactions }: ReactionBu
       if (userReaction) {
         setReactions((prev) => ({
           ...prev,
-          [userReaction]: Math.max(0, prev[userReaction as keyof Reactions] - 1),
+          [userReaction]: Math.max(
+            0,
+            prev[userReaction as keyof Reactions] - 1
+          ),
         }));
       }
 
@@ -69,10 +75,14 @@ export default function ReactionButtons({ postId, initialReactions }: ReactionBu
 
     // Optional: Send to API
     try {
-      await fetch('/api/blog/reaction', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ postId, type, action: userReaction === type ? 'remove' : 'add' }),
+      await fetch("/api/blog/reaction", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          postId,
+          type,
+          action: userReaction === type ? "remove" : "add",
+        }),
       });
     } catch (error) {
       // Silently fail - reactions are stored locally anyway
@@ -81,7 +91,8 @@ export default function ReactionButtons({ postId, initialReactions }: ReactionBu
     setTimeout(() => setIsAnimating(null), 500);
   };
 
-  const totalReactions = reactions.helpful + reactions.insightful + reactions.loved;
+  const totalReactions =
+    reactions.helpful + reactions.insightful + reactions.loved;
 
   return (
     <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-6">
@@ -98,8 +109,8 @@ export default function ReactionButtons({ postId, initialReactions }: ReactionBu
             whileTap={{ scale: 0.95 }}
             className={`group flex flex-col items-center gap-1 rounded-lg border px-4 py-3 transition-all duration-300 ${
               userReaction === key
-                ? 'border-[#c9a962] bg-[#c9a962]/10'
-                : 'border-neutral-200 bg-white hover:border-neutral-300'
+                ? "border-[#c9a962] bg-[#c9a962]/10"
+                : "border-neutral-200 bg-white hover:border-neutral-300"
             }`}
           >
             <motion.span
@@ -118,7 +129,7 @@ export default function ReactionButtons({ postId, initialReactions }: ReactionBu
             </span>
             <span
               className={`font-Satoshi text-xs font-medium ${
-                userReaction === key ? 'text-[#c9a962]' : 'text-neutral-400'
+                userReaction === key ? "text-[#c9a962]" : "text-neutral-400"
               }`}
             >
               {reactions[key as keyof Reactions]}
@@ -133,7 +144,7 @@ export default function ReactionButtons({ postId, initialReactions }: ReactionBu
           animate={{ opacity: 1, y: 0 }}
           className="mt-4 text-center font-Satoshi text-xs font-light text-neutral-500"
         >
-          {totalReactions} {totalReactions === 1 ? 'reaction' : 'reactions'}
+          {totalReactions} {totalReactions === 1 ? "reaction" : "reactions"}
         </motion.p>
       )}
     </div>

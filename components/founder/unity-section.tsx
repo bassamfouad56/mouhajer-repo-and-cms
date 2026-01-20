@@ -1,38 +1,38 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
-import { SafeImage } from '@/components/safe-image';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
+import { SafeImage } from "@/components/safe-image";
 
 const teams = [
   {
-    id: 'design',
-    title: 'The Design Team',
-    description: 'knows their concepts are buildable.',
+    id: "design",
+    title: "The Design Team",
+    description: "knows their concepts are buildable.",
   },
   {
-    id: 'construction',
-    title: 'The Construction Team',
-    description: 'respects the artistic intent.',
+    id: "construction",
+    title: "The Construction Team",
+    description: "respects the artistic intent.",
   },
   {
-    id: 'mep',
-    title: 'The MEP Team',
-    description: 'ensures the systems support the beauty.',
+    id: "mep",
+    title: "The MEP Team",
+    description: "ensures the systems support the beauty.",
   },
 ];
 
 export function UnitySection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ['10%', '-10%']);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
 
   return (
     <section
@@ -43,7 +43,6 @@ export function UnitySection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(201,169,98,0.03),transparent_50%),radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.02),transparent_50%)]" />
 
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 lg:px-12 xl:px-16">
-
         {/* Header */}
         <div className="mb-32">
           <motion.div
@@ -66,12 +65,15 @@ export function UnitySection() {
 
             <div className="max-w-3xl space-y-6 font-Satoshi text-lg font-light leading-relaxed text-white/60 lg:text-xl">
               <p>
-                Many CEOs outsource their problems.{' '}
-                <span className="font-normal text-white">Eng. Maher brings them in-house.</span>
+                Many CEOs outsource their problems.{" "}
+                <span className="font-normal text-white">
+                  Eng. Maher brings them in-house.
+                </span>
               </p>
               <p>
-                He built MIDC as a turnkey powerhouse because he wanted his designers to sit next to
-                his engineers. He wanted the person drawing the joinery to know the person building it.
+                He built MIDC as a turnkey powerhouse because he wanted his
+                designers to sit next to his engineers. He wanted the person
+                drawing the joinery to know the person building it.
               </p>
               <p className="text-white/40">
                 This unity creates a culture of mutual respect and efficiency.
@@ -82,7 +84,6 @@ export function UnitySection() {
 
         {/* Split Layout: Founder Image + Team Grid */}
         <div className="mb-32 grid gap-16 lg:grid-cols-2 lg:gap-20 xl:gap-24">
-
           {/* Left: Large Founder Leadership Image */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -115,7 +116,8 @@ export function UnitySection() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="mt-6 font-Satoshi text-sm font-light text-white/50"
             >
-              Leading by example: Eng. Maher orchestrates collaboration across all disciplines
+              Leading by example: Eng. Maher orchestrates collaboration across
+              all disciplines
             </motion.div>
           </motion.div>
 
@@ -130,7 +132,7 @@ export function UnitySection() {
                   transition={{
                     duration: 0.8,
                     delay: 0.3 + index * 0.15,
-                    ease: [0.22, 1, 0.36, 1]
+                    ease: [0.22, 1, 0.36, 1],
                   }}
                   className="group relative border-l border-white/10 pl-8 transition-all duration-500 hover:border-[#c9a962]"
                 >
@@ -152,7 +154,8 @@ export function UnitySection() {
               className="mt-16 border-t border-white/10 pt-12"
             >
               <p className="font-SchnyderS text-2xl font-light italic leading-tight text-white/80 lg:text-3xl">
-                "The magic happens when everyone understands they are building something bigger than themselves."
+                "The magic happens when everyone understands they are building
+                something bigger than themselves."
               </p>
               <div className="mt-6 h-px w-16 bg-[#c9a962]" />
             </motion.div>
@@ -163,7 +166,7 @@ export function UnitySection() {
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="relative mb-32 aspect-21/9 overflow-hidden bg-neutral-900"
         >
@@ -181,7 +184,8 @@ export function UnitySection() {
             <div className="max-w-2xl">
               <div className="mb-4 h-px w-12 bg-[#c9a962]" />
               <p className="font-SchnyderS text-3xl font-light leading-tight text-white lg:text-4xl xl:text-5xl">
-                Eng. Maher sits at the head of this table, not to dictate, but to orchestrate this collaboration.
+                Eng. Maher sits at the head of this table, not to dictate, but
+                to orchestrate this collaboration.
               </p>
             </div>
           </div>
@@ -207,11 +211,14 @@ export function UnitySection() {
               stroke="currentColor"
               strokeWidth={1}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </Link>
         </motion.div>
-
       </div>
     </section>
   );

@@ -95,27 +95,33 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
         isDark ? "bg-[#0a0a0a]" : "bg-[#faf8f5]"
       }`}
     >
-      {/* Cinematic Background */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ y: backgroundY, scale: backgroundScale }}
-      >
-        {backgroundImage && (
-          <SafeImage
-            src={backgroundImage}
-            alt="Luxury interior"
-            fill
-            className="object-cover"
-            priority
-          />
-        )}
+      {/* Cinematic Background - Wrapper to contain scaled image */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute -inset-[10%]"
+          style={{ y: backgroundY, scale: backgroundScale }}
+        >
+          {backgroundImage && (
+            <SafeImage
+              src={backgroundImage}
+              alt="Luxury interior"
+              fill
+              className="object-cover"
+              priority
+            />
+          )}
+        </motion.div>
         {/* Multi-layer overlays for depth */}
-        <div className={`absolute inset-0 ${isDark ? "bg-[#0a0a0a]/90" : "bg-[#faf8f5]/90"}`} />
-        <div className={`absolute inset-0 ${isDark ? "bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]" : "bg-gradient-to-r from-[#faf8f5] via-[#faf8f5]/80 to-[#faf8f5]"}`} />
-        <div className={`absolute inset-0 ${isDark ? "bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/80" : "bg-gradient-to-t from-[#faf8f5] via-transparent to-[#faf8f5]/80"}`} />
-
-        {/* Subtle grid pattern */}
-      </motion.div>
+        <div
+          className={`absolute inset-0 ${isDark ? "bg-[#0a0a0a]/90" : "bg-[#faf8f5]/90"}`}
+        />
+        <div
+          className={`absolute inset-0 ${isDark ? "bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]" : "bg-gradient-to-r from-[#faf8f5] via-[#faf8f5]/80 to-[#faf8f5]"}`}
+        />
+        <div
+          className={`absolute inset-0 ${isDark ? "bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/80" : "bg-gradient-to-t from-[#faf8f5] via-transparent to-[#faf8f5]/80"}`}
+        />
+      </div>
 
       {/* Floating accent orbs */}
       <motion.div
@@ -146,7 +152,9 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
           >
             <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
             <Sparkles className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
-            <span className={`font-Satoshi text-xs font-light uppercase tracking-[0.4em] ${isDark ? "text-neutral-400" : "text-neutral-500"}`}>
+            <span
+              className={`font-Satoshi text-xs font-light uppercase tracking-[0.4em] ${isDark ? "text-neutral-400" : "text-neutral-500"}`}
+            >
               Begin Your Journey
             </span>
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
@@ -160,7 +168,9 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
           >
             Let&apos;s Create
             <br />
-            <span className={isDark ? "text-neutral-500" : "text-neutral-400"}>Something Extraordinary</span>
+            <span className={isDark ? "text-neutral-500" : "text-neutral-400"}>
+              Something Extraordinary
+            </span>
           </motion.h2>
 
           <motion.p
@@ -228,13 +238,19 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
 
                     {/* Content */}
                     <div className="flex-1">
-                      <div className={`mb-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-[#c9a962] ${isDark ? "text-neutral-400" : "text-neutral-500"}`}>
+                      <div
+                        className={`mb-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-[#c9a962] ${isDark ? "text-neutral-400" : "text-neutral-500"}`}
+                      >
                         {item.label}
                       </div>
-                      <div className={`mb-1 font-SchnyderS text-xl font-light transition-colors duration-500 lg:text-2xl ${isDark ? "text-white group-hover:text-white" : "text-neutral-900 group-hover:text-neutral-900"}`}>
+                      <div
+                        className={`mb-1 font-SchnyderS text-xl font-light transition-colors duration-500 lg:text-2xl ${isDark ? "text-white group-hover:text-white" : "text-neutral-900 group-hover:text-neutral-900"}`}
+                      >
                         {item.value}
                       </div>
-                      <div className={`font-Satoshi text-xs font-light ${isDark ? "text-neutral-500" : "text-neutral-500"}`}>
+                      <div
+                        className={`font-Satoshi text-xs font-light ${isDark ? "text-neutral-500" : "text-neutral-500"}`}
+                      >
                         {item.description}
                       </div>
                     </div>
@@ -281,10 +297,14 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                   <Clock className="h-5 w-5 text-[#c9a962]" strokeWidth={1} />
                 </div>
                 <div>
-                  <h4 className={`font-SchnyderS text-lg font-light ${isDark ? "text-white" : "text-neutral-900"}`}>
+                  <h4
+                    className={`font-SchnyderS text-lg font-light ${isDark ? "text-white" : "text-neutral-900"}`}
+                  >
                     Business Hours
                   </h4>
-                  <p className={`font-Satoshi text-xs font-light ${isDark ? "text-neutral-400" : "text-neutral-500"}`}>
+                  <p
+                    className={`font-Satoshi text-xs font-light ${isDark ? "text-neutral-400" : "text-neutral-500"}`}
+                  >
                     Dubai & Abu Dhabi
                   </p>
                 </div>
@@ -309,8 +329,12 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                       <span
                         className={`font-Satoshi text-sm font-light ${
                           schedule.active
-                            ? isDark ? "text-neutral-300" : "text-neutral-700"
-                            : isDark ? "text-neutral-600" : "text-neutral-400"
+                            ? isDark
+                              ? "text-neutral-300"
+                              : "text-neutral-700"
+                            : isDark
+                              ? "text-neutral-600"
+                              : "text-neutral-400"
                         }`}
                       >
                         {schedule.day}
@@ -319,7 +343,9 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                         className={`font-Satoshi text-sm font-light ${
                           schedule.active
                             ? "text-[#c9a962]"
-                            : isDark ? "text-neutral-600" : "text-neutral-400"
+                            : isDark
+                              ? "text-neutral-600"
+                              : "text-neutral-400"
                         }`}
                       >
                         {schedule.hours}
@@ -345,11 +371,13 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
               transformStyle: "preserve-3d",
             }}
           >
-            <div className={`relative h-full overflow-hidden border border-[#c9a962]/20 backdrop-blur-sm ${
-              isDark
-                ? "bg-gradient-to-br from-white/10 to-white/5"
-                : "bg-gradient-to-br from-white/80 to-white/60"
-            }`}>
+            <div
+              className={`relative h-full overflow-hidden border border-[#c9a962]/20 backdrop-blur-sm ${
+                isDark
+                  ? "bg-gradient-to-br from-white/10 to-white/5"
+                  : "bg-gradient-to-br from-white/80 to-white/60"
+              }`}
+            >
               {/* Decorative background pattern */}
               <div className="absolute inset-0 opacity-30">
                 <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#c9a962]/[0.05] blur-[100px]" />
@@ -410,7 +438,9 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <div className="h-1.5 w-1.5 rounded-full bg-[#c9a962]" />
-                      <span className={`font-Satoshi text-sm font-light ${isDark ? "text-neutral-400" : "text-neutral-600"}`}>
+                      <span
+                        className={`font-Satoshi text-sm font-light ${isDark ? "text-neutral-400" : "text-neutral-600"}`}
+                      >
                         {feature}
                       </span>
                     </div>
@@ -423,11 +453,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 1 }}
                 >
-                  <ContactCTA
-                    source="home-contact-section"
-                    text="Book a Consultation"
-                    variant="gold"
-                  />
+                  <ContactCTA text="Book a Consultation" variant="primary" />
                 </motion.div>
 
                 {/* Trust indicator */}

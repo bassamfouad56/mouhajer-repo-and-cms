@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { SafeImage } from '@/components/safe-image';
-import { urlForImage } from '@/sanity/lib/image';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { SafeImage } from "@/components/safe-image";
+import { urlForImage } from "@/sanity/lib/image";
 
 // Types for Sanity client data
 interface SanityClient {
@@ -24,24 +24,26 @@ interface LogoMarqueeProps {
 }
 
 // Helper to get logo URL from Sanity
-function getLogoUrl(logo: SanityClient['logo']): string {
-  if (!logo?.asset) return '';
+function getLogoUrl(logo: SanityClient["logo"]): string {
+  if (!logo?.asset) return "";
   try {
     return urlForImage(logo).width(200).height(100).url();
   } catch {
-    return '';
+    return "";
   }
 }
 
 export function LogoMarquee({ clients = [] }: LogoMarqueeProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   // Filter out confidential clients and those without logos
-  const visibleClients = clients.filter(c => !c.isConfidential && c.logo?.asset);
+  const visibleClients = clients.filter(
+    (c) => !c.isConfidential && c.logo?.asset
+  );
 
   // Transform Sanity clients to logo format
-  const clientLogos = visibleClients.map(client => ({
+  const clientLogos = visibleClients.map((client) => ({
     name: client.name,
     logoUrl: getLogoUrl(client.logo),
     alt: client.name,
@@ -64,7 +66,7 @@ export function LogoMarquee({ clients = [] }: LogoMarqueeProps) {
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundSize: '60px 60px',
+          backgroundSize: "60px 60px",
         }}
       />
 
@@ -101,12 +103,12 @@ export function LogoMarquee({ clients = [] }: LogoMarqueeProps) {
         >
           <motion.div
             className="flex items-center gap-16 sm:gap-20"
-            animate={{ x: ['0%', '-50%'] }}
+            animate={{ x: ["0%", "-50%"] }}
             transition={{
               x: {
                 duration: 40,
                 repeat: Infinity,
-                ease: 'linear',
+                ease: "linear",
               },
             }}
           >
@@ -142,12 +144,12 @@ export function LogoMarquee({ clients = [] }: LogoMarqueeProps) {
         >
           <motion.div
             className="flex items-center gap-16 sm:gap-20"
-            animate={{ x: ['-50%', '0%'] }}
+            animate={{ x: ["-50%", "0%"] }}
             transition={{
               x: {
                 duration: 35,
                 repeat: Infinity,
-                ease: 'linear',
+                ease: "linear",
               },
             }}
           >

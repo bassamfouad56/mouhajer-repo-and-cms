@@ -7,26 +7,13 @@ import Image from 'next/image';
 import { Industry, Service, Project } from '@/lib/wordpress';
 import { ImageGalleryModal } from '@/components/image-gallery-modal';
 import {
-  Building2,
-  Home,
-  Hotel,
-  Store,
-  Utensils,
-  Briefcase,
   ArrowRight,
   ChevronRight,
-  Award,
   TrendingUp,
   MapPin,
   ArrowUpRight,
   CheckCircle2,
   ZoomIn,
-  Heart,
-  ShoppingBag,
-  Palette,
-  Box,
-  Package,
-  Sofa,
 } from 'lucide-react';
 
 interface IndustryDetailProps {
@@ -88,26 +75,9 @@ export default function EnhancedIndustryDetail({
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.6]);
 
-  // Get icon component based on industry title
-  const getIcon = (title: string) => {
-    const iconMap: { [key: string]: typeof Home } = {
-      'Luxury Hospitality': Hotel,
-      'High-End Residential': Home,
-      'Commercial & Corporate': Building2,
-      'Residential': Home,
-      'Commercial': Building2,
-      'Hospitality': Hotel,
-      'Retail': Store,
-      'Restaurant & F&B': Utensils,
-      'Corporate': Briefcase,
-    };
-    return iconMap[title] || Building2;
-  };
-
-  const icon = getIcon(industry.title);
   const projectCount = industry.acfFields?.stats?.projectsCompleted || relatedProjects.length || 0;
   const yearsExperience = industry.acfFields?.stats?.yearsExperience || 15;
   const clientsSatisfied = industry.acfFields?.stats?.clientsSatisfied || 98;
@@ -119,7 +89,7 @@ export default function EnhancedIndustryDetail({
   const galleryImages = relatedProjects
     .slice(0, 6)
     .map((project) => ({
-      sourceUrl: project.featuredImage?.node?.sourceUrl || '/images/placeholder.jpg',
+      sourceUrl: project.featuredImage?.node?.sourceUrl || '/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg',
       altText: project.title,
     }));
 
@@ -130,101 +100,102 @@ export default function EnhancedIndustryDetail({
 
   return (
     <main className="relative bg-white">
-      {/* Hero Section with Parallax */}
+      {/* Hero Section with Banner Image */}
       <section
         ref={heroRef}
-        className="relative overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 px-6 py-32 lg:px-12 lg:py-48"
+        className="relative min-h-[70vh] overflow-hidden lg:min-h-[80vh]"
       >
-        {/* Background Effects with Parallax */}
+        {/* Background Image with Parallax */}
         <motion.div
           style={{ y }}
-        />
-        <div className="absolute left-0 top-0 h-[600px] w-[600px] rounded-full bg-blue-500/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-purple-500/10 blur-[120px]" />
+          className="absolute inset-0"
+        >
+          <Image
+            src={industry.featuredImage?.node?.sourceUrl || '/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg'}
+            alt={industry.title}
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/40" />
+        </motion.div>
 
-        <motion.div style={{ opacity }} className="relative z-10 mx-auto max-w-[1400px]">
-          {/* Breadcrumbs */}
-          <motion.nav
-            initial={{ opacity: 0, y: -10 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="mb-8 flex items-center gap-2 text-sm font-light text-neutral-400"
-          >
-            <Link href="/" className="transition-colors hover:text-white">
-              Home
-            </Link>
-            <ChevronRight size={16} />
-            <Link href="/industries" className="transition-colors hover:text-white">
-              Industries
-            </Link>
-            <ChevronRight size={16} />
-            <span className="text-white">{industry.title}</span>
-          </motion.nav>
+        <motion.div style={{ opacity }} className="relative z-10 flex min-h-[70vh] flex-col justify-end px-6 pb-16 pt-32 lg:min-h-[80vh] lg:px-12 lg:pb-24">
+          <div className="mx-auto w-full max-w-[1400px]">
+            {/* Breadcrumbs */}
+            <motion.nav
+              initial={{ opacity: 0, y: -10 }}
+              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="mb-8 flex items-center gap-2 text-sm font-light text-neutral-300"
+            >
+              <Link href="/" className="transition-colors hover:text-white">
+                Home
+              </Link>
+              <ChevronRight size={16} />
+              <Link href="/industries" className="transition-colors hover:text-white">
+                Industries
+              </Link>
+              <ChevronRight size={16} />
+              <span className="text-white">{industry.title}</span>
+            </motion.nav>
 
-          {/* Icon */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isHeroInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-8 inline-flex h-20 w-20 items-center justify-center rounded-full border-2 border-white/20 bg-white/5 backdrop-blur-sm"
-          >
-            {icon && typeof icon === 'function' ? icon({ className: "h-10 w-10 text-white" }) : null}
-          </motion.div>
-
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8 max-w-4xl text-6xl font-light tracking-tight text-white lg:text-8xl"
-          >
-            {industry.title}
-          </motion.h1>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-12 max-w-3xl text-xl font-light leading-relaxed text-neutral-300"
-          >
-            {(industry.excerpt || industry.acfFields?.description || '').replace(/<[^>]*>/g, '')}
-          </motion.p>
-
-          {/* Animated Stats */}
-          {(projectCount > 0 || yearsExperience > 0 || clientsSatisfied > 0) && (
-            <motion.div
+            {/* Title */}
+            <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="grid gap-8 sm:grid-cols-3"
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="mb-6 max-w-4xl text-5xl font-light tracking-tight text-white lg:text-7xl"
             >
-              {projectCount > 0 && (
-                <div className="border-l-2 border-white pl-6">
-                  <AnimatedCounter end={projectCount} suffix="+" />
-                  <div className="text-sm font-light tracking-wider text-neutral-400">
-                    PROJECTS COMPLETED
+              {industry.title}
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-10 max-w-2xl text-lg font-light leading-relaxed text-neutral-200"
+            >
+              {(industry.excerpt || industry.acfFields?.description || '').replace(/<[^>]*>/g, '')}
+            </motion.p>
+
+            {/* Animated Stats */}
+            {(projectCount > 0 || yearsExperience > 0 || clientsSatisfied > 0) && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="grid gap-8 sm:grid-cols-3"
+              >
+                {projectCount > 0 && (
+                  <div className="border-l-2 border-white/50 pl-6">
+                    <AnimatedCounter end={projectCount} suffix="+" />
+                    <div className="text-sm font-light tracking-wider text-neutral-300">
+                      PROJECTS COMPLETED
+                    </div>
                   </div>
-                </div>
-              )}
-              {yearsExperience > 0 && (
-                <div className="border-l-2 border-neutral-700 pl-6">
-                  <AnimatedCounter end={yearsExperience} suffix="+" />
-                  <div className="text-sm font-light tracking-wider text-neutral-400">
-                    YEARS EXPERIENCE
+                )}
+                {yearsExperience > 0 && (
+                  <div className="border-l-2 border-white/30 pl-6">
+                    <AnimatedCounter end={yearsExperience} suffix="+" />
+                    <div className="text-sm font-light tracking-wider text-neutral-300">
+                      YEARS EXPERIENCE
+                    </div>
                   </div>
-                </div>
-              )}
-              {clientsSatisfied > 0 && (
-                <div className="border-l-2 border-neutral-700 pl-6">
-                  <AnimatedCounter end={clientsSatisfied} suffix="%" />
-                  <div className="text-sm font-light tracking-wider text-neutral-400">
-                    CLIENT SATISFACTION
+                )}
+                {clientsSatisfied > 0 && (
+                  <div className="border-l-2 border-white/30 pl-6">
+                    <AnimatedCounter end={clientsSatisfied} suffix="%" />
+                    <div className="text-sm font-light tracking-wider text-neutral-300">
+                      CLIENT SATISFACTION
+                    </div>
                   </div>
-                </div>
-              )}
-            </motion.div>
-          )}
+                )}
+              </motion.div>
+            )}
+          </div>
         </motion.div>
       </section>
 
@@ -477,26 +448,6 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
   const isInView = useInView(cardRef, { once: true, margin: '-100px' });
   const [isHovered, setIsHovered] = useState(false);
 
-  const getServiceIcon = (slug: string) => {
-    const iconMap: { [key: string]: typeof Award } = {
-      'fb-restaurants': Utensils,
-      'healthcare-wellness-2': Heart,
-      'retail-showrooms-2': ShoppingBag,
-      'commercial-office-2': Building2,
-      'residential-luxury-2': Home,
-      'hospitality-hotels-2': Hotel,
-      '3d-visualization': Box,
-      'turnkey-solutions': Package,
-      'project-management': Briefcase,
-      'custom-furniture': Sofa,
-      'architecture': Building2,
-      'interior-design': Palette,
-    };
-    return iconMap[slug] || Award;
-  };
-
-  const icon = getServiceIcon(service.slug);
-
   return (
     <motion.div
       ref={cardRef}
@@ -509,51 +460,56 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
     >
       <Link
         href={`/services/${service.slug}`}
-        className="block border border-neutral-200 p-8 transition-all hover:border-neutral-950 hover:shadow-xl"
+        className="block overflow-hidden border border-neutral-200 transition-all hover:border-neutral-950 hover:shadow-xl"
       >
-        <div className="mb-6 flex items-center justify-between">
+        {/* Service Image */}
+        <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
           <motion.div
-            className="flex h-14 w-14 items-center justify-center rounded-full border border-neutral-200 transition-all"
+            className="relative h-full w-full"
             animate={{
-              borderColor: isHovered ? '#0a0a0a' : '#e5e5e5',
-              backgroundColor: isHovered ? '#0a0a0a' : 'transparent',
-              rotate: isHovered ? [0, -10, 10, -10, 0] : 0,
+              scale: isHovered ? 1.05 : 1,
             }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            {icon && typeof icon === 'function' ? (
-              <motion.div
-                animate={{
-                  scale: isHovered ? 1.1 : 1,
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                {icon({ className: `h-6 w-6 transition-colors ${isHovered ? 'text-white' : 'text-neutral-600'}` })}
-              </motion.div>
-            ) : null}
+            <Image
+              src={service.featuredImage?.node?.sourceUrl || '/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg'}
+              alt={service.title}
+              fill
+              className="object-cover"
+            />
           </motion.div>
+          {/* Overlay on hover */}
           <motion.div
+            className="absolute inset-0 bg-neutral-950/0"
             animate={{
-              x: isHovered ? [0, 4, 0] : 0,
-              y: isHovered ? [0, -4, 0] : 0,
+              backgroundColor: isHovered ? 'rgba(10, 10, 10, 0.3)' : 'rgba(10, 10, 10, 0)',
             }}
-            transition={{
-              duration: 1,
-              repeat: isHovered ? Infinity : 0,
-              ease: "easeInOut",
+            transition={{ duration: 0.3 }}
+          />
+          {/* Arrow indicator */}
+          <motion.div
+            className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 backdrop-blur-sm"
+            animate={{
+              scale: isHovered ? 1.1 : 1,
+              x: isHovered ? 4 : 0,
+              y: isHovered ? -4 : 0,
             }}
+            transition={{ duration: 0.3 }}
           >
-            <ArrowUpRight className="h-5 w-5 text-neutral-400 transition-colors group-hover:text-neutral-950" />
+            <ArrowUpRight className="h-5 w-5 text-neutral-950" />
           </motion.div>
         </div>
 
-        <h3 className="mb-4 text-2xl font-light tracking-tight text-neutral-950">
-          {service.title}
-        </h3>
+        {/* Content */}
+        <div className="p-6">
+          <h3 className="mb-3 text-xl font-light tracking-tight text-neutral-950">
+            {service.title}
+          </h3>
 
-        <p className="text-sm font-light leading-relaxed text-neutral-600">
-          {(service.excerpt || '').replace(/<[^>]*>/g, '').substring(0, 120)}...
-        </p>
+          <p className="text-sm font-light leading-relaxed text-neutral-600">
+            {(service.excerpt || '').replace(/<[^>]*>/g, '').substring(0, 100)}...
+          </p>
+        </div>
       </Link>
     </motion.div>
   );
@@ -779,22 +735,6 @@ function OtherIndustryCard({ industry, index }: { industry: Industry; index: num
   const isInView = useInView(cardRef, { once: true, margin: '-50px' });
   const [isHovered, setIsHovered] = useState(false);
 
-  const getIcon = (title: string) => {
-    const iconMap: { [key: string]: typeof Home } = {
-      'Luxury Hospitality': Hotel,
-      'High-End Residential': Home,
-      'Commercial & Corporate': Building2,
-      'Residential': Home,
-      'Commercial': Building2,
-      'Hospitality': Hotel,
-      'Retail': Store,
-      'Restaurant & F&B': Utensils,
-      'Corporate': Briefcase,
-    };
-    const IconComponent = iconMap[title] || Building2;
-    return <IconComponent className="h-6 w-6" />;
-  };
-
   return (
     <motion.div
       ref={cardRef}
@@ -807,28 +747,52 @@ function OtherIndustryCard({ industry, index }: { industry: Industry; index: num
     >
       <Link
         href={`/industries/${industry.slug}`}
-        className="group flex h-full flex-col border border-neutral-200 p-8 transition-all hover:border-neutral-950 hover:bg-neutral-950"
+        className="group block h-full overflow-hidden border border-neutral-200 transition-all hover:border-neutral-950 hover:shadow-xl"
       >
-        <div className="mb-6 flex items-center justify-between">
+        {/* Industry Image */}
+        <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
           <motion.div
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300 text-neutral-600 transition-all group-hover:border-white group-hover:bg-white group-hover:text-neutral-950"
+            className="relative h-full w-full"
             animate={{
-              rotate: isHovered ? 360 : 0,
+              scale: isHovered ? 1.05 : 1,
             }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            {getIcon(industry.title)}
+            <Image
+              src={industry.featuredImage?.node?.sourceUrl || '/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg'}
+              alt={industry.title}
+              fill
+              className="object-cover"
+            />
           </motion.div>
-          <ArrowRight className="text-neutral-400 transition-all group-hover:translate-x-2 group-hover:text-white" size={20} />
+          {/* Gradient overlay */}
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              background: isHovered
+                ? 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%)'
+                : 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%)',
+            }}
+            transition={{ duration: 0.3 }}
+          />
+          {/* Title overlay on image */}
+          <div className="absolute bottom-0 left-0 right-0 p-6">
+            <h3 className="mb-2 text-xl font-light tracking-tight text-white">
+              {industry.title}
+            </h3>
+            <div className="flex items-center gap-2 text-sm text-white/80">
+              <span>Explore</span>
+              <motion.div
+                animate={{
+                  x: isHovered ? 4 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <ArrowRight size={16} />
+              </motion.div>
+            </div>
+          </div>
         </div>
-
-        <h3 className="mb-3 text-xl font-light tracking-tight text-neutral-950 transition-colors group-hover:text-white">
-          {industry.title}
-        </h3>
-
-        <p className="flex-1 text-sm font-light leading-relaxed text-neutral-600 transition-colors group-hover:text-neutral-300">
-          {(industry.excerpt || '').replace(/<[^>]*>/g, '').substring(0, 100)}...
-        </p>
       </Link>
     </motion.div>
   );

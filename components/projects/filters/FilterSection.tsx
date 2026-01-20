@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 interface FilterSectionProps {
   title: string;
@@ -10,7 +10,11 @@ interface FilterSectionProps {
   defaultExpanded?: boolean;
 }
 
-export function FilterSection({ title, children, defaultExpanded = true }: FilterSectionProps) {
+export function FilterSection({
+  title,
+  children,
+  defaultExpanded = true,
+}: FilterSectionProps) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
   return (
@@ -36,7 +40,7 @@ export function FilterSection({ title, children, defaultExpanded = true }: Filte
         {isExpanded && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
+            animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
@@ -58,11 +62,15 @@ interface FilterCheckboxProps {
   count?: number;
 }
 
-export function FilterCheckbox({ label, value, checked, onChange, count }: FilterCheckboxProps) {
+export function FilterCheckbox({
+  label,
+  value,
+  checked,
+  onChange,
+  count,
+}: FilterCheckboxProps) {
   return (
-    <label
-      className="group flex cursor-pointer items-center justify-between py-2 transition-colors hover:bg-neutral-50"
-    >
+    <label className="group flex cursor-pointer items-center justify-between py-2 transition-colors hover:bg-neutral-50">
       <div className="flex items-center gap-3">
         {/* Custom Checkbox */}
         <div className="relative flex items-center justify-center">

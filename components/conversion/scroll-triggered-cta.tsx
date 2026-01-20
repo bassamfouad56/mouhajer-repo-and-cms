@@ -1,27 +1,22 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Phone, MessageCircle, Calendar } from 'lucide-react';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Phone, MessageCircle, Calendar } from "lucide-react";
+import Link from "next/link";
 
-const STORAGE_KEY = 'midc_scroll_cta_dismissed';
-const COOLDOWN_HOURS = 24;
+const STORAGE_KEY = "midc_scroll_cta_dismissed";
 
 export function ScrollTriggeredCTA() {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const [hasScrolledEnough, setHasScrolledEnough] = useState(false);
 
-  // Check dismissal state
+  // Check dismissal state - permanently dismissed once closed
   useEffect(() => {
-    const dismissedAt = localStorage.getItem(STORAGE_KEY);
-    if (dismissedAt) {
-      const dismissedDate = new Date(parseInt(dismissedAt));
-      const cooldownEnd = new Date(dismissedDate.getTime() + COOLDOWN_HOURS * 60 * 60 * 1000);
-      if (new Date() < cooldownEnd) {
-        setIsDismissed(true);
-      }
+    const dismissed = localStorage.getItem(STORAGE_KEY);
+    if (dismissed) {
+      setIsDismissed(true);
     }
   }, []);
 
@@ -29,7 +24,8 @@ export function ScrollTriggeredCTA() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
 
       // Show after 50% scroll
@@ -38,8 +34,8 @@ export function ScrollTriggeredCTA() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [hasScrolledEnough]);
 
   // Show CTA after scroll threshold and delay
@@ -63,7 +59,7 @@ export function ScrollTriggeredCTA() {
           initial={{ opacity: 0, y: 100, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 100, scale: 0.9 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+          transition={{ type: "spring", damping: 25, stiffness: 200 }}
           className="fixed bottom-24 right-6 z-50 w-80 max-w-[calc(100vw-3rem)]"
         >
           <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl">
@@ -92,7 +88,7 @@ export function ScrollTriggeredCTA() {
                 <Link
                   href="/en/contact/book-consultation"
                   onClick={handleDismiss}
-                  className="flex items-center justify-center gap-2 rounded-lg bg-neutral-950 px-4 py-2.5 font-Satoshi text-sm font-medium text-white transition-colors hover:bg-neutral-800"
+                  className="flex items-center justify-center gap-2 border border-neutral-950 bg-neutral-950 px-4 py-2.5 font-Satoshi text-xs font-medium uppercase tracking-wider text-white transition-all hover:bg-transparent hover:text-neutral-950"
                 >
                   <Calendar size={16} />
                   Book Free Consultation
@@ -101,7 +97,7 @@ export function ScrollTriggeredCTA() {
                 <div className="flex gap-2">
                   <a
                     href="tel:+971523041482"
-                    className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white px-3 py-2 font-Satoshi text-xs font-medium text-neutral-700 transition-colors hover:border-[#c9a962] hover:text-[#c9a962]"
+                    className="flex flex-1 items-center justify-center gap-2 border border-neutral-950 bg-transparent px-3 py-2 font-Satoshi text-xs font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-neutral-950 hover:text-white"
                   >
                     <Phone size={14} />
                     Call
@@ -110,7 +106,7 @@ export function ScrollTriggeredCTA() {
                     href="https://wa.me/971523041482"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white px-3 py-2 font-Satoshi text-xs font-medium text-neutral-700 transition-colors hover:border-green-500 hover:text-green-600"
+                    className="flex flex-1 items-center justify-center gap-2 border border-green-600 bg-transparent px-3 py-2 font-Satoshi text-xs font-medium uppercase tracking-wider text-green-600 transition-all hover:bg-green-600 hover:text-white"
                   >
                     <MessageCircle size={14} />
                     WhatsApp

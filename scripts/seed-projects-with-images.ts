@@ -6,14 +6,14 @@
  * Usage: SANITY_API_TOKEN="your-token" npx tsx scripts/seed-projects-with-images.ts
  */
 
-import { createClient } from '@sanity/client';
-import * as fs from 'fs';
-import * as path from 'path';
+import { createClient } from "@sanity/client";
+import * as fs from "fs";
+import * as path from "path";
 
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'r97logzc',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: '2024-01-01',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "b6q28exv",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  apiVersion: "2024-01-01",
   token: process.env.SANITY_API_TOKEN,
   useCdn: false,
 });
@@ -37,100 +37,116 @@ interface ProjectData {
 
 const projects: ProjectData[] = [
   {
-    slug: 'la-petite-maison-restaurant',
-    titleEn: 'La Petite Maison Restaurant',
-    titleAr: 'مطعم لا بيتيت ميزون',
-    excerptEn: 'An elegant French-inspired restaurant featuring sophisticated interior design that blends Parisian charm with Dubai luxury.',
-    excerptAr: 'مطعم فرنسي أنيق يتميز بتصميم داخلي راقي يجمع بين السحر الباريسي وفخامة دبي.',
-    location: 'DIFC, Dubai',
+    slug: "la-petite-maison-restaurant",
+    titleEn: "La Petite Maison Restaurant",
+    titleAr: "مطعم لا بيتيت ميزون",
+    excerptEn:
+      "An elegant French-inspired restaurant featuring sophisticated interior design that blends Parisian charm with Dubai luxury.",
+    excerptAr:
+      "مطعم فرنسي أنيق يتميز بتصميم داخلي راقي يجمع بين السحر الباريسي وفخامة دبي.",
+    location: "DIFC, Dubai",
     year: 2023,
-    category: 'hospitality',
+    category: "hospitality",
     featured: true,
-    imageFileName: 'la-petite-maison-restaurant.jpg',
+    imageFileName: "la-petite-maison-restaurant.jpg",
   },
   {
-    slug: 'difc-corporate-headquarters',
-    titleEn: 'DIFC Corporate Headquarters',
-    titleAr: 'المقر الرئيسي لمركز دبي المالي العالمي',
-    excerptEn: 'A prestigious corporate headquarters featuring modern design elements and premium finishes in the heart of Dubai\'s financial district.',
-    excerptAr: 'مقر رئيسي مرموق يتميز بعناصر التصميم الحديث والتشطيبات الفاخرة في قلب المنطقة المالية بدبي.',
-    location: 'DIFC, Dubai',
+    slug: "difc-corporate-headquarters",
+    titleEn: "DIFC Corporate Headquarters",
+    titleAr: "المقر الرئيسي لمركز دبي المالي العالمي",
+    excerptEn:
+      "A prestigious corporate headquarters featuring modern design elements and premium finishes in the heart of Dubai's financial district.",
+    excerptAr:
+      "مقر رئيسي مرموق يتميز بعناصر التصميم الحديث والتشطيبات الفاخرة في قلب المنطقة المالية بدبي.",
+    location: "DIFC, Dubai",
     year: 2023,
-    category: 'commercial',
+    category: "commercial",
     featured: true,
-    imageFileName: 'difc-corporate-headquarters.jpg',
+    imageFileName: "difc-corporate-headquarters.jpg",
   },
   {
-    slug: 'downtown-dubai-penthouse',
-    titleEn: 'Downtown Dubai Penthouse',
-    titleAr: 'بنتهاوس وسط مدينة دبي',
-    excerptEn: 'A luxurious penthouse with panoramic views of Burj Khalifa, featuring bespoke interiors and premium materials throughout.',
-    excerptAr: 'بنتهاوس فاخر بإطلالات بانورامية على برج خليفة، يتميز بتصميمات داخلية مخصصة ومواد فاخرة.',
-    location: 'Downtown Dubai',
+    slug: "downtown-dubai-penthouse",
+    titleEn: "Downtown Dubai Penthouse",
+    titleAr: "بنتهاوس وسط مدينة دبي",
+    excerptEn:
+      "A luxurious penthouse with panoramic views of Burj Khalifa, featuring bespoke interiors and premium materials throughout.",
+    excerptAr:
+      "بنتهاوس فاخر بإطلالات بانورامية على برج خليفة، يتميز بتصميمات داخلية مخصصة ومواد فاخرة.",
+    location: "Downtown Dubai",
     year: 2024,
-    category: 'residential',
+    category: "residential",
     featured: true,
-    imageFileName: 'downtown-dubai-penthouse.jpg',
+    imageFileName: "downtown-dubai-penthouse.jpg",
   },
   {
-    slug: 'jumeirah-medical-center',
-    titleEn: 'Jumeirah Medical Center',
-    titleAr: 'مركز جميرا الطبي',
-    excerptEn: 'A state-of-the-art medical facility designed to provide patients with a calming, modern healthcare environment.',
-    excerptAr: 'منشأة طبية حديثة مصممة لتوفير بيئة رعاية صحية هادئة وعصرية للمرضى.',
-    location: 'Jumeirah, Dubai',
+    slug: "jumeirah-medical-center",
+    titleEn: "Jumeirah Medical Center",
+    titleAr: "مركز جميرا الطبي",
+    excerptEn:
+      "A state-of-the-art medical facility designed to provide patients with a calming, modern healthcare environment.",
+    excerptAr:
+      "منشأة طبية حديثة مصممة لتوفير بيئة رعاية صحية هادئة وعصرية للمرضى.",
+    location: "Jumeirah, Dubai",
     year: 2023,
-    category: 'healthcare',
+    category: "healthcare",
     featured: true,
-    imageFileName: 'jumeirah-medical-center.jpg',
+    imageFileName: "jumeirah-medical-center.jpg",
   },
   {
-    slug: 'palm-jumeirah-beach-villa',
-    titleEn: 'Palm Jumeirah Beach Villa',
-    titleAr: 'فيلا شاطئية في نخلة جميرا',
-    excerptEn: 'A stunning beachfront villa with contemporary Mediterranean design, featuring seamless indoor-outdoor living spaces.',
-    excerptAr: 'فيلا شاطئية مذهلة بتصميم متوسطي معاصر، تتميز بمساحات معيشة داخلية وخارجية متكاملة.',
-    location: 'Palm Jumeirah, Dubai',
+    slug: "palm-jumeirah-beach-villa",
+    titleEn: "Palm Jumeirah Beach Villa",
+    titleAr: "فيلا شاطئية في نخلة جميرا",
+    excerptEn:
+      "A stunning beachfront villa with contemporary Mediterranean design, featuring seamless indoor-outdoor living spaces.",
+    excerptAr:
+      "فيلا شاطئية مذهلة بتصميم متوسطي معاصر، تتميز بمساحات معيشة داخلية وخارجية متكاملة.",
+    location: "Palm Jumeirah, Dubai",
     year: 2024,
-    category: 'residential',
+    category: "residential",
     featured: true,
-    imageFileName: 'palm-jumeirah-beach-villa.jpg',
+    imageFileName: "palm-jumeirah-beach-villa.jpg",
   },
   {
-    slug: 'city-walk-flagship-retail-store',
-    titleEn: 'City Walk Flagship Retail Store',
-    titleAr: 'متجر رئيسي في سيتي ووك',
-    excerptEn: 'A premium retail flagship store with innovative display solutions and a memorable customer experience design.',
-    excerptAr: 'متجر رئيسي فاخر مع حلول عرض مبتكرة وتصميم تجربة عملاء لا تُنسى.',
-    location: 'City Walk, Dubai',
+    slug: "city-walk-flagship-retail-store",
+    titleEn: "City Walk Flagship Retail Store",
+    titleAr: "متجر رئيسي في سيتي ووك",
+    excerptEn:
+      "A premium retail flagship store with innovative display solutions and a memorable customer experience design.",
+    excerptAr:
+      "متجر رئيسي فاخر مع حلول عرض مبتكرة وتصميم تجربة عملاء لا تُنسى.",
+    location: "City Walk, Dubai",
     year: 2023,
-    category: 'retail',
+    category: "retail",
     featured: true,
-    imageFileName: 'city-walk-flagship-retail-store.jpg',
+    imageFileName: "city-walk-flagship-retail-store.jpg",
   },
   {
-    slug: 'dubai-marina-wellness-spa',
-    titleEn: 'Dubai Marina Wellness Spa',
-    titleAr: 'سبا العافية في دبي مارينا',
-    excerptEn: 'A tranquil wellness sanctuary designed to provide ultimate relaxation with Japanese-inspired minimalist aesthetics.',
-    excerptAr: 'ملاذ عافية هادئ مصمم لتوفير الاسترخاء التام بجماليات يابانية بسيطة.',
-    location: 'Dubai Marina',
+    slug: "dubai-marina-wellness-spa",
+    titleEn: "Dubai Marina Wellness Spa",
+    titleAr: "سبا العافية في دبي مارينا",
+    excerptEn:
+      "A tranquil wellness sanctuary designed to provide ultimate relaxation with Japanese-inspired minimalist aesthetics.",
+    excerptAr:
+      "ملاذ عافية هادئ مصمم لتوفير الاسترخاء التام بجماليات يابانية بسيطة.",
+    location: "Dubai Marina",
     year: 2022,
-    category: 'hospitality',
+    category: "hospitality",
     featured: true,
-    imageFileName: 'dubai-marina-wellness-spa.jpg',
+    imageFileName: "dubai-marina-wellness-spa.jpg",
   },
   {
-    slug: 'luxury-hotel-al-maha-desert-resort',
-    titleEn: 'Al Maha Desert Resort',
-    titleAr: 'منتجع المها الصحراوي',
-    excerptEn: 'A luxury desert resort experience blending traditional Arabian architecture with contemporary comforts.',
-    excerptAr: 'تجربة منتجع صحراوي فاخرة تجمع بين العمارة العربية التقليدية ووسائل الراحة المعاصرة.',
-    location: 'Dubai Desert Conservation Reserve',
+    slug: "luxury-hotel-al-maha-desert-resort",
+    titleEn: "Al Maha Desert Resort",
+    titleAr: "منتجع المها الصحراوي",
+    excerptEn:
+      "A luxury desert resort experience blending traditional Arabian architecture with contemporary comforts.",
+    excerptAr:
+      "تجربة منتجع صحراوي فاخرة تجمع بين العمارة العربية التقليدية ووسائل الراحة المعاصرة.",
+    location: "Dubai Desert Conservation Reserve",
     year: 2022,
-    category: 'hospitality',
+    category: "hospitality",
     featured: true,
-    imageFileName: 'luxury-hotel-al-maha-desert-resort.jpg',
+    imageFileName: "luxury-hotel-al-maha-desert-resort.jpg",
   },
 ];
 
@@ -140,7 +156,12 @@ const projects: ProjectData[] = [
 
 async function uploadImage(filename: string): Promise<string | null> {
   try {
-    const fullPath = path.join(process.cwd(), 'exported-content', 'images', filename);
+    const fullPath = path.join(
+      process.cwd(),
+      "exported-content",
+      "images",
+      filename
+    );
 
     if (!fs.existsSync(fullPath)) {
       console.log(`    Warning: Image not found: ${filename}`);
@@ -148,9 +169,9 @@ async function uploadImage(filename: string): Promise<string | null> {
     }
 
     const fileBuffer = fs.readFileSync(fullPath);
-    const asset = await client.assets.upload('image', fileBuffer, {
+    const asset = await client.assets.upload("image", fileBuffer, {
       filename: filename,
-      contentType: 'image/jpeg',
+      contentType: "image/jpeg",
     });
 
     console.log(`    Uploaded: ${filename}`);
@@ -166,10 +187,12 @@ async function uploadImage(filename: string): Promise<string | null> {
 // =============================================================================
 
 async function seedProjects() {
-  console.log('\n=== Seeding Projects with Images to Sanity ===\n');
+  console.log("\n=== Seeding Projects with Images to Sanity ===\n");
 
   // Check for existing projects
-  const existingProjects = await client.fetch('*[_type == "project"]{_id, slug, "titleEn": title.en, "titleLegacy": title}');
+  const existingProjects = await client.fetch(
+    '*[_type == "project"]{_id, slug, "titleEn": title.en, "titleLegacy": title}'
+  );
   console.log(`Found ${existingProjects.length} existing projects in Sanity\n`);
 
   // Track uploaded images to avoid duplicates
@@ -199,13 +222,13 @@ async function seedProjects() {
 
     // Prepare document with i18n structure
     const doc: any = {
-      _type: 'project',
+      _type: "project",
       title: {
         en: project.titleEn,
         ar: project.titleAr,
       },
       slug: {
-        _type: 'slug',
+        _type: "slug",
         current: project.slug,
       },
       excerpt: {
@@ -225,9 +248,9 @@ async function seedProjects() {
     // Add image if uploaded
     if (imageAssetId) {
       doc.mainImage = {
-        _type: 'image',
+        _type: "image",
         asset: {
-          _type: 'reference',
+          _type: "reference",
           _ref: imageAssetId,
         },
         alt: project.titleEn,
@@ -245,19 +268,23 @@ async function seedProjects() {
     }
   }
 
-  console.log('\n' + '='.repeat(60));
-  console.log('\n✅ Projects seeding completed!\n');
+  console.log("\n" + "=".repeat(60));
+  console.log("\n✅ Projects seeding completed!\n");
 
   // Summary
-  const finalProjects = await client.fetch('*[_type == "project" && featured == true] | order(year desc) { "title": coalesce(title.en, title), year, category, "hasImage": defined(mainImage) }');
-  console.log('Featured Projects:');
+  const finalProjects = await client.fetch(
+    '*[_type == "project" && featured == true] | order(year desc) { "title": coalesce(title.en, title), year, category, "hasImage": defined(mainImage) }'
+  );
+  console.log("Featured Projects:");
   finalProjects.forEach((p: any, i: number) => {
-    const imageStatus = p.hasImage ? '✓ Has Image' : '✗ NO IMAGE';
-    console.log(`  ${i + 1}. [${p.year}] ${p.title} - ${p.category} (${imageStatus})`);
+    const imageStatus = p.hasImage ? "✓ Has Image" : "✗ NO IMAGE";
+    console.log(
+      `  ${i + 1}. [${p.year}] ${p.title} - ${p.category} (${imageStatus})`
+    );
   });
 
   console.log(`\nTotal featured projects: ${finalProjects.length}`);
-  console.log('\nView in Sanity Studio: http://localhost:3333/studio');
+  console.log("\nView in Sanity Studio: http://localhost:3333/studio");
 }
 
 // =============================================================================
@@ -265,20 +292,30 @@ async function seedProjects() {
 // =============================================================================
 
 async function main() {
-  console.log('Starting Projects Migration to Sanity...\n');
-  console.log('Project ID:', process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'r97logzc');
-  console.log('Dataset:', process.env.NEXT_PUBLIC_SANITY_DATASET || 'production');
+  console.log("Starting Projects Migration to Sanity...\n");
+  console.log(
+    "Project ID:",
+    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "b6q28exv"
+  );
+  console.log(
+    "Dataset:",
+    process.env.NEXT_PUBLIC_SANITY_DATASET || "production"
+  );
 
   if (!process.env.SANITY_API_TOKEN) {
-    console.error('\n❌ Error: SANITY_API_TOKEN environment variable is required');
-    console.log('Usage: SANITY_API_TOKEN="your-token" npx tsx scripts/seed-projects-with-images.ts');
+    console.error(
+      "\n❌ Error: SANITY_API_TOKEN environment variable is required"
+    );
+    console.log(
+      'Usage: SANITY_API_TOKEN="your-token" npx tsx scripts/seed-projects-with-images.ts'
+    );
     process.exit(1);
   }
 
   try {
     await seedProjects();
   } catch (error) {
-    console.error('\n💥 Migration failed:', error);
+    console.error("\n💥 Migration failed:", error);
     process.exit(1);
   }
 }

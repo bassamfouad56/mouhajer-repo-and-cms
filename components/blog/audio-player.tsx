@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Play,
   Pause,
@@ -12,7 +12,7 @@ import {
   X,
   Headphones,
   Gauge,
-} from 'lucide-react';
+} from "lucide-react";
 
 interface AudioPlayerProps {
   content: any[];
@@ -22,14 +22,14 @@ interface AudioPlayerProps {
 
 // Extract plain text from Portable Text content
 function extractPlainText(content: any[]): string {
-  let text = '';
-  
+  let text = "";
+
   content.forEach((block) => {
-    if (block._type === 'block' && block.children) {
+    if (block._type === "block" && block.children) {
       const blockText = block.children
-        .map((child: any) => child.text || '')
-        .join('');
-      text += blockText + ' ';
+        .map((child: any) => child.text || "")
+        .join("");
+      text += blockText + " ";
     }
   });
 
@@ -42,7 +42,11 @@ function calculateListenTime(text: string): number {
   return Math.ceil(wordCount / 150);
 }
 
-export default function AudioPlayer({ content, postSlug, postTitle }: AudioPlayerProps) {
+export default function AudioPlayer({
+  content,
+  postSlug,
+  postTitle,
+}: AudioPlayerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -60,8 +64,8 @@ export default function AudioPlayer({ content, postSlug, postTitle }: AudioPlaye
   // Split text into sentences
   useEffect(() => {
     sentencesRef.current = plainText
-      .replace(/([.!?])\s+/g, '|')
-      .split('|')
+      .replace(/([.!?])\s+/g, "|")
+      .split("|")
       .filter((s) => s.trim().length > 0);
   }, [plainText]);
 
@@ -85,75 +89,78 @@ export default function AudioPlayer({ content, postSlug, postTitle }: AudioPlaye
     }
   }, [currentSentence, progress, isPlaying, postSlug]);
 
-  const speak = useCallback((startIndex = 0) => {
-    if (!('speechSynthesis' in window)) {
-      alert('Text-to-speech is not supported in your browser.');
-      return;
-    }
-
-    // Cancel any existing speech
-    window.speechSynthesis.cancel();
-
-    const sentences = sentencesRef.current;
-    if (sentences.length === 0 || startIndex >= sentences.length) return;
-
-    let currentIndex = startIndex;
-
-    const speakSentence = () => {
-      if (currentIndex >= sentences.length) {
-        setIsPlaying(false);
-        setProgress(100);
-        setCurrentSentence(0);
-        localStorage.removeItem(`audio-position-${postSlug}`);
+  const speak = useCallback(
+    (startIndex = 0) => {
+      if (!("speechSynthesis" in window)) {
+        alert("Text-to-speech is not supported in your browser.");
         return;
       }
 
-      const utterance = new SpeechSynthesisUtterance(sentences[currentIndex]);
-      utterance.rate = speed;
-      utterance.volume = isMuted ? 0 : 1;
-      utterance.lang = 'en-US';
+      // Cancel any existing speech
+      window.speechSynthesis.cancel();
 
-      // Try to use a natural voice
-      const voices = window.speechSynthesis.getVoices();
-      const preferredVoice = voices.find(
-        (v) =>
-          v.lang.startsWith('en') &&
-          (v.name.includes('Natural') ||
-            v.name.includes('Enhanced') ||
-            v.name.includes('Premium'))
-      );
-      if (preferredVoice) {
-        utterance.voice = preferredVoice;
-      }
+      const sentences = sentencesRef.current;
+      if (sentences.length === 0 || startIndex >= sentences.length) return;
 
-      utterance.onstart = () => {
-        setCurrentSentence(currentIndex);
-        setProgress((currentIndex / sentences.length) * 100);
-      };
+      let currentIndex = startIndex;
 
-      utterance.onend = () => {
-        currentIndex++;
-        speakSentence();
-      };
-
-      utterance.onerror = (e) => {
-        if (e.error !== 'interrupted') {
-          console.error('Speech error:', e);
+      const speakSentence = () => {
+        if (currentIndex >= sentences.length) {
+          setIsPlaying(false);
+          setProgress(100);
+          setCurrentSentence(0);
+          localStorage.removeItem(`audio-position-${postSlug}`);
+          return;
         }
+
+        const utterance = new SpeechSynthesisUtterance(sentences[currentIndex]);
+        utterance.rate = speed;
+        utterance.volume = isMuted ? 0 : 1;
+        utterance.lang = "en-US";
+
+        // Try to use a natural voice
+        const voices = window.speechSynthesis.getVoices();
+        const preferredVoice = voices.find(
+          (v) =>
+            v.lang.startsWith("en") &&
+            (v.name.includes("Natural") ||
+              v.name.includes("Enhanced") ||
+              v.name.includes("Premium"))
+        );
+        if (preferredVoice) {
+          utterance.voice = preferredVoice;
+        }
+
+        utterance.onstart = () => {
+          setCurrentSentence(currentIndex);
+          setProgress((currentIndex / sentences.length) * 100);
+        };
+
+        utterance.onend = () => {
+          currentIndex++;
+          speakSentence();
+        };
+
+        utterance.onerror = (e) => {
+          if (e.error !== "interrupted") {
+            console.error("Speech error:", e);
+          }
+        };
+
+        utteranceRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
       };
 
-      utteranceRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
-    };
-
-    speakSentence();
-    setIsPlaying(true);
-    setIsPaused(false);
-  }, [speed, isMuted, postSlug]);
+      speakSentence();
+      setIsPlaying(true);
+      setIsPaused(false);
+    },
+    [speed, isMuted, postSlug]
+  );
 
   const togglePlay = () => {
-    if (!('speechSynthesis' in window)) {
-      alert('Text-to-speech is not supported in your browser.');
+    if (!("speechSynthesis" in window)) {
+      alert("Text-to-speech is not supported in your browser.");
       return;
     }
 
@@ -177,7 +184,10 @@ export default function AudioPlayer({ content, postSlug, postTitle }: AudioPlaye
   };
 
   const skipForward = () => {
-    const newIndex = Math.min(currentSentence + 5, sentencesRef.current.length - 1);
+    const newIndex = Math.min(
+      currentSentence + 5,
+      sentencesRef.current.length - 1
+    );
     if (isPlaying) {
       window.speechSynthesis.cancel();
       speak(newIndex);
@@ -221,7 +231,7 @@ export default function AudioPlayer({ content, postSlug, postTitle }: AudioPlaye
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if ('speechSynthesis' in window) {
+      if ("speechSynthesis" in window) {
         window.speechSynthesis.cancel();
       }
     };
@@ -287,7 +297,11 @@ export default function AudioPlayer({ content, postSlug, postTitle }: AudioPlaye
               onClick={togglePlay}
               className="flex h-12 w-12 items-center justify-center rounded-full bg-[#c9a962] text-white shadow-lg transition-all hover:bg-[#b8984f]"
             >
-              {isPlaying && !isPaused ? <Pause size={20} /> : <Play size={20} className="ml-0.5" />}
+              {isPlaying && !isPaused ? (
+                <Pause size={20} />
+              ) : (
+                <Play size={20} className="ml-0.5" />
+              )}
             </button>
 
             <button

@@ -81,7 +81,13 @@ export function MagneticButton({
   );
 }
 
-// Pre-styled magnetic button variants
+/**
+ * MOUHAJER DESIGN STUDIO - MagneticCTAButton
+ *
+ * Pre-styled magnetic button with 2 variants:
+ * - primary: Solid dark button (main CTAs)
+ * - secondary: Outlined button (alternative actions)
+ */
 export function MagneticCTAButton({
   children,
   href,
@@ -91,12 +97,11 @@ export function MagneticCTAButton({
   children: React.ReactNode;
   href?: string;
   onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary';
 }) {
   const variants = {
-    primary: 'border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]',
-    secondary: 'border border-white bg-white px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-white',
-    outline: 'border border-white/20 bg-transparent px-8 py-4 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white/70 transition-all duration-500 hover:border-[#c9a962]/50 hover:text-[#c9a962]',
+    primary: 'border border-neutral-950 bg-neutral-950 px-6 py-3 sm:px-8 sm:py-4 font-Satoshi text-[10px] sm:text-xs font-light uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-transparent hover:text-neutral-950',
+    secondary: 'border border-neutral-950 bg-transparent px-6 py-3 sm:px-8 sm:py-4 font-Satoshi text-[10px] sm:text-xs font-light uppercase tracking-[0.15em] text-neutral-950 transition-all duration-300 hover:bg-neutral-950 hover:text-white',
   };
 
   return (

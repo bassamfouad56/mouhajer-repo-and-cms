@@ -4,10 +4,12 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { LogoMarquee } from '@/components/logo-marquee';
 import { client } from '@/sanity/lib/client';
-import { industryBySlugQuery, industriesQuery, servicesQuery, projectsQuery } from '@/sanity/lib/queries';
+import { industryBySlugQuery, industriesQuery } from '@/sanity/lib/queries';
 import { urlForImage } from '@/sanity/lib/image';
 import { getLocalizedValue } from '@/lib/error-handling';
 import EnhancedIndustryDetail from './enhanced-industry-detail';
+import ResidentialContent from './residential-content';
+import CommercialContent from './commercial-content';
 
 export const revalidate = 3600;
 
@@ -17,7 +19,8 @@ type Props = {
 
 async function getIndustry(slug: string, locale: string) {
   try {
-    return await client.fetch(industryBySlugQuery, { slug, locale });
+    const result = await client.fetch(industryBySlugQuery, { slug, locale });
+    return result;
   } catch (error) {
     console.error('Error fetching industry from Sanity:', error);
     return null;
@@ -25,39 +28,83 @@ async function getIndustry(slug: string, locale: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, slug } = await params;
-  const industry = await getIndustry(slug, locale);
+  try {
+    const { locale, slug } = await params;
 
-  if (!industry) {
+    // Custom metadata for residential page
+    if (slug === 'residential') {
+      return {
+        title: 'Private Sanctuaries | Luxury Residential Design | MIDC',
+        description: 'A home designed for your status. Built for your peace. Over 25 years of creating exclusive private villas and penthouses in Dubai\'s most prestigious communities.',
+        keywords: ['luxury residential', 'private villa', 'penthouse design', 'Dubai', 'interior design', 'high-end homes'],
+      };
+    }
+
+    // Custom metadata for commercial page
+    if (slug === 'commercial') {
+      return {
+        title: 'Defining Business Environments | Commercial & Corporate | MIDC',
+        description: 'Engineered for performance. Designed for the brand. Fast-track commercial fit-outs with in-house joinery and MEP teams in Dubai.',
+        keywords: ['commercial fit-out', 'office design', 'corporate headquarters', 'retail fit-out', 'Dubai', 'business interiors'],
+      };
+    }
+
+    const industry = await getIndustry(slug, locale);
+
+    if (!industry) {
+      return {
+        title: 'Industry Not Found | MIDC',
+      };
+    }
+
+    const industryTitle = getLocalizedValue(industry.title, locale, 'Industry');
+    const industryExcerpt = getLocalizedValue(industry.excerpt, locale, '');
+    const seoTitle = getLocalizedValue(industry.seo?.metaTitle, locale);
+    const seoDescription = getLocalizedValue(industry.seo?.metaDescription, locale);
+
+    const title = seoTitle || `${industryTitle} | Industries | MIDC`;
+    const description = seoDescription || industryExcerpt || `Explore our ${industryTitle} design expertise and portfolio.`;
+
     return {
-      title: 'Industry Not Found | MIDC',
+      title,
+      description,
+      keywords: industry.seo?.keywords?.length > 0 ? industry.seo.keywords : undefined,
+    };
+  } catch (error) {
+    console.error('Error in generateMetadata:', error);
+    return {
+      title: 'Industry | MIDC',
     };
   }
-
-  // Get localized values
-  const industryTitle = getLocalizedValue(industry.title, locale, 'Industry');
-  const industryExcerpt = getLocalizedValue(industry.excerpt, locale, '');
-  const seoTitle = getLocalizedValue(industry.seo?.metaTitle, locale);
-  const seoDescription = getLocalizedValue(industry.seo?.metaDescription, locale);
-
-  const title = seoTitle || `${industryTitle} | Industries | MIDC`;
-  const description = seoDescription || industryExcerpt || `Explore our ${industryTitle} design expertise and portfolio.`;
-
-  return {
-    title,
-    description,
-    keywords: industry.seo?.keywords?.length > 0 ? industry.seo.keywords : undefined,
-  };
 }
 
-// Skip static generation at build time - use ISR instead
-// Pages will be generated on-demand and cached
 export async function generateStaticParams() {
+  // Pre-generate pages for known industry slugs
+  try {
+    const industries = await client.fetch(`*[_type == "industry"]{ "slug": slug.current }`);
+    if (industries && industries.length > 0) {
+      return industries
+        .filter((i: any) => i.slug)
+        .map((i: any) => ({ slug: i.slug }));
+    }
+  } catch (error) {
+    console.error('Error generating static params for industries:', error);
+  }
   return [];
 }
 
-// Allow dynamic params for on-demand generation
 export const dynamicParams = true;
+
+function getSafeImageUrl(image: any, width: number, height: number): string {
+  if (!image) return '';
+  try {
+    const builder = urlForImage(image);
+    if (!builder) return '';
+    return builder.width(width).height(height).url() || '';
+  } catch {
+    return '';
+  }
+}
 
 export default async function IndustryDetailPage({ params }: Props) {
   const { locale, slug } = await params;
@@ -68,85 +115,132 @@ export default async function IndustryDetailPage({ params }: Props) {
   }
 
   // Get all industries for navigation
-  const allIndustries = await client.fetch(industriesQuery, { locale });
+  let allIndustries: any[] = [];
+  try {
+    allIndustries = await client.fetch(industriesQuery, { locale }) || [];
+  } catch {
+    allIndustries = [];
+  }
 
-  // Get localized values
-  const industryTitle = getLocalizedValue(industry.title, locale, '');
+  const industryTitle = getLocalizedValue(industry.title, locale, 'Industry');
   const industryExcerpt = getLocalizedValue(industry.excerpt, locale, '');
 
-  // Transform Sanity industry to the format expected by EnhancedIndustryDetail
+  // Get content from Sanity (it might be a PortableText array or string)
+  let industryContent = '';
+  if (industry.content) {
+    if (typeof industry.content === 'string') {
+      industryContent = industry.content;
+    } else if (Array.isArray(industry.content)) {
+      // PortableText array - convert to simple text for now
+      industryContent = industry.content
+        .filter((block: any) => block._type === 'block')
+        .map((block: any) =>
+          block.children?.map((child: any) => child.text || '').join('') || ''
+        )
+        .join('\n');
+    }
+  }
+
   const transformedIndustry = {
-    id: industry._id,
+    id: industry._id || '',
     databaseId: 0,
     title: industryTitle,
-    slug: industry.slug.current,
+    slug: industry.slug?.current || slug,
     excerpt: industryExcerpt,
+    content: industryContent,
+    date: industry._createdAt || new Date().toISOString(),
+    modified: industry._updatedAt || new Date().toISOString(),
     featuredImage: {
       node: {
-        sourceUrl: industry.mainImage ? urlForImage(industry.mainImage)?.width(1920).height(1080).url() : '',
+        sourceUrl: getSafeImageUrl(industry.mainImage, 1920, 1080),
         altText: getLocalizedValue(industry.mainImage?.alt, locale) || industryTitle,
       },
     },
     acfFields: {
-      // Include challenges and solutions from Sanity with localized values
       challenges: (industry.challenges || []).map((c: any) => ({
-        title: getLocalizedValue(c.title, locale, ''),
-        description: getLocalizedValue(c.description, locale, ''),
+        title: getLocalizedValue(c?.title, locale, ''),
+        description: getLocalizedValue(c?.description, locale, ''),
       })),
       solutions: (industry.solutions || []).map((s: any) => ({
-        title: getLocalizedValue(s.title, locale, ''),
-        description: getLocalizedValue(s.description, locale, ''),
+        title: getLocalizedValue(s?.title, locale, ''),
+        description: getLocalizedValue(s?.description, locale, ''),
       })),
-      relatedProjects: (industry.relatedProjects || []).map((p: any) => p._id),
-      relatedServices: (industry.relatedServices || []).map((s: any) => s._id),
+      relatedProjects: (industry.relatedProjects || []).map((p: any) => p?._id).filter(Boolean),
+      relatedServices: (industry.relatedServices || []).map((s: any) => s?._id).filter(Boolean),
     },
-    _sanityData: industry,
   };
 
-  // Transform related services with localized values
-  const relatedServices = (industry.relatedServices || []).map((s: any) => ({
-    id: s._id,
-    title: getLocalizedValue(s.title, locale, ''),
-    slug: s.slug?.current,
-    excerpt: '',
-    featuredImage: {
-      node: {
-        sourceUrl: s.mainImage ? urlForImage(s.mainImage)?.width(800).height(600).url() : '',
-        altText: getLocalizedValue(s.title, locale, ''),
+  const relatedServices = (industry.relatedServices || [])
+    .filter((s: any) => s?._id && s?.slug?.current)
+    .map((s: any) => ({
+      id: s._id,
+      title: getLocalizedValue(s.title, locale, ''),
+      slug: s.slug.current,
+      excerpt: '',
+      featuredImage: {
+        node: {
+          sourceUrl: getSafeImageUrl(s.mainImage, 800, 600),
+          altText: getLocalizedValue(s.title, locale, ''),
+        },
       },
-    },
-  }));
+    }));
 
-  // Transform related projects with localized values
-  const relatedProjects = (industry.relatedProjects || []).map((p: any) => ({
-    id: p._id,
-    title: getLocalizedValue(p.title, locale, ''),
-    slug: p.slug?.current,
-    acfFields: {
-      projectType: getLocalizedValue(p.category, locale, ''),
-      location: getLocalizedValue(p.location, locale, ''),
-    },
-    featuredImage: {
-      node: {
-        sourceUrl: p.mainImage ? urlForImage(p.mainImage)?.width(800).height(600).url() : '',
-        altText: getLocalizedValue(p.title, locale, ''),
+  const relatedProjects = (industry.relatedProjects || [])
+    .filter((p: any) => p?._id && p?.slug?.current)
+    .map((p: any) => ({
+      id: p._id,
+      title: getLocalizedValue(p.title, locale, ''),
+      slug: p.slug.current,
+      acfFields: {
+        projectType: getLocalizedValue(p.category, locale, ''),
+        location: getLocalizedValue(p.location, locale, ''),
       },
-    },
-  }));
+      featuredImage: {
+        node: {
+          sourceUrl: getSafeImageUrl(p.mainImage, 800, 600),
+          altText: getLocalizedValue(p.title, locale, ''),
+        },
+      },
+    }));
 
-  // Transform all industries for navigation with localized values
-  const transformedAllIndustries = allIndustries.map((i: any) => ({
-    id: i._id,
-    title: getLocalizedValue(i.title, locale, ''),
-    slug: i.slug.current,
-    excerpt: getLocalizedValue(i.excerpt, locale, ''),
-    featuredImage: {
-      node: {
-        sourceUrl: i.mainImage ? urlForImage(i.mainImage)?.width(400).height(300).url() : '',
-        altText: getLocalizedValue(i.title, locale, ''),
+  const transformedAllIndustries = (allIndustries || [])
+    .filter((i: any) => i?._id && i?.slug?.current)
+    .map((i: any) => ({
+      id: i._id,
+      title: getLocalizedValue(i.title, locale, ''),
+      slug: i.slug.current,
+      excerpt: getLocalizedValue(i.excerpt, locale, ''),
+      featuredImage: {
+        node: {
+          sourceUrl: getSafeImageUrl(i.mainImage, 400, 300),
+          altText: getLocalizedValue(i.title, locale, ''),
+        },
       },
-    },
-  }));
+    }));
+
+  // Use custom content component for residential
+  if (slug === 'residential') {
+    return (
+      <>
+        <Header />
+        <ResidentialContent />
+        <LogoMarquee />
+        <Footer />
+      </>
+    );
+  }
+
+  // Use custom content component for commercial
+  if (slug === 'commercial') {
+    return (
+      <>
+        <Header />
+        <CommercialContent />
+        <LogoMarquee />
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>

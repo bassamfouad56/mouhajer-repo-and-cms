@@ -1,48 +1,57 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Quote, Building2, Hotel, Briefcase } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Quote, Building2, Hotel, Briefcase } from "lucide-react";
 
 const clientCategories = [
   {
-    id: 'developers',
+    id: "developers",
     icon: Building2,
-    title: 'Developers',
-    clients: ['Emaar', 'Nakheel', 'Meydan', 'Sobha', 'Wasl', 'DAMAC'],
+    title: "Developers",
+    clients: ["Emaar", "Nakheel", "Meydan", "Sobha", "Wasl", "DAMAC"],
   },
   {
-    id: 'hospitality',
+    id: "hospitality",
     icon: Hotel,
-    title: 'Hospitality',
-    clients: ['Marriott', 'Ritz-Carlton', 'Sofitel', 'Radisson', 'Grand Hyatt', 'Sheraton'],
+    title: "Hospitality",
+    clients: [
+      "Marriott",
+      "Ritz-Carlton",
+      "Sofitel",
+      "Radisson",
+      "Grand Hyatt",
+      "Sheraton",
+    ],
   },
   {
-    id: 'corporate',
+    id: "corporate",
     icon: Briefcase,
-    title: 'Corporate',
-    clients: ['DMCC', 'JLT', 'SBK Holding', 'ADNH'],
+    title: "Corporate",
+    clients: ["DMCC", "JLT", "SBK Holding", "ADNH"],
   },
 ];
 
 const testimonials = [
   {
-    quote: 'One of the standout qualities of MIDC is their dedication to meeting project timelines without compromising quality. MIDC has consistently demonstrated a strong commitment to meeting project timelines while maintaining high-quality standards. Their clear communication and attention to detail helped keep projects on track, even when handling complex requirements.',
-    author: 'Ghaleb Al Najjar',
-    title: 'Consultant – Projects and Infrastructure',
-    company: 'Abu Dhabi National Hotels',
+    quote:
+      "One of the standout qualities of MIDC is their dedication to meeting project timelines without compromising quality. MIDC has consistently demonstrated a strong commitment to meeting project timelines while maintaining high-quality standards. Their clear communication and attention to detail helped keep projects on track, even when handling complex requirements.",
+    author: "Ghaleb Al Najjar",
+    title: "Consultant – Projects and Infrastructure",
+    company: "Abu Dhabi National Hotels",
   },
   {
-    quote: 'Throughout our collaboration, MIDC has consistently demonstrated exceptional skill, professionalism, and a strong commitment to delivering high-quality outcomes. They have been instrumental in the successful execution of our hotel refurbishment, design and built projects. Their work on Hyatt Hotels Dubai surpassed our expectations.',
-    author: 'Sayed Mohammed Al Sayed',
-    title: 'Director of Area Procurement',
-    company: 'Grand Hyatt Hotels Dubai',
+    quote:
+      "Throughout our collaboration, MIDC has consistently demonstrated exceptional skill, professionalism, and a strong commitment to delivering high-quality outcomes. They have been instrumental in the successful execution of our hotel refurbishment, design and built projects. Their work on Hyatt Hotels Dubai surpassed our expectations.",
+    author: "Sayed Mohammed Al Sayed",
+    title: "Director of Area Procurement",
+    company: "Grand Hyatt Hotels Dubai",
   },
 ];
 
 export function AboutClients() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -130,7 +139,8 @@ export function AboutClients() {
               Endorsements of Excellence
             </h3>
             <p className="mt-2 font-Satoshi text-sm font-light text-white/40">
-              We are proud to be the trusted partner for the region&apos;s most ambitious hospitality brands and private visionaries.
+              We are proud to be the trusted partner for the region&apos;s most
+              ambitious hospitality brands and private visionaries.
             </p>
           </motion.div>
 
@@ -144,7 +154,10 @@ export function AboutClients() {
                 className="relative border border-white/5 bg-white/[0.02] p-8 backdrop-blur-sm lg:p-10"
               >
                 {/* Quote Icon */}
-                <Quote className="mb-6 h-8 w-8 text-[#c9a962]/30" strokeWidth={1} />
+                <Quote
+                  className="mb-6 h-8 w-8 text-[#c9a962]/30"
+                  strokeWidth={1}
+                />
 
                 {/* Quote */}
                 <p className="mb-8 font-Satoshi text-base font-light leading-relaxed text-white/70">

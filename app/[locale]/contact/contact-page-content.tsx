@@ -1,27 +1,33 @@
-'use client';
+"use client";
 
-import { useRef, useState, useEffect } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import Link from 'next/link';
-import { MagneticButton } from '@/components/magnetic-button';
-import { SafeImage } from '@/components/safe-image';
+import { useRef, useState } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import Link from "next/link";
+import { MagneticButton } from "@/components/magnetic-button";
+import { SafeImage } from "@/components/safe-image";
 
 // Contact information
-const PHONE = '+971 52 304 1482';
-const PHONE_LINK = '971523041482';
-const EMAIL = 'info@mouhajerdesign.com';
-const EMAIL_CAREERS = 'career@mouhajerdesign.com';
+const PHONE = "+971 52 304 1482";
+const PHONE_LINK = "971523041482";
+const EMAIL = "info@mouhajerdesign.com";
+const EMAIL_CAREERS = "career@mouhajerdesign.com";
 const WHATSAPP_LINK = `https://wa.me/${PHONE_LINK}?text=${encodeURIComponent("Hello! I'm interested in scheduling a consultation.")}`;
 
 // Form validation schema
 const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
   phone: z.string().optional(),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
+  message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -29,67 +35,142 @@ type ContactFormData = z.infer<typeof contactSchema>;
 // FAQ data
 const faqs = [
   {
-    question: 'Do I need an appointment to visit the HQ?',
-    answer: 'Yes. To ensure that the appropriate Senior Project Manager or Designer is available to discuss your specific needs, we recommend scheduling an appointment 24 hours in advance.',
+    question: "Do I need an appointment to visit the HQ?",
+    answer:
+      "Yes. To ensure that the appropriate Senior Project Manager or Designer is available to discuss your specific needs, we recommend scheduling an appointment 24 hours in advance.",
   },
   {
-    question: 'Can Eng. Maher attend the initial meeting?',
-    answer: 'Eng. Maher is deeply involved in all major projects. For significant commissions (Palaces, Hotels, HQs), he makes every effort to attend the initial briefing personally.',
+    question: "Can Eng. Maher attend the initial meeting?",
+    answer:
+      "Eng. Maher is deeply involved in all major projects. For significant commissions (Palaces, Hotels, HQs), he makes every effort to attend the initial briefing personally.",
   },
   {
-    question: 'Do you charge for the initial consultation?',
-    answer: 'Our initial discovery meeting at our HQ is complimentary. This allows us to understand your vision and determine if MIDC is the right partner for your ambition.',
+    question: "Do you charge for the initial consultation?",
+    answer:
+      "Our initial discovery meeting at our HQ is complimentary. This allows us to understand your vision and determine if MIDC is the right partner for your ambition.",
   },
 ];
 
 // Minimalist SVG Icons (professional, thin strokes)
 const IconLocation = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
     <circle cx="12" cy="9" r="2.5" />
   </svg>
 );
 
 const IconPhone = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
   </svg>
 );
 
 const IconMail = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <rect x="2" y="4" width="20" height="16" rx="2" />
     <path d="M22 6L12 13 2 6" />
   </svg>
 );
 
 const IconClock = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <circle cx="12" cy="12" r="10" />
     <path d="M12 6v6l4 2" />
   </svg>
 );
 
 const IconArrowRight = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M5 12h14M12 5l7 7-7 7" />
   </svg>
 );
 
 const IconPlus = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M12 5v14M5 12h14" />
   </svg>
 );
 
 const IconMinus = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M5 12h14" />
   </svg>
 );
 
 const IconCheck = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M20 6L9 17l-5-5" />
   </svg>
 );
@@ -100,26 +181,30 @@ interface ContactPageContentProps {
 }
 
 export default function ContactPageContent({
-  bannerImage = '/founder/CID_2106_00_COVER.jpg',
-  ctaImage = '/founder/CID_2106_00_COVER.jpg'
+  bannerImage = "/founder/CID_2106_00_COVER.jpg",
+  ctaImage = "/founder/CID_2106_00_COVER.jpg",
 }: ContactPageContentProps) {
   const heroRef = useRef<HTMLElement>(null);
   const locationRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLElement>(null);
-  const formRef = useRef<HTMLElement>(null);
   const faqRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLElement>(null);
 
   const heroInView = useInView(heroRef, { once: true });
-  const locationInView = useInView(locationRef, { once: true, margin: '-100px' });
-  const servicesInView = useInView(servicesRef, { once: true, margin: '-100px' });
-  const formInView = useInView(formRef, { once: true, margin: '-100px' });
-  const faqInView = useInView(faqRef, { once: true, margin: '-100px' });
-  const ctaInView = useInView(ctaRef, { once: true, margin: '-100px' });
+  const locationInView = useInView(locationRef, {
+    once: true,
+    margin: "-100px",
+  });
+  const servicesInView = useInView(servicesRef, {
+    once: true,
+    margin: "-100px",
+  });
+  const faqInView = useInView(faqRef, { once: true, margin: "-100px" });
+  const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
@@ -130,16 +215,6 @@ export default function ContactPageContent({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  // Track mouse for subtle glow effect
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const {
     register,
@@ -154,12 +229,12 @@ export default function ContactPageContent({
     setIsSubmitting(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log('Form submitted:', data);
+      console.log("Form submitted:", data);
       setSubmitSuccess(true);
       reset();
       setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error("Form submission error:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -232,7 +307,8 @@ export default function ContactPageContent({
             transition={{ duration: 1, delay: 0.6 }}
             className="mb-8 text-center font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white md:text-7xl lg:text-8xl"
           >
-            Start the<br />
+            Start the
+            <br />
             <span className="italic text-white/90">Conversation.</span>
           </motion.h1>
 
@@ -254,7 +330,11 @@ export default function ContactPageContent({
           >
             <motion.div
               animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
               className="flex flex-col items-center gap-4"
             >
               <div className="h-12 w-px bg-gradient-to-b from-white/20 to-transparent" />
@@ -270,482 +350,517 @@ export default function ContactPageContent({
         <div className="absolute bottom-32 right-8 hidden h-24 w-24 border-b border-r border-white/[0.08] lg:block" />
       </section>
 
-      {/* Section 1: The Center of Operations */}
+      {/* Section 1: Get in Touch - Professional Layout */}
       <section
         ref={locationRef}
-        className="relative overflow-hidden bg-white py-32 lg:py-40"
+        className="relative bg-neutral-50 py-24 lg:py-32"
       >
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div className="h-full w-full bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:80px_80px]" />
-        </div>
-
         <div className="relative mx-auto max-w-7xl px-6">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={locationInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-20 max-w-2xl"
-          >
-            <div className="mb-6 flex items-center gap-4">
-              <div className="h-px w-12 bg-[#d4af37]" />
-              <span className="font-Satoshi text-[11px] font-light uppercase tracking-[0.3em] text-neutral-400">
-                Our Headquarters
-              </span>
-            </div>
-            <h2 className="mb-6 font-Playfair text-4xl font-light leading-[1.15] text-neutral-950 md:text-5xl lg:text-6xl">
-              The Center of<br />
-              <span className="italic">Operations.</span>
-            </h2>
-            <p className="font-Satoshi text-base font-light leading-relaxed text-neutral-500 md:text-lg">
-              Located in the heart of Downtown Dubai, our headquarters reflects the standards we deliver.
-              We invite you to visit our design studio to view material samples, discuss blueprints,
-              and meet the team behind the region&apos;s most iconic projects.
-            </p>
-          </motion.div>
+          {/* Two Column Layout */}
+          <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
+            {/* Left Column: Header + Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={locationInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-2"
+            >
+              {/* Header */}
+              <div className="mb-10">
+                <span className="mb-4 inline-block font-Satoshi text-[11px] font-medium uppercase tracking-[0.2em] text-[#d4af37]">
+                  Contact
+                </span>
+                <h2 className="mb-4 font-Playfair text-3xl font-light leading-tight text-neutral-950 md:text-4xl">
+                  Get in Touch
+                </h2>
+                <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-500">
+                  Visit our headquarters in Downtown Dubai or reach out
+                  directly.
+                </p>
+              </div>
 
-          <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
-            {/* Contact Details - Elegant Layout */}
+              {/* Contact Links - All Clickable */}
+              <div className="space-y-1">
+                {/* Location - Opens Google Maps */}
+                <a
+                  href="https://maps.google.com/?q=Burj+Vista+Tower+1+Downtown+Dubai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-4 rounded-lg p-4 transition-all hover:bg-white hover:shadow-sm"
+                >
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-400 transition-all group-hover:bg-[#d4af37] group-hover:text-white">
+                    <IconLocation />
+                  </div>
+                  <div className="flex-1 pt-1">
+                    <span className="mb-1 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-400">
+                      Visit Us
+                    </span>
+                    <span className="block font-Satoshi text-sm text-neutral-700 transition-colors group-hover:text-neutral-950">
+                      Burj Vista Tower 1, Downtown Dubai
+                    </span>
+                    <span className="block font-Satoshi text-xs text-neutral-400">
+                      Opposite Burj Khalifa
+                    </span>
+                  </div>
+                  <span className="pt-2 text-neutral-300 transition-all group-hover:translate-x-1 group-hover:text-[#d4af37]">
+                    <IconArrowRight />
+                  </span>
+                </a>
+
+                {/* Phone */}
+                <a
+                  href={`tel:${PHONE_LINK}`}
+                  className="group flex items-start gap-4 rounded-lg p-4 transition-all hover:bg-white hover:shadow-sm"
+                >
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-400 transition-all group-hover:bg-[#d4af37] group-hover:text-white">
+                    <IconPhone />
+                  </div>
+                  <div className="flex-1 pt-1">
+                    <span className="mb-1 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-400">
+                      Call Us
+                    </span>
+                    <span className="block font-Satoshi text-sm text-neutral-700 transition-colors group-hover:text-neutral-950">
+                      {PHONE}
+                    </span>
+                  </div>
+                  <span className="pt-2 text-neutral-300 transition-all group-hover:translate-x-1 group-hover:text-[#d4af37]">
+                    <IconArrowRight />
+                  </span>
+                </a>
+
+                {/* Email */}
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="group flex items-start gap-4 rounded-lg p-4 transition-all hover:bg-white hover:shadow-sm"
+                >
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-400 transition-all group-hover:bg-[#d4af37] group-hover:text-white">
+                    <IconMail />
+                  </div>
+                  <div className="flex-1 pt-1">
+                    <span className="mb-1 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-400">
+                      Email Us
+                    </span>
+                    <span className="block font-Satoshi text-sm text-neutral-700 transition-colors group-hover:text-neutral-950">
+                      {EMAIL}
+                    </span>
+                    <span className="block font-Satoshi text-xs text-neutral-400">
+                      Careers: {EMAIL_CAREERS}
+                    </span>
+                  </div>
+                  <span className="pt-2 text-neutral-300 transition-all group-hover:translate-x-1 group-hover:text-[#d4af37]">
+                    <IconArrowRight />
+                  </span>
+                </a>
+
+                {/* WhatsApp */}
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-4 rounded-lg p-4 transition-all hover:bg-white hover:shadow-sm"
+                >
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366] transition-all group-hover:bg-[#25D366] group-hover:text-white">
+                    <svg
+                      className="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1 pt-1">
+                    <span className="mb-1 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-400">
+                      WhatsApp
+                    </span>
+                    <span className="block font-Satoshi text-sm text-neutral-700 transition-colors group-hover:text-neutral-950">
+                      Quick Response
+                    </span>
+                  </div>
+                  <span className="pt-2 text-neutral-300 transition-all group-hover:translate-x-1 group-hover:text-[#25D366]">
+                    <IconArrowRight />
+                  </span>
+                </a>
+
+                {/* Office Hours */}
+                <div className="flex items-start gap-4 rounded-lg p-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-400">
+                    <IconClock />
+                  </div>
+                  <div className="flex-1 pt-1">
+                    <span className="mb-1 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-400">
+                      Office Hours
+                    </span>
+                    <span className="block font-Satoshi text-sm text-neutral-700">
+                      Sunday — Thursday, 9 AM – 6 PM
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Map - Clickable */}
+              <a
+                href="https://maps.google.com/?q=Burj+Vista+Tower+1+Downtown+Dubai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative mt-6 block overflow-hidden rounded-xl"
+              >
+                <div className="relative aspect-video overflow-hidden bg-neutral-200">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.1787674796247!2d55.2697!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682829c85c07%3A0x5c3e5e1a2f00e0c0!2sBurj%20Vista%20Tower%201!5e0!3m2!1sen!2sae!4v1699999999999!5m2!1sen!2sae"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="pointer-events-none absolute inset-0"
+                  />
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-neutral-950/0 transition-all group-hover:bg-neutral-950/40">
+                    <span className="flex items-center gap-2 rounded-full bg-white px-4 py-2 font-Satoshi text-xs font-medium text-neutral-950 opacity-0 shadow-lg transition-all group-hover:opacity-100">
+                      Open in Google Maps
+                      <IconArrowRight />
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </motion.div>
+
+            {/* Right Column: Contact Form - Sticky */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={locationInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-0"
+              className="lg:col-span-3"
             >
-              {/* Address */}
-              <div className="group border-b border-neutral-100 py-8 transition-colors hover:border-neutral-200">
-                <div className="flex items-start gap-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#d4af37]">
-                    <IconLocation />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="mb-3 font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-400">
-                      HQ Address
-                    </h4>
-                    <p className="font-Satoshi text-base font-light leading-relaxed text-neutral-700">
-                      Mouhajer International Design & Contracting<br />
-                      Burj Vista, Tower 1<br />
-                      Downtown Dubai, Opposite Burj Khalifa<br />
-                      Dubai, United Arab Emirates
-                    </p>
-                  </div>
+              <div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm lg:sticky lg:top-28 lg:self-start lg:p-10">
+                {/* Form Header */}
+                <div className="mb-8">
+                  <h3 className="mb-2 font-Playfair text-2xl font-light text-neutral-950">
+                    Send a Message
+                  </h3>
+                  <p className="font-Satoshi text-sm font-light text-neutral-500">
+                    Our team responds within 24 hours.
+                  </p>
                 </div>
-              </div>
 
-              {/* Phone */}
-              <div className="group border-b border-neutral-100 py-8 transition-colors hover:border-neutral-200">
-                <div className="flex items-start gap-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#d4af37]">
-                    <IconPhone />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="mb-3 font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-400">
-                      Direct Line
-                    </h4>
-                    <a
-                      href={`tel:${PHONE_LINK}`}
-                      className="font-Satoshi text-base font-light text-neutral-700 transition-colors hover:text-neutral-950"
-                    >
-                      {PHONE}
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Emails */}
-              <div className="group border-b border-neutral-100 py-8 transition-colors hover:border-neutral-200">
-                <div className="flex items-start gap-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#d4af37]">
-                    <IconMail />
-                  </div>
-                  <div className="flex-1 space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                  {/* Name & Email Row */}
+                  <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <h4 className="mb-2 font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-400">
-                        General Inquiries
-                      </h4>
-                      <a
-                        href={`mailto:${EMAIL}`}
-                        className="font-Satoshi text-base font-light text-neutral-700 transition-colors hover:text-neutral-950"
-                      >
-                        {EMAIL}
-                      </a>
+                      <label className="mb-2 block font-Satoshi text-xs font-medium text-neutral-600">
+                        Full Name <span className="text-[#d4af37]">*</span>
+                      </label>
+                      <input
+                        {...register("name")}
+                        type="text"
+                        placeholder="John Smith"
+                        className={`w-full rounded-lg border ${errors.name ? "border-red-400" : "border-neutral-200"} bg-neutral-50 px-4 py-3 font-Satoshi text-sm text-neutral-900 placeholder:text-neutral-400 transition-all focus:border-[#d4af37] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d4af37]/10`}
+                      />
+                      {errors.name && (
+                        <p className="mt-1.5 font-Satoshi text-xs text-red-500">
+                          {errors.name.message}
+                        </p>
+                      )}
                     </div>
+
                     <div>
-                      <h4 className="mb-2 font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-400">
-                        Careers
-                      </h4>
-                      <a
-                        href={`mailto:${EMAIL_CAREERS}`}
-                        className="font-Satoshi text-base font-light text-neutral-700 transition-colors hover:text-neutral-950"
-                      >
-                        {EMAIL_CAREERS}
-                      </a>
+                      <label className="mb-2 block font-Satoshi text-xs font-medium text-neutral-600">
+                        Email Address <span className="text-[#d4af37]">*</span>
+                      </label>
+                      <input
+                        {...register("email")}
+                        type="email"
+                        placeholder="john@company.com"
+                        className={`w-full rounded-lg border ${errors.email ? "border-red-400" : "border-neutral-200"} bg-neutral-50 px-4 py-3 font-Satoshi text-sm text-neutral-900 placeholder:text-neutral-400 transition-all focus:border-[#d4af37] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d4af37]/10`}
+                      />
+                      {errors.email && (
+                        <p className="mt-1.5 font-Satoshi text-xs text-red-500">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
                   </div>
-                </div>
-              </div>
 
-              {/* Hours */}
-              <div className="group py-8">
-                <div className="flex items-start gap-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#d4af37]">
-                    <IconClock />
+                  {/* Phone */}
+                  <div>
+                    <label className="mb-2 block font-Satoshi text-xs font-medium text-neutral-600">
+                      Phone / WhatsApp
+                    </label>
+                    <input
+                      {...register("phone")}
+                      type="tel"
+                      placeholder="+971 XX XXX XXXX"
+                      className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 font-Satoshi text-sm text-neutral-900 placeholder:text-neutral-400 transition-all focus:border-[#d4af37] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d4af37]/10"
+                    />
                   </div>
-                  <div className="flex-1">
-                    <h4 className="mb-3 font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-400">
-                      Office Hours
-                    </h4>
-                    <p className="font-Satoshi text-base font-light text-neutral-700">
-                      Sunday — Thursday: 9:00 AM – 6:00 PM
-                    </p>
+
+                  {/* Message */}
+                  <div>
+                    <label className="mb-2 block font-Satoshi text-xs font-medium text-neutral-600">
+                      Message <span className="text-[#d4af37]">*</span>
+                    </label>
+                    <textarea
+                      {...register("message")}
+                      rows={5}
+                      placeholder="Tell us about your project or inquiry..."
+                      className={`w-full resize-none rounded-lg border ${errors.message ? "border-red-400" : "border-neutral-200"} bg-neutral-50 px-4 py-3 font-Satoshi text-sm leading-relaxed text-neutral-900 placeholder:text-neutral-400 transition-all focus:border-[#d4af37] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d4af37]/10`}
+                    />
+                    {errors.message && (
+                      <p className="mt-1.5 font-Satoshi text-xs text-red-500">
+                        {errors.message.message}
+                      </p>
+                    )}
                   </div>
-                </div>
-              </div>
-            </motion.div>
 
-            {/* Map with Premium Styling */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={locationInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative"
-            >
-              <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100">
-                {/* Map */}
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.1787674796247!2d55.2697!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682829c85c07%3A0x5c3e5e1a2f00e0c0!2sBurj%20Vista%20Tower%201!5e0!3m2!1sen!2sae!4v1699999999999!5m2!1sen!2sae"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, filter: 'grayscale(100%) contrast(1.1)' }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="absolute inset-0"
-                />
-
-                {/* Subtle overlay */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-neutral-950/10 via-transparent to-transparent" />
-
-                {/* Border frame */}
-                <div className="pointer-events-none absolute inset-4 border border-white/20" />
-              </div>
-
-              {/* Floating Label */}
-              <div className="absolute -bottom-6 left-8 right-8 bg-neutral-950 p-6 md:left-auto md:right-8 md:w-72">
-                <div className="flex items-center gap-4">
-                  <div className="h-px flex-1 bg-[#d4af37]/30" />
-                  <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#d4af37]">Location</span>
-                </div>
-                <p className="mt-4 font-Playfair text-xl font-light text-white">Burj Vista</p>
-                <p className="mt-1 font-Satoshi text-sm font-light text-white/50">Downtown Dubai</p>
+                  {/* Submit */}
+                  <div className="pt-2">
+                    <MagneticButton>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="group flex w-full items-center justify-center gap-3 rounded-lg bg-neutral-950 px-8 py-4 transition-all hover:bg-neutral-800 disabled:opacity-50 sm:w-auto"
+                      >
+                        {isSubmitting ? (
+                          <span className="font-Satoshi text-sm font-medium text-white">
+                            Sending...
+                          </span>
+                        ) : submitSuccess ? (
+                          <>
+                            <span className="text-[#d4af37]">
+                              <IconCheck />
+                            </span>
+                            <span className="font-Satoshi text-sm font-medium text-white">
+                              Message Sent!
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="font-Satoshi text-sm font-medium text-white">
+                              Send Message
+                            </span>
+                            <span className="text-white transition-transform group-hover:translate-x-1">
+                              <IconArrowRight />
+                            </span>
+                          </>
+                        )}
+                      </button>
+                    </MagneticButton>
+                  </div>
+                </form>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Section 2: How Can We Serve You? */}
+      {/* Section 2: How Can We Serve You? - Glass Cards */}
       <section
         ref={servicesRef}
         className="relative overflow-hidden bg-neutral-950 py-32 lg:py-40"
       >
-        {/* Subtle grid */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div className="h-full w-full bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:100px_100px]" />
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <SafeImage
+            src="/website%202.0%20content/services/inside%20services/the%20art%20of%20integrated%20construction/construction-%2B%20more%20labor.jpg"
+            alt="Construction background"
+            fill
+            className="object-cover"
+          />
+          {/* Dark gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/70 via-neutral-950/50 to-neutral-950/80" />
+          <div className="absolute inset-0 bg-neutral-950/40" />
         </div>
 
-        {/* Ambient glow */}
-        <div
-          className="pointer-events-none absolute h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.03] blur-[120px]"
-          style={{
-            left: mousePosition.x - 300,
-            top: mousePosition.y - 300 - 400,
-          }}
-        />
+        {/* Corner Decorations */}
+        <div className="pointer-events-none absolute bottom-6 left-4 z-30 hidden h-12 w-12 sm:block sm:left-6 lg:left-12 lg:h-16 lg:w-16">
+          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
+          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+        </div>
+        <div className="pointer-events-none absolute right-4 top-6 z-30 hidden h-12 w-12 sm:block sm:right-6 lg:right-12 lg:h-16 lg:w-16">
+          <div className="absolute right-0 top-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
+          <div className="absolute right-0 top-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+        </div>
 
-        <div className="relative mx-auto max-w-7xl px-6">
+        <div className="relative z-10 mx-auto max-w-7xl px-6">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={servicesInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="mb-20 text-center"
+            className="mb-16 text-center"
           >
+            {/* Label */}
             <div className="mb-6 flex items-center justify-center gap-4">
-              <div className="h-px w-12 bg-[#d4af37]/40" />
-              <span className="font-Satoshi text-[11px] font-light uppercase tracking-[0.3em] text-[#d4af37]">
-                Get Started
-              </span>
-              <div className="h-px w-12 bg-[#d4af37]/40" />
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
+              <div className="flex items-center gap-2">
+                <svg
+                  className="h-3.5 w-3.5 text-[#c9a962]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z" />
+                  <path d="M5 19l.5 1.5L7 21l-1.5.5L5 23l-.5-1.5L3 21l1.5-.5L5 19z" />
+                  <path d="M19 17l.5 1.5L21 19l-1.5.5L19 21l-.5-1.5L17 19l1.5-.5L19 17z" />
+                </svg>
+                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+                  Get Started
+                </span>
+              </div>
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
             </div>
-            <h2 className="font-Playfair text-4xl font-light leading-[1.15] text-white md:text-5xl lg:text-6xl">
-              How Can We<br />
-              <span className="italic text-white/80">Serve You?</span>
+
+            {/* Title */}
+            <h2 className="mb-4 font-SchnyderS text-3xl font-light tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              How Can We
+              <br />
+              <span className="text-[#c9a962]">Serve You?</span>
             </h2>
+
+            <p className="mx-auto max-w-xl font-Satoshi text-base font-light leading-relaxed text-white/60 lg:text-lg">
+              Whether you&apos;re starting a new project or joining our network.{" "}
+              <span className="font-medium text-white/90">
+                We&apos;re ready to connect.
+              </span>
+            </p>
           </motion.div>
 
+          {/* Glass Cards */}
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-            {/* New Project Inquiry */}
+            {/* Project Inquiry Card */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={servicesInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, x: -40 }}
+              animate={servicesInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="group relative"
+              className="flex"
             >
-              <div className="relative overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-[#d4af37]/20 hover:bg-white/[0.04] lg:p-12">
-                <div className="relative">
-                  <span className="mb-6 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#d4af37]">
+              <Link
+                href="/contact/book-consultation"
+                className="group flex w-full"
+              >
+                <div className="relative flex w-full flex-col overflow-hidden border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white/10 hover:shadow-[0_0_60px_rgba(201,169,98,0.15)] sm:p-8 lg:p-10">
+                  {/* Corner accents */}
+                  <div className="absolute left-0 top-0 h-8 w-px bg-[#c9a962]/30" />
+                  <div className="absolute left-0 top-0 h-px w-8 bg-[#c9a962]/30" />
+                  <div className="absolute bottom-0 right-0 h-8 w-px bg-[#c9a962]/30" />
+                  <div className="absolute bottom-0 right-0 h-px w-8 bg-[#c9a962]/30" />
+
+                  {/* Label */}
+                  <span className="mb-2 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
                     New Project
                   </span>
 
-                  <h3 className="mb-6 font-Playfair text-2xl font-light text-white md:text-3xl">
+                  {/* Title */}
+                  <h3 className="mb-2 font-SchnyderS text-3xl font-light text-white lg:text-4xl">
                     Project Inquiry
                   </h3>
 
-                  <p className="mb-10 max-w-md font-Satoshi text-base font-light leading-relaxed text-white/40">
-                    Are you ready to commission a design, renovate a hotel, or build a private residence?
-                    Connect directly with our executive team to discuss your vision.
+                  {/* Subtitle */}
+                  <p className="mb-4 font-Satoshi text-base font-light text-white/50 lg:text-lg">
+                    Start Your Journey
                   </p>
 
-                  <Link
-                    href="/contact/book-consultation"
-                    className="group/btn inline-flex items-center gap-4 border-b border-[#d4af37]/30 pb-2 transition-all hover:border-[#d4af37]"
-                  >
-                    <span className="font-Satoshi text-sm font-light tracking-wide text-[#d4af37]">
+                  {/* Description */}
+                  <p className="mb-8 grow font-Satoshi text-sm font-light leading-relaxed text-white/60 lg:text-base">
+                    Are you ready to commission a design, renovate a hotel, or
+                    build a private residence? Connect directly with our
+                    executive team to discuss your vision.
+                  </p>
+
+                  {/* CTA */}
+                  <div className="mt-auto flex items-center gap-2 transition-transform group-hover:translate-x-1">
+                    <span className="font-Satoshi text-xs font-light tracking-wide text-white/70 transition-colors group-hover:text-[#c9a962] lg:text-sm">
                       Book a Consultation
                     </span>
-                    <span className="text-[#d4af37] transition-transform group-hover/btn:translate-x-1">
-                      <IconArrowRight />
-                    </span>
-                  </Link>
-                </div>
+                    <div className="flex h-9 w-9 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#c9a962] group-hover:bg-[#c9a962] lg:h-10 lg:w-10">
+                      <svg
+                        className="h-4 w-4 text-white transition-colors group-hover:text-neutral-950"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </div>
+                  </div>
 
-                {/* Hover glow */}
-                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#d4af37]/0 blur-3xl transition-all duration-700 group-hover:bg-[#d4af37]/10" />
-              </div>
+                  {/* Gold accent line on hover */}
+                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#c9a962] transition-all duration-500 group-hover:w-full" />
+                </div>
+              </Link>
             </motion.div>
 
-            {/* Supplier Registration */}
+            {/* Supplier Registration Card */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={servicesInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="group relative"
+              initial={{ opacity: 0, x: 40 }}
+              animate={servicesInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex"
             >
-              <div className="relative overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-white/10 hover:bg-white/[0.04] lg:p-12">
-                <div className="relative">
-                  <span className="mb-6 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
+              <a
+                href={`mailto:${EMAIL}?subject=Supplier Registration`}
+                className="group flex w-full"
+              >
+                <div className="relative flex w-full flex-col overflow-hidden border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-500 hover:border-white/20 hover:bg-white/10 hover:shadow-[0_0_60px_rgba(255,255,255,0.05)] sm:p-8 lg:p-10">
+                  {/* Corner accents */}
+                  <div className="absolute left-0 top-0 h-8 w-px bg-white/20" />
+                  <div className="absolute left-0 top-0 h-px w-8 bg-white/20" />
+                  <div className="absolute bottom-0 right-0 h-8 w-px bg-white/20" />
+                  <div className="absolute bottom-0 right-0 h-px w-8 bg-white/20" />
+
+                  {/* Label */}
+                  <span className="mb-2 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
                     Partnerships
                   </span>
 
-                  <h3 className="mb-6 font-Playfair text-2xl font-light text-white md:text-3xl">
+                  {/* Title */}
+                  <h3 className="mb-2 font-SchnyderS text-3xl font-light text-white lg:text-4xl">
                     Supplier Registration
                   </h3>
 
-                  <p className="mb-10 max-w-md font-Satoshi text-base font-light leading-relaxed text-white/40">
-                    We are always looking for partners who meet the &quot;MIDC Standard.&quot;
-                    If you supply high-grade materials, register with our procurement division.
+                  {/* Subtitle */}
+                  <p className="mb-4 font-Satoshi text-base font-light text-white/50 lg:text-lg">
+                    Join Our Network
                   </p>
 
-                  <a
-                    href={`mailto:${EMAIL}?subject=Supplier Registration`}
-                    className="group/btn inline-flex items-center gap-4 border-b border-white/20 pb-2 transition-all hover:border-white/40"
-                  >
-                    <span className="font-Satoshi text-sm font-light tracking-wide text-white/70">
+                  {/* Description */}
+                  <p className="mb-8 grow font-Satoshi text-sm font-light leading-relaxed text-white/60 lg:text-base">
+                    We are always looking for partners who meet the &quot;MIDC
+                    Standard.&quot; If you supply high-grade materials, register
+                    with our procurement division.
+                  </p>
+
+                  {/* CTA */}
+                  <div className="mt-auto flex items-center gap-2 transition-transform group-hover:translate-x-1">
+                    <span className="font-Satoshi text-xs font-light tracking-wide text-white/70 transition-colors group-hover:text-white lg:text-sm">
                       Join Our Vendor List
                     </span>
-                    <span className="text-white/70 transition-transform group-hover/btn:translate-x-1">
-                      <IconArrowRight />
-                    </span>
-                  </a>
-                </div>
+                    <div className="flex h-9 w-9 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-white/40 group-hover:bg-white/10 lg:h-10 lg:w-10">
+                      <svg
+                        className="h-4 w-4 text-white/70 transition-colors group-hover:text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </div>
+                  </div>
 
-                {/* Hover glow */}
-                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-white/0 blur-3xl transition-all duration-700 group-hover:bg-white/5" />
-              </div>
+                  {/* White accent line on hover */}
+                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-white/40 transition-all duration-500 group-hover:w-full" />
+                </div>
+              </a>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Section 3: General Correspondence - Form */}
-      <section
-        ref={formRef}
-        className="relative overflow-hidden bg-neutral-50 py-32 lg:py-40"
-      >
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-20 lg:grid-cols-2 lg:gap-24">
-            {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={formInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="mb-6 flex items-center gap-4">
-                <div className="h-px w-12 bg-neutral-300" />
-                <span className="font-Satoshi text-[11px] font-light uppercase tracking-[0.3em] text-neutral-400">
-                  Get in Touch
-                </span>
-              </div>
-
-              <h2 className="mb-6 font-SchnyderS text-4xl font-light leading-[1.15] text-neutral-950 md:text-5xl">
-                General<br />
-                <span className="italic">Correspondence</span>
-              </h2>
-
-              <p className="mb-12 max-w-md font-Satoshi text-base font-light leading-relaxed text-neutral-500">
-                For general questions, media requests, or corporate information.
-                Our team responds within 24 hours.
-              </p>
-
-              {/* Quick contact */}
-              <div className="space-y-4">
-                <a
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-4 border border-neutral-200 bg-white p-4 transition-all hover:border-neutral-300 hover:shadow-sm"
-                >
-                  <div className="flex h-10 w-10 items-center justify-center bg-[#25D366] text-white">
-                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <span className="block font-Satoshi text-sm font-medium text-neutral-900">WhatsApp</span>
-                    <span className="font-Satoshi text-xs text-neutral-500">Quick response</span>
-                  </div>
-                  <span className="text-neutral-400 transition-transform group-hover:translate-x-1">
-                    <IconArrowRight />
-                  </span>
-                </a>
-
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="group flex items-center gap-4 border border-neutral-200 bg-white p-4 transition-all hover:border-neutral-300 hover:shadow-sm"
-                >
-                  <div className="flex h-10 w-10 items-center justify-center bg-neutral-900 text-white">
-                    <IconMail />
-                  </div>
-                  <div className="flex-1">
-                    <span className="block font-Satoshi text-sm font-medium text-neutral-900">Email</span>
-                    <span className="font-Satoshi text-xs text-neutral-500">{EMAIL}</span>
-                  </div>
-                  <span className="text-neutral-400 transition-transform group-hover:translate-x-1">
-                    <IconArrowRight />
-                  </span>
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Form */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={formInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-                {/* Name */}
-                <div>
-                  <label className="mb-3 block font-Satoshi text-[10px] uppercase tracking-[0.2em] text-neutral-400">
-                    Full Name <span className="text-[#d4af37]">*</span>
-                  </label>
-                  <input
-                    {...register('name')}
-                    type="text"
-                    placeholder="Your full name"
-                    className={`w-full border-b-2 ${errors.name ? 'border-red-400' : 'border-neutral-200'} bg-transparent pb-3 font-Satoshi text-base font-light text-neutral-900 placeholder:text-neutral-300 transition-colors focus:border-neutral-900 focus:outline-none`}
-                  />
-                  {errors.name && (
-                    <p className="mt-2 font-Satoshi text-xs text-red-500">{errors.name.message}</p>
-                  )}
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label className="mb-3 block font-Satoshi text-[10px] uppercase tracking-[0.2em] text-neutral-400">
-                    Email Address <span className="text-[#d4af37]">*</span>
-                  </label>
-                  <input
-                    {...register('email')}
-                    type="email"
-                    placeholder="your@email.com"
-                    className={`w-full border-b-2 ${errors.email ? 'border-red-400' : 'border-neutral-200'} bg-transparent pb-3 font-Satoshi text-base font-light text-neutral-900 placeholder:text-neutral-300 transition-colors focus:border-neutral-900 focus:outline-none`}
-                  />
-                  {errors.email && (
-                    <p className="mt-2 font-Satoshi text-xs text-red-500">{errors.email.message}</p>
-                  )}
-                </div>
-
-                {/* Phone */}
-                <div>
-                  <label className="mb-3 block font-Satoshi text-[10px] uppercase tracking-[0.2em] text-neutral-400">
-                    Phone / WhatsApp
-                  </label>
-                  <input
-                    {...register('phone')}
-                    type="tel"
-                    placeholder="+971 XX XXX XXXX"
-                    className="w-full border-b-2 border-neutral-200 bg-transparent pb-3 font-Satoshi text-base font-light text-neutral-900 placeholder:text-neutral-300 transition-colors focus:border-neutral-900 focus:outline-none"
-                  />
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label className="mb-3 block font-Satoshi text-[10px] uppercase tracking-[0.2em] text-neutral-400">
-                    Message <span className="text-[#d4af37]">*</span>
-                  </label>
-                  <textarea
-                    {...register('message')}
-                    rows={4}
-                    placeholder="How can we help you today?"
-                    className={`w-full resize-none border-b-2 ${errors.message ? 'border-red-400' : 'border-neutral-200'} bg-transparent pb-3 font-Satoshi text-base font-light leading-relaxed text-neutral-900 placeholder:text-neutral-300 transition-colors focus:border-neutral-900 focus:outline-none`}
-                  />
-                  {errors.message && (
-                    <p className="mt-2 font-Satoshi text-xs text-red-500">{errors.message.message}</p>
-                  )}
-                </div>
-
-                {/* Submit */}
-                <div className="pt-6">
-                  <MagneticButton>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="group flex w-full items-center justify-center gap-3 bg-neutral-950 px-10 py-5 transition-all hover:bg-neutral-800 disabled:opacity-50 sm:w-auto"
-                    >
-                      {isSubmitting ? (
-                        <span className="font-Satoshi text-sm font-light tracking-wide text-white">
-                          Sending...
-                        </span>
-                      ) : submitSuccess ? (
-                        <>
-                          <span className="text-[#d4af37]"><IconCheck /></span>
-                          <span className="font-Satoshi text-sm font-light tracking-wide text-white">
-                            Message Sent!
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="font-Satoshi text-sm font-light tracking-wide text-white">
-                            Submit Inquiry
-                          </span>
-                          <span className="text-white transition-transform group-hover:translate-x-1">
-                            <IconArrowRight />
-                          </span>
-                        </>
-                      )}
-                    </button>
-                  </MagneticButton>
-                </div>
-              </form>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4: Expert Insights / FAQ */}
+      {/* Section 3: Expert Insights / FAQ */}
       <section
         ref={faqRef}
         className="relative overflow-hidden bg-white py-32 lg:py-40"
@@ -789,7 +904,9 @@ export default function ContactPageContent({
                   <span className="pr-8 font-Satoshi text-base font-light text-neutral-900 md:text-lg">
                     {faq.question}
                   </span>
-                  <span className={`shrink-0 text-neutral-400 transition-transform duration-300 ${openFaq === index ? 'rotate-0' : ''}`}>
+                  <span
+                    className={`shrink-0 text-neutral-400 transition-transform duration-300 ${openFaq === index ? "rotate-0" : ""}`}
+                  >
                     {openFaq === index ? <IconMinus /> : <IconPlus />}
                   </span>
                 </button>
@@ -797,9 +914,9 @@ export default function ContactPageContent({
                   {openFaq === index && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
+                      animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
                       <div className="pb-8">

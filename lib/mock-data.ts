@@ -40,7 +40,7 @@ export interface ACFFields {
   projectBudget?: string;
   projectDescription?: string;
   gallery?: Image[];
-  services?: string[];
+  services?: Array<{ id: string; title: string; slug?: string }> | string[];
   challenges?: string;
   solutions?: string;
   results?: string;
@@ -61,6 +61,25 @@ export interface ACFFields {
     clientsSatisfied?: number;
     yearsExperience?: number;
   };
+  // Sanity project fields
+  challenge?: string;
+  approach?: string;
+  outcome?: string;
+  scopeOfWork?: Array<{ title: string; desc: string; icon?: unknown }>;
+  testimonial?: string;
+  testimonialAuthor?: string;
+  awards?: boolean;
+  area?: string;
+  projectSize?: string;
+  duration?: string;
+  durationMonths?: string;
+  projectDates?: string;
+  status?: string;
+  challengePoints?: string[];
+  designApproach?: Array<{ icon?: unknown; title: string; desc: string }>;
+  outcomes?: Array<{ value: string; label: string }>;
+  videoUrl?: string;
+  industries?: Array<{ id: string; title: string; slug?: string }>;
 }
 
 export interface Project {

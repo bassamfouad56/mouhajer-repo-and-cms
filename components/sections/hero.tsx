@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import { SafeImage } from '@/components/safe-image';
-import gsap from 'gsap';
-import SplitType from 'split-type';
+import { useRef, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { SafeImage } from "@/components/safe-image";
+import gsap from "gsap";
+import SplitType from "split-type";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -23,8 +23,8 @@ export function Hero() {
     if (!titleRef.current) return;
 
     const split = new SplitType(titleRef.current, {
-      types: 'chars',
-      tagName: 'span',
+      types: "chars",
+      tagName: "span",
     });
 
     gsap.fromTo(
@@ -36,7 +36,7 @@ export function Hero() {
         rotateX: 0,
         stagger: 0.02,
         duration: 1,
-        ease: 'power4.out',
+        ease: "power4.out",
         delay: 1.5,
       }
     );
@@ -48,14 +48,14 @@ export function Hero() {
 
   // Carousel images - Using placeholder until Sanity images are integrated
   const carouselImages = [
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
-    '/placeholder.jpg',
+    "/placeholder.jpg",
+    "/placeholder.jpg",
+    "/placeholder.jpg",
+    "/placeholder.jpg",
+    "/placeholder.jpg",
+    "/placeholder.jpg",
+    "/placeholder.jpg",
+    "/placeholder.jpg",
   ];
 
   return (
@@ -68,25 +68,27 @@ export function Hero() {
       <div className="absolute left-0 top-0 hidden h-full w-48 lg:block xl:w-64">
         {/* Column 1 */}
         <motion.div
-          animate={{ y: ['-100%', '0%'] }}
+          animate={{ y: ["-100%", "0%"] }}
           transition={{
             duration: 40,
             repeat: Infinity,
-            ease: 'linear',
+            ease: "linear",
           }}
           className="flex flex-col gap-6"
         >
-          {[...carouselImages.slice(0, 4), ...carouselImages.slice(0, 4)].map((img, idx) => (
-            <div key={idx} className="relative h-80 w-full overflow-hidden">
-              <SafeImage
-                src={img}
-                alt="Interior Design Project"
-                fill
-                className="object-cover opacity-90 transition-all duration-700 hover:opacity-100 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/30 via-transparent to-transparent" />
-            </div>
-          ))}
+          {[...carouselImages.slice(0, 4), ...carouselImages.slice(0, 4)].map(
+            (img, idx) => (
+              <div key={idx} className="relative h-80 w-full overflow-hidden">
+                <SafeImage
+                  src={img}
+                  alt="Interior Design Project"
+                  fill
+                  className="object-cover opacity-90 transition-all duration-700 hover:opacity-100 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/30 via-transparent to-transparent" />
+              </div>
+            )
+          )}
         </motion.div>
       </div>
 
@@ -94,25 +96,27 @@ export function Hero() {
       <div className="absolute right-0 top-0 hidden h-full w-48 lg:block xl:w-64">
         {/* Column 2 */}
         <motion.div
-          animate={{ y: ['0%', '-100%'] }}
+          animate={{ y: ["0%", "-100%"] }}
           transition={{
             duration: 35,
             repeat: Infinity,
-            ease: 'linear',
+            ease: "linear",
           }}
           className="flex flex-col gap-6"
         >
-          {[...carouselImages.slice(4, 8), ...carouselImages.slice(4, 8)].map((img, idx) => (
-            <div key={idx} className="relative h-80 w-full overflow-hidden">
-              <SafeImage
-                src={img}
-                alt="Interior Design Project"
-                fill
-                className="object-cover opacity-90 transition-all duration-700 hover:opacity-100 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/30 via-transparent to-transparent" />
-            </div>
-          ))}
+          {[...carouselImages.slice(4, 8), ...carouselImages.slice(4, 8)].map(
+            (img, idx) => (
+              <div key={idx} className="relative h-80 w-full overflow-hidden">
+                <SafeImage
+                  src={img}
+                  alt="Interior Design Project"
+                  fill
+                  className="object-cover opacity-90 transition-all duration-700 hover:opacity-100 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/30 via-transparent to-transparent" />
+              </div>
+            )
+          )}
         </motion.div>
       </div>
 
@@ -128,11 +132,29 @@ export function Hero() {
         <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
 
         {/* Decorative corner elements */}
-        <svg className="absolute left-12 top-12 h-32 w-32 opacity-30" viewBox="0 0 100 100">
-          <path d="M 0 0 L 0 100 M 0 0 L 100 0" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-[#c9a962]" />
+        <svg
+          className="absolute left-12 top-12 h-32 w-32 opacity-30"
+          viewBox="0 0 100 100"
+        >
+          <path
+            d="M 0 0 L 0 100 M 0 0 L 100 0"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            fill="none"
+            className="text-[#c9a962]"
+          />
         </svg>
-        <svg className="absolute right-12 bottom-12 h-32 w-32 opacity-30" viewBox="0 0 100 100">
-          <path d="M 100 100 L 100 0 M 100 100 L 0 100" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-[#c9a962]" />
+        <svg
+          className="absolute right-12 bottom-12 h-32 w-32 opacity-30"
+          viewBox="0 0 100 100"
+        >
+          <path
+            d="M 100 100 L 100 0 M 100 100 L 0 100"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            fill="none"
+            className="text-[#c9a962]"
+          />
         </svg>
       </div>
 
@@ -178,8 +200,9 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 1.8 }}
           className="mx-auto mb-12 max-w-2xl text-base font-light leading-relaxed text-neutral-600 sm:text-lg"
         >
-          Transforming visions into extraordinary interiors. Award-winning design
-          studio specializing in luxury residential and commercial spaces.
+          Transforming visions into extraordinary interiors. Award-winning
+          design studio specializing in luxury residential and commercial
+          spaces.
         </motion.p>
 
         {/* CTA Buttons - More refined design studio aesthetic */}
@@ -191,13 +214,13 @@ export function Hero() {
         >
           <a
             href="#projects"
-            className="group relative overflow-hidden border border-[#c9a962] bg-[#c9a962] px-10 py-5 text-xs font-light uppercase tracking-[0.25em] text-white transition-all hover:bg-transparent hover:text-[#c9a962] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2"
+            className="group relative overflow-hidden border border-neutral-950 bg-neutral-950 px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.15em] text-white transition-all hover:bg-transparent hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
           >
             <span className="relative z-10">Explore Portfolio</span>
           </a>
           <a
             href="#contact"
-            className="group relative border-b-2 border-neutral-400 pb-2 text-xs font-light uppercase tracking-[0.25em] text-neutral-600 transition-all hover:border-[#c9a962] hover:text-[#c9a962] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2"
+            className="group relative border border-neutral-950 bg-transparent px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.15em] text-neutral-950 transition-all hover:bg-neutral-950 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
           >
             <span className="relative z-10 flex items-center gap-2">
               Start Your Project
@@ -221,9 +244,9 @@ export function Hero() {
 
             <div className="grid grid-cols-3 gap-12 border-y border-[#c9a962]/20 py-8">
               {[
-                { value: '15+', label: 'Years of Excellence' },
-                { value: '200+', label: 'Completed Projects' },
-                { value: '50+', label: 'Design Awards' },
+                { value: "15+", label: "Years of Excellence" },
+                { value: "200+", label: "Completed Projects" },
+                { value: "50+", label: "Design Awards" },
               ].map((stat, index) => (
                 <div key={index} className="group relative text-center">
                   {/* Vertical divider between stats */}
@@ -250,7 +273,7 @@ export function Hero() {
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center gap-2"
         >
           <span className="text-xs font-light tracking-widest text-[#c9a962]">

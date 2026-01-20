@@ -383,7 +383,7 @@ export function Projects3DCarousel({ projects }: Projects3DCarouselProps) {
         >
           <Link
             href="/projects"
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-white px-10 py-5 text-sm font-medium tracking-widest text-neutral-950 transition-all duration-500 hover:bg-[#c9a962] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+            className="group relative inline-flex items-center gap-3 overflow-hidden border border-white bg-white px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.15em] text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
           >
             VIEW ALL PROJECTS
             <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:rotate-45" strokeWidth={2} />

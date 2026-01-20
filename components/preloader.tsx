@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,15 +26,15 @@ export function Preloader() {
       setProgress(100);
     };
 
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       handleLoad();
     } else {
-      window.addEventListener('load', handleLoad);
+      window.addEventListener("load", handleLoad);
     }
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener('load', handleLoad);
+      window.removeEventListener("load", handleLoad);
     };
   }, []);
 
@@ -50,12 +50,12 @@ export function Preloader() {
   // Prevent scroll during loading
   useEffect(() => {
     if (isLoading) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isLoading]);
 
@@ -80,7 +80,7 @@ export function Preloader() {
             transition={{
               duration: 3,
               repeat: Infinity,
-              ease: 'easeInOut',
+              ease: "easeInOut",
             }}
           />
 
@@ -100,7 +100,7 @@ export function Preloader() {
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                ease: 'easeInOut',
+                ease: "easeInOut",
               }}
             >
               MIDC
@@ -134,7 +134,7 @@ export function Preloader() {
           >
             <motion.div
               className="h-full bg-gradient-to-r from-[#c9a962] to-[#c9a962]/70"
-              initial={{ width: '0%' }}
+              initial={{ width: "0%" }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.1 }}
             />
@@ -166,12 +166,17 @@ export function Preloader() {
           <motion.div
             className="absolute left-[20%] top-1/2 h-px w-20 bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent"
             animate={{ x: [0, 100, 0], opacity: [0, 1, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
             className="absolute right-[20%] top-1/3 h-20 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"
             animate={{ y: [0, 50, 0], opacity: [0, 1, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
           />
         </motion.div>
       )}

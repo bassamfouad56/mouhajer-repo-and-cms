@@ -14,7 +14,7 @@
   --color-charcoal: #262420;
 
   /* Gold Accent */
-  --color-gold: #c9a962;
+  --color-gold: #800080;
   --color-gold-dark: #b8984f;
   --color-gold-light: #d4b978;
 
@@ -40,19 +40,33 @@
 }
 
 .font-Satoshi {
-  font-family: var(--font-Satoshi), "Inter", -apple-system, sans-serif;
+  font-family:
+    var(--font-Satoshi),
+    "Inter",
+    -apple-system,
+    sans-serif;
 }
 
 /* Arabic Font Class */
 .font-arabic {
-  font-family: var(--font-arabic), "Cairo", "Noto Sans Arabic", -apple-system, sans-serif;
+  font-family:
+    var(--font-arabic),
+    "Cairo",
+    "Noto Sans Arabic",
+    -apple-system,
+    sans-serif;
 }
 
 /* RTL Support Styles */
 html[dir="rtl"] body,
 html.rtl body,
 body.font-arabic {
-  font-family: var(--font-arabic), "Cairo", "Noto Sans Arabic", -apple-system, sans-serif;
+  font-family:
+    var(--font-arabic),
+    "Cairo",
+    "Noto Sans Arabic",
+    -apple-system,
+    sans-serif;
 }
 
 /* RTL-specific adjustments */
@@ -63,7 +77,11 @@ html.rtl .font-SchnyderS {
 
 html[dir="rtl"] .font-Satoshi,
 html.rtl .font-Satoshi {
-  font-family: var(--font-arabic), "Cairo", -apple-system, sans-serif;
+  font-family:
+    var(--font-arabic),
+    "Cairo",
+    -apple-system,
+    sans-serif;
 }
 
 /* RTL Layout Utilities */
@@ -195,7 +213,8 @@ html.lenis body {
 }
 
 @keyframes pulse-soft {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {

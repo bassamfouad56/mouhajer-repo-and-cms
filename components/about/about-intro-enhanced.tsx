@@ -1,32 +1,35 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { SafeImage } from '@/components/safe-image';
-import { getProjectPlaceholder } from '@/lib/image-utils';
-import { SVGLineDraw, SVGCircleDraw } from '@/components/animations/svg-line-draw';
-import { RevealText } from '@/components/animations/reveal-text';
-import { MagneticButton } from '@/components/animations/magnetic-button';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import Link from 'next/link';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { SafeImage } from "@/components/safe-image";
+import { getProjectPlaceholder } from "@/lib/image-utils";
+import {
+  SVGLineDraw,
+  SVGCircleDraw,
+} from "@/components/animations/svg-line-draw";
+import { RevealText } from "@/components/animations/reveal-text";
+import { MagneticButton } from "@/components/animations/magnetic-button";
+import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export function AboutIntroEnhanced() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ['10%', '-10%']);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.05]);
   const imageRotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
 
   // Parallax for decorative elements
-  const decorY1 = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const decorY2 = useTransform(scrollYProgress, [0, 1], ['0%', '-20%']);
+  const decorY1 = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const decorY2 = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
 
   return (
     <section
@@ -35,9 +38,7 @@ export function AboutIntroEnhanced() {
     >
       {/* Animated Background Pattern */}
       <div className="absolute inset-0">
-        <motion.div
-          style={{ y: decorY1 }}
-        />
+        <motion.div style={{ y: decorY1 }} />
         {/* Gradient orbs */}
         <motion.div
           className="absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#c9a962]/5 blur-3xl"
@@ -66,7 +67,13 @@ export function AboutIntroEnhanced() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-8 flex items-center gap-4"
             >
-              <SVGLineDraw width={48} height={2} strokeColor="#c9a962" duration={1} delay={0.3} />
+              <SVGLineDraw
+                width={48}
+                height={2}
+                strokeColor="#c9a962"
+                duration={1}
+                delay={0.3}
+              />
               <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
                 Who We Are
               </span>
@@ -106,7 +113,7 @@ export function AboutIntroEnhanced() {
             <motion.div
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
-              transition={{ duration: 1.2, delay: 1.2, ease: 'easeInOut' }}
+              transition={{ duration: 1.2, delay: 1.2, ease: "easeInOut" }}
               className="my-8 h-px w-full origin-left bg-gradient-to-r from-[#c9a962] via-[#c9a962]/30 to-transparent"
             />
 
@@ -201,14 +208,13 @@ export function AboutIntroEnhanced() {
               </div>
             </motion.div>
 
-
             {/* Floating decorative element */}
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 1.4 }}
               animate={{ y: [-10, 10, -10] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -right-8 top-1/4 hidden lg:block"
             >
               <div className="h-16 w-16 rounded-full border-2 border-[#c9a962]/30 bg-white/80 backdrop-blur-sm" />
@@ -226,15 +232,30 @@ export function AboutIntroEnhanced() {
           <div className="mx-auto max-w-5xl">
             {/* Centered luxury divider */}
             <div className="mb-12 flex items-center justify-center gap-4">
-              <SVGLineDraw width={120} height={2} strokeColor="#c9a962" duration={1.5} delay={1} />
+              <SVGLineDraw
+                width={120}
+                height={2}
+                strokeColor="#c9a962"
+                duration={1.5}
+                delay={1}
+              />
               <motion.div
                 initial={{ scale: 0 }}
                 animate={isInView ? { scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: 1.2, type: 'spring' }}
+                transition={{ duration: 0.6, delay: 1.2, type: "spring" }}
               >
-                <Sparkles className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
+                <Sparkles
+                  className="h-5 w-5 text-[#c9a962]"
+                  strokeWidth={1.5}
+                />
               </motion.div>
-              <SVGLineDraw width={120} height={2} strokeColor="#c9a962" duration={1.5} delay={1} />
+              <SVGLineDraw
+                width={120}
+                height={2}
+                strokeColor="#c9a962"
+                duration={1.5}
+                delay={1}
+              />
             </div>
 
             <div className="space-y-8 text-center">
@@ -262,10 +283,10 @@ export function AboutIntroEnhanced() {
               className="mt-16 grid grid-cols-2 gap-6 md:grid-cols-4"
             >
               {[
-                { label: 'Concept Design', icon: '✏️' },
-                { label: 'Luxury Fit-out', icon: '🏗️' },
-                { label: 'MEP Engineering', icon: '⚡' },
-                { label: 'FF&E Procurement', icon: '🪑' },
+                { label: "Concept Design", icon: "✏️" },
+                { label: "Luxury Fit-out", icon: "🏗️" },
+                { label: "MEP Engineering", icon: "⚡" },
+                { label: "FF&E Procurement", icon: "🪑" },
               ].map((item, index) => (
                 <MagneticButton key={index} strength={0.15}>
                   <motion.div
@@ -275,9 +296,7 @@ export function AboutIntroEnhanced() {
                     whileHover={{ scale: 1.05, y: -5 }}
                     className="group relative overflow-hidden border border-neutral-200 bg-white p-6 text-center transition-all duration-300 hover:border-[#c9a962]/30 hover:shadow-xl"
                   >
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-[#c9a962]/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    />
+                    <motion.div className="absolute inset-0 bg-gradient-to-br from-[#c9a962]/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="relative">
                       <div className="mb-3 text-3xl">{item.icon}</div>
                       <div className="font-Satoshi text-sm font-light text-neutral-600">
@@ -324,7 +343,7 @@ function SVGPathDraw({
   path,
   width = 24,
   height = 24,
-  strokeColor = '#c9a962',
+  strokeColor = "#c9a962",
   strokeWidth = 2,
   duration = 1,
   delay = 0,
@@ -341,7 +360,13 @@ function SVGPathDraw({
   const isInView = useInView(ref, { once: true });
 
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} fill="none" ref={ref}>
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      fill="none"
+      ref={ref}
+    >
       <motion.path
         d={path}
         stroke={strokeColor}
@@ -352,7 +377,7 @@ function SVGPathDraw({
         initial={{ pathLength: 0, opacity: 0 }}
         animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
         transition={{
-          pathLength: { duration, delay, ease: 'easeInOut' },
+          pathLength: { duration, delay, ease: "easeInOut" },
           opacity: { duration: 0.3, delay },
         }}
       />

@@ -1,76 +1,103 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { ArrowUpRight, History, Workflow, Award, Users } from 'lucide-react';
-import Link from 'next/link';
-import { SafeImage } from '@/components/safe-image';
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { ArrowUpRight, History, Workflow, Award, Users } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 
 const ecosystemLinks = [
   {
-    id: 'legacy',
+    id: "legacy",
     icon: History,
-    title: 'MIDC Legacy',
-    headline: 'A Vision Built on Integrity',
-    description: 'Discover the journey of Mouhajer International from its inception to becoming one of the UAE\'s most respected contracting firms.',
-    link: '/about/legacy',
-    cta: 'Explore Our Legacy',
-    bgImage: '/founder/CID_2106_00_COVER.jpg',
+    title: "MIDC Legacy",
+    headline: "A Vision Built on Integrity",
+    description:
+      "Discover the journey of Mouhajer International from its inception to becoming one of the UAE's most respected contracting firms.",
+    link: "/about/legacy",
+    cta: "Explore Our Legacy",
+    bgImage: "/team/MID9563.jpg",
   },
   {
-    id: 'workflow',
+    id: "workflow",
     icon: Workflow,
-    title: 'MIDC Workflow',
-    headline: 'Where Design Meets Engineering',
-    description: 'Explore our seamless design-and-build methodology, where in-house designers collaborate directly with engineers.',
-    link: '/about/process',
-    cta: 'View Our Methodology',
-    bgImage: '/founder/CID_2106_00_COVER.jpg',
+    title: "MIDC Workflow",
+    headline: "Where Design Meets Engineering",
+    description:
+      "Explore our seamless design-and-build methodology, where in-house designers collaborate directly with civil engineers and factory technicians.",
+    link: "/about/process",
+    cta: "View Our Methodology",
+    bgImage: "/team/MID9207.jpg",
   },
   {
-    id: 'awards',
+    id: "awards",
     icon: Award,
-    title: 'Awards',
-    headline: 'Celebrated on the Global Stage',
-    description: 'Explore our gallery of achievements, including the Arabian Property Awards for Best Hotel Interior.',
-    link: '/about/awards',
-    cta: 'View Our Awards',
-    bgImage: '/founder/CID_2106_00_COVER.jpg',
+    title: "Awards",
+    headline: "Celebrated on the Global Stage",
+    description:
+      "Explore our gallery of achievements, including the Arabian Property Awards for Best Hotel Interior, Best Construction Company, and more.",
+    link: "/about/awards",
+    cta: "View Our Awards",
+    bgImage: "/founder/CID_2106_00_COVER.jpg",
   },
   {
-    id: 'clients',
+    id: "clients",
     icon: Users,
-    title: 'Clients',
-    headline: 'Trusted by Industry Giants',
-    description: 'Discover the prestigious brands that rely on MIDC for their most critical renovation and construction projects.',
-    link: '/about/clients',
-    cta: 'Meet Our Partners',
-    bgImage: '/founder/CID_2106_00_COVER.jpg',
+    title: "Clients",
+    headline: "Trusted by Industry Giants",
+    description:
+      "Discover the prestigious brands that rely on MIDC for their most critical renovation and construction projects.",
+    link: "/about/clients",
+    cta: "Meet Our Partners",
+    bgImage: "/team/MID8563.jpg",
   },
 ];
 
 export function AboutEcosystem() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#faf8f5] py-28 sm:py-36 lg:py-44"
+      className="relative overflow-hidden py-28 sm:py-36 lg:py-44"
     >
-      {/* Animated background */}
+      {/* Full-bleed background image with parallax */}
+      <motion.div
+        style={{ y: bgY, scale: bgScale }}
+        className="absolute inset-0"
+      >
+        <Image
+          src="/team/MID9207.jpg"
+          alt="MIDC Team"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Elegant overlay */}
+        <div className="absolute inset-0 bg-[#faf8f5]/95" />
+      </motion.div>
+
+      {/* Animated gradient accents */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,98,0.06)_0%,transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,169,98,0.08)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(201,169,98,0.06)_0%,transparent_50%)]" />
         <motion.div
           style={{ y: bgY }}
-          className="absolute -left-1/3 top-1/4 h-[800px] w-[800px] rounded-full bg-[#c9a962]/[0.03] blur-[200px]"
+          className="absolute -left-1/3 top-1/4 h-[800px] w-[800px] rounded-full bg-[#c9a962]/[0.04] blur-[200px]"
+        />
+        <motion.div
+          style={{ y: useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]) }}
+          className="absolute -right-1/4 bottom-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]"
         />
       </div>
 
@@ -130,7 +157,10 @@ export function AboutEcosystem() {
                       <div className="mb-6 flex items-center justify-between">
                         <div className="flex items-center gap-4">
                           <div className="flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10 transition-all duration-500 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/20">
-                            <Icon className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
+                            <Icon
+                              className="h-5 w-5 text-[#c9a962]"
+                              strokeWidth={1.5}
+                            />
                           </div>
                           <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-500 transition-colors duration-300 group-hover:text-neutral-700">
                             {item.title}
@@ -163,7 +193,10 @@ export function AboutEcosystem() {
                         </span>
                         <div className="flex items-center gap-2">
                           <span className="h-px w-8 bg-[#c9a962]/30 transition-all duration-500 group-hover:w-12 group-hover:bg-[#c9a962]" />
-                          <ArrowUpRight className="h-4 w-4 text-[#c9a962]/50 transition-all duration-300 group-hover:text-[#c9a962]" strokeWidth={1.5} />
+                          <ArrowUpRight
+                            className="h-4 w-4 text-[#c9a962]/50 transition-all duration-300 group-hover:text-[#c9a962]"
+                            strokeWidth={1.5}
+                          />
                         </div>
                       </div>
                     </div>

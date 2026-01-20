@@ -37,10 +37,7 @@ export function LuxuryAwardsShowcase({ awards }: LuxuryAwardsShowcaseProps) {
 
   return (
     <>
-      <section
-        ref={sectionRef}
-        className="relative bg-[#faf8f5] py-40"
-      >
+      <section ref={sectionRef} className="relative bg-[#faf8f5] py-40">
         {/* Subtle background pattern */}
 
         <div className="container relative z-10 mx-auto px-6 lg:px-16 xl:px-24">

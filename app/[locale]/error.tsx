@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import Link from 'next/link';
-import { RefreshCw, Home, ArrowLeft } from 'lucide-react';
+import { useEffect } from "react";
+import Link from "next/link";
+import { RefreshCw, Home, ArrowLeft } from "lucide-react";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -12,7 +12,7 @@ interface ErrorProps {
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
     // Log the error to console in development
-    console.error('Page error:', error);
+    console.error("Page error:", error);
   }, [error]);
 
   return (
@@ -38,11 +38,12 @@ export default function Error({ error, reset }: ErrorProps) {
 
         {/* Description */}
         <p className="mx-auto mb-8 max-w-md font-Satoshi text-lg font-light text-white/60">
-          We apologize for the inconvenience. Please try refreshing the page or return to the homepage.
+          We apologize for the inconvenience. Please try refreshing the page or
+          return to the homepage.
         </p>
 
         {/* Error details (only in development) */}
-        {process.env.NODE_ENV === 'development' && error.message && (
+        {process.env.NODE_ENV === "development" && error.message && (
           <div className="mx-auto mb-8 max-w-2xl rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-left">
             <p className="font-Satoshi text-sm text-red-400">
               <strong>Error:</strong> {error.message}

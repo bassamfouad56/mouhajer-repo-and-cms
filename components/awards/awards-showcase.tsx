@@ -1,94 +1,110 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Trophy, Download, ExternalLink, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Trophy, Download, ExternalLink, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const awardsCollections = [
   {
-    id: '2023-2024',
-    year: '2023-2024',
-    title: 'Regional Dominance',
-    description: 'A landmark year for MIDC. We did not just win in Dubai; we were recognized as the best in the entire Arabian region for hospitality design.',
-    organization: 'The International Property Awards (Arabian Region)',
+    id: "2023-2024",
+    year: "2023-2024",
+    title: "Regional Dominance",
+    description:
+      "A landmark year for MIDC. We did not just win in Dubai; we were recognized as the best in the entire Arabian region for hospitality design.",
+    organization: "The International Property Awards (Arabian Region)",
     awards: [
       {
-        trophy: '🏆',
-        title: 'Best Hotel Suite Interior (Arabia)',
-        project: 'Address Boulevard VIP Suite',
-        level: 'Regional Winner',
-        significance: 'This is one of the highest honors in the industry. It acknowledges that the VIP Suite we designed and built is the finest example of luxury hospitality across the entire Arabian Peninsula.',
-        certificate: '/awards/APA - 2023-2024 Best Hotel Suite Interior Arabia - Address Boulevard VIP Suite.pdf',
-        projectSlug: 'address-boulevard-vip-suite',
+        trophy: "🏆",
+        title: "Best Hotel Suite Interior (Arabia)",
+        project: "Address Boulevard VIP Suite",
+        level: "Regional Winner",
+        significance:
+          "This is one of the highest honors in the industry. It acknowledges that the VIP Suite we designed and built is the finest example of luxury hospitality across the entire Arabian Peninsula.",
+        certificate:
+          "/awards/APA - 2023-2024 Best Hotel Suite Interior Arabia - Address Boulevard VIP Suite.pdf",
+        projectSlug: "address-boulevard-vip-suite",
       },
       {
-        trophy: '🏆',
-        title: 'Best Hotel Suite Interior (Dubai)',
-        project: 'Address Boulevard VIP Suite',
-        level: '5-Star Winner',
-        verdict: 'Recognized for its "Uncluttered Baroque" style, blending functional luxury with aesthetic grandeur.',
-        certificate: '/awards/APA - 2023-2024 Best Hotel Suite Interior Dubai - Address Boulevard VIP Suite.pdf',
-        projectSlug: 'address-boulevard-vip-suite',
+        trophy: "🏆",
+        title: "Best Hotel Suite Interior (Dubai)",
+        project: "Address Boulevard VIP Suite",
+        level: "5-Star Winner",
+        verdict:
+          'Recognized for its "Uncluttered Baroque" style, blending functional luxury with aesthetic grandeur.',
+        certificate:
+          "/awards/APA - 2023-2024 Best Hotel Suite Interior Dubai - Address Boulevard VIP Suite.pdf",
+        projectSlug: "address-boulevard-vip-suite",
       },
       {
-        trophy: '🏆',
-        title: 'Best Residential Interior Apartment (Dubai)',
-        project: 'Boulevard Penthouse 70-71',
-        level: '5-Star Winner',
-        verdict: 'Awarded for the immaculate joinery and bespoke furniture that transformed this high-altitude penthouse into a Fendi-inspired sanctuary.',
-        certificate: '/awards/APA - 2023-2024 Best Residential Interior Apartment Dubai - Address Boulevard Penthouse 70-71.pdf',
-        projectSlug: 'boulevard-penthouse-70-71',
+        trophy: "🏆",
+        title: "Best Residential Interior Apartment (Dubai)",
+        project: "Boulevard Penthouse 70-71",
+        level: "5-Star Winner",
+        verdict:
+          "Awarded for the immaculate joinery and bespoke furniture that transformed this high-altitude penthouse into a Fendi-inspired sanctuary.",
+        certificate:
+          "/awards/APA - 2023-2024 Best Residential Interior Apartment Dubai - Address Boulevard Penthouse 70-71.pdf",
+        projectSlug: "boulevard-penthouse-70-71",
       },
     ],
   },
   {
-    id: '2022-2023',
-    year: '2022-2023',
-    title: 'Revitalizing Heritage',
-    description: 'Modernizing iconic landmarks while preserving their soul.',
-    organization: 'The International Property Awards (Arabian Region)',
+    id: "2022-2023",
+    year: "2022-2023",
+    title: "Revitalizing Heritage",
+    description: "Modernizing iconic landmarks while preserving their soul.",
+    organization: "The International Property Awards (Arabian Region)",
     awards: [
       {
-        trophy: '🏆',
-        title: 'Best Hotel Interior (Abu Dhabi)',
-        project: 'Sheraton Abu Dhabi Hotel & Resort',
-        level: '5-Star Winner',
-        challenge: 'To modernize a heritage landmark without losing its soul.',
-        result: 'A complete transformation of the Lobby, VIP Lounge, and Le Bistrot that honors the past while embracing the future.',
-        certificate: '/awards/APA - 2022-2023 Best Hotel Interior Abu Dhabi - Sheraton Abu Dhabi (2).pdf',
-        projectSlug: 'sheraton-abu-dhabi-hotel-resort',
+        trophy: "🏆",
+        title: "Best Hotel Interior (Abu Dhabi)",
+        project: "Sheraton Abu Dhabi Hotel & Resort",
+        level: "5-Star Winner",
+        challenge: "To modernize a heritage landmark without losing its soul.",
+        result:
+          "A complete transformation of the Lobby, VIP Lounge, and Le Bistrot that honors the past while embracing the future.",
+        certificate:
+          "/awards/APA - 2022-2023 Best Hotel Interior Abu Dhabi - Sheraton Abu Dhabi (2).pdf",
+        projectSlug: "sheraton-abu-dhabi-hotel-resort",
       },
     ],
   },
   {
-    id: '2021',
-    year: '2021',
-    title: 'The Triple Crown',
-    description: 'In 2021, we proved our versatility by winning across three distinct categories, cementing our status as a holistic design firm.',
-    organization: 'Luxury Lifestyle Awards',
+    id: "2021",
+    year: "2021",
+    title: "The Triple Crown",
+    description:
+      "In 2021, we proved our versatility by winning across three distinct categories, cementing our status as a holistic design firm.",
+    organization: "Luxury Lifestyle Awards",
     awards: [
       {
-        trophy: '🏆',
-        title: 'The Best Luxury Interior Design Studio (Dubai)',
-        recipient: 'Mouhajer International Design',
-        significance: 'An overall acknowledgement of our studio\'s capability, creativity, and professional reputation in the market.',
-        certificate: '/awards/Luxury Lifestyle - 2021 Certificate of Recognition.pdf',
+        trophy: "🏆",
+        title: "The Best Luxury Interior Design Studio (Dubai)",
+        recipient: "Mouhajer International Design",
+        significance:
+          "An overall acknowledgement of our studio's capability, creativity, and professional reputation in the market.",
+        certificate:
+          "/awards/Luxury Lifestyle - 2021 Certificate of Recognition.pdf",
       },
       {
-        trophy: '🏆',
-        title: 'Best Luxury Hotel Interior Design',
-        project: 'Sofitel Hotel Dubai JBR',
-        scope: 'Recognized for the sophisticated upgrade of public areas, blending French elegance with local culture.',
-        certificate: '/awards/Luxury Lifestyle - 2021 Certificate of Recognition.pdf',
-        projectSlug: 'sofitel-hotel-dubai-jbr',
+        trophy: "🏆",
+        title: "Best Luxury Hotel Interior Design",
+        project: "Sofitel Hotel Dubai JBR",
+        scope:
+          "Recognized for the sophisticated upgrade of public areas, blending French elegance with local culture.",
+        certificate:
+          "/awards/Luxury Lifestyle - 2021 Certificate of Recognition.pdf",
+        projectSlug: "sofitel-hotel-dubai-jbr",
       },
       {
-        trophy: '🏆',
-        title: 'Best Luxury Residential Interior Design',
-        project: 'Private Villa in Dubai',
-        scope: 'A testament to our ability to deliver bespoke, turnkey luxury for private clients who demand absolute discretion and quality.',
-        certificate: '/awards/Luxury Lifestyle - 2021 Certificate of Recognition.pdf',
+        trophy: "🏆",
+        title: "Best Luxury Residential Interior Design",
+        project: "Private Villa in Dubai",
+        scope:
+          "A testament to our ability to deliver bespoke, turnkey luxury for private clients who demand absolute discretion and quality.",
+        certificate:
+          "/awards/Luxury Lifestyle - 2021 Certificate of Recognition.pdf",
       },
     ],
   },
@@ -96,7 +112,7 @@ const awardsCollections = [
 
 export function AwardsShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -111,7 +127,10 @@ export function AwardsShowcase() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
         {/* Collections */}
         {awardsCollections.map((collection, collectionIndex) => (
-          <div key={collection.id} className={collectionIndex > 0 ? 'mt-32 lg:mt-40' : ''}>
+          <div
+            key={collection.id}
+            className={collectionIndex > 0 ? "mt-32 lg:mt-40" : ""}
+          >
             {/* Collection Header */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -128,7 +147,7 @@ export function AwardsShowcase() {
               </div>
 
               <h2 className="mb-4 font-SchnyderS text-3xl font-light text-neutral-900 sm:text-4xl lg:text-5xl">
-                The {collection.year} Collection:{' '}
+                The {collection.year} Collection:{" "}
                 <span className="text-[#c9a962]">{collection.title}</span>
               </h2>
 
@@ -262,12 +281,18 @@ export function AwardsShowcase() {
                           className="group/btn flex items-center justify-between border border-[#c9a962]/20 bg-white/60 px-6 py-4 transition-all hover:border-[#c9a962]/40 hover:bg-white/80"
                         >
                           <div className="flex items-center gap-3">
-                            <Download className="h-5 w-5 text-[#c9a962]" strokeWidth={1.5} />
+                            <Download
+                              className="h-5 w-5 text-[#c9a962]"
+                              strokeWidth={1.5}
+                            />
                             <span className="font-Satoshi text-sm font-light text-neutral-900">
                               View Certificate
                             </span>
                           </div>
-                          <ExternalLink className="h-4 w-4 text-neutral-500 transition-transform group-hover/btn:translate-x-1" strokeWidth={1.5} />
+                          <ExternalLink
+                            className="h-4 w-4 text-neutral-500 transition-transform group-hover/btn:translate-x-1"
+                            strokeWidth={1.5}
+                          />
                         </a>
 
                         {/* View Project */}
@@ -279,7 +304,10 @@ export function AwardsShowcase() {
                             <span className="font-Satoshi text-sm font-light text-[#c9a962]">
                               View Project
                             </span>
-                            <ArrowRight className="h-4 w-4 text-[#c9a962] transition-transform group-hover/btn:translate-x-1" strokeWidth={1.5} />
+                            <ArrowRight
+                              className="h-4 w-4 text-[#c9a962] transition-transform group-hover/btn:translate-x-1"
+                              strokeWidth={1.5}
+                            />
                           </Link>
                         )}
                       </div>
@@ -308,7 +336,8 @@ export function AwardsShowcase() {
             See the Work Behind the Wins
           </h3>
           <p className="mb-10 font-Satoshi text-base font-light text-neutral-600">
-            Don&apos;t just look at the trophies. Explore the projects that earned them.
+            Don&apos;t just look at the trophies. Explore the projects that
+            earned them.
           </p>
 
           <Link
@@ -316,7 +345,10 @@ export function AwardsShowcase() {
             className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-[#c9a962]/90"
           >
             <span>View Our Portfolio</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1} />
+            <ArrowRight
+              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+              strokeWidth={1}
+            />
           </Link>
         </motion.div>
       </div>

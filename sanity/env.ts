@@ -4,14 +4,14 @@ const validApiVersionRegex = /^(1|20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))
 export const apiVersion = validApiVersionRegex.test(rawApiVersion) ? rawApiVersion : '2024-11-21'
 
 // Validate and sanitize dataset - lowercase, numbers, underscores, dashes, max 64 chars
-const rawDataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+const rawDataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'mouhajer-db'
 const validDatasetRegex = /^[a-z0-9_-]{1,64}$/
-export const dataset = validDatasetRegex.test(rawDataset) ? rawDataset : 'production'
+export const dataset = validDatasetRegex.test(rawDataset) ? rawDataset : 'mouhajer-db'
 
 // Validate and sanitize projectId - only allow a-z, 0-9, and dashes
-const rawProjectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'r97logzc'
+const rawProjectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'b6q28exv'
 const validProjectIdRegex = /^[a-z0-9-]+$/
-export const projectId = validProjectIdRegex.test(rawProjectId) ? rawProjectId : 'r97logzc'
+export const projectId = validProjectIdRegex.test(rawProjectId) ? rawProjectId : 'b6q28exv'
 
 export const useCdn = false
 

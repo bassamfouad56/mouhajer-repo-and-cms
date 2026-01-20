@@ -1,42 +1,45 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import { SafeImage } from '@/components/safe-image';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 
 const philosophies = [
   {
-    id: 'london',
-    title: 'The London Discipline',
-    subtitle: 'The Mind',
-    description: 'Great design requires order. Educated in the UK, Eng. Maher applies a strict architectural discipline to every project. This ensures that even the most ornate spaces remain uncluttered and smart. We reject chaos. We embrace logic, flow, and function.',
+    id: "london",
+    title: "The London Discipline",
+    subtitle: "The Mind",
+    description:
+      "Great design requires order. Educated in the UK, Eng. Maher applies a strict architectural discipline to every project. This ensures that even the most ornate spaces remain uncluttered and smart. We reject chaos. We embrace logic, flow, and function.",
   },
   {
-    id: 'arabic',
-    title: 'The Arabic Soul',
-    subtitle: 'The Heart',
-    description: 'Minimalism can often feel cold. We counter this with the warmth of our heritage. We infuse spaces with the texture, grandeur, and hospitality inherent in Arabic culture. This is the "Baroque" influence. It is a love for richness, gold, and detail, but tamed and polished for the modern executive.',
+    id: "arabic",
+    title: "The Arabic Soul",
+    subtitle: "The Heart",
+    description:
+      'Minimalism can often feel cold. We counter this with the warmth of our heritage. We infuse spaces with the texture, grandeur, and hospitality inherent in Arabic culture. This is the "Baroque" influence. It is a love for richness, gold, and detail, but tamed and polished for the modern executive.',
   },
   {
-    id: 'immaculate',
-    title: 'The Immaculate Standard',
-    subtitle: 'The Result',
-    description: 'A design is only as good as its finish. Eng. Maher works with an all-rounded approach. He is obsessed with the final touch. Whether it is the joinery of a private villa or the lobby of a 5-star hotel, the result must be pristine. We create environments that do not just impress guests. They elevate the way they live.',
+    id: "immaculate",
+    title: "The Immaculate Standard",
+    subtitle: "The Result",
+    description:
+      "A design is only as good as its finish. Eng. Maher works with an all-rounded approach. He is obsessed with the final touch. Whether it is the joinery of a private villa or the lobby of a 5-star hotel, the result must be pristine. We create environments that do not just impress guests. They elevate the way they live.",
   },
 ];
 
 export function DualitiesSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ['8%', '-8%']);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
 
   return (
     <section
@@ -47,10 +50,8 @@ export function DualitiesSection() {
       <div className="absolute inset-0 bg-linear-to-b from-neutral-50/50 via-white to-neutral-50/30" />
 
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 lg:px-12 xl:px-16">
-
         {/* Hero Section with Large Founder Image */}
         <div className="mb-32 grid gap-16 lg:grid-cols-12 lg:gap-20 xl:gap-24">
-
           {/* Left: Content */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -73,17 +74,20 @@ export function DualitiesSection() {
 
             <div className="mb-12 space-y-6 font-Satoshi text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
               <p>
-                Eng. Maher Mouhajer does not believe in choosing between the past and the future.
-                His philosophy is built on the conviction that true luxury lies in the contrast.
+                Eng. Maher Mouhajer does not believe in choosing between the
+                past and the future. His philosophy is built on the conviction
+                that true luxury lies in the contrast.
               </p>
               <p className="text-neutral-950">
-                By filtering his opulent Arabic heritage through the lens of his London education,
-                he has created a signature style that is unique to MIDC.
+                By filtering his opulent Arabic heritage through the lens of his
+                London education, he has created a signature style that is
+                unique to MIDC.
               </p>
             </div>
 
             <div className="font-Satoshi text-sm font-light italic text-neutral-400">
-              A design language spoken in two dialects:<br />
+              A design language spoken in two dialects:
+              <br />
               European precision and Arabian warmth.
             </div>
           </motion.div>
@@ -144,11 +148,10 @@ export function DualitiesSection() {
               transition={{
                 duration: 0.8,
                 delay: 0.3 + index * 0.15,
-                ease: [0.22, 1, 0.36, 1]
+                ease: [0.22, 1, 0.36, 1],
               }}
               className="group relative"
             >
-
               {/* Subtitle */}
               <div className="mb-3 font-Satoshi text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
                 {philosophy.subtitle}
@@ -174,7 +177,7 @@ export function DualitiesSection() {
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="relative mb-32 aspect-[21/9] overflow-hidden bg-neutral-100"
         >
@@ -215,12 +218,12 @@ export function DualitiesSection() {
         >
           <div className="mx-auto max-w-4xl">
             <p className="font-SchnyderS text-3xl font-light leading-relaxed text-neutral-950 lg:text-4xl xl:text-5xl">
-              We create spaces where the grandeur of history shakes hands with the clean lines of tomorrow.
+              We create spaces where the grandeur of history shakes hands with
+              the clean lines of tomorrow.
             </p>
             <div className="mx-auto mt-12 h-px w-24 bg-[#c9a962]" />
           </div>
         </motion.div>
-
       </div>
     </section>
   );

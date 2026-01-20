@@ -74,7 +74,9 @@ export function GatedDownload({
   // Inline variant - simple horizontal form
   if (variant === "inline") {
     return (
-      <div className={`rounded-xl border border-neutral-200 bg-white p-4 ${className}`}>
+      <div
+        className={`rounded-xl border border-neutral-200 bg-white p-4 ${className}`}
+      >
         <div className="flex items-center gap-4">
           <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#c9a962]/10">
             <FileText className="h-6 w-6 text-[#c9a962]" />
@@ -91,7 +93,7 @@ export function GatedDownload({
             <a
               href={downloadUrl}
               download
-              className="flex items-center gap-2 rounded-lg bg-[#c9a962] px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-[#c4a030]"
+              className="flex items-center gap-2 border border-neutral-950 bg-neutral-950 px-4 py-2 font-Satoshi text-xs font-medium uppercase tracking-wider text-white transition-all hover:bg-transparent hover:text-neutral-950"
             >
               <Download className="h-4 w-4" />
               Download
@@ -139,12 +141,7 @@ export function GatedDownload({
       {/* Thumbnail */}
       {thumbnailUrl && (
         <div className="relative aspect-[16/9] bg-neutral-100">
-          <Image
-            src={thumbnailUrl}
-            alt={title}
-            fill
-            className="object-cover"
-          />
+          <Image src={thumbnailUrl} alt={title} fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
           {/* File badge */}
@@ -243,7 +240,7 @@ export function GatedDownload({
                 <a
                   href={downloadUrl}
                   download
-                  className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#c9a962] py-3 font-medium text-black transition-colors hover:bg-[#c4a030]"
+                  className="flex flex-1 items-center justify-center gap-2 border border-neutral-950 bg-neutral-950 py-3 font-Satoshi text-xs font-medium uppercase tracking-wider text-white transition-all hover:bg-transparent hover:text-neutral-950"
                 >
                   <Download className="h-5 w-5" />
                   Download Now
@@ -252,7 +249,7 @@ export function GatedDownload({
                   href={downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-lg border border-neutral-200 px-4 py-3 text-neutral-700 transition-colors hover:bg-neutral-50"
+                  className="flex items-center justify-center gap-2 border border-neutral-950 bg-transparent px-4 py-3 font-Satoshi text-xs font-medium uppercase tracking-wider text-neutral-950 transition-all hover:bg-neutral-950 hover:text-white"
                 >
                   <Eye className="h-5 w-5" />
                   Preview

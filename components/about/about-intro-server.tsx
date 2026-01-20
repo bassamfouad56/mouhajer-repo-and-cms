@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import Image from 'next/image';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, useEffect } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Register GSAP plugins
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -22,15 +22,18 @@ interface AboutIntroServerProps {
 
 // Fallback images if no Sanity images available
 const fallbackImages = [
-  { url: '/founder/CID_2106_00_COVER.jpg', alt: 'Commercial Interior Design Magazine Cover' },
-  { url: '/founder/CEO Arabia.jpg', alt: 'CEO Arabia - Founder Feature' },
-  { url: '/founder/Pages from entrepreneur_middle_east_2025_may1_2025__.pdf (1).jpg', alt: 'Entrepreneur Middle East - Founder Feature' },
+  {
+    url: "/founder/CID_2106_00_COVER.jpg",
+    alt: "Commercial Interior Design Magazine Cover",
+  },
+  { url: "/founder/CEO%20Arabia.jpg", alt: "CEO Arabia - Founder Feature" },
+  { url: "/founder/1765530910_27.jpg", alt: "MIDC Project" },
 ];
 
 // Split text into words for reveal effect
 function SplitRevealText({
   text,
-  className = '',
+  className = "",
   highlightWords = [],
 }: {
   text: string;
@@ -42,9 +45,10 @@ function SplitRevealText({
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const words = containerRef.current.querySelectorAll('.word');
+    const words = containerRef.current.querySelectorAll(".word");
 
-    gsap.fromTo(words,
+    gsap.fromTo(
+      words,
       {
         opacity: 0.15,
         y: 0,
@@ -53,31 +57,33 @@ function SplitRevealText({
         opacity: 1,
         y: 0,
         stagger: 0.02,
-        ease: 'power2.out',
+        ease: "power2.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 80%',
-          end: 'bottom 40%',
+          start: "top 80%",
+          end: "bottom 40%",
           scrub: 1,
         },
       }
     );
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
-  const words = text.split(' ');
+  const words = text.split(" ");
 
   return (
     <p ref={containerRef} className={className}>
       {words.map((word, i) => {
-        const isHighlight = highlightWords.some(hw => word.toLowerCase().includes(hw.toLowerCase()));
+        const isHighlight = highlightWords.some((hw) =>
+          word.toLowerCase().includes(hw.toLowerCase())
+        );
         return (
           <span
             key={i}
-            className={`word inline-block mr-[0.25em] ${isHighlight ? 'font-medium text-white' : ''}`}
+            className={`word inline-block mr-[0.25em] ${isHighlight ? "font-medium text-white" : ""}`}
           >
             {word}
           </span>
@@ -94,13 +100,13 @@ function StrokeFillText({ text }: { text: string }) {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 80%', 'end 30%'],
+    offset: ["start 80%", "end 30%"],
   });
 
   const clipPath = useTransform(
     scrollYProgress,
     [0, 1],
-    ['inset(0 100% 0 0)', 'inset(0 0% 0 0)']
+    ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]
   );
 
   return (
@@ -109,8 +115,8 @@ function StrokeFillText({ text }: { text: string }) {
       <span
         className="font-SchnyderS text-4xl font-light leading-[1.3] tracking-tight sm:text-5xl lg:text-6xl"
         style={{
-          WebkitTextStroke: '1px rgba(201, 169, 98, 0.4)',
-          WebkitTextFillColor: 'transparent',
+          WebkitTextStroke: "1px rgba(201, 169, 98, 0.4)",
+          WebkitTextFillColor: "transparent",
         }}
       >
         {text}
@@ -130,17 +136,17 @@ function StrokeFillText({ text }: { text: string }) {
 
 export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const image1Y = useTransform(scrollYProgress, [0, 1], ['15%', '-15%']);
-  const image2Y = useTransform(scrollYProgress, [0, 1], ['-10%', '20%']);
-  const image3Y = useTransform(scrollYProgress, [0, 1], ['20%', '-10%']);
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const image1Y = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"]);
+  const image2Y = useTransform(scrollYProgress, [0, 1], ["-10%", "20%"]);
+  const image3Y = useTransform(scrollYProgress, [0, 1], ["20%", "-10%"]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   // Use fetched images or fallbacks
   const images = projectImages.length >= 3 ? projectImages : fallbackImages;
@@ -157,7 +163,7 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
           className="absolute -left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.02] blur-[150px]"
         />
         <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], ['10%', '-20%']) }}
+          style={{ y: useTransform(scrollYProgress, [0, 1], ["10%", "-20%"]) }}
           className="absolute -right-1/4 bottom-1/4 h-[800px] w-[800px] rounded-full bg-white/[0.01] blur-[200px]"
         />
       </div>
@@ -171,8 +177,8 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
             className="relative h-[130%] -mt-[15%]"
           >
             <Image
-              src={images[0]?.url || ''}
-              alt={images[0]?.alt || 'MIDC Luxury Project'}
+              src={images[0]?.url || ""}
+              alt={images[0]?.alt || "MIDC Luxury Project"}
               fill
               className="object-cover transition-transform duration-[2s] hover:scale-105"
               sizes="33vw"
@@ -198,8 +204,8 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
             className="relative h-[130%] -mt-[15%]"
           >
             <Image
-              src={images[1]?.url || ''}
-              alt={images[1]?.alt || 'MIDC Luxury Project'}
+              src={images[1]?.url || ""}
+              alt={images[1]?.alt || "MIDC Luxury Project"}
               fill
               className="object-cover transition-transform duration-[2s] hover:scale-105"
               sizes="33vw"
@@ -225,8 +231,8 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
             className="relative h-[130%] -mt-[15%]"
           >
             <Image
-              src={images[2]?.url || ''}
-              alt={images[2]?.alt || 'MIDC Luxury Project'}
+              src={images[2]?.url || ""}
+              alt={images[2]?.alt || "MIDC Luxury Project"}
               fill
               className="object-cover transition-transform duration-[2s] hover:scale-105"
               sizes="33vw"
@@ -249,17 +255,15 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
 
         {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/80" />
-
       </div>
 
       {/* Content Section with scroll text reveal */}
       <div className="relative z-10 mx-auto max-w-5xl px-6 py-28 lg:px-12 lg:py-40">
-
         {/* First paragraph with word-by-word reveal */}
         <SplitRevealText
           text="In a market often fragmented by disconnected service providers, MIDC stands apart as a unified force. We bridge the critical gap between architectural design and technical execution. Our philosophy is simple: a design is only as good as its buildability. By integrating luxury interior fit-out, structural construction, and complex MEP engineering services under one roof, we eliminate the friction that typically plagues high-stakes projects."
           className="font-Satoshi text-xl font-light leading-[1.9] text-white/60 lg:text-2xl"
-          highlightWords={['buildability', 'unified', 'luxury']}
+          highlightWords={["buildability", "unified", "luxury"]}
         />
 
         {/* Visual divider with animation */}
@@ -291,7 +295,7 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
         <SplitRevealText
           text="Our portfolio speaks to the diversity of our expertise. Whether we are executing a complex hospitality renovation for a 5-star landmark like the Sheraton Abu Dhabi or managing the ground-up construction of a high-end residential villa in District One, our approach remains the same. We combine aesthetic mastery with rigorous project management excellence. From the initial concept 3D renderings to the final installation of bespoke joinery and FF&E (Furniture, Fixtures, and Equipment), we control every variable to ensure your project is delivered on time, on budget, and to an award-winning standard."
           className="font-Satoshi text-xl font-light leading-[1.9] text-white/60 lg:text-2xl"
-          highlightWords={['Sheraton', 'District One', 'award-winning']}
+          highlightWords={["Sheraton", "District One", "award-winning"]}
         />
 
         {/* Quote section with stroke-fill effect */}
@@ -319,7 +323,9 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
               transition={{ duration: 1, delay: 0.3 }}
               className="mt-10 font-Satoshi text-lg font-light text-white/40 lg:text-xl"
             >
-              When you choose MIDC, you are choosing a design and build firm that values transparency, safety, and the relentless pursuit of perfection.
+              When you choose MIDC, you are choosing a design and build firm
+              that values transparency, safety, and the relentless pursuit of
+              perfection.
             </motion.p>
 
             {/* Closing accent */}

@@ -2,37 +2,38 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { motion, useInView, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Quote, Building2, Hotel, Briefcase } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Quote } from 'lucide-react';
 import { SafeImage } from '@/components/safe-image';
 
 // Partner data with logo support
 interface Partner {
   name: string;
   logo?: string; // Optional - falls back to text if not provided
+  url: string; // Official website URL
 }
 
 const partners: Record<string, Partner[]> = {
   developers: [
-    { name: 'Emaar', logo: '/partners/Layer 792.png' },
-    { name: 'Nakheel', logo: '/partners/Layer 793.png' },
-    { name: 'Meydan', logo: '/partners/meydan-logo.png' },
-    { name: 'Sobha', logo: '/partners/Layer 796.png' },
-    { name: 'Wasl', logo: '/partners/Layer 798.png' },
-    { name: 'Meraas', logo: '/partners/Layer 799.png' },
+    { name: 'Emaar', logo: '/partners/Layer 792.png', url: 'https://www.emaar.com/' },
+    { name: 'Nakheel', logo: '/partners/Layer 793.png', url: 'https://www.nakheel.com/' },
+    { name: 'Meydan', logo: '/partners/meydan-logo.png', url: 'https://www.meydan.ae/' },
+    { name: 'Sobha', logo: '/partners/Layer 796.png', url: 'https://sobharealty.com/' },
+    { name: 'Wasl', logo: '/partners/Layer 798.png', url: 'https://www.wasl.ae/' },
+    { name: 'Meraas', logo: '/partners/Layer 799.png', url: 'https://meraas.com/' },
   ],
   hospitality: [
-    { name: 'Marriott', logo: '/partners/Marriott_International.png' },
-    { name: 'Ritz-Carlton', logo: '/partners/1200px-RitzCarlton.svg.png' },
-    { name: 'Sofitel', logo: '/partners/Sofitel-JBR-Logo-2019-01_white.png' },
-    { name: 'Radisson', logo: '/partners/2880px-Radisson_Blu_logo.svg.png' },
-    { name: 'Hyatt', logo: '/partners/hyatt-logo.png' },
-    { name: 'Sheraton', logo: '/partners/Layer 801.png' },
+    { name: 'Marriott', logo: '/partners/Marriott_International.png', url: 'https://www.marriott.com/' },
+    { name: 'Ritz-Carlton', logo: '/partners/1200px-RitzCarlton.svg.png', url: 'https://www.ritzcarlton.com/' },
+    { name: 'Sofitel', logo: '/partners/Sofitel-JBR-Logo-2019-01_white.png', url: 'https://sofitel.accor.com/' },
+    { name: 'Radisson', logo: '/partners/2880px-Radisson_Blu_logo.svg.png', url: 'https://www.radissonhotels.com/' },
+    { name: 'Hyatt', logo: '/partners/hyatt-logo.png', url: 'https://www.hyatt.com/' },
+    { name: 'Sheraton', logo: '/partners/Layer 801.png', url: 'https://sheraton.marriott.com/' },
   ],
   corporate: [
-    { name: 'DMCC', logo: '/partners/DMCC-logo.png' },
-    { name: 'JLT', logo: '/partners/Layer 816.png' },
-    { name: 'SBK Holding', logo: '/partners/Layer 817.png' },
-    { name: 'ADNH', logo: '/partners/adnh-logo.png' },
+    { name: 'DMCC', logo: '/partners/DMCC-logo.png', url: 'https://dmcc.ae/' },
+    { name: 'JLT', logo: '/partners/Layer 816.png', url: 'https://jlt.ae/' },
+    { name: 'SBK Holding', logo: '/partners/Layer 817.png', url: 'https://www.sbkholding.com/' },
+    { name: 'ADNH', logo: '/partners/adnh-logo.png', url: 'https://www.adnh.com/' },
   ],
 };
 
@@ -70,27 +71,34 @@ const backgroundImages = [
   '/placeholder.jpg',
 ];
 
-// Partner Display Component - Logo with text fallback
+// Partner Display Component - Logo with text fallback, wrapped in external link
 function PartnerLogo({ partner }: { partner: Partner }) {
-  if (partner.logo) {
-    return (
-      <div className="group relative flex h-16 w-28 items-center justify-center overflow-hidden border border-white/10 bg-white/2 p-3 transition-all duration-300 hover:border-[#d4af37]/30 hover:bg-white/5 sm:h-20 sm:w-36 sm:p-4">
-        <SafeImage
-          src={partner.logo}
-          alt={partner.name}
-          width={120}
-          height={60}
-          className="max-h-full w-auto object-contain opacity-70 brightness-0 invert transition-all duration-300 group-hover:opacity-100"
-        />
-      </div>
-    );
-  }
-
-  // Text fallback for partners without logos
-  return (
-    <span className="inline-block border border-white/10 bg-white/[0.02] px-5 py-2.5 font-Satoshi text-sm font-light text-white/70 transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/10 hover:text-white">
+  const content = partner.logo ? (
+    <div className="group relative flex h-16 w-28 items-center justify-center overflow-hidden p-3 transition-all duration-300 sm:h-20 sm:w-36 sm:p-4">
+      <SafeImage
+        src={partner.logo}
+        alt={partner.name}
+        width={120}
+        height={60}
+        className="max-h-full w-auto object-contain opacity-70 brightness-0 invert transition-all duration-300 group-hover:opacity-100"
+      />
+    </div>
+  ) : (
+    <span className="inline-block px-5 py-2.5 font-Satoshi text-sm font-light text-white/70 transition-all duration-300 hover:text-white">
       {partner.name}
     </span>
+  );
+
+  return (
+    <a
+      href={partner.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block transition-transform duration-300 hover:scale-105"
+      aria-label={`Visit ${partner.name} website`}
+    >
+      {content}
+    </a>
   );
 }
 
@@ -106,21 +114,18 @@ export function PartnersSection() {
       key: 'developers',
       label: 'Developers',
       partnerList: partners.developers,
-      icon: Building2,
       description: 'Premier real estate developers shaping the UAE skyline'
     },
     {
       key: 'hospitality',
       label: 'Hospitality',
       partnerList: partners.hospitality,
-      icon: Hotel,
       description: 'World-renowned hotel brands and hospitality groups'
     },
     {
       key: 'corporate',
       label: 'Corporate',
       partnerList: partners.corporate,
-      icon: Briefcase,
       description: 'Leading corporate entities and business groups'
     },
   ];
@@ -130,26 +135,6 @@ export function PartnersSection() {
       ref={sectionRef}
       className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40"
     >
-      {/* Subtle grid pattern */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundSize: '60px 60px',
-        }}
-      />
-
-      {/* Floating orbs - subtle gold accents */}
-      <motion.div
-        className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#d4af37]/[0.05] blur-[150px]"
-        animate={{ y: [0, -40, 0], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute right-[15%] bottom-[20%] h-80 w-80 rounded-full bg-[#d4af37]/[0.03] blur-[120px]"
-        animate={{ y: [0, 50, 0], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-      />
-
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 lg:px-12">
         {/* Header */}
         <div className="mb-16 text-center lg:mb-24">
@@ -157,13 +142,11 @@ export function PartnersSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="mb-6 flex items-center justify-center gap-4"
+            className="mb-6"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
               Strategic Partners
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
           </motion.div>
 
           <motion.h2
@@ -190,64 +173,49 @@ export function PartnersSection() {
 
         {/* Partner Categories */}
         <div className="grid gap-8 md:grid-cols-3 lg:gap-12">
-          {partnerCategories.map((category, categoryIndex) => {
-            const Icon = category.icon;
-            return (
-              <motion.div
-                key={category.key}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.3 + categoryIndex * 0.15 }}
-                className="group relative h-full"
-              >
-                <div className="relative flex h-full flex-col overflow-hidden border border-white/10 bg-white/2 p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#d4af37]/30 hover:bg-white/4 lg:p-10">
-                  {/* Icon and Label */}
-                  <div className="mb-6 flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center border border-[#d4af37]/30 bg-[#d4af37]/10">
-                      <Icon className="h-5 w-5 text-[#d4af37]" strokeWidth={1.5} />
-                    </div>
-                    <div>
-                      <h3 className="font-SchnyderS text-2xl font-light text-white lg:text-3xl">
-                        {category.label}
-                      </h3>
-                      <p className="font-Satoshi text-xs font-light text-white/40">
-                        {category.partnerList.length} Partners
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-white/60">
-                    {category.description}
+          {partnerCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.key}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 + categoryIndex * 0.15 }}
+              className="group relative h-full"
+            >
+              <div className="relative flex h-full flex-col p-8 lg:p-10">
+                {/* Label */}
+                <div className="mb-6">
+                  <h3 className="font-SchnyderS text-2xl font-light text-white lg:text-3xl">
+                    {category.label}
+                  </h3>
+                  <p className="font-Satoshi text-xs font-light text-white/40">
+                    {category.partnerList.length} Partners
                   </p>
-
-                  {/* Partner Logos */}
-                  <div className="flex flex-wrap items-center gap-3">
-                    {category.partnerList.map((partner, index) => (
-                      <motion.div
-                        key={partner.name}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ duration: 0.4, delay: 0.5 + categoryIndex * 0.1 + index * 0.05 }}
-                      >
-                        <PartnerLogo partner={partner} />
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Decorative corners */}
-                  <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-[#d4af37]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-[#d4af37]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
-              </motion.div>
-            );
-          })}
+
+                {/* Description */}
+                <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-white/60">
+                  {category.description}
+                </p>
+
+                {/* Partner Logos */}
+                <div className="flex flex-wrap items-center gap-3">
+                  {category.partnerList.map((partner, index) => (
+                    <motion.div
+                      key={partner.name}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ duration: 0.4, delay: 0.5 + categoryIndex * 0.1 + index * 0.05 }}
+                    >
+                      <PartnerLogo partner={partner} />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
-      {/* Corner decorations */}
-      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-white/5 lg:block" />
-      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-white/5 lg:block" />
     </section>
   );
 }
@@ -421,25 +389,15 @@ export function TestimonialsSection() {
                       </p>
 
                       {/* Author */}
-                      <div className="flex items-center gap-5 border-t border-white/10 pt-8">
-                        <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-[#d4af37]/30">
-                          <SafeImage
-                            src={testimonials[activeTestimonial].image}
-                            alt={testimonials[activeTestimonial].author}
-                            fill
-                            className="object-cover"
-                          />
+                      <div className="border-t border-white/10 pt-8">
+                        <div className="font-SchnyderS text-xl font-light text-white lg:text-2xl">
+                          {testimonials[activeTestimonial].author}
                         </div>
-                        <div>
-                          <div className="font-SchnyderS text-xl font-light text-white lg:text-2xl">
-                            {testimonials[activeTestimonial].author}
-                          </div>
-                          <div className="font-Satoshi text-sm font-light text-white/50">
-                            {testimonials[activeTestimonial].role}
-                          </div>
-                          <div className="font-Satoshi text-sm font-light text-[#d4af37]/70">
-                            {testimonials[activeTestimonial].company}
-                          </div>
+                        <div className="font-Satoshi text-sm font-light text-white/50">
+                          {testimonials[activeTestimonial].role}
+                        </div>
+                        <div className="font-Satoshi text-sm font-light text-[#d4af37]/70">
+                          {testimonials[activeTestimonial].company}
                         </div>
                       </div>
                     </motion.div>

@@ -204,9 +204,43 @@ export default async function ProjectPage({ params }: PageProps) {
   // Get localized values for all text fields
   const projectTitle = getLocalizedValue(project.title, locale, 'Project');
   const projectExcerpt = getLocalizedValue(project.excerpt, locale, '');
-  const projectLocation = getLocalizedValue(project.location, locale, 'Dubai, UAE');
-  const projectCategory = getLocalizedValue(project.category, locale, 'Luxury Development');
+  const projectLocation = project.location?.name
+    ? getLocalizedValue(project.location.name, locale, '')
+    : '';
+  const projectCategory = project.sector?.title
+    ? getLocalizedValue(project.sector.title, locale, '')
+    : project.projectType?.title
+      ? getLocalizedValue(project.projectType.title, locale, '')
+      : '';
   const projectClient = getLocalizedValue(project.client, locale, '');
+  const projectChallenge = getLocalizedValue(project.challenge, locale, '');
+  const projectApproach = getLocalizedValue(project.approach, locale, '');
+  const projectOutcome = getLocalizedValue(project.outcome, locale, '');
+  const projectTestimonial = project.testimonial?.quote
+    ? getLocalizedValue(project.testimonial.quote, locale, '')
+    : '';
+  const projectTestimonialAuthor = project.testimonial?.author || '';
+
+  // Format dates for display
+  const formatProjectDates = () => {
+    if (project.duration?.startDate && project.duration?.endDate) {
+      const startDate = new Date(project.duration.startDate);
+      const endDate = new Date(project.duration.endDate);
+      const startMonth = startDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+      const endMonth = endDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+      return `${startMonth} - ${endMonth}`;
+    }
+    if (project.year) {
+      return String(project.year);
+    }
+    return '';
+  };
+
+  // Transform scope of work from Sanity format
+  const transformedScope = (project.scope || []).map((item: any) => ({
+    title: getLocalizedValue(item.title, locale, ''),
+    desc: getLocalizedValue(item.description, locale, ''),
+  }));
 
   // Transform gallery images from Sanity to the expected format
   const galleryImages = (project.gallery || []).map((img: any) => {
@@ -214,6 +248,8 @@ export default async function ProjectPage({ params }: PageProps) {
     return imageUrl ? {
       sourceUrl: imageUrl,
       altText: getLocalizedValue(img.alt, locale) || projectTitle,
+      category: img.category || 'interior',
+      caption: getLocalizedValue(img.caption, locale) || '',
     } : null;
   }).filter(Boolean);
 
@@ -231,18 +267,7 @@ export default async function ProjectPage({ params }: PageProps) {
     excerpt: projectExcerpt,
     date: project.publishedAt,
     modified: project.publishedAt,
-    content: `
-      <h2>Project Overview</h2>
-      <p>${projectExcerpt || 'A premium project showcasing exceptional design and construction quality.'}</p>
-
-      <h2>Location</h2>
-      <p>${projectLocation}</p>
-
-      <h2>Category</h2>
-      <p>${projectCategory}</p>
-
-      ${projectClient ? `<h2>Client</h2><p>${projectClient}</p>` : ''}
-    `,
+    content: projectExcerpt,
     featuredImage: {
       node: {
         sourceUrl: featuredImageUrl || '',
@@ -250,18 +275,38 @@ export default async function ProjectPage({ params }: PageProps) {
       },
     },
     acfFields: {
+      // Location and type
       location: projectLocation,
       projectType: projectCategory,
+
+      // Project details
       yearCompleted: project.year ? String(project.year) : '',
       client: projectClient,
+      status: project.status === 'in-progress' ? 'Ongoing' : project.status === 'completed' ? 'Completed' : project.status || '',
+      projectDates: formatProjectDates(),
+
+      // Area and duration - only include if they exist
       area: project.area ? String(project.area) : '',
-      scope: '',
-      duration: '',
-      size: '',
-      features: [],
-      challenges: [],
-      results: [],
+      projectSize: project.area ? String(project.area) : '',
+      durationMonths: project.duration?.months ? String(project.duration.months) : '',
+
+      // Content sections from Sanity
+      projectDescription: projectExcerpt,
+      challenge: projectChallenge,
+      approach: projectApproach,
+      outcome: projectOutcome,
+      scopeOfWork: transformedScope,
+      testimonial: projectTestimonial,
+      testimonialAuthor: projectTestimonialAuthor,
+
+      // Awards badge
+      awards: project.featured || (project.tags && project.tags.some((t: any) =>
+        t.slug?.current?.includes('award') || t.title?.en?.toLowerCase().includes('award')
+      )),
+
+      // Gallery images
       gallery: galleryImages,
+
       // Include related services and industries with localized titles
       services: (project.services || []).map((s: any) => ({
         id: s._id,

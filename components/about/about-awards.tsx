@@ -1,51 +1,51 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Trophy, Star, Award } from 'lucide-react';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Trophy, Star, Award } from "lucide-react";
 
 const awards = [
   {
-    year: '2024',
-    title: 'Best Hotel Interior UAE',
-    organization: 'Arabian Property Awards',
-    category: 'Hospitality',
+    year: "2024",
+    title: "Best Hotel Interior UAE",
+    organization: "Arabian Property Awards",
+    category: "Hospitality",
   },
   {
-    year: '2023',
-    title: 'Best Residential Apartment',
-    organization: 'Arabian Property Awards',
-    category: 'Residential',
+    year: "2023",
+    title: "Best Residential Apartment",
+    organization: "Arabian Property Awards",
+    category: "Residential",
   },
   {
-    year: '2023',
-    title: 'Luxury Hospitality Excellence',
-    organization: 'Middle East Design Awards',
-    category: 'Hospitality',
+    year: "2023",
+    title: "Luxury Hospitality Excellence",
+    organization: "Middle East Design Awards",
+    category: "Hospitality",
   },
   {
-    year: '2022',
-    title: 'Construction Excellence',
-    organization: 'Dubai Quality Award',
-    category: 'Construction',
+    year: "2022",
+    title: "Construction Excellence",
+    organization: "Dubai Quality Award",
+    category: "Construction",
   },
   {
-    year: '2021',
-    title: 'Best Interior Design Firm',
-    organization: 'Gulf Design Awards',
-    category: 'Design',
+    year: "2021",
+    title: "Best Interior Design Firm",
+    organization: "Gulf Design Awards",
+    category: "Design",
   },
   {
-    year: '2020',
-    title: 'Innovation in Construction',
-    organization: 'Emirates Construction Awards',
-    category: 'Construction',
+    year: "2020",
+    title: "Innovation in Construction",
+    organization: "Emirates Construction Awards",
+    category: "Construction",
   },
 ];
 
 export function AboutAwards() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -91,8 +91,9 @@ export function AboutAwards() {
               className="flex items-end"
             >
               <p className="max-w-lg font-Satoshi text-base font-light leading-relaxed text-neutral-600">
-                Excellence is not just a promise; it is our track record. Our awards reflect
-                our commitment to delivering exceptional quality in every project we undertake.
+                Excellence is not just a promise; it is our track record. Our
+                awards reflect our commitment to delivering exceptional quality
+                in every project we undertake.
               </p>
             </motion.div>
           </div>
@@ -154,10 +155,10 @@ export function AboutAwards() {
         >
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {[
-              { value: '10+', label: 'International Awards' },
-              { value: '5', label: 'Arabian Property Awards' },
-              { value: '3', label: 'Design Excellence Awards' },
-              { value: '2', label: 'Construction Awards' },
+              { value: "10+", label: "International Awards" },
+              { value: "5", label: "Arabian Property Awards" },
+              { value: "3", label: "Design Excellence Awards" },
+              { value: "2", label: "Construction Awards" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

@@ -1,10 +1,7 @@
 import { Metadata } from 'next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { ClientsHero } from '@/components/clients/clients-hero';
-import { PartnerLogoMarquee } from '@/components/clients/partner-logo-marquee';
-import { FeaturedPartnerships } from '@/components/clients/featured-partnerships';
-import { TestimonialSpotlight } from '@/components/clients/testimonial-spotlight';
+import ClientsPageContent from './clients-page-content';
 import { getFeaturedTestimonials } from '@/sanity/lib/fetch';
 import { client } from '@/sanity/lib/client';
 import { urlForImage } from '@/sanity/lib/image';
@@ -70,19 +67,10 @@ export default async function ClientsPage() {
   return (
     <>
       <Header />
-      <main className="relative bg-neutral-950">
-        {/* Section 1: Hero with Logo Wall Animation */}
-        <ClientsHero heroImage={siteSettings.heroImage || undefined} />
-
-        {/* Section 2: Partner Logo Marquee */}
-        <PartnerLogoMarquee />
-
-        {/* Section 3: Featured Partnerships */}
-        <FeaturedPartnerships />
-
-        {/* Section 4: Testimonials + CTA */}
-        <TestimonialSpotlight testimonials={testimonials} />
-      </main>
+      <ClientsPageContent
+        testimonials={testimonials}
+        heroImage={siteSettings.heroImage || undefined}
+      />
       <Footer />
     </>
   );

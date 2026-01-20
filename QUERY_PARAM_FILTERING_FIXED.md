@@ -18,16 +18,19 @@ Fixed the category filter tabs to use query parameters instead of route redirect
 ## How It Works Now
 
 ### Category Filter Tabs:
+
 - Click "Commercial" → URL changes to: `?filter=commercial`
 - Click "Residential" → URL changes to: `?filter=residential`
 - Click "Hospitality" → URL changes to: `?filter=hospitality`
 - Click "Ongoing" → URL changes to: `?filter=ongoing`
 
 ### Sidebar Filters (Already Working):
+
 - Click "Villa" → Adds: `&types=villa`
 - Click "Dubai" → Adds: `&locations=dubai`
 
 ### Combined Filtering:
+
 - URL can be: `?filter=commercial&types=showroom&locations=dubai`
 - All filters work together client-side
 
@@ -42,6 +45,7 @@ npx tsx scripts/seed-filtering-taxonomy.ts
 ```
 
 This will create:
+
 - ✅ 3 Industries (Residential, Commercial, Hospitality)
 - ✅ 15 Project Types (Villa, Apartment, Hotel, Office, etc.)
 - ✅ 7 UAE Locations (Dubai, Abu Dhabi, Sharjah, etc.)
@@ -86,18 +90,21 @@ While on any category (e.g., `?filter=commercial`):
 ### 5. Test Search
 
 Type in search box:
+
 - ✅ URL should add: `&search=your-query`
 - ✅ Cards should filter based on title, location, category, excerpt
 
 ### 6. Test Direct URLs
 
 You can also navigate directly:
+
 - `http://localhost:4050/en/projects?filter=hospitality`
 - `http://localhost:4050/en/projects?filter=residential&types=villa&locations=dubai`
 
 ## Expected Behavior
 
 ### ✅ What Should Work:
+
 - Category tabs update URL with `?filter=category`
 - Sidebar filters add `&types=...` and `&locations=...`
 - Search adds `&search=...`
@@ -106,6 +113,7 @@ You can also navigate directly:
 - Browser back/forward buttons work
 
 ### ❌ What Won't Work (Until Seeding):
+
 - If you haven't run the seeding script, projects won't have proper sector/projectType/location references
 - Category counts will all show the same number
 - Filters won't properly narrow down results
@@ -167,13 +175,17 @@ Once filtering works:
 ## Summary
 
 **Before:**
+
 - Clicking category tabs redirected to new routes: `/projects/commercial`
 - This caused full page reloads and broke user experience
 
 **After:**
+
 - Clicking category tabs updates query params: `?filter=commercial`
 - No page reload, instant filtering
 - URL is shareable and bookmarkable
 - Works exactly like the journal page pattern you referenced
 
 **All filtering now uses query parameters as requested!** 🎉
+
+#c9a962

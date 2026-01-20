@@ -1,25 +1,31 @@
-'use client';
+"use client";
 
-import { useRef, useState, useMemo, useCallback, useEffect } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import { urlForImage } from '@/sanity/lib/image';
-import { format } from 'date-fns';
-import { Search, X, Clock, Eye, ArrowRight, Play } from 'lucide-react';
+import { useRef, useState, useMemo, useCallback, useEffect } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { urlForImage } from "@/sanity/lib/image";
+import { format } from "date-fns";
+import { Search, X, Clock, Eye, ArrowRight, Play } from "lucide-react";
 
-// Default hero image fallback
-const DEFAULT_HERO_IMAGE = '/founder/CID_2106_00_COVER.jpg';
+// Default hero image fallback - use a high-quality interior/design image
+const DEFAULT_HERO_IMAGE = "/projects/address-boulevard/lounge-CLounge01.jpg";
 
 // Helper to get safe image URL from Sanity
 function getSafeImageUrl(image: any, width: number, height: number): string {
-  if (!image) return '';
+  if (!image) return "";
   try {
     const url = urlForImage(image)?.width(width).height(height).url();
-    return url || '';
+    return url || "";
   } catch {
-    return '';
+    return "";
   }
 }
 
@@ -51,13 +57,69 @@ interface JournalPageContentProps {
 }
 
 const CATEGORIES = [
-  { value: 'all', label: 'All', color: { bg: 'bg-neutral-950', text: 'text-white', border: 'border-neutral-950' } },
-  { value: 'design-trends', label: 'Design Trends', color: { bg: 'bg-[#c9a962]/10', text: 'text-[#c9a962]', border: 'border-[#c9a962]/30' } },
-  { value: 'project-stories', label: 'Project Stories', color: { bg: 'bg-blue-500/10', text: 'text-blue-600', border: 'border-blue-500/30' } },
-  { value: 'behind-the-scenes', label: 'Behind the Scenes', color: { bg: 'bg-green-500/10', text: 'text-green-600', border: 'border-green-500/30' } },
-  { value: 'materials-craft', label: 'Materials & Craft', color: { bg: 'bg-purple-500/10', text: 'text-purple-600', border: 'border-purple-500/30' } },
-  { value: 'engineering', label: 'Engineering', color: { bg: 'bg-orange-500/10', text: 'text-orange-600', border: 'border-orange-500/30' } },
-  { value: 'founders-insights', label: "Founder's Insights", color: { bg: 'bg-rose-500/10', text: 'text-rose-600', border: 'border-rose-500/30' } }
+  {
+    value: "all",
+    label: "All",
+    color: {
+      bg: "bg-neutral-950",
+      text: "text-white",
+      border: "border-neutral-950",
+    },
+  },
+  {
+    value: "design-trends",
+    label: "Design Trends",
+    color: {
+      bg: "bg-[#c9a962]/10",
+      text: "text-[#c9a962]",
+      border: "border-[#c9a962]/30",
+    },
+  },
+  {
+    value: "project-stories",
+    label: "Project Stories",
+    color: {
+      bg: "bg-blue-500/10",
+      text: "text-blue-600",
+      border: "border-blue-500/30",
+    },
+  },
+  {
+    value: "behind-the-scenes",
+    label: "Behind the Scenes",
+    color: {
+      bg: "bg-green-500/10",
+      text: "text-green-600",
+      border: "border-green-500/30",
+    },
+  },
+  {
+    value: "materials-craft",
+    label: "Materials & Craft",
+    color: {
+      bg: "bg-purple-500/10",
+      text: "text-purple-600",
+      border: "border-purple-500/30",
+    },
+  },
+  {
+    value: "engineering",
+    label: "Engineering",
+    color: {
+      bg: "bg-orange-500/10",
+      text: "text-orange-600",
+      border: "border-orange-500/30",
+    },
+  },
+  {
+    value: "founders-insights",
+    label: "Founder's Insights",
+    color: {
+      bg: "bg-rose-500/10",
+      text: "text-rose-600",
+      border: "border-rose-500/30",
+    },
+  },
 ];
 
 // Helper to calculate reading time
@@ -80,14 +142,14 @@ function formatViews(count: number): string {
 
 // Get category color config
 function getCategoryColor(category: string) {
-  const cat = CATEGORIES.find(c => c.value === category);
+  const cat = CATEGORIES.find((c) => c.value === category);
   return cat?.color || CATEGORIES[0].color;
 }
 
 export default function JournalPageContent({
   posts,
-  currentCategory: initialCategory = 'all',
-  locale
+  currentCategory: initialCategory = "all",
+  locale,
 }: JournalPageContentProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -96,19 +158,20 @@ export default function JournalPageContent({
   const isHeroInView = useInView(heroRef, { once: true });
 
   // Check if we're on a category-specific page (not the main /journal page)
-  const isOnCategoryPage = pathname?.includes('/journal/') && !pathname?.endsWith('/journal');
+  const isOnCategoryPage =
+    pathname?.includes("/journal/") && !pathname?.endsWith("/journal");
 
   // State for filters - initialize from URL params
   const [currentCategory, setCurrentCategory] = useState(() => {
-    const categoryFromUrl = searchParams.get('category');
+    const categoryFromUrl = searchParams.get("category");
     return categoryFromUrl || initialCategory;
   });
   const [selectedTags, setSelectedTags] = useState<string[]>(() => {
-    const tagsParam = searchParams.get('tags');
-    return tagsParam ? tagsParam.split(',') : [];
+    const tagsParam = searchParams.get("tags");
+    return tagsParam ? tagsParam.split(",") : [];
   });
   const [searchQuery, setSearchQuery] = useState(() => {
-    return searchParams.get('search') || '';
+    return searchParams.get("search") || "";
   });
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(9);
@@ -116,31 +179,34 @@ export default function JournalPageContent({
   // Parallax for hero
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   // Update URL when filters change (without page reload)
-  const updateUrl = useCallback((category: string, tags: string[], search: string) => {
-    const params = new URLSearchParams();
+  const updateUrl = useCallback(
+    (category: string, tags: string[], search: string) => {
+      const params = new URLSearchParams();
 
-    if (category && category !== 'all') {
-      params.set('category', category);
-    }
-    if (tags.length > 0) {
-      params.set('tags', tags.join(','));
-    }
-    if (search) {
-      params.set('search', search);
-    }
+      if (category && category !== "all") {
+        params.set("category", category);
+      }
+      if (tags.length > 0) {
+        params.set("tags", tags.join(","));
+      }
+      if (search) {
+        params.set("search", search);
+      }
 
-    const queryString = params.toString();
-    const newUrl = `/${locale}/journal${queryString ? `?${queryString}` : ''}`;
+      const queryString = params.toString();
+      const newUrl = `/${locale}/journal${queryString ? `?${queryString}` : ""}`;
 
-    // Update URL without page reload
-    window.history.replaceState({}, '', newUrl);
-  }, [locale]);
+      // Update URL without page reload
+      window.history.replaceState({}, "", newUrl);
+    },
+    [locale]
+  );
 
   // Sync URL when filters change
   useEffect(() => {
@@ -150,35 +216,38 @@ export default function JournalPageContent({
   // Extract all unique tags from posts (with null-safe handling)
   const allTags = useMemo(() => {
     const tagMap = new Map<string, Tag>();
-    posts.forEach(post => {
-      post.tags?.forEach(tag => {
+    posts.forEach((post) => {
+      post.tags?.forEach((tag) => {
         if (tag && tag._id && !tagMap.has(tag._id)) {
           // Use tag name with fallback to slug if name is missing
           const tagWithName = {
             ...tag,
-            name: tag.name || tag.slug?.current || 'Unknown'
+            name: tag.name || tag.slug?.current || "Unknown",
           };
           tagMap.set(tag._id, tagWithName);
         }
       });
     });
     return Array.from(tagMap.values()).sort((a, b) =>
-      (a.name || '').localeCompare(b.name || '')
+      (a.name || "").localeCompare(b.name || "")
     );
   }, [posts]);
 
   // Filter posts
   const filteredPosts = useMemo(() => {
-    return posts.filter(post => {
+    return posts.filter((post) => {
       // Category filter
-      if (currentCategory !== 'all' && post.category !== currentCategory) {
+      if (currentCategory !== "all" && post.category !== currentCategory) {
         return false;
       }
 
       // Tag filter
       if (selectedTags.length > 0) {
-        const postTagIds = post.tags?.map(t => t._id) || [];
-        const hasAllTags = selectedTags.every(tagId => postTagIds.includes(tagId));
+        const postTagIds =
+          post.tags?.filter((t) => t && t._id).map((t) => t._id) || [];
+        const hasAllTags = selectedTags.every((tagId) =>
+          postTagIds.includes(tagId)
+        );
         if (!hasAllTags) return false;
       }
 
@@ -186,8 +255,8 @@ export default function JournalPageContent({
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const matchesSearch =
-          (post.title || '').toLowerCase().includes(query) ||
-          (post.excerpt || '').toLowerCase().includes(query);
+          (post.title || "").toLowerCase().includes(query) ||
+          (post.excerpt || "").toLowerCase().includes(query);
         if (!matchesSearch) return false;
       }
 
@@ -198,16 +267,23 @@ export default function JournalPageContent({
   // Separate featured and regular posts
   // Only separate into featured/secondary/regular when NO filters are active
   // When any filter is active (category, tags, or search), show all results in the grid
-  const hasActiveFilters = currentCategory !== 'all' || selectedTags.length > 0 || searchQuery.trim() !== '';
+  const hasActiveFilters =
+    currentCategory !== "all" ||
+    selectedTags.length > 0 ||
+    searchQuery.trim() !== "";
   const shouldSeparateFeatured = !hasActiveFilters && filteredPosts.length > 3;
 
   const featuredPost = shouldSeparateFeatured
-    ? (filteredPosts.find(p => p.featured) || filteredPosts[0])
+    ? filteredPosts.find((p) => p.featured) || filteredPosts[0]
     : null;
-  const secondaryFeatured = shouldSeparateFeatured ? filteredPosts.slice(1, 3) : [];
+  const secondaryFeatured = shouldSeparateFeatured
+    ? filteredPosts.slice(1, 3)
+    : [];
   const regularPosts = shouldSeparateFeatured
     ? filteredPosts.filter(
-        p => p._id !== featuredPost?._id && !secondaryFeatured.find(sf => sf._id === p._id)
+        (p) =>
+          p._id !== featuredPost?._id &&
+          !secondaryFeatured.find((sf) => sf._id === p._id)
       )
     : filteredPosts; // Show all posts in grid when filters are active
   const visiblePosts = regularPosts.slice(0, visibleCount);
@@ -215,9 +291,9 @@ export default function JournalPageContent({
 
   // Handle tag toggle
   const toggleTag = (tagId: string) => {
-    setSelectedTags(prev =>
+    setSelectedTags((prev) =>
       prev.includes(tagId)
-        ? prev.filter(id => id !== tagId)
+        ? prev.filter((id) => id !== tagId)
         : [...prev, tagId]
     );
   };
@@ -230,9 +306,9 @@ export default function JournalPageContent({
       return;
     }
 
-    setCurrentCategory('all');
+    setCurrentCategory("all");
     setSelectedTags([]);
-    setSearchQuery('');
+    setSearchQuery("");
     setVisibleCount(9);
   };
 
@@ -242,11 +318,11 @@ export default function JournalPageContent({
     // navigate to the main journal page with the filter applied
     if (isOnCategoryPage) {
       const params = new URLSearchParams();
-      if (category !== 'all') {
-        params.set('category', category);
+      if (category !== "all") {
+        params.set("category", category);
       }
       const queryString = params.toString();
-      router.push(`/${locale}/journal${queryString ? `?${queryString}` : ''}`);
+      router.push(`/${locale}/journal${queryString ? `?${queryString}` : ""}`);
       return;
     }
 
@@ -257,7 +333,7 @@ export default function JournalPageContent({
 
   // Load more posts
   const loadMore = () => {
-    setVisibleCount(prev => prev + 9);
+    setVisibleCount((prev) => prev + 9);
   };
 
   return (
@@ -281,7 +357,10 @@ export default function JournalPageContent({
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
-                <Search size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/40" />
+                <Search
+                  size={24}
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-white/40"
+                />
                 <input
                   type="text"
                   placeholder="Search articles, topics, insights..."
@@ -300,7 +379,13 @@ export default function JournalPageContent({
 
               {/* Quick search suggestions */}
               <div className="mt-8 flex flex-wrap gap-3">
-                {['Interior Design', 'Luxury Villas', 'Fit-Out', 'MEP Engineering', 'Hospitality'].map((term) => (
+                {[
+                  "Interior Design",
+                  "Luxury Villas",
+                  "Fit-Out",
+                  "MEP Engineering",
+                  "Hospitality",
+                ].map((term) => (
                   <button
                     key={term}
                     onClick={() => {
@@ -319,12 +404,20 @@ export default function JournalPageContent({
       </AnimatePresence>
 
       {/* Cinematic Hero Section */}
-      <section ref={heroRef} className="relative min-h-[90vh] bg-neutral-950">
+      <section
+        ref={heroRef}
+        className="relative min-h-screen bg-neutral-950 pt-24 lg:pt-28"
+      >
         {/* Background Image with Parallax */}
         <motion.div style={{ y: imageY }} className="absolute inset-0">
           <Image
-            src={featuredPost?.mainImage ? getSafeImageUrl(featuredPost.mainImage, 1920, 1080) || DEFAULT_HERO_IMAGE : DEFAULT_HERO_IMAGE}
-            alt={featuredPost?.title || 'Journal'}
+            src={
+              featuredPost?.mainImage
+                ? getSafeImageUrl(featuredPost.mainImage, 1920, 1080) ||
+                  DEFAULT_HERO_IMAGE
+                : DEFAULT_HERO_IMAGE
+            }
+            alt={featuredPost?.title || "Journal"}
             fill
             className="object-cover transition-all duration-1000"
             priority
@@ -338,17 +431,18 @@ export default function JournalPageContent({
         {/* Animated Grain Effect */}
         <motion.div
           className="absolute inset-0 opacity-[0.03]"
-          animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+          animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
           style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
           }}
         />
 
         {/* Content */}
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 flex min-h-[90vh] items-end px-6 py-24 lg:px-24"
+          className="relative z-10 flex min-h-[70vh] items-end px-6 pb-24 pt-12 lg:px-24"
         >
           <div className="max-w-3xl">
             {featuredPost ? (
@@ -361,8 +455,11 @@ export default function JournalPageContent({
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className="mb-6"
                   >
-                    <span className={`inline-block rounded-full border px-5 py-2 font-Satoshi text-xs uppercase tracking-wider backdrop-blur-sm ${getCategoryColor(featuredPost.category).bg} ${getCategoryColor(featuredPost.category).text} ${getCategoryColor(featuredPost.category).border}`}>
-                      {CATEGORIES.find(c => c.value === featuredPost.category)?.label || featuredPost.category}
+                    <span
+                      className={`inline-block rounded-full border px-5 py-2 font-Satoshi text-xs uppercase tracking-wider backdrop-blur-sm ${getCategoryColor(featuredPost.category).bg} ${getCategoryColor(featuredPost.category).text} ${getCategoryColor(featuredPost.category).border}`}
+                    >
+                      {CATEGORIES.find((c) => c.value === featuredPost.category)
+                        ?.label || featuredPost.category}
                     </span>
                   </motion.div>
                 )}
@@ -375,18 +472,28 @@ export default function JournalPageContent({
                   className="mb-6 flex flex-wrap items-center gap-6 font-Satoshi text-sm font-light text-white/60"
                 >
                   {featuredPost.publishedAt && (
-                    <span>{format(new Date(featuredPost.publishedAt), 'MMMM d, yyyy')}</span>
+                    <span>
+                      {format(
+                        new Date(featuredPost.publishedAt),
+                        "MMMM d, yyyy"
+                      )}
+                    </span>
                   )}
                   <span className="flex items-center gap-2">
                     <Clock size={14} />
-                    {calculateReadingTime(featuredPost.excerpt, featuredPost.readTime)} min read
+                    {calculateReadingTime(
+                      featuredPost.excerpt,
+                      featuredPost.readTime
+                    )}{" "}
+                    min read
                   </span>
-                  {featuredPost.viewCount !== undefined && featuredPost.viewCount > 0 && (
-                    <span className="flex items-center gap-2">
-                      <Eye size={14} />
-                      {formatViews(featuredPost.viewCount)} views
-                    </span>
-                  )}
+                  {featuredPost.viewCount !== undefined &&
+                    featuredPost.viewCount > 0 && (
+                      <span className="flex items-center gap-2">
+                        <Eye size={14} />
+                        {formatViews(featuredPost.viewCount)} views
+                      </span>
+                    )}
                 </motion.div>
 
                 {/* Title */}
@@ -395,7 +502,9 @@ export default function JournalPageContent({
                   animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 1, delay: 0.5 }}
                 >
-                  <Link href={`/${locale}/journal/${featuredPost.category || 'design-trends'}/${featuredPost.slug?.current || 'article'}`}>
+                  <Link
+                    href={`/${locale}/journal/${featuredPost.category || "design-trends"}/${featuredPost.slug?.current || "article"}`}
+                  >
                     <h1 className="mb-8 font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white transition-colors duration-500 hover:text-[#c9a962] sm:text-6xl lg:text-7xl">
                       {featuredPost.title}
                     </h1>
@@ -421,11 +530,14 @@ export default function JournalPageContent({
                   transition={{ duration: 0.8, delay: 0.7 }}
                 >
                   <Link
-                    href={`/${locale}/journal/${featuredPost.category || 'design-trends'}/${featuredPost.slug?.current || 'article'}`}
+                    href={`/${locale}/journal/${featuredPost.category || "design-trends"}/${featuredPost.slug?.current || "article"}`}
                     className="group/link inline-flex items-center gap-4 border border-white/30 px-8 py-4 font-Satoshi text-sm uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962] hover:text-neutral-950"
                   >
                     <span>Read Full Article</span>
-                    <ArrowRight size={16} className="transition-transform group-hover/link:translate-x-2" />
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover/link:translate-x-2"
+                    />
                   </Link>
                 </motion.div>
               </>
@@ -460,7 +572,9 @@ export default function JournalPageContent({
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="mb-10 max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-white/70"
                 >
-                  Explore our thoughts on design, architecture, and the stories behind our most ambitious projects. From industry trends to behind-the-scenes insights.
+                  Explore our thoughts on design, architecture, and the stories
+                  behind our most ambitious projects. From industry trends to
+                  behind-the-scenes insights.
                 </motion.p>
 
                 <motion.div
@@ -473,7 +587,10 @@ export default function JournalPageContent({
                     className="group/link inline-flex items-center gap-4 border border-white/30 px-8 py-4 font-Satoshi text-sm uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962] hover:text-neutral-950"
                   >
                     <span>Get in Touch</span>
-                    <ArrowRight size={16} className="transition-transform group-hover/link:translate-x-2" />
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover/link:translate-x-2"
+                    />
                   </Link>
                 </motion.div>
               </>
@@ -483,7 +600,7 @@ export default function JournalPageContent({
 
         {/* Featured Badge - only show if there's a featured post */}
         {featuredPost && (
-          <div className="absolute right-12 top-32 z-10">
+          <div className="absolute right-6 top-4 z-10 lg:right-12 lg:top-8">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isHeroInView ? { opacity: 1, scale: 1 } : {}}
@@ -491,32 +608,34 @@ export default function JournalPageContent({
               className="flex items-center gap-3 bg-[#c9a962] px-6 py-3"
             >
               <Play size={14} className="fill-current" />
-              <span className="font-Satoshi text-xs uppercase tracking-wider text-neutral-950">Featured</span>
+              <span className="font-Satoshi text-xs uppercase tracking-wider text-neutral-950">
+                Featured
+              </span>
             </motion.div>
           </div>
         )}
 
         {/* Corner Accents */}
-        <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#c9a962]/20" />
-        <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#c9a962]/20" />
+        <div className="absolute left-6 top-4 h-20 w-20 border-l border-t border-[#c9a962]/20 lg:left-8 lg:top-8 lg:h-24 lg:w-24" />
+        <div className="absolute bottom-24 right-6 h-20 w-20 border-b border-r border-[#c9a962]/20 lg:bottom-32 lg:right-8 lg:h-24 lg:w-24" />
       </section>
 
       {/* Category Filter Bar */}
-      <section className="sticky top-20 z-30 border-b border-neutral-200 bg-white/95 backdrop-blur-md lg:top-24">
+      <section className="sticky top-20 z-20 border-b border-neutral-200 bg-white/95 backdrop-blur-md lg:top-24">
         <div className="mx-auto max-w-[1800px] px-6 py-5 lg:px-12">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex flex-wrap items-center gap-2">
               <span className="mr-3 font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-400">
                 Filter:
               </span>
-              {CATEGORIES.map(cat => (
+              {CATEGORIES.map((cat) => (
                 <button
                   key={cat.value}
                   onClick={() => handleCategoryChange(cat.value)}
                   className={`rounded-full px-5 py-2 font-Satoshi text-xs uppercase tracking-wider transition-all duration-300 ${
                     currentCategory === cat.value
                       ? `${cat.color.bg} ${cat.color.text} border ${cat.color.border}`
-                      : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950'
+                      : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950"
                   }`}
                 >
                   {cat.label}
@@ -532,7 +651,8 @@ export default function JournalPageContent({
                 <Search size={16} />
               </button>
               <span className="font-Satoshi text-xs font-light text-neutral-400">
-                {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'}
+                {filteredPosts.length}{" "}
+                {filteredPosts.length === 1 ? "article" : "articles"}
               </span>
             </div>
           </div>
@@ -569,7 +689,12 @@ export default function JournalPageContent({
 
             <div className="grid gap-8 md:grid-cols-2">
               {secondaryFeatured.map((post, index) => (
-                <SecondaryFeaturedCard key={post._id} post={post} index={index} locale={locale} />
+                <SecondaryFeaturedCard
+                  key={post._id}
+                  post={post}
+                  index={index}
+                  locale={locale}
+                />
               ))}
             </div>
           </div>
@@ -577,7 +702,10 @@ export default function JournalPageContent({
       )}
 
       {/* Main Content with Sidebar */}
-      <section id="all-articles" className="relative bg-neutral-50 px-6 py-24 lg:px-12">
+      <section
+        id="all-articles"
+        className="relative bg-neutral-50 px-6 py-24 lg:px-12"
+      >
         <div className="mx-auto max-w-[1800px]">
           <div className="grid gap-12 lg:grid-cols-[280px_1fr]">
             {/* Filters Sidebar */}
@@ -598,7 +726,7 @@ export default function JournalPageContent({
                   />
                   {searchQuery && (
                     <button
-                      onClick={() => setSearchQuery('')}
+                      onClick={() => setSearchQuery("")}
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
                     >
                       <X size={14} />
@@ -614,9 +742,9 @@ export default function JournalPageContent({
                     Topics
                   </h3>
                   <div className="space-y-2">
-                    {allTags.map(tag => {
-                      const count = posts.filter(p =>
-                        p.tags?.some(t => t._id === tag._id)
+                    {allTags.map((tag) => {
+                      const count = posts.filter((p) =>
+                        p.tags?.some((t) => t && t._id === tag._id)
                       ).length;
                       const isSelected = selectedTags.includes(tag._id);
 
@@ -626,12 +754,14 @@ export default function JournalPageContent({
                           onClick={() => toggleTag(tag._id)}
                           className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm transition-all ${
                             isSelected
-                              ? 'bg-[#c9a962]/10 text-[#c9a962]'
-                              : 'text-neutral-600 hover:bg-neutral-50'
+                              ? "bg-[#c9a962]/10 text-[#c9a962]"
+                              : "text-neutral-600 hover:bg-neutral-50"
                           }`}
                         >
                           <span>{tag.name}</span>
-                          <span className={`text-xs ${isSelected ? 'text-[#c9a962]' : 'text-neutral-400'}`}>
+                          <span
+                            className={`text-xs ${isSelected ? "text-[#c9a962]" : "text-neutral-400"}`}
+                          >
                             {count}
                           </span>
                         </button>
@@ -663,8 +793,8 @@ export default function JournalPageContent({
 
                   <AnimatePresence mode="popLayout">
                     {/* Tag Chips */}
-                    {selectedTags.map(tagId => {
-                      const tag = allTags.find(t => t._id === tagId);
+                    {selectedTags.map((tagId) => {
+                      const tag = allTags.find((t) => t._id === tagId);
                       if (!tag) return null;
 
                       return (
@@ -685,7 +815,10 @@ export default function JournalPageContent({
                             className="flex items-center justify-center rounded-full transition-colors hover:bg-[#c9a962]/10"
                             aria-label={`Remove ${tag.name} filter`}
                           >
-                            <X className="h-3 w-3 text-neutral-500 transition-colors group-hover:text-[#c9a962]" strokeWidth={2.5} />
+                            <X
+                              className="h-3 w-3 text-neutral-500 transition-colors group-hover:text-[#c9a962]"
+                              strokeWidth={2.5}
+                            />
                           </button>
                         </motion.div>
                       );
@@ -706,11 +839,14 @@ export default function JournalPageContent({
                           Search: &quot;{searchQuery}&quot;
                         </span>
                         <button
-                          onClick={() => setSearchQuery('')}
+                          onClick={() => setSearchQuery("")}
                           className="flex items-center justify-center rounded-full transition-colors hover:bg-[#c9a962]/10"
                           aria-label="Clear search"
                         >
-                          <X className="h-3 w-3 text-neutral-500 transition-colors group-hover:text-[#c9a962]" strokeWidth={2.5} />
+                          <X
+                            className="h-3 w-3 text-neutral-500 transition-colors group-hover:text-[#c9a962]"
+                            strokeWidth={2.5}
+                          />
                         </button>
                       </motion.div>
                     )}
@@ -733,7 +869,12 @@ export default function JournalPageContent({
                 <>
                   <div className="grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
                     {visiblePosts.map((post, index) => (
-                      <PostCard key={post._id} post={post} index={index} locale={locale} />
+                      <PostCard
+                        key={post._id}
+                        post={post}
+                        index={index}
+                        locale={locale}
+                      />
                     ))}
                   </div>
 
@@ -746,13 +887,16 @@ export default function JournalPageContent({
                       className="mt-20 flex flex-col items-center gap-4"
                     >
                       <span className="font-Satoshi text-sm font-light text-neutral-400">
-                        Showing {visiblePosts.length} of {regularPosts.length} articles
+                        Showing {visiblePosts.length} of {regularPosts.length}{" "}
+                        articles
                       </span>
                       <button
                         onClick={loadMore}
                         className="group relative overflow-hidden border border-neutral-950 px-12 py-5 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:text-white"
                       >
-                        <span className="relative z-10">Load More Articles</span>
+                        <span className="relative z-10">
+                          Load More Articles
+                        </span>
                         <div className="absolute inset-0 -translate-x-full bg-neutral-950 transition-transform duration-500 group-hover:translate-x-0" />
                       </button>
                     </motion.div>
@@ -770,7 +914,7 @@ export default function JournalPageContent({
                   <p className="mb-8 font-Satoshi text-lg font-light text-neutral-500">
                     {searchQuery
                       ? `No articles match "${searchQuery}". Try a different search term.`
-                      : 'Try selecting a different category or adjusting your filters.'}
+                      : "Try selecting a different category or adjusting your filters."}
                   </p>
                   <button
                     onClick={clearFilters}
@@ -790,7 +934,12 @@ export default function JournalPageContent({
         {/* Background Image with Parallax Effect */}
         <div className="absolute inset-0">
           <Image
-            src={featuredPost?.mainImage ? getSafeImageUrl(featuredPost.mainImage, 1920, 1080) || DEFAULT_HERO_IMAGE : DEFAULT_HERO_IMAGE}
+            src={
+              featuredPost?.mainImage
+                ? getSafeImageUrl(featuredPost.mainImage, 1920, 1080) ||
+                  DEFAULT_HERO_IMAGE
+                : DEFAULT_HERO_IMAGE
+            }
             alt="Background"
             fill
             className="object-cover"
@@ -806,12 +955,12 @@ export default function JournalPageContent({
           className="pointer-events-none absolute inset-0"
           animate={{
             background: [
-              'radial-gradient(ellipse 80% 60% at 20% 80%, rgba(201,169,98,0.08) 0%, transparent 60%)',
-              'radial-gradient(ellipse 80% 60% at 80% 20%, rgba(201,169,98,0.08) 0%, transparent 60%)',
-              'radial-gradient(ellipse 80% 60% at 20% 80%, rgba(201,169,98,0.08) 0%, transparent 60%)',
+              "radial-gradient(ellipse 80% 60% at 20% 80%, rgba(201,169,98,0.08) 0%, transparent 60%)",
+              "radial-gradient(ellipse 80% 60% at 80% 20%, rgba(201,169,98,0.08) 0%, transparent 60%)",
+              "radial-gradient(ellipse 80% 60% at 20% 80%, rgba(201,169,98,0.08) 0%, transparent 60%)",
             ],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         />
 
         {/* Subtle Grid Pattern */}
@@ -849,7 +998,8 @@ export default function JournalPageContent({
             </h2>
 
             <p className="mx-auto mb-12 max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-white/60 lg:text-xl">
-              Subscribe to receive exclusive insights, project showcases, and industry trends directly to your inbox.
+              Subscribe to receive exclusive insights, project showcases, and
+              industry trends directly to your inbox.
             </p>
 
             <motion.div
@@ -863,7 +1013,10 @@ export default function JournalPageContent({
                 className="group relative inline-flex items-center gap-4 overflow-hidden border-2 border-[#c9a962] bg-[#c9a962] px-12 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]"
               >
                 <span className="relative z-10">Get in Touch</span>
-                <ArrowRight size={16} className="relative z-10 transition-transform group-hover:translate-x-2" />
+                <ArrowRight
+                  size={16}
+                  className="relative z-10 transition-transform group-hover:translate-x-2"
+                />
                 {/* Shine effect on hover */}
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
               </Link>
@@ -888,17 +1041,27 @@ export default function JournalPageContent({
         <motion.div
           className="absolute left-[10%] top-[20%] h-2 w-2 rounded-full bg-[#c9a962]/30"
           animate={{ y: [0, -20, 0], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute right-[15%] top-[30%] h-1.5 w-1.5 rounded-full bg-[#c9a962]/20"
           animate={{ y: [0, 15, 0], opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         />
         <motion.div
           className="absolute bottom-[25%] left-[20%] h-1 w-1 rounded-full bg-[#c9a962]/40"
           animate={{ y: [0, -10, 0], opacity: [0.4, 0.7, 0.4] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
         />
       </section>
     </main>
@@ -907,21 +1070,31 @@ export default function JournalPageContent({
 
 // Default card fallback images
 const CARD_FALLBACK_IMAGES = [
-  '/founder/CID_2106_00_COVER.jpg',
-  '/placeholder.jpg',
-  '/founder/CID_2106_00_COVER.jpg',
-  '/placeholder.jpg',
+  "/founder/CID_2106_00_COVER.jpg",
+  "/placeholder.jpg",
+  "/founder/CID_2106_00_COVER.jpg",
+  "/placeholder.jpg",
 ];
 
 // Secondary Featured Card Component - Full Background Image with Overlay
-function SecondaryFeaturedCard({ post, index, locale }: { post: Post; index: number; locale: string }) {
+function SecondaryFeaturedCard({
+  post,
+  index,
+  locale,
+}: {
+  post: Post;
+  index: number;
+  locale: string;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
   const readingTime = calculateReadingTime(post.excerpt, post.readTime);
   const colors = getCategoryColor(post.category);
 
   // Get image URL with fallback
-  const imageUrl = getSafeImageUrl(post.mainImage, 1200, 750) || CARD_FALLBACK_IMAGES[index % CARD_FALLBACK_IMAGES.length];
+  const imageUrl =
+    getSafeImageUrl(post.mainImage, 1200, 750) ||
+    CARD_FALLBACK_IMAGES[index % CARD_FALLBACK_IMAGES.length];
 
   return (
     <motion.article
@@ -931,7 +1104,10 @@ function SecondaryFeaturedCard({ post, index, locale }: { post: Post; index: num
       transition={{ duration: 1, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
       className="group"
     >
-      <Link href={`/${locale}/journal/${post.category || 'design-trends'}/${post.slug?.current || 'article'}`} className="block">
+      <Link
+        href={`/${locale}/journal/${post.category || "design-trends"}/${post.slug?.current || "article"}`}
+        className="block"
+      >
         {/* Full Background Image Card */}
         <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900 sm:aspect-[16/12]">
           {/* Background Image */}
@@ -952,8 +1128,11 @@ function SecondaryFeaturedCard({ post, index, locale }: { post: Post; index: num
           {/* Category Badge - Top */}
           {post.category && (
             <div className="absolute left-6 top-6 z-10">
-              <span className={`inline-block rounded-full border px-4 py-1.5 font-Satoshi text-xs uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}>
-                {CATEGORIES.find(c => c.value === post.category)?.label || post.category}
+              <span
+                className={`inline-block rounded-full border px-4 py-1.5 font-Satoshi text-xs uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}
+              >
+                {CATEGORIES.find((c) => c.value === post.category)?.label ||
+                  post.category}
               </span>
             </div>
           )}
@@ -971,7 +1150,9 @@ function SecondaryFeaturedCard({ post, index, locale }: { post: Post; index: num
             {/* Meta */}
             <div className="mb-4 flex items-center gap-4 font-Satoshi text-xs font-light text-white/60">
               {post.publishedAt && (
-                <span>{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</span>
+                <span>
+                  {format(new Date(post.publishedAt), "MMMM d, yyyy")}
+                </span>
               )}
               {post.viewCount !== undefined && post.viewCount > 0 && (
                 <span className="flex items-center gap-1.5">
@@ -997,7 +1178,10 @@ function SecondaryFeaturedCard({ post, index, locale }: { post: Post; index: num
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-white transition-colors group-hover:text-[#c9a962]">
                 Read Article
-                <ArrowRight size={14} className="transition-transform group-hover:translate-x-2" />
+                <ArrowRight
+                  size={14}
+                  className="transition-transform group-hover:translate-x-2"
+                />
               </span>
               <div className="h-px flex-1 bg-white/20 transition-all duration-500 group-hover:bg-[#c9a962]/50" />
             </div>
@@ -1013,24 +1197,41 @@ function SecondaryFeaturedCard({ post, index, locale }: { post: Post; index: num
 }
 
 // Post Card Component - Full Background Image with Overlay
-function PostCard({ post, index, locale }: { post: Post; index: number; locale: string }) {
+function PostCard({
+  post,
+  index,
+  locale,
+}: {
+  post: Post;
+  index: number;
+  locale: string;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
   const readingTime = calculateReadingTime(post.excerpt, post.readTime);
   const colors = getCategoryColor(post.category);
 
   // Get image URL with fallback
-  const imageUrl = getSafeImageUrl(post.mainImage, 800, 600) || CARD_FALLBACK_IMAGES[index % CARD_FALLBACK_IMAGES.length];
+  const imageUrl =
+    getSafeImageUrl(post.mainImage, 800, 600) ||
+    CARD_FALLBACK_IMAGES[index % CARD_FALLBACK_IMAGES.length];
 
   return (
     <motion.article
       ref={cardRef}
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.8,
+        delay: index * 0.1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className="group"
     >
-      <Link href={`/${locale}/journal/${post.category || 'design-trends'}/${post.slug?.current || 'article'}`} className="block">
+      <Link
+        href={`/${locale}/journal/${post.category || "design-trends"}/${post.slug?.current || "article"}`}
+        className="block"
+      >
         {/* Full Background Image Card */}
         <div className="relative aspect-[3/4] overflow-hidden bg-neutral-900">
           {/* Background Image */}
@@ -1059,8 +1260,11 @@ function PostCard({ post, index, locale }: { post: Post; index: number; locale: 
           {/* Category Badge - Top Left */}
           {post.category && (
             <div className="absolute left-4 top-4 z-10">
-              <span className={`inline-block rounded-full border px-3 py-1 font-Satoshi text-[10px] uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}>
-                {CATEGORIES.find(c => c.value === post.category)?.label || post.category}
+              <span
+                className={`inline-block rounded-full border px-3 py-1 font-Satoshi text-[10px] uppercase tracking-wider backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}
+              >
+                {CATEGORIES.find((c) => c.value === post.category)?.label ||
+                  post.category}
               </span>
             </div>
           )}
@@ -1078,7 +1282,7 @@ function PostCard({ post, index, locale }: { post: Post; index: number; locale: 
             {/* Meta Row */}
             <div className="mb-3 flex items-center gap-3 font-Satoshi text-[10px] font-light text-white/60">
               {post.publishedAt && (
-                <span>{format(new Date(post.publishedAt), 'MMM d, yyyy')}</span>
+                <span>{format(new Date(post.publishedAt), "MMM d, yyyy")}</span>
               )}
               {post.viewCount !== undefined && post.viewCount > 0 && (
                 <>
@@ -1104,16 +1308,19 @@ function PostCard({ post, index, locale }: { post: Post; index: number; locale: 
             )}
 
             {/* Tags */}
-            {post.tags && post.tags.length > 0 && (
+            {post.tags && post.tags.filter((t) => t && t.name).length > 0 && (
               <div className="mb-4 flex flex-wrap gap-1.5">
-                {post.tags.slice(0, 2).map(tag => (
-                  <span
-                    key={tag._id}
-                    className="rounded-full border border-[#c9a962]/40 bg-neutral-950/60 px-2.5 py-1 font-Satoshi text-[10px] font-medium tracking-wide text-[#c9a962] backdrop-blur-md transition-all duration-300 group-hover:border-[#c9a962]/60 group-hover:bg-[#c9a962]/20"
-                  >
-                    {tag.name}
-                  </span>
-                ))}
+                {post.tags
+                  .filter((t) => t && t.name)
+                  .slice(0, 2)
+                  .map((tag) => (
+                    <span
+                      key={tag._id}
+                      className="rounded-full border border-[#c9a962]/40 bg-neutral-950/60 px-2.5 py-1 font-Satoshi text-[10px] font-medium tracking-wide text-[#c9a962] backdrop-blur-md transition-all duration-300 group-hover:border-[#c9a962]/60 group-hover:bg-[#c9a962]/20"
+                    >
+                      {tag.name}
+                    </span>
+                  ))}
               </div>
             )}
 
@@ -1121,7 +1328,10 @@ function PostCard({ post, index, locale }: { post: Post; index: number; locale: 
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-2 font-Satoshi text-[10px] uppercase tracking-wider text-white/70 transition-colors group-hover:text-[#c9a962]">
                 Read Article
-                <ArrowRight size={10} className="transition-transform group-hover:translate-x-1" />
+                <ArrowRight
+                  size={10}
+                  className="transition-transform group-hover:translate-x-1"
+                />
               </span>
               <div className="h-px flex-1 bg-white/10 transition-all duration-500 group-hover:bg-[#c9a962]/30" />
             </div>

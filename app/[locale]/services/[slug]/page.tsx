@@ -72,9 +72,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// Skip static generation at build time - use ISR instead
-// Pages will be generated on-demand and cached
+// Pre-generate pages for known service slugs
 export async function generateStaticParams() {
+  try {
+    const services = await client.fetch(`*[_type == "service"]{ "slug": slug.current }`);
+    if (services && services.length > 0) {
+      return services
+        .filter((s: any) => s.slug)
+        .map((s: any) => ({ slug: s.slug }));
+    }
+  } catch (error) {
+    console.error('Error generating static params for services:', error);
+  }
   return [];
 }
 
