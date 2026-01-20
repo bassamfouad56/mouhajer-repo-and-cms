@@ -212,7 +212,7 @@ export default function ContactPageContent({
             initial={{ scaleY: 0 }}
             animate={heroInView ? { scaleY: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-12 h-24 w-px origin-top bg-gradient-to-b from-transparent via-[#c9a962]/60 to-transparent"
+            className="mb-12 h-24 w-px origin-top bg-gradient-to-b from-transparent via-[#d4af37]/60 to-transparent"
           />
 
           <motion.div
@@ -221,7 +221,7 @@ export default function ContactPageContent({
             transition={{ duration: 1, delay: 0.4 }}
             className="mb-8 text-center"
           >
-            <span className="font-Satoshi text-[11px] font-light uppercase tracking-[0.4em] text-[#c9a962]">
+            <span className="font-Satoshi text-[11px] font-light uppercase tracking-[0.4em] text-[#d4af37]">
               Contact Us
             </span>
           </motion.div>
@@ -277,6 +277,7 @@ export default function ContactPageContent({
       >
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-[0.02]">
+          <div className="h-full w-full bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:80px_80px]" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6">
@@ -288,7 +289,7 @@ export default function ContactPageContent({
             className="mb-20 max-w-2xl"
           >
             <div className="mb-6 flex items-center gap-4">
-              <div className="h-px w-12 bg-[#c9a962]" />
+              <div className="h-px w-12 bg-[#d4af37]" />
               <span className="font-Satoshi text-[11px] font-light uppercase tracking-[0.3em] text-neutral-400">
                 Our Headquarters
               </span>
@@ -315,7 +316,7 @@ export default function ContactPageContent({
               {/* Address */}
               <div className="group border-b border-neutral-100 py-8 transition-colors hover:border-neutral-200">
                 <div className="flex items-start gap-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#c9a962]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#d4af37]">
                     <IconLocation />
                   </div>
                   <div className="flex-1">
@@ -335,7 +336,7 @@ export default function ContactPageContent({
               {/* Phone */}
               <div className="group border-b border-neutral-100 py-8 transition-colors hover:border-neutral-200">
                 <div className="flex items-start gap-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#c9a962]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#d4af37]">
                     <IconPhone />
                   </div>
                   <div className="flex-1">
@@ -355,7 +356,7 @@ export default function ContactPageContent({
               {/* Emails */}
               <div className="group border-b border-neutral-100 py-8 transition-colors hover:border-neutral-200">
                 <div className="flex items-start gap-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#c9a962]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#d4af37]">
                     <IconMail />
                   </div>
                   <div className="flex-1 space-y-4">
@@ -388,7 +389,7 @@ export default function ContactPageContent({
               {/* Hours */}
               <div className="group py-8">
                 <div className="flex items-start gap-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#c9a962]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center text-neutral-300 transition-colors group-hover:text-[#d4af37]">
                     <IconClock />
                   </div>
                   <div className="flex-1">
@@ -433,8 +434,8 @@ export default function ContactPageContent({
               {/* Floating Label */}
               <div className="absolute -bottom-6 left-8 right-8 bg-neutral-950 p-6 md:left-auto md:right-8 md:w-72">
                 <div className="flex items-center gap-4">
-                  <div className="h-px flex-1 bg-[#c9a962]/30" />
-                  <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#c9a962]">Location</span>
+                  <div className="h-px flex-1 bg-[#d4af37]/30" />
+                  <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#d4af37]">Location</span>
                 </div>
                 <p className="mt-4 font-Playfair text-xl font-light text-white">Burj Vista</p>
                 <p className="mt-1 font-Satoshi text-sm font-light text-white/50">Downtown Dubai</p>
@@ -451,11 +452,12 @@ export default function ContactPageContent({
       >
         {/* Subtle grid */}
         <div className="absolute inset-0 opacity-[0.03]">
+          <div className="h-full w-full bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:100px_100px]" />
         </div>
 
         {/* Ambient glow */}
         <div
-          className="pointer-events-none absolute h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.03] blur-[120px]"
+          className="pointer-events-none absolute h-[600px] w-[600px] rounded-full bg-[#d4af37]/[0.03] blur-[120px]"
           style={{
             left: mousePosition.x - 300,
             top: mousePosition.y - 300 - 400,
@@ -471,11 +473,11 @@ export default function ContactPageContent({
             className="mb-20 text-center"
           >
             <div className="mb-6 flex items-center justify-center gap-4">
-              <div className="h-px w-12 bg-[#c9a962]/40" />
-              <span className="font-Satoshi text-[11px] font-light uppercase tracking-[0.3em] text-[#c9a962]">
+              <div className="h-px w-12 bg-[#d4af37]/40" />
+              <span className="font-Satoshi text-[11px] font-light uppercase tracking-[0.3em] text-[#d4af37]">
                 Get Started
               </span>
-              <div className="h-px w-12 bg-[#c9a962]/40" />
+              <div className="h-px w-12 bg-[#d4af37]/40" />
             </div>
             <h2 className="font-Playfair text-4xl font-light leading-[1.15] text-white md:text-5xl lg:text-6xl">
               How Can We<br />
@@ -489,11 +491,11 @@ export default function ContactPageContent({
               initial={{ opacity: 0, y: 40 }}
               animate={servicesInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="group relative h-full"
+              className="group relative"
             >
-              <div className="relative flex h-full flex-col overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-[#c9a962]/20 hover:bg-white/[0.04] lg:p-12">
+              <div className="relative overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-[#d4af37]/20 hover:bg-white/[0.04] lg:p-12">
                 <div className="relative">
-                  <span className="mb-6 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
+                  <span className="mb-6 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#d4af37]">
                     New Project
                   </span>
 
@@ -508,19 +510,19 @@ export default function ContactPageContent({
 
                   <Link
                     href="/contact/book-consultation"
-                    className="group/btn inline-flex items-center gap-4 border-b border-[#c9a962]/30 pb-2 transition-all hover:border-[#c9a962]"
+                    className="group/btn inline-flex items-center gap-4 border-b border-[#d4af37]/30 pb-2 transition-all hover:border-[#d4af37]"
                   >
-                    <span className="font-Satoshi text-sm font-light tracking-wide text-[#c9a962]">
+                    <span className="font-Satoshi text-sm font-light tracking-wide text-[#d4af37]">
                       Book a Consultation
                     </span>
-                    <span className="text-[#c9a962] transition-transform group-hover/btn:translate-x-1">
+                    <span className="text-[#d4af37] transition-transform group-hover/btn:translate-x-1">
                       <IconArrowRight />
                     </span>
                   </Link>
                 </div>
 
                 {/* Hover glow */}
-                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#c9a962]/0 blur-3xl transition-all duration-700 group-hover:bg-[#c9a962]/10" />
+                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#d4af37]/0 blur-3xl transition-all duration-700 group-hover:bg-[#d4af37]/10" />
               </div>
             </motion.div>
 
@@ -529,10 +531,10 @@ export default function ContactPageContent({
               initial={{ opacity: 0, y: 40 }}
               animate={servicesInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="group relative h-full"
+              className="group relative"
             >
-              <div className="relative flex h-full flex-col overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-white/10 hover:bg-white/[0.04] lg:p-12">
-                <div className="relative flex flex-1 flex-col">
+              <div className="relative overflow-hidden border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm transition-all duration-700 hover:border-white/10 hover:bg-white/[0.04] lg:p-12">
+                <div className="relative">
                   <span className="mb-6 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-white/40">
                     Partnerships
                   </span>
@@ -647,7 +649,7 @@ export default function ContactPageContent({
                 {/* Name */}
                 <div>
                   <label className="mb-3 block font-Satoshi text-[10px] uppercase tracking-[0.2em] text-neutral-400">
-                    Full Name <span className="text-[#c9a962]">*</span>
+                    Full Name <span className="text-[#d4af37]">*</span>
                   </label>
                   <input
                     {...register('name')}
@@ -663,7 +665,7 @@ export default function ContactPageContent({
                 {/* Email */}
                 <div>
                   <label className="mb-3 block font-Satoshi text-[10px] uppercase tracking-[0.2em] text-neutral-400">
-                    Email Address <span className="text-[#c9a962]">*</span>
+                    Email Address <span className="text-[#d4af37]">*</span>
                   </label>
                   <input
                     {...register('email')}
@@ -692,7 +694,7 @@ export default function ContactPageContent({
                 {/* Message */}
                 <div>
                   <label className="mb-3 block font-Satoshi text-[10px] uppercase tracking-[0.2em] text-neutral-400">
-                    Message <span className="text-[#c9a962]">*</span>
+                    Message <span className="text-[#d4af37]">*</span>
                   </label>
                   <textarea
                     {...register('message')}
@@ -719,7 +721,7 @@ export default function ContactPageContent({
                         </span>
                       ) : submitSuccess ? (
                         <>
-                          <span className="text-[#c9a962]"><IconCheck /></span>
+                          <span className="text-[#d4af37]"><IconCheck /></span>
                           <span className="font-Satoshi text-sm font-light tracking-wide text-white">
                             Message Sent!
                           </span>
@@ -844,7 +846,7 @@ export default function ContactPageContent({
             transition={{ duration: 1 }}
           >
             {/* Decorative line */}
-            <div className="mx-auto mb-12 h-16 w-px bg-gradient-to-b from-transparent via-[#c9a962]/50 to-transparent" />
+            <div className="mx-auto mb-12 h-16 w-px bg-gradient-to-b from-transparent via-[#d4af37]/50 to-transparent" />
 
             <h2 className="mb-8 font-Playfair text-4xl font-light leading-[1.1] text-white md:text-6xl lg:text-7xl">
               Make the <span className="italic">Call.</span>
@@ -857,12 +859,12 @@ export default function ContactPageContent({
             <MagneticButton>
               <Link
                 href="/contact/book-consultation"
-                className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962] px-12 py-5 transition-all duration-500 hover:bg-transparent"
+                className="group inline-flex items-center gap-4 border border-[#d4af37] bg-[#d4af37] px-12 py-5 transition-all duration-500 hover:bg-transparent"
               >
-                <span className="font-Satoshi text-sm font-light tracking-wide text-neutral-950 transition-colors group-hover:text-[#c9a962]">
+                <span className="font-Satoshi text-sm font-light tracking-wide text-neutral-950 transition-colors group-hover:text-[#d4af37]">
                   Book Consultation
                 </span>
-                <span className="text-neutral-950 transition-all group-hover:translate-x-1 group-hover:text-[#c9a962]">
+                <span className="text-neutral-950 transition-all group-hover:translate-x-1 group-hover:text-[#d4af37]">
                   <IconArrowRight />
                 </span>
               </Link>
