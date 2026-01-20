@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { Award, Shield, CheckCircle2, Download, ChevronLeft, ChevronRight, ExternalLink, Trophy } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // ISO Certifications
 const certifications = [
@@ -158,7 +158,6 @@ export function CertificationsAwards() {
             className="mb-6 flex items-center justify-center gap-4"
           >
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <Trophy className="h-5 w-5 text-[#c9a962]/60" strokeWidth={1} />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
               Industry Validation
             </span>
@@ -194,14 +193,9 @@ export function CertificationsAwards() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-16"
         >
-          <div className="mb-8 flex items-center gap-4">
-            <div className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
-              <Shield className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
-            </div>
-            <div>
-              <h3 className="font-SchnyderS text-xl font-light text-white">International Standards</h3>
-              <p className="font-Satoshi text-xs font-light text-white/40">Triple ISO Certification</p>
-            </div>
+          <div className="mb-8">
+            <h3 className="font-SchnyderS text-xl font-light text-white">International Standards</h3>
+            <p className="font-Satoshi text-xs font-light text-white/40">Triple ISO Certification</p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
@@ -211,7 +205,7 @@ export function CertificationsAwards() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="group relative h-full overflow-hidden border border-white/5 bg-white/2 p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/20 hover:bg-white/4"
+                className="group relative h-full overflow-hidden p-6 transition-all duration-500"
               >
                 <div className="flex h-full flex-col items-center text-center">
                   {/* ISO Badge Image */}
@@ -240,14 +234,9 @@ export function CertificationsAwards() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           <div className="mb-8 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
-                <Award className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
-              </div>
-              <div>
-                <h3 className="font-SchnyderS text-xl font-light text-white">Award Certificates</h3>
-                <p className="font-Satoshi text-xs font-light text-white/40">Official certificates displayed below</p>
-              </div>
+            <div>
+              <h3 className="font-SchnyderS text-xl font-light text-white">Award Certificates</h3>
+              <p className="font-Satoshi text-xs font-light text-white/40">Official certificates displayed below</p>
             </div>
 
             {/* Navigation Arrows */}
@@ -282,11 +271,10 @@ export function CertificationsAwards() {
                 className="group relative flex-shrink-0 snap-center"
               >
                 {/* Certificate Card with Embedded PDF */}
-                <div className="relative w-[340px] overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent transition-all duration-500 hover:border-[#c9a962]/40 sm:w-[400px]">
+                <div className="relative w-[340px] overflow-hidden transition-all duration-500 sm:w-[400px]">
                   {/* Level Badge */}
                   {cert.level === '5-Star Winner' && (
                     <div className="absolute left-4 top-4 z-10 flex items-center gap-1 rounded-full bg-[#c9a962] px-3 py-1 shadow-lg">
-                      <Trophy className="h-3 w-3 text-neutral-950" strokeWidth={2} />
                       <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-950">5-Star</span>
                     </div>
                   )}
@@ -313,7 +301,7 @@ export function CertificationsAwards() {
                   {/* Certificate Info */}
                   <div className="p-5">
                     {/* Year Badge */}
-                    <div className="mb-3 inline-block border border-[#c9a962]/30 bg-[#c9a962]/10 px-2 py-1">
+                    <div className="mb-3 inline-block px-2 py-1">
                       <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#c9a962]">
                         {cert.year}
                       </span>
@@ -333,7 +321,7 @@ export function CertificationsAwards() {
                     </p>
 
                     {/* Project & Download */}
-                    <div className="flex items-center justify-between border-t border-white/5 pt-4">
+                    <div className="flex items-center justify-between pt-4">
                       <div>
                         <p className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/30">
                           Project
@@ -347,11 +335,10 @@ export function CertificationsAwards() {
                         href={cert.file}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/btn flex items-center gap-2 border border-[#c9a962]/30 bg-[#c9a962]/5 px-3 py-2 transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/20"
+                        className="group/btn flex items-center gap-2 px-3 py-2 transition-all hover:opacity-80"
                       >
-                        <ExternalLink className="h-3.5 w-3.5 text-[#c9a962]" strokeWidth={1.5} />
                         <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#c9a962]">
-                          Open
+                          View Certificate
                         </span>
                       </a>
                     </div>

@@ -4,12 +4,8 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { SafeImage } from "@/components/safe-image";
 import {
-  ArrowRight,
   ArrowUpRight,
   ChevronDown,
-  Hotel,
-  Home,
-  Building2,
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
@@ -38,12 +34,6 @@ const defaultIndustries = [
     slug: { current: "luxury-hospitality" },
     excerpt:
       "The art of the live renovation. Upgrading your asset while protecting your guest experience. We specialize in 5-star hotel renovations with zero guest complaints.",
-    icon: "hotel",
-    features: [
-      "Live Environment Renovations",
-      "FF&E Procurement",
-      "Brand Standards Compliance",
-    ],
     accent: "#c9a962",
     image:
       "/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg",
@@ -54,12 +44,6 @@ const defaultIndustries = [
     slug: { current: "high-end-residential" },
     excerpt:
       "Private sanctuaries. A home designed for your status, built for your peace. Turnkey luxury villas and penthouses with absolute discretion.",
-    icon: "home",
-    features: [
-      "Turnkey Villa Construction",
-      "Penthouse Fit-Out",
-      "Bespoke Manufacturing",
-    ],
     accent: "#d4c4a8",
     image:
       "/website%202.0%20content/services/industries/highend%20residential/_MID0001-HDR-2.jpg",
@@ -70,38 +54,11 @@ const defaultIndustries = [
     slug: { current: "commercial-corporate" },
     excerpt:
       "Engineered for performance. Designed for the brand. Fast-track commercial fit-outs with in-house joinery and MEP teams.",
-    icon: "building",
-    features: ["Fast-Track Delivery", "Brand Integration", "MEP Engineering"],
     accent: "#9ca3af",
     image:
       "/website%202.0%20content/services/industries/commercial%20and%20corporate/_MID1004-HDR.jpg",
   },
 ];
-
-// Icon mapping
-const iconMap: { [key: string]: typeof Hotel } = {
-  hotel: Hotel,
-  hospitality: Hotel,
-  home: Home,
-  residential: Home,
-  building: Building2,
-  commercial: Building2,
-  corporate: Building2,
-};
-
-// Get icon component based on icon name or title
-const getIcon = (icon?: string, title?: string) => {
-  if (icon && iconMap[icon.toLowerCase()]) {
-    return iconMap[icon.toLowerCase()];
-  }
-  // Fallback based on title
-  const titleLower = (title || "").toLowerCase();
-  if (titleLower.includes("hospitality") || titleLower.includes("hotel"))
-    return Hotel;
-  if (titleLower.includes("residential") || titleLower.includes("home"))
-    return Home;
-  return Building2;
-};
 
 // Get image URL from Sanity or fallback
 const getImageUrl = (industry: SanityIndustry): string => {
@@ -136,23 +93,6 @@ const getAccent = (slug: string): string => {
   return "#9ca3af";
 };
 
-// Get features based on industry
-const getFeatures = (slug: string): string[] => {
-  if (slug.includes("hospitality"))
-    return [
-      "Live Environment Renovations",
-      "FF&E Procurement",
-      "Brand Standards",
-    ];
-  if (slug.includes("residential"))
-    return [
-      "Turnkey Construction",
-      "Penthouse Fit-Out",
-      "Bespoke Manufacturing",
-    ];
-  return ["Fast-Track Delivery", "Brand Integration", "MEP Engineering"];
-};
-
 export function IndustriesHorizontalScroll({
   industries,
 }: IndustriesHorizontalScrollProps) {
@@ -166,20 +106,16 @@ export function IndustriesHorizontalScroll({
           title: ind.title,
           slug: ind.slug?.current || "",
           excerpt: ind.excerpt || "",
-          icon: getIcon(ind.icon, ind.title),
           image: getImageUrl(ind),
           accent: getAccent(ind.slug?.current || ""),
-          features: getFeatures(ind.slug?.current || ""),
         }))
       : defaultIndustries.map((ind) => ({
           id: ind._id,
           title: ind.title,
           slug: ind.slug.current,
           excerpt: ind.excerpt,
-          icon: getIcon(ind.icon, ind.title),
           image: ind.image,
           accent: ind.accent,
-          features: ind.features,
         }));
 
   const { scrollYProgress } = useScroll({
@@ -313,8 +249,6 @@ export function IndustriesHorizontalScroll({
         {/* Horizontal Scroll Container */}
         <motion.div className="flex h-full" style={{ x }}>
           {panels.map((panel, index) => {
-            const Icon = panel.icon;
-
             // Calculate adjusted scroll positions for each panel
             // First panel (index 0): content visible from start, stays during holdRatio
             // Other panels: start after holdRatio with proportional timing
@@ -388,7 +322,7 @@ export function IndustriesHorizontalScroll({
                 <div className="relative z-10 flex h-full w-full flex-col justify-end px-4 pb-20 pt-44 sm:px-6 sm:pb-24 sm:pt-52 lg:flex-row lg:items-center lg:justify-start lg:px-12 lg:pb-16 lg:pt-64 xl:px-20">
                   {/* Main Content */}
                   <div className="max-w-full sm:max-w-xl lg:max-w-3xl">
-                    {/* Icon Badge */}
+                    {/* Label Badge */}
                     <motion.div
                       className="mb-4 flex items-center gap-3 sm:mb-6 sm:gap-4"
                       style={{
@@ -408,13 +342,12 @@ export function IndustriesHorizontalScroll({
                         className="h-0.5 w-8 sm:h-1 sm:w-12"
                         style={{ backgroundColor: panel.accent }}
                       />
-                      <div className="flex h-8 w-8 items-center justify-center border border-white/20 sm:h-10 sm:w-10">
-                        <Icon
-                          className="h-4 w-4 sm:h-5 sm:w-5"
-                          style={{ color: panel.accent }}
-                          strokeWidth={1}
-                        />
-                      </div>
+                      <span
+                        className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] sm:text-xs"
+                        style={{ color: panel.accent }}
+                      >
+                        {panel.title}
+                      </span>
                     </motion.div>
 
                     {/* Title */}
@@ -438,7 +371,7 @@ export function IndustriesHorizontalScroll({
 
                     {/* Description */}
                     <motion.p
-                      className="mb-6 max-w-md font-Satoshi text-sm font-light leading-relaxed text-white/70 sm:mb-8 sm:max-w-xl sm:text-base lg:text-lg lg:leading-relaxed"
+                      className="mb-8 max-w-md font-Satoshi text-sm font-light leading-relaxed text-white/70 sm:mb-10 sm:max-w-xl sm:text-base lg:text-lg lg:leading-relaxed"
                       style={{
                         opacity: useTransform(
                           scrollYProgress,
@@ -455,9 +388,8 @@ export function IndustriesHorizontalScroll({
                       {panel.excerpt}
                     </motion.p>
 
-                    {/* Features */}
+                    {/* Primary CTA Button */}
                     <motion.div
-                      className="mb-6 flex flex-wrap gap-2 sm:mb-8 sm:gap-3"
                       style={{
                         opacity: useTransform(
                           scrollYProgress,
@@ -466,42 +398,17 @@ export function IndustriesHorizontalScroll({
                         ),
                       }}
                     >
-                      {panel.features.map((feature) => (
-                        <span
-                          key={feature}
-                          className="border border-white/10 bg-white/5 px-3 py-1.5 font-Satoshi text-[9px] font-light uppercase tracking-[0.15em] text-white/70 sm:px-4 sm:py-2 sm:text-[10px]"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </motion.div>
-
-                    {/* CTA */}
-                    <motion.div
-                      style={{
-                        opacity: useTransform(
-                          scrollYProgress,
-                          getAdjustedProgress(2),
-                          [index === 0 ? 1 : 0, 1]
-                        ),
-                      }}
-                    >
                       <Link
                         href={`/industries/${panel.slug}`}
-                        className="group flex items-center gap-3"
+                        className="group inline-flex items-center gap-3 bg-[#c9a962] px-6 py-3.5 transition-all duration-300 hover:bg-[#b8983f] sm:px-8 sm:py-4"
                       >
-                        <span className="font-Satoshi text-xs font-light tracking-wide text-white/80 transition-colors group-hover:text-[#c9a962] sm:text-sm">
+                        <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-950 sm:text-sm">
                           Explore {panel.title}
                         </span>
-                        <div
-                          className="flex h-9 w-9 items-center justify-center border transition-all duration-300 group-hover:bg-[#c9a962] sm:h-10 sm:w-10"
-                          style={{ borderColor: panel.accent }}
-                        >
-                          <ArrowUpRight
-                            className="h-4 w-4 text-white transition-colors group-hover:text-neutral-950"
-                            strokeWidth={1.5}
-                          />
-                        </div>
+                        <ArrowUpRight
+                          className="h-4 w-4 text-neutral-950 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          strokeWidth={2}
+                        />
                       </Link>
                     </motion.div>
                   </div>

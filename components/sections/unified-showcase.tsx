@@ -14,9 +14,6 @@ import {
   Sparkles,
   Building2,
   Home,
-  HardHat,
-  Palette,
-  Factory,
   ChevronDown,
 } from "lucide-react";
 import Link from "next/link";
@@ -66,17 +63,11 @@ const promiseCards = [
 const whoWeArePanels = [
   {
     id: "build",
-    icon: HardHat,
     label: "We Build",
     title: "The Main Contractor",
     subtitle: "From Foundation to Finish",
     description:
       "We hold the trade license to execute heavy civil works. From excavation and piling to the concrete superstructure, our own teams are on site daily — ensuring quality control at every pour, every weld, every connection.",
-    features: [
-      "Civil Construction License",
-      "In-House Labor Force",
-      "Quality Control Teams",
-    ],
     href: "/services/civil-construction",
     ctaText: "Explore Construction",
     imageKey: "contractor",
@@ -84,17 +75,11 @@ const whoWeArePanels = [
   },
   {
     id: "design",
-    icon: Palette,
     label: "We Design",
     title: "The Design Studio",
     subtitle: "Vision Meets Feasibility",
     description:
       "Our creative team designs the vision, but because they work alongside the builders, every drawing is validated for cost and feasibility before you see it. No surprises, no value engineering disappointments.",
-    features: [
-      "Interior Architecture",
-      "Cost-Validated Designs",
-      "3D Visualization",
-    ],
     href: "/services/interior-architecture",
     ctaText: "Explore Design",
     imageKey: "designer",
@@ -102,17 +87,11 @@ const whoWeArePanels = [
   },
   {
     id: "make",
-    icon: Factory,
     label: "We Make",
     title: "The Mouhajer Factory",
     subtitle: "Crafted Locally, Delivered Precisely",
     description:
       "Why wait for imports? We manufacture your fire-rated doors, wardrobes, and custom furniture in our own local facility — ensuring perfect fit, zero shipping delays, and the ability to adjust on the fly.",
-    features: [
-      "Local Manufacturing",
-      "Custom Joinery",
-      "Zero Import Delays",
-    ],
     href: "/services/manufacturing-joinery",
     ctaText: "Explore Manufacturing",
     imageKey: "manufacturer",
@@ -531,7 +510,6 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
           {/* Horizontal Scroll Container */}
           <motion.div className="flex h-full pt-32 sm:pt-40 lg:pt-48" style={{ x }}>
             {whoWeArePanels.map((panel, index) => {
-              const Icon = panel.icon;
               const panelStart = promiseRatio + (index / whoWeArePanels.length) * whoWeAreRatio;
               const panelMid = promiseRatio + ((index + 0.5) / whoWeArePanels.length) * whoWeAreRatio;
 
@@ -551,7 +529,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                   <div className="relative z-10 flex h-full w-full flex-col justify-end px-4 pb-20 sm:px-6 sm:pb-24 lg:flex-row lg:items-center lg:justify-start lg:px-12 lg:pb-16 xl:px-20">
                     {/* Main Content */}
                     <div className="max-w-full sm:max-w-xl lg:max-w-3xl">
-                      {/* Icon Badge */}
+                      {/* Label Badge */}
                       <motion.div
                         className="mb-4 flex items-center gap-3 sm:mb-6 sm:gap-4"
                         style={{
@@ -571,13 +549,12 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           className="h-0.5 w-8 sm:h-1 sm:w-12"
                           style={{ backgroundColor: panel.accent }}
                         />
-                        <div className="flex h-8 w-8 items-center justify-center border border-white/20 sm:h-10 sm:w-10">
-                          <Icon
-                            className="h-4 w-4 sm:h-5 sm:w-5"
-                            style={{ color: panel.accent }}
-                            strokeWidth={1}
-                          />
-                        </div>
+                        <span
+                          className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] sm:text-xs"
+                          style={{ color: panel.accent }}
+                        >
+                          {panel.label}
+                        </span>
                       </motion.div>
 
                       {/* Title */}
@@ -601,7 +578,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
 
                       {/* Description */}
                       <motion.p
-                        className="mb-6 max-w-md font-Satoshi text-sm font-light leading-relaxed text-white/70 sm:mb-8 sm:max-w-xl sm:text-base lg:text-lg lg:leading-relaxed"
+                        className="mb-8 max-w-md font-Satoshi text-sm font-light leading-relaxed text-white/70 sm:mb-10 sm:max-w-xl sm:text-base lg:text-lg lg:leading-relaxed"
                         style={{
                           opacity: useTransform(
                             scrollYProgress,
@@ -618,9 +595,8 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                         {panel.description}
                       </motion.p>
 
-                      {/* Features */}
+                      {/* Primary CTA Button */}
                       <motion.div
-                        className="mb-6 flex flex-wrap gap-2 sm:mb-8 sm:gap-3"
                         style={{
                           opacity: useTransform(
                             scrollYProgress,
@@ -629,42 +605,17 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           ),
                         }}
                       >
-                        {panel.features.map((feature) => (
-                          <span
-                            key={feature}
-                            className="border border-white/10 bg-white/5 px-3 py-1.5 font-Satoshi text-[9px] font-light uppercase tracking-[0.15em] text-white/70 sm:px-4 sm:py-2 sm:text-[10px]"
-                          >
-                            {feature}
-                          </span>
-                        ))}
-                      </motion.div>
-
-                      {/* CTA */}
-                      <motion.div
-                        style={{
-                          opacity: useTransform(
-                            scrollYProgress,
-                            getContentProgress(4),
-                            [index === 0 ? 1 : 0, 1]
-                          ),
-                        }}
-                      >
                         <Link
                           href={panel.href}
-                          className="group flex items-center gap-3"
+                          className="group inline-flex items-center gap-3 bg-[#c9a962] px-6 py-3.5 transition-all duration-300 hover:bg-[#b8983f] sm:px-8 sm:py-4"
                         >
-                          <span className="font-Satoshi text-xs font-light tracking-wide text-white/80 transition-colors group-hover:text-[#c9a962] sm:text-sm">
+                          <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-950 sm:text-sm">
                             {panel.ctaText}
                           </span>
-                          <div
-                            className="flex h-9 w-9 items-center justify-center border transition-all duration-300 group-hover:bg-[#c9a962] sm:h-10 sm:w-10"
-                            style={{ borderColor: panel.accent }}
-                          >
-                            <ArrowUpRight
-                              className="h-4 w-4 text-white transition-colors group-hover:text-neutral-950"
-                              strokeWidth={1.5}
-                            />
-                          </div>
+                          <ArrowUpRight
+                            className="h-4 w-4 text-neutral-950 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                            strokeWidth={2}
+                          />
                         </Link>
                       </motion.div>
                     </div>
