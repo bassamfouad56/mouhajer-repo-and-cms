@@ -34,7 +34,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
   const backgroundScale = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [1.1, 1, 1.05]
+    [1.1, 1, 1.05],
   );
 
   // Mouse tracking for subtle 3D effect
@@ -43,11 +43,11 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
   const springConfig = { stiffness: 100, damping: 30 };
   const rotateX = useSpring(
     useTransform(mouseY, [-0.5, 0.5], [2, -2]),
-    springConfig
+    springConfig,
   );
   const rotateY = useSpring(
     useTransform(mouseX, [-0.5, 0.5], [-2, 2]),
-    springConfig
+    springConfig,
   );
 
   const handleMouseMove = useCallback(
@@ -59,7 +59,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
       mouseX.set(x);
       mouseY.set(y);
     },
-    [mouseX, mouseY]
+    [mouseX, mouseY],
   );
 
   const contactInfo = [
@@ -125,7 +125,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
 
       {/* Floating accent orbs */}
       <motion.div
-        className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#c9a962]/[0.03] blur-[150px]"
+        className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#8f7852]/[0.03] blur-[150px]"
         animate={{ y: [0, -40, 0], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -150,14 +150,14 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <Sparkles className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+            <Sparkles className="h-4 w-4 text-[#8f7852]" strokeWidth={1} />
             <span
               className={`font-Satoshi text-xs font-light uppercase tracking-[0.4em] ${isDark ? "text-neutral-400" : "text-neutral-500"}`}
             >
               Begin Your Journey
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </motion.div>
 
           <motion.h2
@@ -208,8 +208,8 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                   onMouseLeave={() => setHoveredItem(null)}
                   className={`group relative block overflow-hidden border backdrop-blur-sm transition-all duration-500 ${
                     isDark
-                      ? "border-[#c9a962]/20 bg-white/5 hover:border-[#c9a962]/40 hover:bg-white/10"
-                      : "border-[#c9a962]/20 bg-white/60 hover:border-[#c9a962]/40 hover:bg-white/80"
+                      ? "border-[#8f7852]/20 bg-white/5 hover:border-[#8f7852]/40 hover:bg-white/10"
+                      : "border-[#8f7852]/20 bg-white/60 hover:border-[#8f7852]/40 hover:bg-white/80"
                   }`}
                 >
                   <div className="relative z-10 flex items-center gap-6 p-6 lg:p-8">
@@ -230,7 +230,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                         strokeWidth={1}
                         style={{
                           color: isHovered
-                            ? "#c9a962"
+                            ? "#8f7852"
                             : "rgba(201, 169, 98, 0.6)",
                         }}
                       />
@@ -239,7 +239,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                     {/* Content */}
                     <div className="flex-1">
                       <div
-                        className={`mb-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-[#c9a962] ${isDark ? "text-neutral-400" : "text-neutral-500"}`}
+                        className={`mb-1 font-Satoshi text-[10px] font-light uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-[#8f7852] ${isDark ? "text-neutral-400" : "text-neutral-500"}`}
                       >
                         {item.label}
                       </div>
@@ -257,11 +257,11 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
 
                     {/* Arrow */}
                     <motion.div
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[#c9a962]/20 transition-all duration-500 group-hover:border-[#c9a962]/40 group-hover:bg-[#c9a962]/10"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[#8f7852]/20 transition-all duration-500 group-hover:border-[#8f7852]/40 group-hover:bg-[#8f7852]/10"
                       animate={{ x: isHovered ? 5 : 0 }}
                     >
                       <ArrowRight
-                        className="h-4 w-4 text-[#c9a962]/60 transition-colors duration-500 group-hover:text-[#c9a962]"
+                        className="h-4 w-4 text-[#8f7852]/60 transition-colors duration-500 group-hover:text-[#8f7852]"
                         strokeWidth={1.5}
                       />
                     </motion.div>
@@ -279,8 +279,8 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                   )}
 
                   {/* Corner accent */}
-                  <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/30" />
-                  <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/30" />
+                  <div className="absolute right-0 top-0 h-12 w-12 border-r border-t border-[#8f7852]/0 transition-all duration-500 group-hover:border-[#8f7852]/30" />
+                  <div className="absolute bottom-0 left-0 h-12 w-12 border-b border-l border-[#8f7852]/0 transition-all duration-500 group-hover:border-[#8f7852]/30" />
                 </motion.a>
               );
             })}
@@ -290,11 +290,11 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className={`border border-[#c9a962]/20 p-6 backdrop-blur-sm lg:p-8 ${isDark ? "bg-white/5" : "bg-white/60"}`}
+              className={`border border-[#8f7852]/20 p-6 backdrop-blur-sm lg:p-8 ${isDark ? "bg-white/5" : "bg-white/60"}`}
             >
               <div className="mb-6 flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
-                  <Clock className="h-5 w-5 text-[#c9a962]" strokeWidth={1} />
+                <div className="flex h-12 w-12 items-center justify-center border border-[#8f7852]/30 bg-[#8f7852]/5">
+                  <Clock className="h-5 w-5 text-[#8f7852]" strokeWidth={1} />
                 </div>
                 <div>
                   <h4
@@ -342,7 +342,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                       <span
                         className={`font-Satoshi text-sm font-light ${
                           schedule.active
-                            ? "text-[#c9a962]"
+                            ? "text-[#8f7852]"
                             : isDark
                               ? "text-neutral-600"
                               : "text-neutral-400"
@@ -352,7 +352,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                       </span>
                     </div>
                     {index < 2 && (
-                      <div className="mt-4 h-px w-full bg-[#c9a962]/10" />
+                      <div className="mt-4 h-px w-full bg-[#8f7852]/10" />
                     )}
                   </div>
                 ))}
@@ -372,7 +372,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
             }}
           >
             <div
-              className={`relative h-full overflow-hidden border border-[#c9a962]/20 backdrop-blur-sm ${
+              className={`relative h-full overflow-hidden border border-[#8f7852]/20 backdrop-blur-sm ${
                 isDark
                   ? "bg-gradient-to-br from-white/10 to-white/5"
                   : "bg-gradient-to-br from-white/80 to-white/60"
@@ -380,7 +380,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
             >
               {/* Decorative background pattern */}
               <div className="absolute inset-0 opacity-30">
-                <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#c9a962]/[0.05] blur-[100px]" />
+                <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#8f7852]/[0.05] blur-[100px]" />
               </div>
 
               <div className="relative z-10 flex h-full flex-col justify-center p-8 lg:p-12 xl:p-16">
@@ -391,9 +391,9 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="mb-10"
                 >
-                  <div className="inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-5 py-3">
-                    <div className="h-2 w-2 rounded-full bg-[#c9a962] animate-pulse" />
-                    <span className="font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-[#c9a962]">
+                  <div className="inline-flex items-center gap-3 border border-[#8f7852]/30 bg-[#8f7852]/5 px-5 py-3">
+                    <div className="h-2 w-2 rounded-full bg-[#8f7852] animate-pulse" />
+                    <span className="font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-[#8f7852]">
                       Available for New Projects
                     </span>
                   </div>
@@ -408,7 +408,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                 >
                   Transform Your
                   <br />
-                  <span className="text-[#c9a962]">Vision Into Reality</span>
+                  <span className="text-[#8f7852]">Vision Into Reality</span>
                 </motion.h3>
 
                 {/* Description */}
@@ -437,7 +437,7 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                     "Dedicated Team",
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
-                      <div className="h-1.5 w-1.5 rounded-full bg-[#c9a962]" />
+                      <div className="h-1.5 w-1.5 rounded-full bg-[#8f7852]" />
                       <span
                         className={`font-Satoshi text-sm font-light ${isDark ? "text-neutral-400" : "text-neutral-600"}`}
                       >
@@ -461,11 +461,11 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.6, delay: 1.1 }}
-                  className="mt-10 flex items-center gap-4 border-t border-[#c9a962]/10 pt-8"
+                  className="mt-10 flex items-center gap-4 border-t border-[#8f7852]/10 pt-8"
                 >
                   <div className="flex -space-x-2">
                     {[1, 2, 3].map((i) => (
-                      <div key={i} className="h-8 w-8 rounded-full border-2 border-white bg-gradient-to-br from-[#c9a962]/40 to-[#c9a962]/20" />
+                      <div key={i} className="h-8 w-8 rounded-full border-2 border-white bg-gradient-to-br from-[#8f7852]/40 to-[#8f7852]/20" />
                     ))}
                   </div>
                   <div className="font-Satoshi text-xs font-light text-neutral-500">
@@ -475,16 +475,16 @@ export function Contact({ backgroundImage, theme = "light" }: ContactProps) {
               </div>
 
               {/* Corner frame accents */}
-              <div className="absolute left-0 top-0 h-20 w-20 border-l-2 border-t-2 border-[#c9a962]/30" />
-              <div className="absolute bottom-0 right-0 h-20 w-20 border-b-2 border-r-2 border-[#c9a962]/30" />
+              <div className="absolute left-0 top-0 h-20 w-20 border-l-2 border-t-2 border-[#8f7852]/30" />
+              <div className="absolute bottom-0 right-0 h-20 w-20 border-b-2 border-r-2 border-[#8f7852]/30" />
             </div>
           </motion.div>
         </div>
       </div>
 
       {/* Decorative corner elements */}
-      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-[#c9a962]/20 lg:block" />
-      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-[#c9a962]/20 lg:block" />
+      <div className="absolute left-8 top-24 hidden h-32 w-32 border-l border-t border-[#8f7852]/20 lg:block" />
+      <div className="absolute bottom-24 right-8 hidden h-32 w-32 border-b border-r border-[#8f7852]/20 lg:block" />
     </section>
   );
 }

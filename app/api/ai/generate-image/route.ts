@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     if (!email || !prompt) {
       return NextResponse.json(
         { error: "Email and prompt are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: "Invalid email address" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
             comfyUI: comfyUIHealthy ? "online" : "offline",
           },
         },
-        { status: 503 }
+        { status: 503 },
       );
     }
 
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
           error: "Prompt must be related to design or construction services",
           suggestion: validation.suggestion,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
       imageAnalysis = await analyzeImageWithOllama(
         uploadedImageBase64,
         `Describe this image in detail, focusing on architectural and design elements. How can we enhance this design for a luxury project?`,
-        "llava"
+        "llava",
       );
     }
 
@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
       imageAnalysis
         ? `${prompt}. Reference image analysis: ${imageAnalysis}`
         : prompt,
-      serviceCategory || validation.category
+      serviceCategory || validation.category,
     );
 
     console.log("Enhanced prompt:", enhancedPrompt);
@@ -131,7 +131,7 @@ export async function POST(request: NextRequest) {
       {
         filename: `ai-generated-${Date.now()}.png`,
         contentType: "image/png",
-      }
+      },
     );
 
     // Upload user's image to Sanity if provided
@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
         {
           filename: `user-upload-${Date.now()}.${uploadedImage.type.split("/")[1]}`,
           contentType: uploadedImage.type,
-        }
+        },
       );
     }
 
@@ -201,7 +201,7 @@ export async function POST(request: NextRequest) {
             </head>
             <body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
               <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); padding: 40px 20px; text-align: center; border-radius: 8px 8px 0 0;">
-                <h1 style="color: #c9a962; margin: 0; font-size: 28px; font-weight: 300;">MIDC AI Design Studio</h1>
+                <h1 style="color: #8f7852; margin: 0; font-size: 28px; font-weight: 300;">MIDC AI Design Studio</h1>
                 <p style="color: #ffffff; margin: 10px 0 0 0; font-size: 14px;">Your Vision, Elevated by AI</p>
               </div>
 
@@ -212,7 +212,7 @@ export async function POST(request: NextRequest) {
                   Thank you for exploring the future of design with MIDC. Based on your prompt, our AI has generated a concept visualization that captures your vision with MIDC's signature blend of European precision and Arabic warmth.
                 </p>
 
-                <div style="margin: 30px 0; padding: 20px; background: #f8f8f8; border-left: 4px solid #c9a962; border-radius: 4px;">
+                <div style="margin: 30px 0; padding: 20px; background: #f8f8f8; border-left: 4px solid #8f7852; border-radius: 4px;">
                   <p style="margin: 0 0 10px 0; font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px;">Your Prompt</p>
                   <p style="margin: 0; font-size: 14px; color: #333; font-style: italic;">"${prompt}"</p>
                 </div>
@@ -231,7 +231,7 @@ export async function POST(request: NextRequest) {
                 </div>
 
                 <div style="text-align: center; margin: 30px 0;">
-                  <a href="https://midc.ae/contact" style="display: inline-block; background: #c9a962; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Schedule Consultation</a>
+                  <a href="https://midc.ae/contact" style="display: inline-block; background: #8f7852; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Schedule Consultation</a>
                 </div>
 
                 <div style="border-top: 1px solid #e0e0e0; margin-top: 30px; padding-top: 20px;">
@@ -245,12 +245,12 @@ export async function POST(request: NextRequest) {
                 <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
                   <p style="font-size: 12px; color: #999; margin: 5px 0;">
                     Mouhajer International Design & Contracting<br>
-                    Dubai, UAE | <a href="tel:+971XXXXXXXX" style="color: #c9a962;">+971 XX XXX XXXX</a>
+                    Dubai, UAE | <a href="tel:+971XXXXXXXX" style="color: #8f7852;">+971 XX XXX XXXX</a>
                   </p>
                   <div style="margin-top: 15px;">
-                    <a href="https://midc.ae" style="color: #c9a962; text-decoration: none; margin: 0 10px; font-size: 12px;">Website</a>
-                    <a href="https://linkedin.com/company/midc" style="color: #c9a962; text-decoration: none; margin: 0 10px; font-size: 12px;">LinkedIn</a>
-                    <a href="https://instagram.com/midc.ae" style="color: #c9a962; text-decoration: none; margin: 0 10px; font-size: 12px;">Instagram</a>
+                    <a href="https://midc.ae" style="color: #8f7852; text-decoration: none; margin: 0 10px; font-size: 12px;">Website</a>
+                    <a href="https://linkedin.com/company/midc" style="color: #8f7852; text-decoration: none; margin: 0 10px; font-size: 12px;">LinkedIn</a>
+                    <a href="https://instagram.com/midc.ae" style="color: #8f7852; text-decoration: none; margin: 0 10px; font-size: 12px;">Instagram</a>
                   </div>
                 </div>
               </div>
@@ -292,7 +292,7 @@ export async function POST(request: NextRequest) {
         error: "Failed to generate image",
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

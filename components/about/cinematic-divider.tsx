@@ -27,7 +27,7 @@ export function CinematicDivider({
   const textOpacity = useTransform(
     scrollYProgress,
     [0.2, 0.4, 0.6, 0.8],
-    [0, 1, 1, 0]
+    [0, 1, 1, 0],
   );
   const textY = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [50, 0, -50]);
 
@@ -66,7 +66,7 @@ export function CinematicDivider({
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, delay: 0.2 }}
-            className="mx-auto mb-8 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#c9a962]/60 to-transparent"
+            className="mx-auto mb-8 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#8f7852]/60 to-transparent"
           />
 
           {/* Quote */}
@@ -75,7 +75,7 @@ export function CinematicDivider({
           </p>
 
           {/* Author */}
-          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]/80">
+          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]/80">
             {author}
           </span>
 
@@ -85,7 +85,7 @@ export function CinematicDivider({
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, delay: 0.4 }}
-            className="mx-auto mt-8 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#c9a962]/60 to-transparent"
+            className="mx-auto mt-8 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#8f7852]/60 to-transparent"
           />
         </motion.div>
       </div>

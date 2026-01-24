@@ -50,7 +50,7 @@ export function TestFounderVision() {
         style={{ y: textY, opacity }}
         className="relative z-10 flex h-full items-center justify-center px-6 lg:px-12"
       >
-        <div className="max-w-5xl text-center">
+        <div className="container text-center">
           {/* Chapter indicator */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -60,11 +60,11 @@ export function TestFounderVision() {
             className="mb-12"
           >
             <div className="mb-4 inline-flex items-center gap-3 border border-white/10 bg-white/5 px-6 py-3 backdrop-blur-md">
-              <div className="h-px w-8 bg-[#c9a962]" />
+              <div className="h-px w-8 bg-[#8f7852]" />
               <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-white/70">
                 Chapter I
               </span>
-              <div className="h-px w-8 bg-[#c9a962]" />
+              <div className="h-px w-8 bg-[#8f7852]" />
             </div>
           </motion.div>
 
@@ -80,10 +80,10 @@ export function TestFounderVision() {
               <br />
               until the last detail
               <br />
-              <span className="text-[#c9a962]">serves its purpose."</span>
+              <span className="text-[#8f7852]">serves its purpose."</span>
             </h2>
 
-            <div className="mb-16 h-px w-32 mx-auto bg-gradient-to-r from-transparent via-[#c9a962] to-transparent" />
+            <div className="mb-16 h-px w-32 mx-auto bg-gradient-to-r from-transparent via-[#8f7852] to-transparent" />
 
             <p className="mx-auto max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-white/70 lg:text-xl">
               For Eng. Maher Mouhajer, architecture is not about making a

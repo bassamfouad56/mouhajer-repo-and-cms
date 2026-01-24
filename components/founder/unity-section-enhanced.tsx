@@ -25,7 +25,7 @@ const teams = [
     icon: Hammer,
     title: "The Construction Team",
     description: "respects the artistic intent.",
-    color: "#c9a962",
+    color: "#8f7852",
   },
   {
     id: "mep",
@@ -57,7 +57,7 @@ function TeamCard({ team, index }: { team: (typeof teams)[0]; index: number }) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.8, delay: index * 0.15 }}
-      className="group relative border border-[#c9a962]/10 bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white/90 hover:shadow-2xl"
+      className="group relative border border-[#8f7852]/10 bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#8f7852]/30 hover:bg-white/90 hover:shadow-2xl"
     >
       {/* Glowing border on hover */}
       <div
@@ -174,7 +174,7 @@ export function UnitySectionEnhanced() {
 
       {/* Glowing orb */}
       <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2">
-        <div className="h-full w-full rounded-full bg-[#c9a962]/[0.02] blur-[150px]" />
+        <div className="h-full w-full rounded-full bg-[#8f7852]/[0.02] blur-[150px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
@@ -252,7 +252,7 @@ export function UnitySectionEnhanced() {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.5, delay: 0.5 }}
-          className="mx-auto mb-16 hidden h-px w-full max-w-5xl origin-center bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent md:block lg:mb-24"
+          className="mx-auto mb-16 hidden h-px w-full container origin-center bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent md:block lg:mb-24"
         />
 
         {/* Leadership Statement with 3D card */}
@@ -261,7 +261,7 @@ export function UnitySectionEnhanced() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="border-t border-[#c9a962]/20 pt-16"
+          className="border-t border-[#8f7852]/20 pt-16"
         >
           <div className="mx-auto max-w-4xl">
             <motion.p
@@ -285,7 +285,7 @@ export function UnitySectionEnhanced() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="group relative border-l-2 bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:bg-white/90"
-              style={{ borderColor: "#c9a962" }}
+              style={{ borderColor: "#8f7852" }}
             >
               <RevealText
                 className="font-SchnyderS text-xl font-light italic text-neutral-700 lg:text-2xl"
@@ -298,7 +298,7 @@ export function UnitySectionEnhanced() {
               </RevealText>
 
               {/* Glowing accent */}
-              <div className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-[#c9a962]/0 via-[#c9a962] to-[#c9a962]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-[#8f7852]/0 via-[#8f7852] to-[#8f7852]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </motion.div>
           </div>
         </motion.div>
@@ -314,7 +314,7 @@ export function UnitySectionEnhanced() {
           <MagneticButton strength={0.25}>
             <Link
               href="/about/process"
-              className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-900 transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962]/20"
+              className="group inline-flex items-center gap-3 border border-[#8f7852]/30 bg-[#8f7852]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-900 transition-all duration-500 hover:border-[#8f7852] hover:bg-[#8f7852]/20"
             >
               <span>See Our Integrated Process</span>
               <ArrowRight

@@ -59,11 +59,11 @@ export function FounderSection() {
   const springConfig = { stiffness: 100, damping: 30 };
   const rotateX = useSpring(
     useTransform(mouseY, [-0.5, 0.5], [3, -3]),
-    springConfig
+    springConfig,
   );
   const rotateY = useSpring(
     useTransform(mouseX, [-0.5, 0.5], [-3, 3]),
-    springConfig
+    springConfig,
   );
 
   const handleMouseMove = useCallback(
@@ -76,7 +76,7 @@ export function FounderSection() {
       mouseY.set(y);
       setMousePosition({ x: e.clientX, y: e.clientY });
     },
-    [mouseX, mouseY]
+    [mouseX, mouseY],
   );
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export function FounderSection() {
             className="mb-6 flex items-center gap-4"
           >
             <div className="h-px w-12 bg-neutral-300" />
-            <Globe className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
+            <Globe className="h-4 w-4 text-[#8f7852]" strokeWidth={1} />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
               The Founder
             </span>
@@ -163,8 +163,8 @@ export function FounderSection() {
                 </div>
 
                 {/* Corner accents */}
-                <div className="absolute left-0 top-0 h-20 w-20 border-l-2 border-t-2 border-[#c9a962]/50" />
-                <div className="absolute bottom-0 right-0 h-20 w-20 border-b-2 border-r-2 border-[#c9a962]/50" />
+                <div className="absolute left-0 top-0 h-20 w-20 border-l-2 border-t-2 border-[#8f7852]/50" />
+                <div className="absolute bottom-0 right-0 h-20 w-20 border-b-2 border-r-2 border-[#8f7852]/50" />
               </motion.div>
             </motion.div>
           </motion.div>
@@ -185,7 +185,7 @@ export function FounderSection() {
                 We create spaces where the grandeur of history shakes hands with
                 the clean lines of tomorrow.
               </p>
-              <div className="mt-4 h-1 w-16 bg-[#c9a962]/50" />
+              <div className="mt-4 h-1 w-16 bg-[#8f7852]/50" />
             </motion.div>
 
             {/* Subtitle */}
@@ -193,7 +193,7 @@ export function FounderSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-12 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-[#c9a962]"
+              className="mb-12 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-[#8f7852]"
             >
               Defined by Dualities: European precision meets Arabian warmth
             </motion.p>
@@ -208,12 +208,12 @@ export function FounderSection() {
                     initial={{ opacity: 0, x: 30 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.5 + index * 0.15 }}
-                    className="group relative border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-[#c9a962]/30 hover:shadow-lg lg:p-8"
+                    className="group relative border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-[#8f7852]/30 hover:shadow-lg lg:p-8"
                   >
                     <div className="flex items-start gap-6">
-                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5 transition-all duration-300 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10">
+                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center border border-[#8f7852]/30 bg-[#8f7852]/5 transition-all duration-300 group-hover:border-[#8f7852]/50 group-hover:bg-[#8f7852]/10">
                         <Icon
-                          className="h-5 w-5 text-[#c9a962]"
+                          className="h-5 w-5 text-[#8f7852]"
                           strokeWidth={1}
                         />
                       </div>
@@ -221,7 +221,7 @@ export function FounderSection() {
                         <div className="mb-1 font-Satoshi text-xs font-light uppercase tracking-wider text-neutral-400">
                           {philosophy.subtitle}
                         </div>
-                        <h3 className="mb-3 font-SchnyderS text-xl font-light text-neutral-950 transition-colors group-hover:text-[#c9a962] lg:text-2xl">
+                        <h3 className="mb-3 font-SchnyderS text-xl font-light text-neutral-950 transition-colors group-hover:text-[#8f7852] lg:text-2xl">
                           {philosophy.title}
                         </h3>
                         <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">

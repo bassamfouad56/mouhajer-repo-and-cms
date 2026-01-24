@@ -11,9 +11,6 @@ import {
 import { SafeImage } from "@/components/safe-image";
 import {
   ArrowUpRight,
-  Sparkles,
-  Building2,
-  Home,
   ChevronDown,
 } from "lucide-react";
 import Link from "next/link";
@@ -33,7 +30,6 @@ interface UnifiedShowcaseProps {
 const promiseCards = [
   {
     id: "land-owners",
-    icon: Building2,
     label: "From Ground Zero",
     title: "Land Owners",
     subtitle: "Build Your Vision",
@@ -46,7 +42,6 @@ const promiseCards = [
   },
   {
     id: "property-owners",
-    icon: Home,
     label: "Renaissance & Rebirth",
     title: "Property Owners",
     subtitle: "Transform Your Space",
@@ -71,7 +66,7 @@ const whoWeArePanels = [
     href: "/services/civil-construction",
     ctaText: "Explore Construction",
     imageKey: "contractor",
-    accent: "#c9a962",
+    accent: "#8f7852",
   },
   {
     id: "design",
@@ -99,11 +94,22 @@ const whoWeArePanels = [
   },
 ];
 
+// Hover background images for promise cards
+const promiseCardBackgrounds: Record<string, string> = {
+  "land-owners": "/homepage/land owners/MID9173.jpg",
+  "property-owners":
+    "/homepage/Property Owners/vlcsnap-2026-01-03-15h21m57s058.jpg",
+};
+
 export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const promiseContentRef = useRef<HTMLDivElement>(null);
-  const promiseInView = useInView(promiseContentRef, { once: true, margin: "-100px" });
-  const [activePanel, setActivePanel] = useState(0);
+  const promiseInView = useInView(promiseContentRef, {
+    once: true,
+    margin: "-100px",
+  });
+  const [activePanel, setActivePanel] = useState(-1);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   // Total scroll height: Promise section (1 screen) + Who We Are panels (3 panels x 180vh each)
   const totalHeight = 100 + whoWeArePanels.length * 180; // vh
@@ -129,10 +135,13 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
     } else {
       // Calculate which Who We Are panel we're on
       const whoWeAreProgress = (latest - promiseRatio) / whoWeAreRatio;
-      const panelProgress = Math.max(0, Math.min(1, (whoWeAreProgress - holdRatio) / scrollRatio));
+      const panelProgress = Math.max(
+        0,
+        Math.min(1, (whoWeAreProgress - holdRatio) / scrollRatio),
+      );
       const newIndex = Math.min(
         whoWeArePanels.length - 1,
-        Math.floor(panelProgress * whoWeArePanels.length)
+        Math.floor(panelProgress * whoWeArePanels.length),
       );
       if (newIndex !== activePanel && newIndex >= 0) {
         setActivePanel(newIndex);
@@ -144,28 +153,28 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
   const x = useTransform(
     scrollYProgress,
     [promiseRatio, promiseRatio + whoWeAreRatio * holdRatio, 1],
-    ["0%", "0%", `-${(whoWeArePanels.length - 1) * 100}%`]
+    ["0%", "0%", `-${(whoWeArePanels.length - 1) * 100}%`],
   );
 
   // Progress bar width for Who We Are
   const progressWidth = useTransform(
     scrollYProgress,
     [promiseRatio, promiseRatio + whoWeAreRatio * holdRatio, 1],
-    ["0%", `${100 / whoWeArePanels.length}%`, "100%"]
+    ["0%", `${100 / whoWeArePanels.length}%`, "100%"],
   );
 
   // Promise section content opacity (fades out as we enter Who We Are)
   const promiseOpacity = useTransform(
     scrollYProgress,
     [0, promiseRatio * 0.7, promiseRatio],
-    [1, 1, 0]
+    [1, 1, 0],
   );
 
   // Who We Are header opacity (fades in as we enter Who We Are)
   const whoWeAreHeaderOpacity = useTransform(
     scrollYProgress,
     [promiseRatio * 0.8, promiseRatio],
-    [0, 1]
+    [0, 1],
   );
 
   const getImageUrl = (imageKey: string) => {
@@ -176,7 +185,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
   const bgPromiseOpacity = useTransform(
     scrollYProgress,
     [0, promiseRatio * 0.8, promiseRatio],
-    [1, 1, 0]
+    [1, 1, 0],
   );
 
   return (
@@ -201,17 +210,41 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
             src={images.background}
             alt="Construction background"
             fill
-            className="object-cover"
+            className="object-cover object-top"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/70 via-neutral-950/50 to-neutral-950/80" />
           <div className="absolute inset-0 bg-neutral-950/40" />
         </motion.div>
 
+        {/* Hover Background Images for Promise Cards */}
+        {promiseCards.map((card) => (
+          <motion.div
+            key={`hover-bg-${card.id}`}
+            className="absolute inset-0 z-[1]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: hoveredCard === card.id ? 1 : 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            style={{ pointerEvents: "none" }}
+          >
+            <SafeImage
+              src={promiseCardBackgrounds[card.id]}
+              alt={card.title}
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/70 via-neutral-950/50 to-neutral-950/80" />
+            <div className="absolute inset-0 bg-neutral-950/40" />
+          </motion.div>
+        ))}
+
         {/* Who We Are Panel Backgrounds (fade in as you scroll) */}
         {whoWeArePanels.map((panel, index) => {
-          const panelStart = promiseRatio + (index / whoWeArePanels.length) * whoWeAreRatio;
-          const panelEnd = promiseRatio + ((index + 1) / whoWeArePanels.length) * whoWeAreRatio;
+          const panelStart =
+            promiseRatio + (index / whoWeArePanels.length) * whoWeAreRatio;
+          const panelEnd =
+            promiseRatio +
+            ((index + 1) / whoWeArePanels.length) * whoWeAreRatio;
 
           const bgOpacity = useTransform(
             scrollYProgress,
@@ -221,13 +254,13 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
               panelEnd - 0.05,
               Math.min(1, panelEnd + 0.02),
             ],
-            [0, 1, 1, index === whoWeArePanels.length - 1 ? 1 : 0]
+            [0, 1, 1, index === whoWeArePanels.length - 1 ? 1 : 0],
           );
 
           const bgScale = useTransform(
             scrollYProgress,
             [panelStart, (panelStart + panelEnd) / 2, panelEnd],
-            [1.1, 1, 1.05]
+            [1.1, 1, 1.05],
           );
 
           return (
@@ -257,7 +290,10 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
         <motion.div
           ref={promiseContentRef}
           className="absolute inset-0 z-10 flex items-center justify-center"
-          style={{ opacity: promiseOpacity }}
+          style={{
+            opacity: promiseOpacity,
+            pointerEvents: activePanel === -1 ? "auto" : "none",
+          }}
         >
           <div className="mx-auto max-w-7xl px-6 py-32 lg:py-40">
             {/* Header */}
@@ -268,32 +304,30 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="mb-6 flex items-center justify-center gap-4">
-                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
-                <div className="flex items-center gap-2">
-                  <Sparkles className="h-3.5 w-3.5 text-[#c9a962]" strokeWidth={1.5} />
-                  <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
-                    The Mouhajer Promise
-                  </span>
-                </div>
-                <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]" />
+                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
+                  The Mouhajer Promise
+                </span>
+                <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]" />
               </div>
 
               <h2 className="mb-4 font-SchnyderS text-3xl font-light tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
                 The Architect of
                 <br />
-                <span className="text-[#c9a962]">Assets & Sanctuaries</span>
+                <span className="text-[#8f7852]">Assets & Sanctuaries</span>
               </h2>
 
               <p className="mx-auto max-w-xl font-Satoshi text-base font-light leading-relaxed text-white/60 lg:text-lg">
                 Two categories of clients.{" "}
-                <span className="font-medium text-white/90">One unwavering demand: Perfection.</span>
+                <span className="font-medium text-white/90">
+                  One unwavering demand: Perfection.
+                </span>
               </p>
             </motion.div>
 
             {/* Cards Grid */}
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
               {promiseCards.map((card, index) => {
-                const Icon = card.icon;
                 const isAccent = card.accent;
 
                 return (
@@ -302,48 +336,40 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                     className="flex"
                     initial={{ opacity: 0, y: 40 }}
                     animate={promiseInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: 0.2 + index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.2 + index * 0.15,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    onMouseEnter={() => setHoveredCard(card.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
                   >
                     <Link href={card.href} className="group flex w-full">
                       <div
                         className={`relative flex w-full flex-col overflow-hidden border bg-white/5 p-6 backdrop-blur-md transition-all duration-500 sm:p-8 lg:p-10 ${
                           isAccent
-                            ? "border-white/10 hover:border-[#c9a962]/30 hover:bg-white/10 hover:shadow-[0_0_60px_rgba(201,169,98,0.15)]"
+                            ? "border-white/10 hover:border-[#8f7852]/30 hover:bg-white/10 hover:shadow-[0_0_60px_rgba(201,169,98,0.15)]"
                             : "border-white/10 hover:border-white/20 hover:bg-white/10 hover:shadow-[0_0_60px_rgba(255,255,255,0.05)]"
                         }`}
                       >
                         {/* Corner accents */}
                         <div
-                          className={`absolute left-0 top-0 h-8 w-px ${isAccent ? "bg-[#c9a962]/30" : "bg-white/20"}`}
+                          className={`absolute left-0 top-0 h-8 w-px ${isAccent ? "bg-[#8f7852]/30" : "bg-white/20"}`}
                         />
                         <div
-                          className={`absolute left-0 top-0 h-px w-8 ${isAccent ? "bg-[#c9a962]/30" : "bg-white/20"}`}
+                          className={`absolute left-0 top-0 h-px w-8 ${isAccent ? "bg-[#8f7852]/30" : "bg-white/20"}`}
                         />
                         <div
-                          className={`absolute bottom-0 right-0 h-8 w-px ${isAccent ? "bg-[#c9a962]/30" : "bg-white/20"}`}
+                          className={`absolute bottom-0 right-0 h-8 w-px ${isAccent ? "bg-[#8f7852]/30" : "bg-white/20"}`}
                         />
                         <div
-                          className={`absolute bottom-0 right-0 h-px w-8 ${isAccent ? "bg-[#c9a962]/30" : "bg-white/20"}`}
+                          className={`absolute bottom-0 right-0 h-px w-8 ${isAccent ? "bg-[#8f7852]/30" : "bg-white/20"}`}
                         />
-
-                        {/* Icon */}
-                        <div
-                          className={`mb-4 inline-flex h-12 w-12 items-center justify-center border backdrop-blur-sm lg:h-14 lg:w-14 ${
-                            isAccent
-                              ? "border-[#c9a962]/30 bg-[#c9a962]/10"
-                              : "border-white/20 bg-white/10"
-                          }`}
-                        >
-                          <Icon
-                            className={`h-5 w-5 lg:h-6 lg:w-6 ${isAccent ? "text-[#c9a962]" : "text-white/70"}`}
-                            strokeWidth={1.5}
-                          />
-                        </div>
 
                         {/* Label */}
                         <span
                           className={`mb-2 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] ${
-                            isAccent ? "text-[#c9a962]" : "text-white/40"
+                            isAccent ? "text-[#8f7852]" : "text-white/40"
                           }`}
                         >
                           {card.label}
@@ -369,7 +395,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           <span
                             className={`font-Satoshi text-xs font-light tracking-wide transition-colors lg:text-sm ${
                               isAccent
-                                ? "text-white/70 group-hover:text-[#c9a962]"
+                                ? "text-white/70 group-hover:text-[#8f7852]"
                                 : "text-white/70 group-hover:text-white"
                             }`}
                           >
@@ -378,7 +404,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           <div
                             className={`flex h-9 w-9 items-center justify-center border transition-all duration-300 lg:h-10 lg:w-10 ${
                               isAccent
-                                ? "border-white/20 group-hover:border-[#c9a962] group-hover:bg-[#c9a962]"
+                                ? "border-white/20 group-hover:border-[#8f7852] group-hover:bg-[#8f7852]"
                                 : "border-white/20 group-hover:border-white/40 group-hover:bg-white/10"
                             }`}
                           >
@@ -396,7 +422,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                         {/* Bottom accent line on hover */}
                         <div
                           className={`absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-500 group-hover:w-full ${
-                            isAccent ? "bg-[#c9a962]" : "bg-white/40"
+                            isAccent ? "bg-[#8f7852]" : "bg-white/40"
                           }`}
                         />
                       </div>
@@ -418,9 +444,13 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
               </span>
               <motion.div
                 animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
-                <ChevronDown className="h-5 w-5 text-[#c9a962]/60" />
+                <ChevronDown className="h-5 w-5 text-[#8f7852]/60" />
               </motion.div>
             </motion.div>
           </div>
@@ -431,24 +461,26 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
         {/* ============================================ */}
         <motion.div
           className="absolute inset-0 z-20"
-          style={{ opacity: whoWeAreHeaderOpacity }}
+          style={{
+            opacity: whoWeAreHeaderOpacity,
+            pointerEvents: activePanel === -1 ? "none" : "auto",
+          }}
         >
           {/* Fixed Header */}
           <div className="absolute left-0 right-0 top-0 z-40 px-4 pb-4 pt-20 sm:px-6 sm:pb-6 sm:pt-24 lg:px-12 lg:pb-8 lg:pt-28">
-            <motion.div
-              className="flex flex-col items-center gap-3 lg:flex-row lg:items-start lg:justify-between lg:gap-4"
-            >
+            <motion.div className="flex flex-col items-center gap-3 lg:flex-row lg:items-start lg:justify-between lg:gap-4">
               {/* Left: Title */}
               <div className="text-center lg:text-left">
                 <div className="mb-2 flex items-center justify-center gap-2 lg:justify-start">
-                  <Sparkles className="h-3 w-3 text-[#c9a962]" strokeWidth={1} />
-                  <span className="font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962] sm:text-[10px] sm:tracking-[0.4em]">
+                  <span className="font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#8f7852] sm:text-[10px] sm:tracking-[0.4em]">
                     Who We Are
                   </span>
                 </div>
                 <h2 className="font-SchnyderS text-2xl font-light tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
-                  <span className="block sm:inline">The Contractor. The Designer.</span>{" "}
-                  <span className="text-[#c9a962]">The Maker.</span>
+                  <span className="block sm:inline">
+                    The Contractor. The Designer.
+                  </span>{" "}
+                  <span className="text-[#8f7852]">The Maker.</span>
                 </h2>
               </div>
 
@@ -457,7 +489,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                 <p className="max-w-xs text-right font-Satoshi text-sm font-light leading-relaxed text-white/50">
                   Three disciplines. One integrated team.
                   <br />
-                  <span className="text-[#c9a962]">We are all three.</span>
+                  <span className="text-[#8f7852]">We are all three.</span>
                 </p>
               </div>
             </motion.div>
@@ -466,16 +498,22 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
             <div className="mx-auto mt-4 max-w-4xl sm:mt-6 lg:mt-8">
               <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-white/10">
                 <motion.div
-                  className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#c9a962] to-[#e8d5a3]"
+                  className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#8f7852] to-[#e8d5a3]"
                   style={{ width: progressWidth }}
                 />
               </div>
               {/* Panel Indicators */}
               <div className="mt-3 flex justify-between sm:mt-4">
                 {whoWeArePanels.map((panel, index) => {
-                  const panelStart = promiseRatio + (index / whoWeArePanels.length) * whoWeAreRatio;
-                  const panelMid = promiseRatio + ((index + 0.5) / whoWeArePanels.length) * whoWeAreRatio;
-                  const panelEnd = promiseRatio + ((index + 1) / whoWeArePanels.length) * whoWeAreRatio;
+                  const panelStart =
+                    promiseRatio +
+                    (index / whoWeArePanels.length) * whoWeAreRatio;
+                  const panelMid =
+                    promiseRatio +
+                    ((index + 0.5) / whoWeArePanels.length) * whoWeAreRatio;
+                  const panelEnd =
+                    promiseRatio +
+                    ((index + 1) / whoWeArePanels.length) * whoWeAreRatio;
 
                   return (
                     <motion.div
@@ -490,7 +528,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                             1,
                             1,
                             index === whoWeArePanels.length - 1 ? 1 : 0.3,
-                          ]
+                          ],
                         ),
                       }}
                     >
@@ -508,10 +546,16 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
           </div>
 
           {/* Horizontal Scroll Container */}
-          <motion.div className="flex h-full pt-32 sm:pt-40 lg:pt-48" style={{ x }}>
+          <motion.div
+            className="flex h-full pt-32 sm:pt-40 lg:pt-48"
+            style={{ x }}
+          >
             {whoWeArePanels.map((panel, index) => {
-              const panelStart = promiseRatio + (index / whoWeArePanels.length) * whoWeAreRatio;
-              const panelMid = promiseRatio + ((index + 0.5) / whoWeArePanels.length) * whoWeAreRatio;
+              const panelStart =
+                promiseRatio + (index / whoWeArePanels.length) * whoWeAreRatio;
+              const panelMid =
+                promiseRatio +
+                ((index + 0.5) / whoWeArePanels.length) * whoWeAreRatio;
 
               // Content animation timing
               const getContentProgress = (offset: number) => {
@@ -536,12 +580,12 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           opacity: useTransform(
                             scrollYProgress,
                             getContentProgress(0),
-                            [index === 0 ? 1 : 0, 1]
+                            [index === 0 ? 1 : 0, 1],
                           ),
                           y: useTransform(
                             scrollYProgress,
                             getContentProgress(0),
-                            [index === 0 ? 0 : 40, 0]
+                            [index === 0 ? 0 : 40, 0],
                           ),
                         }}
                       >
@@ -564,12 +608,12 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           opacity: useTransform(
                             scrollYProgress,
                             getContentProgress(1),
-                            [index === 0 ? 1 : 0, 1]
+                            [index === 0 ? 1 : 0, 1],
                           ),
                           y: useTransform(
                             scrollYProgress,
                             getContentProgress(1),
-                            [index === 0 ? 0 : 60, 0]
+                            [index === 0 ? 0 : 60, 0],
                           ),
                         }}
                       >
@@ -583,12 +627,12 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           opacity: useTransform(
                             scrollYProgress,
                             getContentProgress(2),
-                            [index === 0 ? 1 : 0, 1]
+                            [index === 0 ? 1 : 0, 1],
                           ),
                           y: useTransform(
                             scrollYProgress,
                             getContentProgress(2),
-                            [index === 0 ? 0 : 30, 0]
+                            [index === 0 ? 0 : 30, 0],
                           ),
                         }}
                       >
@@ -601,13 +645,13 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           opacity: useTransform(
                             scrollYProgress,
                             getContentProgress(3),
-                            [index === 0 ? 1 : 0, 1]
+                            [index === 0 ? 1 : 0, 1],
                           ),
                         }}
                       >
                         <Link
                           href={panel.href}
-                          className="group inline-flex items-center gap-3 bg-[#c9a962] px-6 py-3.5 transition-all duration-300 hover:bg-[#b8983f] sm:px-8 sm:py-4"
+                          className="group inline-flex items-center gap-3 bg-[#8f7852] px-6 py-3.5 transition-all duration-300 hover:bg-[#b8983f] sm:px-8 sm:py-4"
                         >
                           <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-950 sm:text-sm">
                             {panel.ctaText}
@@ -633,9 +677,14 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
           {/* Bottom Navigation Dots */}
           <div className="absolute bottom-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-4 sm:bottom-6 sm:gap-6 lg:bottom-10 lg:gap-8">
             {whoWeArePanels.map((panel, index) => {
-              const panelStart = promiseRatio + (index / whoWeArePanels.length) * whoWeAreRatio;
-              const panelMid = promiseRatio + ((index + 0.5) / whoWeArePanels.length) * whoWeAreRatio;
-              const panelEnd = promiseRatio + ((index + 1) / whoWeArePanels.length) * whoWeAreRatio;
+              const panelStart =
+                promiseRatio + (index / whoWeArePanels.length) * whoWeAreRatio;
+              const panelMid =
+                promiseRatio +
+                ((index + 0.5) / whoWeArePanels.length) * whoWeAreRatio;
+              const panelEnd =
+                promiseRatio +
+                ((index + 1) / whoWeArePanels.length) * whoWeAreRatio;
 
               return (
                 <motion.div
@@ -650,7 +699,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                         1.2,
                         1.2,
                         index === whoWeArePanels.length - 1 ? 1.2 : 0.8,
-                      ]
+                      ],
                     ),
                   }}
                 >
@@ -665,7 +714,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           32,
                           32,
                           index === whoWeArePanels.length - 1 ? 32 : 6,
-                        ]
+                        ],
                       ),
                       backgroundColor: useTransform(
                         scrollYProgress,
@@ -677,7 +726,7 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
                           index === whoWeArePanels.length - 1
                             ? panel.accent
                             : "rgba(255,255,255,0.2)",
-                        ]
+                        ],
                       ),
                     }}
                   />
@@ -695,21 +744,25 @@ export function UnifiedShowcase({ images }: UnifiedShowcaseProps) {
           >
             <motion.div
               animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
-              <ChevronDown className="h-4 w-4 text-[#c9a962]" />
+              <ChevronDown className="h-4 w-4 text-[#8f7852]" />
             </motion.div>
           </motion.div>
         </motion.div>
 
         {/* Corner Decorations */}
         <div className="pointer-events-none absolute bottom-6 left-4 z-30 hidden h-12 w-12 sm:block sm:left-6 lg:left-12 lg:h-16 lg:w-16">
-          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
-          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#8f7852]/30 lg:h-8" />
+          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#8f7852]/30 lg:w-8" />
         </div>
         <div className="pointer-events-none absolute right-4 top-6 z-30 hidden h-12 w-12 sm:block sm:right-6 lg:right-12 lg:h-16 lg:w-16">
-          <div className="absolute right-0 top-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
-          <div className="absolute right-0 top-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+          <div className="absolute right-0 top-0 h-6 w-px bg-[#8f7852]/30 lg:h-8" />
+          <div className="absolute right-0 top-0 h-px w-6 bg-[#8f7852]/30 lg:w-8" />
         </div>
       </div>
     </section>

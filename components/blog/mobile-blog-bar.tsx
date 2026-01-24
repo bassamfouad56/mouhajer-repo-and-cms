@@ -62,7 +62,7 @@ export default function MobileBlogBar({
       action: () => {
         window.open(
           `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(postTitle)}`,
-          "_blank"
+          "_blank",
         );
         setShowShareMenu(false);
       },
@@ -72,7 +72,7 @@ export default function MobileBlogBar({
       action: () => {
         window.open(
           `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(postTitle)}`,
-          "_blank"
+          "_blank",
         );
         setShowShareMenu(false);
       },
@@ -82,7 +82,7 @@ export default function MobileBlogBar({
       action: () => {
         window.open(
           `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,
-          "_blank"
+          "_blank",
         );
         setShowShareMenu(false);
       },
@@ -119,7 +119,7 @@ export default function MobileBlogBar({
                   onClick={onTOCToggle}
                   className={`flex flex-col items-center gap-1 transition-colors ${
                     showTOC
-                      ? "text-[#c9a962]"
+                      ? "text-[#8f7852]"
                       : "text-neutral-600 hover:text-neutral-950"
                   }`}
                 >

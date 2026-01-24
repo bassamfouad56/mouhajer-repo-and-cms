@@ -102,22 +102,22 @@ const StepCard = ({
     <div
       className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all duration-500 ${
         isActive
-          ? "border-[#c9a962] bg-[#c9a962] shadow-lg shadow-[#c9a962]/30"
+          ? "border-[#8f7852] bg-[#8f7852] shadow-lg shadow-[#8f7852]/30"
           : isCompleted
-            ? "border-[#c9a962] bg-[#c9a962]/20"
-            : "border-neutral-200 bg-white group-hover:border-[#c9a962]/50"
+            ? "border-[#8f7852] bg-[#8f7852]/20"
+            : "border-neutral-200 bg-white group-hover:border-[#8f7852]/50"
       }`}
     >
       {isCompleted && !isActive ? (
-        <CheckCircle2 className="h-5 w-5 text-[#c9a962]" strokeWidth={2} />
+        <CheckCircle2 className="h-5 w-5 text-[#8f7852]" strokeWidth={2} />
       ) : (
         <span
           className={`font-Satoshi text-sm font-medium transition-colors duration-300 ${
             isActive
               ? "text-neutral-950"
               : isCompleted
-                ? "text-[#c9a962]"
-                : "text-neutral-400 group-hover:text-[#c9a962]"
+                ? "text-[#8f7852]"
+                : "text-neutral-400 group-hover:text-[#8f7852]"
           }`}
         >
           {String(index + 1).padStart(2, "0")}
@@ -127,7 +127,7 @@ const StepCard = ({
       {/* Active ring animation */}
       {isActive && (
         <motion.div
-          className="absolute -inset-1 rounded-full border-2 border-[#c9a962]/40"
+          className="absolute -inset-1 rounded-full border-2 border-[#8f7852]/40"
           initial={{ scale: 1, opacity: 1 }}
           animate={{ scale: 1.3, opacity: 0 }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
@@ -139,7 +139,7 @@ const StepCard = ({
     <motion.span
       className={`mt-3 font-Satoshi text-xs font-medium uppercase tracking-wider transition-all duration-300 ${
         isActive
-          ? "text-[#c9a962]"
+          ? "text-[#8f7852]"
           : isCompleted
             ? "text-neutral-600"
             : "text-neutral-400 group-hover:text-neutral-600"
@@ -155,7 +155,7 @@ const StepCard = ({
 
     {/* Active indicator bar */}
     <motion.div
-      className="mt-2 h-0.5 w-8 bg-[#c9a962] origin-center"
+      className="mt-2 h-0.5 w-8 bg-[#8f7852] origin-center"
       initial={{ scaleX: 0 }}
       animate={{ scaleX: isActive ? 1 : 0 }}
       transition={{ duration: 0.3 }}
@@ -181,8 +181,8 @@ const StepContent = ({
         transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       >
         {/* Subtitle Badge */}
-        <div className="mb-4 inline-flex items-center gap-2 border border-[#c9a962]/30 bg-[#c9a962]/5 px-4 py-2">
-          <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
+        <div className="mb-4 inline-flex items-center gap-2 border border-[#8f7852]/30 bg-[#8f7852]/5 px-4 py-2">
+          <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#8f7852]">
             {step.subtitle}
           </span>
         </div>
@@ -208,7 +208,7 @@ const StepContent = ({
               transition={{ duration: 0.4, delay: 0.1 + fIndex * 0.1 }}
             >
               <CheckCircle2
-                className="h-4 w-4 text-[#c9a962]"
+                className="h-4 w-4 text-[#8f7852]"
                 strokeWidth={1.5}
               />
               <span className="font-Satoshi text-sm font-light text-neutral-700">
@@ -219,13 +219,13 @@ const StepContent = ({
         </div>
 
         {/* Quick Nav hint */}
-        <div className="flex items-center gap-4 border-t border-[#c9a962]/20 pt-6">
+        <div className="flex items-center gap-4 border-t border-[#8f7852]/20 pt-6">
           <div className="flex items-center gap-2">
             <div className="flex -space-x-1">
               {processSteps.slice(0, 3).map((_, i) => (
                 <div
                   key={i}
-                  className="h-2 w-2 rounded-full border border-white bg-[#c9a962]/40"
+                  className="h-2 w-2 rounded-full border border-white bg-[#8f7852]/40"
                 />
               ))}
             </div>
@@ -262,14 +262,14 @@ export function Process() {
   const progressValue = useTransform(
     smoothProgress,
     [0.1, 0.8],
-    [0, processSteps.length - 1]
+    [0, processSteps.length - 1],
   );
 
   // Use transform to derive step without causing re-renders on every scroll tick
   const currentStepTransform = useTransform(progressValue, (value) => {
     const newStep = Math.max(
       0,
-      Math.min(Math.round(value), processSteps.length - 1)
+      Math.min(Math.round(value), processSteps.length - 1),
     );
     if (newStep !== lastStepRef.current) {
       lastStepRef.current = newStep;
@@ -286,7 +286,7 @@ export function Process() {
   const progressWidth = useTransform(
     smoothProgress,
     [0.1, 0.8],
-    ["0%", "100%"]
+    ["0%", "100%"],
   );
 
   return (
@@ -301,9 +301,9 @@ export function Process() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5] via-white to-[#faf8f5]" />
 
         {/* Static gradient orbs - no animation to prevent flickering */}
-        <div className="absolute left-[20%] top-[10%] h-[500px] w-[500px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]" />
-        <div className="absolute right-[10%] top-[40%] h-[400px] w-[400px] rounded-full bg-[#c9a962]/[0.02] blur-[120px]" />
-        <div className="absolute left-[40%] bottom-[20%] h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.02] blur-[180px]" />
+        <div className="absolute left-[20%] top-[10%] h-[500px] w-[500px] rounded-full bg-[#8f7852]/[0.03] blur-[150px]" />
+        <div className="absolute right-[10%] top-[40%] h-[400px] w-[400px] rounded-full bg-[#8f7852]/[0.02] blur-[120px]" />
+        <div className="absolute left-[40%] bottom-[20%] h-[600px] w-[600px] rounded-full bg-[#8f7852]/[0.02] blur-[180px]" />
       </div>
 
       {/* Sticky Container */}
@@ -319,7 +319,7 @@ export function Process() {
             >
               <div>
                 <div className="mb-4 flex items-center gap-4">
-                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
                   <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
                     Our Capabilities
                   </span>
@@ -327,7 +327,7 @@ export function Process() {
                 <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
                   Complete Lifecycle
                   <br />
-                  <span className="text-[#c9a962]">Control</span>
+                  <span className="text-[#8f7852]">Control</span>
                 </h2>
               </div>
 
@@ -353,7 +353,7 @@ export function Process() {
                 {/* Connection Line */}
                 <div className="absolute left-0 right-0 top-6 z-0 hidden h-0.5 bg-neutral-200 lg:block">
                   <motion.div
-                    className="h-full bg-gradient-to-r from-[#c9a962] via-[#c9a962] to-[#c9a962]/40"
+                    className="h-full bg-gradient-to-r from-[#8f7852] via-[#8f7852] to-[#8f7852]/40"
                     style={{ width: progressWidth }}
                   />
                 </div>
@@ -385,9 +385,9 @@ export function Process() {
                       onClick={() => setActiveStep(index)}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
                         index === activeStep
-                          ? "w-6 bg-[#c9a962]"
+                          ? "w-6 bg-[#8f7852]"
                           : index < activeStep
-                            ? "w-1.5 bg-[#c9a962]/50"
+                            ? "w-1.5 bg-[#8f7852]/50"
                             : "w-1.5 bg-neutral-300"
                       }`}
                     />
@@ -433,21 +433,21 @@ export function Process() {
                   </AnimatePresence>
 
                   {/* Corner accents */}
-                  <div className="absolute left-0 top-0 h-20 w-20 border-l border-t border-[#c9a962]/20" />
-                  <div className="absolute bottom-0 right-0 h-20 w-20 border-b border-r border-[#c9a962]/20" />
+                  <div className="absolute left-0 top-0 h-20 w-20 border-l border-t border-[#8f7852]/20" />
+                  <div className="absolute bottom-0 right-0 h-20 w-20 border-b border-r border-[#8f7852]/20" />
                 </div>
 
                 {/* Phase indicator below image */}
                 <div className="mt-6 flex items-center justify-between border-t border-neutral-200/50 pt-4">
                   <div className="flex items-center gap-3">
                     <motion.div
-                      className="flex h-8 w-8 items-center justify-center rounded-full bg-[#c9a962]/10"
+                      className="flex h-8 w-8 items-center justify-center rounded-full bg-[#8f7852]/10"
                       key={activeStep}
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <span className="font-Satoshi text-xs font-semibold text-[#c9a962]">
+                      <span className="font-Satoshi text-xs font-semibold text-[#8f7852]">
                         {String(activeStep + 1).padStart(2, "0")}
                       </span>
                     </motion.div>
@@ -469,7 +469,7 @@ export function Process() {
                       className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 ${
                         activeStep === 0
                           ? "border-neutral-200 text-neutral-300 cursor-not-allowed"
-                          : "border-neutral-300 text-neutral-600 hover:border-[#c9a962] hover:text-[#c9a962]"
+                          : "border-neutral-300 text-neutral-600 hover:border-[#8f7852] hover:text-[#8f7852]"
                       }`}
                     >
                       <ArrowRight
@@ -480,14 +480,14 @@ export function Process() {
                     <button
                       onClick={() =>
                         setActiveStep(
-                          Math.min(processSteps.length - 1, activeStep + 1)
+                          Math.min(processSteps.length - 1, activeStep + 1),
                         )
                       }
                       disabled={activeStep === processSteps.length - 1}
                       className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 ${
                         activeStep === processSteps.length - 1
                           ? "border-neutral-200 text-neutral-300 cursor-not-allowed"
-                          : "border-neutral-300 text-neutral-600 hover:border-[#c9a962] hover:text-[#c9a962]"
+                          : "border-neutral-300 text-neutral-600 hover:border-[#8f7852] hover:text-[#8f7852]"
                       }`}
                     >
                       <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
@@ -520,13 +520,13 @@ export function Process() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <div className="flex items-center justify-between border-t border-[#c9a962]/20 pt-6">
+            <div className="flex items-center justify-between border-t border-[#8f7852]/20 pt-6">
               <span className="font-Satoshi text-sm font-light text-neutral-500">
                 Ready to begin your journey?
               </span>
               <Link
                 href="/contact"
-                className="group flex items-center gap-3 font-Satoshi text-sm font-light tracking-wide text-neutral-600 transition-colors hover:text-[#c9a962]"
+                className="group flex items-center gap-3 font-Satoshi text-sm font-light tracking-wide text-neutral-600 transition-colors hover:text-[#8f7852]"
               >
                 Start Your Project
                 <ArrowRight

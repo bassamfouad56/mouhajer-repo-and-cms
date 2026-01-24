@@ -27,7 +27,7 @@ export function CompanyStorySection() {
           >
             {/* Label */}
             <div className="mb-8 flex items-center gap-4">
-              <div className="h-px w-12 bg-gradient-to-r from-[#c9a962] to-transparent" />
+              <div className="h-px w-12 bg-gradient-to-r from-[#8f7852] to-transparent" />
               <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
                 Founded 1999
               </span>
@@ -37,7 +37,7 @@ export function CompanyStorySection() {
             <h2 className="mb-8 font-SchnyderS text-4xl font-light leading-[1.1] tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl">
               Growing with
               <br />
-              <span className="text-[#c9a962]">the UAE</span>
+              <span className="text-[#8f7852]">the UAE</span>
             </h2>
 
             {/* Body - 100% VERBATIM from content.md lines 449-451 */}
@@ -64,7 +64,7 @@ export function CompanyStorySection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mt-12 border-l-2 border-[#c9a962] pl-6"
+              className="mt-12 border-l-2 border-[#8f7852] pl-6"
             >
               <p className="font-SchnyderS text-xl font-light italic leading-relaxed text-neutral-600 sm:text-2xl">
                 "We didn't just appear on the landscape;
@@ -95,8 +95,8 @@ export function CompanyStorySection() {
               </div>
 
               {/* Decorative Frame */}
-              <div className="absolute left-4 top-4 h-24 w-24 border-l-2 border-t-2 border-[#c9a962]/30" />
-              <div className="absolute bottom-4 right-4 h-24 w-24 border-b-2 border-r-2 border-[#c9a962]/30" />
+              <div className="absolute left-4 top-4 h-24 w-24 border-l-2 border-t-2 border-[#8f7852]/30" />
+              <div className="absolute bottom-4 right-4 h-24 w-24 border-b-2 border-r-2 border-[#8f7852]/30" />
             </div>
           </motion.div>
         </div>

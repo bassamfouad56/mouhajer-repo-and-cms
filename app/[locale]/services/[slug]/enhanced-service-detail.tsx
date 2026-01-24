@@ -242,7 +242,7 @@ export default function EnhancedServiceDetail({
     <>
       {/* Progress indicator */}
       <motion.div
-        className="fixed left-0 top-0 z-50 h-0.5 bg-[#c9a962] origin-left"
+        className="fixed left-0 top-0 z-50 h-0.5 bg-[#8f7852] origin-left"
         style={{ scaleX: smoothProgress }}
       />
 
@@ -323,8 +323,8 @@ export default function EnhancedServiceDetail({
                   transition={{ delay: 0.5, duration: 0.8 }}
                   className="mb-6 flex items-center gap-4"
                 >
-                  <div className="h-px w-16 bg-[#c9a962]/50" />
-                  <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                  <div className="h-px w-16 bg-[#8f7852]/50" />
+                  <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                     Our Services
                   </span>
                 </motion.div>
@@ -366,7 +366,7 @@ export default function EnhancedServiceDetail({
             <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
               {/* Left: Section Title */}
               <motion.div variants={itemVariants}>
-                <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                   What We Offer
                 </span>
                 <h2 className="mt-4 font-SchnyderS text-4xl font-light leading-tight text-neutral-950 md:text-5xl lg:text-6xl">
@@ -374,7 +374,7 @@ export default function EnhancedServiceDetail({
                   <br />
                   Overview
                 </h2>
-                <div className="mt-6 h-px w-24 bg-[#c9a962]" />
+                <div className="mt-6 h-px w-24 bg-[#8f7852]" />
               </motion.div>
 
               {/* Right: Content */}
@@ -440,7 +440,7 @@ export default function EnhancedServiceDetail({
                 variants={itemVariants}
                 className="mb-16 text-center lg:mb-20"
               >
-                <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                   Key Features
                 </span>
                 <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 md:text-5xl">
@@ -453,12 +453,12 @@ export default function EnhancedServiceDetail({
                 {features.map(
                   (
                     feature: { title: string; description: string },
-                    index: number
+                    index: number,
                   ) => (
                     <motion.div
                       key={index}
                       variants={itemVariants}
-                      className="group relative overflow-hidden border border-neutral-200 bg-[#faf8f5] p-8 transition-all duration-500 hover:border-[#c9a962]/30 hover:shadow-2xl lg:p-10"
+                      className="group relative overflow-hidden border border-neutral-200 bg-[#faf8f5] p-8 transition-all duration-500 hover:border-[#8f7852]/30 hover:shadow-2xl lg:p-10"
                     >
                       {/* Content */}
                       <div className="relative z-10">
@@ -471,9 +471,9 @@ export default function EnhancedServiceDetail({
                       </div>
 
                       {/* Hover accent */}
-                      <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#c9a962] transition-all duration-500 group-hover:w-full" />
+                      <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#8f7852] transition-all duration-500 group-hover:w-full" />
                     </motion.div>
-                  )
+                  ),
                 )}
               </div>
             </div>
@@ -495,7 +495,7 @@ export default function EnhancedServiceDetail({
             <AnimatedSection className="absolute inset-0 flex items-center">
               <div className="mx-auto max-w-7xl px-6 lg:px-12">
                 <motion.div variants={itemVariants}>
-                  <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                  <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                     Excellence in Every Detail
                   </span>
                   <h3 className="mt-4 max-w-xl font-SchnyderS text-4xl font-light leading-tight text-white md:text-5xl">
@@ -513,7 +513,7 @@ export default function EnhancedServiceDetail({
             <div className="mx-auto max-w-7xl px-6 lg:px-12">
               {/* Section Header */}
               <motion.div variants={itemVariants} className="mb-16 lg:mb-20">
-                <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                   Our Approach
                 </span>
                 <h2 className="mt-4 font-SchnyderS text-4xl font-light text-white md:text-5xl lg:text-6xl">
@@ -531,16 +531,16 @@ export default function EnhancedServiceDetail({
                         title: string;
                         description: string;
                       },
-                      index: number
+                      index: number,
                     ) => (
                       <motion.div
                         key={index}
                         variants={itemVariants}
-                        className="group relative border-l border-white/20 pl-8 transition-all duration-500 hover:border-[#c9a962]/50"
+                        className="group relative border-l border-white/20 pl-8 transition-all duration-500 hover:border-[#8f7852]/50"
                       >
                         {/* Content */}
                         <div className="pb-8 lg:pb-12">
-                          <h3 className="mb-3 font-SchnyderS text-2xl font-light text-white transition-colors duration-500 group-hover:text-[#c9a962] md:text-3xl">
+                          <h3 className="mb-3 font-SchnyderS text-2xl font-light text-white transition-colors duration-500 group-hover:text-[#8f7852] md:text-3xl">
                             {step.title}
                           </h3>
                           <p className="max-w-2xl font-Satoshi text-base font-light leading-relaxed text-white/60">
@@ -548,7 +548,7 @@ export default function EnhancedServiceDetail({
                           </p>
                         </div>
                       </motion.div>
-                    )
+                    ),
                   )}
                 </div>
               </div>
@@ -566,7 +566,7 @@ export default function EnhancedServiceDetail({
                 className="mb-12 flex items-end justify-between lg:mb-16"
               >
                 <div>
-                  <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                  <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                     Portfolio
                   </span>
                   <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 md:text-5xl">
@@ -611,7 +611,7 @@ export default function EnhancedServiceDetail({
                         {/* Content */}
                         <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
                           {project.acfFields?.projectType && (
-                            <span className="mb-2 font-Satoshi text-xs uppercase tracking-wider text-[#c9a962]">
+                            <span className="mb-2 font-Satoshi text-xs uppercase tracking-wider text-[#8f7852]">
                               {project.acfFields.projectType}
                             </span>
                           )}
@@ -660,7 +660,7 @@ export default function EnhancedServiceDetail({
           <AnimatedSection className="border-t border-neutral-200 bg-white py-24 lg:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-12">
               <motion.div variants={itemVariants} className="mb-12 lg:mb-16">
-                <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                   Industries We Serve
                 </span>
                 <h2 className="mt-4 font-SchnyderS text-4xl font-light text-neutral-950 md:text-5xl">
@@ -673,9 +673,9 @@ export default function EnhancedServiceDetail({
                   <motion.div key={industry.id} variants={itemVariants}>
                     <Link
                       href={`/industries/${industry.slug}`}
-                      className="group block h-full border border-neutral-200 bg-[#faf8f5] p-8 transition-all duration-500 hover:border-[#c9a962]/30 hover:shadow-xl lg:p-10"
+                      className="group block h-full border border-neutral-200 bg-[#faf8f5] p-8 transition-all duration-500 hover:border-[#8f7852]/30 hover:shadow-xl lg:p-10"
                     >
-                      <h3 className="mb-3 font-SchnyderS text-2xl font-light text-neutral-950 transition-colors group-hover:text-[#c9a962]">
+                      <h3 className="mb-3 font-SchnyderS text-2xl font-light text-neutral-950 transition-colors group-hover:text-[#8f7852]">
                         {industry.title}
                       </h3>
                       <p className="mb-6 font-Satoshi text-base font-light leading-relaxed text-neutral-600">
@@ -698,7 +698,7 @@ export default function EnhancedServiceDetail({
         <AnimatedSection className="bg-neutral-950 py-24 lg:py-32">
           <div className="mx-auto max-w-4xl px-6 text-center lg:px-12">
             <motion.div variants={itemVariants}>
-              <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+              <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                 Start Your Project
               </span>
               <h2 className="mt-4 font-SchnyderS text-4xl font-light text-white md:text-5xl lg:text-6xl">
@@ -711,7 +711,7 @@ export default function EnhancedServiceDetail({
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium text-neutral-950 transition-all hover:bg-[#b8954f]"
+                  className="inline-flex items-center gap-2 bg-[#8f7852] px-8 py-4 font-Satoshi text-sm font-medium text-neutral-950 transition-all hover:bg-[#b8954f]"
                 >
                   <span>Get in Touch</span>
                   <ArrowRight size={16} />
@@ -740,7 +740,7 @@ export default function EnhancedServiceDetail({
                     <ChevronRight size={14} className="rotate-180" />
                     <span>Previous</span>
                   </div>
-                  <h3 className="mt-4 font-SchnyderS text-2xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-3xl">
+                  <h3 className="mt-4 font-SchnyderS text-2xl font-light text-white transition-colors group-hover:text-[#8f7852] lg:text-3xl">
                     {previousService.title}
                   </h3>
                 </Link>
@@ -755,7 +755,7 @@ export default function EnhancedServiceDetail({
                     <span>Next</span>
                     <ChevronRight size={14} />
                   </div>
-                  <h3 className="mt-4 font-SchnyderS text-2xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-3xl">
+                  <h3 className="mt-4 font-SchnyderS text-2xl font-light text-white transition-colors group-hover:text-[#8f7852] lg:text-3xl">
                     {nextService.title}
                   </h3>
                 </Link>

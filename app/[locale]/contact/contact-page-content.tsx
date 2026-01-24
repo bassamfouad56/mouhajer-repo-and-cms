@@ -674,12 +674,12 @@ export default function ContactPageContent({
 
         {/* Corner Decorations */}
         <div className="pointer-events-none absolute bottom-6 left-4 z-30 hidden h-12 w-12 sm:block sm:left-6 lg:left-12 lg:h-16 lg:w-16">
-          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
-          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#8f7852]/30 lg:h-8" />
+          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#8f7852]/30 lg:w-8" />
         </div>
         <div className="pointer-events-none absolute right-4 top-6 z-30 hidden h-12 w-12 sm:block sm:right-6 lg:right-12 lg:h-16 lg:w-16">
-          <div className="absolute right-0 top-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
-          <div className="absolute right-0 top-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+          <div className="absolute right-0 top-0 h-6 w-px bg-[#8f7852]/30 lg:h-8" />
+          <div className="absolute right-0 top-0 h-px w-6 bg-[#8f7852]/30 lg:w-8" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -692,10 +692,10 @@ export default function ContactPageContent({
           >
             {/* Label */}
             <div className="mb-6 flex items-center justify-center gap-4">
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]" />
               <div className="flex items-center gap-2">
                 <svg
-                  className="h-3.5 w-3.5 text-[#c9a962]"
+                  className="h-3.5 w-3.5 text-[#8f7852]"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -705,18 +705,18 @@ export default function ContactPageContent({
                   <path d="M5 19l.5 1.5L7 21l-1.5.5L5 23l-.5-1.5L3 21l1.5-.5L5 19z" />
                   <path d="M19 17l.5 1.5L21 19l-1.5.5L19 21l-.5-1.5L17 19l1.5-.5L19 17z" />
                 </svg>
-                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
                   Get Started
                 </span>
               </div>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]" />
             </div>
 
             {/* Title */}
             <h2 className="mb-4 font-SchnyderS text-3xl font-light tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               How Can We
               <br />
-              <span className="text-[#c9a962]">Serve You?</span>
+              <span className="text-[#8f7852]">Serve You?</span>
             </h2>
 
             <p className="mx-auto max-w-xl font-Satoshi text-base font-light leading-relaxed text-white/60 lg:text-lg">
@@ -740,15 +740,15 @@ export default function ContactPageContent({
                 href="/contact/book-consultation"
                 className="group flex w-full"
               >
-                <div className="relative flex w-full flex-col overflow-hidden border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white/10 hover:shadow-[0_0_60px_rgba(201,169,98,0.15)] sm:p-8 lg:p-10">
+                <div className="relative flex w-full flex-col overflow-hidden border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-500 hover:border-[#8f7852]/30 hover:bg-white/10 hover:shadow-[0_0_60px_rgba(201,169,98,0.15)] sm:p-8 lg:p-10">
                   {/* Corner accents */}
-                  <div className="absolute left-0 top-0 h-8 w-px bg-[#c9a962]/30" />
-                  <div className="absolute left-0 top-0 h-px w-8 bg-[#c9a962]/30" />
-                  <div className="absolute bottom-0 right-0 h-8 w-px bg-[#c9a962]/30" />
-                  <div className="absolute bottom-0 right-0 h-px w-8 bg-[#c9a962]/30" />
+                  <div className="absolute left-0 top-0 h-8 w-px bg-[#8f7852]/30" />
+                  <div className="absolute left-0 top-0 h-px w-8 bg-[#8f7852]/30" />
+                  <div className="absolute bottom-0 right-0 h-8 w-px bg-[#8f7852]/30" />
+                  <div className="absolute bottom-0 right-0 h-px w-8 bg-[#8f7852]/30" />
 
                   {/* Label */}
-                  <span className="mb-2 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                  <span className="mb-2 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                     New Project
                   </span>
 
@@ -771,10 +771,10 @@ export default function ContactPageContent({
 
                   {/* CTA */}
                   <div className="mt-auto flex items-center gap-2 transition-transform group-hover:translate-x-1">
-                    <span className="font-Satoshi text-xs font-light tracking-wide text-white/70 transition-colors group-hover:text-[#c9a962] lg:text-sm">
+                    <span className="font-Satoshi text-xs font-light tracking-wide text-white/70 transition-colors group-hover:text-[#8f7852] lg:text-sm">
                       Book a Consultation
                     </span>
-                    <div className="flex h-9 w-9 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#c9a962] group-hover:bg-[#c9a962] lg:h-10 lg:w-10">
+                    <div className="flex h-9 w-9 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#8f7852] group-hover:bg-[#8f7852] lg:h-10 lg:w-10">
                       <svg
                         className="h-4 w-4 text-white transition-colors group-hover:text-neutral-950"
                         viewBox="0 0 24 24"
@@ -788,7 +788,7 @@ export default function ContactPageContent({
                   </div>
 
                   {/* Gold accent line on hover */}
-                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#c9a962] transition-all duration-500 group-hover:w-full" />
+                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#8f7852] transition-all duration-500 group-hover:w-full" />
                 </div>
               </Link>
             </motion.div>

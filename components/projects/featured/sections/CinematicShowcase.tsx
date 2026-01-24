@@ -75,7 +75,7 @@ function FullBleedSection({
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.2, 0.8, 1],
-    [0, 1, 1, 0.5]
+    [0, 1, 1, 0.5],
   );
 
   return (
@@ -107,8 +107,8 @@ function FullBleedSection({
           className="absolute bottom-24 left-8 lg:left-16 right-8 lg:right-16"
         >
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-px bg-[#c9a962]" />
-            <span className="text-[#c9a962] text-xs tracking-[0.2em] uppercase">
+            <div className="w-12 h-px bg-[#8f7852]" />
+            <span className="text-[#8f7852] text-xs tracking-[0.2em] uppercase">
               {String(index + 1).padStart(2, "0")}
             </span>
           </div>
@@ -158,7 +158,7 @@ function SplitScreenSection({
   const gap = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["4rem", "2rem", "4rem"]
+    ["4rem", "2rem", "4rem"],
   );
 
   return (
@@ -239,7 +239,7 @@ function SplitScreenSection({
         initial={{ scaleY: 0 }}
         animate={isInView ? { scaleY: 1 } : {}}
         transition={{ duration: 1, delay: 0.3 }}
-        className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#c9a962]/20 to-transparent origin-top hidden lg:block"
+        className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#8f7852]/20 to-transparent origin-top hidden lg:block"
       />
     </section>
   );
@@ -311,8 +311,8 @@ function StaggeredGrid({
                 )}
 
                 {/* Corner Accents */}
-                <div className="absolute top-3 left-3 w-6 h-6 border-l border-t border-white/0 group-hover:border-[#c9a962]/60 transition-colors duration-500" />
-                <div className="absolute bottom-3 right-3 w-6 h-6 border-r border-b border-white/0 group-hover:border-[#c9a962]/60 transition-colors duration-500" />
+                <div className="absolute top-3 left-3 w-6 h-6 border-l border-t border-white/0 group-hover:border-[#8f7852]/60 transition-colors duration-500" />
+                <div className="absolute bottom-3 right-3 w-6 h-6 border-r border-b border-white/0 group-hover:border-[#8f7852]/60 transition-colors duration-500" />
               </motion.div>
             );
           })}

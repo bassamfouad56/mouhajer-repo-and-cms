@@ -3,10 +3,26 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Link from "next/link";
+import {
+  homepageSectionAttr,
+  homepageArrayItemAttr,
+} from "@/lib/sanity-visual-editing";
 
 export interface FAQItem {
   question: string;
   answer: string;
+}
+
+interface FAQSanityData {
+  sectionTitle?: string;
+  titleHighlight?: string;
+  subtitle?: string;
+  faqs?: Array<{
+    question?: string;
+    answer?: string;
+  }>;
+  ctaText?: string;
+  ctaLink?: string;
 }
 
 interface FAQSectionProps {
@@ -20,6 +36,9 @@ interface FAQSectionProps {
   ctaText?: string;
   ctaLink?: string;
   defaultOpen?: number | null;
+  sanityData?: FAQSanityData | null;
+  homepageId?: string;
+  sectionKey?: string;
 }
 
 /**
@@ -42,12 +61,45 @@ export function FAQSection({
   ctaText = "Get In Touch",
   ctaLink = "/contact",
   defaultOpen = 0,
+  sanityData,
+  homepageId,
+  sectionKey,
 }: FAQSectionProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(defaultOpen);
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const isDark = variant === "dark";
+
+  // Use Sanity data if available, otherwise fall back to props/defaults
+  const displayTitle = sanityData?.sectionTitle || title;
+  const displayTitleHighlight = sanityData?.titleHighlight || titleHighlight;
+  const displaySubtitle = sanityData?.subtitle || subtitle;
+  const displayCtaText = sanityData?.ctaText || ctaText;
+  const displayCtaLink = sanityData?.ctaLink || ctaLink;
+  const displayFaqs = sanityData?.faqs?.length
+    ? sanityData.faqs.map((faq) => ({
+        question: faq.question || "",
+        answer: faq.answer || "",
+      }))
+    : faqs;
+
+  // Helper for visual editing data attributes
+  const getDataAttr = (fieldPath: string) => {
+    if (!homepageId || !sectionKey) return {};
+    return homepageSectionAttr(homepageId, sectionKey, fieldPath);
+  };
+
+  const getFaqDataAttr = (index: number, fieldPath: string) => {
+    if (!homepageId || !sectionKey) return {};
+    return homepageArrayItemAttr(
+      homepageId,
+      sectionKey,
+      "faqs",
+      index,
+      fieldPath,
+    );
+  };
 
   return (
     <section
@@ -81,26 +133,29 @@ export function FAQSection({
               isDark ? "text-white" : "text-neutral-950"
             }`}
           >
-            {title}
+            <span {...getDataAttr("sectionTitle")}>{displayTitle}</span>
             <br />
-            <span className="text-[#c9a962]">{titleHighlight}</span>
+            <span className="text-[#8f7852]" {...getDataAttr("titleHighlight")}>
+              {displayTitleHighlight}
+            </span>
           </h2>
 
           {/* Subtitle */}
-          {subtitle && (
+          {displaySubtitle && (
             <p
               className={`mt-6 max-w-xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
                 isDark ? "text-white/50" : "text-neutral-500"
               }`}
+              {...getDataAttr("subtitle")}
             >
-              {subtitle}
+              {displaySubtitle}
             </p>
           )}
         </motion.div>
 
         {/* Minimal Accordion */}
         <div className="space-y-px">
-          {faqs.map((faq, index) => (
+          {displayFaqs.map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -120,6 +175,7 @@ export function FAQSection({
                   className={`max-w-3xl pr-6 font-SchnyderS text-xl font-light sm:pr-8 sm:text-2xl lg:text-3xl ${
                     isDark ? "text-white" : "text-neutral-950"
                   }`}
+                  {...getFaqDataAttr(index, "question")}
                 >
                   {faq.question}
                 </h3>
@@ -153,6 +209,7 @@ export function FAQSection({
                         className={`max-w-3xl font-Satoshi text-base font-light leading-relaxed sm:text-lg ${
                           isDark ? "text-white/60" : "text-neutral-600"
                         }`}
+                        {...getFaqDataAttr(index, "answer")}
                       >
                         {faq.answer}
                       </p>
@@ -180,14 +237,14 @@ export function FAQSection({
               Still have questions? We&apos;re here to help.
             </p>
             <Link
-              href={ctaLink}
+              href={displayCtaLink}
               className={`group inline-flex items-center gap-3 border px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.2em] transition-all ${
                 isDark
                   ? "border-white/30 text-white hover:bg-white hover:text-neutral-950"
                   : "border-neutral-950 text-neutral-950 hover:bg-neutral-950 hover:text-white"
               }`}
             >
-              {ctaText}
+              <span {...getDataAttr("ctaText")}>{displayCtaText}</span>
               <span className="transition-transform group-hover:translate-x-1">
                 →
               </span>
@@ -326,7 +383,7 @@ export function FAQHeader({
       >
         {title}
         <br />
-        <span className="text-[#c9a962]">{titleHighlight}</span>
+        <span className="text-[#8f7852]">{titleHighlight}</span>
       </h2>
 
       {/* Subtitle */}

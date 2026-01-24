@@ -4,12 +4,25 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { homepageArrayItemAttr } from "@/lib/sanity-visual-editing";
 
 interface StatItemProps {
   value: number;
   suffix: string;
   label: string;
   delay: number;
+  dataAttr?: Record<string, unknown>;
+}
+
+interface StatsSanityData {
+  stats?: Array<{ value: number; suffix?: string; label?: string }>;
+  backgroundImages?: Array<{ asset?: { url?: string }; alt?: string }>;
+}
+
+interface StatsBannerProps {
+  sanityData?: StatsSanityData | null;
+  homepageId?: string;
+  sectionKey?: string;
 }
 
 function AnimatedCounter({
@@ -54,7 +67,7 @@ function AnimatedCounter({
   );
 }
 
-function StatItem({ value, suffix, label, delay }: StatItemProps) {
+function StatItem({ value, suffix, label, delay, dataAttr }: StatItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -65,6 +78,7 @@ function StatItem({ value, suffix, label, delay }: StatItemProps) {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] }}
       className="group relative flex flex-col items-center text-center"
+      {...dataAttr}
     >
       {/* Value */}
       <div className="mb-2 font-SchnyderS text-5xl font-light tracking-tight text-[#262420] sm:text-6xl md:text-7xl lg:text-8xl">
@@ -81,7 +95,7 @@ function StatItem({ value, suffix, label, delay }: StatItemProps) {
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 0.6, delay: delay + 0.3 }}
-        className="mt-4 h-px w-12 origin-center bg-[#c9a962]/40 sm:mt-6 sm:w-16"
+        className="mt-4 h-px w-12 origin-center bg-[#8f7852]/40 sm:mt-6 sm:w-16"
       />
     </motion.div>
   );
@@ -107,7 +121,11 @@ const backgroundImages = [
   },
 ];
 
-export function StatsBanner() {
+export function StatsBanner({
+  sanityData,
+  homepageId,
+  sectionKey,
+}: StatsBannerProps) {
   const t = useTranslations("Stats");
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -122,8 +140,37 @@ export function StatsBanner() {
   const backgroundScale = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [1.1, 1, 1.1]
+    [1.1, 1, 1.1],
   );
+
+  // Default stats for fallback
+  const defaultStats = [
+    { value: 400, suffix: "+", label: t("projectsCompleted") },
+    { value: 20, suffix: "+", label: t("yearsExperience") },
+    { value: 10, suffix: "+", label: t("internationalAwards") },
+    { value: 100, suffix: "%", label: t("clientSatisfaction") },
+  ];
+
+  // Use Sanity data if available, otherwise use defaults
+  const stats = sanityData?.stats?.length
+    ? sanityData.stats.map((stat) => ({
+        value: stat.value || 0,
+        suffix: stat.suffix || "",
+        label: stat.label || "",
+      }))
+    : defaultStats;
+
+  // Helper for visual editing data attributes
+  const getStatDataAttr = (index: number) => {
+    if (!homepageId || !sectionKey) return {};
+    return homepageArrayItemAttr(
+      homepageId,
+      sectionKey,
+      "stats",
+      index,
+      "value",
+    );
+  };
 
   // Auto-rotate background images
   useEffect(() => {
@@ -132,13 +179,6 @@ export function StatsBanner() {
     }, 5000);
     return () => clearInterval(interval);
   }, []);
-
-  const stats = [
-    { value: 400, suffix: "+", label: t("projectsCompleted") },
-    { value: 20, suffix: "+", label: t("yearsExperience") },
-    { value: 10, suffix: "+", label: t("internationalAwards") },
-    { value: 100, suffix: "%", label: t("clientSatisfaction") },
-  ];
 
   return (
     <section
@@ -184,7 +224,7 @@ export function StatsBanner() {
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-        className="absolute left-0 top-0 h-px w-full origin-left bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
+        className="absolute left-0 top-0 h-px w-full origin-left bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent"
       />
 
       {/* Bottom border line */}
@@ -192,12 +232,12 @@ export function StatsBanner() {
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-        className="absolute bottom-0 left-0 h-px w-full origin-right bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
+        className="absolute bottom-0 left-0 h-px w-full origin-right bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent"
       />
 
       {/* Floating decorative elements */}
       <motion.div
-        className="absolute left-[10%] top-1/4 h-32 w-px bg-gradient-to-b from-transparent via-[#c9a962]/20 to-transparent"
+        className="absolute left-[10%] top-1/4 h-32 w-px bg-gradient-to-b from-transparent via-[#8f7852]/20 to-transparent"
         animate={{ opacity: [0.3, 0.6, 0.3], y: [0, -20, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -220,17 +260,22 @@ export function StatsBanner() {
           transition={{ duration: 0.6 }}
           className="mb-12 flex items-center justify-center gap-4 lg:mb-16"
         >
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]">
             {t("heading")}
           </span>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
         </motion.div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 gap-8 sm:gap-12 lg:grid-cols-4 lg:gap-8">
           {stats.map((stat, index) => (
-            <StatItem key={stat.label} {...stat} delay={index * 0.1} />
+            <StatItem
+              key={`stat-${index}`}
+              {...stat}
+              delay={index * 0.1}
+              dataAttr={getStatDataAttr(index)}
+            />
           ))}
         </div>
 
@@ -247,7 +292,7 @@ export function StatsBanner() {
               onClick={() => setActiveImage(index)}
               className={`h-1 transition-all duration-500 ${
                 index === activeImage
-                  ? "w-8 bg-[#c9a962]"
+                  ? "w-8 bg-[#8f7852]"
                   : "w-2 bg-[#262420]/20 hover:bg-[#262420]/40"
               }`}
               aria-label={`View image ${index + 1}`}

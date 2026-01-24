@@ -40,7 +40,7 @@ export function OrchestrationSection() {
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
-        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a962]/[0.02] blur-[150px]" />
+        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8f7852]/[0.02] blur-[150px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
@@ -67,7 +67,7 @@ export function OrchestrationSection() {
           >
             We Don&apos;t Just Build.
             <br />
-            <span className="text-[#c9a962]">We Orchestrate.</span>
+            <span className="text-[#8f7852]">We Orchestrate.</span>
           </motion.h2>
 
           <motion.div
@@ -104,15 +104,15 @@ export function OrchestrationSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}
-                className="group relative border border-white/5 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/20 hover:bg-white/[0.04] lg:p-10"
+                className="group relative border border-white/5 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-300 hover:border-[#8f7852]/20 hover:bg-white/[0.04] lg:p-10"
               >
                 {/* Icon */}
-                <div className="mb-6 inline-flex h-14 w-14 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5 transition-all duration-300 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10">
-                  <Icon className="h-6 w-6 text-[#c9a962]" strokeWidth={1} />
+                <div className="mb-6 inline-flex h-14 w-14 items-center justify-center border border-[#8f7852]/30 bg-[#8f7852]/5 transition-all duration-300 group-hover:border-[#8f7852]/50 group-hover:bg-[#8f7852]/10">
+                  <Icon className="h-6 w-6 text-[#8f7852]" strokeWidth={1} />
                 </div>
 
                 {/* Content */}
-                <h3 className="mb-4 font-SchnyderS text-xl font-light text-white transition-colors group-hover:text-[#c9a962] lg:text-2xl">
+                <h3 className="mb-4 font-SchnyderS text-xl font-light text-white transition-colors group-hover:text-[#8f7852] lg:text-2xl">
                   {protocol.title}
                 </h3>
                 <p className="font-Satoshi text-sm font-light leading-relaxed text-white/60 lg:text-base">
@@ -120,7 +120,7 @@ export function OrchestrationSection() {
                 </p>
 
                 {/* Corner accent */}
-                <div className="absolute bottom-0 right-0 h-12 w-12 border-b border-r border-[#c9a962]/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute bottom-0 right-0 h-12 w-12 border-b border-r border-[#8f7852]/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </motion.div>
             );
           })}
@@ -136,7 +136,7 @@ export function OrchestrationSection() {
           <div className="mx-auto max-w-3xl text-center">
             <p className="font-SchnyderS text-2xl font-light italic text-white/80 lg:text-3xl">
               This isn&apos;t just "turnkey." It is{" "}
-              <span className="not-italic text-[#c9a962]">
+              <span className="not-italic text-[#8f7852]">
                 integrated precision
               </span>
               .

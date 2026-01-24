@@ -102,7 +102,7 @@ export function TestFounderJourney() {
           <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-neutral-200 lg:block">
             <motion.div
               style={{ height: lineHeight }}
-              className="w-full bg-[#c9a962] origin-top"
+              className="w-full bg-[#8f7852] origin-top"
             />
           </div>
 
@@ -129,14 +129,14 @@ export function TestFounderJourney() {
                     <div
                       className={`mb-6 flex items-center gap-4 ${isEven ? "lg:justify-end" : ""}`}
                     >
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#c9a962]/30 bg-[#c9a962]/5">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#8f7852]/30 bg-[#8f7852]/5">
                         <Icon
-                          className="h-7 w-7 text-[#c9a962]"
+                          className="h-7 w-7 text-[#8f7852]"
                           strokeWidth={1.5}
                         />
                       </div>
                       <div>
-                        <div className="font-SchnyderS text-3xl font-light text-[#c9a962]">
+                        <div className="font-SchnyderS text-3xl font-light text-[#8f7852]">
                           {item.year}
                         </div>
                         <div className="flex items-center gap-2 font-Satoshi text-xs font-light uppercase tracking-wider text-neutral-400">
@@ -158,7 +158,7 @@ export function TestFounderJourney() {
 
                     {/* Decorative line */}
                     <div
-                      className={`mt-6 h-px w-24 bg-[#c9a962] ${isEven ? "lg:ml-auto" : ""}`}
+                      className={`mt-6 h-px w-24 bg-[#8f7852] ${isEven ? "lg:ml-auto" : ""}`}
                     />
                   </div>
 
@@ -184,7 +184,7 @@ export function TestFounderJourney() {
                   </div>
 
                   {/* Center dot for timeline */}
-                  <div className="absolute left-1/2 top-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white bg-[#c9a962] shadow-lg lg:block" />
+                  <div className="absolute left-1/2 top-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white bg-[#8f7852] shadow-lg lg:block" />
                 </motion.div>
               );
             })}
@@ -203,7 +203,7 @@ export function TestFounderJourney() {
             Today, MIDC stands as proof that great design transcends borders. It
             speaks the language of excellence—universally understood.
           </p>
-          <div className="mx-auto mt-12 h-px w-32 bg-[#c9a962]" />
+          <div className="mx-auto mt-12 h-px w-32 bg-[#8f7852]" />
         </motion.div>
       </div>
     </section>

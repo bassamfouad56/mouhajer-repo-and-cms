@@ -1,7 +1,13 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useInView, useMotionValueEvent } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useInView,
+  useMotionValueEvent,
+} from "framer-motion";
 import { ArrowUpRight, History, Workflow, Award, Users } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -74,7 +80,9 @@ export function AboutJourney({
 }: AboutJourneyProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-50px" });
-  const [activeChapter, setActiveChapter] = useState<"quote" | "ecosystem" | "press">("quote");
+  const [activeChapter, setActiveChapter] = useState<
+    "quote" | "ecosystem" | "press"
+  >("quote");
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -97,29 +105,29 @@ export function AboutJourney({
   const quoteOpacity = useTransform(
     scrollYProgress,
     [0, 0.08, 0.2, 0.28],
-    [0, 1, 1, 0]
+    [0, 1, 1, 0],
   );
   const quoteY = useTransform(
     scrollYProgress,
     [0, 0.08, 0.2, 0.28],
-    [60, 0, 0, -60]
+    [60, 0, 0, -60],
   );
   const quoteScale = useTransform(
     scrollYProgress,
     [0, 0.08, 0.2, 0.28],
-    [0.95, 1, 1, 0.95]
+    [0.95, 1, 1, 0.95],
   );
   const quoteImageOpacity = useTransform(
     scrollYProgress,
     [0, 0.05, 0.25, 0.3],
-    [0.6, 0.4, 0.4, 0]
+    [0.6, 0.4, 0.4, 0],
   );
 
   // Chapter 2: Ecosystem Cards (0.25 - 0.7)
   const ecosystemOpacity = useTransform(
     scrollYProgress,
     [0.22, 0.32, 0.65, 0.72],
-    [0, 1, 1, 0]
+    [0, 1, 1, 0],
   );
   const ecosystemY = useTransform(scrollYProgress, [0.22, 0.32], [80, 0]);
 
@@ -127,7 +135,7 @@ export function AboutJourney({
   const pressOpacity = useTransform(
     scrollYProgress,
     [0.68, 0.78, 0.95, 1],
-    [0, 1, 1, 1]
+    [0, 1, 1, 1],
   );
   const pressY = useTransform(scrollYProgress, [0.68, 0.78], [60, 0]);
 
@@ -135,7 +143,7 @@ export function AboutJourney({
   const bgOverlay = useTransform(
     scrollYProgress,
     [0, 0.25, 0.7, 1],
-    [0.4, 0.92, 0.95, 0.92]
+    [0.4, 0.92, 0.95, 0.92],
   );
 
   return (
@@ -185,7 +193,7 @@ export function AboutJourney({
               backgroundColor: useTransform(
                 scrollYProgress,
                 [0, 0.25],
-                ["rgba(201,169,98,0.5)", "rgba(201,169,98,0.3)"]
+                ["rgba(201,169,98,0.5)", "rgba(201,169,98,0.3)"],
               ),
             }}
           />
@@ -196,7 +204,7 @@ export function AboutJourney({
               backgroundColor: useTransform(
                 scrollYProgress,
                 [0, 0.25],
-                ["rgba(201,169,98,0.5)", "rgba(201,169,98,0.3)"]
+                ["rgba(201,169,98,0.5)", "rgba(201,169,98,0.3)"],
               ),
             }}
           />
@@ -209,7 +217,7 @@ export function AboutJourney({
               backgroundColor: useTransform(
                 scrollYProgress,
                 [0, 0.25],
-                ["rgba(201,169,98,0.5)", "rgba(201,169,98,0.3)"]
+                ["rgba(201,169,98,0.5)", "rgba(201,169,98,0.3)"],
               ),
             }}
           />
@@ -220,7 +228,7 @@ export function AboutJourney({
               backgroundColor: useTransform(
                 scrollYProgress,
                 [0, 0.25],
-                ["rgba(201,169,98,0.5)", "rgba(201,169,98,0.3)"]
+                ["rgba(201,169,98,0.5)", "rgba(201,169,98,0.3)"],
               ),
             }}
           />
@@ -242,7 +250,7 @@ export function AboutJourney({
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 1.2, delay: 0.2 }}
-              className="mx-auto mb-8 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#c9a962]/60 to-transparent"
+              className="mx-auto mb-8 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#8f7852]/60 to-transparent"
             />
 
             {/* Quote */}
@@ -260,7 +268,7 @@ export function AboutJourney({
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 1.2, delay: 0.4 }}
-              className="mx-auto mt-8 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#c9a962]/60 to-transparent"
+              className="mx-auto mt-8 h-px w-24 origin-center bg-gradient-to-r from-transparent via-[#8f7852]/60 to-transparent"
             />
 
             {/* Scroll hint */}
@@ -287,15 +295,15 @@ export function AboutJourney({
             {/* Header */}
             <div className="mb-12 text-center lg:mb-16">
               <div className="mb-4 flex items-center justify-center gap-4">
-                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/40" />
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/40" />
                 <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-neutral-500">
                   Discover More
                 </span>
-                <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/40" />
+                <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/40" />
               </div>
               <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
                 Explore the MIDC{" "}
-                <span className="text-[#c9a962]">Ecosystem</span>
+                <span className="text-[#8f7852]">Ecosystem</span>
               </h2>
             </div>
 
@@ -312,15 +320,15 @@ export function AboutJourney({
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                   >
                     <Link href={item.link} className="group block">
-                      <div className="relative overflow-hidden border border-neutral-200/50 bg-white/80 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white hover:shadow-lg">
+                      <div className="relative overflow-hidden border border-neutral-200/50 bg-white/80 backdrop-blur-sm transition-all duration-500 hover:border-[#8f7852]/30 hover:bg-white hover:shadow-lg">
                         {/* Card Content */}
                         <div className="relative z-10 p-6 lg:p-8">
                           {/* Top Row */}
                           <div className="mb-4 flex items-center justify-between">
                             <div className="flex items-center gap-3">
-                              <div className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10 transition-all duration-500 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/20">
+                              <div className="flex h-10 w-10 items-center justify-center border border-[#8f7852]/30 bg-[#8f7852]/10 transition-all duration-500 group-hover:border-[#8f7852]/50 group-hover:bg-[#8f7852]/20">
                                 <Icon
-                                  className="h-4 w-4 text-[#c9a962]"
+                                  className="h-4 w-4 text-[#8f7852]"
                                   strokeWidth={1.5}
                                 />
                               </div>
@@ -330,16 +338,16 @@ export function AboutJourney({
                             </div>
 
                             {/* Arrow */}
-                            <div className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/20 bg-[#c9a962]/5 transition-all duration-500 group-hover:border-[#c9a962] group-hover:bg-[#c9a962]">
+                            <div className="flex h-10 w-10 items-center justify-center border border-[#8f7852]/20 bg-[#8f7852]/5 transition-all duration-500 group-hover:border-[#8f7852] group-hover:bg-[#8f7852]">
                               <ArrowUpRight
-                                className="h-4 w-4 text-[#c9a962]/60 transition-all duration-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                                className="h-4 w-4 text-[#8f7852]/60 transition-all duration-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                                 strokeWidth={2}
                               />
                             </div>
                           </div>
 
                           {/* Headline */}
-                          <h3 className="mb-2 font-SchnyderS text-xl font-light text-neutral-900 transition-colors duration-300 group-hover:text-[#c9a962] lg:text-2xl">
+                          <h3 className="mb-2 font-SchnyderS text-xl font-light text-neutral-900 transition-colors duration-300 group-hover:text-[#8f7852] lg:text-2xl">
                             {item.headline}
                           </h3>
 
@@ -349,11 +357,11 @@ export function AboutJourney({
                           </p>
 
                           {/* CTA */}
-                          <div className="mt-4 flex items-center gap-2 border-t border-[#c9a962]/10 pt-4">
-                            <span className="font-Satoshi text-xs font-medium text-[#c9a962]/70 transition-colors group-hover:text-[#c9a962]">
+                          <div className="mt-4 flex items-center gap-2 border-t border-[#8f7852]/10 pt-4">
+                            <span className="font-Satoshi text-xs font-medium text-[#8f7852]/70 transition-colors group-hover:text-[#8f7852]">
                               {item.cta}
                             </span>
-                            <div className="h-px w-6 bg-[#c9a962]/30 transition-all duration-500 group-hover:w-10 group-hover:bg-[#c9a962]" />
+                            <div className="h-px w-6 bg-[#8f7852]/30 transition-all duration-500 group-hover:w-10 group-hover:bg-[#8f7852]" />
                           </div>
                         </div>
                       </div>
@@ -386,7 +394,7 @@ export function AboutJourney({
                 <div className="h-px w-12 bg-gradient-to-l from-transparent to-neutral-300" />
               </div>
               <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl">
-                Trusted & <span className="text-[#c9a962]">Recognized</span>
+                Trusted & <span className="text-[#8f7852]">Recognized</span>
               </h2>
             </div>
 
@@ -401,7 +409,7 @@ export function AboutJourney({
                   transition={{ duration: 0.5, delay: index * 0.08 }}
                   className="group"
                 >
-                  <div className="flex h-20 items-center justify-center border border-neutral-200/50 bg-white/60 px-4 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white hover:shadow-md lg:h-24">
+                  <div className="flex h-20 items-center justify-center border border-neutral-200/50 bg-white/60 px-4 backdrop-blur-sm transition-all duration-500 hover:border-[#8f7852]/30 hover:bg-white hover:shadow-md lg:h-24">
                     <Image
                       src={press.logo}
                       alt={press.name}
@@ -416,16 +424,16 @@ export function AboutJourney({
 
             {/* Bottom accent */}
             <div className="mt-12 flex items-center justify-center gap-4 lg:mt-16">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/30" />
-              <div className="h-2 w-2 rotate-45 bg-[#c9a962]/40" />
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/30" />
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]/30" />
+              <div className="h-2 w-2 rotate-45 bg-[#8f7852]/40" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]/30" />
             </div>
 
             {/* CTA */}
             <div className="mt-8 text-center">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-[#c9a962]"
+                className="group inline-flex items-center gap-3 border border-[#8f7852] bg-[#8f7852] px-8 py-4 font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-[#8f7852]"
               >
                 <span>Start Your Project</span>
                 <ArrowUpRight
@@ -443,7 +451,7 @@ export function AboutJourney({
             {[0, 1, 2].map((index) => (
               <motion.div
                 key={index}
-                className="h-1 rounded-full bg-[#c9a962] transition-all duration-500"
+                className="h-1 rounded-full bg-[#8f7852] transition-all duration-500"
                 style={{
                   width: useTransform(
                     scrollYProgress,
@@ -453,7 +461,7 @@ export function AboutJourney({
                       (index + 1) * 0.33 - 0.1,
                       (index + 1) * 0.33,
                     ],
-                    [8, 24, 24, 8]
+                    [8, 24, 24, 8],
                   ),
                   opacity: useTransform(
                     scrollYProgress,
@@ -463,7 +471,7 @@ export function AboutJourney({
                       (index + 1) * 0.33 - 0.05,
                       (index + 1) * 0.33,
                     ],
-                    [0.3, 1, 1, 0.3]
+                    [0.3, 1, 1, 0.3],
                   ),
                 }}
               />

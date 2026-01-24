@@ -48,7 +48,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
       link: "/industries/luxury-hospitality",
       icon: Hotel,
       stats: { projects: "50+", value: "AED 500M+" },
-      accent: "#c9a962",
+      accent: "#8f7852",
       gradient: "from-amber-900/80 via-neutral-900/60 to-neutral-900/90",
     },
     {
@@ -106,7 +106,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.2, 0.8, 1],
-    [0.3, 1, 1, 0.3]
+    [0.3, 1, 1, 0.3],
   );
 
   // Mouse tracking for 3D effect
@@ -115,11 +115,11 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
   const springConfig = { stiffness: 150, damping: 20 };
   const rotateX = useSpring(
     useTransform(mouseY, [-0.5, 0.5], [3, -3]),
-    springConfig
+    springConfig,
   );
   const rotateY = useSpring(
     useTransform(mouseX, [-0.5, 0.5], [-3, 3]),
-    springConfig
+    springConfig,
   );
 
   const handleMouseMove = useCallback(
@@ -131,7 +131,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
       mouseX.set(x);
       mouseY.set(y);
     },
-    [hoveredIndex, mouseX, mouseY]
+    [hoveredIndex, mouseX, mouseY],
   );
 
   const handleMouseLeave = useCallback(() => {
@@ -170,7 +170,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
       {/* Cinematic Background Effects */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         {/* Gradient Orbs */}
-        <div className="absolute -left-1/4 top-0 h-[800px] w-[800px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]" />
+        <div className="absolute -left-1/4 top-0 h-[800px] w-[800px] rounded-full bg-[#8f7852]/[0.03] blur-[150px]" />
         <div className="absolute -right-1/4 bottom-0 h-[600px] w-[600px] rounded-full bg-white/[0.02] blur-[120px]" />
       </motion.div>
 
@@ -191,17 +191,17 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
               className="mb-8 flex items-center justify-center gap-4"
             >
               <motion.div
-                className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50"
+                className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]/50"
                 initial={{ scaleX: 0 }}
                 animate={headerInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 1, delay: 0.3 }}
               />
-              <Sparkles className="h-4 w-4 text-[#c9a962]" strokeWidth={1} />
-              <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-[#c9a962]">
+              <Sparkles className="h-4 w-4 text-[#8f7852]" strokeWidth={1} />
+              <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-[#8f7852]">
                 {t("label")}
               </span>
               <motion.div
-                className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50"
+                className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]/50"
                 initial={{ scaleX: 0 }}
                 animate={headerInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 1, delay: 0.3 }}
@@ -316,7 +316,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
 
                             {/* Animated Scan Line */}
                             <motion.div
-                              className="absolute inset-0 bg-gradient-to-b from-transparent via-[#c9a962]/10 to-transparent"
+                              className="absolute inset-0 bg-gradient-to-b from-transparent via-[#8f7852]/10 to-transparent"
                               initial={{ y: "-100%" }}
                               animate={
                                 isHovered ? { y: "100%" } : { y: "-100%" }
@@ -402,7 +402,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                               transition={{ duration: 0.3 }}
                             >
                               <Icon
-                                className="h-6 w-6 text-[#c9a962]"
+                                className="h-6 w-6 text-[#8f7852]"
                                 strokeWidth={1}
                               />
                             </motion.div>
@@ -452,7 +452,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                               {sector.features.map((feature, i) => (
                                 <motion.span
                                   key={i}
-                                  className="border border-white/10 bg-white/5 px-4 py-2 font-Satoshi text-[10px] font-light uppercase tracking-[0.15em] text-white/70 transition-all duration-300 hover:border-[#c9a962]/30 hover:bg-[#c9a962]/10"
+                                  className="border border-white/10 bg-white/5 px-4 py-2 font-Satoshi text-[10px] font-light uppercase tracking-[0.15em] text-white/70 transition-all duration-300 hover:border-[#8f7852]/30 hover:bg-[#8f7852]/10"
                                   initial={{ opacity: 0, scale: 0.9 }}
                                   whileInView={{ opacity: 1, scale: 1 }}
                                   viewport={{ once: true }}
@@ -474,11 +474,11 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
                               viewport={{ once: true }}
                               transition={{ duration: 0.6, delay: 0.6 }}
                             >
-                              <span className="font-Satoshi text-sm font-light tracking-wide text-white/80 transition-colors group-hover:text-[#c9a962]">
+                              <span className="font-Satoshi text-sm font-light tracking-wide text-white/80 transition-colors group-hover:text-[#8f7852]">
                                 {tCommon("explore")} {sector.title}
                               </span>
                               <motion.div
-                                className="flex h-10 w-10 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#c9a962] group-hover:bg-[#c9a962]"
+                                className="flex h-10 w-10 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#8f7852] group-hover:bg-[#8f7852]"
                                 whileHover={{ scale: 1.1 }}
                               >
                                 <ArrowUpRight
@@ -490,7 +490,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
 
                             {/* Animated accent line */}
                             <motion.div
-                              className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#c9a962] to-transparent"
+                              className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#8f7852] to-transparent"
                               initial={{ width: 0 }}
                               whileInView={{
                                 width: isHovered ? "100%" : "30%",
@@ -517,7 +517,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-20 text-center lg:mt-28"
         >
-          <div className="mx-auto mb-8 h-16 w-px bg-gradient-to-b from-transparent via-[#c9a962]/30 to-transparent" />
+          <div className="mx-auto mb-8 h-16 w-px bg-gradient-to-b from-transparent via-[#8f7852]/30 to-transparent" />
 
           <p className="mb-8 font-Satoshi text-sm font-light text-white/40">
             {t("ctaQuestion")}
@@ -525,7 +525,7 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
 
           <Link
             href="#contact"
-            className="group relative inline-flex items-center gap-4 overflow-hidden border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]"
+            className="group relative inline-flex items-center gap-4 overflow-hidden border border-[#8f7852] bg-[#8f7852] px-10 py-5 font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#8f7852]"
           >
             <span>{t("ctaButton")}</span>
             <ArrowRight
@@ -551,8 +551,8 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
         transition={{ duration: 1, delay: 0.5 }}
         className="absolute left-8 top-24 hidden h-20 w-20 lg:block"
       >
-        <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[#c9a962]/30 to-transparent" />
-        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-[#c9a962]/30 to-transparent" />
+        <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[#8f7852]/30 to-transparent" />
+        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-[#8f7852]/30 to-transparent" />
       </motion.div>
       <motion.div
         initial={{ opacity: 0 }}
@@ -560,8 +560,8 @@ export function SectorsExpertise({ images }: SectorsExpertiseProps) {
         transition={{ duration: 1, delay: 0.6 }}
         className="absolute bottom-24 right-8 hidden h-20 w-20 lg:block"
       >
-        <div className="absolute bottom-0 right-0 h-full w-px bg-gradient-to-t from-[#c9a962]/30 to-transparent" />
-        <div className="absolute bottom-0 right-0 h-px w-full bg-gradient-to-l from-[#c9a962]/30 to-transparent" />
+        <div className="absolute bottom-0 right-0 h-full w-px bg-gradient-to-t from-[#8f7852]/30 to-transparent" />
+        <div className="absolute bottom-0 right-0 h-px w-full bg-gradient-to-l from-[#8f7852]/30 to-transparent" />
       </motion.div>
     </section>
   );

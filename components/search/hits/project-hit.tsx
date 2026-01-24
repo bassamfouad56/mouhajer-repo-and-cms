@@ -19,7 +19,7 @@ export function ProjectHitComponent({ hit, locale, onClick }: ProjectHitProps) {
     <Link
       href={`/${locale}/projects/${hit.slug}`}
       onClick={onClick}
-      className="group flex items-center gap-4 rounded-lg border-l-4 border-[#c9a962] bg-white/5 p-4 transition-all hover:bg-[#c9a962]/10"
+      className="group flex items-center gap-4 rounded-lg border-l-4 border-[#8f7852] bg-white/5 p-4 transition-all hover:bg-[#8f7852]/10"
     >
       {/* Thumbnail */}
       {hit.mainImage && (
@@ -36,17 +36,17 @@ export function ProjectHitComponent({ hit, locale, onClick }: ProjectHitProps) {
       {/* Content */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium uppercase tracking-wider text-[#c9a962]">
+          <span className="text-xs font-medium uppercase tracking-wider text-[#8f7852]">
             Project
           </span>
           {hit.industry && (
-            <span className="rounded-full bg-[#c9a962]/20 px-2 py-0.5 text-xs text-[#c9a962]">
+            <span className="rounded-full bg-[#8f7852]/20 px-2 py-0.5 text-xs text-[#8f7852]">
               {hit.industry}
             </span>
           )}
         </div>
 
-        <h4 className="mt-1 truncate font-medium text-white group-hover:text-[#c9a962]">
+        <h4 className="mt-1 truncate font-medium text-white group-hover:text-[#8f7852]">
           {title}
         </h4>
 
@@ -67,7 +67,7 @@ export function ProjectHitComponent({ hit, locale, onClick }: ProjectHitProps) {
       </div>
 
       {/* Arrow indicator */}
-      <div className="text-neutral-500 transition-transform group-hover:translate-x-1 group-hover:text-[#c9a962]">
+      <div className="text-neutral-500 transition-transform group-hover:translate-x-1 group-hover:text-[#8f7852]">
         →
       </div>
     </Link>

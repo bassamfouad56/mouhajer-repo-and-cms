@@ -116,7 +116,7 @@ export function EnhancedMegaMenu({
         | "commercial"
         | "hospitality"
         | "ongoing"
-        | "featured"
+        | "featured",
     ): string => {
       const sanityImage = megaMenuImages?.projects?.[category]?.mainImage;
       if (sanityImage) {
@@ -124,7 +124,7 @@ export function EnhancedMegaMenu({
           sanityImage,
           400,
           300,
-          FALLBACK_IMAGES.projects[category]
+          FALLBACK_IMAGES.projects[category],
         );
       }
       return FALLBACK_IMAGES.projects[category];
@@ -136,7 +136,7 @@ export function EnhancedMegaMenu({
         | "projectStories"
         | "materialsCraft"
         | "engineering"
-        | "featured"
+        | "featured",
     ): string => {
       const sanityImage = megaMenuImages?.posts?.[category]?.mainImage;
       const categoryToFallback: Record<
@@ -154,7 +154,7 @@ export function EnhancedMegaMenu({
           sanityImage,
           400,
           300,
-          FALLBACK_IMAGES.journal[categoryToFallback[category]]
+          FALLBACK_IMAGES.journal[categoryToFallback[category]],
         );
       }
       return FALLBACK_IMAGES.journal[categoryToFallback[category]];
@@ -167,7 +167,7 @@ export function EnhancedMegaMenu({
           sanityImage,
           400,
           300,
-          FALLBACK_IMAGES.about[section]
+          FALLBACK_IMAGES.about[section],
         );
       }
       return FALLBACK_IMAGES.about[section];
@@ -236,7 +236,7 @@ export function EnhancedMegaMenu({
                     service.mainImage,
                     400,
                     300,
-                    FALLBACK_IMAGES.services.featured
+                    FALLBACK_IMAGES.services.featured,
                   )
                 : FALLBACK_IMAGES.services.featured,
             };
@@ -249,7 +249,7 @@ export function EnhancedMegaMenu({
                 megaMenuImages.services[0].mainImage,
                 400,
                 300,
-                FALLBACK_IMAGES.services.featured
+                FALLBACK_IMAGES.services.featured,
               )
             : FALLBACK_IMAGES.services.featured,
           href: "/services",
@@ -280,7 +280,7 @@ export function EnhancedMegaMenu({
                     industry.mainImage,
                     400,
                     300,
-                    FALLBACK_IMAGES.industries.featured
+                    FALLBACK_IMAGES.industries.featured,
                   )
                 : FALLBACK_IMAGES.industries.featured,
             };
@@ -297,7 +297,7 @@ export function EnhancedMegaMenu({
                   filteredIndustries[0].mainImage,
                   400,
                   300,
-                  FALLBACK_IMAGES.industries.featured
+                  FALLBACK_IMAGES.industries.featured,
                 )
               : FALLBACK_IMAGES.industries.featured;
           })(),
@@ -540,7 +540,7 @@ export function EnhancedMegaMenu({
                         >
                           <div className="overflow-hidden rounded-xl border border-white/10 bg-neutral-950/98 shadow-2xl shadow-black/50 backdrop-blur-xl">
                             {/* Top accent */}
-                            <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c9a962]/40 to-transparent" />
+                            <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#8f7852]/40 to-transparent" />
 
                             <div className="p-2">
                               {item.subLinks.map((subLink, index) => (
@@ -557,7 +557,7 @@ export function EnhancedMegaMenu({
                                     className="flex flex-1 items-center justify-between"
                                   >
                                     <div>
-                                      <span className="block text-[13px] font-light text-white group-hover/item:text-[#c9a962]">
+                                      <span className="block text-[13px] font-light text-white group-hover/item:text-[#8f7852]">
                                         {subLink.label}
                                       </span>
                                       <span className="mt-0.5 block text-[11px] text-neutral-500">
@@ -566,7 +566,7 @@ export function EnhancedMegaMenu({
                                     </div>
                                     <ArrowRight
                                       size={14}
-                                      className="text-neutral-600 transition-all group-hover/item:translate-x-1 group-hover/item:text-[#c9a962]"
+                                      className="text-neutral-600 transition-all group-hover/item:translate-x-1 group-hover/item:text-[#8f7852]"
                                     />
                                   </motion.div>
                                 </Link>
@@ -639,7 +639,7 @@ export function EnhancedMegaMenu({
                                         !subLink.image
                                           ? ""
                                           : ""
-                                      } ${hoveredSubLink?.href === subLink.href ? "ring-1 ring-[#c9a962]/30" : ""}`}
+                                      } ${hoveredSubLink?.href === subLink.href ? "ring-1 ring-[#8f7852]/30" : ""}`}
                                       onMouseEnter={() =>
                                         setHoveredSubLink(subLink)
                                       }

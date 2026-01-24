@@ -1,17 +1,51 @@
-'use client';
+"use client";
 
-import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Play, Pause, Volume2, VolumeX } from 'lucide-react';
-import gsap from 'gsap';
-import SplitType from 'split-type';
-import Link from 'next/link';
-import Image from 'next/image';
-import { MagneticButton } from '@/components/magnetic-button';
-import { useTranslations } from 'next-intl';
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown, Play, Pause, Volume2, VolumeX } from "lucide-react";
+import gsap from "gsap";
+import SplitType from "split-type";
+import Link from "next/link";
+import Image from "next/image";
+import { MagneticButton } from "@/components/magnetic-button";
+import { useTranslations } from "next-intl";
+import { homepageSectionAttr } from "@/lib/sanity-visual-editing";
 
-export function HeroVideo() {
-  const t = useTranslations('Hero');
+interface HeroSanityData {
+  headline?: string;
+  subheadline?: string;
+  videoUrl?: string;
+  primaryCta?: { text?: string; link?: string };
+  secondaryCta?: { text?: string; link?: string };
+  showScrollIndicator?: boolean;
+}
+
+interface HeroVideoProps {
+  sanityData?: HeroSanityData | null;
+  homepageId?: string;
+  sectionKey?: string;
+}
+
+export function HeroVideo({ sanityData, homepageId, sectionKey }: HeroVideoProps) {
+  const t = useTranslations("Hero");
+
+  // Use Sanity data if available, otherwise fall back to i18n
+  const headline = sanityData?.headline;
+  const headlineLine1 = headline ? headline.split('\n')[0] || headline : t("titleLine1");
+  const headlineLine2 = headline ? headline.split('\n')[1] || '' : t("titleLine2");
+  const description = sanityData?.subheadline || t("description");
+  const primaryCtaText = sanityData?.primaryCta?.text || t("ctaPrimary");
+  const primaryCtaLink = sanityData?.primaryCta?.link || "#contact";
+  const secondaryCtaText = sanityData?.secondaryCta?.text || t("ctaSecondary");
+  const secondaryCtaLink = sanityData?.secondaryCta?.link || "/projects";
+  const videoUrl = sanityData?.videoUrl || "/banner-2s.mp4";
+  const showScrollIndicator = sanityData?.showScrollIndicator !== false;
+
+  // Helper for visual editing data attributes
+  const getDataAttr = (fieldPath: string) => {
+    if (!homepageId || !sectionKey) return {};
+    return homepageSectionAttr(homepageId, sectionKey, fieldPath);
+  };
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -23,7 +57,7 @@ export function HeroVideo() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -34,8 +68,8 @@ export function HeroVideo() {
     if (!titleRef.current || !isLoaded) return;
 
     const split = new SplitType(titleRef.current, {
-      types: 'lines,words',
-      tagName: 'span',
+      types: "lines,words",
+      tagName: "span",
     });
 
     const tl = gsap.timeline({ delay: 0.6 });
@@ -47,7 +81,7 @@ export function HeroVideo() {
         opacity: 0,
         y: 80,
         rotateX: -60,
-        transformOrigin: 'center bottom'
+        transformOrigin: "center bottom",
       },
       {
         opacity: 1,
@@ -55,8 +89,8 @@ export function HeroVideo() {
         rotateX: 0,
         stagger: 0.035,
         duration: 1,
-        ease: 'power3.out',
-      }
+        ease: "power3.out",
+      },
     );
 
     return () => {
@@ -90,12 +124,12 @@ export function HeroVideo() {
       });
     };
 
-    video.addEventListener('error', handleError);
-    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener("error", handleError);
+    video.addEventListener("canplay", handleCanPlay);
 
     return () => {
-      video.removeEventListener('error', handleError);
-      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener("error", handleError);
+      video.removeEventListener("canplay", handleCanPlay);
     };
   }, []);
 
@@ -124,12 +158,11 @@ export function HeroVideo() {
       className="relative h-screen min-h-[600px] max-h-[1200px] overflow-hidden bg-neutral-950"
     >
       {/* Video/Image Background */}
-      <motion.div
-        style={{ scale: videoScale }}
-        className="absolute inset-0"
-      >
+      <motion.div style={{ scale: videoScale }} className="absolute inset-0">
         {/* Fallback Image - Always rendered, shows when video fails */}
-        <div className={`absolute inset-0 transition-opacity duration-1000 ${videoExists && !hasVideoError ? 'opacity-0' : 'opacity-100'}`}>
+        <div
+          className={`absolute inset-0 transition-opacity duration-1000 ${videoExists && !hasVideoError ? "opacity-0" : "opacity-100"}`}
+        >
           <Image
             src="/founder/CID_2106_00_COVER.jpg"
             alt="Mouhajer International Design"
@@ -147,11 +180,11 @@ export function HeroVideo() {
             muted
             loop
             playsInline
-            className={`h-full w-full object-cover transition-opacity duration-1000 ${hasVideoError ? 'opacity-0' : 'opacity-100'}`}
+            className={`h-full w-full object-cover transition-opacity duration-1000 ${hasVideoError ? "opacity-0" : "opacity-100"}`}
             onLoadedData={() => setIsLoaded(true)}
             onError={() => setHasVideoError(true)}
           >
-            <source src="/banner-2s.mp4" type="video/mp4" />
+            <source src={videoUrl} type="video/mp4" />
           </video>
         )}
 
@@ -160,9 +193,13 @@ export function HeroVideo() {
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/50 via-transparent to-neutral-950/50" />
 
         {/* Vignette effect */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)',
-        }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)",
+          }}
+        />
       </motion.div>
 
       {/* Video Controls - Bottom Left (only show if video exists and no error) */}
@@ -176,7 +213,7 @@ export function HeroVideo() {
           <button
             onClick={toggleVideo}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/60 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10 hover:text-white"
-            aria-label={isVideoPlaying ? 'Pause video' : 'Play video'}
+            aria-label={isVideoPlaying ? "Pause video" : "Play video"}
           >
             {isVideoPlaying ? (
               <Pause className="h-4 w-4" />
@@ -187,7 +224,7 @@ export function HeroVideo() {
           <button
             onClick={toggleMute}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/60 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10 hover:text-white"
-            aria-label={isMuted ? 'Unmute' : 'Mute'}
+            aria-label={isMuted ? "Unmute" : "Mute"}
           >
             {isMuted ? (
               <VolumeX className="h-4 w-4" />
@@ -201,18 +238,26 @@ export function HeroVideo() {
       {/* Main Content */}
       <motion.div
         style={{ opacity, y }}
-        className="relative z-10 flex h-full flex-col items-center justify-center px-4 sm:px-6 lg:px-12"
+        className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-6 lg:px-12"
       >
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto container text-center">
           {/* Main Title */}
-          <div className="mb-6 overflow-hidden sm:mb-8" style={{ perspective: '1000px' }}>
+          <div
+            className="mb-6 overflow-hidden sm:mb-8"
+            style={{ perspective: "1000px" }}
+            {...getDataAttr("headline")}
+          >
             <h1
               ref={titleRef}
               className="font-SchnyderS text-3xl font-light leading-[1.15] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
             >
-              {t('titleLine1')}
-              <br />
-              {t('titleLine2')}
+              {headlineLine1}
+              {headlineLine2 && (
+                <>
+                  <br />
+                  {headlineLine2}
+                </>
+              )}
             </h1>
           </div>
 
@@ -222,8 +267,9 @@ export function HeroVideo() {
             animate={isLoaded ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 1.2 }}
             className="mx-auto mb-8 max-w-2xl px-4 text-sm font-light leading-relaxed text-white/70 sm:mb-12 sm:px-0 sm:text-base lg:text-lg"
+            {...getDataAttr("subheadline")}
           >
-            {t('description')}
+            {description}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -235,21 +281,23 @@ export function HeroVideo() {
           >
             <MagneticButton strength={0.2}>
               <Link
-                href="#contact"
+                href={primaryCtaLink}
                 className="group relative block w-full overflow-hidden bg-white px-8 py-4 text-xs font-medium uppercase tracking-[0.15em] text-neutral-950 transition-all hover:bg-transparent hover:text-white sm:w-auto sm:px-10 sm:py-5 sm:tracking-[0.2em]"
               >
-                <span className="relative z-10">{t('ctaPrimary')}</span>
+                <span className="relative z-10" {...getDataAttr("primaryCta.text")}>{primaryCtaText}</span>
                 <div className="absolute inset-0 border-2 border-white" />
                 <div className="absolute inset-0 origin-left scale-x-0 bg-transparent transition-transform duration-500 group-hover:scale-x-100" />
               </Link>
             </MagneticButton>
             <MagneticButton strength={0.15}>
               <Link
-                href="/projects"
+                href={secondaryCtaLink}
                 className="group flex items-center gap-2 border-b border-white/40 pb-1 text-xs font-light uppercase tracking-[0.15em] text-white/80 transition-all hover:border-white hover:text-white sm:gap-3 sm:tracking-[0.2em]"
               >
-                <span>{t('ctaSecondary')}</span>
-                <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                <span {...getDataAttr("secondaryCta.text")}>{secondaryCtaText}</span>
+                <span className="inline-block transition-transform group-hover:translate-x-1">
+                  →
+                </span>
               </Link>
             </MagneticButton>
           </motion.div>
@@ -257,23 +305,25 @@ export function HeroVideo() {
       </motion.div>
 
       {/* Scroll Indicator - Bottom Center */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isLoaded ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 2 }}
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 sm:bottom-8 lg:bottom-12"
-      >
+      {showScrollIndicator && (
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={isLoaded ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 2 }}
+          className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 sm:bottom-8 lg:bottom-12"
         >
-          <span className="text-[10px] font-light tracking-[0.2em] text-white/50 sm:text-xs">
-            {t('scrollDown')}
-          </span>
-          <ChevronDown className="h-4 w-4 text-white/50" />
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-2"
+          >
+            <span className="text-[10px] font-light tracking-[0.2em] text-white/50 sm:text-xs">
+              {t("scrollDown")}
+            </span>
+            <ChevronDown className="h-4 w-4 text-white/50" />
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
 
       {/* Decorative corner elements */}
       <div className="absolute left-4 top-4 hidden h-16 w-16 border-l border-t border-white/10 sm:left-6 sm:top-6 lg:left-12 lg:top-28 lg:block lg:h-24 lg:w-24" />

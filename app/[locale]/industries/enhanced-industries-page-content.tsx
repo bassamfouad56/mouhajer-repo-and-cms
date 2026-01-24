@@ -10,7 +10,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 // Helper to extract localized string
 function getLocalizedString(
   value: string | { ar?: string; en?: string } | undefined,
-  locale: string = "en"
+  locale: string = "en",
 ): string {
   if (!value) return "";
   if (typeof value === "string") return value;
@@ -24,7 +24,7 @@ function getLocalizedString(
 function getSafeImageUrl(
   image: any,
   width: number,
-  height: number
+  height: number,
 ): string | null {
   if (!image || !image.asset) return null;
   try {
@@ -125,7 +125,7 @@ function ImmersiveIndustriesSection({
   scrollYProgress.on("change", (latest) => {
     const newIndex = Math.min(
       Math.floor(latest / segmentSize),
-      numIndustries - 1
+      numIndustries - 1,
     );
     if (newIndex !== activeIndex && newIndex >= 0) {
       setActiveIndex(newIndex);
@@ -174,7 +174,7 @@ function ImmersiveIndustriesSection({
 
         {/* Gold ambient glow */}
         <motion.div
-          className="absolute left-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[#c9a962]/[0.08] blur-[200px]"
+          className="absolute left-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[#8f7852]/[0.08] blur-[200px]"
           animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -193,8 +193,8 @@ function ImmersiveIndustriesSection({
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                   className="mb-6 flex items-center gap-4"
                 >
-                  <div className="h-px w-12 bg-[#c9a962]" />
-                  <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+                  <div className="h-px w-12 bg-[#8f7852]" />
+                  <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
                     Our Expertise
                   </span>
                 </motion.div>
@@ -219,7 +219,7 @@ function ImmersiveIndustriesSection({
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className="mb-6 h-px w-20 origin-left bg-gradient-to-r from-[#c9a962] to-transparent"
+                  className="mb-6 h-px w-20 origin-left bg-gradient-to-r from-[#8f7852] to-transparent"
                 />
 
                 {/* Description with Fade Animation */}
@@ -246,7 +246,7 @@ function ImmersiveIndustriesSection({
                 >
                   <Link
                     href={`/industries/${industries[activeIndex]?.slug?.current}`}
-                    className="group inline-flex items-center gap-4 border border-[#c9a962]/50 bg-[#c9a962]/10 px-8 py-4 font-Satoshi text-xs uppercase tracking-[0.2em] text-[#c9a962] backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962] hover:text-neutral-950"
+                    className="group inline-flex items-center gap-4 border border-[#8f7852]/50 bg-[#8f7852]/10 px-8 py-4 font-Satoshi text-xs uppercase tracking-[0.2em] text-[#8f7852] backdrop-blur-sm transition-all duration-500 hover:border-[#8f7852] hover:bg-[#8f7852] hover:text-neutral-950"
                   >
                     Explore This Sector
                     <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
@@ -261,7 +261,7 @@ function ImmersiveIndustriesSection({
                       <div
                         key={industry._id}
                         className={`h-1.5 rounded-full transition-all duration-500 ${
-                          isActive ? "w-10 bg-[#c9a962]" : "w-3 bg-white/20"
+                          isActive ? "w-10 bg-[#8f7852]" : "w-3 bg-white/20"
                         }`}
                       />
                     );
@@ -282,7 +282,7 @@ function ImmersiveIndustriesSection({
                     className="absolute top-0 left-0 w-[65%] h-[75%] overflow-hidden"
                   >
                     {/* Gold border frame */}
-                    <div className="absolute inset-0 border border-[#c9a962]/30 z-10" />
+                    <div className="absolute inset-0 border border-[#8f7852]/30 z-10" />
 
                     <Image
                       src={activeImages.main}
@@ -296,8 +296,8 @@ function ImmersiveIndustriesSection({
                     <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/50 via-transparent to-neutral-950/10" />
 
                     {/* Corner accents */}
-                    <div className="absolute top-4 left-4 h-8 w-8 border-l border-t border-[#c9a962]/50" />
-                    <div className="absolute bottom-4 right-4 h-8 w-8 border-r border-b border-[#c9a962]/50" />
+                    <div className="absolute top-4 left-4 h-8 w-8 border-l border-t border-[#8f7852]/50" />
+                    <div className="absolute bottom-4 right-4 h-8 w-8 border-r border-b border-[#8f7852]/50" />
                   </motion.div>
 
                   {/* Secondary Image - Medium, overlapping */}
@@ -313,7 +313,7 @@ function ImmersiveIndustriesSection({
                     className="absolute bottom-0 right-0 w-[55%] h-[55%] overflow-hidden shadow-2xl"
                   >
                     {/* Gold border frame */}
-                    <div className="absolute inset-0 border-2 border-[#c9a962]/40 z-10" />
+                    <div className="absolute inset-0 border-2 border-[#8f7852]/40 z-10" />
 
                     <Image
                       src={activeImages.secondary}
@@ -333,7 +333,7 @@ function ImmersiveIndustriesSection({
                       transition={{ duration: 0.6, delay: 0.5 }}
                       className="absolute bottom-4 left-4 right-4 z-20"
                     >
-                      <div className="font-Satoshi text-[10px] uppercase tracking-[0.25em] text-[#c9a962]">
+                      <div className="font-Satoshi text-[10px] uppercase tracking-[0.25em] text-[#8f7852]">
                         Featured Work
                       </div>
                     </motion.div>
@@ -349,7 +349,7 @@ function ImmersiveIndustriesSection({
                       delay: 0.4,
                       ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="absolute top-[60%] left-[55%] w-28 h-28 overflow-hidden border-2 border-[#c9a962]/50 bg-neutral-950/90 backdrop-blur-sm shadow-xl z-10"
+                    className="absolute top-[60%] left-[55%] w-28 h-28 overflow-hidden border-2 border-[#8f7852]/50 bg-neutral-950/90 backdrop-blur-sm shadow-xl z-10"
                   >
                     {/* Show next industry's image as preview */}
                     {industries[(activeIndex + 1) % industries.length] && (
@@ -357,7 +357,7 @@ function ImmersiveIndustriesSection({
                         <Image
                           src={
                             getIndustryImages(
-                              industries[(activeIndex + 1) % industries.length]
+                              industries[(activeIndex + 1) % industries.length],
                             ).main
                           }
                           alt="Next sector preview"
@@ -369,15 +369,15 @@ function ImmersiveIndustriesSection({
                           className="absolute inset-0 flex items-center justify-center"
                           whileHover={{ scale: 1.1 }}
                         >
-                          <ArrowRight className="h-5 w-5 text-[#c9a962]" />
+                          <ArrowRight className="h-5 w-5 text-[#8f7852]" />
                         </motion.div>
                       </>
                     )}
                   </motion.div>
 
                   {/* Decorative frame element */}
-                  <div className="absolute -top-4 -left-4 h-20 w-20 border-l-2 border-t-2 border-[#c9a962]/20" />
-                  <div className="absolute -bottom-4 -right-4 h-20 w-20 border-r-2 border-b-2 border-[#c9a962]/20" />
+                  <div className="absolute -top-4 -left-4 h-20 w-20 border-l-2 border-t-2 border-[#8f7852]/20" />
+                  <div className="absolute -bottom-4 -right-4 h-20 w-20 border-r-2 border-b-2 border-[#8f7852]/20" />
                 </div>
               </div>
 
@@ -409,7 +409,7 @@ function ImmersiveIndustriesSection({
                         </span>
                         <div
                           className={`h-px transition-all duration-500 ${
-                            isActive ? "w-12 bg-[#c9a962]" : "w-6 bg-white/20"
+                            isActive ? "w-12 bg-[#8f7852]" : "w-6 bg-white/20"
                           }`}
                         />
                       </motion.div>
@@ -421,12 +421,12 @@ function ImmersiveIndustriesSection({
                 <div className="mt-12 flex flex-col items-end gap-2">
                   <div className="h-24 w-px overflow-hidden bg-white/10">
                     <motion.div
-                      className="w-full bg-[#c9a962]"
+                      className="w-full bg-[#8f7852]"
                       style={{
                         height: useTransform(
                           scrollYProgress,
                           [0, 1],
-                          ["0%", "100%"]
+                          ["0%", "100%"],
                         ),
                       }}
                     />
@@ -441,8 +441,8 @@ function ImmersiveIndustriesSection({
         </div>
 
         {/* Corner Accents */}
-        <div className="pointer-events-none absolute left-8 top-24 h-20 w-20 border-l border-t border-[#c9a962]/20 lg:left-16" />
-        <div className="pointer-events-none absolute bottom-24 right-8 h-20 w-20 border-b border-r border-[#c9a962]/20 lg:right-16" />
+        <div className="pointer-events-none absolute left-8 top-24 h-20 w-20 border-l border-t border-[#8f7852]/20 lg:left-16" />
+        <div className="pointer-events-none absolute bottom-24 right-8 h-20 w-20 border-b border-r border-[#8f7852]/20 lg:right-16" />
 
         {/* Mobile Progress Dots */}
         <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-3 lg:hidden">
@@ -450,7 +450,7 @@ function ImmersiveIndustriesSection({
             <div
               key={index}
               className={`h-2 rounded-full transition-all duration-500 ${
-                index === activeIndex ? "w-8 bg-[#c9a962]" : "w-2 bg-white/30"
+                index === activeIndex ? "w-8 bg-[#8f7852]" : "w-2 bg-white/30"
               }`}
             />
           ))}
@@ -509,10 +509,10 @@ export default function EnhancedIndustriesPageContent({
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-neutral-950/70 via-neutral-950/30 to-transparent" />
 
         {/* Gold Accent Glow */}
-        <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.06] blur-[150px]" />
+        <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] rounded-full bg-[#8f7852]/[0.06] blur-[150px]" />
 
         {/* Top Border Accent */}
-        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
 
         {/* Hero Content */}
         <motion.div
@@ -527,11 +527,11 @@ export default function EnhancedIndustriesPageContent({
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-12 flex items-center justify-center gap-4"
             >
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
               <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-neutral-500">
                 Industries
               </span>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
             </motion.div>
 
             {/* Main Title */}
@@ -559,7 +559,7 @@ export default function EnhancedIndustriesPageContent({
                   delay: 0.5,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-[#c9a962] sm:text-7xl md:text-8xl lg:text-9xl"
+                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-[#8f7852] sm:text-7xl md:text-8xl lg:text-9xl"
               >
                 We Transform
               </motion.h1>
@@ -621,7 +621,7 @@ export default function EnhancedIndustriesPageContent({
         </motion.div>
 
         {/* Bottom Border Accent */}
-        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/20 to-transparent" />
       </section>
 
       {/* Immersive Scroll-Driven Industries */}
@@ -638,7 +638,7 @@ export default function EnhancedIndustriesPageContent({
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-4 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-[#c9a962]"
+            className="inline-flex items-center gap-3 border border-[#8f7852] bg-[#8f7852] px-10 py-4 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-[#8f7852]"
           >
             Start a Conversation
             <ArrowRight className="h-4 w-4" />

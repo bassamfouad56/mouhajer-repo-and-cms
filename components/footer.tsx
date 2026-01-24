@@ -134,7 +134,7 @@ export function Footer() {
               <StaggerItem>
                 <a
                   href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
-                  className="group flex items-center gap-3 transition-colors hover:text-[#c9a962]"
+                  className="group flex items-center gap-3 transition-colors hover:text-[#8f7852]"
                 >
                   <motion.span
                     className="transition-transform group-hover:scale-110"
@@ -144,14 +144,14 @@ export function Footer() {
                   </motion.span>
                   <span className="relative">
                     {process.env.NEXT_PUBLIC_EMAIL || "info@mouhajerdesign.com"}
-                    <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute bottom-0 left-0 h-px w-0 bg-[#8f7852] transition-all duration-300 group-hover:w-full" />
                   </span>
                 </a>
               </StaggerItem>
               <StaggerItem>
                 <a
                   href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
-                  className="group flex items-center gap-3 transition-colors hover:text-[#c9a962]"
+                  className="group flex items-center gap-3 transition-colors hover:text-[#8f7852]"
                 >
                   <motion.span
                     className="transition-transform group-hover:scale-110"
@@ -161,7 +161,7 @@ export function Footer() {
                   </motion.span>
                   <span className="relative">
                     {process.env.NEXT_PUBLIC_PHONE || "+971-4-323-4567"}
-                    <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute bottom-0 left-0 h-px w-0 bg-[#8f7852] transition-all duration-300 group-hover:w-full" />
                   </span>
                 </a>
               </StaggerItem>
@@ -186,11 +186,11 @@ export function Footer() {
                     <li>
                       <Link
                         href={link.href}
-                        className="group relative inline-block text-sm font-light text-neutral-600 transition-colors hover:text-[#c9a962] focus-visible:text-[#c9a962] focus-visible:outline-none"
+                        className="group relative inline-block text-sm font-light text-neutral-600 transition-colors hover:text-[#8f7852] focus-visible:text-[#8f7852] focus-visible:outline-none"
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 ease-out group-hover:w-full" />
+                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#8f7852] transition-all duration-300 ease-out group-hover:w-full" />
                         </span>
                       </Link>
                     </li>
@@ -212,11 +212,11 @@ export function Footer() {
                     <li>
                       <Link
                         href={link.href}
-                        className="group relative inline-block text-sm font-light text-neutral-600 transition-colors hover:text-[#c9a962] focus-visible:text-[#c9a962] focus-visible:outline-none"
+                        className="group relative inline-block text-sm font-light text-neutral-600 transition-colors hover:text-[#8f7852] focus-visible:text-[#8f7852] focus-visible:outline-none"
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 ease-out group-hover:w-full" />
+                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#8f7852] transition-all duration-300 ease-out group-hover:w-full" />
                         </span>
                       </Link>
                     </li>
@@ -242,7 +242,7 @@ export function Footer() {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting}
                 required
-                className="flex-1 border border-[#c9a962]/30 bg-white/60 px-4 py-3 text-sm font-light text-neutral-900 placeholder:text-neutral-400 transition-all duration-300 focus:border-[#c9a962] focus:outline-none disabled:opacity-50"
+                className="flex-1 border border-[#8f7852]/30 bg-white/60 px-4 py-3 text-sm font-light text-neutral-900 placeholder:text-neutral-400 transition-all duration-300 focus:border-[#8f7852] focus:outline-none disabled:opacity-50"
               />
               <motion.button
                 type="submit"
@@ -250,7 +250,7 @@ export function Footer() {
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="group relative overflow-hidden border border-[#c9a962] px-6 py-3 text-sm font-light tracking-wider text-[#c9a962] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5] disabled:cursor-not-allowed disabled:opacity-50"
+                className="group relative overflow-hidden border border-[#8f7852] px-6 py-3 text-sm font-light tracking-wider text-[#8f7852] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8f7852] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {isSubmitting
@@ -262,7 +262,7 @@ export function Footer() {
                   />
                 </span>
                 <motion.span
-                  className="absolute inset-0 bg-[#c9a962]"
+                  className="absolute inset-0 bg-[#8f7852]"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -299,10 +299,10 @@ export function Footer() {
                   transition={{ delay: 0.4 + index * 0.1 }}
                   whileHover={{
                     y: -4,
-                    borderColor: "#c9a962",
-                    color: "#c9a962",
+                    borderColor: "#8f7852",
+                    color: "#8f7852",
                   }}
-                  className="flex h-10 w-10 items-center justify-center border border-[#c9a962]/30 text-neutral-600 transition-colors focus-visible:border-[#c9a962] focus-visible:text-[#c9a962] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5]"
+                  className="flex h-10 w-10 items-center justify-center border border-[#8f7852]/30 text-neutral-600 transition-colors focus-visible:border-[#8f7852] focus-visible:text-[#8f7852] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8f7852] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf8f5]"
                   aria-label={social.label}
                 >
                   <social.icon size={18} />
@@ -320,17 +320,17 @@ export function Footer() {
             <div className="flex gap-6">
               <Link
                 href="/privacy"
-                className="group relative transition-colors hover:text-[#c9a962]"
+                className="group relative transition-colors hover:text-[#8f7852]"
               >
                 <span>{t("privacy")}</span>
-                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#8f7852] transition-all duration-300 group-hover:w-full" />
               </Link>
               <Link
                 href="/terms"
-                className="group relative transition-colors hover:text-[#c9a962]"
+                className="group relative transition-colors hover:text-[#8f7852]"
               >
                 <span>{t("terms")}</span>
-                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c9a962] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#8f7852] transition-all duration-300 group-hover:w-full" />
               </Link>
             </div>
           </div>

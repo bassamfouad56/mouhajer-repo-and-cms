@@ -26,19 +26,19 @@ function GradientLineDivider({
         initial={{ scaleX: 0, opacity: 0 }}
         animate={isInView ? { scaleX: 1, opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="h-px w-24 origin-right bg-gradient-to-l from-[#c9a962]/60 to-transparent sm:w-32"
+        className="h-px w-24 origin-right bg-gradient-to-l from-[#8f7852]/60 to-transparent sm:w-32"
       />
       <motion.div
         initial={{ scale: 0, rotate: 0 }}
         animate={isInView ? { scale: 1, rotate: 45 } : {}}
         transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="h-2 w-2 border border-[#c9a962]/60"
+        className="h-2 w-2 border border-[#8f7852]/60"
       />
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}
         animate={isInView ? { scaleX: 1, opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="h-px w-24 origin-left bg-gradient-to-r from-[#c9a962]/60 to-transparent sm:w-32"
+        className="h-px w-24 origin-left bg-gradient-to-r from-[#8f7852]/60 to-transparent sm:w-32"
       />
     </div>
   );
@@ -68,7 +68,7 @@ function DiamondDivider({
         transition={{ duration: 0.4, delay: 0.2 }}
         className="mx-3"
       >
-        <div className="h-1.5 w-1.5 rotate-45 bg-[#c9a962]/50" />
+        <div className="h-1.5 w-1.5 rotate-45 bg-[#8f7852]/50" />
       </motion.div>
       <motion.div
         initial={{ scale: 0, rotate: 0 }}
@@ -76,9 +76,9 @@ function DiamondDivider({
         transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="relative"
       >
-        <div className="h-4 w-4 border border-[#c9a962]" />
+        <div className="h-4 w-4 border border-[#8f7852]" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-1.5 w-1.5 bg-[#c9a962]" />
+          <div className="h-1.5 w-1.5 bg-[#8f7852]" />
         </div>
       </motion.div>
       <motion.div
@@ -87,7 +87,7 @@ function DiamondDivider({
         transition={{ duration: 0.4, delay: 0.2 }}
         className="mx-3"
       >
-        <div className="h-1.5 w-1.5 rotate-45 bg-[#c9a962]/50" />
+        <div className="h-1.5 w-1.5 rotate-45 bg-[#8f7852]/50" />
       </motion.div>
       <motion.div
         initial={{ width: 0 }}
@@ -113,14 +113,14 @@ function GradientOverlayDivider({
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1 }}
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-[#c9a962]/5 to-transparent"
+        className="absolute inset-0 bg-gradient-to-b from-transparent via-[#8f7852]/5 to-transparent"
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <motion.div
           initial={{ width: 0, opacity: 0 }}
           animate={isInView ? { width: "100%", opacity: 1 } : {}}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="h-px max-w-md bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
+          className="h-px max-w-md bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent"
         />
       </div>
     </div>
@@ -147,7 +147,7 @@ function DotsDivider({
             delay: 0.1 * i,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className={`h-1.5 w-1.5 rounded-full ${i === 1 ? "bg-[#c9a962]" : "bg-[#c9a962]/40"}`}
+          className={`h-1.5 w-1.5 rounded-full ${i === 1 ? "bg-[#8f7852]" : "bg-[#8f7852]/40"}`}
         />
       ))}
     </div>
@@ -167,7 +167,7 @@ function MinimalDivider({
       initial={{ scaleX: 0, opacity: 0 }}
       animate={isInView ? { scaleX: 1, opacity: 1 } : {}}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-      className="mx-auto h-px w-16 bg-gradient-to-r from-transparent via-[#c9a962]/50 to-transparent"
+      className="mx-auto h-px w-16 bg-gradient-to-r from-transparent via-[#8f7852]/50 to-transparent"
     />
   );
 }
@@ -243,7 +243,7 @@ export function SimpleAnimatedDivider({
         initial={{ scale: 0, rotate: 0, opacity: 0 }}
         animate={isInView ? { scale: 1, rotate: 45, opacity: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="mx-4 h-2.5 w-2.5 border border-[#c9a962]"
+        className="mx-4 h-2.5 w-2.5 border border-[#8f7852]"
       />
 
       {/* Right Line */}
@@ -303,7 +303,7 @@ export function LuxuryTransition({
           transition={{ duration: 0.4, delay: 0.4 }}
           className="mx-2"
         >
-          <div className="h-1 w-1 rotate-45 bg-[#c9a962]/50" />
+          <div className="h-1 w-1 rotate-45 bg-[#8f7852]/50" />
         </motion.div>
 
         {/* Center diamond frame */}
@@ -313,14 +313,14 @@ export function LuxuryTransition({
           transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-2"
         >
-          <div className="h-5 w-5 border border-[#c9a962]/70" />
+          <div className="h-5 w-5 border border-[#8f7852]/70" />
           <motion.div
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : {}}
             transition={{ duration: 0.4, delay: 0.6 }}
             className="absolute inset-0 flex items-center justify-center"
           >
-            <div className="h-2 w-2 bg-[#c9a962]" />
+            <div className="h-2 w-2 bg-[#8f7852]" />
           </motion.div>
         </motion.div>
 
@@ -331,7 +331,7 @@ export function LuxuryTransition({
           transition={{ duration: 0.4, delay: 0.4 }}
           className="mx-2"
         >
-          <div className="h-1 w-1 rotate-45 bg-[#c9a962]/50" />
+          <div className="h-1 w-1 rotate-45 bg-[#8f7852]/50" />
         </motion.div>
 
         {/* Extended right line */}

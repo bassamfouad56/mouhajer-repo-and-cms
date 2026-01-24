@@ -253,7 +253,7 @@ function CinematicHero({
           {/* Decorative Line */}
           <motion.div
             variants={itemVariants}
-            className="mx-auto h-20 w-px bg-gradient-to-b from-transparent via-[#c9a962] to-transparent"
+            className="mx-auto h-20 w-px bg-gradient-to-b from-transparent via-[#8f7852] to-transparent"
           />
 
           {/* Title */}
@@ -263,7 +263,7 @@ function CinematicHero({
           >
             {title}
             <br />
-            <span className="text-[#c9a962]">{titleHighlight}</span>
+            <span className="text-[#8f7852]">{titleHighlight}</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -281,7 +281,7 @@ function CinematicHero({
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="mx-auto flex h-14 w-8 items-start justify-center rounded-full border border-white/20 p-2"
             >
-              <motion.div className="h-2 w-1 rounded-full bg-[#c9a962]" />
+              <motion.div className="h-2 w-1 rounded-full bg-[#8f7852]" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -318,7 +318,7 @@ function IntroSection({
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 1px 1px, #c9a962 1px, transparent 0)",
+              "radial-gradient(circle at 1px 1px, #8f7852 1px, transparent 0)",
             backgroundSize: "40px 40px",
           }}
         />
@@ -334,8 +334,8 @@ function IntroSection({
           <motion.div variants={itemVariants} className="lg:col-span-5">
             {/* Label */}
             <div className="mb-6 flex items-center gap-4">
-              <div className="h-px w-12 bg-[#c9a962]" />
-              <span className="font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-[#c9a962]">
+              <div className="h-px w-12 bg-[#8f7852]" />
+              <span className="font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-[#8f7852]">
                 Overview
               </span>
             </div>
@@ -343,7 +343,7 @@ function IntroSection({
             <h2 className="font-SchnyderS text-4xl font-light leading-tight tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl">
               {title}{" "}
               {highlight && (
-                <span className="italic text-[#c9a962]">{highlight}</span>
+                <span className="italic text-[#8f7852]">{highlight}</span>
               )}
             </h2>
           </motion.div>
@@ -386,7 +386,7 @@ function ScrollRevealSectionTitle({
   const textOpacity = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
-    [0, 1, 1, 0]
+    [0, 1, 1, 0],
   );
   const labelOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const titleScale = useTransform(scrollYProgress, [0, 0.3], [0.9, 1]);
@@ -418,7 +418,7 @@ function ScrollRevealSectionTitle({
 
         {/* Gold Ambient Glow */}
         <motion.div
-          className="absolute left-1/4 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[#c9a962]/[0.08] blur-[150px]"
+          className="absolute left-1/4 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[#8f7852]/[0.08] blur-[150px]"
           animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -426,7 +426,7 @@ function ScrollRevealSectionTitle({
         {/* Content */}
         <div className="relative z-10 flex h-full items-center justify-center">
           <motion.div
-            className="mx-auto max-w-5xl px-6 text-center sm:px-12"
+            className="mx-auto container px-6 text-center sm:px-12"
             style={{ y: textY }}
           >
             {/* Label */}
@@ -434,11 +434,11 @@ function ScrollRevealSectionTitle({
               style={{ opacity: labelOpacity }}
               className="mb-8 flex items-center justify-center gap-4"
             >
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
-              <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]" />
+              <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.4em] text-[#8f7852]">
                 {label}
               </span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]" />
             </motion.div>
 
             {/* Title with Scale and Opacity Animation */}
@@ -452,14 +452,14 @@ function ScrollRevealSectionTitle({
             {/* Decorative Line Below */}
             <motion.div
               style={{ opacity: textOpacity }}
-              className="mx-auto mt-10 h-20 w-px bg-gradient-to-b from-[#c9a962] to-transparent"
+              className="mx-auto mt-10 h-20 w-px bg-gradient-to-b from-[#8f7852] to-transparent"
             />
           </motion.div>
         </div>
 
         {/* Corner Accents */}
-        <div className="pointer-events-none absolute left-8 top-24 h-16 w-16 border-l border-t border-[#c9a962]/20 sm:left-12 lg:left-20" />
-        <div className="pointer-events-none absolute bottom-24 right-8 h-16 w-16 border-b border-r border-[#c9a962]/20 sm:right-12 lg:right-20" />
+        <div className="pointer-events-none absolute left-8 top-24 h-16 w-16 border-l border-t border-[#8f7852]/20 sm:left-12 lg:left-20" />
+        <div className="pointer-events-none absolute bottom-24 right-8 h-16 w-16 border-b border-r border-[#8f7852]/20 sm:right-12 lg:right-20" />
 
         {/* Scroll Indicator */}
         <motion.div
@@ -580,7 +580,7 @@ function CapabilityCard({
 
           {/* Image Overlay on Hover */}
           <motion.div
-            className="absolute inset-0 bg-[#c9a962]/10"
+            className="absolute inset-0 bg-[#8f7852]/10"
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.5 }}
@@ -597,10 +597,10 @@ function CapabilityCard({
           <div className="mx-auto max-w-xl">
             {/* Title & Subtitle */}
             <motion.div variants={itemVariants} className="mb-10 space-y-3">
-              <p className="font-Satoshi text-sm font-light uppercase tracking-[0.15em] text-[#c9a962]">
+              <p className="font-Satoshi text-sm font-light uppercase tracking-[0.15em] text-[#8f7852]">
                 {capability.subtitle}
               </p>
-              <h3 className="font-SchnyderS text-3xl font-light text-neutral-950 transition-colors duration-500 group-hover:text-[#c9a962] lg:text-4xl xl:text-5xl">
+              <h3 className="font-SchnyderS text-3xl font-light text-neutral-950 transition-colors duration-500 group-hover:text-[#8f7852] lg:text-4xl xl:text-5xl">
                 {capability.title}
               </h3>
             </motion.div>
@@ -616,10 +616,10 @@ function CapabilityCard({
                   {/* Animated Border */}
                   <motion.div
                     className="absolute left-0 top-0 h-full w-0.5 bg-neutral-200"
-                    whileHover={{ backgroundColor: "#c9a962" }}
+                    whileHover={{ backgroundColor: "#8f7852" }}
                   >
                     <motion.div
-                      className="absolute left-0 top-0 h-0 w-full bg-[#c9a962]"
+                      className="absolute left-0 top-0 h-0 w-full bg-[#8f7852]"
                       initial={{ height: 0 }}
                       whileHover={{ height: "100%" }}
                       transition={{ duration: 0.3 }}
@@ -660,7 +660,7 @@ function CaseStudySection({ caseStudy }: { caseStudy: CaseStudy }) {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 1px 1px, #c9a962 1px, transparent 0)",
+              "radial-gradient(circle at 1px 1px, #8f7852 1px, transparent 0)",
             backgroundSize: "60px 60px",
           }}
         />
@@ -675,8 +675,8 @@ function CaseStudySection({ caseStudy }: { caseStudy: CaseStudy }) {
         {/* Section Header */}
         <motion.div variants={itemVariants} className="mb-16">
           <div className="mb-6 flex items-center gap-4">
-            <div className="h-px w-12 bg-[#c9a962]" />
-            <span className="font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-[#c9a962]">
+            <div className="h-px w-12 bg-[#8f7852]" />
+            <span className="font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-[#8f7852]">
               Case Study
             </span>
           </div>
@@ -687,7 +687,7 @@ function CaseStudySection({ caseStudy }: { caseStudy: CaseStudy }) {
           <div className="space-y-8">
             <motion.div
               variants={itemVariants}
-              className="inline-block border-b-2 border-[#c9a962] pb-2 font-Satoshi text-sm font-light uppercase tracking-wider text-[#c9a962]"
+              className="inline-block border-b-2 border-[#8f7852] pb-2 font-Satoshi text-sm font-light uppercase tracking-wider text-[#8f7852]"
             >
               {caseStudy.label}
             </motion.div>
@@ -720,7 +720,7 @@ function CaseStudySection({ caseStudy }: { caseStudy: CaseStudy }) {
             {caseStudy.approachItems && caseStudy.approachItems.length > 0 && (
               <motion.ul
                 variants={itemVariants}
-                className="space-y-4 border-l-2 border-[#c9a962] pl-6"
+                className="space-y-4 border-l-2 border-[#8f7852] pl-6"
               >
                 {caseStudy.approachItems.map((item, index) => (
                   <motion.li
@@ -760,7 +760,7 @@ function CaseStudySection({ caseStudy }: { caseStudy: CaseStudy }) {
                         transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                         className="group flex flex-col items-center text-center"
                       >
-                        <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-lg border border-white/10 bg-white/5 p-4 transition-all duration-300 group-hover:border-[#c9a962]/30 group-hover:bg-white/10 lg:h-32 lg:w-32">
+                        <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-lg border border-white/10 bg-white/5 p-4 transition-all duration-300 group-hover:border-[#8f7852]/30 group-hover:bg-white/10 lg:h-32 lg:w-32">
                           <SafeImage
                             src={cert.image}
                             alt={cert.label}
@@ -790,7 +790,7 @@ function CaseStudySection({ caseStudy }: { caseStudy: CaseStudy }) {
                         transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                         className="group"
                       >
-                        <div className="mb-3 font-SchnyderS text-4xl font-light text-[#c9a962] transition-transform duration-300 group-hover:scale-110 lg:text-5xl">
+                        <div className="mb-3 font-SchnyderS text-4xl font-light text-[#8f7852] transition-transform duration-300 group-hover:scale-110 lg:text-5xl">
                           {stat.value}
                         </div>
                         <div className="font-Satoshi text-sm font-light text-white/70">
@@ -870,7 +870,7 @@ function CTASection({
         >
           {title}
           <br />
-          <span className="text-[#c9a962]">{titleHighlight}</span>
+          <span className="text-[#8f7852]">{titleHighlight}</span>
         </motion.h2>
 
         <motion.p
@@ -886,7 +886,7 @@ function CTASection({
         >
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-3 border-2 border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-[#c9a962]"
+            className="group inline-flex items-center gap-3 border-2 border-[#8f7852] bg-[#8f7852] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-950 transition-all duration-300 hover:bg-transparent hover:text-[#8f7852]"
           >
             Start Your Project
             <ArrowRight
@@ -909,8 +909,8 @@ function CTASection({
       </motion.div>
 
       {/* Corner Accents */}
-      <div className="pointer-events-none absolute left-8 top-8 h-16 w-16 border-l border-t border-[#c9a962]/30 sm:left-12 lg:left-20" />
-      <div className="pointer-events-none absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#c9a962]/30 sm:right-12 lg:right-20" />
+      <div className="pointer-events-none absolute left-8 top-8 h-16 w-16 border-l border-t border-[#8f7852]/30 sm:left-12 lg:left-20" />
+      <div className="pointer-events-none absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#8f7852]/30 sm:right-12 lg:right-20" />
     </section>
   );
 }

@@ -53,7 +53,7 @@ export function TrustedRecognized() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(201,169,98,0.04)_0%,transparent_50%)]" />
         <motion.div
           style={{ y: bgY }}
-          className="absolute -left-1/4 top-1/3 h-[500px] w-[500px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]"
+          className="absolute -left-1/4 top-1/3 h-[500px] w-[500px] rounded-full bg-[#8f7852]/[0.03] blur-[150px]"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], ["5%", "-10%"]) }}
@@ -113,7 +113,7 @@ export function TrustedRecognized() {
               whileHover={{ y: -5 }}
               className="group relative"
             >
-              <div className="flex h-24 items-center justify-center border border-neutral-200/50 bg-white/50 px-6 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white hover:shadow-lg hover:shadow-[#c9a962]/5">
+              <div className="flex h-24 items-center justify-center border border-neutral-200/50 bg-white/50 px-6 backdrop-blur-sm transition-all duration-500 hover:border-[#8f7852]/30 hover:bg-white hover:shadow-lg hover:shadow-[#8f7852]/5">
                 {/* Press logo */}
                 <Image
                   src={press.logo}
@@ -140,19 +140,19 @@ export function TrustedRecognized() {
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 1.5, delay: 0.8 }}
-            className="h-px w-16 origin-right bg-gradient-to-r from-transparent to-[#c9a962]/30"
+            className="h-px w-16 origin-right bg-gradient-to-r from-transparent to-[#8f7852]/30"
           />
           <motion.div
             initial={{ scale: 0, rotate: 0 }}
             animate={isInView ? { scale: 1, rotate: 45 } : {}}
             transition={{ duration: 0.6, delay: 1 }}
-            className="h-2 w-2 bg-[#c9a962]/40"
+            className="h-2 w-2 bg-[#8f7852]/40"
           />
           <motion.div
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 1.5, delay: 0.8 }}
-            className="h-px w-16 origin-left bg-gradient-to-l from-transparent to-[#c9a962]/30"
+            className="h-px w-16 origin-left bg-gradient-to-l from-transparent to-[#8f7852]/30"
           />
         </div>
       </div>

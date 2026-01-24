@@ -28,7 +28,7 @@ export function OverviewSection({ overview, locale }: OverviewSectionProps) {
       className="relative py-24 md:py-32 bg-white"
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="max-w-5xl mx-auto px-6 md:px-16">
+      <div className="container mx-auto px-6 md:px-16">
         {/* Section Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,9 +40,9 @@ export function OverviewSection({ overview, locale }: OverviewSectionProps) {
             initial={{ width: 0 }}
             animate={isInView ? { width: 48 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-px bg-[#c9a962]"
+            className="h-px bg-[#8f7852]"
           />
-          <span className="text-[#c9a962] text-xs tracking-[0.3em] uppercase font-light">
+          <span className="text-[#8f7852] text-xs tracking-[0.3em] uppercase font-light">
             {t.title}
           </span>
         </motion.div>
@@ -63,7 +63,7 @@ export function OverviewSection({ overview, locale }: OverviewSectionProps) {
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 h-px bg-gradient-to-r from-[#c9a962] via-[#c9a962]/50 to-transparent origin-left"
+          className="mt-16 h-px bg-gradient-to-r from-[#8f7852] via-[#8f7852]/50 to-transparent origin-left"
         />
       </div>
     </section>

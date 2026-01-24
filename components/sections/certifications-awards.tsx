@@ -1,101 +1,92 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRef, useState } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+
+// Type for Sanity Award
+export interface SanityAward {
+  _id: string;
+  title: string;
+  type?: string;
+  organization: string;
+  year: number;
+  level?: string;
+  category?: string;
+  projectName?: string;
+  subtitle?: string;
+  description?: string;
+  certificatePath?: string;
+  featured?: boolean;
+}
 
 // ISO Certifications
 const certifications = [
   {
-    name: 'ISO 9001:2015',
-    description: 'Quality Management System',
-    detail: 'Ensuring consistent quality in every project delivery',
-    image: '/certifications/iso-9001.svg',
-    color: '#c9a962',
+    name: "ISO 9001:2015",
+    description: "Quality Management System",
+    detail: "Ensuring consistent quality in every project delivery",
+    image: "/certifications/iso-9001.svg",
+    color: "#8f7852",
   },
   {
-    name: 'ISO 14001:2015',
-    description: 'Environmental Management',
-    detail: 'Committed to sustainable construction practices',
-    image: '/certifications/iso-14001.svg',
-    color: '#4ade80',
+    name: "ISO 14001:2015",
+    description: "Environmental Management",
+    detail: "Committed to sustainable construction practices",
+    image: "/certifications/iso-14001.svg",
+    color: "#4ade80",
   },
   {
-    name: 'ISO 45001:2018',
-    description: 'Occupational Health & Safety',
-    detail: 'Zero-compromise approach to workplace safety',
-    image: '/certifications/iso-45001.svg',
-    color: '#60a5fa',
+    name: "ISO 45001:2018",
+    description: "Occupational Health & Safety",
+    detail: "Zero-compromise approach to workplace safety",
+    image: "/certifications/iso-45001.svg",
+    color: "#60a5fa",
   },
 ];
 
-// Actual certificate files with their details
-const certificates = [
-  {
-    id: 1,
-    title: 'Best Hotel Suite Interior',
-    subtitle: 'Arabia Region',
-    organization: 'International Property Awards',
-    year: '2023-2024',
-    project: 'Address Boulevard VIP Suite',
-    level: '5-Star Winner',
-    file: '/awards/APA - 2023-2024 Best Hotel Suite Interior Arabia - Address Boulevard VIP Suite.pdf',
-  },
-  {
-    id: 2,
-    title: 'Best Hotel Suite Interior',
-    subtitle: 'Dubai',
-    organization: 'International Property Awards',
-    year: '2023-2024',
-    project: 'Address Boulevard VIP Suite',
-    level: '5-Star Winner',
-    file: '/awards/APA - 2023-2024 Best Hotel Suite Interior Dubai - Address Boulevard VIP Suite.pdf',
-  },
-  {
-    id: 3,
-    title: 'Best Residential Interior Apartment',
-    subtitle: 'Dubai',
-    organization: 'International Property Awards',
-    year: '2023-2024',
-    project: 'Address Boulevard Penthouse 70-71',
-    level: '5-Star Winner',
-    file: '/awards/APA - 2023-2024 Best Residential Interior Apartment Dubai - Address Boulevard Penthouse 70-71.pdf',
-  },
-  {
-    id: 4,
-    title: 'Best Hotel Interior',
-    subtitle: 'Abu Dhabi',
-    organization: 'International Property Awards',
-    year: '2022-2023',
-    project: 'Sheraton Abu Dhabi Hotel & Resort',
-    level: '5-Star Winner',
-    file: '/awards/APA - 2022-2023 Best Hotel Interior Abu Dhabi - Sheraton Abu Dhabi (2).pdf',
-  },
-  {
-    id: 5,
-    title: 'Certificate of Recognition',
-    subtitle: 'Best Luxury Interior Design',
-    organization: 'Luxury Lifestyle Awards',
-    year: '2021',
-    project: 'Mouhajer International Design',
-    level: 'Winner',
-    file: '/awards/Luxury Lifestyle - 2021 Certificate of Recognition.pdf',
-  },
-];
+// Transform Sanity award to component format
+function transformAwardToCertificate(award: SanityAward) {
+  // Generate anchor slug from title
+  const awardSlug = `award-${award.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
 
-export function CertificationsAwards() {
+  return {
+    id: award._id,
+    title: award.title,
+    subtitle: award.subtitle || award.category || "",
+    organization: award.organization,
+    year: award.year.toString(),
+    project: award.projectName || "MIDC Project",
+    level: award.level || "Winner",
+    file: award.certificatePath || "",
+    awardSlug,
+  };
+}
+
+interface CertificationsAwardsProps {
+  awards?: SanityAward[];
+}
+
+export function CertificationsAwards({ awards }: CertificationsAwardsProps) {
+  // Transform Sanity awards to component format
+  const certificates = (awards || []).map(transformAwardToCertificate);
   const sectionRef = useRef<HTMLElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeIndex, setActiveIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.6, 1, 1, 0.6]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    [0.6, 1, 1, 0.6],
+  );
 
   const scrollToIndex = (index: number) => {
     if (scrollContainerRef.current) {
@@ -103,19 +94,21 @@ export function CertificationsAwards() {
       const cardWidth = container.scrollWidth / certificates.length;
       container.scrollTo({
         left: cardWidth * index,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
       setActiveIndex(index);
     }
   };
 
   const handlePrev = () => {
-    const newIndex = activeIndex > 0 ? activeIndex - 1 : certificates.length - 1;
+    const newIndex =
+      activeIndex > 0 ? activeIndex - 1 : certificates.length - 1;
     scrollToIndex(newIndex);
   };
 
   const handleNext = () => {
-    const newIndex = activeIndex < certificates.length - 1 ? activeIndex + 1 : 0;
+    const newIndex =
+      activeIndex < certificates.length - 1 ? activeIndex + 1 : 0;
     scrollToIndex(newIndex);
   };
 
@@ -126,21 +119,23 @@ export function CertificationsAwards() {
       className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-neutral-950 py-24 sm:py-32 lg:py-40 scroll-mt-24"
     >
       {/* Background Elements */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ y: backgroundY }}
-      >
+      <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
-        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a962]/[0.03] blur-[120px]" />
+        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8f7852]/[0.03] blur-[120px]" />
         <motion.div
-          className="absolute left-[10%] top-[20%] h-32 w-32 rounded-full bg-[#c9a962]/[0.02] blur-3xl"
+          className="absolute left-[10%] top-[20%] h-32 w-32 rounded-full bg-[#8f7852]/[0.02] blur-3xl"
           animate={{ y: [0, -30, 0], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute right-[15%] bottom-[30%] h-48 w-48 rounded-full bg-white/[0.02] blur-3xl"
           animate={{ y: [0, 20, 0], opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
         />
       </motion.div>
 
@@ -157,11 +152,11 @@ export function CertificationsAwards() {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
               Industry Validation
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </motion.div>
 
           <motion.h2
@@ -181,8 +176,9 @@ export function CertificationsAwards() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto max-w-2xl font-Satoshi text-base font-light text-white/50 sm:text-lg"
           >
-            Triple ISO certified and internationally recognized. Our official certificates
-            and awards from the International Property Awards and Luxury Lifestyle Awards.
+            Triple ISO certified and internationally recognized. Our official
+            certificates and awards from the International Property Awards and
+            Luxury Lifestyle Awards.
           </motion.p>
         </div>
 
@@ -194,8 +190,12 @@ export function CertificationsAwards() {
           className="mb-16"
         >
           <div className="mb-8">
-            <h3 className="font-SchnyderS text-xl font-light text-white">International Standards</h3>
-            <p className="font-Satoshi text-xs font-light text-white/40">Triple ISO Certification</p>
+            <h3 className="font-SchnyderS text-xl font-light text-white">
+              International Standards
+            </h3>
+            <p className="font-Satoshi text-xs font-light text-white/40">
+              Triple ISO Certification
+            </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
@@ -217,9 +217,15 @@ export function CertificationsAwards() {
                     />
                   </div>
                   <div className="flex-1">
-                    <div className="mb-1 font-SchnyderS text-xl font-light text-white">{cert.name}</div>
-                    <div className="mb-2 font-Satoshi text-sm font-light text-white/60">{cert.description}</div>
-                    <div className="font-Satoshi text-xs font-light text-white/40">{cert.detail}</div>
+                    <div className="mb-1 font-SchnyderS text-xl font-light text-white">
+                      {cert.name}
+                    </div>
+                    <div className="mb-2 font-Satoshi text-sm font-light text-white/60">
+                      {cert.description}
+                    </div>
+                    <div className="font-Satoshi text-xs font-light text-white/40">
+                      {cert.detail}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -235,23 +241,33 @@ export function CertificationsAwards() {
         >
           <div className="mb-8 flex items-center justify-between">
             <div>
-              <h3 className="font-SchnyderS text-xl font-light text-white">Award Certificates</h3>
-              <p className="font-Satoshi text-xs font-light text-white/40">Official certificates displayed below</p>
+              <h3 className="font-SchnyderS text-xl font-light text-white">
+                Award Certificates
+              </h3>
+              <p className="font-Satoshi text-xs font-light text-white/40">
+                Official certificates displayed below
+              </p>
             </div>
 
             {/* Navigation Arrows */}
             <div className="hidden items-center gap-2 sm:flex">
               <button
                 onClick={handlePrev}
-                className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/[0.02] transition-all hover:border-[#c9a962]/40 hover:bg-white/[0.05]"
+                className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/[0.02] transition-all hover:border-[#8f7852]/40 hover:bg-white/[0.05]"
               >
-                <ChevronLeft className="h-5 w-5 text-white/60" strokeWidth={1} />
+                <ChevronLeft
+                  className="h-5 w-5 text-white/60"
+                  strokeWidth={1}
+                />
               </button>
               <button
                 onClick={handleNext}
-                className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/[0.02] transition-all hover:border-[#c9a962]/40 hover:bg-white/[0.05]"
+                className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/[0.02] transition-all hover:border-[#8f7852]/40 hover:bg-white/[0.05]"
               >
-                <ChevronRight className="h-5 w-5 text-white/60" strokeWidth={1} />
+                <ChevronRight
+                  className="h-5 w-5 text-white/60"
+                  strokeWidth={1}
+                />
               </button>
             </div>
           </div>
@@ -260,7 +276,7 @@ export function CertificationsAwards() {
           <div
             ref={scrollContainerRef}
             className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x snap-mandatory"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {certificates.map((cert, index) => (
               <motion.div
@@ -273,9 +289,11 @@ export function CertificationsAwards() {
                 {/* Certificate Card with Embedded PDF */}
                 <div className="relative w-[340px] overflow-hidden transition-all duration-500 sm:w-[400px]">
                   {/* Level Badge */}
-                  {cert.level === '5-Star Winner' && (
-                    <div className="absolute left-4 top-4 z-10 flex items-center gap-1 rounded-full bg-[#c9a962] px-3 py-1 shadow-lg">
-                      <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-950">5-Star</span>
+                  {cert.level === "5-Star Winner" && (
+                    <div className="absolute left-4 top-4 z-10 flex items-center gap-1 rounded-full bg-[#8f7852] px-3 py-1 shadow-lg">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-950">
+                        5-Star
+                      </span>
                     </div>
                   )}
 
@@ -302,7 +320,7 @@ export function CertificationsAwards() {
                   <div className="p-5">
                     {/* Year Badge */}
                     <div className="mb-3 inline-block px-2 py-1">
-                      <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#c9a962]">
+                      <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#8f7852]">
                         {cert.year}
                       </span>
                     </div>
@@ -331,16 +349,14 @@ export function CertificationsAwards() {
                         </p>
                       </div>
 
-                      <a
-                        href={cert.file}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href={`/about/awards#${cert.awardSlug}`}
                         className="group/btn flex items-center gap-2 px-3 py-2 transition-all hover:opacity-80"
                       >
-                        <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#c9a962]">
-                          View Certificate
+                        <span className="font-Satoshi text-[10px] font-medium uppercase tracking-wider text-[#8f7852]">
+                          View Award
                         </span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -356,8 +372,8 @@ export function CertificationsAwards() {
                 onClick={() => scrollToIndex(index)}
                 className={`h-2 transition-all duration-300 ${
                   activeIndex === index
-                    ? 'w-8 bg-[#c9a962]'
-                    : 'w-2 bg-white/20 hover:bg-white/40'
+                    ? "w-8 bg-[#8f7852]"
+                    : "w-2 bg-white/20 hover:bg-white/40"
                 }`}
               />
             ))}
@@ -373,10 +389,10 @@ export function CertificationsAwards() {
         >
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {[
-              { value: '3', label: 'ISO Certifications' },
-              { value: '10+', label: 'International Awards' },
-              { value: '100%', label: 'Project Success Rate' },
-              { value: '0', label: 'Safety Incidents' },
+              { value: "3", label: "ISO Certifications" },
+              { value: "10+", label: "International Awards" },
+              { value: "100%", label: "Project Success Rate" },
+              { value: "0", label: "Safety Incidents" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -385,7 +401,7 @@ export function CertificationsAwards() {
                 transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="mb-2 font-SchnyderS text-4xl font-light text-[#c9a962] lg:text-5xl">
+                <div className="mb-2 font-SchnyderS text-4xl font-light text-[#8f7852] lg:text-5xl">
                   {stat.value}
                 </div>
                 <div className="font-Satoshi text-xs font-light uppercase tracking-[0.15em] text-white/40">

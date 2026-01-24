@@ -107,7 +107,7 @@ interface ProjectsPageContentProps {
 // Helper to extract localized string from i18n field (for legacy support)
 function getLocalizedString(
   field: I18nField | undefined,
-  locale: string
+  locale: string,
 ): string {
   if (!field) return "";
   if (typeof field === "string") return field;
@@ -120,7 +120,7 @@ function getLocalizedString(
 // Helper to normalize project - maps new taxonomy fields to display strings
 function normalizeProject(
   project: RawSanityProject,
-  locale: string
+  locale: string,
 ): SanityProject {
   return {
     _id: project._id,
@@ -190,12 +190,6 @@ export default function EnhancedProjectsPageContent({
       title: p.title || "",
     }));
 
-  // State for hovered carousel image
-  const [hoveredImage, setHoveredImage] = useState<{
-    src: string;
-    title: string;
-  } | null>(null);
-
   // Get initial values from URL
   const viewFromUrl = (searchParams.get("view") as ViewMode) || "grid";
   const columnsFromUrl = searchParams.get("columns");
@@ -219,7 +213,7 @@ export default function EnhancedProjectsPageContent({
   });
   const [viewMode, setViewMode] = useState<ViewMode>(viewFromUrl);
   const [gridColumns, setGridColumns] = useState<GridColumns>(
-    columnsFromUrl ? (parseInt(columnsFromUrl) as GridColumns) : 3
+    columnsFromUrl ? (parseInt(columnsFromUrl) as GridColumns) : 3,
   );
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -337,7 +331,7 @@ export default function EnhancedProjectsPageContent({
         project.location?.toLowerCase() ||
         "";
       const matchesLocation = filters.locations.some((loc) =>
-        locationName.includes(loc.toLowerCase())
+        locationName.includes(loc.toLowerCase()),
       );
       if (!matchesLocation) return false;
     }
@@ -347,7 +341,7 @@ export default function EnhancedProjectsPageContent({
       const projectServiceSlugs =
         project.services?.map((s) => s.slug?.current) || [];
       const matchesService = filters.services.some((serviceSlug) =>
-        projectServiceSlugs.includes(serviceSlug)
+        projectServiceSlugs.includes(serviceSlug),
       );
       if (!matchesService) return false;
     }
@@ -405,7 +399,7 @@ export default function EnhancedProjectsPageContent({
         return projectYear >= currentYear || p.status === "in-progress";
       }).length,
     }),
-    [normalizedProjects]
+    [normalizedProjects],
   );
 
   // Render the active view
@@ -447,7 +441,7 @@ export default function EnhancedProjectsPageContent({
   const usesCombinedView =
     hasActiveFilters ||
     ["horizontal", "split-screen", "stacked-cards", "infinite-scroll"].includes(
-      viewMode
+      viewMode,
     );
 
   return (
@@ -467,57 +461,6 @@ export default function EnhancedProjectsPageContent({
             allowFullScreen
           />
         </div>
-
-        {/* Hovered Image Overlay */}
-        <AnimatePresence>
-          {hoveredImage && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="absolute inset-0 z-5 flex items-center justify-center"
-            >
-              {/* Background blur */}
-              <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
-
-              {/* Image */}
-              <motion.div
-                initial={{ scale: 0.9, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                className="relative z-10 h-[75vh] w-[85vw] overflow-hidden rounded-xl border border-white/10 shadow-2xl lg:h-[70vh] lg:w-[80vw]"
-              >
-                <SafeImage
-                  src={hoveredImage.src}
-                  alt={hoveredImage.title}
-                  fill
-                  className="object-cover"
-                />
-
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
-
-                {/* Image title */}
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <motion.h3
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="font-SchnyderS text-4xl font-light text-white md:text-5xl lg:text-6xl"
-                  >
-                    {hoveredImage.title}
-                  </motion.h3>
-                </div>
-
-                {/* Decorative corner accents */}
-                <div className="pointer-events-none absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#c9a962]/60" />
-                <div className="pointer-events-none absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#c9a962]/60" />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* Dark Overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-neutral-950/60 to-neutral-950/40" />
@@ -539,7 +482,7 @@ export default function EnhancedProjectsPageContent({
         {/* Floating Decorative Lines */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute right-[15%] top-[25%] h-px w-40 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
+            className="absolute right-[15%] top-[25%] h-px w-40 bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent"
             animate={{ x: [0, 50, 0], opacity: [0.2, 0.5, 0.2] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -554,7 +497,7 @@ export default function EnhancedProjectsPageContent({
             }}
           />
           <motion.div
-            className="absolute right-[25%] bottom-[20%] h-40 w-px bg-gradient-to-b from-transparent via-[#c9a962]/20 to-transparent"
+            className="absolute right-[25%] bottom-[20%] h-40 w-px bg-gradient-to-b from-transparent via-[#8f7852]/20 to-transparent"
             animate={{ y: [0, 20, 0], opacity: [0.1, 0.3, 0.1] }}
             transition={{
               duration: 7,
@@ -578,7 +521,7 @@ export default function EnhancedProjectsPageContent({
               transition={{ duration: 1, delay: 0.2 }}
               className="mb-8 flex items-center gap-4"
             >
-              <div className="h-px w-12 bg-[#c9a962]/50" />
+              <div className="h-px w-12 bg-[#8f7852]/50" />
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/50">
                 Our Portfolio
               </span>
@@ -597,7 +540,7 @@ export default function EnhancedProjectsPageContent({
             >
               400+ Projects.
               <br />
-              <span className="text-[#c9a962]">Zero Failures.</span>
+              <span className="text-[#8f7852]">Zero Failures.</span>
             </motion.h1>
 
             {/* Hero Description */}
@@ -627,7 +570,7 @@ export default function EnhancedProjectsPageContent({
               }}
               className="grid gap-12 sm:grid-cols-3"
             >
-              <div className="border-l border-[#c9a962]/30 pl-6">
+              <div className="border-l border-[#8f7852]/30 pl-6">
                 <div className="mb-2 font-SchnyderS text-5xl font-light text-white lg:text-6xl">
                   400+
                 </div>
@@ -656,8 +599,8 @@ export default function EnhancedProjectsPageContent({
         </motion.div>
 
         {/* Corner Accents */}
-        <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#c9a962]/20" />
-        <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#c9a962]/20" />
+        <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#8f7852]/20" />
+        <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#8f7852]/20" />
       </section>
 
       {/* Infinite Animated Carousel */}
@@ -672,22 +615,15 @@ export default function EnhancedProjectsPageContent({
             {[...carouselImages, ...carouselImages].map((image, index) => (
               <div
                 key={`carousel-1-${index}`}
-                className="group relative h-32 w-48 flex-shrink-0 cursor-pointer overflow-hidden lg:h-40 lg:w-64"
-                onMouseEnter={() => setHoveredImage(image)}
-                onMouseLeave={() => setHoveredImage(null)}
+                className="relative h-32 w-48 shrink-0 overflow-hidden lg:h-40 lg:w-64"
               >
                 <SafeImage
                   src={image.src}
                   alt={image.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-neutral-950/30 transition-opacity duration-500 group-hover:opacity-0" />
-                <div className="absolute inset-0 flex items-end justify-center p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  <span className="bg-neutral-950/80 px-3 py-1 text-[10px] uppercase tracking-wider text-white backdrop-blur-sm">
-                    {image.title}
-                  </span>
-                </div>
+                <div className="absolute inset-0 bg-neutral-950/30" />
               </div>
             ))}
           </motion.div>
@@ -700,17 +636,15 @@ export default function EnhancedProjectsPageContent({
             {[...carouselImages, ...carouselImages].map((image, index) => (
               <div
                 key={`carousel-2-${index}`}
-                className="group relative h-32 w-48 flex-shrink-0 cursor-pointer overflow-hidden lg:h-40 lg:w-64"
-                onMouseEnter={() => setHoveredImage(image)}
-                onMouseLeave={() => setHoveredImage(null)}
+                className="relative h-32 w-48 shrink-0 overflow-hidden lg:h-40 lg:w-64"
               >
                 <SafeImage
                   src={image.src}
                   alt={image.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-neutral-950/30 transition-opacity duration-500 group-hover:opacity-0" />
+                <div className="absolute inset-0 bg-neutral-950/30" />
               </div>
             ))}
           </motion.div>
@@ -834,7 +768,7 @@ export default function EnhancedProjectsPageContent({
             <div
               className={`mx-auto ${
                 ["horizontal", "split-screen", "stacked-cards"].includes(
-                  viewMode
+                  viewMode,
                 )
                   ? ""
                   : "max-w-[1800px]"
@@ -941,7 +875,7 @@ export default function EnhancedProjectsPageContent({
         {/* Animated Lines */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute left-[10%] top-[30%] h-px w-24 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent"
+            className="absolute left-[10%] top-[30%] h-px w-24 bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent"
             animate={{ x: [0, 30, 0], opacity: [0.2, 0.4, 0.2] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -958,8 +892,8 @@ export default function EnhancedProjectsPageContent({
         </div>
 
         {/* Corner Accents */}
-        <div className="absolute left-8 top-8 h-16 w-16 border-l border-t border-[#c9a962]/20" />
-        <div className="absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#c9a962]/20" />
+        <div className="absolute left-8 top-8 h-16 w-16 border-l border-t border-[#8f7852]/20" />
+        <div className="absolute bottom-8 right-8 h-16 w-16 border-b border-r border-[#8f7852]/20" />
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <motion.div
@@ -969,11 +903,11 @@ export default function EnhancedProjectsPageContent({
             viewport={{ once: true }}
             className="mb-4 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-8 bg-[#c9a962]/50" />
+            <div className="h-px w-8 bg-[#8f7852]/50" />
             <span className="text-[10px] uppercase tracking-[0.3em] text-white/50">
               Let&apos;s Build Together
             </span>
-            <div className="h-px w-8 bg-[#c9a962]/50" />
+            <div className="h-px w-8 bg-[#8f7852]/50" />
           </motion.div>
           <h2 className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl xl:text-6xl">
             Start Your Project
@@ -984,7 +918,7 @@ export default function EnhancedProjectsPageContent({
           </p>
           <Link
             href="/#contact"
-            className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962]/10 px-12 py-4 font-Satoshi text-xs uppercase tracking-[0.3em] text-[#c9a962] transition-all duration-500 hover:bg-[#c9a962] hover:text-neutral-950"
+            className="group inline-flex items-center gap-3 border border-[#8f7852] bg-[#8f7852]/10 px-12 py-4 font-Satoshi text-xs uppercase tracking-[0.3em] text-[#8f7852] transition-all duration-500 hover:bg-[#8f7852] hover:text-neutral-950"
           >
             Get in Touch
             <svg

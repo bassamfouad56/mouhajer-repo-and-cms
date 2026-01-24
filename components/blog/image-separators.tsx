@@ -29,12 +29,12 @@ function FullWidthSeparator({ value, locale = "en" }: ImageSeparatorProps) {
   const y = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", value.enableParallax !== false ? "20%" : "0%"]
+    ["0%", value.enableParallax !== false ? "20%" : "0%"],
   );
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
-    [0.6, 1, 1, 0.6]
+    [0.6, 1, 1, 0.6],
   );
 
   const imageUrl = value.image?.asset
@@ -70,8 +70,8 @@ function FullWidthSeparator({ value, locale = "en" }: ImageSeparatorProps) {
       <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
 
       {/* Corner accents */}
-      <div className="absolute left-4 top-4 h-12 w-12 border-l-2 border-t-2 border-white/30 transition-all duration-300 group-hover:h-16 group-hover:w-16 group-hover:border-[#c9a962]" />
-      <div className="absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-white/30 transition-all duration-300 group-hover:h-16 group-hover:w-16 group-hover:border-[#c9a962]" />
+      <div className="absolute left-4 top-4 h-12 w-12 border-l-2 border-t-2 border-white/30 transition-all duration-300 group-hover:h-16 group-hover:w-16 group-hover:border-[#8f7852]" />
+      <div className="absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-white/30 transition-all duration-300 group-hover:h-16 group-hover:w-16 group-hover:border-[#8f7852]" />
 
       {/* Caption */}
       {caption && (

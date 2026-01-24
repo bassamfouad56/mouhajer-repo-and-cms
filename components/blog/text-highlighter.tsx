@@ -44,7 +44,7 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
     if (highlights.length > 0) {
       localStorage.setItem(
         `highlights-${postSlug}`,
-        JSON.stringify(highlights)
+        JSON.stringify(highlights),
       );
     } else {
       localStorage.removeItem(`highlights-${postSlug}`);
@@ -161,7 +161,7 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
           >
             <button
               onClick={saveHighlight}
-              className="flex items-center gap-2 rounded-md px-3 py-2 font-Satoshi text-xs font-medium text-neutral-700 transition-colors hover:bg-[#c9a962]/10 hover:text-[#c9a962]"
+              className="flex items-center gap-2 rounded-md px-3 py-2 font-Satoshi text-xs font-medium text-neutral-700 transition-colors hover:bg-[#8f7852]/10 hover:text-[#8f7852]"
             >
               <Highlighter size={14} />
               <span>Highlight</span>
@@ -185,9 +185,9 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             onClick={() => setShowHighlightsSidebar(!showHighlightsSidebar)}
-            className="flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-2 shadow-lg transition-all hover:border-[#c9a962] hover:shadow-xl"
+            className="flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-2 shadow-lg transition-all hover:border-[#8f7852] hover:shadow-xl"
           >
-            <Highlighter size={16} className="text-[#c9a962]" />
+            <Highlighter size={16} className="text-[#8f7852]" />
             <span className="font-Satoshi text-xs font-medium text-neutral-700">
               {highlights.length}
             </span>
@@ -215,7 +215,7 @@ export default function TextHighlighter({ postSlug }: TextHighlighterProps) {
             >
               <div className="sticky top-0 flex items-center justify-between border-b border-neutral-200 bg-white p-4">
                 <div className="flex items-center gap-2">
-                  <Highlighter size={18} className="text-[#c9a962]" />
+                  <Highlighter size={18} className="text-[#8f7852]" />
                   <span className="font-Satoshi text-sm font-medium text-neutral-900">
                     Your Highlights
                   </span>

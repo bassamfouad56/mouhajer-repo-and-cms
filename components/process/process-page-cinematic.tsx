@@ -116,7 +116,7 @@ export function ProcessPageCinematic({ images }: ProcessPageCinematicProps) {
     const unsubscribe = scrollYProgress.on("change", (value) => {
       const phaseIndex = Math.min(
         Math.floor(value * phases.length),
-        phases.length - 1
+        phases.length - 1,
       );
       setActivePhase(phaseIndex);
       // Hide indicator when past the phases section (entering CTA/footer)
@@ -196,7 +196,7 @@ function HeroSection() {
         style={{ opacity, y }}
         className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24"
       >
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto container text-center">
           {/* Lifecycle Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -204,17 +204,17 @@ function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="mb-12"
           >
-            <div className="inline-flex items-center gap-4 rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-8 py-3 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-4 rounded-full border border-[#8f7852]/30 bg-[#8f7852]/10 px-8 py-3 backdrop-blur-sm">
               <div className="flex -space-x-1">
                 {phases.slice(0, 6).map((_, i) => (
                   <div
                     key={i}
-                    className="h-2 w-2 rounded-full border border-neutral-950 bg-[#c9a962]"
+                    className="h-2 w-2 rounded-full border border-neutral-950 bg-[#8f7852]"
                     style={{ opacity: 1 - i * 0.1 }}
                   />
                 ))}
               </div>
-              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
+              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]">
                 6-Phase Lifecycle
               </span>
             </div>
@@ -229,7 +229,7 @@ function HeroSection() {
           >
             From First Sketch
             <br />
-            to <span className="text-[#c9a962]">Final Polish</span>
+            to <span className="text-[#8f7852]">Final Polish</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -258,9 +258,9 @@ function HeroSection() {
                   className="group relative"
                   whileHover={{ scale: 1.1 }}
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm transition-all duration-300 group-hover:border-[#c9a962] group-hover:bg-[#c9a962]/20">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm transition-all duration-300 group-hover:border-[#8f7852] group-hover:bg-[#8f7852]/20">
                     <Icon
-                      className="h-5 w-5 text-white/70 transition-colors group-hover:text-[#c9a962]"
+                      className="h-5 w-5 text-white/70 transition-colors group-hover:text-[#8f7852]"
                       strokeWidth={1.5}
                     />
                   </div>
@@ -319,7 +319,7 @@ function LifecycleIndicator({
         <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-white/10">
           <motion.div
             style={{ height: progressHeight }}
-            className="w-full bg-gradient-to-b from-[#c9a962] via-[#c9a962] to-[#c9a962]/50"
+            className="w-full bg-gradient-to-b from-[#8f7852] via-[#8f7852] to-[#8f7852]/50"
           />
         </div>
 
@@ -343,13 +343,13 @@ function LifecycleIndicator({
                   animate={{
                     scale: isActive ? 1.2 : 1,
                     backgroundColor:
-                      isActive || isPast ? "#c9a962" : "transparent",
+                      isActive || isPast ? "#8f7852" : "transparent",
                   }}
                   className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                     isActive
-                      ? "border-[#c9a962] shadow-[0_0_20px_rgba(201,169,98,0.5)]"
+                      ? "border-[#8f7852] shadow-[0_0_20px_rgba(201,169,98,0.5)]"
                       : isPast
-                        ? "border-[#c9a962]/50"
+                        ? "border-[#8f7852]/50"
                         : "border-white/20"
                   }`}
                 >
@@ -370,8 +370,8 @@ function LifecycleIndicator({
                       exit={{ opacity: 0, x: -10 }}
                       className="absolute left-14 whitespace-nowrap"
                     >
-                      <div className="rounded-lg bg-[#c9a962]/20 px-4 py-2 backdrop-blur-sm">
-                        <span className="font-Satoshi text-xs font-medium text-[#c9a962]">
+                      <div className="rounded-lg bg-[#8f7852]/20 px-4 py-2 backdrop-blur-sm">
+                        <span className="font-Satoshi text-xs font-medium text-[#8f7852]">
                           {phase.title}
                         </span>
                       </div>
@@ -411,7 +411,7 @@ function PhaseSection({
   const contentOpacity = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
-    [0, 1, 1, 0]
+    [0, 1, 1, 0],
   );
 
   return (
@@ -477,11 +477,11 @@ function PhaseSection({
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mb-8 flex items-center gap-6"
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#c9a962]/30 bg-[#c9a962]/10 backdrop-blur-sm">
-                <Icon className="h-7 w-7 text-[#c9a962]" strokeWidth={1.5} />
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#8f7852]/30 bg-[#8f7852]/10 backdrop-blur-sm">
+                <Icon className="h-7 w-7 text-[#8f7852]" strokeWidth={1.5} />
               </div>
               <div>
-                <div className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-[#c9a962]">
+                <div className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-[#8f7852]">
                   Phase {phase.number}
                 </div>
                 <div className="mt-1 font-Satoshi text-sm font-light text-white/40">
@@ -499,7 +499,7 @@ function PhaseSection({
             >
               <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
                 {phase.title}
-                <span className="block text-[#c9a962]">{phase.subtitle}</span>
+                <span className="block text-[#8f7852]">{phase.subtitle}</span>
               </h2>
             </motion.div>
 
@@ -548,12 +548,12 @@ function PhaseSection({
 
       {/* Lifecycle Connection Line */}
       {index < phases.length - 1 && (
-        <div className="absolute bottom-0 left-1/2 h-32 w-px -translate-x-1/2 bg-gradient-to-b from-[#c9a962]/50 to-transparent" />
+        <div className="absolute bottom-0 left-1/2 h-32 w-px -translate-x-1/2 bg-gradient-to-b from-[#8f7852]/50 to-transparent" />
       )}
 
       {/* Corner Accents */}
       <div className="absolute left-8 top-8 hidden h-20 w-20 border-l border-t border-white/10 lg:block" />
-      <div className="absolute bottom-8 right-8 hidden h-20 w-20 border-b border-r border-[#c9a962]/30 lg:block" />
+      <div className="absolute bottom-8 right-8 hidden h-20 w-20 border-b border-r border-[#8f7852]/30 lg:block" />
     </section>
   );
 }
@@ -588,7 +588,7 @@ function CTASection({ backgroundImage }: { backgroundImage: string }) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8 }}
-          className="flex items-center gap-3 rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-6 py-2 backdrop-blur-sm"
+          className="flex items-center gap-3 rounded-full border border-[#8f7852]/30 bg-[#8f7852]/10 px-6 py-2 backdrop-blur-sm"
         >
           <div className="flex -space-x-1">
             {phases.map((phase, i) => {
@@ -596,14 +596,14 @@ function CTASection({ backgroundImage }: { backgroundImage: string }) {
               return (
                 <div
                   key={i}
-                  className="flex h-6 w-6 items-center justify-center rounded-full border border-neutral-950 bg-[#c9a962]"
+                  className="flex h-6 w-6 items-center justify-center rounded-full border border-neutral-950 bg-[#8f7852]"
                 >
                   <Icon className="h-3 w-3 text-neutral-950" strokeWidth={2} />
                 </div>
               );
             })}
           </div>
-          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-[#c9a962]">
+          <span className="font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-[#8f7852]">
             Lifecycle Complete
           </span>
         </motion.div>
@@ -620,7 +620,7 @@ function CTASection({ backgroundImage }: { backgroundImage: string }) {
           >
             Ready to Begin
             <br />
-            <span className="text-[#c9a962]">Your Journey?</span>
+            <span className="text-[#8f7852]">Your Journey?</span>
           </motion.h2>
 
           <motion.p
@@ -642,7 +642,7 @@ function CTASection({ backgroundImage }: { backgroundImage: string }) {
           >
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-white"
+              className="group inline-flex items-center gap-3 bg-[#8f7852] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-white"
             >
               <span>START YOUR PROJECT</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -650,7 +650,7 @@ function CTASection({ backgroundImage }: { backgroundImage: string }) {
 
             <Link
               href="/projects"
-              className="inline-flex items-center gap-3 border border-white/20 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+              className="inline-flex items-center gap-3 border border-white/20 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
             >
               <span>SEE OUR WORK</span>
             </Link>

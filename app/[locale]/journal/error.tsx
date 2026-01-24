@@ -20,13 +20,13 @@ export default function JournalError({ error, reset }: ErrorProps) {
       {/* Background pattern */}
 
       {/* Gradient orb */}
-      <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a962]/5 blur-[150px]" />
+      <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8f7852]/5 blur-[150px]" />
 
       <div className="relative z-10 text-center">
         {/* Error badge */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-4 py-2">
-          <BookOpen className="h-4 w-4 text-[#c9a962]" />
-          <span className="font-Satoshi text-xs uppercase tracking-wider text-[#c9a962]">
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#8f7852]/30 bg-[#8f7852]/10 px-4 py-2">
+          <BookOpen className="h-4 w-4 text-[#8f7852]" />
+          <span className="font-Satoshi text-xs uppercase tracking-wider text-[#8f7852]">
             Journal Error
           </span>
         </div>
@@ -60,7 +60,7 @@ export default function JournalError({ error, reset }: ErrorProps) {
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <button
             onClick={reset}
-            className="group inline-flex items-center gap-3 rounded-full border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium text-neutral-950 transition-all duration-300 hover:bg-[#e5c349]"
+            className="group inline-flex items-center gap-3 rounded-full border border-[#8f7852] bg-[#8f7852] px-8 py-4 font-Satoshi text-sm font-medium text-neutral-950 transition-all duration-300 hover:bg-[#e5c349]"
           >
             <RefreshCw className="h-4 w-4 transition-transform group-hover:rotate-180" />
             Try Again

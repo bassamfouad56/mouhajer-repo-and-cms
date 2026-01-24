@@ -122,7 +122,7 @@ export function Header({ megaMenuImages }: HeaderProps) {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(
-    null
+    null,
   );
 
   useEffect(() => {
@@ -196,12 +196,12 @@ export function Header({ megaMenuImages }: HeaderProps) {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={openSearch}
-                className="group relative hidden items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur-sm transition-all hover:border-[#c9a962]/50 hover:bg-white/10 hover:text-white lg:flex"
+                className="group relative hidden items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur-sm transition-all hover:border-[#8f7852]/50 hover:bg-white/10 hover:text-white lg:flex"
                 aria-label="Search"
               >
                 <Search
                   size={16}
-                  className="text-white/60 transition-colors group-hover:text-[#c9a962]"
+                  className="text-white/60 transition-colors group-hover:text-[#8f7852]"
                 />
                 <span className="font-light">Search</span>
                 <kbd className="ml-2 hidden rounded bg-white/10 px-1.5 py-0.5 text-xs text-white/40 xl:inline-block">
@@ -315,7 +315,7 @@ export function Header({ megaMenuImages }: HeaderProps) {
                             setExpandedMobileItem(
                               expandedMobileItem === item.href
                                 ? null
-                                : item.href
+                                : item.href,
                             )
                           }
                           className="flex w-full items-center justify-between text-left text-3xl font-light tracking-wider text-white transition-all hover:text-neutral-300"

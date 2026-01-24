@@ -78,8 +78,8 @@ export function GatedDownload({
         className={`rounded-xl border border-neutral-200 bg-white p-4 ${className}`}
       >
         <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#c9a962]/10">
-            <FileText className="h-6 w-6 text-[#c9a962]" />
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#8f7852]/10">
+            <FileText className="h-6 w-6 text-[#8f7852]" />
           </div>
 
           <div className="flex-1">
@@ -105,7 +105,7 @@ export function GatedDownload({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email to unlock"
-                className="w-48 rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#c9a962]"
+                className="w-48 rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#8f7852]"
                 disabled={isSubmitting}
               />
               <button
@@ -190,7 +190,7 @@ export function GatedDownload({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email to download"
-                    className="w-full rounded-lg border border-neutral-200 py-3 pl-12 pr-4 outline-none transition-colors focus:border-[#c9a962] focus:ring-2 focus:ring-[#c9a962]/20"
+                    className="w-full rounded-lg border border-neutral-200 py-3 pl-12 pr-4 outline-none transition-colors focus:border-[#8f7852] focus:ring-2 focus:ring-[#8f7852]/20"
                     disabled={isSubmitting}
                   />
                 </div>

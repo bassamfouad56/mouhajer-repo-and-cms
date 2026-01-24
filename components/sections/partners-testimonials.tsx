@@ -1,9 +1,15 @@
-'use client';
+"use client";
 
-import { useRef, useState, useCallback, useEffect } from 'react';
-import { motion, useInView, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Quote } from 'lucide-react';
-import { SafeImage } from '@/components/safe-image';
+import { useRef, useState, useCallback, useEffect } from "react";
+import {
+  motion,
+  useInView,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
+import { SafeImage } from "@/components/safe-image";
 
 // Partner data with logo support
 interface Partner {
@@ -14,67 +20,126 @@ interface Partner {
 
 const partners: Record<string, Partner[]> = {
   developers: [
-    { name: 'Emaar', logo: '/partners/Layer 792.png', url: 'https://www.emaar.com/' },
-    { name: 'Nakheel', logo: '/partners/Layer 793.png', url: 'https://www.nakheel.com/' },
-    { name: 'Meydan', logo: '/partners/meydan-logo.png', url: 'https://www.meydan.ae/' },
-    { name: 'Sobha', logo: '/partners/Layer 796.png', url: 'https://sobharealty.com/' },
-    { name: 'Wasl', logo: '/partners/Layer 798.png', url: 'https://www.wasl.ae/' },
-    { name: 'Meraas', logo: '/partners/Layer 799.png', url: 'https://meraas.com/' },
+    {
+      name: "Emaar",
+      logo: "/partners/Layer 792.png",
+      url: "https://www.emaar.com/",
+    },
+    {
+      name: "Nakheel",
+      logo: "/partners/Layer 793.png",
+      url: "https://www.nakheel.com/",
+    },
+    {
+      name: "Meydan",
+      logo: "/partners/meydan-logo.png",
+      url: "https://www.meydan.ae/",
+    },
+    {
+      name: "Sobha",
+      logo: "/partners/Layer 796.png",
+      url: "https://sobharealty.com/",
+    },
+    {
+      name: "Wasl",
+      logo: "/partners/Layer 798.png",
+      url: "https://www.wasl.ae/",
+    },
+    {
+      name: "Meraas",
+      logo: "/partners/Layer 799.png",
+      url: "https://meraas.com/",
+    },
   ],
   hospitality: [
-    { name: 'Marriott', logo: '/partners/Marriott_International.png', url: 'https://www.marriott.com/' },
-    { name: 'Ritz-Carlton', logo: '/partners/1200px-RitzCarlton.svg.png', url: 'https://www.ritzcarlton.com/' },
-    { name: 'Sofitel', logo: '/partners/Sofitel-JBR-Logo-2019-01_white.png', url: 'https://sofitel.accor.com/' },
-    { name: 'Radisson', logo: '/partners/2880px-Radisson_Blu_logo.svg.png', url: 'https://www.radissonhotels.com/' },
-    { name: 'Hyatt', logo: '/partners/hyatt-logo.png', url: 'https://www.hyatt.com/' },
-    { name: 'Sheraton', logo: '/partners/Layer 801.png', url: 'https://sheraton.marriott.com/' },
+    {
+      name: "Marriott",
+      logo: "/partners/Marriott_International.png",
+      url: "https://www.marriott.com/",
+    },
+    {
+      name: "Ritz-Carlton",
+      logo: "/partners/1200px-RitzCarlton.svg.png",
+      url: "https://www.ritzcarlton.com/",
+    },
+    {
+      name: "Sofitel",
+      logo: "/partners/Sofitel-JBR-Logo-2019-01_white.png",
+      url: "https://sofitel.accor.com/",
+    },
+    {
+      name: "Radisson",
+      logo: "/partners/2880px-Radisson_Blu_logo.svg.png",
+      url: "https://www.radissonhotels.com/",
+    },
+    {
+      name: "Hyatt",
+      logo: "/partners/hyatt-logo.png",
+      url: "https://www.hyatt.com/",
+    },
+    {
+      name: "Sheraton",
+      logo: "/partners/Layer 801.png",
+      url: "https://sheraton.marriott.com/",
+    },
   ],
   corporate: [
-    { name: 'DMCC', logo: '/partners/DMCC-logo.png', url: 'https://dmcc.ae/' },
-    { name: 'JLT', logo: '/partners/Layer 816.png', url: 'https://jlt.ae/' },
-    { name: 'SBK Holding', logo: '/partners/Layer 817.png', url: 'https://www.sbkholding.com/' },
-    { name: 'ADNH', logo: '/partners/adnh-logo.png', url: 'https://www.adnh.com/' },
+    { name: "DMCC", logo: "/partners/DMCC-logo.png", url: "https://dmcc.ae/" },
+    { name: "JLT", logo: "/partners/Layer 816.png", url: "https://jlt.ae/" },
+    {
+      name: "SBK Holding",
+      logo: "/partners/Layer 817.png",
+      url: "https://www.sbkholding.com/",
+    },
+    {
+      name: "ADNH",
+      logo: "/partners/adnh-logo.png",
+      url: "https://www.adnh.com/",
+    },
   ],
 };
 
 const testimonials = [
   {
     id: 1,
-    quote: 'One of the standout qualities of MIDC is their dedication to meeting project timelines without compromising quality. MIDC has consistently demonstrated a strong commitment to meeting project timelines while maintaining high-quality standards. Their clear communication and attention to detail helped keep projects on track, even when handling complex requirements.',
-    author: 'Ghaleb Al Najjar',
-    role: 'Consultant - Projects and Infrastructure',
-    company: 'Abu Dhabi National Hotels',
-    image: '/partners/Layer 806.png',
+    quote:
+      "One of the standout qualities of MIDC is their dedication to meeting project timelines without compromising quality. MIDC has consistently demonstrated a strong commitment to meeting project timelines while maintaining high-quality standards. Their clear communication and attention to detail helped keep projects on track, even when handling complex requirements.",
+    author: "Ghaleb Al Najjar",
+    role: "Consultant - Projects and Infrastructure",
+    company: "Abu Dhabi National Hotels",
+    image: "/partners/Layer 806.png",
   },
   {
     id: 2,
-    quote: 'Throughout our collaboration, MIDC has consistently demonstrated exceptional skill, professionalism, and a strong commitment to delivering high-quality outcomes. They have been instrumental in the successful execution of our hotel refurbishment, design and built projects. Their work surpassed our expectations, not only in terms of quality but also in their ability to manage the project within tight timelines.',
-    author: 'Sayed Mohammed Al Sayed',
-    role: 'Director of Area Procurement',
-    company: 'Grand Hyatt Hotels Dubai',
-    image: '/partners/Layer 810.png',
+    quote:
+      "Throughout our collaboration, MIDC has consistently demonstrated exceptional skill, professionalism, and a strong commitment to delivering high-quality outcomes. They have been instrumental in the successful execution of our hotel refurbishment, design and built projects. Their work surpassed our expectations, not only in terms of quality but also in their ability to manage the project within tight timelines.",
+    author: "Sayed Mohammed Al Sayed",
+    role: "Director of Area Procurement",
+    company: "Grand Hyatt Hotels Dubai",
+    image: "/partners/Layer 810.png",
   },
   {
     id: 3,
-    quote: 'I did not want a house that felt like a hotel. I wanted a home that felt like art. Eng. Maher took my vague ideas and translated them into a reality that was sharper and more elegant than I could have imagined. His presence on-site gave me total peace of mind.',
-    author: 'Private Client',
-    role: 'Villa Owner',
-    company: 'Jumeirah Bay Island',
-    image: '/partners/The Residences.png',
+    quote:
+      "I did not want a house that felt like a hotel. I wanted a home that felt like art. Eng. Maher took my vague ideas and translated them into a reality that was sharper and more elegant than I could have imagined. His presence on-site gave me total peace of mind.",
+    author: "Private Client",
+    role: "Villa Owner",
+    company: "Jumeirah Bay Island",
+    image: "/partners/The Residences.png",
   },
 ];
 
 // Background images for visual richness - using placeholder until project images are available
 const backgroundImages = [
-  '/placeholder.jpg',
-  '/placeholder.jpg',
-  '/placeholder.jpg',
+  "/placeholder.jpg",
+  "/placeholder.jpg",
+  "/placeholder.jpg",
 ];
 
 // Partner Display Component - Logo with text fallback, wrapped in external link
 function PartnerLogo({ partner }: { partner: Partner }) {
   const content = partner.logo ? (
-    <div className="group relative flex h-16 w-28 items-center justify-center overflow-hidden p-3 transition-all duration-300 sm:h-20 sm:w-36 sm:p-4">
+    <div className="group relative flex h-14 w-full items-center justify-center overflow-hidden p-2 transition-all duration-300 sm:h-16 sm:p-3">
       <SafeImage
         src={partner.logo}
         alt={partner.name}
@@ -84,7 +149,7 @@ function PartnerLogo({ partner }: { partner: Partner }) {
       />
     </div>
   ) : (
-    <span className="inline-block px-5 py-2.5 font-Satoshi text-sm font-light text-white/70 transition-all duration-300 hover:text-white">
+    <span className="inline-block px-4 py-2 font-Satoshi text-sm font-light text-white/70 transition-all duration-300 hover:text-white">
       {partner.name}
     </span>
   );
@@ -102,31 +167,137 @@ function PartnerLogo({ partner }: { partner: Partner }) {
   );
 }
 
+// Logo Carousel Component for each category
+function LogoCarousel({
+  partners: partnerList,
+  categoryIndex,
+  isInView,
+}: {
+  partners: Partner[];
+  categoryIndex: number;
+  isInView: boolean;
+}) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const logosPerView = 2; // Show 2 logos at a time
+  const totalSlides = Math.ceil(partnerList.length / logosPerView);
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
+  };
+
+  const visibleLogos = partnerList.slice(
+    currentIndex * logosPerView,
+    currentIndex * logosPerView + logosPerView,
+  );
+
+  return (
+    <div className="mt-auto">
+      {/* Logo display area */}
+      <div className="relative mb-4 min-h-[70px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-center gap-2"
+          >
+            {visibleLogos.map((partner, index) => (
+              <motion.div
+                key={partner.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.5 + categoryIndex * 0.1 + index * 0.05,
+                }}
+                className="flex-1"
+              >
+                <PartnerLogo partner={partner} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Navigation */}
+      {totalSlides > 1 && (
+        <div className="flex items-center justify-between">
+          {/* Dots */}
+          <div className="flex gap-1.5">
+            {Array.from({ length: totalSlides }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-1.5 rounded-full transition-all ${
+                  index === currentIndex
+                    ? "w-4 bg-[#8f7852]"
+                    : "w-1.5 bg-white/20 hover:bg-white/40"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Arrows */}
+          <div className="flex gap-2">
+            <button
+              onClick={goToPrev}
+              className="flex h-8 w-8 items-center justify-center border border-white/20 bg-white/5 transition-all hover:border-[#8f7852] hover:bg-[#8f7852]"
+              aria-label="Previous"
+            >
+              <ArrowLeft
+                className="h-3.5 w-3.5 text-white/60 transition-colors hover:text-neutral-950"
+                strokeWidth={1.5}
+              />
+            </button>
+            <button
+              onClick={goToNext}
+              className="flex h-8 w-8 items-center justify-center border border-white/20 bg-white/5 transition-all hover:border-[#8f7852] hover:bg-[#8f7852]"
+              aria-label="Next"
+            >
+              <ArrowRight
+                className="h-3.5 w-3.5 text-white/60 transition-colors hover:text-neutral-950"
+                strokeWidth={1.5}
+              />
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ============================================
 // PARTNERS SECTION
 // ============================================
 export function PartnersSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const partnerCategories = [
     {
-      key: 'developers',
-      label: 'Developers',
+      key: "developers",
+      label: "Developers",
       partnerList: partners.developers,
-      description: 'Premier real estate developers shaping the UAE skyline'
+      description: "Premier real estate developers shaping the UAE skyline",
     },
     {
-      key: 'hospitality',
-      label: 'Hospitality',
+      key: "hospitality",
+      label: "Hospitality",
       partnerList: partners.hospitality,
-      description: 'World-renowned hotel brands and hospitality groups'
+      description: "World-renowned hotel brands and hospitality groups",
     },
     {
-      key: 'corporate',
-      label: 'Corporate',
+      key: "corporate",
+      label: "Corporate",
       partnerList: partners.corporate,
-      description: 'Leading corporate entities and business groups'
+      description: "Leading corporate entities and business groups",
     },
   ];
 
@@ -166,83 +337,80 @@ export function PartnersSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto max-w-2xl font-Satoshi text-base font-light leading-relaxed text-white/60 lg:text-lg"
           >
-            Collaborating with the most prestigious developers, hospitality brands,
-            and corporate entities to create extraordinary spaces.
+            Collaborating with the most prestigious developers, hospitality
+            brands, and corporate entities to create extraordinary spaces.
           </motion.p>
         </div>
 
         {/* Partner Categories */}
-        <div className="grid gap-8 md:grid-cols-3 lg:gap-12">
+        <div className="grid gap-6 md:grid-cols-3 lg:gap-8">
           {partnerCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.key}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.3 + categoryIndex * 0.15 }}
-              className="group relative h-full"
+              className="group relative"
             >
-              <div className="relative flex h-full flex-col p-8 lg:p-10">
+              <div className="relative flex h-full flex-col p-6 lg:p-8">
                 {/* Label */}
-                <div className="mb-6">
-                  <h3 className="font-SchnyderS text-2xl font-light text-white lg:text-3xl">
+                <div className="mb-4">
+                  <h3 className="font-SchnyderS text-xl font-light text-white lg:text-2xl">
                     {category.label}
                   </h3>
-                  <p className="font-Satoshi text-xs font-light text-white/40">
+                  <p className="font-Satoshi text-[10px] font-light uppercase tracking-wider text-white/40">
                     {category.partnerList.length} Partners
                   </p>
                 </div>
 
                 {/* Description */}
-                <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-white/60">
+                <p className="mb-6 font-Satoshi text-sm font-light leading-relaxed text-white/50">
                   {category.description}
                 </p>
 
-                {/* Partner Logos */}
-                <div className="flex flex-wrap items-center gap-3">
-                  {category.partnerList.map((partner, index) => (
-                    <motion.div
-                      key={partner.name}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ duration: 0.4, delay: 0.5 + categoryIndex * 0.1 + index * 0.05 }}
-                    >
-                      <PartnerLogo partner={partner} />
-                    </motion.div>
-                  ))}
-                </div>
+                {/* Partner Logos Carousel */}
+                <LogoCarousel
+                  partners={category.partnerList}
+                  categoryIndex={categoryIndex}
+                  isInView={isInView}
+                />
               </div>
             </motion.div>
           ))}
         </div>
       </div>
-
     </section>
   );
 }
-
 
 // ============================================
 // TESTIMONIALS SECTION
 // ============================================
 export function TestimonialsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const backgroundScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1, 1.1]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const backgroundScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1.15, 1, 1.1],
+  );
 
   const nextTestimonial = useCallback(() => {
     setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
   }, []);
 
   const prevTestimonial = useCallback(() => {
-    setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setActiveTestimonial(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
+    );
   }, []);
 
   // Auto-advance testimonials
@@ -267,7 +435,7 @@ export function TestimonialsSection() {
             className="absolute inset-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: index === activeTestimonial ? 0.2 : 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
           >
             <SafeImage
               src={src}
@@ -290,12 +458,17 @@ export function TestimonialsSection() {
       <motion.div
         className="absolute right-[10%] top-[30%] h-72 w-72 rounded-full bg-[#d4af37]/[0.04] blur-[120px]"
         animate={{ y: [0, -30, 0], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="absolute left-[20%] bottom-[20%] h-64 w-64 rounded-full bg-white/[0.02] blur-[100px]"
         animate={{ y: [0, 40, 0], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 3,
+        }}
       />
 
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 lg:px-12">
@@ -331,7 +504,7 @@ export function TestimonialsSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative mx-auto max-w-5xl"
+          className="relative mx-auto container"
         >
           <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-sm">
             {/* Large Quote Icon - Background */}
@@ -415,9 +588,13 @@ export function TestimonialsSection() {
                         className="group relative h-2 overflow-hidden"
                         aria-label={`Go to testimonial ${index + 1}`}
                       >
-                        <div className={`h-full transition-all duration-500 ${
-                          index === activeTestimonial ? 'w-12 bg-[#d4af37]' : 'w-2 bg-white/20 hover:bg-white/40'
-                        }`} />
+                        <div
+                          className={`h-full transition-all duration-500 ${
+                            index === activeTestimonial
+                              ? "w-12 bg-[#d4af37]"
+                              : "w-2 bg-white/20 hover:bg-white/40"
+                          }`}
+                        />
                       </button>
                     ))}
                   </div>
@@ -429,14 +606,20 @@ export function TestimonialsSection() {
                       className="flex h-12 w-12 items-center justify-center border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/10"
                       aria-label="Previous testimonial"
                     >
-                      <ArrowLeft className="h-5 w-5 text-white/50" strokeWidth={1.5} />
+                      <ArrowLeft
+                        className="h-5 w-5 text-white/50"
+                        strokeWidth={1.5}
+                      />
                     </button>
                     <button
                       onClick={nextTestimonial}
                       className="flex h-12 w-12 items-center justify-center border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/10"
                       aria-label="Next testimonial"
                     >
-                      <ArrowRight className="h-5 w-5 text-white/50" strokeWidth={1.5} />
+                      <ArrowRight
+                        className="h-5 w-5 text-white/50"
+                        strokeWidth={1.5}
+                      />
                     </button>
                   </div>
                 </div>
@@ -456,7 +639,6 @@ export function TestimonialsSection() {
   );
 }
 
-
 // ============================================
 // COMBINED EXPORT (for backwards compatibility)
 // ============================================
@@ -465,7 +647,10 @@ interface PartnersTestimonialsProps {
   testimonials?: unknown[];
 }
 
-export function PartnersTestimonials({ clients, testimonials }: PartnersTestimonialsProps = {}) {
+export function PartnersTestimonials({
+  clients,
+  testimonials,
+}: PartnersTestimonialsProps = {}) {
   // Note: clients and testimonials props are accepted for API compatibility
   // but this version uses hardcoded data for the stable design
   return (

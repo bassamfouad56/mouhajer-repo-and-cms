@@ -134,7 +134,17 @@
       "Bash(npx next lint:*)",
       "Bash(git show:*)",
       "Bash(SANITY_API_TOKEN=skhWsYxkUNrMW5rpyKxwQM5rOgSOHhNTqiDWc5Qmeq4CUDM4kdpINUUM47nvvEGaEzY64nVBwqctTChZDQ9CGkKOsE86RH2MuGzfaAOK18E5WqBbSLVj8iTPehtToYGwxrrGjFWWQJ1nWV10ar424sftwtaJN0b1fs8DokYPIEjot9Dobzb9 node:*)",
-      "Bash(export SANITY_API_TOKEN=skhWsYxkUNrMW5rpyKxwQM5rOgSOHhNTqiDWc5Qmeq4CUDM4kdpINUUM47nvvEGaEzY64nVBwqctTChZDQ9CGkKOsE86RH2MuGzfaAOK18E5WqBbSLVj8iTPehtToYGwxrrGjFWWQJ1nWV10ar424sftwtaJN0b1fs8DokYPIEjot9Dobzb9)"
+      "Bash(export SANITY_API_TOKEN=skhWsYxkUNrMW5rpyKxwQM5rOgSOHhNTqiDWc5Qmeq4CUDM4kdpINUUM47nvvEGaEzY64nVBwqctTChZDQ9CGkKOsE86RH2MuGzfaAOK18E5WqBbSLVj8iTPehtToYGwxrrGjFWWQJ1nWV10ar424sftwtaJN0b1fs8DokYPIEjot9Dobzb9)",
+      "Bash(git reset:*)",
+      "Bash(brew list:*)",
+      "Bash(pnpm config:*)",
+      "Bash(npx sanity@latest documents query:*)",
+      "Bash(diskutil list:*)",
+      "Bash(mdfind:*)",
+      "Bash(osascript:*)",
+      "Bash(chmod:*)",
+      "Bash(ffprobe:*)",
+      "Bash(ffmpeg:*)"
     ],
     "deny": [],
     "ask": []

@@ -61,7 +61,7 @@ export function CinematicHero({
   // Extract YouTube video ID
   const getYouTubeId = (url: string) => {
     const match = url.match(
-      /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/watch\?.+&v=))([^&?\s]+)/
+      /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/watch\?.+&v=))([^&?\s]+)/,
     );
     return match?.[1];
   };
@@ -173,25 +173,25 @@ export function CinematicHero({
       {/* Animated Corner Accents */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-8 left-8 w-24 h-24 border-l-2 border-t-2 border-[#c9a962]/60"
+          className="absolute top-8 left-8 w-24 h-24 border-l-2 border-t-2 border-[#8f7852]/60"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         />
         <motion.div
-          className="absolute top-8 right-8 w-24 h-24 border-r-2 border-t-2 border-[#c9a962]/60"
+          className="absolute top-8 right-8 w-24 h-24 border-r-2 border-t-2 border-[#8f7852]/60"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
         />
         <motion.div
-          className="absolute bottom-8 left-8 w-24 h-24 border-l-2 border-b-2 border-[#c9a962]/60"
+          className="absolute bottom-8 left-8 w-24 h-24 border-l-2 border-b-2 border-[#8f7852]/60"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.7, duration: 0.8 }}
         />
         <motion.div
-          className="absolute bottom-8 right-8 w-24 h-24 border-r-2 border-b-2 border-[#c9a962]/60"
+          className="absolute bottom-8 right-8 w-24 h-24 border-r-2 border-b-2 border-[#8f7852]/60"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.8, duration: 0.8 }}
@@ -215,7 +215,7 @@ export function CinematicHero({
             {awardTags.map((tag, index) => (
               <motion.div
                 key={tag.slug || index}
-                className="px-4 py-1.5 bg-[#c9a962] text-black text-xs font-medium tracking-wider uppercase"
+                className="px-4 py-1.5 bg-[#8f7852] text-black text-xs font-medium tracking-wider uppercase"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
@@ -247,11 +247,11 @@ export function CinematicHero({
           transition={{ delay: 0.2 }}
         >
           {location && (
-            <span className="text-[#c9a962] text-sm tracking-[0.2em] uppercase font-light">
+            <span className="text-[#8f7852] text-sm tracking-[0.2em] uppercase font-light">
               {location}
             </span>
           )}
-          {location && year && <span className="w-8 h-px bg-[#c9a962]/50" />}
+          {location && year && <span className="w-8 h-px bg-[#8f7852]/50" />}
           {year && (
             <span className="text-white/60 text-sm tracking-[0.2em] font-light">
               {year}
@@ -296,7 +296,7 @@ export function CinematicHero({
           </p>
           {/* Animated underline */}
           <motion.div
-            className="absolute bottom-0 left-0 h-px bg-[#c9a962]"
+            className="absolute bottom-0 left-0 h-px bg-[#8f7852]"
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ delay: 1.2, duration: 1.5, ease: "easeOut" }}
@@ -335,7 +335,7 @@ export function CinematicHero({
           {isRTL ? "مرر للأسفل" : "Scroll"}
         </span>
         <motion.div
-          className="w-px h-12 bg-gradient-to-b from-[#c9a962] to-transparent"
+          className="w-px h-12 bg-gradient-to-b from-[#8f7852] to-transparent"
           animate={{ scaleY: [1, 0.5, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />

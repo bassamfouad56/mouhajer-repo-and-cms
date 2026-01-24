@@ -77,7 +77,7 @@ export function FeaturedNavigation({
               {prevProject && (
                 <Link href={`/${locale}/projects/featured/${prevProject.slug}`}>
                   <motion.div
-                    className="group relative h-56 md:h-64 bg-white/5 border border-white/10 hover:border-[#c9a962]/30 transition-colors overflow-hidden"
+                    className="group relative h-56 md:h-64 bg-white/5 border border-white/10 hover:border-[#8f7852]/30 transition-colors overflow-hidden"
                     whileHover={{ x: isRTL ? 10 : -10 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -119,11 +119,11 @@ export function FeaturedNavigation({
 
                       {/* Project Title */}
                       <div>
-                        <h3 className="text-xl md:text-2xl text-white font-light group-hover:text-[#c9a962] transition-colors line-clamp-2">
+                        <h3 className="text-xl md:text-2xl text-white font-light group-hover:text-[#8f7852] transition-colors line-clamp-2">
                           {prevProject.title ||
                             prevProject.slug.replace(/-/g, " ")}
                         </h3>
-                        <motion.div className="mt-3 flex items-center gap-2 text-[#c9a962] text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                        <motion.div className="mt-3 flex items-center gap-2 text-[#8f7852] text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                           <span>{isRTL ? "عرض المشروع" : "View Project"}</span>
                           <svg
                             width="14"
@@ -146,14 +146,14 @@ export function FeaturedNavigation({
 
                     {/* Hover Line */}
                     <motion.div
-                      className="absolute bottom-0 left-0 h-1 bg-[#c9a962]"
+                      className="absolute bottom-0 left-0 h-1 bg-[#8f7852]"
                       initial={{ width: 0 }}
                       whileHover={{ width: "100%" }}
                       transition={{ duration: 0.4 }}
                     />
 
                     {/* Corner Frame */}
-                    <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-white/0 group-hover:border-[#c9a962]/70 transition-colors duration-500" />
+                    <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-white/0 group-hover:border-[#8f7852]/70 transition-colors duration-500" />
                   </motion.div>
                 </Link>
               )}
@@ -163,7 +163,7 @@ export function FeaturedNavigation({
             {nextProject && (
               <Link href={`/${locale}/projects/featured/${nextProject.slug}`}>
                 <motion.div
-                  className="group relative h-56 md:h-64 bg-white/5 border border-white/10 hover:border-[#c9a962]/30 transition-colors overflow-hidden"
+                  className="group relative h-56 md:h-64 bg-white/5 border border-white/10 hover:border-[#8f7852]/30 transition-colors overflow-hidden"
                   whileHover={{ x: isRTL ? -10 : 10 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -205,11 +205,11 @@ export function FeaturedNavigation({
 
                     {/* Project Title */}
                     <div>
-                      <h3 className="text-xl md:text-2xl text-white font-light group-hover:text-[#c9a962] transition-colors line-clamp-2">
+                      <h3 className="text-xl md:text-2xl text-white font-light group-hover:text-[#8f7852] transition-colors line-clamp-2">
                         {nextProject.title ||
                           nextProject.slug.replace(/-/g, " ")}
                       </h3>
-                      <motion.div className="mt-3 flex items-center justify-end gap-2 text-[#c9a962] text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                      <motion.div className="mt-3 flex items-center justify-end gap-2 text-[#8f7852] text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                         <span>{isRTL ? "عرض المشروع" : "View Project"}</span>
                         <svg
                           width="14"
@@ -232,14 +232,14 @@ export function FeaturedNavigation({
 
                   {/* Hover Line */}
                   <motion.div
-                    className="absolute bottom-0 right-0 h-1 bg-[#c9a962]"
+                    className="absolute bottom-0 right-0 h-1 bg-[#8f7852]"
                     initial={{ width: 0 }}
                     whileHover={{ width: "100%" }}
                     transition={{ duration: 0.4 }}
                   />
 
                   {/* Corner Frame */}
-                  <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-white/0 group-hover:border-[#c9a962]/70 transition-colors duration-500" />
+                  <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-white/0 group-hover:border-[#8f7852]/70 transition-colors duration-500" />
                 </motion.div>
               </Link>
             )}
@@ -256,7 +256,7 @@ export function FeaturedNavigation({
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-[#c9a962] text-sm tracking-[0.3em] uppercase block mb-4">
+              <span className="text-[#8f7852] text-sm tracking-[0.3em] uppercase block mb-4">
                 {isRTL ? "استكشف المزيد" : "Explore More"}
               </span>
               <h2 className="text-2xl md:text-3xl text-white font-light">
@@ -291,17 +291,17 @@ export function FeaturedNavigation({
 
                       {/* Content */}
                       <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                        <h3 className="text-lg md:text-xl text-white font-light group-hover:text-[#c9a962] transition-colors">
+                        <h3 className="text-lg md:text-xl text-white font-light group-hover:text-[#8f7852] transition-colors">
                           {project.title}
                         </h3>
                       </div>
 
                       {/* Hover Border */}
-                      <div className="absolute inset-0 border-2 border-[#c9a962]/0 group-hover:border-[#c9a962]/50 transition-colors duration-300" />
+                      <div className="absolute inset-0 border-2 border-[#8f7852]/0 group-hover:border-[#8f7852]/50 transition-colors duration-300" />
 
                       {/* View Arrow */}
                       <motion.div
-                        className="absolute bottom-6 right-6 w-10 h-10 bg-[#c9a962] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute bottom-6 right-6 w-10 h-10 bg-[#8f7852] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                         whileHover={{ scale: 1.1 }}
                       >
                         <svg
@@ -336,7 +336,7 @@ export function FeaturedNavigation({
             >
               <Link
                 href={`/${locale}/projects`}
-                className="inline-flex items-center gap-3 px-8 py-4 border border-[#c9a962] text-[#c9a962] hover:bg-[#c9a962] hover:text-black transition-all duration-300 tracking-wider uppercase text-sm"
+                className="inline-flex items-center gap-3 px-8 py-4 border border-[#8f7852] text-[#8f7852] hover:bg-[#8f7852] hover:text-black transition-all duration-300 tracking-wider uppercase text-sm"
               >
                 {t.viewAll}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">

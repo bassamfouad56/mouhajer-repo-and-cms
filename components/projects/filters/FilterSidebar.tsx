@@ -84,7 +84,7 @@ export function FilterSidebar({
           {hasActiveFilters && (
             <button
               onClick={clearAll}
-              className="font-Satoshi text-xs uppercase tracking-wider text-[#c9a962] transition-colors hover:text-neutral-950"
+              className="font-Satoshi text-xs uppercase tracking-wider text-[#8f7852] transition-colors hover:text-neutral-950"
             >
               Clear All
             </button>

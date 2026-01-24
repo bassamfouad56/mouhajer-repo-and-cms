@@ -41,8 +41,8 @@ export function Industries({
       className="relative overflow-hidden bg-gradient-to-b from-[#faf8f5] via-[#f8f6f3] to-[#faf8f5] px-6 py-32 lg:px-12 lg:py-48"
     >
       {/* Background Effects */}
-      <div className="absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
+      <div className="absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-[#8f7852]/5 blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 h-[500px] w-[500px] rounded-full bg-[#8f7852]/5 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-[1600px]">
         {/* Section Header */}
@@ -53,11 +53,11 @@ export function Industries({
             transition={{ duration: 0.8 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <span className="text-sm font-light tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+            <span className="text-sm font-light tracking-[0.3em] text-[#8f7852]">
               WHO WE SERVE
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -88,14 +88,14 @@ export function Industries({
               isSelected={selectedIndustry === industry.id}
               onSelect={() =>
                 setSelectedIndustry(
-                  industry.id === selectedIndustry ? null : industry.id
+                  industry.id === selectedIndustry ? null : industry.id,
                 )
               }
               relatedServices={services.filter((s) =>
-                industry.acfFields?.relatedServices?.includes(s.id)
+                industry.acfFields?.relatedServices?.includes(s.id),
               )}
               relatedProjects={projects.filter((p) =>
-                industry.acfFields?.relatedProjects?.includes(p.id)
+                industry.acfFields?.relatedProjects?.includes(p.id),
               )}
             />
           ))}
@@ -110,8 +110,8 @@ export function Industries({
         >
           <div className="text-center">
             <div className="mb-4 flex justify-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#c9a962]/30">
-                <Building2 className="h-8 w-8 text-[#c9a962]" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#8f7852]/30">
+                <Building2 className="h-8 w-8 text-[#8f7852]" />
               </div>
             </div>
             <div className="mb-2 font-SchnyderS text-4xl font-light text-[#262420]">
@@ -123,8 +123,8 @@ export function Industries({
           </div>
           <div className="text-center">
             <div className="mb-4 flex justify-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#c9a962]/30">
-                <Award className="h-8 w-8 text-[#c9a962]" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#8f7852]/30">
+                <Award className="h-8 w-8 text-[#8f7852]" />
               </div>
             </div>
             <div className="mb-2 font-SchnyderS text-4xl font-light text-[#262420]">
@@ -136,8 +136,8 @@ export function Industries({
           </div>
           <div className="text-center">
             <div className="mb-4 flex justify-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#c9a962]/30">
-                <Users className="h-8 w-8 text-[#c9a962]" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#8f7852]/30">
+                <Users className="h-8 w-8 text-[#8f7852]" />
               </div>
             </div>
             <div className="mb-2 font-SchnyderS text-4xl font-light text-[#262420]">
@@ -156,7 +156,7 @@ export function Industries({
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-24 text-center"
         >
-          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
           <p className="mb-6 font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60">
             READY TO TRANSFORM YOUR INDUSTRY?
           </p>
@@ -231,7 +231,7 @@ function IndustryCard({
         {/* Top Border */}
         <div
           className={`h-1 w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent transition-all duration-500 ${
-            isSelected ? "via-[#c9a962]" : "group-hover:via-[#c9a962]/50"
+            isSelected ? "via-[#8f7852]" : "group-hover:via-[#8f7852]/50"
           }`}
         />
 
@@ -241,8 +241,8 @@ function IndustryCard({
             <div
               className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-500 ${
                 isSelected
-                  ? "border-[#c9a962] bg-[#c9a962] text-white"
-                  : "border-[#e8e6e3] text-[#3d3a36]/60 group-hover:border-[#c9a962]/50"
+                  ? "border-[#8f7852] bg-[#8f7852] text-white"
+                  : "border-[#e8e6e3] text-[#3d3a36]/60 group-hover:border-[#8f7852]/50"
               }`}
             >
               {getIcon(industry.title)}
@@ -334,8 +334,8 @@ function IndustryCard({
           <div
             className={`flex items-center gap-2 font-Satoshi text-xs font-light tracking-wider transition-all ${
               isSelected
-                ? "gap-4 text-[#c9a962]"
-                : "text-[#3d3a36]/60 group-hover:gap-4 group-hover:text-[#c9a962]"
+                ? "gap-4 text-[#8f7852]"
+                : "text-[#3d3a36]/60 group-hover:gap-4 group-hover:text-[#8f7852]"
             }`}
           >
             <span>{isSelected ? "SHOW LESS" : "EXPLORE"}</span>
@@ -352,8 +352,8 @@ function IndustryCard({
         <div
           className={`absolute -right-12 -top-12 h-32 w-32 rounded-full blur-3xl transition-all duration-500 ${
             isSelected
-              ? "bg-[#c9a962]/10"
-              : "bg-[#c9a962]/5 group-hover:bg-[#c9a962]/10"
+              ? "bg-[#8f7852]/10"
+              : "bg-[#8f7852]/5 group-hover:bg-[#8f7852]/10"
           }`}
         />
       </div>

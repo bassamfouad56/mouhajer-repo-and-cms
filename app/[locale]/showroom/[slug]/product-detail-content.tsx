@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import {
   ShoppingCart,
   Heart,
@@ -19,9 +19,9 @@ import {
   ChevronRight,
   Clock,
   Package,
-} from 'lucide-react';
-import { type FurnitureProduct } from '@/lib/furniture-data';
-import { useCart } from '@/lib/cart-context';
+} from "lucide-react";
+import { type FurnitureProduct } from "@/lib/furniture-data";
+import { useCart } from "@/lib/cart-context";
 
 export default function ProductDetailContent({
   product,
@@ -51,7 +51,7 @@ export default function ProductDetailContent({
           url: window.location.href,
         });
       } catch (err) {
-        console.log('Share failed:', err);
+        console.log("Share failed:", err);
       }
     }
   };
@@ -61,7 +61,9 @@ export default function ProductDetailContent({
   };
 
   const prevImage = () => {
-    setSelectedImage((prev) => (prev - 1 + product.images.length) % product.images.length);
+    setSelectedImage(
+      (prev) => (prev - 1 + product.images.length) % product.images.length,
+    );
   };
 
   const handleAddToCart = () => {
@@ -82,8 +84,12 @@ export default function ProductDetailContent({
               Showroom
             </Link>
             <span>/</span>
-            <Link href={`/showroom?category=${product.category}`} className="hover:text-neutral-950">
-              {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+            <Link
+              href={`/showroom?category=${product.category}`}
+              className="hover:text-neutral-950"
+            >
+              {product.category.charAt(0).toUpperCase() +
+                product.category.slice(1)}
             </Link>
             <span>/</span>
             <span className="text-neutral-950">{product.name}</span>
@@ -142,10 +148,17 @@ export default function ProductDetailContent({
                     key={index}
                     onClick={() => setSelectedImage(index)}
                     className={`relative aspect-square overflow-hidden rounded-lg ${
-                      selectedImage === index ? 'ring-2 ring-neutral-950' : 'ring-1 ring-neutral-200'
+                      selectedImage === index
+                        ? "ring-2 ring-neutral-950"
+                        : "ring-1 ring-neutral-200"
                     }`}
                   >
-                    <Image src={image} alt={`Thumbnail ${index + 1}`} fill className="object-cover" />
+                    <Image
+                      src={image}
+                      alt={`Thumbnail ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
                   </button>
                 ))}
               </div>
@@ -161,7 +174,9 @@ export default function ProductDetailContent({
               <h1 className="mb-4 font-cormorant text-4xl font-light text-neutral-950 md:text-5xl">
                 {product.name}
               </h1>
-              <p className="text-lg leading-relaxed text-neutral-700">{product.description}</p>
+              <p className="text-lg leading-relaxed text-neutral-700">
+                {product.description}
+              </p>
             </div>
 
             {/* Price */}
@@ -171,8 +186,11 @@ export default function ProductDetailContent({
                   {product.price.toLocaleString()} {product.currency}
                 </span>
               )}
-              <span className={`text-3xl font-medium ${hasDiscount ? 'text-red-600' : 'text-neutral-950'}`}>
-                {(product.salePrice || product.price).toLocaleString()} {product.currency}
+              <span
+                className={`text-3xl font-medium ${hasDiscount ? "text-red-600" : "text-neutral-950"}`}
+              >
+                {(product.salePrice || product.price).toLocaleString()}{" "}
+                {product.currency}
               </span>
               {hasDiscount && (
                 <span className="rounded-full bg-red-600 px-3 py-1 text-sm font-medium text-white">
@@ -196,7 +214,9 @@ export default function ProductDetailContent({
                       key={color.name}
                       onClick={() => setSelectedColor(color)}
                       className={`group relative h-12 w-12 overflow-hidden rounded-full ${
-                        selectedColor.name === color.name ? 'ring-2 ring-neutral-950 ring-offset-2' : ''
+                        selectedColor.name === color.name
+                          ? "ring-2 ring-neutral-950 ring-offset-2"
+                          : ""
                       }`}
                       title={color.name}
                     >
@@ -217,7 +237,9 @@ export default function ProductDetailContent({
 
             {/* Quantity */}
             <div className="space-y-3">
-              <span className="text-sm font-medium text-neutral-950">Quantity</span>
+              <span className="text-sm font-medium text-neutral-950">
+                Quantity
+              </span>
               <div className="flex items-center gap-4">
                 <div className="flex items-center rounded-lg border border-neutral-300">
                   <button
@@ -260,7 +282,7 @@ export default function ProductDetailContent({
                 className="rounded-lg border border-neutral-300 p-4 transition-colors hover:border-neutral-950"
               >
                 <Heart
-                  className={`h-5 w-5 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-neutral-950'}`}
+                  className={`h-5 w-5 ${isWishlisted ? "fill-red-500 text-red-500" : "text-neutral-950"}`}
                 />
               </button>
               <button
@@ -286,7 +308,10 @@ export default function ProductDetailContent({
               <h3 className="font-cormorant text-xl font-medium">Features</h3>
               <ul className="space-y-2">
                 {product.features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-neutral-700">
+                  <li
+                    key={index}
+                    className="flex items-start gap-2 text-sm text-neutral-700"
+                  >
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-neutral-950" />
                     <span>{feature}</span>
                   </li>
@@ -300,10 +325,13 @@ export default function ProductDetailContent({
                 <div className="flex items-start gap-3">
                   <Package className="mt-0.5 h-5 w-5 shrink-0 text-neutral-950" />
                   <div>
-                    <h4 className="font-medium text-neutral-950">Customization Available</h4>
+                    <h4 className="font-medium text-neutral-950">
+                      Customization Available
+                    </h4>
                     <p className="mt-1 text-sm text-neutral-600">
-                      This piece can be customized to your specifications. Contact us to discuss custom
-                      options including dimensions, materials, and finishes.
+                      This piece can be customized to your specifications.
+                      Contact us to discuss custom options including dimensions,
+                      materials, and finishes.
                     </p>
                   </div>
                 </div>
@@ -332,7 +360,9 @@ export default function ProductDetailContent({
       {/* Specifications */}
       <section className="border-t border-neutral-200 bg-neutral-50 py-16">
         <div className="mx-auto max-w-7xl px-6">
-          <h2 className="mb-8 font-cormorant text-3xl font-light text-neutral-950">Specifications</h2>
+          <h2 className="mb-8 font-cormorant text-3xl font-light text-neutral-950">
+            Specifications
+          </h2>
           <div className="grid gap-8 md:grid-cols-2">
             {/* Dimensions */}
             <div>
@@ -343,15 +373,21 @@ export default function ProductDetailContent({
               <dl className="space-y-2 text-sm">
                 <div className="flex justify-between border-b border-neutral-200 pb-2">
                   <dt className="text-neutral-600">Width</dt>
-                  <dd className="font-medium text-neutral-950">{product.dimensions.width}</dd>
+                  <dd className="font-medium text-neutral-950">
+                    {product.dimensions.width}
+                  </dd>
                 </div>
                 <div className="flex justify-between border-b border-neutral-200 pb-2">
                   <dt className="text-neutral-600">Height</dt>
-                  <dd className="font-medium text-neutral-950">{product.dimensions.height}</dd>
+                  <dd className="font-medium text-neutral-950">
+                    {product.dimensions.height}
+                  </dd>
                 </div>
                 <div className="flex justify-between border-b border-neutral-200 pb-2">
                   <dt className="text-neutral-600">Depth</dt>
-                  <dd className="font-medium text-neutral-950">{product.dimensions.depth}</dd>
+                  <dd className="font-medium text-neutral-950">
+                    {product.dimensions.depth}
+                  </dd>
                 </div>
               </dl>
             </div>
@@ -364,7 +400,10 @@ export default function ProductDetailContent({
               </h3>
               <ul className="space-y-2 text-sm">
                 {product.materials.map((material, index) => (
-                  <li key={index} className="flex items-start gap-2 border-b border-neutral-200 pb-2">
+                  <li
+                    key={index}
+                    className="flex items-start gap-2 border-b border-neutral-200 pb-2"
+                  >
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-neutral-950" />
                     <span className="text-neutral-700">{material}</span>
                   </li>
@@ -379,10 +418,15 @@ export default function ProductDetailContent({
       {relatedProducts.length > 0 && (
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-6">
-            <h2 className="mb-8 font-cormorant text-3xl font-light text-neutral-950">You May Also Like</h2>
+            <h2 className="mb-8 font-cormorant text-3xl font-light text-neutral-950">
+              You May Also Like
+            </h2>
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {relatedProducts.map((relatedProduct) => (
-                <RelatedProductCard key={relatedProduct.id} product={relatedProduct} />
+                <RelatedProductCard
+                  key={relatedProduct.id}
+                  product={relatedProduct}
+                />
               ))}
             </div>
           </div>
@@ -401,7 +445,7 @@ export default function ProductDetailContent({
           >
             <X className="h-6 w-6" />
           </button>
-          <div className="relative h-[80vh] w-full max-w-5xl">
+          <div className="relative h-[80vh] w-full container">
             <Image
               src={product.images[selectedImage]}
               alt={product.name}
@@ -448,8 +492,11 @@ function RelatedProductCard({ product }: { product: FurnitureProduct }) {
               {product.price.toLocaleString()} {product.currency}
             </span>
           )}
-          <span className={`font-medium ${hasDiscount ? 'text-red-600' : 'text-neutral-950'}`}>
-            {(product.salePrice || product.price).toLocaleString()} {product.currency}
+          <span
+            className={`font-medium ${hasDiscount ? "text-red-600" : "text-neutral-950"}`}
+          >
+            {(product.salePrice || product.price).toLocaleString()}{" "}
+            {product.currency}
           </span>
         </div>
       </Link>

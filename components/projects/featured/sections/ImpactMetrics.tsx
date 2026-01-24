@@ -120,7 +120,7 @@ function RadialProgress({
             cy="50%"
             r="45%"
             fill="none"
-            stroke="#c9a962"
+            stroke="#8f7852"
             strokeWidth="4"
             strokeLinecap="round"
             strokeDasharray={`${percentage * 2.827} 282.7`}
@@ -295,7 +295,7 @@ export function ImpactMetrics({
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #c9a962 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, #8f7852 1px, transparent 0)`,
             backgroundSize: "40px 40px",
           }}
         />
@@ -313,7 +313,7 @@ export function ImpactMetrics({
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <span className="text-[#c9a962] text-sm tracking-[0.3em] uppercase block mb-4">
+          <span className="text-[#8f7852] text-sm tracking-[0.3em] uppercase block mb-4">
             {isRTL ? "أرقام مؤثرة" : "Impact Numbers"}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl text-white font-light">
@@ -354,7 +354,7 @@ export function ImpactMetrics({
               </div>
               {/* Decorative line */}
               <motion.div
-                className="w-12 h-px bg-[#c9a962]/30 mx-auto mt-4"
+                className="w-12 h-px bg-[#8f7852]/30 mx-auto mt-4"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
@@ -378,7 +378,7 @@ export function ImpactMetrics({
                 status === "completed"
                   ? "border-green-500/30 bg-green-500/10"
                   : status === "in-progress"
-                    ? "border-[#c9a962]/30 bg-[#c9a962]/10"
+                    ? "border-[#8f7852]/30 bg-[#8f7852]/10"
                     : "border-white/20 bg-white/5"
               } rounded-full`}
             >
@@ -387,7 +387,7 @@ export function ImpactMetrics({
                   status === "completed"
                     ? "bg-green-500"
                     : status === "in-progress"
-                      ? "bg-[#c9a962] animate-pulse"
+                      ? "bg-[#8f7852] animate-pulse"
                       : "bg-white/50"
                 }`}
               />
@@ -401,14 +401,14 @@ export function ImpactMetrics({
 
       {/* Decorative Corner Elements */}
       <motion.div
-        className="absolute top-8 left-8 w-20 h-20 border-l border-t border-[#c9a962]/20"
+        className="absolute top-8 left-8 w-20 h-20 border-l border-t border-[#8f7852]/20"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.3 }}
       />
       <motion.div
-        className="absolute bottom-8 right-8 w-20 h-20 border-r border-b border-[#c9a962]/20"
+        className="absolute bottom-8 right-8 w-20 h-20 border-r border-b border-[#8f7852]/20"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

@@ -83,9 +83,9 @@ const CATEGORIES: Record<
 > = {
   "design-trends": {
     label: "Design Trends",
-    bg: "bg-[#c9a962]/10",
-    text: "text-[#c9a962]",
-    border: "border-[#c9a962]/30",
+    bg: "bg-[#8f7852]/10",
+    text: "text-[#8f7852]",
+    border: "border-[#8f7852]/30",
   },
   "project-stories": {
     label: "Project Stories",
@@ -142,7 +142,7 @@ function calculateReadingTime(content?: any[], readTime?: number): number {
 function getSafeImageUrl(
   image: any,
   width: number,
-  height: number
+  height: number,
 ): string | null {
   if (!image?.asset) return null;
   try {
@@ -154,7 +154,7 @@ function getSafeImageUrl(
 
 // Portable Text components for rich content rendering
 const createPortableTextComponents = (
-  locale: string = "en"
+  locale: string = "en",
 ): PortableTextComponents => ({
   block: {
     h1: ({ children }) => (
@@ -176,7 +176,7 @@ const createPortableTextComponents = (
         transition={{ duration: 0.6 }}
         className="mb-6 mt-14 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950 lg:text-4xl"
       >
-        <span className="mr-4 inline-block h-px w-8 bg-[#c9a962] align-middle" />
+        <span className="mr-4 inline-block h-px w-8 bg-[#8f7852] align-middle" />
         {children}
       </motion.h2>
     ),
@@ -213,9 +213,9 @@ const createPortableTextComponents = (
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="relative my-12 overflow-hidden border-l-4 border-[#c9a962] bg-gradient-to-r from-neutral-50 to-transparent py-8 pl-10 pr-8"
+        className="relative my-12 overflow-hidden border-l-4 border-[#8f7852] bg-gradient-to-r from-neutral-50 to-transparent py-8 pl-10 pr-8"
       >
-        <div className="absolute left-6 top-6 font-SchnyderS text-6xl text-[#c9a962]/20">
+        <div className="absolute left-6 top-6 font-SchnyderS text-6xl text-[#8f7852]/20">
           &ldquo;
         </div>
         <div className="relative z-10 font-SchnyderS text-2xl font-light italic leading-relaxed text-neutral-700 lg:text-3xl">
@@ -249,7 +249,7 @@ const createPortableTextComponents = (
   listItem: {
     bullet: ({ children }) => (
       <li className="relative pl-6 font-Satoshi text-lg font-light leading-relaxed text-neutral-700">
-        <span className="absolute left-0 top-3 h-1.5 w-1.5 rounded-full bg-[#c9a962]" />
+        <span className="absolute left-0 top-3 h-1.5 w-1.5 rounded-full bg-[#8f7852]" />
         {children}
       </li>
     ),
@@ -268,7 +268,7 @@ const createPortableTextComponents = (
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
-          className="text-[#c9a962] underline decoration-[#c9a962]/30 underline-offset-4 transition-colors hover:decoration-[#c9a962]"
+          className="text-[#8f7852] underline decoration-[#8f7852]/30 underline-offset-4 transition-colors hover:decoration-[#8f7852]"
         >
           {children}
         </a>
@@ -339,7 +339,7 @@ export default function JournalArticleContent({
   const prevImage = () => {
     if (lightboxIndex !== null && galleryImages.length > 0) {
       setLightboxIndex(
-        (lightboxIndex - 1 + galleryImages.length) % galleryImages.length
+        (lightboxIndex - 1 + galleryImages.length) % galleryImages.length,
       );
     }
   };
@@ -363,7 +363,7 @@ export default function JournalArticleContent({
   // Calculate reading time
   const readingTime = useMemo(
     () => calculateReadingTime(post.content, post.readTime),
-    [post.content, post.readTime]
+    [post.content, post.readTime],
   );
 
   // Get image URLs
@@ -407,14 +407,14 @@ export default function JournalArticleContent({
   // Portable text components
   const portableTextComponents = useMemo(
     () => createPortableTextComponents(locale),
-    [locale]
+    [locale],
   );
 
   return (
     <ReadingModeProvider>
       {/* Reading Progress Bar */}
       <motion.div
-        className="fixed left-0 top-0 z-50 h-1 origin-left bg-[#c9a962]"
+        className="fixed left-0 top-0 z-50 h-1 origin-left bg-[#8f7852]"
         style={{ scaleX: scrollYProgress }}
       />
 
@@ -473,7 +473,7 @@ export default function JournalArticleContent({
               style={{ opacity: heroOpacity }}
               className="relative z-10 flex h-full flex-col justify-end px-6 pb-20 lg:px-24 lg:pb-28"
             >
-              <div className="mx-auto w-full max-w-5xl">
+              <div className="mx-auto w-full container">
                 {/* Back Button */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -523,8 +523,8 @@ export default function JournalArticleContent({
                         Quick read
                       </span>
                     ) : readingTime >= 10 ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#c9a962]/20 px-3 py-1 text-xs font-medium text-[#c9a962]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#c9a962]" />
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#8f7852]/20 px-3 py-1 text-xs font-medium text-[#8f7852]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[#8f7852]" />
                         Deep dive
                       </span>
                     ) : null}
@@ -604,7 +604,7 @@ export default function JournalArticleContent({
                       onClick={() => setIsBookmarked(!isBookmarked)}
                       className={`flex items-center gap-2 rounded-full border px-4 py-2 font-Satoshi text-xs transition-all ${
                         isBookmarked
-                          ? "border-[#c9a962] bg-[#c9a962]/10 text-[#c9a962]"
+                          ? "border-[#8f7852] bg-[#8f7852]/10 text-[#8f7852]"
                           : "border-white/20 text-white/60 hover:border-white/40 hover:text-white"
                       }`}
                     >
@@ -650,8 +650,8 @@ export default function JournalArticleContent({
             </motion.div>
 
             {/* Corner Accents */}
-            <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#c9a962]/20" />
-            <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#c9a962]/20" />
+            <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#8f7852]/20" />
+            <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#8f7852]/20" />
           </section>
 
           {/* Article Content */}
@@ -665,7 +665,7 @@ export default function JournalArticleContent({
                   animate={isContentInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8 }}
                 >
-                  <p className="mb-12 border-l-4 border-[#c9a962] pl-6 font-SchnyderS text-2xl font-light leading-relaxed text-neutral-700 lg:text-3xl">
+                  <p className="mb-12 border-l-4 border-[#8f7852] pl-6 font-SchnyderS text-2xl font-light leading-relaxed text-neutral-700 lg:text-3xl">
                     {post.excerpt}
                   </p>
                 </motion.div>
@@ -702,7 +702,7 @@ export default function JournalArticleContent({
                       .map((tag) => (
                         <span
                           key={tag._id}
-                          className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 font-Satoshi text-sm font-light text-neutral-600 transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+                          className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 font-Satoshi text-sm font-light text-neutral-600 transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
                         >
                           {tag.name}
                         </span>
@@ -807,7 +807,7 @@ export default function JournalArticleContent({
                 <div className="flex items-center gap-3">
                   <button
                     onClick={copyLink}
-                    className="flex items-center gap-2 rounded-full border border-neutral-200 px-4 py-2 font-Satoshi text-xs text-neutral-600 transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+                    className="flex items-center gap-2 rounded-full border border-neutral-200 px-4 py-2 font-Satoshi text-xs text-neutral-600 transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
                   >
                     {copied ? <Check size={14} /> : <Copy size={14} />}
                     <span>{copied ? "Copied!" : "Copy link"}</span>
@@ -842,7 +842,7 @@ export default function JournalArticleContent({
                 className="mb-16 flex items-end justify-between"
               >
                 <div>
-                  <span className="mb-4 block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
+                  <span className="mb-4 block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#8f7852]">
                     Continue Reading
                   </span>
                   <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl">
@@ -887,7 +887,7 @@ export default function JournalArticleContent({
               <h2 className="mb-8 font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
                 Let&apos;s Create Something
                 <br />
-                <span className="text-[#c9a962]">Extraordinary Together</span>
+                <span className="text-[#8f7852]">Extraordinary Together</span>
               </h2>
               <Link
                 href={`/${locale}/contact`}
@@ -942,7 +942,7 @@ function FullWidthImageBreak({
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
-    [0.6, 1, 1, 0.6]
+    [0.6, 1, 1, 0.6],
   );
 
   const imageUrl = image?.asset
@@ -996,8 +996,8 @@ function FullWidthImageBreak({
       )}
 
       {/* Corner accents */}
-      <div className="absolute left-4 top-4 h-12 w-12 border-l-2 border-t-2 border-white/30 transition-all duration-300 group-hover:h-16 group-hover:w-16 group-hover:border-[#c9a962]" />
-      <div className="absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-white/30 transition-all duration-300 group-hover:h-16 group-hover:w-16 group-hover:border-[#c9a962]" />
+      <div className="absolute left-4 top-4 h-12 w-12 border-l-2 border-t-2 border-white/30 transition-all duration-300 group-hover:h-16 group-hover:w-16 group-hover:border-[#8f7852]" />
+      <div className="absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-white/30 transition-all duration-300 group-hover:h-16 group-hover:w-16 group-hover:border-[#8f7852]" />
     </motion.div>
   );
 }
@@ -1027,7 +1027,7 @@ function GalleryGridSection({
     >
       {/* Section header */}
       <div className="mb-10 flex items-center gap-4">
-        <Grid3X3 className="h-5 w-5 text-[#c9a962]" />
+        <Grid3X3 className="h-5 w-5 text-[#8f7852]" />
         <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-400">
           Project Gallery
         </span>
@@ -1126,7 +1126,7 @@ function MasonryGridSection({
     >
       {/* Section header */}
       <div className="mb-10 flex items-center gap-4">
-        <Grid3X3 className="h-5 w-5 text-[#c9a962]" />
+        <Grid3X3 className="h-5 w-5 text-[#8f7852]" />
         <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-neutral-400">
           Visual Journey
         </span>
@@ -1326,7 +1326,7 @@ function ImageLightbox({
                 }}
                 className={`relative h-12 w-16 overflow-hidden transition-all ${
                   idx === currentIndex
-                    ? "ring-2 ring-[#c9a962] ring-offset-2 ring-offset-black"
+                    ? "ring-2 ring-[#8f7852] ring-offset-2 ring-offset-black"
                     : "opacity-60 hover:opacity-100"
                 }`}
               >
@@ -1407,16 +1407,16 @@ function RelatedPostCard({
                 {format(new Date(post.publishedAt), "MMM d, yyyy")}
               </span>
             )}
-            <h3 className="mb-3 line-clamp-2 font-SchnyderS text-xl font-light leading-tight text-white transition-colors duration-300 group-hover:text-[#c9a962] lg:text-2xl">
+            <h3 className="mb-3 line-clamp-2 font-SchnyderS text-xl font-light leading-tight text-white transition-colors duration-300 group-hover:text-[#8f7852] lg:text-2xl">
               {post.title}
             </h3>
             <div className="flex items-center gap-2">
-              <span className="font-Satoshi text-[10px] uppercase tracking-wider text-white/60 transition-colors group-hover:text-[#c9a962]">
+              <span className="font-Satoshi text-[10px] uppercase tracking-wider text-white/60 transition-colors group-hover:text-[#8f7852]">
                 Read Article
               </span>
               <ArrowRight
                 size={12}
-                className="text-white/60 transition-transform group-hover:translate-x-1 group-hover:text-[#c9a962]"
+                className="text-white/60 transition-transform group-hover:translate-x-1 group-hover:text-[#8f7852]"
               />
             </div>
           </div>

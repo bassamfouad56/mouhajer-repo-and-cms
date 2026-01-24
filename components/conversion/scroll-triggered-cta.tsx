@@ -64,7 +64,7 @@ export function ScrollTriggeredCTA() {
         >
           <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl">
             {/* Gold accent */}
-            <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#c9a962] via-[#f4d03f] to-[#c9a962]" />
+            <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#8f7852] via-[#f4d03f] to-[#8f7852]" />
 
             {/* Close button */}
             <button

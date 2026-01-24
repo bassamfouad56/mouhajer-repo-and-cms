@@ -18,7 +18,7 @@ export default function TermsOfService() {
         <section className="relative bg-neutral-950 px-6 pb-16 pt-32 lg:px-12">
           <div className="mx-auto max-w-4xl">
             <div className="mb-6 flex items-center gap-4">
-              <div className="h-px w-12 bg-[#c9a962]/50" />
+              <div className="h-px w-12 bg-[#8f7852]/50" />
               <span className="text-[10px] font-light uppercase tracking-[0.3em] text-white/50">
                 Legal
               </span>

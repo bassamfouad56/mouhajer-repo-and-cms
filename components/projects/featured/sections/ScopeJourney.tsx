@@ -70,7 +70,7 @@ export function ScopeJourney({
     [0.15, 0.85],
     isRTL
       ? [`-${(totalCards - 1) * 25}%`, "0%"]
-      : ["0%", `-${(totalCards - 1) * 25}%`]
+      : ["0%", `-${(totalCards - 1) * 25}%`],
   );
 
   const labels = {
@@ -109,7 +109,7 @@ export function ScopeJourney({
             const yOffset = useTransform(
               smoothProgress,
               [0, 1],
-              [index === 0 ? -50 : 50, index === 0 ? 50 : -50]
+              [index === 0 ? -50 : 50, index === 0 ? 50 : -50],
             );
             return (
               <motion.div
@@ -147,16 +147,16 @@ export function ScopeJourney({
                 initial={{ width: 0 }}
                 animate={isTitleInView ? { width: 48 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="h-px bg-[#c9a962]"
+                className="h-px bg-[#8f7852]"
               />
-              <span className="text-[#c9a962] text-sm tracking-[0.3em] uppercase">
+              <span className="text-[#8f7852] text-sm tracking-[0.3em] uppercase">
                 {t.title}
               </span>
               <motion.div
                 initial={{ width: 0 }}
                 animate={isTitleInView ? { width: 48 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="h-px bg-[#c9a962]"
+                className="h-px bg-[#8f7852]"
               />
             </div>
             <h2 className="font-SchnyderS text-3xl md:text-4xl lg:text-5xl text-white font-light">
@@ -212,7 +212,7 @@ export function ScopeJourney({
                 {services.map((service, index) => (
                   <motion.span
                     key={index}
-                    className="px-5 py-2 border border-[#c9a962]/30 text-[#c9a962] text-sm tracking-wider hover:bg-[#c9a962]/10 transition-colors cursor-default"
+                    className="px-5 py-2 border border-[#8f7852]/30 text-[#8f7852] text-sm tracking-wider hover:bg-[#8f7852]/10 transition-colors cursor-default"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={isTitleInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ delay: 0.5 + index * 0.05, duration: 0.4 }}
@@ -292,7 +292,7 @@ function ScopeCard({
       className="flex-shrink-0 w-[320px] md:w-[420px] lg:w-[480px]"
       style={{ opacity, y, scale }}
     >
-      <div className="group relative h-full bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:border-[#c9a962]/30 transition-all duration-500 overflow-hidden">
+      <div className="group relative h-full bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:border-[#8f7852]/30 transition-all duration-500 overflow-hidden">
         {/* Card Image */}
         {image && (
           <div className="relative h-48 md:h-56 overflow-hidden">
@@ -305,7 +305,7 @@ function ScopeCard({
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
 
             {/* Number Badge on Image */}
-            <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-[#c9a962]/90 flex items-center justify-center">
+            <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-[#8f7852]/90 flex items-center justify-center">
               <span className="text-white text-lg font-medium">
                 {String(index + 1).padStart(2, "0")}
               </span>
@@ -313,7 +313,7 @@ function ScopeCard({
 
             {/* Icon Badge on Image */}
             <div className="absolute bottom-4 left-4 w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center">
-              <Icon className="w-5 h-5 text-[#c9a962]" />
+              <Icon className="w-5 h-5 text-[#8f7852]" />
             </div>
           </div>
         )}
@@ -323,10 +323,10 @@ function ScopeCard({
           {/* If no image, show number and icon here */}
           {!image && (
             <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-lg bg-[#c9a962]/10 flex items-center justify-center">
-                <Icon className="w-5 h-5 text-[#c9a962]" />
+              <div className="w-10 h-10 rounded-lg bg-[#8f7852]/10 flex items-center justify-center">
+                <Icon className="w-5 h-5 text-[#8f7852]" />
               </div>
-              <span className="text-[#c9a962]/40 text-4xl font-light font-SchnyderS">
+              <span className="text-[#8f7852]/40 text-4xl font-light font-SchnyderS">
                 {String(index + 1).padStart(2, "0")}
               </span>
             </div>
@@ -341,11 +341,11 @@ function ScopeCard({
         </div>
 
         {/* Bottom Accent Line */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-[#c9a962]/0 via-[#c9a962]/30 to-[#c9a962]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-[#8f7852]/0 via-[#8f7852]/30 to-[#8f7852]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         {/* Corner Accents */}
-        <div className="absolute top-0 left-0 w-6 h-6 border-l-2 border-t-2 border-[#c9a962]/0 group-hover:border-[#c9a962]/50 transition-colors duration-500" />
-        <div className="absolute bottom-0 right-0 w-6 h-6 border-r-2 border-b-2 border-[#c9a962]/0 group-hover:border-[#c9a962]/50 transition-colors duration-500" />
+        <div className="absolute top-0 left-0 w-6 h-6 border-l-2 border-t-2 border-[#8f7852]/0 group-hover:border-[#8f7852]/50 transition-colors duration-500" />
+        <div className="absolute bottom-0 right-0 w-6 h-6 border-r-2 border-b-2 border-[#8f7852]/0 group-hover:border-[#8f7852]/50 transition-colors duration-500" />
       </div>
     </motion.div>
   );
@@ -364,14 +364,14 @@ function ProgressDot({
   const dotProgress = useTransform(
     progress,
     [0.1 + (index * 0.7) / total, 0.1 + ((index + 1) * 0.7) / total],
-    [0, 1]
+    [0, 1],
   );
 
   const scale = useTransform(dotProgress, [0, 0.5, 1], [1, 1.5, 1]);
   const backgroundColor = useTransform(
     dotProgress,
     [0, 0.3, 1],
-    ["rgba(255,255,255,0.2)", "#c9a962", "rgba(201,169,98,0.5)"]
+    ["rgba(255,255,255,0.2)", "#8f7852", "rgba(201,169,98,0.5)"],
   );
 
   return (

@@ -169,8 +169,8 @@ export function SocialProofNotifications() {
 
             <div className="flex items-start gap-3 pl-3">
               {/* Icon */}
-              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#c9a962]/10">
-                <CheckCircle className="h-5 w-5 text-[#c9a962]" />
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#8f7852]/10">
+                <CheckCircle className="h-5 w-5 text-[#8f7852]" />
               </div>
 
               {/* Content */}

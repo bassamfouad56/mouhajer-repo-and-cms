@@ -99,7 +99,7 @@ export function AssetsRequestSection({
       className="relative py-24 md:py-32 bg-white"
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="max-w-5xl mx-auto px-6 md:px-16">
+      <div className="container mx-auto px-6 md:px-16">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,9 +111,9 @@ export function AssetsRequestSection({
             initial={{ width: 0 }}
             animate={isInView ? { width: 48 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-px bg-[#c9a962]"
+            className="h-px bg-[#8f7852]"
           />
-          <span className="text-[#c9a962] text-xs tracking-[0.3em] uppercase font-light">
+          <span className="text-[#8f7852] text-xs tracking-[0.3em] uppercase font-light">
             {t.title}
           </span>
         </motion.div>
@@ -149,9 +149,9 @@ export function AssetsRequestSection({
                     transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                     className="group"
                   >
-                    <div className="flex items-center gap-4 p-4 border border-neutral-200 rounded-lg hover:border-[#c9a962]/50 transition-colors">
-                      <div className="w-12 h-12 rounded-lg bg-[#c9a962]/10 flex items-center justify-center group-hover:bg-[#c9a962]/20 transition-colors">
-                        <Icon className="w-6 h-6 text-[#c9a962]" />
+                    <div className="flex items-center gap-4 p-4 border border-neutral-200 rounded-lg hover:border-[#8f7852]/50 transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-[#8f7852]/10 flex items-center justify-center group-hover:bg-[#8f7852]/20 transition-colors">
+                        <Icon className="w-6 h-6 text-[#8f7852]" />
                       </div>
                       <div className="flex-1">
                         <p className="font-medium text-neutral-900">
@@ -166,7 +166,7 @@ export function AssetsRequestSection({
                           href={asset.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-10 h-10 rounded-full border border-[#c9a962]/30 flex items-center justify-center text-[#c9a962] hover:bg-[#c9a962] hover:text-white transition-all"
+                          className="w-10 h-10 rounded-full border border-[#8f7852]/30 flex items-center justify-center text-[#8f7852] hover:bg-[#8f7852] hover:text-white transition-all"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </a>
@@ -188,7 +188,7 @@ export function AssetsRequestSection({
         >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,#c9a962,transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,#8f7852,transparent_50%)]" />
           </div>
 
           <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
@@ -200,7 +200,7 @@ export function AssetsRequestSection({
             </div>
             <a
               href={`mailto:${contactEmail}?subject=${encodeURIComponent(`Asset Request: ${projectTitle || "Featured Project"}`)}`}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-[#c9a962] text-white rounded-full hover:bg-[#b8984f] transition-colors whitespace-nowrap"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-[#8f7852] text-white rounded-full hover:bg-[#b8984f] transition-colors whitespace-nowrap"
             >
               <span className="tracking-wider">{t.contactTeam}</span>
               <ExternalLink className="w-4 h-4" />
@@ -208,7 +208,7 @@ export function AssetsRequestSection({
           </div>
 
           {/* Decorative Corner */}
-          <div className="absolute top-4 right-4 w-12 h-12 border-r border-t border-[#c9a962]/20 rounded-tr-lg" />
+          <div className="absolute top-4 right-4 w-12 h-12 border-r border-t border-[#8f7852]/20 rounded-tr-lg" />
         </motion.div>
       </div>
     </section>

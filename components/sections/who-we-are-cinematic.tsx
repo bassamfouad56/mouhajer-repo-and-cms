@@ -26,7 +26,7 @@ const createPanels = (images?: WhoWeAreCinematicProps["images"]) => [
     longDescription:
       "Our construction division operates with full autonomy, equipped with the latest machinery and a workforce trained to international standards. We don't subcontract the critical path — we own it.",
     image: images?.contractor || "/placeholder.jpg",
-    accent: "#c9a962",
+    accent: "#8f7852",
     capabilities: [
       { title: "Civil Works", desc: "Excavation, piling, foundations" },
       { title: "Structural", desc: "Concrete & steel frameworks" },
@@ -107,14 +107,14 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
           >
             {/* Left: Title */}
             <div className="text-center lg:text-left">
-              <span className="mb-2 inline-block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962] sm:text-[10px] sm:tracking-[0.4em]">
+              <span className="mb-2 inline-block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#8f7852] sm:text-[10px] sm:tracking-[0.4em]">
                 Who We Are
               </span>
               <h2 className="font-SchnyderS text-2xl font-light tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
                 <span className="block sm:inline">
                   The Contractor. The Designer.
                 </span>{" "}
-                <span className="text-[#c9a962]">The Maker.</span>
+                <span className="text-[#8f7852]">The Maker.</span>
               </h2>
             </div>
 
@@ -123,7 +123,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
               <p className="max-w-xs text-right font-Satoshi text-sm font-light leading-relaxed text-white/50">
                 Three disciplines. One integrated team.
                 <br />
-                <span className="text-[#c9a962]">We are all three.</span>
+                <span className="text-[#8f7852]">We are all three.</span>
               </p>
             </div>
           </motion.div>
@@ -132,7 +132,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
           <div className="mx-auto mt-4 max-w-4xl sm:mt-6 lg:mt-8">
             <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-white/10">
               <motion.div
-                className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#c9a962] to-[#e8d5a3]"
+                className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#8f7852] to-[#e8d5a3]"
                 style={{ width: progressWidth }}
               />
             </div>
@@ -151,7 +151,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                         (index + 0.5) / panels.length,
                         Math.min(1, (index + 1) / panels.length),
                       ],
-                      [0.3, 1, 1, index === panels.length - 1 ? 1 : 0.3]
+                      [0.3, 1, 1, index === panels.length - 1 ? 1 : 0.3],
                     ),
                   }}
                 >
@@ -185,7 +185,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                       (index + 0.5) / panels.length,
                       (index + 1) / panels.length,
                     ],
-                    [1.1, 1, 1.05]
+                    [1.1, 1, 1.05],
                   ),
                 }}
               >
@@ -216,7 +216,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                           Math.max(0, index / panels.length - 0.05),
                           index / panels.length + 0.08,
                         ],
-                        [0, 1]
+                        [0, 1],
                       ),
                       y: useTransform(
                         scrollYProgress,
@@ -224,7 +224,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                           Math.max(0, index / panels.length - 0.05),
                           index / panels.length + 0.1,
                         ],
-                        [40, 0]
+                        [40, 0],
                       ),
                     }}
                   >
@@ -250,7 +250,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                           Math.max(0, index / panels.length),
                           index / panels.length + 0.1,
                         ],
-                        [0, 1]
+                        [0, 1],
                       ),
                       y: useTransform(
                         scrollYProgress,
@@ -258,7 +258,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                           Math.max(0, index / panels.length),
                           index / panels.length + 0.12,
                         ],
-                        [60, 0]
+                        [60, 0],
                       ),
                     }}
                   >
@@ -275,7 +275,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                           Math.max(0, index / panels.length + 0.02),
                           index / panels.length + 0.12,
                         ],
-                        [0, 1]
+                        [0, 1],
                       ),
                     }}
                   >
@@ -292,7 +292,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                           Math.max(0, index / panels.length + 0.04),
                           index / panels.length + 0.14,
                         ],
-                        [0, 1]
+                        [0, 1],
                       ),
                       y: useTransform(
                         scrollYProgress,
@@ -300,7 +300,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                           Math.max(0, index / panels.length + 0.04),
                           index / panels.length + 0.16,
                         ],
-                        [30, 0]
+                        [30, 0],
                       ),
                     }}
                   >
@@ -317,7 +317,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                           Math.max(0, index / panels.length + 0.08),
                           index / panels.length + 0.18,
                         ],
-                        [0, 1]
+                        [0, 1],
                       ),
                     }}
                   >
@@ -331,11 +331,11 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                             [
                               Math.max(
                                 0,
-                                index / panels.length + 0.08 + capIndex * 0.02
+                                index / panels.length + 0.08 + capIndex * 0.02,
                               ),
                               index / panels.length + 0.2 + capIndex * 0.02,
                             ],
-                            [20, 0]
+                            [20, 0],
                           ),
                         }}
                       >
@@ -379,7 +379,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                     (index + 0.7) / panels.length,
                     Math.min(1, (index + 1) / panels.length),
                   ],
-                  [0.8, 1.2, 1.2, index === panels.length - 1 ? 1.2 : 0.8]
+                  [0.8, 1.2, 1.2, index === panels.length - 1 ? 1.2 : 0.8],
                 ),
               }}
             >
@@ -394,7 +394,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                       (index + 0.7) / panels.length,
                       Math.min(1, (index + 1) / panels.length),
                     ],
-                    [6, 32, 32, index === panels.length - 1 ? 32 : 6]
+                    [6, 32, 32, index === panels.length - 1 ? 32 : 6],
                   ),
                   backgroundColor: useTransform(
                     scrollYProgress,
@@ -411,7 +411,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
                       index === panels.length - 1
                         ? panel.accent
                         : "rgba(255,255,255,0.2)",
-                    ]
+                    ],
                   ),
                 }}
               />
@@ -430,7 +430,7 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
             animate={{ y: [0, 4, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown className="h-4 w-4 text-[#c9a962]" />
+            <ChevronDown className="h-4 w-4 text-[#8f7852]" />
           </motion.div>
         </motion.div>
 
@@ -438,12 +438,12 @@ export function WhoWeAreCinematic({ images }: WhoWeAreCinematicProps) {
 
         {/* Corner Decorations - Hidden on very small screens */}
         <div className="pointer-events-none absolute bottom-6 left-4 z-30 hidden h-12 w-12 sm:block sm:left-6 lg:left-12 lg:h-16 lg:w-16">
-          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
-          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#8f7852]/30 lg:h-8" />
+          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#8f7852]/30 lg:w-8" />
         </div>
         <div className="pointer-events-none absolute right-4 top-6 z-30 hidden h-12 w-12 sm:block sm:right-6 lg:right-12 lg:h-16 lg:w-16">
-          <div className="absolute right-0 top-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
-          <div className="absolute right-0 top-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+          <div className="absolute right-0 top-0 h-6 w-px bg-[#8f7852]/30 lg:h-8" />
+          <div className="absolute right-0 top-0 h-px w-6 bg-[#8f7852]/30 lg:w-8" />
         </div>
       </div>
     </section>

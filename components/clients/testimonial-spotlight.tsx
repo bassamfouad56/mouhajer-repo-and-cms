@@ -115,7 +115,7 @@ export function TestimonialSpotlight({
 
   const prevTestimonial = () => {
     setActiveIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
   };
 
@@ -128,7 +128,7 @@ export function TestimonialSpotlight({
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a962]/5 blur-[180px]" />
+        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8f7852]/5 blur-[180px]" />
       </div>
 
       {/* Grid pattern */}
@@ -142,11 +142,11 @@ export function TestimonialSpotlight({
             transition={{ duration: 0.6 }}
             className="mb-4 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]">
               Testimonials
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </motion.div>
 
           <motion.h2
@@ -172,7 +172,7 @@ export function TestimonialSpotlight({
             >
               {/* Quote Icon */}
               <div className="absolute -top-6 left-8 lg:left-12">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#c9a962]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#8f7852]">
                   <Quote className="h-5 w-5 text-neutral-950" strokeWidth={2} />
                 </div>
               </div>
@@ -183,9 +183,9 @@ export function TestimonialSpotlight({
                   (_, i) => (
                     <Star
                       key={i}
-                      className="h-4 w-4 fill-[#c9a962] text-[#c9a962]"
+                      className="h-4 w-4 fill-[#8f7852] text-[#8f7852]"
                     />
-                  )
+                  ),
                 )}
               </div>
 
@@ -199,8 +199,8 @@ export function TestimonialSpotlight({
               {/* Author Info */}
               <div className="flex items-center gap-4">
                 {/* Avatar placeholder */}
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10">
-                  <span className="font-SchnyderS text-xl text-[#c9a962]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[#8f7852]/30 bg-[#8f7852]/10">
+                  <span className="font-SchnyderS text-xl text-[#8f7852]">
                     {activeTestimonial.author?.charAt(0) || "A"}
                   </span>
                 </div>
@@ -213,7 +213,7 @@ export function TestimonialSpotlight({
                   <div className="font-Satoshi text-sm text-white/50">
                     {activeTestimonial.position}
                     {activeTestimonial.company && (
-                      <span className="text-[#c9a962]">
+                      <span className="text-[#8f7852]">
                         {" "}
                         — {activeTestimonial.company}
                       </span>
@@ -228,10 +228,10 @@ export function TestimonialSpotlight({
           <div className="mt-8 flex items-center justify-center gap-6">
             <button
               onClick={prevTestimonial}
-              className="group flex h-12 w-12 items-center justify-center rounded-full border border-white/10 transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
+              className="group flex h-12 w-12 items-center justify-center rounded-full border border-white/10 transition-all duration-300 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="h-5 w-5 text-white/50 transition-colors group-hover:text-[#c9a962]" />
+              <ChevronLeft className="h-5 w-5 text-white/50 transition-colors group-hover:text-[#8f7852]" />
             </button>
 
             {/* Dots Indicator */}
@@ -242,7 +242,7 @@ export function TestimonialSpotlight({
                   onClick={() => setActiveIndex(index)}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index === activeIndex
-                      ? "w-8 bg-[#c9a962]"
+                      ? "w-8 bg-[#8f7852]"
                       : "w-2 bg-white/20 hover:bg-white/40"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -252,10 +252,10 @@ export function TestimonialSpotlight({
 
             <button
               onClick={nextTestimonial}
-              className="group flex h-12 w-12 items-center justify-center rounded-full border border-white/10 transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
+              className="group flex h-12 w-12 items-center justify-center rounded-full border border-white/10 transition-all duration-300 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="h-5 w-5 text-white/50 transition-colors group-hover:text-[#c9a962]" />
+              <ChevronRight className="h-5 w-5 text-white/50 transition-colors group-hover:text-[#8f7852]" />
             </button>
           </div>
         </div>
@@ -277,7 +277,7 @@ export function TestimonialSpotlight({
 
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-3 rounded-full bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium text-neutral-950 transition-all duration-300 hover:bg-[#e5c349]"
+            className="group inline-flex items-center gap-3 rounded-full bg-[#8f7852] px-8 py-4 font-Satoshi text-sm font-medium text-neutral-950 transition-all duration-300 hover:bg-[#e5c349]"
           >
             Become a Partner
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

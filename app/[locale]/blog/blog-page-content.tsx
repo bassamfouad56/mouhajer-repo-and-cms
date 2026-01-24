@@ -45,10 +45,10 @@ const categoryColors: Record<
   { bg: string; text: string; border: string; gradient: string }
 > = {
   trends: {
-    bg: "bg-[#c9a962]/10",
-    text: "text-[#c9a962]",
-    border: "border-[#c9a962]/30",
-    gradient: "from-[#c9a962]/20",
+    bg: "bg-[#8f7852]/10",
+    text: "text-[#8f7852]",
+    border: "border-[#8f7852]/30",
+    gradient: "from-[#8f7852]/20",
   },
   tips: {
     bg: "bg-blue-500/10",
@@ -116,7 +116,7 @@ export default function BlogPageContent({
   const regularPosts = filteredPosts.filter(
     (p) =>
       p._id !== featuredPost?._id &&
-      !secondaryFeatured.find((sf) => sf._id === p._id)
+      !secondaryFeatured.find((sf) => sf._id === p._id),
   );
   const visiblePosts = regularPosts.slice(0, visibleCount);
   const hasMorePosts = visibleCount < regularPosts.length;
@@ -161,7 +161,7 @@ export default function BlogPageContent({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus
-                  className="w-full border-b-2 border-white/20 bg-transparent py-6 pl-16 pr-16 font-SchnyderS text-3xl font-light text-white placeholder:text-white/30 focus:border-[#c9a962] focus:outline-none"
+                  className="w-full border-b-2 border-white/20 bg-transparent py-6 pl-16 pr-16 font-SchnyderS text-3xl font-light text-white placeholder:text-white/30 focus:border-[#8f7852] focus:outline-none"
                 />
                 <button
                   onClick={() => setIsSearchOpen(false)}
@@ -186,7 +186,7 @@ export default function BlogPageContent({
                       setSearchQuery(term);
                       setIsSearchOpen(false);
                     }}
-                    className="border border-white/20 px-4 py-2 font-Satoshi text-sm font-light text-white/60 transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+                    className="border border-white/20 px-4 py-2 font-Satoshi text-sm font-light text-white/60 transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
                   >
                     {term}
                   </button>
@@ -389,7 +389,7 @@ export default function BlogPageContent({
 
                   {/* Project Info on Hover */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                    <span className="mb-2 block font-Satoshi text-[10px] uppercase tracking-wider text-[#c9a962]">
+                    <span className="mb-2 block font-Satoshi text-[10px] uppercase tracking-wider text-[#8f7852]">
                       {project.category}
                     </span>
                     <h3 className="mb-3 font-SchnyderS text-xl font-light text-white lg:text-2xl">
@@ -495,7 +495,7 @@ export default function BlogPageContent({
                 setSelectedCategory("all");
                 setSearchQuery("");
               }}
-              className="font-Satoshi text-sm font-light text-[#c9a962] underline transition-colors hover:text-neutral-950"
+              className="font-Satoshi text-sm font-light text-[#8f7852] underline transition-colors hover:text-neutral-950"
             >
               Clear filters
             </button>
@@ -523,13 +523,13 @@ export default function BlogPageContent({
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <span className="mb-6 block font-Satoshi text-[10px] uppercase tracking-[0.4em] text-[#c9a962]">
+            <span className="mb-6 block font-Satoshi text-[10px] uppercase tracking-[0.4em] text-[#8f7852]">
               Stay Connected
             </span>
             <h2 className="mb-8 font-SchnyderS text-5xl font-light tracking-tight text-white lg:text-7xl">
               Get Design
               <br />
-              <span className="text-[#c9a962]">Inspiration</span>
+              <span className="text-[#8f7852]">Inspiration</span>
             </h2>
             <p className="mb-12 font-Satoshi text-xl font-light text-white/60">
               Subscribe to receive exclusive insights, project showcases, and
@@ -537,7 +537,7 @@ export default function BlogPageContent({
             </p>
             <Link
               href="/#contact"
-              className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962] px-12 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]"
+              className="group inline-flex items-center gap-4 border border-[#8f7852] bg-[#8f7852] px-12 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#8f7852]"
             >
               <span>Subscribe Now</span>
               <ArrowRight
@@ -644,7 +644,7 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
             transition={{ duration: 1, delay: 0.5 }}
           >
             <Link href={`/blog/${post.slug.current}`}>
-              <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white transition-colors duration-500 hover:text-[#c9a962] sm:text-6xl lg:text-7xl">
+              <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white transition-colors duration-500 hover:text-[#8f7852] sm:text-6xl lg:text-7xl">
                 {post.title}
               </h2>
             </Link>
@@ -670,7 +670,7 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
           >
             <Link
               href={`/blog/${post.slug.current}`}
-              className="group/link inline-flex items-center gap-4 border border-white/30 px-8 py-4 font-Satoshi text-sm uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962] hover:text-neutral-950"
+              className="group/link inline-flex items-center gap-4 border border-white/30 px-8 py-4 font-Satoshi text-sm uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-500 hover:border-[#8f7852] hover:bg-[#8f7852] hover:text-neutral-950"
             >
               <span>Read Full Article</span>
               <ArrowRight
@@ -688,7 +688,7 @@ function FeaturedPostCard({ post }: { post: SanityPost }) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex items-center gap-3 bg-[#c9a962] px-6 py-3"
+          className="flex items-center gap-3 bg-[#8f7852] px-6 py-3"
         >
           <Play size={14} className="fill-current" />
           <span className="font-Satoshi text-xs uppercase tracking-wider text-neutral-950">
@@ -775,7 +775,7 @@ function SecondaryFeaturedCard({
           </div>
 
           {/* Title */}
-          <h3 className="mb-4 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950 transition-colors duration-500 group-hover:text-[#c9a962] lg:text-4xl">
+          <h3 className="mb-4 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950 transition-colors duration-500 group-hover:text-[#8f7852] lg:text-4xl">
             {post.title}
           </h3>
 
@@ -829,10 +829,10 @@ function PostCard({ post, index }: { post: SanityPost; index: number }) {
 
           {/* Animated Border on Hover */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-0 top-0 h-0 w-full bg-[#c9a962] transition-all duration-500 group-hover:h-1" />
-            <div className="absolute right-0 top-0 h-full w-0 bg-[#c9a962] transition-all duration-500 delay-100 group-hover:w-1" />
-            <div className="absolute bottom-0 right-0 h-0 w-full bg-[#c9a962] transition-all duration-500 delay-200 group-hover:h-1" />
-            <div className="absolute bottom-0 left-0 h-full w-0 bg-[#c9a962] transition-all duration-500 delay-300 group-hover:w-1" />
+            <div className="absolute left-0 top-0 h-0 w-full bg-[#8f7852] transition-all duration-500 group-hover:h-1" />
+            <div className="absolute right-0 top-0 h-full w-0 bg-[#8f7852] transition-all duration-500 delay-100 group-hover:w-1" />
+            <div className="absolute bottom-0 right-0 h-0 w-full bg-[#8f7852] transition-all duration-500 delay-200 group-hover:h-1" />
+            <div className="absolute bottom-0 left-0 h-full w-0 bg-[#8f7852] transition-all duration-500 delay-300 group-hover:w-1" />
           </div>
 
           {/* Overlay on hover */}
@@ -877,7 +877,7 @@ function PostCard({ post, index }: { post: SanityPost; index: number }) {
           </div>
 
           {/* Title */}
-          <h3 className="mb-3 line-clamp-2 font-SchnyderS text-2xl font-light tracking-tight text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962]">
+          <h3 className="mb-3 line-clamp-2 font-SchnyderS text-2xl font-light tracking-tight text-neutral-950 transition-colors duration-300 group-hover:text-[#8f7852]">
             {post.title}
           </h3>
 
@@ -890,7 +890,7 @@ function PostCard({ post, index }: { post: SanityPost; index: number }) {
 
           {/* Read More Link */}
           <div className="mt-auto pt-4">
-            <span className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-neutral-400 transition-colors group-hover:text-[#c9a962]">
+            <span className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-neutral-400 transition-colors group-hover:text-[#8f7852]">
               Read Article
               <ArrowRight
                 size={12}

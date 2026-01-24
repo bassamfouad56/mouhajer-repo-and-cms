@@ -265,6 +265,24 @@ html.lenis body {
   animation: marquee-reverse 80s linear infinite;
 }
 
+/* Thumbnail gallery scroll animation */
+@keyframes scrollX {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-x {
+  animation: scrollX 20s linear infinite;
+}
+
+.animate-scroll-x:hover {
+  animation-play-state: paused;
+}
+
 /* Pause animation on hover */
 .group:hover .animate-marquee,
 .group:hover .animate-marquee-reverse,
@@ -390,12 +408,12 @@ body.reading-mode-active.reading-mode-dark {
 }
 
 .reading-dark.reading-mode a {
-  color: #c9a962 !important;
+  color: #8f7852 !important;
 }
 
 .reading-dark.reading-mode blockquote {
   background: rgba(255, 255, 255, 0.05) !important;
-  border-color: #c9a962 !important;
+  border-color: #8f7852 !important;
 }
 
 /* Focus Mode - center content and increase max-width */

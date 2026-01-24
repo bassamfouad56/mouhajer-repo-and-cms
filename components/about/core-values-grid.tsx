@@ -67,17 +67,17 @@ export function CoreValuesGrid() {
           className="mb-16 text-center lg:mb-24"
         >
           <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
               The Pillars of Our Culture
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </div>
 
           <h2 className="font-SchnyderS text-4xl font-light leading-[1.1] tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
             Our
             <br />
-            <span className="text-[#c9a962]">Core Values</span>
+            <span className="text-[#8f7852]">Core Values</span>
           </h2>
         </motion.div>
 
@@ -93,10 +93,10 @@ export function CoreValuesGrid() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 className="group relative"
               >
-                <div className="relative h-full overflow-hidden rounded-sm border border-[#c9a962]/10 bg-white/70 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-[#c9a962]/30 hover:bg-white/90 hover:shadow-2xl">
+                <div className="relative h-full overflow-hidden rounded-sm border border-[#8f7852]/10 bg-white/70 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-[#8f7852]/30 hover:bg-white/90 hover:shadow-2xl">
                   {/* Icon */}
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-sm bg-[#c9a962]/10 transition-colors duration-300 group-hover:bg-[#c9a962]/20">
-                    <Icon className="h-8 w-8 text-[#c9a962] transition-transform duration-300 group-hover:scale-110" />
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-sm bg-[#8f7852]/10 transition-colors duration-300 group-hover:bg-[#8f7852]/20">
+                    <Icon className="h-8 w-8 text-[#8f7852] transition-transform duration-300 group-hover:scale-110" />
                   </div>
 
                   {/* Title - 100% VERBATIM */}
@@ -110,7 +110,7 @@ export function CoreValuesGrid() {
                   </p>
 
                   {/* Decorative Corner */}
-                  <div className="absolute right-4 top-4 h-8 w-8 border-r border-t border-[#c9a962]/20 transition-colors duration-300 group-hover:border-[#c9a962]/50" />
+                  <div className="absolute right-4 top-4 h-8 w-8 border-r border-t border-[#8f7852]/20 transition-colors duration-300 group-hover:border-[#8f7852]/50" />
                 </div>
               </motion.div>
             );
@@ -130,7 +130,7 @@ export function CoreValuesGrid() {
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 border border-[#c9a962] bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#c9a962]/90 hover:shadow-lg hover:shadow-[#c9a962]/20"
+            className="inline-flex items-center gap-2 border border-[#8f7852] bg-[#8f7852] px-8 py-4 font-Satoshi text-sm font-medium uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#8f7852]/90 hover:shadow-lg hover:shadow-[#8f7852]/20"
           >
             Work With Us
             <svg

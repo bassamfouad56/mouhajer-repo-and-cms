@@ -109,7 +109,7 @@ export function OutcomeSection({
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 border-2 border-[#c9a962]/30" />
+              <div className="absolute inset-0 border-2 border-[#8f7852]/30" />
             </motion.div>
           )}
 
@@ -126,11 +126,11 @@ export function OutcomeSection({
                 className="px-6 py-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg"
               >
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl md:text-4xl font-SchnyderS text-[#c9a962]">
+                  <span className="text-3xl md:text-4xl font-SchnyderS text-[#8f7852]">
                     {stat.value}
                   </span>
                   {stat.suffix && (
-                    <span className="text-lg text-[#c9a962]">
+                    <span className="text-lg text-[#8f7852]">
                       {stat.suffix}
                     </span>
                   )}
@@ -145,7 +145,7 @@ export function OutcomeSection({
             initial={{ opacity: 0, scale: 0 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.8, type: "spring" }}
-            className="absolute top-8 left-8 w-20 h-20 rounded-full bg-[#c9a962] flex items-center justify-center shadow-lg"
+            className="absolute top-8 left-8 w-20 h-20 rounded-full bg-[#8f7852] flex items-center justify-center shadow-lg"
           >
             <Trophy className="w-10 h-10 text-white" />
           </motion.div>
@@ -155,7 +155,7 @@ export function OutcomeSection({
         <div className="relative flex items-center py-16 md:py-24 lg:py-32">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,#c9a962,transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,#8f7852,transparent_50%)]" />
           </div>
 
           <div className="relative z-10 max-w-xl mx-auto px-6 md:px-12 lg:px-16">
@@ -170,9 +170,9 @@ export function OutcomeSection({
                 initial={{ width: 0 }}
                 animate={isInView ? { width: 48 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="h-px bg-[#c9a962]"
+                className="h-px bg-[#8f7852]"
               />
-              <span className="text-[#c9a962] text-xs tracking-[0.3em] uppercase font-light">
+              <span className="text-[#8f7852] text-xs tracking-[0.3em] uppercase font-light">
                 {t.title}
               </span>
             </motion.div>
@@ -184,8 +184,8 @@ export function OutcomeSection({
               transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
               className="mb-8"
             >
-              <div className="w-14 h-14 rounded-full bg-[#c9a962]/10 flex items-center justify-center">
-                <CheckCircle2 className="w-7 h-7 text-[#c9a962]" />
+              <div className="w-14 h-14 rounded-full bg-[#8f7852]/10 flex items-center justify-center">
+                <CheckCircle2 className="w-7 h-7 text-[#8f7852]" />
               </div>
             </motion.div>
 
@@ -201,9 +201,9 @@ export function OutcomeSection({
                       initial={{ opacity: 0, y: 30 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.8, delay: 0.4 + index * 0.1 }}
-                      className="relative mt-8 pt-8 border-t border-[#c9a962]/30"
+                      className="relative mt-8 pt-8 border-t border-[#8f7852]/30"
                     >
-                      <Star className="absolute -top-4 left-0 w-8 h-8 text-[#c9a962]/30" />
+                      <Star className="absolute -top-4 left-0 w-8 h-8 text-[#8f7852]/30" />
                       <p className="font-SchnyderS text-xl md:text-2xl text-neutral-800 italic leading-relaxed">
                         {paragraph}
                       </p>
@@ -246,8 +246,8 @@ export function OutcomeSection({
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/30 to-transparent" />
 
                 {/* Frame Corners */}
-                <div className="absolute top-3 left-3 w-8 h-8 border-l-2 border-t-2 border-[#c9a962]/70" />
-                <div className="absolute bottom-3 right-3 w-8 h-8 border-r-2 border-b-2 border-[#c9a962]/70" />
+                <div className="absolute top-3 left-3 w-8 h-8 border-l-2 border-t-2 border-[#8f7852]/70" />
+                <div className="absolute bottom-3 right-3 w-8 h-8 border-r-2 border-b-2 border-[#8f7852]/70" />
 
                 {images[2].caption && (
                   <div className="absolute bottom-4 left-4 right-4">
@@ -265,7 +265,7 @@ export function OutcomeSection({
             transition={{ delay: 1 }}
             className="absolute top-8 right-8 hidden lg:block"
           >
-            <Award className="w-12 h-12 text-[#c9a962]/20" />
+            <Award className="w-12 h-12 text-[#8f7852]/20" />
           </motion.div>
         </div>
       </div>
@@ -275,7 +275,7 @@ export function OutcomeSection({
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1, delay: 0.8 }}
-        className="absolute bottom-0 right-0 text-[250px] font-SchnyderS text-[#c9a962]/5 leading-none select-none pointer-events-none hidden lg:block"
+        className="absolute bottom-0 right-0 text-[250px] font-SchnyderS text-[#8f7852]/5 leading-none select-none pointer-events-none hidden lg:block"
       >
         06
       </motion.div>

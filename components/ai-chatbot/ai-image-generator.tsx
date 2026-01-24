@@ -27,7 +27,7 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(
-    null
+    null,
   );
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -150,8 +150,8 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
         {/* Header */}
         <div className="p-8 pb-6 border-b border-neutral-200">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-[#c9a962]/10 rounded-lg">
-              <Sparkles className="h-6 w-6 text-[#c9a962]" />
+            <div className="p-2 bg-[#8f7852]/10 rounded-lg">
+              <Sparkles className="h-6 w-6 text-[#8f7852]" />
             </div>
             <h2 className="font-SchnyderS text-3xl font-light text-neutral-950">
               AI Design Studio
@@ -179,7 +179,7 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
-              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-[#c9a962]/20 focus:border-[#c9a962] transition-colors font-Satoshi text-sm"
+              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-[#8f7852]/20 focus:border-[#8f7852] transition-colors font-Satoshi text-sm"
               required
               disabled={isGenerating}
             />
@@ -197,7 +197,7 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
               id="serviceCategory"
               value={serviceCategory}
               onChange={(e) => setServiceCategory(e.target.value)}
-              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-[#c9a962]/20 focus:border-[#c9a962] transition-colors font-Satoshi text-sm"
+              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-[#8f7852]/20 focus:border-[#8f7852] transition-colors font-Satoshi text-sm"
               disabled={isGenerating}
             >
               <option value="">Select a service (optional)</option>
@@ -223,7 +223,7 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="e.g., A modern luxury living room with floor-to-ceiling windows, marble flooring, and gold accents..."
               rows={5}
-              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-[#c9a962]/20 focus:border-[#c9a962] transition-colors font-Satoshi text-sm resize-none"
+              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-[#8f7852]/20 focus:border-[#8f7852] transition-colors font-Satoshi text-sm resize-none"
               required
               disabled={isGenerating}
             />
@@ -242,7 +242,7 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
             {!previewUrl ? (
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-neutral-300 rounded-lg p-8 text-center cursor-pointer hover:border-[#c9a962] hover:bg-[#c9a962]/5 transition-colors"
+                className="border-2 border-dashed border-neutral-300 rounded-lg p-8 text-center cursor-pointer hover:border-[#8f7852] hover:bg-[#8f7852]/5 transition-colors"
               >
                 <Upload className="h-10 w-10 text-neutral-400 mx-auto mb-3" />
                 <p className="font-Satoshi text-sm text-neutral-600 mb-1">
@@ -335,7 +335,7 @@ export function AIImageGenerator({ onClose }: AIImageGeneratorProps) {
           <button
             type="submit"
             disabled={isGenerating || success}
-            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-neutral-950 text-white font-Satoshi text-sm font-medium rounded-lg hover:bg-[#c9a962] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-neutral-950 text-white font-Satoshi text-sm font-medium rounded-lg hover:bg-[#8f7852] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isGenerating ? (
               <>

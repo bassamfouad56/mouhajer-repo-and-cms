@@ -3,11 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { SafeImage } from "@/components/safe-image";
-import {
-  ArrowUpRight,
-  ChevronDown,
-  Sparkles,
-} from "lucide-react";
+import { ArrowUpRight, ChevronDown, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { urlForImage } from "@/sanity/lib/image";
 
@@ -34,7 +30,7 @@ const defaultIndustries = [
     slug: { current: "luxury-hospitality" },
     excerpt:
       "The art of the live renovation. Upgrading your asset while protecting your guest experience. We specialize in 5-star hotel renovations with zero guest complaints.",
-    accent: "#c9a962",
+    accent: "#8f7852",
     image:
       "/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg",
   },
@@ -88,7 +84,7 @@ const getImageUrl = (industry: SanityIndustry): string => {
 
 // Get accent color based on industry
 const getAccent = (slug: string): string => {
-  if (slug.includes("hospitality")) return "#c9a962";
+  if (slug.includes("hospitality")) return "#8f7852";
   if (slug.includes("residential")) return "#d4c4a8";
   return "#9ca3af";
 };
@@ -132,14 +128,14 @@ export function IndustriesHorizontalScroll({
   const x = useTransform(
     scrollYProgress,
     [0, holdRatio, 1],
-    ["0%", "0%", `-${(panels.length - 1) * 100}%`]
+    ["0%", "0%", `-${(panels.length - 1) * 100}%`],
   );
 
   // Progress bar width (adjusted for hold period)
   const progressWidth = useTransform(
     scrollYProgress,
     [0, holdRatio, 1],
-    ["0%", `${100 / panels.length}%`, "100%"]
+    ["0%", `${100 / panels.length}%`, "100%"],
   );
 
   return (
@@ -163,14 +159,14 @@ export function IndustriesHorizontalScroll({
             {/* Left: Title */}
             <div className="text-center lg:text-left">
               <div className="mb-2 flex items-center justify-center gap-2 lg:justify-start">
-                <Sparkles className="h-3 w-3 text-[#c9a962]" strokeWidth={1} />
-                <span className="font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962] sm:text-[10px] sm:tracking-[0.4em]">
+                <Sparkles className="h-3 w-3 text-[#8f7852]" strokeWidth={1} />
+                <span className="font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#8f7852] sm:text-[10px] sm:tracking-[0.4em]">
                   Industries We Transform
                 </span>
               </div>
               <h2 className="font-SchnyderS text-2xl font-light tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
                 <span className="block sm:inline">Sectors of</span>{" "}
-                <span className="text-[#c9a962]">Excellence.</span>
+                <span className="text-[#8f7852]">Excellence.</span>
               </h2>
             </div>
 
@@ -179,7 +175,7 @@ export function IndustriesHorizontalScroll({
               <p className="max-w-xs text-right font-Satoshi text-sm font-light leading-relaxed text-white/50">
                 Three decades of expertise.
                 <br />
-                <span className="text-[#c9a962]">Across every sector.</span>
+                <span className="text-[#8f7852]">Across every sector.</span>
               </p>
             </div>
           </motion.div>
@@ -188,7 +184,7 @@ export function IndustriesHorizontalScroll({
           <div className="mx-auto mt-4 max-w-4xl sm:mt-6 lg:mt-8">
             <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-white/10">
               <motion.div
-                className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#c9a962] to-[#e8d5a3]"
+                className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#8f7852] to-[#e8d5a3]"
                 style={{ width: progressWidth }}
               />
             </div>
@@ -213,7 +209,7 @@ export function IndustriesHorizontalScroll({
                     ? holdRatio
                     : Math.min(
                         1,
-                        holdRatio + ((index + 1) / panels.length) * scrollRatio
+                        holdRatio + ((index + 1) / panels.length) * scrollRatio,
                       );
 
                 return (
@@ -229,7 +225,7 @@ export function IndustriesHorizontalScroll({
                           1,
                           1,
                           index === panels.length - 1 ? 1 : 0.3,
-                        ]
+                        ],
                       ),
                     }}
                   >
@@ -262,11 +258,11 @@ export function IndustriesHorizontalScroll({
                 holdRatio + ((index - 1) / (panels.length - 1)) * scrollRatio;
               const animStart = Math.max(
                 holdRatio,
-                panelScrollStart - 0.05 + baseOffset * 0.1
+                panelScrollStart - 0.05 + baseOffset * 0.1,
               );
               const animEnd = Math.min(
                 1,
-                panelScrollStart + 0.1 + baseOffset * 0.1
+                panelScrollStart + 0.1 + baseOffset * 0.1,
               );
               return [animStart, animEnd];
             };
@@ -286,7 +282,7 @@ export function IndustriesHorizontalScroll({
                 ? holdRatio
                 : Math.min(
                     1,
-                    holdRatio + (index / (panels.length - 1)) * scrollRatio
+                    holdRatio + (index / (panels.length - 1)) * scrollRatio,
                   );
 
             return (
@@ -301,7 +297,7 @@ export function IndustriesHorizontalScroll({
                     scale: useTransform(
                       scrollYProgress,
                       [bgScaleStart, bgScaleMid, bgScaleEnd],
-                      [1.1, 1, 1.05]
+                      [1.1, 1, 1.05],
                     ),
                   }}
                 >
@@ -329,12 +325,12 @@ export function IndustriesHorizontalScroll({
                         opacity: useTransform(
                           scrollYProgress,
                           getAdjustedProgress(0),
-                          [index === 0 ? 1 : 0, 1]
+                          [index === 0 ? 1 : 0, 1],
                         ),
                         y: useTransform(
                           scrollYProgress,
                           getAdjustedProgress(0),
-                          [index === 0 ? 0 : 40, 0]
+                          [index === 0 ? 0 : 40, 0],
                         ),
                       }}
                     >
@@ -357,12 +353,12 @@ export function IndustriesHorizontalScroll({
                         opacity: useTransform(
                           scrollYProgress,
                           getAdjustedProgress(0.5),
-                          [index === 0 ? 1 : 0, 1]
+                          [index === 0 ? 1 : 0, 1],
                         ),
                         y: useTransform(
                           scrollYProgress,
                           getAdjustedProgress(0.5),
-                          [index === 0 ? 0 : 60, 0]
+                          [index === 0 ? 0 : 60, 0],
                         ),
                       }}
                     >
@@ -376,12 +372,12 @@ export function IndustriesHorizontalScroll({
                         opacity: useTransform(
                           scrollYProgress,
                           getAdjustedProgress(1),
-                          [index === 0 ? 1 : 0, 1]
+                          [index === 0 ? 1 : 0, 1],
                         ),
                         y: useTransform(
                           scrollYProgress,
                           getAdjustedProgress(1),
-                          [index === 0 ? 0 : 30, 0]
+                          [index === 0 ? 0 : 30, 0],
                         ),
                       }}
                     >
@@ -394,13 +390,13 @@ export function IndustriesHorizontalScroll({
                         opacity: useTransform(
                           scrollYProgress,
                           getAdjustedProgress(1.5),
-                          [index === 0 ? 1 : 0, 1]
+                          [index === 0 ? 1 : 0, 1],
                         ),
                       }}
                     >
                       <Link
                         href={`/industries/${panel.slug}`}
-                        className="group inline-flex items-center gap-3 bg-[#c9a962] px-6 py-3.5 transition-all duration-300 hover:bg-[#b8983f] sm:px-8 sm:py-4"
+                        className="group inline-flex items-center gap-3 bg-[#8f7852] px-6 py-3.5 transition-all duration-300 hover:bg-[#b8983f] sm:px-8 sm:py-4"
                       >
                         <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.15em] text-neutral-950 sm:text-sm">
                           Explore {panel.title}
@@ -447,7 +443,7 @@ export function IndustriesHorizontalScroll({
                 : Math.min(
                     1,
                     holdRatio +
-                      ((index + 1) / (panels.length - 1)) * scrollRatio
+                      ((index + 1) / (panels.length - 1)) * scrollRatio,
                   );
 
             return (
@@ -463,7 +459,7 @@ export function IndustriesHorizontalScroll({
                       1.2,
                       1.2,
                       index === panels.length - 1 ? 1.2 : 0.8,
-                    ]
+                    ],
                   ),
                 }}
               >
@@ -478,7 +474,7 @@ export function IndustriesHorizontalScroll({
                         32,
                         32,
                         index === panels.length - 1 ? 32 : 6,
-                      ]
+                      ],
                     ),
                     backgroundColor: useTransform(
                       scrollYProgress,
@@ -490,7 +486,7 @@ export function IndustriesHorizontalScroll({
                         index === panels.length - 1
                           ? panel.accent
                           : "rgba(255,255,255,0.2)",
-                      ]
+                      ],
                     ),
                   }}
                 />
@@ -510,7 +506,7 @@ export function IndustriesHorizontalScroll({
             animate={{ y: [0, 4, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown className="h-4 w-4 text-[#c9a962]" />
+            <ChevronDown className="h-4 w-4 text-[#8f7852]" />
           </motion.div>
         </motion.div>
 
@@ -518,12 +514,12 @@ export function IndustriesHorizontalScroll({
 
         {/* Corner Decorations */}
         <div className="pointer-events-none absolute bottom-6 left-4 z-30 hidden h-12 w-12 sm:block sm:left-6 lg:left-12 lg:h-16 lg:w-16">
-          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
-          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+          <div className="absolute bottom-0 left-0 h-6 w-px bg-[#8f7852]/30 lg:h-8" />
+          <div className="absolute bottom-0 left-0 h-px w-6 bg-[#8f7852]/30 lg:w-8" />
         </div>
         <div className="pointer-events-none absolute right-4 top-6 z-30 hidden h-12 w-12 sm:block sm:right-6 lg:right-12 lg:h-16 lg:w-16">
-          <div className="absolute right-0 top-0 h-6 w-px bg-[#c9a962]/30 lg:h-8" />
-          <div className="absolute right-0 top-0 h-px w-6 bg-[#c9a962]/30 lg:w-8" />
+          <div className="absolute right-0 top-0 h-6 w-px bg-[#8f7852]/30 lg:h-8" />
+          <div className="absolute right-0 top-0 h-px w-6 bg-[#8f7852]/30 lg:w-8" />
         </div>
       </div>
     </section>

@@ -109,7 +109,7 @@ export function OutcomeResultsSection({
   const getVideoEmbedUrl = (url: string) => {
     if (url.includes("youtube.com") || url.includes("youtu.be")) {
       const videoId = url.match(
-        /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/
+        /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/,
       )?.[1];
       return videoId
         ? `https://www.youtube.com/embed/${videoId}?autoplay=1`
@@ -152,9 +152,9 @@ export function OutcomeResultsSection({
             initial={{ width: 0 }}
             animate={isInView ? { width: 48 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-px bg-[#c9a962]"
+            className="h-px bg-[#8f7852]"
           />
-          <span className="text-[#c9a962] text-xs tracking-[0.3em] uppercase font-light">
+          <span className="text-[#8f7852] text-xs tracking-[0.3em] uppercase font-light">
             {t.title}
           </span>
         </motion.div>
@@ -173,7 +173,7 @@ export function OutcomeResultsSection({
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-6 py-3 rounded-full text-sm tracking-wider transition-all ${
                   activeTab === tab.id
-                    ? "bg-[#c9a962] text-white"
+                    ? "bg-[#8f7852] text-white"
                     : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
                 }`}
               >
@@ -239,7 +239,7 @@ export function OutcomeResultsSection({
                   <div className="absolute top-4 left-4 px-3 py-1 bg-neutral-950/70 text-white text-xs tracking-wider rounded">
                     {t.before}
                   </div>
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-[#c9a962]/90 text-white text-xs tracking-wider rounded">
+                  <div className="absolute top-4 right-4 px-3 py-1 bg-[#8f7852]/90 text-white text-xs tracking-wider rounded">
                     {t.after}
                   </div>
 
@@ -260,7 +260,7 @@ export function OutcomeResultsSection({
                     <button
                       onClick={() => navigatePair("prev")}
                       disabled={currentPairIndex === 0}
-                      className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-[#c9a962] hover:text-[#c9a962] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-[#8f7852] hover:text-[#8f7852] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
@@ -274,7 +274,7 @@ export function OutcomeResultsSection({
                         currentPairIndex >=
                         Math.min(beforeImages.length, afterImages.length) - 1
                       }
-                      className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-[#c9a962] hover:text-[#c9a962] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-[#8f7852] hover:text-[#8f7852] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>
@@ -339,7 +339,7 @@ export function OutcomeResultsSection({
                 onClick={() => setShowVideoModal(true)}
                 className="absolute inset-0 flex flex-col items-center justify-center gap-4 group"
               >
-                <div className="w-20 h-20 rounded-full bg-[#c9a962] flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-20 h-20 rounded-full bg-[#8f7852] flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Play className="w-8 h-8 text-white ml-1" />
                 </div>
                 <span className="text-white text-lg tracking-wider">
@@ -359,14 +359,14 @@ export function OutcomeResultsSection({
             className="mt-24 relative"
           >
             <div className="max-w-4xl mx-auto text-center">
-              <Quote className="w-12 h-12 text-[#c9a962]/30 mx-auto mb-6" />
+              <Quote className="w-12 h-12 text-[#8f7852]/30 mx-auto mb-6" />
               <p className="font-SchnyderS text-2xl md:text-3xl text-white font-light leading-relaxed italic">
                 "{testimonial.quote}"
               </p>
               {(testimonial.author || testimonial.role) && (
                 <div className="mt-8">
                   {testimonial.author && (
-                    <p className="text-[#c9a962] font-medium">
+                    <p className="text-[#8f7852] font-medium">
                       {testimonial.author}
                     </p>
                   )}
@@ -400,7 +400,7 @@ export function OutcomeResultsSection({
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-5xl aspect-video"
+              className="w-full container aspect-video"
               onClick={(e) => e.stopPropagation()}
             >
               <iframe

@@ -38,7 +38,7 @@ export function Hero() {
         duration: 1,
         ease: "power4.out",
         delay: 1.5,
-      }
+      },
     );
 
     return () => {
@@ -87,7 +87,7 @@ export function Hero() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/30 via-transparent to-transparent" />
               </div>
-            )
+            ),
           )}
         </motion.div>
       </div>
@@ -115,7 +115,7 @@ export function Hero() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/30 via-transparent to-transparent" />
               </div>
-            )
+            ),
           )}
         </motion.div>
       </div>
@@ -126,10 +126,10 @@ export function Hero() {
       {/* Architectural Line Pattern */}
       <div className="absolute inset-0">
         {/* Subtle diagonal lines for architectural feel */}
-        <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#c9a962]/30 to-transparent" />
-        <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#c9a962]/30 to-transparent" />
-        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+        <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#8f7852]/30 to-transparent" />
+        <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#8f7852]/30 to-transparent" />
+        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
 
         {/* Decorative corner elements */}
         <svg
@@ -141,7 +141,7 @@ export function Hero() {
             stroke="currentColor"
             strokeWidth="0.5"
             fill="none"
-            className="text-[#c9a962]"
+            className="text-[#8f7852]"
           />
         </svg>
         <svg
@@ -153,14 +153,14 @@ export function Hero() {
             stroke="currentColor"
             strokeWidth="0.5"
             fill="none"
-            className="text-[#c9a962]"
+            className="text-[#8f7852]"
           />
         </svg>
       </div>
 
       {/* Elegant accent lines - architectural blueprint style */}
-      <div className="absolute left-1/4 top-1/3 h-px w-32 bg-gradient-to-r from-[#c9a962]/40 to-transparent" />
-      <div className="absolute right-1/4 bottom-1/3 h-px w-32 bg-gradient-to-l from-[#c9a962]/40 to-transparent" />
+      <div className="absolute left-1/4 top-1/3 h-px w-32 bg-gradient-to-r from-[#8f7852]/40 to-transparent" />
+      <div className="absolute right-1/4 bottom-1/3 h-px w-32 bg-gradient-to-l from-[#8f7852]/40 to-transparent" />
 
       {/* Subtle background texture */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,98,0.03)_0%,transparent_70%)]" />
@@ -176,11 +176,11 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 1.2 }}
           className="mb-8 flex items-center justify-center gap-4"
         >
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
-          <span className="text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]" />
+          <span className="text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]">
             Dubai • Luxury Interior Design
           </span>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]" />
         </motion.div>
 
         {/* Main Title */}
@@ -190,7 +190,7 @@ export function Hero() {
         >
           Crafting Timeless
           <br />
-          <span className="text-[#c9a962]">Elegant Spaces</span>
+          <span className="text-[#8f7852]">Elegant Spaces</span>
         </h1>
 
         {/* Description */}
@@ -240,9 +240,9 @@ export function Hero() {
         >
           <div className="relative">
             {/* Top decorative line */}
-            <div className="absolute -top-8 left-1/2 h-16 w-px -translate-x-1/2 bg-gradient-to-b from-[#c9a962]/40 to-transparent" />
+            <div className="absolute -top-8 left-1/2 h-16 w-px -translate-x-1/2 bg-gradient-to-b from-[#8f7852]/40 to-transparent" />
 
-            <div className="grid grid-cols-3 gap-12 border-y border-[#c9a962]/20 py-8">
+            <div className="grid grid-cols-3 gap-12 border-y border-[#8f7852]/20 py-8">
               {[
                 { value: "15+", label: "Years of Excellence" },
                 { value: "200+", label: "Completed Projects" },
@@ -251,7 +251,7 @@ export function Hero() {
                 <div key={index} className="group relative text-center">
                   {/* Vertical divider between stats */}
                   {index < 2 && (
-                    <div className="absolute -right-6 top-1/2 h-8 w-px -translate-y-1/2 bg-[#c9a962]/20" />
+                    <div className="absolute -right-6 top-1/2 h-8 w-px -translate-y-1/2 bg-[#8f7852]/20" />
                   )}
                   <div className="mb-3 text-3xl font-light tracking-tight text-neutral-900 transition-all duration-300 sm:text-4xl">
                     {stat.value}
@@ -276,10 +276,10 @@ export function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs font-light tracking-widest text-[#c9a962]">
+          <span className="text-xs font-light tracking-widest text-[#8f7852]">
             SCROLL
           </span>
-          <ChevronDown className="text-[#c9a962]" size={20} />
+          <ChevronDown className="text-[#8f7852]" size={20} />
         </motion.div>
       </motion.div>
     </section>

@@ -45,7 +45,7 @@ export function TestFounderHero() {
         stagger: 0.035,
         duration: 1,
         ease: "power3.out",
-      }
+      },
     );
 
     return () => {
@@ -121,7 +121,7 @@ export function TestFounderHero() {
             >
               The Mind Behind
               <br />
-              <span className="text-[#c9a962]">the Masterpiece</span>
+              <span className="text-[#8f7852]">the Masterpiece</span>
             </h1>
           </div>
 
@@ -164,8 +164,8 @@ export function TestFounderHero() {
       ></motion.div>
 
       {/* Decorative Corner Elements */}
-      <div className="absolute left-0 top-0 h-32 w-32 border-l-2 border-t-2 border-[#c9a962]/20" />
-      <div className="absolute bottom-0 right-0 h-32 w-32 border-b-2 border-r-2 border-[#c9a962]/20" />
+      <div className="absolute left-0 top-0 h-32 w-32 border-l-2 border-t-2 border-[#8f7852]/20" />
+      <div className="absolute bottom-0 right-0 h-32 w-32 border-b-2 border-r-2 border-[#8f7852]/20" />
     </section>
   );
 }

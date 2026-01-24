@@ -28,7 +28,7 @@ export function ClientTestimonial({
   const scale = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
-    [0.95, 1, 1, 0.95]
+    [0.95, 1, 1, 0.95],
   );
 
   // Split quote into words for reveal animation
@@ -37,7 +37,7 @@ export function ClientTestimonial({
   return (
     <section
       ref={containerRef}
-      className="relative py-24 md:py-32 bg-[#c9a962] overflow-hidden"
+      className="relative py-24 md:py-32 bg-[#8f7852] overflow-hidden"
       dir={isRTL ? "rtl" : "ltr"}
     >
       {/* Noise Texture Overlay */}
@@ -60,7 +60,7 @@ export function ClientTestimonial({
       </div>
 
       <motion.div
-        className="relative z-10 max-w-5xl mx-auto px-6 md:px-16"
+        className="relative z-10 container mx-auto px-6 md:px-16"
         style={{ opacity, scale }}
       >
         {/* Large Opening Quote */}

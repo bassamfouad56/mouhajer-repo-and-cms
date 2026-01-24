@@ -73,14 +73,14 @@ export default function NewsletterCTA({
         </button>
 
         {/* Decorative Elements */}
-        <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#c9a962]/10 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#c9a962]/5 blur-3xl" />
+        <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#8f7852]/10 blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#8f7852]/5 blur-3xl" />
 
         <div className="relative z-10">
           {/* Header */}
           <div className="mb-8 flex items-start gap-4">
-            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-[#c9a962]/20">
-              <Mail className="h-6 w-6 text-[#c9a962]" />
+            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-[#8f7852]/20">
+              <Mail className="h-6 w-6 text-[#8f7852]" />
             </div>
             <div>
               <h3 className="mb-2 font-SchnyderS text-2xl font-light text-white lg:text-3xl">
@@ -106,7 +106,7 @@ export default function NewsletterCTA({
                 placeholder="Enter your email"
                 required
                 disabled={status === "loading" || status === "success"}
-                className="w-full rounded-full border border-white/20 bg-white/5 px-6 py-4 font-Satoshi text-sm text-white placeholder:text-white/40 focus:border-[#c9a962] focus:outline-none focus:ring-1 focus:ring-[#c9a962] disabled:opacity-50"
+                className="w-full rounded-full border border-white/20 bg-white/5 px-6 py-4 font-Satoshi text-sm text-white placeholder:text-white/40 focus:border-[#8f7852] focus:outline-none focus:ring-1 focus:ring-[#8f7852] disabled:opacity-50"
               />
             </div>
             <motion.button
@@ -119,7 +119,7 @@ export default function NewsletterCTA({
                   ? "bg-green-500 text-white"
                   : status === "error"
                     ? "bg-red-500 text-white"
-                    : "bg-[#c9a962] text-neutral-950 hover:bg-white"
+                    : "bg-[#8f7852] text-neutral-950 hover:bg-white"
               }`}
             >
               {status === "loading" ? (

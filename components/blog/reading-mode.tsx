@@ -57,7 +57,7 @@ export function ReadingModeProvider({
       JSON.stringify({
         fontSize: state.fontSize,
         isDarkMode: state.isDarkMode,
-      })
+      }),
     );
   }, [state.fontSize, state.isDarkMode]);
 
@@ -73,14 +73,14 @@ export function ReadingModeProvider({
     } else {
       document.body.classList.remove(
         "reading-mode-active",
-        "reading-mode-dark"
+        "reading-mode-dark",
       );
     }
 
     return () => {
       document.body.classList.remove(
         "reading-mode-active",
-        "reading-mode-dark"
+        "reading-mode-dark",
       );
     };
   }, [state.isActive, state.isDarkMode]);
@@ -161,7 +161,7 @@ export function ReadingModeToggle() {
                 onClick={toggleReadingMode}
                 className={`flex w-full items-center justify-between rounded-lg border px-4 py-3 transition-all ${
                   isActive
-                    ? "border-[#c9a962] bg-[#c9a962]/10"
+                    ? "border-[#8f7852] bg-[#8f7852]/10"
                     : isDarkMode
                       ? "border-white/10 hover:border-white/20"
                       : "border-neutral-200 hover:border-neutral-300"
@@ -172,7 +172,7 @@ export function ReadingModeToggle() {
                     size={18}
                     className={
                       isActive
-                        ? "text-[#c9a962]"
+                        ? "text-[#8f7852]"
                         : isDarkMode && isActive
                           ? "text-white/60"
                           : "text-neutral-400"
@@ -181,7 +181,7 @@ export function ReadingModeToggle() {
                   <span
                     className={`font-Satoshi text-sm ${
                       isActive
-                        ? "text-[#c9a962]"
+                        ? "text-[#8f7852]"
                         : isDarkMode && isActive
                           ? "text-white"
                           : "text-neutral-700"
@@ -192,7 +192,7 @@ export function ReadingModeToggle() {
                 </div>
                 <div
                   className={`h-5 w-9 rounded-full p-0.5 transition-colors ${
-                    isActive ? "bg-[#c9a962]" : "bg-neutral-200"
+                    isActive ? "bg-[#8f7852]" : "bg-neutral-200"
                   }`}
                 >
                   <motion.div
@@ -221,7 +221,7 @@ export function ReadingModeToggle() {
                         ? "medium"
                         : fontSize === "medium"
                           ? "small"
-                          : "small"
+                          : "small",
                     )
                   }
                   disabled={fontSize === "small"}
@@ -249,7 +249,7 @@ export function ReadingModeToggle() {
                         ? "medium"
                         : fontSize === "medium"
                           ? "large"
-                          : "large"
+                          : "large",
                     )
                   }
                   disabled={fontSize === "large"}
@@ -280,7 +280,7 @@ export function ReadingModeToggle() {
                   onClick={() => isDarkMode && toggleDarkMode()}
                   className={`flex flex-1 items-center justify-center gap-2 rounded-lg border px-4 py-2 transition-all ${
                     !isDarkMode
-                      ? "border-[#c9a962] bg-[#c9a962]/10 text-[#c9a962]"
+                      ? "border-[#8f7852] bg-[#8f7852]/10 text-[#8f7852]"
                       : "border-neutral-200 text-neutral-500 hover:border-neutral-300"
                   }`}
                 >
@@ -291,7 +291,7 @@ export function ReadingModeToggle() {
                   onClick={() => !isDarkMode && toggleDarkMode()}
                   className={`flex flex-1 items-center justify-center gap-2 rounded-lg border px-4 py-2 transition-all ${
                     isDarkMode
-                      ? "border-[#c9a962] bg-[#c9a962]/10 text-[#c9a962]"
+                      ? "border-[#8f7852] bg-[#8f7852]/10 text-[#8f7852]"
                       : "border-neutral-200 text-neutral-500 hover:border-neutral-300"
                   }`}
                 >
@@ -311,7 +311,7 @@ export function ReadingModeToggle() {
         whileTap={{ scale: 0.95 }}
         className={`flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all ${
           isActive
-            ? "bg-[#c9a962] text-neutral-950"
+            ? "bg-[#8f7852] text-neutral-950"
             : isDarkMode
               ? "bg-neutral-900 text-white border border-white/10"
               : "bg-white text-neutral-700 border border-neutral-200"

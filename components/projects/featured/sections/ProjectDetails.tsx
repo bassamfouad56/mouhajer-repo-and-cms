@@ -135,7 +135,7 @@ export function ProjectDetails({
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <span className="text-[#c9a962] text-sm tracking-[0.3em] uppercase block mb-4">
+          <span className="text-[#8f7852] text-sm tracking-[0.3em] uppercase block mb-4">
             {isRTL ? "معلومات المشروع" : "Project Information"}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl text-white font-light">
@@ -156,7 +156,7 @@ export function ProjectDetails({
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                 >
-                  <div className="relative p-4 md:p-6 bg-white/[0.02] border border-white/10 hover:border-[#c9a962]/30 transition-colors duration-300">
+                  <div className="relative p-4 md:p-6 bg-white/[0.02] border border-white/10 hover:border-[#8f7852]/30 transition-colors duration-300">
                     {/* Label */}
                     <span className="text-white/40 text-xs tracking-[0.2em] uppercase block mb-2">
                       {detail.label}
@@ -166,7 +166,7 @@ export function ProjectDetails({
                       {detail.value}
                     </span>
                     {/* Corner accent */}
-                    <div className="absolute bottom-0 right-0 w-0 h-0 border-b-[20px] border-r-[20px] border-b-[#c9a962]/0 border-r-transparent group-hover:border-b-[#c9a962]/20 transition-colors duration-300" />
+                    <div className="absolute bottom-0 right-0 w-0 h-0 border-b-[20px] border-r-[20px] border-b-[#8f7852]/0 border-r-transparent group-hover:border-b-[#8f7852]/20 transition-colors duration-300" />
                   </div>
                 </motion.div>
               ))}
@@ -190,7 +190,7 @@ export function ProjectDetails({
                       <Link
                         key={index}
                         href={`/${locale}/services/${service.slug}`}
-                        className="px-4 py-2 border border-[#c9a962]/30 text-[#c9a962] text-sm tracking-wider hover:bg-[#c9a962]/10 transition-colors"
+                        className="px-4 py-2 border border-[#8f7852]/30 text-[#8f7852] text-sm tracking-wider hover:bg-[#8f7852]/10 transition-colors"
                       >
                         {service.title}
                       </Link>
@@ -201,7 +201,7 @@ export function ProjectDetails({
                       >
                         {service.title}
                       </span>
-                    )
+                    ),
                   )}
                 </div>
               </motion.div>
@@ -216,12 +216,12 @@ export function ProjectDetails({
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              <div className="relative h-full p-8 md:p-10 bg-gradient-to-br from-[#c9a962]/10 to-transparent border border-[#c9a962]/20">
+              <div className="relative h-full p-8 md:p-10 bg-gradient-to-br from-[#8f7852]/10 to-transparent border border-[#8f7852]/20">
                 {/* Corner accents */}
-                <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-[#c9a962]/50" />
-                <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-[#c9a962]/50" />
+                <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-[#8f7852]/50" />
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-[#8f7852]/50" />
 
-                <span className="text-[#c9a962] text-sm tracking-[0.3em] uppercase block mb-6">
+                <span className="text-[#8f7852] text-sm tracking-[0.3em] uppercase block mb-6">
                   {t.outcome}
                 </span>
                 <p className="text-white/80 text-lg leading-relaxed">
@@ -229,7 +229,7 @@ export function ProjectDetails({
                 </p>
 
                 {/* Decorative quote */}
-                <span className="absolute top-4 right-4 text-[#c9a962]/10 text-6xl font-serif leading-none">
+                <span className="absolute top-4 right-4 text-[#8f7852]/10 text-6xl font-serif leading-none">
                   "
                 </span>
               </div>
@@ -257,7 +257,7 @@ export function ProjectDetails({
                     {
                       month: "short",
                       year: "numeric",
-                    }
+                    },
                   )}
                 </span>
               </div>
@@ -266,7 +266,7 @@ export function ProjectDetails({
               <div className="flex-1 mx-8 relative">
                 <div className="h-px bg-white/20" />
                 <motion.div
-                  className="absolute top-0 left-0 h-px bg-[#c9a962]"
+                  className="absolute top-0 left-0 h-px bg-[#8f7852]"
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
                   viewport={{ once: true }}
@@ -274,7 +274,7 @@ export function ProjectDetails({
                 />
                 {/* Duration Label */}
                 <div className="absolute top-4 left-1/2 -translate-x-1/2">
-                  <span className="text-[#c9a962] text-sm">
+                  <span className="text-[#8f7852] text-sm">
                     {duration.months} {t.months}
                   </span>
                 </div>
@@ -290,7 +290,7 @@ export function ProjectDetails({
                     {
                       month: "short",
                       year: "numeric",
-                    }
+                    },
                   )}
                 </span>
               </div>
@@ -304,7 +304,7 @@ export function ProjectDetails({
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(to right, #c9a962 1px, transparent 1px), linear-gradient(to bottom, #c9a962 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(to right, #8f7852 1px, transparent 1px), linear-gradient(to bottom, #8f7852 1px, transparent 1px)`,
             backgroundSize: "60px 60px",
           }}
         />

@@ -35,7 +35,7 @@ const phases = [
     image: "",
     bgColor: "bg-neutral-100",
     textColor: "text-neutral-950",
-    accentColor: "text-[#c9a962]",
+    accentColor: "text-[#8f7852]",
   },
   {
     id: "phase-02",
@@ -61,7 +61,7 @@ const phases = [
     image: "",
     bgColor: "bg-neutral-950",
     textColor: "text-white",
-    accentColor: "text-[#c9a962]",
+    accentColor: "text-[#8f7852]",
   },
   {
     id: "phase-03",
@@ -83,7 +83,7 @@ const phases = [
     image: "",
     bgColor: "bg-neutral-100",
     textColor: "text-neutral-950",
-    accentColor: "text-[#c9a962]",
+    accentColor: "text-[#8f7852]",
   },
   {
     id: "phase-04",
@@ -109,7 +109,7 @@ const phases = [
     image: "",
     bgColor: "bg-neutral-950",
     textColor: "text-white",
-    accentColor: "text-[#c9a962]",
+    accentColor: "text-[#8f7852]",
   },
   {
     id: "phase-05",
@@ -135,7 +135,7 @@ const phases = [
     image: "",
     bgColor: "bg-neutral-100",
     textColor: "text-neutral-950",
-    accentColor: "text-[#c9a962]",
+    accentColor: "text-[#8f7852]",
   },
   {
     id: "phase-06",
@@ -161,7 +161,7 @@ const phases = [
     image: "",
     bgColor: "bg-neutral-950",
     textColor: "text-white",
-    accentColor: "text-[#c9a962]",
+    accentColor: "text-[#8f7852]",
   },
 ];
 
@@ -205,7 +205,7 @@ export function PhasesSection() {
 
           <Link
             href="/#contact"
-            className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
+            className="group inline-flex items-center gap-3 border border-[#8f7852]/30 bg-[#8f7852]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10"
           >
             <span>Start Your Project</span>
             <ArrowRight
@@ -266,9 +266,9 @@ function PhaseBlock({
             {/* Phase Number Badge */}
             <div className="mb-6 inline-flex items-center gap-4">
               <div
-                className={`flex h-16 w-16 items-center justify-center border ${phase.bgColor === "bg-neutral-100" ? "border-[#c9a962]/30 bg-[#c9a962]/5" : "border-[#c9a962]/30 bg-[#c9a962]/10"}`}
+                className={`flex h-16 w-16 items-center justify-center border ${phase.bgColor === "bg-neutral-100" ? "border-[#8f7852]/30 bg-[#8f7852]/5" : "border-[#8f7852]/30 bg-[#8f7852]/10"}`}
               >
-                <Icon className="h-7 w-7 text-[#c9a962]" strokeWidth={1} />
+                <Icon className="h-7 w-7 text-[#8f7852]" strokeWidth={1} />
               </div>
               <div>
                 <div
@@ -299,7 +299,7 @@ function PhaseBlock({
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-                  className={`border-l-2 ${phase.bgColor === "bg-neutral-100" ? "border-[#c9a962]/50" : "border-[#c9a962]/30"} pl-6`}
+                  className={`border-l-2 ${phase.bgColor === "bg-neutral-100" ? "border-[#8f7852]/50" : "border-[#8f7852]/30"} pl-6`}
                 >
                   <div
                     className={`mb-2 font-Satoshi text-sm font-medium uppercase tracking-wider ${phase.accentColor}`}
@@ -338,8 +338,8 @@ function PhaseBlock({
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
 
               {/* Corner Frame */}
-              <div className="absolute left-4 top-4 h-20 w-20 border-l-2 border-t-2 border-[#c9a962]/50" />
-              <div className="absolute bottom-4 right-4 h-20 w-20 border-b-2 border-r-2 border-[#c9a962]/50" />
+              <div className="absolute left-4 top-4 h-20 w-20 border-l-2 border-t-2 border-[#8f7852]/50" />
+              <div className="absolute bottom-4 right-4 h-20 w-20 border-b-2 border-r-2 border-[#8f7852]/50" />
             </motion.div>
           </motion.div>
         </div>

@@ -33,12 +33,12 @@ export function Services({ services }: ServicesProps) {
       {/* Background Grid */}
 
       {/* Gradient Orbs */}
-      <div className="absolute left-0 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
-      <div className="absolute bottom-1/4 right-0 h-[600px] w-[600px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
+      <div className="absolute left-0 top-1/4 h-[600px] w-[600px] rounded-full bg-[#8f7852]/5 blur-[120px]" />
+      <div className="absolute bottom-1/4 right-0 h-[600px] w-[600px] rounded-full bg-[#8f7852]/5 blur-[120px]" />
 
       {/* Decorative Lines */}
-      <div className="absolute left-0 top-0 h-px w-1/3 bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
-      <div className="absolute bottom-0 right-0 h-px w-1/3 bg-gradient-to-l from-transparent via-[#c9a962]/30 to-transparent" />
+      <div className="absolute left-0 top-0 h-px w-1/3 bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
+      <div className="absolute bottom-0 right-0 h-px w-1/3 bg-gradient-to-l from-transparent via-[#8f7852]/30 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-[1600px]">
         {/* Section Header */}
@@ -49,11 +49,11 @@ export function Services({ services }: ServicesProps) {
             transition={{ duration: 0.8 }}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <span className="text-sm font-light tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+            <span className="text-sm font-light tracking-[0.3em] text-[#8f7852]">
               WHAT WE OFFER
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -88,7 +88,7 @@ export function Services({ services }: ServicesProps) {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-24 text-center"
         >
-          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+          <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
           <p className="mb-6 font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60">
             INTERESTED IN OUR SERVICES?
           </p>
@@ -136,12 +136,12 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       className="group relative flex h-full flex-col overflow-hidden bg-white/60 backdrop-blur-sm transition-all duration-500 hover:bg-white/90"
     >
       {/* Top Border Accent */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent transition-all duration-500 group-hover:via-[#c9a962]" />
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent transition-all duration-500 group-hover:via-[#8f7852]" />
 
       <div className="flex flex-1 flex-col p-10">
         {/* Icon */}
         <div className="mb-8">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#e8e6e3] text-[#3d3a36]/60 transition-all duration-500 group-hover:border-[#c9a962] group-hover:text-[#c9a962]">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#e8e6e3] text-[#3d3a36]/60 transition-all duration-500 group-hover:border-[#8f7852] group-hover:text-[#8f7852]">
             {getIcon(service.title)}
           </div>
         </div>
@@ -166,7 +166,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         <div className="mb-6 mt-auto h-px w-full bg-gradient-to-r from-transparent via-[#e8e6e3] to-transparent" />
 
         {/* Learn More Link */}
-        <div className="flex items-center gap-3 font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60 transition-all group-hover:gap-5 group-hover:text-[#c9a962]">
+        <div className="flex items-center gap-3 font-Satoshi text-sm font-light tracking-wider text-[#3d3a36]/60 transition-all group-hover:gap-5 group-hover:text-[#8f7852]">
           <span>LEARN MORE</span>
           <ArrowRight
             size={18}
@@ -176,11 +176,11 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#c9a962]/5 blur-3xl transition-all duration-500 group-hover:bg-[#c9a962]/10" />
-      <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-[#c9a962]/5 blur-2xl transition-all duration-500 group-hover:bg-[#c9a962]/10" />
+      <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#8f7852]/5 blur-3xl transition-all duration-500 group-hover:bg-[#8f7852]/10" />
+      <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-[#8f7852]/5 blur-2xl transition-all duration-500 group-hover:bg-[#8f7852]/10" />
 
       {/* Corner Frame */}
-      <div className="absolute bottom-0 right-0 h-20 w-20 border-b border-r border-[#e8e6e3] transition-all duration-500 group-hover:border-[#c9a962]/30" />
+      <div className="absolute bottom-0 right-0 h-20 w-20 border-b border-r border-[#e8e6e3] transition-all duration-500 group-hover:border-[#8f7852]/30" />
     </motion.div>
   );
 }

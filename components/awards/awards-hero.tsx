@@ -46,7 +46,7 @@ export function AwardsHero() {
         stagger: 0.035,
         duration: 1,
         ease: "power3.out",
-      }
+      },
     );
 
     return () => {
@@ -99,7 +99,7 @@ export function AwardsHero() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: isLoaded ? 1 : 0 }}
           transition={{ duration: 1.5, delay: 1, ease: "easeOut" }}
-          className="absolute top-16 left-12 right-12 h-px origin-left bg-gradient-to-r from-[#c9a962]/40 via-[#c9a962]/20 to-transparent lg:top-20 lg:left-20 lg:right-20"
+          className="absolute top-16 left-12 right-12 h-px origin-left bg-gradient-to-r from-[#8f7852]/40 via-[#8f7852]/20 to-transparent lg:top-20 lg:left-20 lg:right-20"
         />
 
         {/* Bottom Border */}
@@ -107,7 +107,7 @@ export function AwardsHero() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: isLoaded ? 1 : 0 }}
           transition={{ duration: 1.5, delay: 1.2, ease: "easeOut" }}
-          className="absolute bottom-16 left-12 right-12 h-px origin-right bg-gradient-to-l from-[#c9a962]/40 via-[#c9a962]/20 to-transparent lg:bottom-20 lg:left-20 lg:right-20"
+          className="absolute bottom-16 left-12 right-12 h-px origin-right bg-gradient-to-l from-[#8f7852]/40 via-[#8f7852]/20 to-transparent lg:bottom-20 lg:left-20 lg:right-20"
         />
 
         {/* Left Border */}
@@ -115,7 +115,7 @@ export function AwardsHero() {
           initial={{ scaleY: 0 }}
           animate={{ scaleY: isLoaded ? 1 : 0 }}
           transition={{ duration: 1.5, delay: 1.1, ease: "easeOut" }}
-          className="absolute top-16 bottom-16 left-12 w-px origin-top bg-gradient-to-b from-[#c9a962]/40 via-[#c9a962]/20 to-transparent lg:top-20 lg:bottom-20 lg:left-20"
+          className="absolute top-16 bottom-16 left-12 w-px origin-top bg-gradient-to-b from-[#8f7852]/40 via-[#8f7852]/20 to-transparent lg:top-20 lg:bottom-20 lg:left-20"
         />
 
         {/* Right Border */}
@@ -123,7 +123,7 @@ export function AwardsHero() {
           initial={{ scaleY: 0 }}
           animate={{ scaleY: isLoaded ? 1 : 0 }}
           transition={{ duration: 1.5, delay: 1.3, ease: "easeOut" }}
-          className="absolute top-16 bottom-16 right-12 w-px origin-bottom bg-gradient-to-t from-[#c9a962]/40 via-[#c9a962]/20 to-transparent lg:top-20 lg:bottom-20 lg:right-20"
+          className="absolute top-16 bottom-16 right-12 w-px origin-bottom bg-gradient-to-t from-[#8f7852]/40 via-[#8f7852]/20 to-transparent lg:top-20 lg:bottom-20 lg:right-20"
         />
 
         {/* Corner Accents */}
@@ -131,25 +131,25 @@ export function AwardsHero() {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0 }}
           transition={{ duration: 0.5, delay: 1.6 }}
-          className="absolute top-16 left-12 h-3 w-3 border-l border-t border-[#c9a962] lg:top-20 lg:left-20"
+          className="absolute top-16 left-12 h-3 w-3 border-l border-t border-[#8f7852] lg:top-20 lg:left-20"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0 }}
           transition={{ duration: 0.5, delay: 1.7 }}
-          className="absolute top-16 right-12 h-3 w-3 border-r border-t border-[#c9a962] lg:top-20 lg:right-20"
+          className="absolute top-16 right-12 h-3 w-3 border-r border-t border-[#8f7852] lg:top-20 lg:right-20"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0 }}
           transition={{ duration: 0.5, delay: 1.8 }}
-          className="absolute bottom-16 left-12 h-3 w-3 border-l border-b border-[#c9a962] lg:bottom-20 lg:left-20"
+          className="absolute bottom-16 left-12 h-3 w-3 border-l border-b border-[#8f7852] lg:bottom-20 lg:left-20"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0 }}
           transition={{ duration: 0.5, delay: 1.9 }}
-          className="absolute bottom-16 right-12 h-3 w-3 border-r border-b border-[#c9a962] lg:bottom-20 lg:right-20"
+          className="absolute bottom-16 right-12 h-3 w-3 border-r border-b border-[#8f7852] lg:bottom-20 lg:right-20"
         />
       </div>
 
@@ -158,7 +158,7 @@ export function AwardsHero() {
         style={{ opacity, y }}
         className="relative z-10 flex h-full flex-col items-center justify-center px-6 lg:px-12"
       >
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto container text-center">
           {/* Subtitle with decorative elements */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -170,7 +170,7 @@ export function AwardsHero() {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: isLoaded ? 1 : 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="h-px w-16 origin-right bg-gradient-to-r from-transparent to-[#c9a962]/60 sm:w-24"
+              className="h-px w-16 origin-right bg-gradient-to-r from-transparent to-[#8f7852]/60 sm:w-24"
             />
             <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.5em] text-neutral-500 sm:text-xs">
               Awards & Recognition
@@ -179,7 +179,7 @@ export function AwardsHero() {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: isLoaded ? 1 : 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="h-px w-16 origin-left bg-gradient-to-l from-transparent to-[#c9a962]/60 sm:w-24"
+              className="h-px w-16 origin-left bg-gradient-to-l from-transparent to-[#8f7852]/60 sm:w-24"
             />
           </motion.div>
 
@@ -194,7 +194,7 @@ export function AwardsHero() {
             >
               Excellence,
               <br />
-              <span className="text-[#c9a962]">Certified</span>
+              <span className="text-[#8f7852]">Certified</span>
             </h1>
           </div>
 
@@ -219,9 +219,9 @@ export function AwardsHero() {
             transition={{ duration: 0.8, delay: 1.5 }}
             className="mt-12 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-8 bg-gradient-to-r from-transparent to-[#c9a962]/40" />
-            <div className="h-1.5 w-1.5 rotate-45 bg-[#c9a962]/60" />
-            <div className="h-px w-8 bg-gradient-to-l from-transparent to-[#c9a962]/40" />
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-[#8f7852]/40" />
+            <div className="h-1.5 w-1.5 rotate-45 bg-[#8f7852]/60" />
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-[#8f7852]/40" />
           </motion.div>
         </div>
       </motion.div>
@@ -242,8 +242,8 @@ export function AwardsHero() {
             Explore Our Achievements
           </span>
           <div className="flex flex-col items-center gap-1">
-            <div className="h-6 w-px bg-gradient-to-b from-[#c9a962]/50 to-transparent" />
-            <ChevronDown className="h-4 w-4 text-[#c9a962]/60" />
+            <div className="h-6 w-px bg-gradient-to-b from-[#8f7852]/50 to-transparent" />
+            <ChevronDown className="h-4 w-4 text-[#8f7852]/60" />
           </div>
         </motion.div>
       </motion.div>

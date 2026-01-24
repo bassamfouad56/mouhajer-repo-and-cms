@@ -45,7 +45,7 @@ export function LegacyHero() {
         stagger: 0.035,
         duration: 1,
         ease: "power3.out",
-      }
+      },
     );
 
     return () => {
@@ -95,7 +95,7 @@ export function LegacyHero() {
         style={{ opacity, y }}
         className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24 lg:px-12"
       >
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto container text-center">
           {/* Subtitle */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -121,7 +121,7 @@ export function LegacyHero() {
             >
               The MIDC Legacy:
               <br />
-              <span className="text-[#c9a962]">Excellence in Construction</span>
+              <span className="text-[#8f7852]">Excellence in Construction</span>
             </h1>
           </div>
 

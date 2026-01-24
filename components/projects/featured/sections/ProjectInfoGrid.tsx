@@ -126,9 +126,9 @@ export function ProjectInfoGrid({
             initial={{ width: 0 }}
             animate={isInView ? { width: 48 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-px bg-[#c9a962]"
+            className="h-px bg-[#8f7852]"
           />
-          <span className="text-[#c9a962] text-xs tracking-[0.3em] uppercase font-light">
+          <span className="text-[#8f7852] text-xs tracking-[0.3em] uppercase font-light">
             {t.title}
           </span>
         </motion.div>
@@ -145,11 +145,11 @@ export function ProjectInfoGrid({
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="group"
               >
-                <div className="relative p-6 bg-white rounded-lg border border-neutral-200 hover:border-[#c9a962]/30 transition-colors">
+                <div className="relative p-6 bg-white rounded-lg border border-neutral-200 hover:border-[#8f7852]/30 transition-colors">
                   {/* Icon */}
                   <div className="mb-4">
-                    <div className="w-10 h-10 rounded-full bg-[#c9a962]/10 flex items-center justify-center group-hover:bg-[#c9a962]/20 transition-colors">
-                      <Icon className="w-5 h-5 text-[#c9a962]" />
+                    <div className="w-10 h-10 rounded-full bg-[#8f7852]/10 flex items-center justify-center group-hover:bg-[#8f7852]/20 transition-colors">
+                      <Icon className="w-5 h-5 text-[#8f7852]" />
                     </div>
                   </div>
 
@@ -171,7 +171,7 @@ export function ProjectInfoGrid({
                   )}
 
                   {/* Corner Accent */}
-                  <div className="absolute top-0 right-0 w-4 h-4 border-r border-t border-[#c9a962]/0 group-hover:border-[#c9a962]/50 transition-colors rounded-tr-lg" />
+                  <div className="absolute top-0 right-0 w-4 h-4 border-r border-t border-[#8f7852]/0 group-hover:border-[#8f7852]/50 transition-colors rounded-tr-lg" />
                 </div>
               </motion.div>
             );
@@ -199,12 +199,12 @@ export function ProjectInfoGrid({
                   {service.slug ? (
                     <Link
                       href={`/${locale}/services/${service.slug}`}
-                      className="inline-block px-5 py-2 bg-white border border-[#c9a962]/30 text-[#c9a962] text-sm tracking-wider rounded-full hover:bg-[#c9a962] hover:text-white transition-all"
+                      className="inline-block px-5 py-2 bg-white border border-[#8f7852]/30 text-[#8f7852] text-sm tracking-wider rounded-full hover:bg-[#8f7852] hover:text-white transition-all"
                     >
                       {service.title}
                     </Link>
                   ) : (
-                    <span className="inline-block px-5 py-2 bg-white border border-[#c9a962]/30 text-[#c9a962] text-sm tracking-wider rounded-full">
+                    <span className="inline-block px-5 py-2 bg-white border border-[#8f7852]/30 text-[#8f7852] text-sm tracking-wider rounded-full">
                       {service.title}
                     </span>
                   )}

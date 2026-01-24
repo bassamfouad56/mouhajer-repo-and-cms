@@ -29,7 +29,7 @@ export function StandardsSectionEnhanced() {
   const imageScale = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [1.05, 1, 1.05]
+    [1.05, 1, 1.05],
   );
   const imageRotate = useTransform(scrollYProgress, [0, 0.5, 1], [-2, 0, 2]);
 
@@ -44,7 +44,7 @@ export function StandardsSectionEnhanced() {
       <motion.div style={{ y: bgY }} />
 
       {/* Gradient orbs */}
-      <div className="absolute right-0 top-1/4 h-[600px] w-[600px] translate-x-1/3 rounded-full bg-[#c9a962]/5 blur-[120px]" />
+      <div className="absolute right-0 top-1/4 h-[600px] w-[600px] translate-x-1/3 rounded-full bg-[#8f7852]/5 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-20 lg:items-center">
@@ -64,7 +64,7 @@ export function StandardsSectionEnhanced() {
               <SVGLineDraw
                 width={60}
                 height={1}
-                strokeColor="#c9a962"
+                strokeColor="#8f7852"
                 duration={1.5}
                 delay={0.2}
               />
@@ -140,12 +140,12 @@ export function StandardsSectionEnhanced() {
                     }}
                   >
                     <CheckCircle2
-                      className="h-5 w-5 flex-shrink-0 text-[#c9a962] transition-transform duration-300 group-hover:scale-110"
+                      className="h-5 w-5 flex-shrink-0 text-[#8f7852] transition-transform duration-300 group-hover:scale-110"
                       strokeWidth={1.5}
                     />
                   </motion.div>
                   <div>
-                    <span className="font-SchnyderS text-lg font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962]">
+                    <span className="font-SchnyderS text-lg font-light text-neutral-950 transition-colors duration-300 group-hover:text-[#8f7852]">
                       {client.name}
                     </span>
                     <span className="ml-2 font-Satoshi text-sm font-light text-neutral-400">
@@ -173,7 +173,7 @@ export function StandardsSectionEnhanced() {
                 src={getSafeImageUrl(
                   "/founder/CID_2106_00_COVER.jpg",
                   "Eng. Maher Mouhajer",
-                  "hospitality"
+                  "hospitality",
                 )}
                 alt="Eng. Maher Mouhajer on construction site"
                 fill
@@ -188,13 +188,13 @@ export function StandardsSectionEnhanced() {
                 initial={{ scale: 0, rotate: -45 }}
                 animate={isInView ? { scale: 1, rotate: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="absolute left-4 top-4 h-20 w-20 border-l-2 border-t-2 border-[#c9a962]/60"
+                className="absolute left-4 top-4 h-20 w-20 border-l-2 border-t-2 border-[#8f7852]/60"
               />
               <motion.div
                 initial={{ scale: 0, rotate: 45 }}
                 animate={isInView ? { scale: 1, rotate: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="absolute bottom-4 right-4 h-20 w-20 border-b-2 border-r-2 border-[#c9a962]/60"
+                className="absolute bottom-4 right-4 h-20 w-20 border-b-2 border-r-2 border-[#8f7852]/60"
               />
 
               {/* SVG Line decorations */}
@@ -202,7 +202,7 @@ export function StandardsSectionEnhanced() {
                 <SVGLineDraw
                   width={60}
                   height={2}
-                  strokeColor="#c9a962"
+                  strokeColor="#8f7852"
                   duration={1.2}
                   delay={0.6}
                 />
@@ -211,7 +211,7 @@ export function StandardsSectionEnhanced() {
                 <SVGLineDraw
                   width={60}
                   height={2}
-                  strokeColor="#c9a962"
+                  strokeColor="#8f7852"
                   duration={1.2}
                   delay={0.7}
                 />
@@ -227,7 +227,7 @@ export function StandardsSectionEnhanced() {
                 <motion.div
                   whileHover={{ scale: 1.02, y: -5 }}
                   transition={{ duration: 0.3 }}
-                  className="group relative border-l-2 border-[#c9a962] bg-neutral-950/90 p-6 backdrop-blur-md"
+                  className="group relative border-l-2 border-[#8f7852] bg-neutral-950/90 p-6 backdrop-blur-md"
                 >
                   <p className="font-Satoshi text-sm font-light italic text-white">
                     "Excellence is not an act, but a habit embedded in every
@@ -238,7 +238,7 @@ export function StandardsSectionEnhanced() {
                   </p>
 
                   {/* Glowing accent line */}
-                  <div className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-[#c9a962]/0 via-[#c9a962] to-[#c9a962]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-[#8f7852]/0 via-[#8f7852] to-[#8f7852]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -284,7 +284,7 @@ export function StandardsSectionEnhanced() {
               <MagneticButton strength={0.25}>
                 <Link
                   href="/about/awards"
-                  className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all duration-500 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
+                  className="group inline-flex items-center gap-3 border border-[#8f7852]/30 bg-[#8f7852]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all duration-500 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10"
                 >
                   <span>View Our Achievements</span>
                   <ArrowRight

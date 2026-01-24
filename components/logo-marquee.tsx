@@ -39,7 +39,7 @@ export function LogoMarquee({ clients = [] }: LogoMarqueeProps) {
 
   // Filter out confidential clients and those without logos
   const visibleClients = clients.filter(
-    (c) => !c.isConfidential && c.logo?.asset
+    (c) => !c.isConfidential && c.logo?.asset,
   );
 
   // Transform Sanity clients to logo format
@@ -71,8 +71,8 @@ export function LogoMarquee({ clients = [] }: LogoMarqueeProps) {
       />
 
       {/* Border lines with gold accent */}
-      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
-      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
 
       {/* Label */}
       <motion.div
@@ -81,11 +81,11 @@ export function LogoMarquee({ clients = [] }: LogoMarqueeProps) {
         transition={{ duration: 0.6 }}
         className="mb-10 flex items-center justify-center gap-4 sm:mb-12"
       >
-        <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/60" />
+        <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]/60" />
         <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#3d3a36]/60">
           Trusted By Industry Leaders
         </span>
-        <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/60" />
+        <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]/60" />
       </motion.div>
 
       {/* Marquee container */}

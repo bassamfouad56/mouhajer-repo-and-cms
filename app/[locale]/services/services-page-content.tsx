@@ -55,7 +55,7 @@ interface ServicesPageContentProps {
 // Helper function to safely get localized text
 function getLocalizedText(
   field: MultilingualField | undefined,
-  locale: string = "en"
+  locale: string = "en",
 ): string {
   if (!field) return "";
   if (typeof field === "string") return field;
@@ -138,10 +138,10 @@ export default function ServicesPageContent({
         />
 
         {/* Gold Accent Glow */}
-        <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.06] blur-[150px]" />
+        <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] rounded-full bg-[#8f7852]/[0.06] blur-[150px]" />
 
         {/* Top Border Accent */}
-        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
 
         {/* Hero Content */}
         <motion.div
@@ -156,11 +156,11 @@ export default function ServicesPageContent({
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-12 flex items-center justify-center gap-4"
             >
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
               <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-neutral-500">
                 Services
               </span>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
             </motion.div>
 
             {/* Main Title */}
@@ -188,7 +188,7 @@ export default function ServicesPageContent({
                   delay: 0.5,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-[#c9a962] sm:text-7xl md:text-8xl lg:text-9xl"
+                className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-[#8f7852] sm:text-7xl md:text-8xl lg:text-9xl"
               >
                 Integrated Construction
               </motion.h1>
@@ -207,7 +207,7 @@ export default function ServicesPageContent({
         </motion.div>
 
         {/* Bottom Border Accent */}
-        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/20 to-transparent" />
       </section>
 
       {/* Section 1: Turnkey Solution with Real Project Image */}
@@ -302,7 +302,7 @@ function TurnkeySolutionSection({
       />
 
       {/* Gold accent glow */}
-      <div className="pointer-events-none absolute right-0 top-1/4 h-[500px] w-[500px] rounded-full bg-[#c9a962]/[0.06] blur-[150px]" />
+      <div className="pointer-events-none absolute right-0 top-1/4 h-[500px] w-[500px] rounded-full bg-[#8f7852]/[0.06] blur-[150px]" />
 
       <div className="mx-auto max-w-[1800px] px-6 lg:px-16 xl:px-24">
         <div className="grid gap-20 lg:grid-cols-2 lg:gap-32 items-center">
@@ -315,7 +315,7 @@ function TurnkeySolutionSection({
           >
             <div className="mb-10">
               <motion.div
-                className="mb-4 h-px w-12 bg-gradient-to-r from-[#c9a962] to-transparent"
+                className="mb-4 h-px w-12 bg-gradient-to-r from-[#8f7852] to-transparent"
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -325,7 +325,7 @@ function TurnkeySolutionSection({
             <h2 className="mb-16 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl xl:text-8xl">
               We Do Not
               <br />
-              <span className="text-[#c9a962]">Outsource Your Vision</span>
+              <span className="text-[#8f7852]">Outsource Your Vision</span>
             </h2>
 
             <div className="space-y-10 font-Satoshi text-lg font-light leading-relaxed text-neutral-600 lg:text-xl">
@@ -363,7 +363,7 @@ function TurnkeySolutionSection({
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="border-l-2 border-[#c9a962]/50 pl-8 text-neutral-900 text-xl lg:text-2xl"
+                className="border-l-2 border-[#8f7852]/50 pl-8 text-neutral-900 text-xl lg:text-2xl"
               >
                 <p>
                   No Blame Games.
@@ -418,9 +418,9 @@ function TurnkeySolutionSection({
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="absolute bottom-8 left-8 right-8 backdrop-blur-md bg-white/80 border border-[#c9a962]/20 p-8"
+                className="absolute bottom-8 left-8 right-8 backdrop-blur-md bg-white/80 border border-[#8f7852]/20 p-8"
               >
-                <div className="font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#c9a962] mb-2">
+                <div className="font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#8f7852] mb-2">
                   Featured Project
                 </div>
                 <div className="font-SchnyderS text-3xl font-light text-neutral-900 mb-2">
@@ -435,14 +435,14 @@ function TurnkeySolutionSection({
             )}
 
             {/* Corner accents */}
-            <div className="absolute right-0 top-0 h-24 w-24 border-r border-t border-[#c9a962]/20" />
-            <div className="absolute bottom-0 left-0 h-24 w-24 border-b border-l border-[#c9a962]/20" />
+            <div className="absolute right-0 top-0 h-24 w-24 border-r border-t border-[#8f7852]/20" />
+            <div className="absolute bottom-0 left-0 h-24 w-24 border-b border-l border-[#8f7852]/20" />
           </motion.div>
         </div>
       </div>
 
       {/* Section divider */}
-      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/20 to-transparent" />
     </section>
   );
 }
@@ -604,7 +604,7 @@ function ServicePillarsSection({
           <h2 className="font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
             Our Core
             <br />
-            <span className="text-[#c9a962]">Service Pillars</span>
+            <span className="text-[#8f7852]">Service Pillars</span>
           </h2>
         </motion.div>
 
@@ -629,7 +629,7 @@ function ServicePillarsSection({
                 className="group relative h-full"
               >
                 <Link href={service.ctaLink} className="block h-full">
-                  <div className="relative flex h-full flex-col overflow-hidden border border-[#c9a962]/20 bg-white/70 transition-all duration-500 hover:border-[#c9a962]/40 hover:bg-white/90">
+                  <div className="relative flex h-full flex-col overflow-hidden border border-[#8f7852]/20 bg-white/70 transition-all duration-500 hover:border-[#8f7852]/40 hover:bg-white/90">
                     {/* Top Section: Image + Number */}
                     <div className="relative">
                       {/* Image */}
@@ -650,12 +650,12 @@ function ServicePillarsSection({
                     {/* Content Section */}
                     <div className="flex flex-1 flex-col p-8 lg:p-10">
                       {/* Subtitle */}
-                      <div className="mb-3 font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#c9a962]">
+                      <div className="mb-3 font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-[#8f7852]">
                         {service.subtitle}
                       </div>
 
                       {/* Title */}
-                      <h3 className="mb-4 font-SchnyderS text-3xl font-light text-neutral-900 transition-colors duration-500 group-hover:text-[#c9a962] lg:text-4xl">
+                      <h3 className="mb-4 font-SchnyderS text-3xl font-light text-neutral-900 transition-colors duration-500 group-hover:text-[#8f7852] lg:text-4xl">
                         {service.title}
                       </h3>
 
@@ -669,7 +669,7 @@ function ServicePillarsSection({
                         {service.capabilities.map((cap, i) => (
                           <span
                             key={i}
-                            className="border border-[#c9a962]/20 bg-[#c9a962]/5 px-3 py-1.5 font-Satoshi text-[10px] font-light uppercase tracking-wider text-neutral-600"
+                            className="border border-[#8f7852]/20 bg-[#8f7852]/5 px-3 py-1.5 font-Satoshi text-[10px] font-light uppercase tracking-wider text-neutral-600"
                           >
                             {cap}
                           </span>
@@ -677,15 +677,15 @@ function ServicePillarsSection({
                       </div>
 
                       {/* CTA */}
-                      <div className="flex items-center gap-2 font-Satoshi text-sm font-light text-neutral-600 transition-colors duration-300 group-hover:text-[#c9a962]">
+                      <div className="flex items-center gap-2 font-Satoshi text-sm font-light text-neutral-600 transition-colors duration-300 group-hover:text-[#8f7852]">
                         <span>Explore Service</span>
                         <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </div>
                     </div>
 
                     {/* Corner Accent */}
-                    <div className="absolute right-0 top-0 h-16 w-16 border-r border-t border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/30" />
-                    <div className="absolute bottom-0 left-0 h-16 w-16 border-b border-l border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/30" />
+                    <div className="absolute right-0 top-0 h-16 w-16 border-r border-t border-[#8f7852]/0 transition-all duration-500 group-hover:border-[#8f7852]/30" />
+                    <div className="absolute bottom-0 left-0 h-16 w-16 border-b border-l border-[#8f7852]/0 transition-all duration-500 group-hover:border-[#8f7852]/30" />
                   </div>
                 </Link>
               </motion.div>
@@ -729,7 +729,7 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
         <motion.div
           whileHover={{ y: -4 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex h-full flex-col overflow-hidden bg-white/70 border border-[#c9a962]/20 transition-all duration-500 hover:border-[#c9a962]/40"
+          className="relative flex h-full flex-col overflow-hidden bg-white/70 border border-[#8f7852]/20 transition-all duration-500 hover:border-[#8f7852]/40"
         >
           {/* Large Image */}
           {imageSource ? (
@@ -753,7 +753,7 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
             </div>
           ) : (
             <div className="aspect-[3/4] bg-[#faf8f5] flex items-center justify-center">
-              <div className="font-SchnyderS text-4xl font-light text-[#c9a962]/20">
+              <div className="font-SchnyderS text-4xl font-light text-[#8f7852]/20">
                 {service.subtitle}
               </div>
             </div>
@@ -777,7 +777,7 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
             </p>
 
             {/* Capabilities */}
-            <div className="mb-8 pb-8 border-b border-[#c9a962]/20">
+            <div className="mb-8 pb-8 border-b border-[#8f7852]/20">
               <p className="font-Satoshi text-sm font-light text-neutral-500">
                 {service.capabilities[0]}
               </p>
@@ -786,7 +786,7 @@ function ProfessionalServiceCard({ service, index, isInView }: any) {
             {/* CTA */}
             <div className="mt-auto">
               <motion.div
-                className="inline-flex items-center gap-2 font-Satoshi text-sm font-light text-neutral-600 transition-colors group-hover:text-[#c9a962]"
+                className="inline-flex items-center gap-2 font-Satoshi text-sm font-light text-neutral-600 transition-colors group-hover:text-[#8f7852]"
                 animate={{ gap: isHovered ? 8 : 8 }}
               >
                 <span>Explore</span>
@@ -828,7 +828,7 @@ function IntegratedPathCTA() {
           <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl xl:text-8xl">
             Choose the
             <br />
-            <span className="text-[#c9a962]">Integrated Path</span>
+            <span className="text-[#8f7852]">Integrated Path</span>
           </h2>
 
           <p className="mx-auto mb-16 max-w-2xl font-Satoshi text-xl font-light leading-relaxed text-neutral-600 lg:text-2xl">
@@ -841,7 +841,7 @@ function IntegratedPathCTA() {
               href="/contact"
               whileHover={{ y: -2 }}
               transition={{ duration: 0.3 }}
-              className="group inline-flex items-center gap-3 bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-[#c9a962]/90"
+              className="group inline-flex items-center gap-3 bg-[#8f7852] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-[#8f7852]/90"
             >
               <span>DISCUSS YOUR PROJECT</span>
               <ArrowRight size={16} />
@@ -851,7 +851,7 @@ function IntegratedPathCTA() {
               href="/about/company-profile"
               whileHover={{ y: -2 }}
               transition={{ duration: 0.3 }}
-              className="inline-flex items-center gap-3 border border-[#c9a962]/30 bg-white/60 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-900 transition-all hover:border-[#c9a962]/50 hover:bg-white/80"
+              className="inline-flex items-center gap-3 border border-[#8f7852]/30 bg-white/60 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-900 transition-all hover:border-[#8f7852]/50 hover:bg-white/80"
             >
               <span>DOWNLOAD PROFILE</span>
             </motion.a>

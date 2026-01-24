@@ -49,26 +49,26 @@ export function LuxuryAwardsShowcase({ awards }: LuxuryAwardsShowcaseProps) {
             className="mb-32 text-center"
           >
             <div className="mb-8 flex items-center justify-center gap-6">
-              <div className="h-px w-20 bg-linear-to-r from-transparent to-[#c9a962]" />
+              <div className="h-px w-20 bg-linear-to-r from-transparent to-[#8f7852]" />
               <div className="flex items-center gap-3">
                 <Sparkles
-                  className="h-4 w-4 text-[#c9a962]"
+                  className="h-4 w-4 text-[#8f7852]"
                   strokeWidth={1.5}
                 />
                 <span className="font-Satoshi text-xs font-light uppercase tracking-[0.35em] text-neutral-500">
                   Gallery of Excellence
                 </span>
                 <Sparkles
-                  className="h-4 w-4 text-[#c9a962]"
+                  className="h-4 w-4 text-[#8f7852]"
                   strokeWidth={1.5}
                 />
               </div>
-              <div className="h-px w-20 bg-linear-to-l from-transparent to-[#c9a962]" />
+              <div className="h-px w-20 bg-linear-to-l from-transparent to-[#8f7852]" />
             </div>
 
             <h2 className="mb-8 font-SchnyderS text-6xl font-light tracking-tight text-neutral-900 md:text-7xl lg:text-8xl">
               Recognition &<br />
-              <span className="text-[#c9a962]">Achievement</span>
+              <span className="text-[#8f7852]">Achievement</span>
             </h2>
 
             <p className="mx-auto max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600 md:text-xl">
@@ -110,13 +110,13 @@ export function LuxuryAwardsShowcase({ awards }: LuxuryAwardsShowcaseProps) {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative h-[90vh] w-full max-w-5xl"
+              className="relative h-[90vh] w-full container"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedAward(null)}
-                className="absolute -right-6 -top-6 z-10 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-neutral-900/80 text-white backdrop-blur-xl transition-all hover:border-[#c9a962]/50 hover:bg-neutral-900"
+                className="absolute -right-6 -top-6 z-10 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-neutral-900/80 text-white backdrop-blur-xl transition-all hover:border-[#8f7852]/50 hover:bg-neutral-900"
               >
                 <X className="h-5 w-5" strokeWidth={1.5} />
               </button>
@@ -134,7 +134,7 @@ export function LuxuryAwardsShowcase({ awards }: LuxuryAwardsShowcaseProps) {
               <a
                 href={selectedAward.certificate}
                 download
-                className="absolute -bottom-20 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/20 bg-neutral-900/80 px-8 py-4 font-Satoshi text-sm font-light text-white backdrop-blur-xl transition-all hover:border-[#c9a962]/50 hover:bg-neutral-900"
+                className="absolute -bottom-20 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/20 bg-neutral-900/80 px-8 py-4 font-Satoshi text-sm font-light text-white backdrop-blur-xl transition-all hover:border-[#8f7852]/50 hover:bg-neutral-900"
               >
                 <Download className="h-4 w-4" strokeWidth={1.5} />
                 Download Certificate
@@ -186,16 +186,16 @@ function AwardShowcaseItem({
               initial={{ opacity: 0, y: 20 }}
               animate={itemInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#c9a962]/20 bg-[#c9a962]/5 px-5 py-2.5 backdrop-blur-sm hidden"
+              className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#8f7852]/20 bg-[#8f7852]/5 px-5 py-2.5 backdrop-blur-sm hidden"
             >
-              <Trophy className="h-4 w-4 text-[#c9a962]" strokeWidth={1.5} />
-              <span className="font-Satoshi text-sm font-medium text-[#c9a962]">
+              <Trophy className="h-4 w-4 text-[#8f7852]" strokeWidth={1.5} />
+              <span className="font-Satoshi text-sm font-medium text-[#8f7852]">
                 {award.level}
               </span>
             </motion.div> */}
 
             {/* Certificate Preview */}
-            <div className="group/cert relative overflow-hidden rounded-2xl border border-[#c9a962]/20 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(201,169,98,0.15)]">
+            <div className="group/cert relative overflow-hidden rounded-2xl border border-[#8f7852]/20 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(201,169,98,0.15)]">
               <div className="aspect-[8.5/11] w-full">
                 <iframe
                   src={`${award.certificate}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
@@ -209,7 +209,7 @@ function AwardShowcaseItem({
                 <div className="flex gap-4">
                   <button
                     onClick={onViewCertificate}
-                    className="flex items-center gap-2 rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-7 py-3.5 font-Satoshi text-sm font-light text-neutral-900 backdrop-blur-sm transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/20"
+                    className="flex items-center gap-2 rounded-full border border-[#8f7852]/30 bg-[#8f7852]/10 px-7 py-3.5 font-Satoshi text-sm font-light text-neutral-900 backdrop-blur-sm transition-all hover:border-[#8f7852] hover:bg-[#8f7852]/20"
                   >
                     <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} />
                     View Full Size
@@ -217,7 +217,7 @@ function AwardShowcaseItem({
                   <a
                     href={award.certificate}
                     download
-                    className="flex items-center gap-2 rounded-full border border-[#c9a962]/30 bg-[#c9a962]/10 px-7 py-3.5 font-Satoshi text-sm font-light text-neutral-900 backdrop-blur-sm transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/20"
+                    className="flex items-center gap-2 rounded-full border border-[#8f7852]/30 bg-[#8f7852]/10 px-7 py-3.5 font-Satoshi text-sm font-light text-neutral-900 backdrop-blur-sm transition-all hover:border-[#8f7852] hover:bg-[#8f7852]/20"
                   >
                     <Download className="h-4 w-4" strokeWidth={1.5} />
                     Download
@@ -226,8 +226,8 @@ function AwardShowcaseItem({
               </div>
 
               {/* Decorative corner accents */}
-              <div className="pointer-events-none absolute left-8 top-8 h-12 w-12 border-l-2 border-t-2 border-[#c9a962]/30 transition-all duration-500 group-hover/cert:h-16 group-hover/cert:w-16 group-hover/cert:border-[#c9a962]/60" />
-              <div className="pointer-events-none absolute bottom-8 right-8 h-12 w-12 border-b-2 border-r-2 border-[#c9a962]/30 transition-all duration-500 group-hover/cert:h-16 group-hover/cert:w-16 group-hover/cert:border-[#c9a962]/60" />
+              <div className="pointer-events-none absolute left-8 top-8 h-12 w-12 border-l-2 border-t-2 border-[#8f7852]/30 transition-all duration-500 group-hover/cert:h-16 group-hover/cert:w-16 group-hover/cert:border-[#8f7852]/60" />
+              <div className="pointer-events-none absolute bottom-8 right-8 h-12 w-12 border-b-2 border-r-2 border-[#8f7852]/30 transition-all duration-500 group-hover/cert:h-16 group-hover/cert:w-16 group-hover/cert:border-[#8f7852]/60" />
             </div>
           </div>
         </motion.div>
@@ -244,7 +244,7 @@ function AwardShowcaseItem({
           {/* Award Metadata */}
           <div className="mb-8 flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-3 font-Satoshi text-sm font-light text-neutral-500">
-              <AwardIcon className="h-4 w-4 text-[#c9a962]" strokeWidth={1.5} />
+              <AwardIcon className="h-4 w-4 text-[#8f7852]" strokeWidth={1.5} />
               <span>{award.year}</span>
             </div>
             <div className="h-1 w-1 rounded-full bg-neutral-300" />
@@ -266,7 +266,7 @@ function AwardShowcaseItem({
           )}
 
           {/* Decorative divider */}
-          <div className="mb-10 h-px w-24 bg-linear-to-r from-[#c9a962] to-transparent" />
+          <div className="mb-10 h-px w-24 bg-linear-to-r from-[#8f7852] to-transparent" />
 
           {/* Winning Project */}
           {award.projectSlug && (
@@ -311,7 +311,7 @@ function AwardShowcaseItem({
                     </div>
 
                     {/* Corner accent */}
-                    <div className="pointer-events-none absolute right-8 top-8 h-12 w-12 border-r-2 border-t-2 border-white/40 transition-all duration-500 group-hover/project:h-16 group-hover/project:w-16 group-hover/project:border-[#c9a962]" />
+                    <div className="pointer-events-none absolute right-8 top-8 h-12 w-12 border-r-2 border-t-2 border-white/40 transition-all duration-500 group-hover/project:h-16 group-hover/project:w-16 group-hover/project:border-[#8f7852]" />
                   </div>
                 </Link>
               )}

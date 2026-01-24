@@ -71,7 +71,7 @@ const PHYSICS = {
 const HolographicMaterial = {
   uniforms: {
     time: { value: 0 },
-    color: { value: new THREE.Color("#c9a962") },
+    color: { value: new THREE.Color("#8f7852") },
     opacity: { value: 0.8 },
   },
   vertexShader: `
@@ -164,7 +164,7 @@ function ParticleField() {
       </bufferGeometry>
       <pointsMaterial
         size={0.05}
-        color="#c9a962"
+        color="#8f7852"
         transparent
         opacity={0.6}
         sizeAttenuation
@@ -244,7 +244,7 @@ function ProjectCard3D({
     return new THREE.Vector3(
       col * spacing - offsetX + Math.sin(spiralAngle) * 0.5,
       Math.sin(index * 0.5) * 0.5,
-      row * spacing + offsetZ + Math.cos(spiralAngle) * 0.5
+      row * spacing + offsetZ + Math.cos(spiralAngle) * 0.5,
     );
   }, [index]);
 
@@ -305,7 +305,7 @@ function ProjectCard3D({
     const targetScale = isHovered ? 1.15 : 1;
     meshRef.current.scale.lerp(
       new THREE.Vector3(targetScale, targetScale, targetScale),
-      0.1
+      0.1,
     );
 
     // Glow effect
@@ -330,7 +330,7 @@ function ProjectCard3D({
       >
         <planeGeometry args={[3.8, 2.6]} />
         <meshBasicMaterial
-          color="#c9a962"
+          color="#8f7852"
           transparent
           opacity={0.1}
           blending={THREE.AdditiveBlending}
@@ -361,7 +361,7 @@ function ProjectCard3D({
       >
         <edgesGeometry args={[new THREE.PlaneGeometry(3.6, 2.5)]} />
         <lineBasicMaterial
-          color={isHovered ? "#c9a962" : "#333333"}
+          color={isHovered ? "#8f7852" : "#333333"}
           linewidth={2}
         />
       </lineSegments>
@@ -370,7 +370,7 @@ function ProjectCard3D({
       <Text
         position={[gridPosition.x, gridPosition.y - 1.5, gridPosition.z]}
         fontSize={0.18}
-        color={isHovered ? "#c9a962" : "#ffffff"}
+        color={isHovered ? "#8f7852" : "#ffffff"}
         anchorX="center"
         anchorY="middle"
         maxWidth={3}
@@ -387,7 +387,7 @@ function ProjectCard3D({
             gridPosition.z,
           ]}
           fontSize={0.1}
-          color="#c9a962"
+          color="#8f7852"
           anchorX="left"
           anchorY="middle"
         >
@@ -445,7 +445,7 @@ function Scene({ projects, mousePosition, onSelect }: SceneProps) {
       {/* Lighting */}
       <ambientLight intensity={0.4} />
       <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
-      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#c9a962" />
+      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#8f7852" />
       <spotLight
         position={[0, 20, 0]}
         angle={0.5}
@@ -505,12 +505,12 @@ function LoadingScreen() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="mb-6 h-16 w-16 mx-auto border-2 border-[#c9a962] border-t-transparent rounded-full"
+          className="mb-6 h-16 w-16 mx-auto border-2 border-[#8f7852] border-t-transparent rounded-full"
         />
         <motion.p
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="text-[#c9a962] font-Satoshi text-sm tracking-[0.3em] uppercase"
+          className="text-[#8f7852] font-Satoshi text-sm tracking-[0.3em] uppercase"
         >
           Loading Experience
         </motion.p>
@@ -546,7 +546,7 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
           animate={{ scale: 1, y: 0, rotateX: 0 }}
           exit={{ scale: 0.8, y: 50, rotateX: 15 }}
           transition={{ type: "spring", damping: 25, stiffness: 200 }}
-          className="relative max-w-5xl w-full mx-6"
+          className="relative container w-full mx-6"
           onClick={(e) => e.stopPropagation()}
           style={{ perspective: "1000px" }}
         >
@@ -581,7 +581,7 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
                   transition={{ delay: 0.2 }}
                   className="mb-4"
                 >
-                  <span className="px-3 py-1 bg-[#c9a962]/20 border border-[#c9a962]/50 text-[#c9a962] font-Satoshi text-xs tracking-wider">
+                  <span className="px-3 py-1 bg-[#8f7852]/20 border border-[#8f7852]/50 text-[#8f7852] font-Satoshi text-xs tracking-wider">
                     {project.category}
                   </span>
                 </motion.div>
@@ -629,7 +629,7 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
               >
                 <Link
                   href={`/projects/${project.slug.current}`}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-[#c9a962] text-black font-Satoshi text-sm tracking-wider hover:bg-white transition-colors"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-[#8f7852] text-black font-Satoshi text-sm tracking-wider hover:bg-white transition-colors"
                 >
                   VIEW PROJECT
                   <svg
@@ -652,10 +652,10 @@ function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
 
           {/* Decorative frame */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#c9a962]/50" />
-            <div className="absolute top-0 right-0 w-16 h-16 border-r-2 border-t-2 border-[#c9a962]/50" />
-            <div className="absolute bottom-0 left-0 w-16 h-16 border-l-2 border-b-2 border-[#c9a962]/50" />
-            <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#c9a962]/50" />
+            <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#8f7852]/50" />
+            <div className="absolute top-0 right-0 w-16 h-16 border-r-2 border-t-2 border-[#8f7852]/50" />
+            <div className="absolute bottom-0 left-0 w-16 h-16 border-l-2 border-b-2 border-[#8f7852]/50" />
+            <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#8f7852]/50" />
           </div>
         </motion.div>
       </motion.div>
@@ -668,7 +668,7 @@ export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState(new THREE.Vector2(0, 0));
   const [selectedProject, setSelectedProject] = useState<SanityProject | null>(
-    null
+    null,
   );
   const [isLoading, setIsLoading] = useState(true);
   const [dpr, setDpr] = useState(1.5);
@@ -722,7 +722,7 @@ export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
         className="absolute bottom-8 left-8 z-20"
       >
         <div className="font-Satoshi text-xs tracking-wider text-white/30">
-          <span className="text-[#c9a962]">{projects.length}</span> PROJECTS IN
+          <span className="text-[#8f7852]">{projects.length}</span> PROJECTS IN
           VIEW
         </div>
       </motion.div>
@@ -775,20 +775,20 @@ export default function Immersive3DGrid({ projects }: Immersive3DGridProps) {
 
       {/* Decorative corner elements */}
       <div className="absolute top-0 left-0 w-32 h-32 pointer-events-none">
-        <div className="absolute top-8 left-8 w-12 h-px bg-gradient-to-r from-[#c9a962] to-transparent" />
-        <div className="absolute top-8 left-8 h-12 w-px bg-gradient-to-b from-[#c9a962] to-transparent" />
+        <div className="absolute top-8 left-8 w-12 h-px bg-gradient-to-r from-[#8f7852] to-transparent" />
+        <div className="absolute top-8 left-8 h-12 w-px bg-gradient-to-b from-[#8f7852] to-transparent" />
       </div>
       <div className="absolute top-0 right-0 w-32 h-32 pointer-events-none">
-        <div className="absolute top-8 right-8 w-12 h-px bg-gradient-to-l from-[#c9a962] to-transparent" />
-        <div className="absolute top-8 right-8 h-12 w-px bg-gradient-to-b from-[#c9a962] to-transparent" />
+        <div className="absolute top-8 right-8 w-12 h-px bg-gradient-to-l from-[#8f7852] to-transparent" />
+        <div className="absolute top-8 right-8 h-12 w-px bg-gradient-to-b from-[#8f7852] to-transparent" />
       </div>
       <div className="absolute bottom-0 left-0 w-32 h-32 pointer-events-none">
-        <div className="absolute bottom-8 left-8 w-12 h-px bg-gradient-to-r from-[#c9a962] to-transparent" />
-        <div className="absolute bottom-8 left-8 h-12 w-px bg-gradient-to-t from-[#c9a962] to-transparent" />
+        <div className="absolute bottom-8 left-8 w-12 h-px bg-gradient-to-r from-[#8f7852] to-transparent" />
+        <div className="absolute bottom-8 left-8 h-12 w-px bg-gradient-to-t from-[#8f7852] to-transparent" />
       </div>
       <div className="absolute bottom-0 right-0 w-32 h-32 pointer-events-none">
-        <div className="absolute bottom-8 right-8 w-12 h-px bg-gradient-to-l from-[#c9a962] to-transparent" />
-        <div className="absolute bottom-8 right-8 h-12 w-px bg-gradient-to-t from-[#c9a962] to-transparent" />
+        <div className="absolute bottom-8 right-8 w-12 h-px bg-gradient-to-l from-[#8f7852] to-transparent" />
+        <div className="absolute bottom-8 right-8 h-12 w-px bg-gradient-to-t from-[#8f7852] to-transparent" />
       </div>
     </div>
   );

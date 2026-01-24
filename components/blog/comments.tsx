@@ -22,19 +22,19 @@ export default function Comments({ postSlug, postTitle }: CommentsProps) {
     script.setAttribute(
       "data-repo",
       process.env.NEXT_PUBLIC_GISCUS_REPO ||
-        "mouhajer-international/blog-comments"
+        "mouhajer-international/blog-comments",
     );
     script.setAttribute(
       "data-repo-id",
-      process.env.NEXT_PUBLIC_GISCUS_REPO_ID || ""
+      process.env.NEXT_PUBLIC_GISCUS_REPO_ID || "",
     );
     script.setAttribute(
       "data-category",
-      process.env.NEXT_PUBLIC_GISCUS_CATEGORY || "Blog Comments"
+      process.env.NEXT_PUBLIC_GISCUS_CATEGORY || "Blog Comments",
     );
     script.setAttribute(
       "data-category-id",
-      process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || ""
+      process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || "",
     );
     script.setAttribute("data-mapping", "specific");
     script.setAttribute("data-term", postSlug);
@@ -101,7 +101,7 @@ export default function Comments({ postSlug, postTitle }: CommentsProps) {
           <div id="giscus-container" className="giscus min-h-[200px]">
             {!isLoaded && (
               <div className="flex items-center justify-center py-12">
-                <div className="h-8 w-8 animate-spin rounded-full border-2 border-neutral-300 border-t-[#c9a962]" />
+                <div className="h-8 w-8 animate-spin rounded-full border-2 border-neutral-300 border-t-[#8f7852]" />
               </div>
             )}
           </div>
@@ -114,7 +114,7 @@ export default function Comments({ postSlug, postTitle }: CommentsProps) {
           href="https://giscus.app"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#c9a962] hover:underline"
+          className="text-[#8f7852] hover:underline"
         >
           Giscus
         </a>{" "}

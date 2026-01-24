@@ -93,7 +93,7 @@ const partnerCategories = [
     description:
       "Partnering with the most prestigious hospitality brands to deliver award-winning hotel renovations and fit-outs.",
     icon: Hotel,
-    accent: "#c9a962",
+    accent: "#8f7852",
     image:
       "/website%202.0%20content/services/industries/luxury%20hospitality/_MID3940-HDR.jpg",
   },
@@ -251,13 +251,13 @@ function ImmersiveHero({ heroImage }: { heroImage?: string }) {
       {/* Corner Decorations */}
       <div className="pointer-events-none absolute left-6 top-32 z-30 hidden h-20 w-20 sm:block lg:left-12">
         <motion.div
-          className="absolute left-0 top-0 w-px bg-[#c9a962]/50"
+          className="absolute left-0 top-0 w-px bg-[#8f7852]/50"
           initial={{ height: 0 }}
           animate={isInView ? { height: 48 } : {}}
           transition={{ duration: 1, delay: 0.5 }}
         />
         <motion.div
-          className="absolute left-0 top-0 h-px bg-[#c9a962]/50"
+          className="absolute left-0 top-0 h-px bg-[#8f7852]/50"
           initial={{ width: 0 }}
           animate={isInView ? { width: 48 } : {}}
           transition={{ duration: 1, delay: 0.5 }}
@@ -265,13 +265,13 @@ function ImmersiveHero({ heroImage }: { heroImage?: string }) {
       </div>
       <div className="pointer-events-none absolute bottom-32 right-6 z-30 hidden h-20 w-20 sm:block lg:right-12">
         <motion.div
-          className="absolute bottom-0 right-0 w-px bg-[#c9a962]/50"
+          className="absolute bottom-0 right-0 w-px bg-[#8f7852]/50"
           initial={{ height: 0 }}
           animate={isInView ? { height: 48 } : {}}
           transition={{ duration: 1, delay: 0.7 }}
         />
         <motion.div
-          className="absolute bottom-0 right-0 h-px bg-[#c9a962]/50"
+          className="absolute bottom-0 right-0 h-px bg-[#8f7852]/50"
           initial={{ width: 0 }}
           animate={isInView ? { width: 48 } : {}}
           transition={{ duration: 1, delay: 0.7 }}
@@ -283,7 +283,7 @@ function ImmersiveHero({ heroImage }: { heroImage?: string }) {
         className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24 lg:px-12"
         style={{ opacity: heroOpacity, y: heroY }}
       >
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto container text-center">
           {/* Label */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -291,11 +291,11 @@ function ImmersiveHero({ heroImage }: { heroImage?: string }) {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="mb-8 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-[#c9a962]">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-[#8f7852]">
               Our Clients & Partners
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]" />
           </motion.div>
 
           {/* Main Title - Animated word by word */}
@@ -314,7 +314,7 @@ function ImmersiveHero({ heroImage }: { heroImage?: string }) {
               initial={{ y: 100 }}
               animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
-              className="mb-8 font-SchnyderS text-5xl font-light leading-[0.95] tracking-tight text-[#c9a962] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+              className="mb-8 font-SchnyderS text-5xl font-light leading-[0.95] tracking-tight text-[#8f7852] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
             >
               Visionaries.
             </motion.h1>
@@ -349,7 +349,7 @@ function ImmersiveHero({ heroImage }: { heroImage?: string }) {
                   initial={{ scale: 0.5, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                  className="font-SchnyderS text-4xl text-[#c9a962] lg:text-5xl xl:text-6xl"
+                  className="font-SchnyderS text-4xl text-[#8f7852] lg:text-5xl xl:text-6xl"
                 >
                   {stat.value}
                 </motion.div>
@@ -377,7 +377,7 @@ function ImmersiveHero({ heroImage }: { heroImage?: string }) {
           <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-white/40">
             Explore Our Network
           </span>
-          <ChevronDown className="h-5 w-5 text-[#c9a962]/60" strokeWidth={1} />
+          <ChevronDown className="h-5 w-5 text-[#8f7852]/60" strokeWidth={1} />
         </motion.div>
       </motion.div>
     </section>
@@ -393,10 +393,10 @@ function PartnerCategoriesSection() {
   const [activeCategory, setActiveCategory] = useState<string>("hospitality");
 
   const activeCategoryData = partnerCategories.find(
-    (c) => c.key === activeCategory
+    (c) => c.key === activeCategory,
   );
   const categoryPartners = getPartnersByCategory(
-    activeCategory as PartnerLogo["category"]
+    activeCategory as PartnerLogo["category"],
   );
 
   return (
@@ -441,11 +441,11 @@ function PartnerCategoriesSection() {
           className="mb-16 text-center lg:mb-20"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]">
               Partner Network
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </div>
           <h2 className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
             The Company <span className="text-white/30">We Keep</span>
@@ -470,14 +470,14 @@ function PartnerCategoriesSection() {
                     transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
                     className={`group relative w-full overflow-hidden border p-6 text-left transition-all duration-500 ${
                       isActive
-                        ? "border-[#c9a962]/50 bg-white/10"
+                        ? "border-[#8f7852]/50 bg-white/10"
                         : "border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/5"
                     }`}
                   >
                     {/* Progress bar for active */}
                     {isActive && (
                       <motion.div
-                        className="absolute bottom-0 left-0 h-0.5 bg-[#c9a962]"
+                        className="absolute bottom-0 left-0 h-0.5 bg-[#8f7852]"
                         initial={{ width: "0%" }}
                         animate={{ width: "100%" }}
                         transition={{ duration: 0.5 }}
@@ -487,12 +487,12 @@ function PartnerCategoriesSection() {
                     {/* Corner accent */}
                     <div
                       className={`absolute left-0 top-0 h-8 w-px transition-colors duration-300 ${
-                        isActive ? "bg-[#c9a962]" : "bg-[#c9a962]/30"
+                        isActive ? "bg-[#8f7852]" : "bg-[#8f7852]/30"
                       }`}
                     />
                     <div
                       className={`absolute left-0 top-0 h-px w-8 transition-colors duration-300 ${
-                        isActive ? "bg-[#c9a962]" : "bg-[#c9a962]/30"
+                        isActive ? "bg-[#8f7852]" : "bg-[#8f7852]/30"
                       }`}
                     />
 
@@ -500,13 +500,13 @@ function PartnerCategoriesSection() {
                       <div
                         className={`flex h-12 w-12 items-center justify-center border transition-all duration-300 ${
                           isActive
-                            ? "border-[#c9a962]/50 bg-[#c9a962]/20"
+                            ? "border-[#8f7852]/50 bg-[#8f7852]/20"
                             : "border-white/10 bg-white/5"
                         }`}
                       >
                         <Icon
                           className={`h-5 w-5 transition-colors duration-300 ${
-                            isActive ? "text-[#c9a962]" : "text-white/50"
+                            isActive ? "text-[#8f7852]" : "text-white/50"
                           }`}
                           strokeWidth={1.5}
                         />
@@ -514,7 +514,7 @@ function PartnerCategoriesSection() {
                       <div>
                         <span
                           className={`block font-Satoshi text-[10px] font-medium uppercase tracking-[0.2em] transition-colors duration-300 ${
-                            isActive ? "text-[#c9a962]" : "text-white/40"
+                            isActive ? "text-[#8f7852]" : "text-white/40"
                           }`}
                         >
                           {category.subtitle}
@@ -551,8 +551,8 @@ function PartnerCategoriesSection() {
                     {activeCategoryData?.description}
                   </p>
                   <div className="flex items-center gap-4">
-                    <div className="h-px flex-1 bg-gradient-to-r from-[#c9a962]/50 to-transparent" />
-                    <span className="font-Satoshi text-sm font-light text-[#c9a962]">
+                    <div className="h-px flex-1 bg-gradient-to-r from-[#8f7852]/50 to-transparent" />
+                    <span className="font-Satoshi text-sm font-light text-[#8f7852]">
                       {categoryPartners.length} Partners
                     </span>
                   </div>
@@ -566,7 +566,7 @@ function PartnerCategoriesSection() {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.4, delay: index * 0.05 }}
-                      className="group flex h-20 items-center justify-center border border-white/10 bg-white/[0.02] p-4 transition-all duration-300 hover:border-[#c9a962]/30 hover:bg-white/5"
+                      className="group flex h-20 items-center justify-center border border-white/10 bg-white/[0.02] p-4 transition-all duration-300 hover:border-[#8f7852]/30 hover:bg-white/5"
                     >
                       <Image
                         src={partner.logo}
@@ -587,12 +587,12 @@ function PartnerCategoriesSection() {
 
       {/* Corner decorations */}
       <div className="pointer-events-none absolute left-6 top-8 z-30 hidden h-16 w-16 sm:block lg:left-12">
-        <div className="absolute left-0 top-0 h-8 w-px bg-[#c9a962]/30" />
-        <div className="absolute left-0 top-0 h-px w-8 bg-[#c9a962]/30" />
+        <div className="absolute left-0 top-0 h-8 w-px bg-[#8f7852]/30" />
+        <div className="absolute left-0 top-0 h-px w-8 bg-[#8f7852]/30" />
       </div>
       <div className="pointer-events-none absolute bottom-8 right-6 z-30 hidden h-16 w-16 sm:block lg:right-12">
-        <div className="absolute bottom-0 right-0 h-8 w-px bg-[#c9a962]/30" />
-        <div className="absolute bottom-0 right-0 h-px w-8 bg-[#c9a962]/30" />
+        <div className="absolute bottom-0 right-0 h-8 w-px bg-[#8f7852]/30" />
+        <div className="absolute bottom-0 right-0 h-px w-8 bg-[#8f7852]/30" />
       </div>
     </section>
   );
@@ -630,14 +630,14 @@ function FeaturedPartnersShowcase() {
           className="mb-16 text-center lg:mb-20"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/60" />
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]/60" />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#3d3a36]/60">
               Featured Partnerships
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/60" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]/60" />
           </div>
           <h2 className="mb-6 font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl">
-            Partners in <span className="text-[#c9a962]">Excellence</span>
+            Partners in <span className="text-[#8f7852]">Excellence</span>
           </h2>
           <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-500">
             Our partnerships with industry leaders reflect our commitment to
@@ -653,10 +653,10 @@ function FeaturedPartnersShowcase() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 * (index % 8) }}
-              className="group relative overflow-hidden border border-neutral-200 bg-white p-6 transition-all duration-500 hover:border-[#c9a962]/50 hover:shadow-lg"
+              className="group relative overflow-hidden border border-neutral-200 bg-white p-6 transition-all duration-500 hover:border-[#8f7852]/50 hover:shadow-lg"
             >
               {/* Corner accent on hover */}
-              <div className="absolute left-0 top-0 h-0 w-0 border-l-[3px] border-t-[3px] border-transparent transition-all duration-300 group-hover:h-8 group-hover:w-8 group-hover:border-[#c9a962]" />
+              <div className="absolute left-0 top-0 h-0 w-0 border-l-[3px] border-t-[3px] border-transparent transition-all duration-300 group-hover:h-8 group-hover:w-8 group-hover:border-[#8f7852]" />
 
               {/* Logo */}
               <div className="mb-6 flex h-16 items-center justify-start">
@@ -671,7 +671,7 @@ function FeaturedPartnersShowcase() {
               </div>
 
               {/* Partner Name */}
-              <h3 className="mb-2 font-SchnyderS text-xl text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962]">
+              <h3 className="mb-2 font-SchnyderS text-xl text-neutral-950 transition-colors duration-300 group-hover:text-[#8f7852]">
                 {partner.name}
               </h3>
 
@@ -683,7 +683,7 @@ function FeaturedPartnersShowcase() {
               {/* Stats */}
               <div className="flex items-center justify-between border-t border-neutral-100 pt-4">
                 <div>
-                  <div className="font-SchnyderS text-2xl text-[#c9a962]">
+                  <div className="font-SchnyderS text-2xl text-[#8f7852]">
                     {partner.projects}+
                   </div>
                   <div className="font-Satoshi text-xs text-neutral-400">
@@ -692,7 +692,7 @@ function FeaturedPartnersShowcase() {
                 </div>
 
                 {/* Arrow */}
-                <div className="flex h-10 w-10 items-center justify-center border border-neutral-200 transition-all duration-300 group-hover:border-[#c9a962] group-hover:bg-[#c9a962]">
+                <div className="flex h-10 w-10 items-center justify-center border border-neutral-200 transition-all duration-300 group-hover:border-[#8f7852] group-hover:bg-[#8f7852]">
                   <ArrowRight
                     className="h-4 w-4 text-neutral-400 transition-colors duration-300 group-hover:text-white"
                     strokeWidth={1.5}
@@ -751,7 +751,7 @@ function CinematicTestimonials({
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
   const prevTestimonial = () =>
     setActiveIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
 
   const activeTestimonial = testimonials[activeIndex];
@@ -763,13 +763,13 @@ function CinematicTestimonials({
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a962]/5 blur-[200px]" />
+        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8f7852]/5 blur-[200px]" />
       </div>
 
       {/* Large Quote Background */}
       <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.02]">
         <Quote
-          className="h-[600px] w-[600px] text-[#c9a962]"
+          className="h-[600px] w-[600px] text-[#8f7852]"
           strokeWidth={0.3}
         />
       </div>
@@ -783,11 +783,11 @@ function CinematicTestimonials({
           className="mb-16 text-center lg:mb-20"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]">
               Client Voices
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </div>
           <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl">
             What Our <span className="text-white/30">Partners Say</span>
@@ -807,7 +807,7 @@ function CinematicTestimonials({
             >
               {/* Quote Icon */}
               <div className="absolute -top-6 left-8 lg:left-12">
-                <div className="flex h-12 w-12 items-center justify-center bg-[#c9a962]">
+                <div className="flex h-12 w-12 items-center justify-center bg-[#8f7852]">
                   <Quote className="h-5 w-5 text-neutral-950" strokeWidth={2} />
                 </div>
               </div>
@@ -821,8 +821,8 @@ function CinematicTestimonials({
 
               {/* Author Info */}
               <div className="flex items-center gap-5 border-t border-white/10 pt-8">
-                <div className="flex h-16 w-16 items-center justify-center border-2 border-[#c9a962]/30 bg-[#c9a962]/10">
-                  <span className="font-SchnyderS text-2xl text-[#c9a962]">
+                <div className="flex h-16 w-16 items-center justify-center border-2 border-[#8f7852]/30 bg-[#8f7852]/10">
+                  <span className="font-SchnyderS text-2xl text-[#8f7852]">
                     {activeTestimonial.author?.charAt(0) || "A"}
                   </span>
                 </div>
@@ -833,7 +833,7 @@ function CinematicTestimonials({
                   <div className="font-Satoshi text-sm font-light text-white/50">
                     {activeTestimonial.position}
                     {activeTestimonial.company && (
-                      <span className="text-[#c9a962]">
+                      <span className="text-[#8f7852]">
                         {" "}
                         — {activeTestimonial.company}
                       </span>
@@ -843,8 +843,8 @@ function CinematicTestimonials({
               </div>
 
               {/* Corner accents */}
-              <div className="absolute right-0 top-0 h-16 w-16 border-r-2 border-t-2 border-[#c9a962]/20" />
-              <div className="absolute bottom-0 left-0 h-16 w-16 border-b-2 border-l-2 border-[#c9a962]/20" />
+              <div className="absolute right-0 top-0 h-16 w-16 border-r-2 border-t-2 border-[#8f7852]/20" />
+              <div className="absolute bottom-0 left-0 h-16 w-16 border-b-2 border-l-2 border-[#8f7852]/20" />
             </motion.div>
           </AnimatePresence>
 
@@ -852,7 +852,7 @@ function CinematicTestimonials({
           <div className="mt-8 flex items-center justify-center gap-6">
             <button
               onClick={prevTestimonial}
-              className="flex h-12 w-12 items-center justify-center border border-white/10 transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
+              className="flex h-12 w-12 items-center justify-center border border-white/10 transition-all duration-300 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10"
               aria-label="Previous testimonial"
             >
               <ArrowLeft className="h-5 w-5 text-white/50" strokeWidth={1.5} />
@@ -866,7 +866,7 @@ function CinematicTestimonials({
                   onClick={() => setActiveIndex(index)}
                   className={`h-2 transition-all duration-500 ${
                     index === activeIndex
-                      ? "w-10 bg-[#c9a962]"
+                      ? "w-10 bg-[#8f7852]"
                       : "w-2 bg-white/20 hover:bg-white/40"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -876,7 +876,7 @@ function CinematicTestimonials({
 
             <button
               onClick={nextTestimonial}
-              className="flex h-12 w-12 items-center justify-center border border-white/10 transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
+              className="flex h-12 w-12 items-center justify-center border border-white/10 transition-all duration-300 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10"
               aria-label="Next testimonial"
             >
               <ArrowRight className="h-5 w-5 text-white/50" strokeWidth={1.5} />
@@ -901,8 +901,8 @@ function PartnershipCTA() {
       className="relative overflow-hidden bg-neutral-950 py-32 lg:py-40"
     >
       {/* Background glow */}
-      <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/10 blur-[150px]" />
-      <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/10 blur-[150px]" />
+      <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#8f7852]/10 blur-[150px]" />
+      <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#8f7852]/10 blur-[150px]" />
 
       <div className="relative z-10 mx-auto max-w-[1000px] px-6 text-center lg:px-12">
         <motion.div
@@ -912,18 +912,18 @@ function PartnershipCTA() {
         >
           {/* Label */}
           <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#8f7852]">
               Join Our Network
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]" />
           </div>
 
           {/* Title */}
           <h2 className="mb-6 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             Ready to Partner
             <br />
-            <span className="text-[#c9a962]">with Excellence?</span>
+            <span className="text-[#8f7852]">with Excellence?</span>
           </h2>
 
           {/* Subtitle */}
@@ -936,7 +936,7 @@ function PartnershipCTA() {
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
+              className="group inline-flex items-center gap-3 border border-[#8f7852] bg-[#8f7852] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#8f7852]"
             >
               <span>START A PROJECT</span>
               <ArrowRight
@@ -946,7 +946,7 @@ function PartnershipCTA() {
             </Link>
             <Link
               href="/about/company-profile"
-              className="group inline-flex items-center gap-3 border border-white/30 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+              className="group inline-flex items-center gap-3 border border-white/30 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
             >
               <span>DOWNLOAD PROFILE</span>
               <ArrowRight

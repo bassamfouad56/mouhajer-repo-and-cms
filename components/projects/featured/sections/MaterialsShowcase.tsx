@@ -51,7 +51,7 @@ export function MaterialsShowcase({
   const x = useTransform(
     smoothProgress,
     [0.1, 0.9],
-    isRTL ? ["-60%", "0%"] : ["0%", "-60%"]
+    isRTL ? ["-60%", "0%"] : ["0%", "-60%"],
   );
 
   const labels = {
@@ -99,9 +99,9 @@ export function MaterialsShowcase({
                   initial={{ width: 0 }}
                   animate={isTitleInView ? { width: 48 } : {}}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="h-px bg-[#c9a962]"
+                  className="h-px bg-[#8f7852]"
                 />
-                <span className="text-[#c9a962] text-xs tracking-[0.3em] uppercase font-light">
+                <span className="text-[#8f7852] text-xs tracking-[0.3em] uppercase font-light">
                   {title || t.title}
                 </span>
               </div>
@@ -144,7 +144,7 @@ export function MaterialsShowcase({
               animate={{
                 backgroundColor:
                   index <= Math.floor(smoothProgress.get() * materials.length)
-                    ? "#c9a962"
+                    ? "#8f7852"
                     : "#d4d4d4",
               }}
             />
@@ -232,10 +232,10 @@ function MaterialCard({
         </motion.div>
 
         {/* Frame Corners */}
-        <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-white/0 group-hover:border-[#c9a962]/70 transition-colors duration-500" />
-        <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-white/0 group-hover:border-[#c9a962]/70 transition-colors duration-500" />
-        <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-white/0 group-hover:border-[#c9a962]/70 transition-colors duration-500" />
-        <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-white/0 group-hover:border-[#c9a962]/70 transition-colors duration-500" />
+        <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-white/0 group-hover:border-[#8f7852]/70 transition-colors duration-500" />
+        <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-white/0 group-hover:border-[#8f7852]/70 transition-colors duration-500" />
+        <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-white/0 group-hover:border-[#8f7852]/70 transition-colors duration-500" />
+        <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-white/0 group-hover:border-[#8f7852]/70 transition-colors duration-500" />
       </div>
 
       {/* Text Content */}

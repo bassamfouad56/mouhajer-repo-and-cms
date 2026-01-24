@@ -93,9 +93,9 @@ const categoryColors: Record<
   { bg: string; text: string; border: string }
 > = {
   trends: {
-    bg: "bg-[#c9a962]/10",
-    text: "text-[#c9a962]",
-    border: "border-[#c9a962]/30",
+    bg: "bg-[#8f7852]/10",
+    text: "text-[#8f7852]",
+    border: "border-[#8f7852]/30",
   },
   tips: {
     bg: "bg-blue-500/10",
@@ -153,7 +153,7 @@ function addHeadingIds(content: any[]): any[] {
 
 // Portable Text components for custom rendering with enhanced visuals
 const createPortableTextComponents = (
-  locale: string = "en"
+  locale: string = "en",
 ): PortableTextComponents => ({
   block: {
     h1: ({ children, value }) => (
@@ -177,7 +177,7 @@ const createPortableTextComponents = (
         id={value._headingId}
         className="mb-6 mt-14 scroll-mt-32 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950 lg:text-4xl"
       >
-        <span className="mr-4 inline-block h-px w-8 bg-[#c9a962] align-middle" />
+        <span className="mr-4 inline-block h-px w-8 bg-[#8f7852] align-middle" />
         {children}
       </motion.h2>
     ),
@@ -215,9 +215,9 @@ const createPortableTextComponents = (
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="relative my-12 overflow-hidden border-l-4 border-[#c9a962] bg-gradient-to-r from-neutral-50 to-transparent py-8 pl-10 pr-8"
+        className="relative my-12 overflow-hidden border-l-4 border-[#8f7852] bg-gradient-to-r from-neutral-50 to-transparent py-8 pl-10 pr-8"
       >
-        <div className="absolute left-6 top-6 font-SchnyderS text-6xl text-[#c9a962]/20">
+        <div className="absolute left-6 top-6 font-SchnyderS text-6xl text-[#8f7852]/20">
           &ldquo;
         </div>
         <div className="relative z-10 font-SchnyderS text-2xl font-light italic leading-relaxed text-neutral-700 lg:text-3xl">
@@ -251,7 +251,7 @@ const createPortableTextComponents = (
   listItem: {
     bullet: ({ children }) => (
       <li className="relative pl-6 font-Satoshi text-lg font-light leading-relaxed text-neutral-700">
-        <span className="absolute left-0 top-3 h-1.5 w-1.5 rounded-full bg-[#c9a962]" />
+        <span className="absolute left-0 top-3 h-1.5 w-1.5 rounded-full bg-[#8f7852]" />
         {children}
       </li>
     ),
@@ -270,7 +270,7 @@ const createPortableTextComponents = (
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
-          className="text-[#c9a962] underline decoration-[#c9a962]/30 underline-offset-4 transition-colors hover:decoration-[#c9a962]"
+          className="text-[#8f7852] underline decoration-[#8f7852]/30 underline-offset-4 transition-colors hover:decoration-[#8f7852]"
         >
           {children}
         </a>
@@ -337,7 +337,7 @@ export default function BlogPostContent({
     setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : prev));
   const nextImage = () =>
     setLightboxIndex((prev) =>
-      prev !== null && prev < galleryImages.length - 1 ? prev + 1 : prev
+      prev !== null && prev < galleryImages.length - 1 ? prev + 1 : prev,
     );
 
   // Parallax effect for hero
@@ -353,13 +353,13 @@ export default function BlogPostContent({
   // Calculate reading time
   const readingTime = useMemo(
     () => calculateReadingTime(post.content, post.readTime),
-    [post.content, post.readTime]
+    [post.content, post.readTime],
   );
 
   // Add IDs to headings for TOC linking
   const contentWithIds = useMemo(
     () => (post.content ? addHeadingIds(post.content) : []),
-    [post.content]
+    [post.content],
   );
 
   // Get image URLs safely
@@ -387,7 +387,7 @@ export default function BlogPostContent({
   // Portable text components
   const portableTextComponents = useMemo(
     () => createPortableTextComponents(locale),
-    [locale]
+    [locale],
   );
 
   return (
@@ -491,7 +491,7 @@ export default function BlogPostContent({
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="mb-8 max-w-5xl font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl"
+                  className="mb-8 container font-SchnyderS text-5xl font-light leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl"
                 >
                   {post.title}
                 </motion.h1>
@@ -549,7 +549,7 @@ export default function BlogPostContent({
                       onClick={() => setIsBookmarked(!isBookmarked)}
                       className={`flex items-center gap-2 rounded-full border px-4 py-2 font-Satoshi text-xs transition-all ${
                         isBookmarked
-                          ? "border-[#c9a962] bg-[#c9a962]/10 text-[#c9a962]"
+                          ? "border-[#8f7852] bg-[#8f7852]/10 text-[#8f7852]"
                           : "border-white/20 text-white/60 hover:border-white/40 hover:text-white"
                       }`}
                     >
@@ -601,7 +601,7 @@ export default function BlogPostContent({
               >
                 {/* Lead paragraph styling */}
                 {post.excerpt && (
-                  <p className="mb-12 border-l-4 border-[#c9a962] pl-6 font-SchnyderS text-2xl font-light leading-relaxed text-neutral-700 lg:text-3xl">
+                  <p className="mb-12 border-l-4 border-[#8f7852] pl-6 font-SchnyderS text-2xl font-light leading-relaxed text-neutral-700 lg:text-3xl">
                     {post.excerpt}
                   </p>
                 )}
@@ -632,7 +632,7 @@ export default function BlogPostContent({
                         return (
                           <span
                             key={tagKey}
-                            className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-1.5 font-Satoshi text-xs font-light text-neutral-600 transition-colors hover:border-[#c9a962] hover:bg-[#c9a962]/5"
+                            className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-1.5 font-Satoshi text-xs font-light text-neutral-600 transition-colors hover:border-[#8f7852] hover:bg-[#8f7852]/5"
                           >
                             {tagName}
                           </span>
@@ -673,7 +673,7 @@ export default function BlogPostContent({
                           if (typeof window !== "undefined") {
                             window.open(
                               `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`,
-                              "_blank"
+                              "_blank",
                             );
                           }
                         }}
@@ -687,7 +687,7 @@ export default function BlogPostContent({
                           if (typeof window !== "undefined") {
                             window.open(
                               `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(post.title)}`,
-                              "_blank"
+                              "_blank",
                             );
                           }
                         }}
@@ -701,7 +701,7 @@ export default function BlogPostContent({
                           if (typeof window !== "undefined") {
                             window.open(
                               `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,
-                              "_blank"
+                              "_blank",
                             );
                           }
                         }}
@@ -712,7 +712,7 @@ export default function BlogPostContent({
                       </button>
                       <button
                         onClick={copyLink}
-                        className="flex items-center justify-center gap-2 rounded-lg border border-neutral-200 py-3 font-Satoshi text-xs text-neutral-600 transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/10 hover:text-[#c9a962]"
+                        className="flex items-center justify-center gap-2 rounded-lg border border-neutral-200 py-3 font-Satoshi text-xs text-neutral-600 transition-all hover:border-[#8f7852] hover:bg-[#8f7852]/10 hover:text-[#8f7852]"
                       >
                         {copied ? (
                           <Check size={14} className="text-green-500" />
@@ -735,7 +735,7 @@ export default function BlogPostContent({
                     </p>
                     <Link
                       href="/contact"
-                      className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-[#c9a962] transition-colors hover:text-white"
+                      className="inline-flex items-center gap-2 font-Satoshi text-xs uppercase tracking-wider text-[#8f7852] transition-colors hover:text-white"
                     >
                       <span>Get in Touch</span>
                       <ArrowRight size={12} />
@@ -767,7 +767,7 @@ export default function BlogPostContent({
                     </div>
                   )}
                   <div className="flex-1">
-                    <p className="mb-2 font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
+                    <p className="mb-2 font-Satoshi text-xs font-light uppercase tracking-wider text-[#8f7852]">
                       About the Author
                     </p>
                     <h3 className="mb-3 font-SchnyderS text-3xl font-light tracking-tight text-neutral-950">
@@ -785,7 +785,7 @@ export default function BlogPostContent({
                     )}
                     <Link
                       href="/blog"
-                      className="inline-flex items-center gap-2 border-b border-neutral-950 pb-1 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-colors hover:border-[#c9a962] hover:text-[#c9a962]"
+                      className="inline-flex items-center gap-2 border-b border-neutral-950 pb-1 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-colors hover:border-[#8f7852] hover:text-[#8f7852]"
                     >
                       View all articles
                       <ArrowRight size={14} />
@@ -859,8 +859,8 @@ export default function BlogPostContent({
         {/* CTA Section with Background */}
         <section className="relative overflow-hidden bg-neutral-950 px-6 py-32 lg:px-12">
           {/* Background Pattern */}
-          <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[150px]" />
-          <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#c9a962]/5 blur-[150px]" />
+          <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#8f7852]/5 blur-[150px]" />
+          <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#8f7852]/5 blur-[150px]" />
 
           <div className="relative z-10 mx-auto max-w-4xl text-center">
             <motion.div
@@ -869,13 +869,13 @@ export default function BlogPostContent({
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="mb-6 block font-Satoshi text-[10px] uppercase tracking-[0.4em] text-[#c9a962]">
+              <span className="mb-6 block font-Satoshi text-[10px] uppercase tracking-[0.4em] text-[#8f7852]">
                 Start Your Project
               </span>
               <h2 className="mb-8 font-SchnyderS text-5xl font-light tracking-tight text-white lg:text-7xl">
                 Inspired by What
                 <br />
-                You&apos;ve <span className="text-[#c9a962]">Read?</span>
+                You&apos;ve <span className="text-[#8f7852]">Read?</span>
               </h2>
               <p className="mb-12 font-Satoshi text-xl font-light text-white/60">
                 Let&apos;s discuss how we can bring your interior design vision
@@ -884,7 +884,7 @@ export default function BlogPostContent({
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#c9a962]"
+                  className="group inline-flex items-center gap-3 border border-[#8f7852] bg-[#8f7852] px-10 py-5 font-Satoshi text-sm uppercase tracking-[0.2em] text-neutral-950 transition-all duration-500 hover:bg-transparent hover:text-[#8f7852]"
                 >
                   <span>Start Your Project</span>
                   <ArrowRight
@@ -994,10 +994,10 @@ function RelatedPostCard({ post, index }: { post: SanityPost; index: number }) {
 
           {/* Animated Border */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-0 top-0 h-0 w-full bg-[#c9a962] transition-all duration-500 group-hover:h-1" />
-            <div className="absolute right-0 top-0 h-full w-0 bg-[#c9a962] transition-all duration-500 delay-75 group-hover:w-1" />
-            <div className="absolute bottom-0 right-0 h-0 w-full bg-[#c9a962] transition-all duration-500 delay-150 group-hover:h-1" />
-            <div className="absolute bottom-0 left-0 h-full w-0 bg-[#c9a962] transition-all duration-500 delay-200 group-hover:w-1" />
+            <div className="absolute left-0 top-0 h-0 w-full bg-[#8f7852] transition-all duration-500 group-hover:h-1" />
+            <div className="absolute right-0 top-0 h-full w-0 bg-[#8f7852] transition-all duration-500 delay-75 group-hover:w-1" />
+            <div className="absolute bottom-0 right-0 h-0 w-full bg-[#8f7852] transition-all duration-500 delay-150 group-hover:h-1" />
+            <div className="absolute bottom-0 left-0 h-full w-0 bg-[#8f7852] transition-all duration-500 delay-200 group-hover:w-1" />
           </div>
 
           {/* Category Badge */}
@@ -1015,7 +1015,7 @@ function RelatedPostCard({ post, index }: { post: SanityPost; index: number }) {
         {/* Content */}
         <div>
           {/* Title */}
-          <h3 className="mb-3 line-clamp-2 font-SchnyderS text-2xl font-light tracking-tight text-neutral-950 transition-colors group-hover:text-[#c9a962]">
+          <h3 className="mb-3 line-clamp-2 font-SchnyderS text-2xl font-light tracking-tight text-neutral-950 transition-colors group-hover:text-[#8f7852]">
             {post.title}
           </h3>
 
@@ -1104,8 +1104,8 @@ function FullWidthImageBreak({
       )}
 
       {/* Corner Accents */}
-      <div className="absolute left-4 top-4 h-16 w-16 border-l-2 border-t-2 border-[#c9a962]/50 lg:left-8 lg:top-8 lg:h-24 lg:w-24" />
-      <div className="absolute bottom-4 right-4 h-16 w-16 border-b-2 border-r-2 border-[#c9a962]/50 lg:bottom-8 lg:right-8 lg:h-24 lg:w-24" />
+      <div className="absolute left-4 top-4 h-16 w-16 border-l-2 border-t-2 border-[#8f7852]/50 lg:left-8 lg:top-8 lg:h-24 lg:w-24" />
+      <div className="absolute bottom-4 right-4 h-16 w-16 border-b-2 border-r-2 border-[#8f7852]/50 lg:bottom-8 lg:right-8 lg:h-24 lg:w-24" />
     </motion.div>
   );
 }
@@ -1137,9 +1137,9 @@ function GalleryGridSection({
           className="mb-16 text-center"
         >
           <div className="mb-4 flex items-center justify-center gap-3">
-            <div className="h-px w-12 bg-[#c9a962]" />
-            <Grid3X3 size={20} className="text-[#c9a962]" />
-            <div className="h-px w-12 bg-[#c9a962]" />
+            <div className="h-px w-12 bg-[#8f7852]" />
+            <Grid3X3 size={20} className="text-[#8f7852]" />
+            <div className="h-px w-12 bg-[#8f7852]" />
           </div>
           <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-neutral-950 lg:text-5xl">
             Visual Gallery
@@ -1204,10 +1204,10 @@ function GalleryGridSection({
 
                 {/* Animated Border */}
                 <div className="pointer-events-none absolute inset-0">
-                  <div className="absolute left-0 top-0 h-0 w-full bg-[#c9a962] transition-all duration-500 group-hover:h-1" />
-                  <div className="absolute right-0 top-0 h-full w-0 bg-[#c9a962] transition-all duration-500 delay-75 group-hover:w-1" />
-                  <div className="absolute bottom-0 right-0 h-0 w-full bg-[#c9a962] transition-all duration-500 delay-150 group-hover:h-1" />
-                  <div className="absolute bottom-0 left-0 h-full w-0 bg-[#c9a962] transition-all duration-500 delay-200 group-hover:w-1" />
+                  <div className="absolute left-0 top-0 h-0 w-full bg-[#8f7852] transition-all duration-500 group-hover:h-1" />
+                  <div className="absolute right-0 top-0 h-full w-0 bg-[#8f7852] transition-all duration-500 delay-75 group-hover:w-1" />
+                  <div className="absolute bottom-0 right-0 h-0 w-full bg-[#8f7852] transition-all duration-500 delay-150 group-hover:h-1" />
+                  <div className="absolute bottom-0 left-0 h-full w-0 bg-[#8f7852] transition-all duration-500 delay-200 group-hover:w-1" />
                 </div>
               </motion.button>
             );
@@ -1250,7 +1250,7 @@ function MasonryGridSection({
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <span className="mb-4 block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
+          <span className="mb-4 block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#8f7852]">
             Behind the Scenes
           </span>
           <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-white lg:text-5xl">
@@ -1315,8 +1315,8 @@ function MasonryGridSection({
                     </div>
 
                     {/* Corner Accents */}
-                    <div className="absolute left-0 top-0 h-12 w-12 border-l-2 border-t-2 border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/60" />
-                    <div className="absolute bottom-0 right-0 h-12 w-12 border-b-2 border-r-2 border-[#c9a962]/0 transition-all duration-500 group-hover:border-[#c9a962]/60" />
+                    <div className="absolute left-0 top-0 h-12 w-12 border-l-2 border-t-2 border-[#8f7852]/0 transition-all duration-500 group-hover:border-[#8f7852]/60" />
+                    <div className="absolute bottom-0 right-0 h-12 w-12 border-b-2 border-r-2 border-[#8f7852]/0 transition-all duration-500 group-hover:border-[#8f7852]/60" />
                   </motion.button>
                 );
               })}
@@ -1428,7 +1428,7 @@ function ImageLightbox({
               <div
                 key={idx}
                 className={`h-1 rounded-full transition-all ${
-                  idx === currentIndex ? "w-6 bg-[#c9a962]" : "w-1 bg-white/30"
+                  idx === currentIndex ? "w-6 bg-[#8f7852]" : "w-1 bg-white/30"
                 }`}
               />
             ))}

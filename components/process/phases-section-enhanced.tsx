@@ -34,7 +34,7 @@ const phases = [
       "Preliminary Budget & Timeline Estimates",
       "Conceptual Design Brief",
     ],
-    color: "#c9a962",
+    color: "#8f7852",
   },
   {
     id: 2,
@@ -109,7 +109,7 @@ const phases = [
       "Staff Training on Building Systems",
       "Comprehensive Warranty & Maintenance Plans",
     ],
-    color: "#c9a962",
+    color: "#8f7852",
   },
 ];
 
@@ -135,7 +135,7 @@ function PhaseCard({
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
-    [0, 1, 1, 0.5]
+    [0, 1, 1, 0.5],
   );
 
   const Icon = phase.icon;
@@ -348,7 +348,7 @@ export function PhasesSectionEnhanced() {
     >
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-[#c9a962]/5 blur-3xl" />
+        <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-[#8f7852]/5 blur-3xl" />
         <div className="absolute bottom-1/4 right-0 h-96 w-96 rounded-full bg-[#3b82f6]/5 blur-3xl" />
       </div>
 
@@ -364,7 +364,7 @@ export function PhasesSectionEnhanced() {
             <SVGLineDraw
               width={60}
               height={2}
-              strokeColor="#c9a962"
+              strokeColor="#8f7852"
               duration={1.5}
               delay={0.2}
             />
@@ -374,7 +374,7 @@ export function PhasesSectionEnhanced() {
             <SVGLineDraw
               width={60}
               height={2}
-              strokeColor="#c9a962"
+              strokeColor="#8f7852"
               duration={1.5}
               delay={0.2}
             />
@@ -430,7 +430,7 @@ export function PhasesSectionEnhanced() {
           <MagneticButton strength={0.25}>
             <Link
               href="/#contact"
-              className="group inline-flex items-center gap-3 border border-neutral-900 bg-neutral-950 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962]"
+              className="group inline-flex items-center gap-3 border border-neutral-900 bg-neutral-950 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-white transition-all duration-500 hover:border-[#8f7852] hover:bg-[#8f7852]"
             >
               <span>Start Your Project</span>
               <ArrowRight

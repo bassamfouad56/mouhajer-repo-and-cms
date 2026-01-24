@@ -115,6 +115,9 @@ function AwardsHeroSection() {
       ref={heroRef}
       className="relative min-h-[90vh] overflow-hidden bg-[#faf8f5]"
     >
+      {/* Dark Header Overlay - Ensures navbar is visible */}
+      <div className="absolute inset-x-0 top-0 z-30 h-32 bg-gradient-to-b from-neutral-950/80 via-neutral-950/40 to-transparent pointer-events-none" />
+
       {/* Video Background */}
       <motion.div className="absolute inset-0" style={{ scale: videoScale }}>
         <div className="absolute inset-0 h-full w-full overflow-hidden">
@@ -126,10 +129,10 @@ function AwardsHeroSection() {
           />
         </div>
 
-        {/* Light Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/90 via-[#faf8f5]/70 to-[#faf8f5]/95" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#faf8f5]/80 via-transparent to-[#faf8f5]/80" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(250,248,245,0.6)_100%)]" />
+        {/* Light Overlays - Reduced opacity for clearer video */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/40 via-[#faf8f5]/30 to-[#faf8f5]/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#faf8f5]/30 via-transparent to-[#faf8f5]/30" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(250,248,245,0.3)_100%)]" />
 
         {/* Subtle gold accent */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(201,169,98,0.08)_0%,transparent_60%)]" />
@@ -142,8 +145,8 @@ function AwardsHeroSection() {
         transition={{ duration: 1, delay: 0.5 }}
         className="pointer-events-none absolute inset-0 z-20"
       >
-        <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#c9a962]/40 lg:left-16" />
-        <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#c9a962]/40 lg:right-16" />
+        <div className="absolute left-8 top-32 h-24 w-24 border-l border-t border-[#8f7852]/40 lg:left-16" />
+        <div className="absolute bottom-32 right-8 h-24 w-24 border-b border-r border-[#8f7852]/40 lg:right-16" />
       </motion.div>
 
       {/* Main Content */}
@@ -151,7 +154,7 @@ function AwardsHeroSection() {
         style={{ opacity, y }}
         className="relative z-10 flex min-h-[90vh] flex-col items-center justify-center px-6 py-32 lg:px-12"
       >
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto container text-center">
           {/* Label */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -159,11 +162,11 @@ function AwardsHeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="mb-8 flex items-center justify-center gap-6"
           >
-            <div className="h-px w-20 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <span className="font-Satoshi text-[11px] font-medium uppercase tracking-[0.5em] text-[#c9a962]">
+            <div className="h-px w-20 bg-gradient-to-r from-transparent to-[#8f7852]" />
+            <span className="font-Satoshi text-[11px] font-medium uppercase tracking-[0.5em] text-[#8f7852]">
               International Recognition
             </span>
-            <div className="h-px w-20 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-20 bg-gradient-to-l from-transparent to-[#8f7852]" />
           </motion.div>
 
           {/* Main Title */}
@@ -176,7 +179,7 @@ function AwardsHeroSection() {
             <h1 className="font-SchnyderS text-6xl font-light leading-[1.05] tracking-tight text-neutral-900 sm:text-7xl md:text-8xl lg:text-9xl">
               Excellence,
               <br />
-              <span className="text-[#c9a962]">Certified</span>
+              <span className="text-[#8f7852]">Certified</span>
             </h1>
           </motion.div>
 
@@ -194,29 +197,6 @@ function AwardsHeroSection() {
             </span>
           </motion.p>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 1.1 }}
-            className="mt-16 flex flex-wrap items-center justify-center gap-12 lg:gap-20"
-          >
-            {[
-              { number: "5+", label: "International Awards" },
-              { number: "25+", label: "Years of Excellence" },
-              { number: "100%", label: "Client Satisfaction" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="mb-2 font-SchnyderS text-5xl font-light text-[#c9a962] lg:text-6xl">
-                  {stat.number}
-                </div>
-                <div className="font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-neutral-500">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </motion.div>
-
           {/* Decorative element */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -224,9 +204,9 @@ function AwardsHeroSection() {
             transition={{ duration: 1, delay: 1.4 }}
             className="mt-20 flex items-center justify-center gap-3"
           >
-            <div className="h-px w-12 bg-[#c9a962]/40" />
-            <div className="h-2 w-2 rotate-45 bg-[#c9a962]/60" />
-            <div className="h-px w-12 bg-[#c9a962]/40" />
+            <div className="h-px w-12 bg-[#8f7852]/40" />
+            <div className="h-2 w-2 rotate-45 bg-[#8f7852]/60" />
+            <div className="h-px w-12 bg-[#8f7852]/40" />
           </motion.div>
         </div>
       </motion.div>
@@ -246,7 +226,7 @@ function AwardsHeroSection() {
           <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.4em] text-neutral-400">
             View Our Achievements
           </span>
-          <div className="h-12 w-px bg-gradient-to-b from-[#c9a962] to-transparent" />
+          <div className="h-12 w-px bg-gradient-to-b from-[#8f7852] to-transparent" />
         </motion.div>
       </motion.div>
     </section>
@@ -319,13 +299,13 @@ function ImageCarousel({
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-white/90 text-neutral-800 opacity-0 shadow-lg transition-all duration-300 hover:bg-[#c9a962] hover:text-white group-hover:opacity-100"
+            className="absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-white/90 text-neutral-800 opacity-0 shadow-lg transition-all duration-300 hover:bg-[#8f7852] hover:text-white group-hover:opacity-100"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-white/90 text-neutral-800 opacity-0 shadow-lg transition-all duration-300 hover:bg-[#c9a962] hover:text-white group-hover:opacity-100"
+            className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-white/90 text-neutral-800 opacity-0 shadow-lg transition-all duration-300 hover:bg-[#8f7852] hover:text-white group-hover:opacity-100"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -341,7 +321,7 @@ function ImageCarousel({
               onClick={() => setCurrentIndex(index)}
               className={`h-2 transition-all duration-300 ${
                 index === currentIndex
-                  ? "w-6 bg-[#c9a962]"
+                  ? "w-6 bg-[#8f7852]"
                   : "w-2 bg-white/60 hover:bg-white"
               }`}
             />
@@ -388,17 +368,17 @@ function FeaturedAwardsSection({
           className="mb-24 text-center"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
               Featured Recognition
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]" />
           </div>
 
           <h2 className="font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
             Award-Winning
             <br />
-            <span className="text-[#c9a962]">Excellence</span>
+            <span className="text-[#8f7852]">Excellence</span>
           </h2>
         </motion.div>
 
@@ -454,13 +434,13 @@ function FeaturedAwardCard({
       >
         <div className="group relative">
           {/* Decorative Frame */}
-          <div className="absolute -inset-4 border border-[#c9a962]/20 lg:-inset-6" />
-          <div className="absolute -inset-8 border border-[#c9a962]/10 lg:-inset-10" />
+          <div className="absolute -inset-4 border border-[#8f7852]/20 lg:-inset-6" />
+          <div className="absolute -inset-8 border border-[#8f7852]/10 lg:-inset-10" />
 
           {/* Certificate */}
           <div className="relative overflow-hidden bg-white shadow-2xl shadow-neutral-200/50">
             {/* Gold Top Border */}
-            <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-[#c9a962]/60 via-[#c9a962] to-[#c9a962]/60" />
+            <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-[#8f7852]/60 via-[#8f7852] to-[#8f7852]/60" />
 
             {/* Certificate Preview */}
             <div className="aspect-[8.5/11] w-full bg-white p-4 lg:p-6">
@@ -476,7 +456,7 @@ function FeaturedAwardCard({
               <div className="flex gap-4 opacity-0 transition-all duration-300 group-hover:opacity-100">
                 <button
                   onClick={() => onViewCertificate(award)}
-                  className="flex items-center gap-2 border-2 border-[#c9a962] bg-[#c9a962] px-6 py-3 font-Satoshi text-sm font-medium text-neutral-900 transition-all hover:bg-transparent hover:text-[#c9a962]"
+                  className="flex items-center gap-2 border-2 border-[#8f7852] bg-[#8f7852] px-6 py-3 font-Satoshi text-sm font-medium text-neutral-900 transition-all hover:bg-transparent hover:text-[#8f7852]"
                 >
                   <ExternalLink className="h-4 w-4" />
                   View Full Size
@@ -484,7 +464,7 @@ function FeaturedAwardCard({
                 <a
                   href={award.certificate}
                   download
-                  className="flex items-center gap-2 border-2 border-white/50 px-6 py-3 font-Satoshi text-sm font-light text-white transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+                  className="flex items-center gap-2 border-2 border-white/50 px-6 py-3 font-Satoshi text-sm font-light text-white transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
                 >
                   <Download className="h-4 w-4" />
                   Download
@@ -494,8 +474,8 @@ function FeaturedAwardCard({
           </div>
 
           {/* Corner Accents */}
-          <div className="absolute -left-2 -top-2 h-6 w-6 border-l-2 border-t-2 border-[#c9a962]" />
-          <div className="absolute -bottom-2 -right-2 h-6 w-6 border-b-2 border-r-2 border-[#c9a962]" />
+          <div className="absolute -left-2 -top-2 h-6 w-6 border-l-2 border-t-2 border-[#8f7852]" />
+          <div className="absolute -bottom-2 -right-2 h-6 w-6 border-b-2 border-r-2 border-[#8f7852]" />
         </div>
       </motion.div>
 
@@ -507,11 +487,11 @@ function FeaturedAwardCard({
         className={`flex flex-col justify-center ${isEven ? "" : "lg:order-1"}`}
       >
         {/* Year Badge */}
-        <div className="mb-8 inline-flex w-fit items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-5 py-2">
-          <span className="font-SchnyderS text-3xl font-light text-[#c9a962]">
+        <div className="mb-8 inline-flex w-fit items-center gap-3 border border-[#8f7852]/30 bg-[#8f7852]/5 px-5 py-2">
+          <span className="font-SchnyderS text-3xl font-light text-[#8f7852]">
             {award.year}
           </span>
-          <div className="h-6 w-px bg-[#c9a962]/30" />
+          <div className="h-6 w-px bg-[#8f7852]/30" />
           <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-neutral-600">
             {award.organization}
           </span>
@@ -528,11 +508,11 @@ function FeaturedAwardCard({
             {[1, 2, 3, 4, 5].map((star) => (
               <Star
                 key={star}
-                className="h-4 w-4 fill-[#c9a962] text-[#c9a962]"
+                className="h-4 w-4 fill-[#8f7852] text-[#8f7852]"
               />
             ))}
           </div>
-          <span className="font-Satoshi text-sm font-medium text-[#c9a962]">
+          <span className="font-Satoshi text-sm font-medium text-[#8f7852]">
             {award.level}
           </span>
         </div>
@@ -545,7 +525,7 @@ function FeaturedAwardCard({
         )}
 
         {/* Divider */}
-        <div className="mb-10 h-px w-24 bg-gradient-to-r from-[#c9a962] to-transparent" />
+        <div className="mb-10 h-px w-24 bg-gradient-to-r from-[#8f7852] to-transparent" />
 
         {/* Winning Project */}
         <div className="mb-6">
@@ -559,7 +539,7 @@ function FeaturedAwardCard({
             {award.projectSlug && (
               <Link
                 href={`/en/projects/${award.projectSlug}`}
-                className="group flex h-10 w-10 items-center justify-center border border-neutral-300 transition-all hover:border-[#c9a962] hover:bg-[#c9a962]"
+                className="group flex h-10 w-10 items-center justify-center border border-neutral-300 transition-all hover:border-[#8f7852] hover:bg-[#8f7852]"
               >
                 <ArrowRight className="h-4 w-4 text-neutral-600 transition-colors group-hover:text-white" />
               </Link>
@@ -577,7 +557,7 @@ function FeaturedAwardCard({
             {award.projectSlug && (
               <Link
                 href={`/en/projects/${award.projectSlug}`}
-                className="mt-4 inline-flex items-center gap-2 font-Satoshi text-sm text-neutral-600 transition-colors hover:text-[#c9a962]"
+                className="mt-4 inline-flex items-center gap-2 font-Satoshi text-sm text-neutral-600 transition-colors hover:text-[#8f7852]"
               >
                 <span>View Full Project</span>
                 <ArrowRight className="h-4 w-4" />
@@ -612,7 +592,7 @@ function AwardsGallerySection({
       acc[year].push(award);
       return acc;
     },
-    {} as Record<number, AwardData[]>
+    {} as Record<number, AwardData[]>,
   );
 
   const years = Object.keys(awardsByYear)
@@ -626,7 +606,7 @@ function AwardsGallerySection({
         <div
           className="h-full w-full"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #c9a962 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, #8f7852 1px, transparent 0)`,
             backgroundSize: "60px 60px",
           }}
         />
@@ -641,16 +621,16 @@ function AwardsGallerySection({
           className="mb-20 text-center"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
               Complete Collection
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]" />
           </div>
 
           <h2 className="font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
             All
-            <span className="text-[#c9a962]"> Awards</span>
+            <span className="text-[#8f7852]"> Awards</span>
           </h2>
         </motion.div>
 
@@ -665,10 +645,10 @@ function AwardsGallerySection({
             >
               {/* Year Header */}
               <div className="mb-12 flex items-center gap-6">
-                <span className="font-SchnyderS text-6xl font-light text-[#c9a962] lg:text-7xl">
+                <span className="font-SchnyderS text-6xl font-light text-[#8f7852] lg:text-7xl">
                   {year}
                 </span>
-                <div className="h-px flex-1 bg-gradient-to-r from-[#c9a962]/40 to-transparent" />
+                <div className="h-px flex-1 bg-gradient-to-r from-[#8f7852]/40 to-transparent" />
               </div>
 
               {/* Awards Grid */}
@@ -702,15 +682,19 @@ function GalleryAwardCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
+  // Create a URL-friendly slug for the award
+  const awardSlug = `award-${award.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+
   return (
     <motion.div
       ref={cardRef}
+      id={awardSlug}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group"
+      className="group scroll-mt-32"
     >
-      <div className="relative overflow-hidden bg-white shadow-lg shadow-neutral-200/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#c9a962]/10">
+      <div className="relative overflow-hidden bg-white shadow-lg shadow-neutral-200/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#8f7852]/10">
         {/* Certificate Preview */}
         <div className="relative aspect-[8.5/11] w-full">
           <iframe
@@ -724,7 +708,7 @@ function GalleryAwardCard({
             <div className="flex flex-col gap-3 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <button
                 onClick={() => onViewCertificate(award)}
-                className="flex items-center justify-center gap-2 bg-[#c9a962] px-5 py-2.5 font-Satoshi text-sm font-medium text-neutral-900 transition-all hover:bg-white"
+                className="flex items-center justify-center gap-2 bg-[#8f7852] px-5 py-2.5 font-Satoshi text-sm font-medium text-neutral-900 transition-all hover:bg-white"
               >
                 <ExternalLink className="h-4 w-4" />
                 View Certificate
@@ -732,7 +716,7 @@ function GalleryAwardCard({
               <a
                 href={award.certificate}
                 download
-                className="flex items-center justify-center gap-2 border border-white/50 px-5 py-2.5 font-Satoshi text-sm font-light text-white transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+                className="flex items-center justify-center gap-2 border border-white/50 px-5 py-2.5 font-Satoshi text-sm font-light text-white transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
               >
                 <Download className="h-4 w-4" />
                 Download PDF
@@ -744,7 +728,7 @@ function GalleryAwardCard({
         {/* Card Footer */}
         <div className="border-t border-neutral-100 p-5">
           <div className="mb-2 flex items-center gap-2">
-            <Award className="h-4 w-4 text-[#c9a962]" strokeWidth={1.5} />
+            <Award className="h-4 w-4 text-[#8f7852]" strokeWidth={1.5} />
             <span className="font-Satoshi text-xs font-light text-neutral-500">
               {award.organization}
             </span>
@@ -758,7 +742,7 @@ function GalleryAwardCard({
         </div>
 
         {/* Gold accent line */}
-        <div className="absolute left-0 right-0 top-0 h-0.5 scale-x-0 bg-[#c9a962] transition-transform duration-500 group-hover:scale-x-100" />
+        <div className="absolute left-0 right-0 top-0 h-0.5 scale-x-0 bg-[#8f7852] transition-transform duration-500 group-hover:scale-x-100" />
       </div>
     </motion.div>
   );
@@ -779,8 +763,8 @@ function RecognitionStatement() {
     >
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[#c9a962]/[0.08] blur-[200px]" />
-        <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-[#c9a962]/[0.05] blur-[150px]" />
+        <div className="absolute left-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[#8f7852]/[0.08] blur-[200px]" />
+        <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-[#8f7852]/[0.05] blur-[150px]" />
       </div>
 
       {/* Film Grain */}
@@ -789,10 +773,10 @@ function RecognitionStatement() {
       </div>
 
       {/* Corner Accents */}
-      <div className="pointer-events-none absolute left-8 top-20 h-20 w-20 border-l border-t border-[#c9a962]/30 lg:left-16" />
-      <div className="pointer-events-none absolute bottom-20 right-8 h-20 w-20 border-b border-r border-[#c9a962]/30 lg:right-16" />
+      <div className="pointer-events-none absolute left-8 top-20 h-20 w-20 border-l border-t border-[#8f7852]/30 lg:left-16" />
+      <div className="pointer-events-none absolute bottom-20 right-8 h-20 w-20 border-b border-r border-[#8f7852]/30 lg:right-16" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center lg:px-12">
+      <div className="relative z-10 mx-auto container px-6 text-center lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -805,7 +789,7 @@ function RecognitionStatement() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-12 flex justify-center"
           >
-            <div className="font-SchnyderS text-[120px] leading-none text-[#c9a962]/30 lg:text-[180px]">
+            <div className="font-SchnyderS text-[120px] leading-none text-[#8f7852]/30 lg:text-[180px]">
               &ldquo;
             </div>
           </motion.div>
@@ -819,7 +803,7 @@ function RecognitionStatement() {
           >
             Every project we undertake carries the same commitment to perfection
             that earned these recognitions.{" "}
-            <span className="text-[#c9a962]">
+            <span className="text-[#8f7852]">
               Excellence is not our goal—it&apos;s our standard.
             </span>
           </motion.blockquote>
@@ -830,7 +814,7 @@ function RecognitionStatement() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="mb-3 font-Satoshi text-sm font-medium text-[#c9a962]">
+            <div className="mb-3 font-Satoshi text-sm font-medium text-[#8f7852]">
               Maher Mouhajer
             </div>
             <div className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-white/40">
@@ -864,7 +848,7 @@ function AwardsCTA() {
         <div
           className="h-full w-full"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #c9a962 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, #8f7852 1px, transparent 0)`,
             backgroundSize: "50px 50px",
           }}
         />
@@ -878,18 +862,18 @@ function AwardsCTA() {
         >
           {/* Label */}
           <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
               Your Project, Our Expertise
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]" />
           </div>
 
           {/* Title */}
           <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
             Build Your
             <br />
-            <span className="text-[#c9a962]">Award-Worthy</span>
+            <span className="text-[#8f7852]">Award-Worthy</span>
             <br />
             Project
           </h2>
@@ -905,7 +889,7 @@ function AwardsCTA() {
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 border-2 border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-medium tracking-widest text-neutral-900 transition-all hover:bg-transparent hover:text-[#c9a962]"
+              className="group inline-flex items-center gap-3 border-2 border-[#8f7852] bg-[#8f7852] px-10 py-5 font-Satoshi text-sm font-medium tracking-widest text-neutral-900 transition-all hover:bg-transparent hover:text-[#8f7852]"
             >
               <span>START YOUR PROJECT</span>
               <ArrowRight
@@ -915,7 +899,7 @@ function AwardsCTA() {
             </Link>
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-3 border-2 border-neutral-300 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-700 transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+              className="group inline-flex items-center gap-3 border-2 border-neutral-300 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-700 transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
             >
               <span>VIEW ALL PROJECTS</span>
               <ArrowRight
@@ -957,13 +941,13 @@ function CertificateModal({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 30 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative h-[90vh] w-full max-w-5xl"
+            className="relative h-[90vh] w-full container"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute -right-2 -top-2 z-10 flex h-12 w-12 items-center justify-center bg-[#c9a962] text-neutral-900 transition-all hover:bg-white sm:-right-4 sm:-top-4"
+              className="absolute -right-2 -top-2 z-10 flex h-12 w-12 items-center justify-center bg-[#8f7852] text-neutral-900 transition-all hover:bg-white sm:-right-4 sm:-top-4"
             >
               <X className="h-5 w-5" strokeWidth={2} />
             </button>
@@ -971,7 +955,7 @@ function CertificateModal({
             {/* Certificate Frame */}
             <div className="relative h-full w-full">
               {/* Decorative Frame */}
-              <div className="absolute -inset-3 border-2 border-[#c9a962]/40 sm:-inset-4" />
+              <div className="absolute -inset-3 border-2 border-[#8f7852]/40 sm:-inset-4" />
 
               {/* Certificate */}
               <div className="h-full w-full overflow-hidden bg-white shadow-2xl">
@@ -983,8 +967,8 @@ function CertificateModal({
               </div>
 
               {/* Corner Accents */}
-              <div className="absolute -left-2 -top-2 h-6 w-6 border-l-2 border-t-2 border-[#c9a962] sm:-left-3 sm:-top-3 sm:h-8 sm:w-8" />
-              <div className="absolute -bottom-2 -right-2 h-6 w-6 border-b-2 border-r-2 border-[#c9a962] sm:-bottom-3 sm:-right-3 sm:h-8 sm:w-8" />
+              <div className="absolute -left-2 -top-2 h-6 w-6 border-l-2 border-t-2 border-[#8f7852] sm:-left-3 sm:-top-3 sm:h-8 sm:w-8" />
+              <div className="absolute -bottom-2 -right-2 h-6 w-6 border-b-2 border-r-2 border-[#8f7852] sm:-bottom-3 sm:-right-3 sm:h-8 sm:w-8" />
             </div>
 
             {/* Award Info & Download */}
@@ -1005,7 +989,7 @@ function CertificateModal({
               <a
                 href={award.certificate}
                 download
-                className="flex items-center gap-3 bg-[#c9a962] px-8 py-4 font-Satoshi text-sm font-medium text-neutral-900 transition-all hover:bg-white"
+                className="flex items-center gap-3 bg-[#8f7852] px-8 py-4 font-Satoshi text-sm font-medium text-neutral-900 transition-all hover:bg-white"
               >
                 <Download className="h-4 w-4" />
                 Download Certificate

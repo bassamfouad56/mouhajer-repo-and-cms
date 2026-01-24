@@ -37,7 +37,7 @@ export const projectsQuery = groq`
     "title": coalesce(title[$locale], title.en, title),
     slug,
     "excerpt": coalesce(excerpt[$locale], excerpt.en, coalesce(excerpt, description)),
-    "mainImage": coalesce(mainImage, featuredImage),
+    "mainImage": coalesce(gallery[0], mainImage, featuredImage),
     "legacyCategory": category,
     "sector": sector->{
       _id,
@@ -1196,16 +1196,16 @@ export const homepageQuery = groq`
 
       // Hero Section
       _type == "heroSection" => {
-        "headline": headline[$locale],
-        "subheadline": subheadline[$locale],
+        "headline": coalesce(headline[$locale], headline.en, headline),
+        "subheadline": coalesce(subheadline[$locale], subheadline.en, subheadline),
         videoUrl,
         fallbackImage,
         "primaryCta": {
-          "text": primaryCta.text[$locale],
+          "text": coalesce(primaryCta.text[$locale], primaryCta.text.en, primaryCta.text),
           "link": primaryCta.link
         },
         "secondaryCta": {
-          "text": secondaryCta.text[$locale],
+          "text": coalesce(secondaryCta.text[$locale], secondaryCta.text.en, secondaryCta.text),
           "link": secondaryCta.link
         },
         showAwardBadge,
@@ -1216,19 +1216,19 @@ export const homepageQuery = groq`
       _type == "showcaseSection" => {
         backgroundImage,
         "clientTypes": clientTypes[] {
-          "title": title[$locale],
-          "subtitle": subtitle[$locale],
+          "title": coalesce(title[$locale], title.en, title),
+          "subtitle": coalesce(subtitle[$locale], subtitle.en, subtitle),
           "stat": {
             "value": stat.value,
-            "label": stat.label[$locale]
+            "label": coalesce(stat.label[$locale], stat.label.en, stat.label)
           },
           link
         },
         "panels": panels[] {
           number,
-          "title": title[$locale],
-          "subtitle": subtitle[$locale],
-          "services": services[][$locale],
+          "title": coalesce(title[$locale], title.en, title),
+          "subtitle": coalesce(subtitle[$locale], subtitle.en, subtitle),
+          "services": services,
           image,
           link
         }
@@ -1239,14 +1239,14 @@ export const homepageQuery = groq`
         "stats": stats[] {
           value,
           suffix,
-          "label": label[$locale]
+          "label": coalesce(label[$locale], label.en, label)
         },
         backgroundImages
       },
 
       // Logo Marquee Section
       _type == "logoMarqueeSection" => {
-        "sectionTitle": sectionTitle[$locale],
+        "sectionTitle": coalesce(sectionTitle[$locale], sectionTitle.en, sectionTitle),
         displayMode,
         "clients": select(
           displayMode == "manual" => selectedClients[]-> {
@@ -1267,34 +1267,34 @@ export const homepageQuery = groq`
 
       // Founder Section
       _type == "founderSection" => {
-        "sectionTitle": sectionTitle[$locale],
+        "sectionTitle": coalesce(sectionTitle[$locale], sectionTitle.en, sectionTitle),
         founderName,
-        "founderTitle": founderTitle[$locale],
+        "founderTitle": coalesce(founderTitle[$locale], founderTitle.en, founderTitle),
         founderImage,
-        "quote": quote[$locale],
-        "message": message[$locale],
-        "ctaText": ctaText[$locale],
+        "quote": coalesce(quote[$locale], quote.en, quote),
+        "message": coalesce(message[$locale], message.en, message),
+        "ctaText": coalesce(ctaText[$locale], ctaText.en, ctaText),
         ctaLink
       },
 
       // Capabilities Section
       _type == "capabilitiesSection" => {
-        "sectionTitle": sectionTitle[$locale],
+        "sectionTitle": coalesce(sectionTitle[$locale], sectionTitle.en, sectionTitle),
         "capabilities": capabilities[] {
-          "title": title[$locale],
-          "subtitle": subtitle[$locale],
-          "description": description[$locale],
+          "title": coalesce(title[$locale], title.en, title),
+          "subtitle": coalesce(subtitle[$locale], subtitle.en, subtitle),
+          "description": coalesce(description[$locale], description.en, description),
           image,
           link
         },
-        "ctaText": ctaText[$locale],
+        "ctaText": coalesce(ctaText[$locale], ctaText.en, ctaText),
         ctaLink
       },
 
       // Portfolio Section
       _type == "portfolioSection" => {
-        "sectionTitle": sectionTitle[$locale],
-        "sectionSubtitle": sectionSubtitle[$locale],
+        "sectionTitle": coalesce(sectionTitle[$locale], sectionTitle.en, sectionTitle),
+        "sectionSubtitle": coalesce(sectionSubtitle[$locale], sectionSubtitle.en, sectionSubtitle),
         displayMode,
         maxProjects,
         "projects": select(
@@ -1308,7 +1308,7 @@ export const homepageQuery = groq`
             "location": location->{name, slug},
             "year": coalesce(year, yearCompleted)
           },
-          displayMode == "auto" => *[_type == "project" && featured == true] | order(publishedAt desc)[0..^.maxProjects] {
+          displayMode == "auto" => *[_type == "project" && featured == true] | order(publishedAt desc)[0...8] {
             _id,
             title,
             slug,
@@ -1319,13 +1319,13 @@ export const homepageQuery = groq`
             "year": coalesce(year, yearCompleted)
           }
         ),
-        "ctaText": ctaText[$locale],
+        "ctaText": coalesce(ctaText[$locale], ctaText.en, ctaText),
         ctaLink
       },
 
       // Industries Section
       _type == "industriesSection" => {
-        "sectionTitle": sectionTitle[$locale],
+        "sectionTitle": coalesce(sectionTitle[$locale], sectionTitle.en, sectionTitle),
         displayMode,
         "industries": select(
           displayMode == "manual" => featuredIndustries[]-> {
@@ -1345,13 +1345,13 @@ export const homepageQuery = groq`
             icon
           }
         ),
-        "ctaText": ctaText[$locale],
+        "ctaText": coalesce(ctaText[$locale], ctaText.en, ctaText),
         ctaLink
       },
 
       // Partners & Testimonials Section
       _type == "partnersSection" => {
-        "sectionTitle": sectionTitle[$locale],
+        "sectionTitle": coalesce(sectionTitle[$locale], sectionTitle.en, sectionTitle),
         showPartners,
         showTestimonials,
         "testimonials": featuredTestimonials[]-> {
@@ -1367,15 +1367,15 @@ export const homepageQuery = groq`
 
       // Certifications Section
       _type == "certificationsSection" => {
-        "sectionTitle": sectionTitle[$locale],
+        "sectionTitle": coalesce(sectionTitle[$locale], sectionTitle.en, sectionTitle),
         "certifications": certifications[] {
           name,
           code,
-          "description": description[$locale],
+          "description": coalesce(description[$locale], description.en, description),
           icon
         },
         "awards": awards[] {
-          "title": title[$locale],
+          "title": coalesce(title[$locale], title.en, title),
           year,
           organization,
           certificate,
@@ -1386,32 +1386,333 @@ export const homepageQuery = groq`
 
       // FAQ Section
       _type == "faqSection" => {
-        "sectionTitle": sectionTitle[$locale],
-        "sectionSubtitle": sectionSubtitle[$locale],
+        "sectionTitle": coalesce(sectionTitle[$locale], sectionTitle.en, sectionTitle),
+        "sectionSubtitle": coalesce(sectionSubtitle[$locale], sectionSubtitle.en, sectionSubtitle),
         "faqs": faqs[] {
-          "question": question[$locale],
-          "answer": answer[$locale]
+          "question": coalesce(question[$locale], question.en, question),
+          "answer": coalesce(answer[$locale], answer.en, answer)
         }
       },
 
       // Contact Section
       _type == "contactSection" => {
-        "sectionTitle": sectionTitle[$locale],
-        "sectionSubtitle": sectionSubtitle[$locale],
+        "sectionTitle": coalesce(sectionTitle[$locale], sectionTitle.en, sectionTitle),
+        "sectionSubtitle": coalesce(sectionSubtitle[$locale], sectionSubtitle.en, sectionSubtitle),
         backgroundImage,
         theme,
         "contactInfo": {
           "email": contactInfo.email,
           "phone": contactInfo.phone,
-          "address": contactInfo.address[$locale],
+          "address": coalesce(contactInfo.address[$locale], contactInfo.address.en, contactInfo.address),
           "hours": contactInfo.hours
         }
       }
     },
     "seo": {
-      "metaTitle": seo.metaTitle[$locale],
-      "metaDescription": seo.metaDescription[$locale],
+      "metaTitle": coalesce(seo.metaTitle[$locale], seo.metaTitle.en, seo.metaTitle),
+      "metaDescription": coalesce(seo.metaDescription[$locale], seo.metaDescription.en, seo.metaDescription),
       "ogImage": seo.ogImage
     }
+  }
+`
+
+// ============================================
+// ENHANCED QUERIES - PROJECTS
+// ============================================
+
+// Related Projects - Get projects related by category or tags
+// Used for "You may also like" sections on project detail pages
+export const relatedProjectsQuery = groq`
+  *[_type == "project"
+    && _id != $currentId
+    && (
+      category == $category
+      || sector->slug.current == $sectorSlug
+      || count((tags[]._ref)[@ in $tagIds]) > 0
+    )
+    && (!defined(__i18n_lang) || __i18n_lang == $locale)
+  ] | order(featured desc, publishedAt desc)[0...4] {
+    _id,
+    title,
+    slug,
+    "mainImage": coalesce(mainImage, featuredImage),
+    category,
+    "location": location->name,
+    "year": coalesce(year, yearCompleted),
+    "sector": sector->{
+      _id,
+      title,
+      slug
+    }
+  }
+`
+
+// Project Stats - Aggregate statistics for dashboards, footers, about page
+export const projectStatsQuery = groq`
+{
+  "total": count(*[_type == "project"]),
+  "completed": count(*[_type == "project" && status == "completed"]),
+  "inProgress": count(*[_type == "project" && status == "in-progress"]),
+  "featured": count(*[_type == "project" && featured == true]),
+  "byCategory": {
+    "residential": count(*[_type == "project" && (category == "residential" || sector->slug.current == "residential")]),
+    "commercial": count(*[_type == "project" && (category == "commercial" || sector->slug.current == "commercial")]),
+    "hospitality": count(*[_type == "project" && (category == "hospitality" || sector->slug.current == "hospitality")])
+  },
+  "locationCount": count(*[_type == "location"]),
+  "clientCount": count(*[_type == "client"])
+}
+`
+
+// Projects with Testimonials - For case studies or testimonials page
+export const projectsWithTestimonialsQuery = groq`
+  *[_type == "project" && defined(testimonial) && testimonial != ""] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    "mainImage": coalesce(mainImage, featuredImage),
+    category,
+    client,
+    testimonial,
+    "location": location->name
+  }
+`
+
+// ============================================
+// ENHANCED QUERIES - SERVICES
+// ============================================
+
+// Services with Project Count - Shows how many projects use each service
+export const servicesWithProjectCountQuery = groq`
+  *[_type == "service" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
+    _id,
+    "title": coalesce(title[$locale], title.en, title),
+    slug,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
+    mainImage,
+    icon,
+    featured,
+    order,
+    "projectCount": count(*[_type == "project" && references(^._id)])
+  }
+`
+
+// Service Detail with Auto-Linked Projects - Enhanced version
+export const serviceDetailEnhancedQuery = groq`
+  *[_type == "service" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
+    _id,
+    "title": coalesce(title[$locale], title.en, title),
+    slug,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
+    mainImage,
+    icon,
+    "features": features[] {
+      "title": coalesce(title[$locale], title.en, title),
+      "description": coalesce(description[$locale], description.en, description)
+    },
+    "process": process[] {
+      step,
+      "title": coalesce(title[$locale], title.en, title),
+      "description": coalesce(description[$locale], description.en, description)
+    },
+    content,
+    "seo": {
+      "metaTitle": coalesce(seo.metaTitle[$locale], seo.metaTitle.en, seo.metaTitle),
+      "metaDescription": coalesce(seo.metaDescription[$locale], seo.metaDescription.en, seo.metaDescription),
+      "keywords": seo.keywords
+    },
+    __i18n_lang,
+    // Auto-fetch projects that use this service
+    "linkedProjects": *[_type == "project" && references(^._id)] | order(featured desc, publishedAt desc)[0...8] {
+      _id,
+      title,
+      slug,
+      "mainImage": coalesce(mainImage, featuredImage),
+      category,
+      "location": location->name,
+      "year": coalesce(year, yearCompleted)
+    },
+    // Related industries that use this service
+    "relatedIndustries": *[_type == "industry" && references(^._id)] {
+      _id,
+      "title": coalesce(title[$locale], title.en, title),
+      slug,
+      icon
+    },
+    // All services for navigation
+    "allServices": *[_type == "service" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
+      _id,
+      "title": coalesce(title[$locale], title.en, title),
+      slug,
+      icon
+    }
+  }
+`
+
+// Services Navigation - Lightweight query for menus/navigation
+export const servicesNavQuery = groq`
+  *[_type == "service" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
+    _id,
+    "title": coalesce(title[$locale], title.en, title),
+    slug,
+    icon
+  }
+`
+
+// ============================================
+// ENHANCED QUERIES - INDUSTRIES
+// ============================================
+
+// Industries with Project Count - Shows projects per industry
+export const industriesWithProjectCountQuery = groq`
+  *[_type == "industry" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
+    _id,
+    "title": coalesce(title[$locale], title.en, title),
+    slug,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
+    mainImage,
+    icon,
+    featured,
+    order,
+    "projectCount": count(*[_type == "project" && references(^._id)])
+  }
+`
+
+// Industry Detail Enhanced - Full industry with related content
+export const industryDetailEnhancedQuery = groq`
+  *[_type == "industry" && slug.current == $slug && (!defined(__i18n_lang) || __i18n_lang == $locale)][0] {
+    _id,
+    "title": coalesce(title[$locale], title.en, title),
+    slug,
+    "excerpt": coalesce(excerpt[$locale], excerpt.en, excerpt),
+    mainImage,
+    icon,
+    "challenges": challenges[] {
+      "title": coalesce(title[$locale], title.en, title),
+      "description": coalesce(description[$locale], description.en, description)
+    },
+    "solutions": solutions[] {
+      "title": coalesce(title[$locale], title.en, title),
+      "description": coalesce(description[$locale], description.en, description)
+    },
+    content,
+    "seo": {
+      "metaTitle": coalesce(seo.metaTitle[$locale], seo.metaTitle.en, seo.metaTitle),
+      "metaDescription": coalesce(seo.metaDescription[$locale], seo.metaDescription.en, seo.metaDescription),
+      "keywords": seo.keywords
+    },
+    __i18n_lang,
+    // Projects in this industry
+    "linkedProjects": *[_type == "project" && references(^._id)] | order(featured desc, publishedAt desc)[0...8] {
+      _id,
+      title,
+      slug,
+      "mainImage": coalesce(mainImage, featuredImage),
+      category,
+      "location": location->name,
+      "year": coalesce(year, yearCompleted)
+    },
+    // Services used in this industry
+    "relatedServices": relatedServices[]-> {
+      _id,
+      "title": coalesce(title[$locale], title.en, title),
+      slug,
+      mainImage,
+      icon
+    },
+    // All industries for navigation
+    "allIndustries": *[_type == "industry" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
+      _id,
+      "title": coalesce(title[$locale], title.en, title),
+      slug,
+      icon
+    }
+  }
+`
+
+// Industries Navigation - Lightweight query for menus
+export const industriesNavQuery = groq`
+  *[_type == "industry" && (!defined(__i18n_lang) || __i18n_lang == $locale)] | order(order asc) {
+    _id,
+    "title": coalesce(title[$locale], title.en, title),
+    slug,
+    icon
+  }
+`
+
+// ============================================
+// CROSS-CONTENT QUERIES
+// ============================================
+
+// Full-text Search across all content types
+export const searchQuery = groq`
+  *[_type in ["project", "service", "industry", "post"]
+    && (
+      title match $searchTerm + "*"
+      || pt::text(content) match $searchTerm + "*"
+      || coalesce(excerpt, description, "") match $searchTerm + "*"
+    )
+    && (!defined(__i18n_lang) || __i18n_lang == $locale)
+  ][0...20] {
+    _type,
+    _id,
+    title,
+    slug,
+    "excerpt": coalesce(excerpt, description),
+    "mainImage": coalesce(mainImage, featuredImage),
+    category
+  }
+`
+
+// Tag Cloud with Project Counts
+export const tagCloudQuery = groq`
+  *[_type == "tag"] {
+    _id,
+    name,
+    slug,
+    category,
+    icon,
+    color,
+    "projectCount": count(*[_type == "project" && references(^._id)])
+  } | order(projectCount desc)
+`
+
+// ============================================
+// AWARDS QUERIES
+// ============================================
+
+// All Awards Query - for awards page and homepage
+export const awardsQuery = groq`
+  *[_type == "award"] | order(year desc, order asc) {
+    _id,
+    title,
+    type,
+    organization,
+    year,
+    level,
+    category,
+    projectName,
+    subtitle,
+    description,
+    certificatePath,
+    featured,
+    order
+  }
+`
+
+// Featured Awards Query - for homepage certifications section
+export const featuredAwardsQuery = groq`
+  *[_type == "award" && featured == true] | order(year desc, order asc) {
+    _id,
+    title,
+    type,
+    organization,
+    year,
+    level,
+    category,
+    projectName,
+    subtitle,
+    description,
+    certificatePath
   }
 `

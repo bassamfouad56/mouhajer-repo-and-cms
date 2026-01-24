@@ -118,7 +118,7 @@ export function DualitiesSection() {
               <div className="absolute inset-0 bg-linear-to-t from-neutral-950/20 via-transparent to-transparent" />
 
               {/* Minimal frame accent */}
-              <div className="absolute bottom-0 left-0 right-0 border-b-[3px] border-[#c9a962]" />
+              <div className="absolute bottom-0 left-0 right-0 border-b-[3px] border-[#8f7852]" />
             </motion.div>
 
             {/* Floating caption */}
@@ -158,7 +158,7 @@ export function DualitiesSection() {
               </div>
 
               {/* Title */}
-              <h3 className="mb-6 font-SchnyderS text-3xl font-light leading-tight text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962] xl:text-4xl">
+              <h3 className="mb-6 font-SchnyderS text-3xl font-light leading-tight text-neutral-950 transition-colors duration-300 group-hover:text-[#8f7852] xl:text-4xl">
                 {philosophy.title}
               </h3>
 
@@ -168,7 +168,7 @@ export function DualitiesSection() {
               </p>
 
               {/* Subtle bottom border that expands on hover */}
-              <div className="mt-8 h-px w-0 bg-[#c9a962] transition-all duration-500 group-hover:w-full" />
+              <div className="mt-8 h-px w-0 bg-[#8f7852] transition-all duration-500 group-hover:w-full" />
             </motion.div>
           ))}
         </div>
@@ -197,7 +197,7 @@ export function DualitiesSection() {
           {/* Quote overlay */}
           <div className="absolute inset-y-0 left-0 flex items-center px-12 lg:px-20 xl:px-28">
             <div className="max-w-2xl">
-              <div className="mb-4 h-px w-12 bg-[#c9a962]" />
+              <div className="mb-4 h-px w-12 bg-[#8f7852]" />
               <p className="font-SchnyderS text-3xl font-light leading-tight text-white lg:text-4xl xl:text-5xl">
                 "Every line, every detail must serve both beauty and function."
               </p>
@@ -221,7 +221,7 @@ export function DualitiesSection() {
               We create spaces where the grandeur of history shakes hands with
               the clean lines of tomorrow.
             </p>
-            <div className="mx-auto mt-12 h-px w-24 bg-[#c9a962]" />
+            <div className="mx-auto mt-12 h-px w-24 bg-[#8f7852]" />
           </div>
         </motion.div>
       </div>

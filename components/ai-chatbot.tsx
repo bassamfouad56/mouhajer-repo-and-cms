@@ -296,7 +296,7 @@ function renderMessageWithLinks(text: string) {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-medium text-[#c9a962] underline decoration-[#c9a962]/30 underline-offset-2 hover:text-[#c4a030] hover:decoration-[#c4a030]/50 transition-colors"
+          className="font-medium text-[#8f7852] underline decoration-[#8f7852]/30 underline-offset-2 hover:text-[#c4a030] hover:decoration-[#c4a030]/50 transition-colors"
         >
           {linkText}
         </a>
@@ -346,7 +346,7 @@ export function AIChatbot() {
           parsed.map((m: Message) => ({
             ...m,
             timestamp: new Date(m.timestamp),
-          }))
+          })),
         );
       }
     } catch (e) {
@@ -413,7 +413,7 @@ export function AIChatbot() {
   const addMessage = (
     role: "user" | "assistant",
     content: string,
-    error = false
+    error = false,
   ) => {
     const newMessage: Message = {
       id: nanoid(),
@@ -437,7 +437,7 @@ export function AIChatbot() {
     // Greeting
     if (
       ["hello", "hi", "hey", "good morning", "good evening"].some((g) =>
-        lowerMessage.includes(g)
+        lowerMessage.includes(g),
       )
     ) {
       return chatbotResponses.greeting;
@@ -475,7 +475,7 @@ export function AIChatbot() {
     // About the company
     if (
       ["about", "company", "history", "background", "midc", "mouhajer"].some(
-        (a) => lowerMessage.includes(a)
+        (a) => lowerMessage.includes(a),
       )
     ) {
       return chatbotResponses.about;
@@ -484,7 +484,7 @@ export function AIChatbot() {
     // Services
     if (
       ["service", "offer", "do you", "what can", "provide", "specialize"].some(
-        (s) => lowerMessage.includes(s)
+        (s) => lowerMessage.includes(s),
       )
     ) {
       return chatbotResponses.services;
@@ -493,7 +493,7 @@ export function AIChatbot() {
     // Projects
     if (
       ["project", "portfolio", "work", "example", "client", "partner"].some(
-        (p) => lowerMessage.includes(p)
+        (p) => lowerMessage.includes(p),
       )
     ) {
       return chatbotResponses.projects;
@@ -502,7 +502,7 @@ export function AIChatbot() {
     // Consultation
     if (
       ["consult", "meeting", "appointment", "book", "schedule"].some((c) =>
-        lowerMessage.includes(c)
+        lowerMessage.includes(c),
       )
     ) {
       return chatbotResponses.consultation;
@@ -511,7 +511,7 @@ export function AIChatbot() {
     // Pricing
     if (
       ["price", "cost", "fee", "budget", "quote", "how much", "expensive"].some(
-        (p) => lowerMessage.includes(p)
+        (p) => lowerMessage.includes(p),
       )
     ) {
       return chatbotResponses.pricing;
@@ -520,7 +520,7 @@ export function AIChatbot() {
     // Timeline
     if (
       ["timeline", "how long", "duration", "when", "time", "delivery"].some(
-        (t) => lowerMessage.includes(t)
+        (t) => lowerMessage.includes(t),
       )
     ) {
       return chatbotResponses.timeline;
@@ -597,7 +597,7 @@ export function AIChatbot() {
       addMessage(
         "assistant",
         "Sorry, I encountered an error. Please try again.",
-        true
+        true,
       );
       setRetryMessage(message);
     } finally {
@@ -634,7 +634,7 @@ export function AIChatbot() {
     setDesignFlowStep("collecting_email");
     addMessage(
       "assistant",
-      "Exciting! Let me help you reimagine your space with AI. 🎨\n\nFirst, please enter your email address so we can send you the redesigned image and have our design engineer contact you within 15 minutes to discuss your project."
+      "Exciting! Let me help you reimagine your space with AI. 🎨\n\nFirst, please enter your email address so we can send you the redesigned image and have our design engineer contact you within 15 minutes to discuss your project.",
     );
   };
 
@@ -650,7 +650,7 @@ export function AIChatbot() {
     addMessage("user", email);
     addMessage(
       "assistant",
-      `Perfect! I've saved your email: ${email}\n\nNow, please upload a photo of your interior space. Our AI will analyze it and create a stunning redesigned version for you!\n\nClick the upload button below to select your image.`
+      `Perfect! I've saved your email: ${email}\n\nNow, please upload a photo of your interior space. Our AI will analyze it and create a stunning redesigned version for you!\n\nClick the upload button below to select your image.`,
     );
   };
 
@@ -662,7 +662,7 @@ export function AIChatbot() {
     if (!file.type.startsWith("image/")) {
       addMessage(
         "assistant",
-        "Please upload a valid image file (JPG, PNG, etc.)"
+        "Please upload a valid image file (JPG, PNG, etc.)",
       );
       return;
     }
@@ -671,7 +671,7 @@ export function AIChatbot() {
     if (file.size > 10 * 1024 * 1024) {
       addMessage(
         "assistant",
-        "Image must be less than 10MB. Please choose a smaller file."
+        "Image must be less than 10MB. Please choose a smaller file.",
       );
       return;
     }
@@ -700,7 +700,7 @@ export function AIChatbot() {
 
     addMessage(
       "assistant",
-      "Analyzing your space... Our AI is working on creating a beautiful redesign. This may take 30-60 seconds. ✨"
+      "Analyzing your space... Our AI is working on creating a beautiful redesign. This may take 30-60 seconds. ✨",
     );
 
     try {
@@ -709,7 +709,7 @@ export function AIChatbot() {
       formData.append("image", file);
       formData.append(
         "prompt",
-        "Redesign this interior space with a modern luxury aesthetic, incorporating elegant materials, sophisticated lighting, and premium finishes while maintaining the room's functional layout"
+        "Redesign this interior space with a modern luxury aesthetic, incorporating elegant materials, sophisticated lighting, and premium finishes while maintaining the room's functional layout",
       );
       formData.append("serviceCategory", "interior");
       formData.append("requestEngineerCallback", "true");
@@ -760,7 +760,7 @@ export function AIChatbot() {
       addMessage(
         "assistant",
         `Sorry, there was an issue processing your image. Please try again or contact us directly:\n\n💬 [WhatsApp](${WHATSAPP_LINK})\n📞 [Call ${PHONE_DISPLAY}](tel:+${PHONE})`,
-        true
+        true,
       );
       resetDesignFlow();
     } finally {
@@ -826,7 +826,7 @@ export function AIChatbot() {
           >
             <Sparkles className="h-7 w-7 text-white" strokeWidth={1.5} />
             {messages.length === 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#c9a962] text-xs font-medium text-black">
+              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#8f7852] text-xs font-medium text-black">
                 1
               </span>
             )}
@@ -957,7 +957,7 @@ export function AIChatbot() {
                             className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full sm:h-8 sm:w-8 ${
                               message.role === "assistant"
                                 ? "bg-neutral-950 text-white"
-                                : "bg-[#c9a962] text-black"
+                                : "bg-[#8f7852] text-black"
                             }`}
                           >
                             {message.role === "assistant" ? (
@@ -996,7 +996,7 @@ export function AIChatbot() {
                                     height={200}
                                     className="w-full h-auto object-cover"
                                     unoptimized={message.imageUrl.startsWith(
-                                      "blob:"
+                                      "blob:",
                                     )}
                                   />
                                 </div>
@@ -1083,7 +1083,7 @@ export function AIChatbot() {
                             <button
                               key={action.id}
                               onClick={() => handleQuickAction(action.id)}
-                              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-left text-xs font-light transition-all hover:border-[#c9a962]/50 hover:shadow-md sm:text-sm"
+                              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-left text-xs font-light transition-all hover:border-[#8f7852]/50 hover:shadow-md sm:text-sm"
                             >
                               <span className="mr-1.5">{action.icon}</span>
                               {action.label}
@@ -1101,7 +1101,7 @@ export function AIChatbot() {
                               <button
                                 key={i}
                                 onClick={() => handleSuggestion(suggestion)}
-                                className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-[10px] font-light text-neutral-600 transition-all hover:border-[#c9a962]/50 hover:text-neutral-900 sm:text-xs"
+                                className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-[10px] font-light text-neutral-600 transition-all hover:border-[#8f7852]/50 hover:text-neutral-900 sm:text-xs"
                               >
                                 {suggestion}
                               </button>
@@ -1159,13 +1159,13 @@ export function AIChatbot() {
                             onChange={(e) => setInputValue(e.target.value)}
                             placeholder="Enter your email address..."
                             aria-label="Email input"
-                            className="w-full rounded-lg border border-neutral-200 py-2 pl-10 pr-3 text-sm font-light outline-none transition-colors focus:border-[#c9a962] focus-visible:ring-2 focus-visible:ring-[#c9a962]/20"
+                            className="w-full rounded-lg border border-neutral-200 py-2 pl-10 pr-3 text-sm font-light outline-none transition-colors focus:border-[#8f7852] focus-visible:ring-2 focus-visible:ring-[#8f7852]/20"
                           />
                         </div>
                         <button
                           type="submit"
                           disabled={!inputValue.trim()}
-                          className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#c9a962] text-white transition-all hover:bg-[#c4a030] disabled:opacity-30"
+                          className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#8f7852] text-white transition-all hover:bg-[#c4a030] disabled:opacity-30"
                         >
                           <Send className="h-4 w-4" strokeWidth={1.5} />
                         </button>
@@ -1177,9 +1177,9 @@ export function AIChatbot() {
                       <div className="space-y-2">
                         <button
                           onClick={() => fileInputRef.current?.click()}
-                          className="flex w-full items-center justify-center gap-3 rounded-lg border-2 border-dashed border-[#c9a962]/50 bg-[#c9a962]/5 py-4 text-sm font-medium text-neutral-700 transition-all hover:border-[#c9a962] hover:bg-[#c9a962]/10"
+                          className="flex w-full items-center justify-center gap-3 rounded-lg border-2 border-dashed border-[#8f7852]/50 bg-[#8f7852]/5 py-4 text-sm font-medium text-neutral-700 transition-all hover:border-[#8f7852] hover:bg-[#8f7852]/10"
                         >
-                          <Upload className="h-5 w-5 text-[#c9a962]" />
+                          <Upload className="h-5 w-5 text-[#8f7852]" />
                           <span>Upload Interior Photo</span>
                         </button>
                         <button
@@ -1194,7 +1194,7 @@ export function AIChatbot() {
                     {/* Processing State */}
                     {designFlowStep === "processing" && (
                       <div className="flex items-center justify-center gap-3 py-3">
-                        <Loader2 className="h-5 w-5 animate-spin text-[#c9a962]" />
+                        <Loader2 className="h-5 w-5 animate-spin text-[#8f7852]" />
                         <span className="text-sm text-neutral-600">
                           AI is redesigning your space...
                         </span>
@@ -1227,7 +1227,7 @@ export function AIChatbot() {
                           disabled={isTyping}
                           aria-label="Redesign my space with AI"
                           title="Upload a photo to redesign your space"
-                          className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#c9a962]/50 bg-[#c9a962]/10 text-[#c9a962] transition-all hover:bg-[#c9a962]/20 hover:border-[#c9a962] disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2"
+                          className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#8f7852]/50 bg-[#8f7852]/10 text-[#8f7852] transition-all hover:bg-[#8f7852]/20 hover:border-[#8f7852] disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8f7852] focus-visible:ring-offset-2"
                         >
                           <Upload
                             className="h-4 w-4"

@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     if (!uploadedImage) {
       return NextResponse.json(
         { error: "Please upload an interior image" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: "Invalid email address" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
     if (!uploadedImage.type.startsWith("image/")) {
       return NextResponse.json(
         { error: "Please upload a valid image file" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
         {
           ollama: ollamaHealthy ? "online" : "offline",
           comfyUI: comfyUIHealthy ? "online" : "offline",
-        }
+        },
       );
     }
 
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
           6. Overall atmosphere and mood
 
           Based on this, suggest how to transform it into a modern luxury space with MIDC signature style - blending European precision with Arabic warmth.`,
-          "llava"
+          "llava",
         );
 
         console.log("[Redesign] Image analysis:", imageAnalysis);
@@ -156,7 +156,7 @@ export async function POST(request: NextRequest) {
       } catch (aiError) {
         console.error(
           "[Redesign] AI processing failed, switching to demo mode:",
-          aiError
+          aiError,
         );
         // Continue in demo mode
       }
@@ -164,7 +164,7 @@ export async function POST(request: NextRequest) {
 
     const generationTime = Math.round((Date.now() - startTime) / 1000);
     console.log(
-      `[Redesign] Processing completed in ${generationTime}s (demo mode: ${demoMode || !generatedImageBuffer})`
+      `[Redesign] Processing completed in ${generationTime}s (demo mode: ${demoMode || !generatedImageBuffer})`,
     );
 
     // Upload images to Sanity
@@ -186,7 +186,7 @@ export async function POST(request: NextRequest) {
           {
             filename: `ai-redesign-${Date.now()}.png`,
             contentType: "image/png",
-          }
+          },
         );
       }
     } catch (uploadError) {
@@ -286,7 +286,7 @@ export async function POST(request: NextRequest) {
               </head>
               <body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; max-width: 700px; margin: 0 auto; padding: 20px;">
                 <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); padding: 40px 20px; text-align: center; border-radius: 8px 8px 0 0;">
-                  <h1 style="color: #c9a962; margin: 0; font-size: 28px; font-weight: 300;">Interior Redesign Request</h1>
+                  <h1 style="color: #8f7852; margin: 0; font-size: 28px; font-weight: 300;">Interior Redesign Request</h1>
                   <p style="color: #ffffff; margin: 10px 0 0 0; font-size: 14px;">Mouhajer Design Studio</p>
                 </div>
 
@@ -297,7 +297,7 @@ export async function POST(request: NextRequest) {
                     Thank you for your interest in our Interior Redesign service! We've received your photo and a design engineer will be in touch shortly.
                   </p>
 
-                  <div style="background: #c9a962; color: #1a1a1a; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center;">
+                  <div style="background: #8f7852; color: #1a1a1a; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center;">
                     <h3 style="margin: 0 0 10px 0; font-size: 18px;">Engineer Callback Scheduled</h3>
                     <p style="margin: 0; font-size: 14px;">
                       One of our design engineers will contact you within <strong>15 minutes</strong> to discuss your project and create a personalized redesign concept!
@@ -327,13 +327,13 @@ export async function POST(request: NextRequest) {
 
                   <div style="text-align: center; margin: 30px 0;">
                     <a href="https://wa.me/971523041482?text=${encodeURIComponent("Hi! I just submitted my interior photo for redesign.")}" style="display: inline-block; background: #25D366; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">WhatsApp Us</a>
-                    <a href="tel:+971523041482" style="display: inline-block; background: #c9a962; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">Call Now</a>
+                    <a href="tel:+971523041482" style="display: inline-block; background: #8f7852; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">Call Now</a>
                   </div>
 
                   <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
                     <p style="font-size: 12px; color: #999; margin: 5px 0;">
                       Mouhajer International Design & Contracting<br>
-                      Dubai, UAE | <a href="tel:${ENGINEER_PHONE}" style="color: #c9a962;">${ENGINEER_PHONE}</a>
+                      Dubai, UAE | <a href="tel:${ENGINEER_PHONE}" style="color: #8f7852;">${ENGINEER_PHONE}</a>
                     </p>
                   </div>
                 </div>
@@ -349,7 +349,7 @@ export async function POST(request: NextRequest) {
               </head>
               <body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; max-width: 700px; margin: 0 auto; padding: 20px;">
                 <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); padding: 40px 20px; text-align: center; border-radius: 8px 8px 0 0;">
-                  <h1 style="color: #c9a962; margin: 0; font-size: 28px; font-weight: 300;">Your Interior Redesign</h1>
+                  <h1 style="color: #8f7852; margin: 0; font-size: 28px; font-weight: 300;">Your Interior Redesign</h1>
                   <p style="color: #ffffff; margin: 10px 0 0 0; font-size: 14px;">Powered by Mouhajer AI Design Studio</p>
                 </div>
 
@@ -363,7 +363,7 @@ export async function POST(request: NextRequest) {
                   ${
                     requestEngineerCallback
                       ? `
-                  <div style="background: #c9a962; color: #1a1a1a; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center;">
+                  <div style="background: #8f7852; color: #1a1a1a; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center;">
                     <h3 style="margin: 0 0 10px 0; font-size: 18px;">Engineer Callback Scheduled</h3>
                     <p style="margin: 0; font-size: 14px;">
                       One of our design engineers will contact you within <strong>15 minutes</strong> to discuss your project!
@@ -413,7 +413,7 @@ export async function POST(request: NextRequest) {
                     </p>
                     <div style="text-align: center;">
                       <a href="https://wa.me/971523041482?text=${encodeURIComponent("Hi! I just received my AI interior redesign and would like to discuss bringing it to life.")}" style="display: inline-block; background: #25D366; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">WhatsApp Us</a>
-                      <a href="tel:+971523041482" style="display: inline-block; background: #c9a962; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">Call Now</a>
+                      <a href="tel:+971523041482" style="display: inline-block; background: #8f7852; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: 600; margin: 5px;">Call Now</a>
                     </div>
                   </div>
 
@@ -428,7 +428,7 @@ export async function POST(request: NextRequest) {
                   <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
                     <p style="font-size: 12px; color: #999; margin: 5px 0;">
                       Mouhajer International Design & Contracting<br>
-                      Dubai, UAE | <a href="tel:${ENGINEER_PHONE}" style="color: #c9a962;">${ENGINEER_PHONE}</a>
+                      Dubai, UAE | <a href="tel:${ENGINEER_PHONE}" style="color: #8f7852;">${ENGINEER_PHONE}</a>
                     </p>
                   </div>
                 </div>
@@ -447,7 +447,7 @@ export async function POST(request: NextRequest) {
           emailSent = true;
           console.log(
             "[Redesign] Email sent successfully:",
-            emailResult.data.id
+            emailResult.data.id,
           );
         } else if (emailResult.error) {
           emailError = emailResult.error.message || "Failed to send email";
@@ -538,7 +538,7 @@ export async function POST(request: NextRequest) {
         error: "Failed to generate redesign",
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

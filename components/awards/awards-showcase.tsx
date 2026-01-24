@@ -140,7 +140,7 @@ export function AwardsShowcase() {
               className="mb-16 lg:mb-24"
             >
               <div className="mb-6 flex items-center gap-4">
-                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/40" />
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/40" />
                 <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
                   {collection.year}
                 </span>
@@ -148,7 +148,7 @@ export function AwardsShowcase() {
 
               <h2 className="mb-4 font-SchnyderS text-3xl font-light text-neutral-900 sm:text-4xl lg:text-5xl">
                 The {collection.year} Collection:{" "}
-                <span className="text-[#c9a962]">{collection.title}</span>
+                <span className="text-[#8f7852]">{collection.title}</span>
               </h2>
 
               <p className="mb-3 max-w-3xl font-Satoshi text-base font-light text-neutral-600 lg:text-lg">
@@ -156,8 +156,8 @@ export function AwardsShowcase() {
               </p>
 
               <div className="flex items-center gap-2">
-                <Trophy className="h-4 w-4 text-[#c9a962]" strokeWidth={1.5} />
-                <p className="font-Satoshi text-sm font-light italic text-[#c9a962]">
+                <Trophy className="h-4 w-4 text-[#8f7852]" strokeWidth={1.5} />
+                <p className="font-Satoshi text-sm font-light italic text-[#8f7852]">
                   {collection.organization}
                 </p>
               </div>
@@ -172,12 +172,12 @@ export function AwardsShowcase() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: awardIndex * 0.1 }}
-                  className="group relative overflow-hidden border border-[#c9a962]/20 bg-white/70 p-8 backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/40 hover:bg-white/90 lg:p-10"
+                  className="group relative overflow-hidden border border-[#8f7852]/20 bg-white/70 p-8 backdrop-blur-sm transition-all duration-300 hover:border-[#8f7852]/40 hover:bg-white/90 lg:p-10"
                 >
                   <div className="grid gap-8 lg:grid-cols-12">
                     {/* Left - Title */}
                     <div className="lg:col-span-7">
-                      <h3 className="mb-3 font-SchnyderS text-2xl font-light text-neutral-900 transition-colors group-hover:text-[#c9a962] lg:text-3xl">
+                      <h3 className="mb-3 font-SchnyderS text-2xl font-light text-neutral-900 transition-colors group-hover:text-[#8f7852] lg:text-3xl">
                         {award.title}
                       </h3>
 
@@ -204,8 +204,8 @@ export function AwardsShowcase() {
                       )}
 
                       {award.level && (
-                        <div className="mb-6 inline-flex items-center gap-2 border border-[#c9a962]/30 bg-[#c9a962]/5 px-4 py-2">
-                          <span className="font-Satoshi text-sm font-light uppercase tracking-wider text-[#c9a962]">
+                        <div className="mb-6 inline-flex items-center gap-2 border border-[#8f7852]/30 bg-[#8f7852]/5 px-4 py-2">
+                          <span className="font-Satoshi text-sm font-light uppercase tracking-wider text-[#8f7852]">
                             {award.level}
                           </span>
                         </div>
@@ -214,8 +214,8 @@ export function AwardsShowcase() {
                       {/* Details */}
                       <div className="space-y-4">
                         {award.significance && (
-                          <div className="border-l-2 border-[#c9a962]/50 pl-4">
-                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#c9a962]">
+                          <div className="border-l-2 border-[#8f7852]/50 pl-4">
+                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#8f7852]">
                               Significance
                             </div>
                             <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
@@ -225,8 +225,8 @@ export function AwardsShowcase() {
                         )}
 
                         {award.verdict && (
-                          <div className="border-l-2 border-[#c9a962]/50 pl-4">
-                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#c9a962]">
+                          <div className="border-l-2 border-[#8f7852]/50 pl-4">
+                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#8f7852]">
                               Verdict
                             </div>
                             <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
@@ -236,8 +236,8 @@ export function AwardsShowcase() {
                         )}
 
                         {award.challenge && (
-                          <div className="border-l-2 border-[#c9a962]/50 pl-4">
-                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#c9a962]">
+                          <div className="border-l-2 border-[#8f7852]/50 pl-4">
+                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#8f7852]">
                               The Challenge
                             </div>
                             <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
@@ -247,8 +247,8 @@ export function AwardsShowcase() {
                         )}
 
                         {award.result && (
-                          <div className="border-l-2 border-[#c9a962]/50 pl-4">
-                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#c9a962]">
+                          <div className="border-l-2 border-[#8f7852]/50 pl-4">
+                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#8f7852]">
                               The Result
                             </div>
                             <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
@@ -258,8 +258,8 @@ export function AwardsShowcase() {
                         )}
 
                         {award.scope && (
-                          <div className="border-l-2 border-[#c9a962]/50 pl-4">
-                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#c9a962]">
+                          <div className="border-l-2 border-[#8f7852]/50 pl-4">
+                            <div className="mb-1 font-Satoshi text-xs font-medium uppercase tracking-wider text-[#8f7852]">
                               Scope
                             </div>
                             <p className="font-Satoshi text-sm font-light leading-relaxed text-neutral-600">
@@ -278,11 +278,11 @@ export function AwardsShowcase() {
                           href={award.certificate}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group/btn flex items-center justify-between border border-[#c9a962]/20 bg-white/60 px-6 py-4 transition-all hover:border-[#c9a962]/40 hover:bg-white/80"
+                          className="group/btn flex items-center justify-between border border-[#8f7852]/20 bg-white/60 px-6 py-4 transition-all hover:border-[#8f7852]/40 hover:bg-white/80"
                         >
                           <div className="flex items-center gap-3">
                             <Download
-                              className="h-5 w-5 text-[#c9a962]"
+                              className="h-5 w-5 text-[#8f7852]"
                               strokeWidth={1.5}
                             />
                             <span className="font-Satoshi text-sm font-light text-neutral-900">
@@ -299,13 +299,13 @@ export function AwardsShowcase() {
                         {award.projectSlug && (
                           <Link
                             href={`/projects/${award.projectSlug}`}
-                            className="group/btn flex items-center justify-between border border-[#c9a962]/30 bg-[#c9a962]/5 px-6 py-4 transition-all hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
+                            className="group/btn flex items-center justify-between border border-[#8f7852]/30 bg-[#8f7852]/5 px-6 py-4 transition-all hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10"
                           >
-                            <span className="font-Satoshi text-sm font-light text-[#c9a962]">
+                            <span className="font-Satoshi text-sm font-light text-[#8f7852]">
                               View Project
                             </span>
                             <ArrowRight
-                              className="h-4 w-4 text-[#c9a962] transition-transform group-hover/btn:translate-x-1"
+                              className="h-4 w-4 text-[#8f7852] transition-transform group-hover/btn:translate-x-1"
                               strokeWidth={1.5}
                             />
                           </Link>
@@ -315,7 +315,7 @@ export function AwardsShowcase() {
                   </div>
 
                   {/* Number */}
-                  <div className="absolute right-6 top-6 font-SchnyderS text-6xl font-extralight text-[#c9a962]/10 lg:text-7xl">
+                  <div className="absolute right-6 top-6 font-SchnyderS text-6xl font-extralight text-[#8f7852]/10 lg:text-7xl">
                     0{collectionIndex + 1}
                   </div>
                 </motion.div>
@@ -330,7 +330,7 @@ export function AwardsShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mt-32 border-t border-[#c9a962]/20 pt-16 text-center lg:mt-40"
+          className="mt-32 border-t border-[#8f7852]/20 pt-16 text-center lg:mt-40"
         >
           <h3 className="mb-6 font-SchnyderS text-3xl font-light text-neutral-900 lg:text-4xl">
             See the Work Behind the Wins
@@ -342,7 +342,7 @@ export function AwardsShowcase() {
 
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-[#c9a962]/90"
+            className="group inline-flex items-center gap-3 border border-[#8f7852] bg-[#8f7852] px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all hover:bg-[#8f7852]/90"
           >
             <span>View Our Portfolio</span>
             <ArrowRight

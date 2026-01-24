@@ -10,6 +10,7 @@ import {
   ongoingProjectsQuery,
   industriesQuery,
   servicesQuery,
+  projectsQuery,
 } from '@/sanity/lib/queries';
 import { urlForImage } from '@/sanity/lib/image';
 import { EnhancedProjectPageClient } from './enhanced-project-page';
@@ -106,6 +107,16 @@ async function getServices(locale: string) {
   }
 }
 
+async function getAllProjects(locale: string) {
+  try {
+    const projects = await client.fetch(projectsQuery, { locale });
+    return projects || [];
+  } catch (error) {
+    console.error('Error fetching all projects from Sanity:', error);
+    return [];
+  }
+}
+
 // Generate static params for categories
 export async function generateStaticParams() {
   // Pre-generate category pages
@@ -195,7 +206,10 @@ export default async function ProjectPage({ params }: PageProps) {
   }
 
   // Otherwise, it's an individual project page
-  const project = await getProject(slug, locale);
+  const [project, allProjects] = await Promise.all([
+    getProject(slug, locale),
+    getAllProjects(locale),
+  ]);
 
   if (!project) {
     notFound();
@@ -323,10 +337,29 @@ export default async function ProjectPage({ params }: PageProps) {
     _sanityData: project,
   };
 
+  // Transform all projects for navigation
+  const transformedAllProjects = allProjects.map((p: any) => ({
+    id: p._id,
+    title: typeof p.title === 'string' ? p.title : p.title?.[locale] || p.title?.en || '',
+    slug: p.slug?.current || p.slug,
+    featuredImage: p.mainImage ? {
+      node: {
+        sourceUrl: urlForImage(p.mainImage)?.width(800).height(600).url() || '',
+        altText: '',
+      }
+    } : null,
+    acfFields: {
+      projectType: p.sector?.title || p.projectType?.title || '',
+    },
+  }));
+
   return (
     <>
       <Header />
-      <EnhancedProjectPageClient project={transformedProject} />
+      <EnhancedProjectPageClient
+        project={transformedProject}
+        allProjects={transformedAllProjects}
+      />
       <LogoMarquee />
       <Footer />
     </>

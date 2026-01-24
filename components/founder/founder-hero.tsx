@@ -59,7 +59,7 @@ export function FounderHero({
         stagger: 0.035,
         duration: 1,
         ease: "power3.out",
-      }
+      },
     );
 
     return () => {
@@ -110,7 +110,7 @@ export function FounderHero({
         style={{ opacity, y }}
         className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24 lg:px-12"
       >
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto container text-center">
           {/* Subtitle */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -136,7 +136,7 @@ export function FounderHero({
             >
               The Mind Behind
               <br />
-              <span className="text-[#c9a962]">the Masterpiece</span>
+              <span className="text-[#8f7852]">the Masterpiece</span>
             </h1>
           </div>
 

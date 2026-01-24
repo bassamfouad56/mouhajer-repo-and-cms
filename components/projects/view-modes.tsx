@@ -19,7 +19,7 @@ import { SafeImage } from "@/components/safe-image";
 const getProjectImageUrl = (
   mainImage: any,
   width: number,
-  height: number
+  height: number,
 ): string => {
   return getSafeImageUrl(mainImage, width, height, "/placeholder.jpg");
 };
@@ -244,7 +244,7 @@ function MasonryCard({
           {/* Content */}
           <div className="absolute inset-x-0 bottom-0 p-4 lg:p-6">
             {project.category && (
-              <span className="mb-2 inline-block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962]">
+              <span className="mb-2 inline-block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#8f7852]">
                 {project.category}
               </span>
             )}
@@ -284,7 +284,7 @@ export function HorizontalScrollView({
   const x = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", `-${(projects.length - 1) * 80}%`]
+    ["0%", `-${(projects.length - 1) * 80}%`],
   );
 
   return (
@@ -331,7 +331,7 @@ function HorizontalCard({
 
           {/* Content */}
           <div className="absolute bottom-0 left-0 p-8 lg:p-12">
-            <span className="mb-3 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
+            <span className="mb-3 inline-block font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#8f7852]">
               {project.category || "Project"}
             </span>
             <h3 className="mb-3 font-SchnyderS text-3xl font-light text-white lg:text-5xl">
@@ -538,7 +538,7 @@ function CaseStudyCard({
                 </p>
               )}
 
-              <div className="flex items-center gap-2 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-colors duration-300 group-hover:text-[#c9a962]">
+              <div className="flex items-center gap-2 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-colors duration-300 group-hover:text-[#8f7852]">
                 <span>View Case Study</span>
                 <motion.svg
                   animate={{ x: isHovered ? 5 : 0 }}
@@ -586,7 +586,7 @@ export function SplitScreenView({ projects }: { projects: SanityProject[] }) {
               <div
                 className={`border-l-2 py-4 pl-6 transition-all duration-300 ${
                   activeIndex === index
-                    ? "border-[#c9a962] bg-white"
+                    ? "border-[#8f7852] bg-white"
                     : "border-transparent hover:border-neutral-300"
                 }`}
               >
@@ -635,7 +635,7 @@ export function SplitScreenView({ projects }: { projects: SanityProject[] }) {
                   src={getProjectImageUrl(
                     projects[activeIndex].mainImage,
                     1200,
-                    1000
+                    1000,
                   )}
                   alt={projects[activeIndex].title}
                   fill
@@ -645,7 +645,7 @@ export function SplitScreenView({ projects }: { projects: SanityProject[] }) {
                 <div className="absolute inset-0 bg-neutral-200" />
               )}
               <div className="absolute inset-0 bg-neutral-950/20" />
-              <div className="absolute bottom-8 right-8 flex items-center gap-2 bg-white px-6 py-3 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-colors duration-300 hover:bg-[#c9a962] hover:text-white">
+              <div className="absolute bottom-8 right-8 flex items-center gap-2 bg-white px-6 py-3 font-Satoshi text-xs uppercase tracking-[0.2em] text-neutral-950 transition-colors duration-300 hover:bg-[#8f7852] hover:text-white">
                 View Project
                 <svg
                   className="h-4 w-4"
@@ -720,7 +720,7 @@ export function StackedCardsView({ projects }: { projects: SanityProject[] }) {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-6">
-                    <span className="mb-2 block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962]">
+                    <span className="mb-2 block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#8f7852]">
                       {project.category}
                     </span>
                     <h3 className="font-SchnyderS text-xl font-light text-white lg:text-2xl">
@@ -744,7 +744,7 @@ export function StackedCardsView({ projects }: { projects: SanityProject[] }) {
             }
             className={`h-2 w-2 rounded-full transition-all duration-300 ${
               hoveredIndex === index
-                ? "w-6 bg-[#c9a962]"
+                ? "w-6 bg-[#8f7852]"
                 : "bg-neutral-300 hover:bg-neutral-400"
             }`}
           />
@@ -805,8 +805,8 @@ function TimelineCard({
       className={`relative flex items-center ${isLeft ? "lg:flex-row" : "lg:flex-row-reverse"}`}
     >
       {/* Year marker */}
-      <div className="absolute left-4 z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#c9a962] bg-white lg:left-1/2 lg:-translate-x-1/2">
-        <div className="h-2 w-2 rounded-full bg-[#c9a962]" />
+      <div className="absolute left-4 z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#8f7852] bg-white lg:left-1/2 lg:-translate-x-1/2">
+        <div className="h-2 w-2 rounded-full bg-[#8f7852]" />
       </div>
 
       {/* Year label */}
@@ -838,7 +838,7 @@ function TimelineCard({
             </div>
             <div className="p-6">
               <div className="mb-2 flex items-center gap-2">
-                <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#c9a962]">
+                <span className="font-Satoshi text-[10px] uppercase tracking-[0.2em] text-[#8f7852]">
                   {project.category}
                 </span>
                 <span className="font-Satoshi text-sm text-neutral-400 lg:hidden">
@@ -953,7 +953,7 @@ function Immersive3DCard({
           className="absolute inset-x-0 bottom-0 p-5"
           style={{ transform: "translateZ(30px)" }}
         >
-          <span className="mb-1 block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#c9a962]">
+          <span className="mb-1 block font-Satoshi text-[9px] uppercase tracking-[0.3em] text-[#8f7852]">
             {project.category}
           </span>
           <h3 className="font-SchnyderS text-xl font-light text-white">
@@ -994,7 +994,7 @@ function CinematicCard({
   const imageScale = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [1.15, 1, 1.15]
+    [1.15, 1, 1.15],
   );
   const contentY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
@@ -1028,12 +1028,12 @@ function CinematicCard({
             className="absolute bottom-0 left-0 right-0 p-8 lg:p-16"
           >
             <div className="mb-3 flex items-center gap-4">
-              <div className="h-px w-12 bg-[#c9a962]" />
-              <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#c9a962]">
+              <div className="h-px w-12 bg-[#8f7852]" />
+              <span className="font-Satoshi text-[10px] uppercase tracking-[0.3em] text-[#8f7852]">
                 {project.category || "Featured Project"}
               </span>
             </div>
-            <h2 className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-white transition-all duration-500 group-hover:text-[#c9a962] lg:text-6xl xl:text-7xl">
+            <h2 className="mb-4 font-SchnyderS text-4xl font-light tracking-tight text-white transition-all duration-500 group-hover:text-[#8f7852] lg:text-6xl xl:text-7xl">
               {project.title}
             </h2>
             <div className="mb-6 flex flex-wrap items-center gap-4 font-Satoshi text-sm text-white/60">
@@ -1069,7 +1069,7 @@ function CinematicCard({
             )}
 
             {/* View button */}
-            <div className="mt-6 inline-flex items-center gap-2 border-b border-white/30 pb-1 font-Satoshi text-xs uppercase tracking-[0.2em] text-white/80 transition-all duration-300 group-hover:border-[#c9a962] group-hover:text-[#c9a962]">
+            <div className="mt-6 inline-flex items-center gap-2 border-b border-white/30 pb-1 font-Satoshi text-xs uppercase tracking-[0.2em] text-white/80 transition-all duration-300 group-hover:border-[#8f7852] group-hover:text-[#8f7852]">
               Explore Project
               <svg
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
@@ -1344,7 +1344,7 @@ export function ViewModeSelector({
             className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 font-Satoshi text-xs transition-all duration-200 ${
               isExpanded ||
               !["grid", "masonry", "cinematic"].includes(currentView)
-                ? "bg-[#c9a962] text-white"
+                ? "bg-[#8f7852] text-white"
                 : "text-neutral-600 hover:bg-neutral-100"
             }`}
           >
@@ -1461,20 +1461,20 @@ export function ViewModeSelector({
                     }}
                     className={`group rounded-lg border p-3 text-left transition-all duration-200 ${
                       currentView === view
-                        ? "border-[#c9a962] bg-[#c9a962]/5"
+                        ? "border-[#8f7852] bg-[#8f7852]/5"
                         : "border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
                     }`}
                   >
                     <div className="mb-2 flex items-center gap-2">
                       <div
-                        className={`${currentView === view ? "text-[#c9a962]" : "text-neutral-400 group-hover:text-neutral-600"}`}
+                        className={`${currentView === view ? "text-[#8f7852]" : "text-neutral-400 group-hover:text-neutral-600"}`}
                       >
                         {VIEW_MODE_CONFIG[view].icon}
                       </div>
                       <span
                         className={`font-Satoshi text-sm font-medium ${
                           currentView === view
-                            ? "text-[#c9a962]"
+                            ? "text-[#8f7852]"
                             : "text-neutral-950"
                         }`}
                       >

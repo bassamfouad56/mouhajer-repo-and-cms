@@ -186,14 +186,14 @@ export function PhasesSectionJourney() {
           className="mb-24 text-center"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]" />
             <span className="text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
               The MIDC Protocol
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]" />
           </div>
           <h2 className="font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 md:text-6xl lg:text-7xl">
-            Journey to <span className="text-[#c9a962]">Perfection</span>
+            Journey to <span className="text-[#8f7852]">Perfection</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light leading-relaxed text-neutral-600">
             Six integrated phases. One seamless execution.
@@ -205,11 +205,11 @@ export function PhasesSectionJourney() {
           {/* Connecting Line - Desktop */}
           <div className="absolute left-12 top-0 hidden h-full w-px lg:block">
             {/* Background line */}
-            <div className="h-full w-full bg-gradient-to-b from-[#c9a962]/20 via-[#c9a962]/10 to-transparent" />
+            <div className="h-full w-full bg-gradient-to-b from-[#8f7852]/20 via-[#8f7852]/10 to-transparent" />
             {/* Animated progress line */}
             <motion.div
               style={{ scaleY: pathLength }}
-              className="absolute left-0 top-0 h-full w-full origin-top bg-gradient-to-b from-[#c9a962] to-[#c9a962]/50"
+              className="absolute left-0 top-0 h-full w-full origin-top bg-gradient-to-b from-[#8f7852] to-[#8f7852]/50"
             />
           </div>
 
@@ -276,12 +276,12 @@ function PhaseStep({
             >
               {/* Outer glow ring */}
               <div
-                className={`absolute inset-0 rounded-full bg-[#c9a962]/20 transition-all duration-500 ${isActive ? "scale-150 opacity-100" : "scale-100 opacity-0"}`}
+                className={`absolute inset-0 rounded-full bg-[#8f7852]/20 transition-all duration-500 ${isActive ? "scale-150 opacity-100" : "scale-100 opacity-0"}`}
               />
 
               {/* Main circle */}
-              <div className="relative flex h-24 w-24 items-center justify-center rounded-full border-2 border-[#c9a962] bg-white">
-                <Icon className="h-10 w-10 text-[#c9a962]" strokeWidth={1.5} />
+              <div className="relative flex h-24 w-24 items-center justify-center rounded-full border-2 border-[#8f7852] bg-white">
+                <Icon className="h-10 w-10 text-[#8f7852]" strokeWidth={1.5} />
               </div>
 
               {/* Completion checkmark */}
@@ -289,7 +289,7 @@ function PhaseStep({
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-[#c9a962]"
+                  className="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-[#8f7852]"
                 >
                   <Check className="h-4 w-4 text-neutral-950" strokeWidth={3} />
                 </motion.div>
@@ -299,20 +299,20 @@ function PhaseStep({
 
           {/* Mobile Step Indicator */}
           <div className="mb-6 flex items-center gap-4 lg:hidden">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#c9a962] bg-[#c9a962]/10">
-              <Icon className="h-7 w-7 text-[#c9a962]" strokeWidth={1.5} />
+            <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#8f7852] bg-[#8f7852]/10">
+              <Icon className="h-7 w-7 text-[#8f7852]" strokeWidth={1.5} />
             </div>
           </div>
 
           {/* Phase Info */}
           <div className="mb-6">
             <div className="mb-2">
-              <div className="h-px w-24 bg-gradient-to-r from-[#c9a962] to-transparent" />
+              <div className="h-px w-24 bg-gradient-to-r from-[#8f7852] to-transparent" />
             </div>
             <h3 className="mb-2 font-SchnyderS text-3xl font-light text-neutral-900 md:text-4xl">
               {phase.title}
             </h3>
-            <p className="font-Satoshi text-lg font-light text-[#c9a962]">
+            <p className="font-Satoshi text-lg font-light text-[#8f7852]">
               {phase.headline}
             </p>
           </div>
@@ -334,7 +334,7 @@ function PhaseStep({
                 transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
                 className="flex gap-3"
               >
-                <Circle className="mt-1.5 h-2 w-2 shrink-0 fill-[#c9a962] text-[#c9a962]" />
+                <Circle className="mt-1.5 h-2 w-2 shrink-0 fill-[#8f7852] text-[#8f7852]" />
                 <div>
                   <span className="block text-sm font-medium text-neutral-900">
                     {item.label}
@@ -348,8 +348,8 @@ function PhaseStep({
           </div>
 
           {/* Duration */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#c9a962]/30 bg-[#c9a962]/5 px-4 py-2">
-            <div className="h-2 w-2 rounded-full bg-[#c9a962]" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#8f7852]/30 bg-[#8f7852]/5 px-4 py-2">
+            <div className="h-2 w-2 rounded-full bg-[#8f7852]" />
             <span className="text-xs font-light text-neutral-600">
               Duration: {phase.duration}
             </span>
@@ -376,8 +376,8 @@ function PhaseStep({
             <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-[#faf8f5]/30 to-transparent" />
 
             {/* Corner Frames */}
-            <div className="absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#c9a962]/50 transition-all duration-300 group-hover:h-20 group-hover:w-20" />
-            <div className="absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#c9a962]/50 transition-all duration-300 group-hover:h-20 group-hover:w-20" />
+            <div className="absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#8f7852]/50 transition-all duration-300 group-hover:h-20 group-hover:w-20" />
+            <div className="absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#8f7852]/50 transition-all duration-300 group-hover:h-20 group-hover:w-20" />
           </div>
         </motion.div>
       </div>
@@ -385,7 +385,7 @@ function PhaseStep({
       {/* Connecting Dots for Mobile */}
       {index < phases.length - 1 && (
         <div className="my-12 flex justify-center lg:hidden">
-          <div className="h-12 w-px bg-gradient-to-b from-[#c9a962] to-transparent" />
+          <div className="h-12 w-px bg-gradient-to-b from-[#8f7852] to-transparent" />
         </div>
       )}
     </div>

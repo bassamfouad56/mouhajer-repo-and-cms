@@ -26,7 +26,7 @@ export function FeaturedPartnerships() {
     >
       {/* Background accent */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 bg-[#c9a962]/5 blur-[150px]" />
+        <div className="absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 bg-[#8f7852]/5 blur-[150px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
@@ -38,11 +38,11 @@ export function FeaturedPartnerships() {
             transition={{ duration: 0.6 }}
             className="mb-4 flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]">
               Featured Partnerships
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </motion.div>
 
           <motion.h2
@@ -73,10 +73,10 @@ export function FeaturedPartnerships() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 * (index % 8) }}
-              className="group relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-b from-white/[0.03] to-transparent p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#c9a962]/30 hover:bg-white/[0.05]"
+              className="group relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-b from-white/[0.03] to-transparent p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#8f7852]/30 hover:bg-white/[0.05]"
             >
               {/* Hover glow effect */}
-              <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-[#c9a962]/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-[#8f7852]/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
               <div className="relative z-10">
                 {/* Logo */}
@@ -92,7 +92,7 @@ export function FeaturedPartnerships() {
                 </div>
 
                 {/* Partner Name */}
-                <h3 className="mb-2 font-SchnyderS text-xl text-white transition-colors duration-300 group-hover:text-[#c9a962]">
+                <h3 className="mb-2 font-SchnyderS text-xl text-white transition-colors duration-300 group-hover:text-[#8f7852]">
                   {partner.name}
                 </h3>
 
@@ -104,7 +104,7 @@ export function FeaturedPartnerships() {
                 {/* Stats */}
                 <div className="flex items-center justify-between border-t border-white/5 pt-4">
                   <div>
-                    <div className="font-SchnyderS text-2xl text-[#c9a962]">
+                    <div className="font-SchnyderS text-2xl text-[#8f7852]">
                       {partner.projects}+
                     </div>
                     <div className="font-Satoshi text-xs text-white/40">
@@ -113,8 +113,8 @@ export function FeaturedPartnerships() {
                   </div>
 
                   {/* Arrow icon on hover */}
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all duration-300 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/10">
-                    <ArrowUpRight className="h-4 w-4 text-white/40 transition-colors duration-300 group-hover:text-[#c9a962]" />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all duration-300 group-hover:border-[#8f7852]/50 group-hover:bg-[#8f7852]/10">
+                    <ArrowUpRight className="h-4 w-4 text-white/40 transition-colors duration-300 group-hover:text-[#8f7852]" />
                   </div>
                 </div>
               </div>
@@ -132,14 +132,14 @@ export function FeaturedPartnerships() {
           {Object.entries(categoryDescriptions).map(
             ([category, description]) => (
               <div key={category} className="text-center">
-                <h4 className="mb-2 font-Satoshi text-xs font-medium uppercase tracking-widest text-[#c9a962]">
+                <h4 className="mb-2 font-Satoshi text-xs font-medium uppercase tracking-widest text-[#8f7852]">
                   {category}
                 </h4>
                 <p className="font-Satoshi text-sm leading-relaxed text-white/40">
                   {description}
                 </p>
               </div>
-            )
+            ),
           )}
         </motion.div>
       </div>

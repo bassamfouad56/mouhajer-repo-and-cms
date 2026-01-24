@@ -5,6 +5,18 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Quote } from "lucide-react";
 import Link from "next/link";
 import { SafeImage } from "@/components/safe-image";
+import { homepageSectionAttr } from "@/lib/sanity-visual-editing";
+
+interface FounderSanityData {
+  sectionTitle?: string;
+  founderName?: string;
+  founderTitle?: string;
+  founderImage?: { asset?: { url?: string } };
+  quote?: string;
+  message?: string;
+  ctaText?: string;
+  ctaLink?: string;
+}
 
 interface FounderMessageProps {
   founderImage?: string;
@@ -12,18 +24,43 @@ interface FounderMessageProps {
   founderTitle?: string;
   founderQuote?: string;
   backgroundImage?: string;
+  sanityData?: FounderSanityData | null;
+  homepageId?: string;
+  sectionKey?: string;
 }
 
 // Default founder image fallback
 const DEFAULT_FOUNDER_IMAGE = "/founder/mouhajer.png";
 
+// Default content
+const DEFAULT_QUOTE =
+  "Designing a palace on paper is easy. Building it on sand requires discipline.";
+const DEFAULT_MESSAGE = `For over two decades, I have led a firm that refuses to outsource the hard work. Whether we are pouring the foundation for a new mega-mansion or fitting out a 5-star hotel lobby, my team controls the process from start to finish.
+
+My promise to you is simple: The luxury you see in the render is exactly the quality you will touch in reality.`;
+
 export function FounderMessage({
   founderImage,
   founderName = "Eng. Maher Mouhajer",
   founderTitle = "CEO & Founder",
+  sanityData,
+  homepageId,
+  sectionKey,
 }: FounderMessageProps) {
-  // Use Sanity image if available, otherwise fall back to local image
+  // Use Sanity data if available, otherwise fall back to props/defaults
+  const displayName = sanityData?.founderName || founderName;
+  const displayTitle = sanityData?.founderTitle || founderTitle;
   const displayImage = founderImage || DEFAULT_FOUNDER_IMAGE;
+  const displayQuote = sanityData?.quote || DEFAULT_QUOTE;
+  const displayMessage = sanityData?.message || DEFAULT_MESSAGE;
+  const ctaText = sanityData?.ctaText || "Read the Full Story";
+  const ctaLink = sanityData?.ctaLink || "/about/founder";
+
+  // Helper for visual editing data attributes
+  const getDataAttr = (fieldPath: string) => {
+    if (!homepageId || !sectionKey) return {};
+    return homepageSectionAttr(homepageId, sectionKey, fieldPath);
+  };
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
@@ -59,15 +96,15 @@ export function FounderMessage({
           className="mb-16 text-center lg:mb-20"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
               Founder&apos;s Message
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </div>
           <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-white sm:text-5xl lg:text-6xl">
             We Don&apos;t Just Draw.{" "}
-            <span className="text-[#c9a962]">We Build.</span>
+            <span className="text-[#8f7852]">We Build.</span>
           </h2>
         </motion.div>
 
@@ -110,15 +147,21 @@ export function FounderMessage({
               >
                 <div className="flex items-end justify-between">
                   <div>
-                    <h3 className="font-SchnyderS text-2xl font-light tracking-wide text-white lg:text-3xl">
-                      {founderName}
+                    <h3
+                      className="font-SchnyderS text-2xl font-light tracking-wide text-white lg:text-3xl"
+                      {...getDataAttr("founderName")}
+                    >
+                      {displayName}
                     </h3>
-                    <p className="mt-1 font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-[#c9a962]">
-                      {founderTitle}
+                    <p
+                      className="mt-1 font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-[#8f7852]"
+                      {...getDataAttr("founderTitle")}
+                    >
+                      {displayTitle}
                     </p>
                   </div>
-                  <div className="hidden h-12 w-12 items-center justify-center rounded-full border border-[#c9a962]/30 lg:flex">
-                    <Quote size={18} className="text-[#c9a962]" />
+                  <div className="hidden h-12 w-12 items-center justify-center rounded-full border border-[#8f7852]/30 lg:flex">
+                    <Quote size={18} className="text-[#8f7852]" />
                   </div>
                 </div>
               </motion.div>
@@ -145,11 +188,13 @@ export function FounderMessage({
                 transition={{ duration: 0.8, delay: 0.5 }}
                 className="relative z-10 mb-8"
               >
-                <blockquote className="font-SchnyderS text-2xl font-light leading-[1.4] tracking-wide text-white sm:text-3xl lg:text-4xl">
-                  <span className="text-[#c9a962]">"</span>
-                  Designing a palace on paper is easy. Building it on sand
-                  requires discipline.
-                  <span className="text-[#c9a962]">"</span>
+                <blockquote
+                  className="font-SchnyderS text-2xl font-light leading-[1.4] tracking-wide text-white sm:text-3xl lg:text-4xl"
+                  {...getDataAttr("quote")}
+                >
+                  <span className="text-[#8f7852]">"</span>
+                  {displayQuote}
+                  <span className="text-[#8f7852]">"</span>
                 </blockquote>
               </motion.div>
 
@@ -158,7 +203,7 @@ export function FounderMessage({
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 1, delay: 0.7 }}
-                className="mb-8 h-px w-16 origin-left bg-gradient-to-r from-[#c9a962] to-transparent"
+                className="mb-8 h-px w-16 origin-left bg-gradient-to-r from-[#8f7852] to-transparent"
               />
 
               {/* Message Body */}
@@ -167,21 +212,18 @@ export function FounderMessage({
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.8 }}
                 className="relative z-10 mb-10 space-y-5"
+                {...getDataAttr("message")}
               >
-                <p className="font-Satoshi text-base font-light leading-[1.9] text-neutral-400 lg:text-lg">
-                  For over two decades, I have led a firm that refuses to
-                  outsource the hard work. Whether we are pouring the foundation
-                  for a new mega-mansion or fitting out a 5-star hotel lobby, my
-                  team controls the process from start to finish.
-                </p>
-                <p className="font-Satoshi text-base font-light leading-[1.9] text-neutral-500 lg:text-lg">
-                  My promise to you is simple:
-                  <span className="font-medium text-white">
-                    {" "}
-                    The luxury you see in the render is exactly the quality you
-                    will touch in reality.
-                  </span>
-                </p>
+                {displayMessage.split("\n\n").map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className={`font-Satoshi text-base font-light leading-[1.9] lg:text-lg ${
+                      index === 0 ? "text-neutral-400" : "text-neutral-500"
+                    }`}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
               </motion.div>
 
               {/* CTA Button */}
@@ -191,10 +233,10 @@ export function FounderMessage({
                 transition={{ duration: 0.6, delay: 1 }}
               >
                 <Link
-                  href="/about/founder"
-                  className="group inline-flex items-center gap-4 border border-[#c9a962]/30 bg-transparent px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-[#c9a962] transition-all duration-500 hover:border-[#c9a962] hover:bg-[#c9a962] hover:text-neutral-950"
+                  href={ctaLink}
+                  className="group inline-flex items-center gap-4 border border-[#8f7852]/30 bg-transparent px-8 py-4 font-Satoshi text-xs font-light uppercase tracking-[0.2em] text-[#8f7852] transition-all duration-500 hover:border-[#8f7852] hover:bg-[#8f7852] hover:text-neutral-950"
                 >
-                  <span>Read the Full Story</span>
+                  <span {...getDataAttr("ctaText")}>{ctaText}</span>
                   <ArrowRight
                     className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                     strokeWidth={1.5}
@@ -203,8 +245,8 @@ export function FounderMessage({
               </motion.div>
 
               {/* Decorative Corner Elements */}
-              <div className="absolute right-0 top-0 h-20 w-20 border-r border-t border-[#c9a962]/10" />
-              <div className="absolute bottom-0 left-0 h-20 w-20 border-b border-l border-[#c9a962]/10" />
+              <div className="absolute right-0 top-0 h-20 w-20 border-r border-t border-[#8f7852]/10" />
+              <div className="absolute bottom-0 left-0 h-20 w-20 border-b border-l border-[#8f7852]/10" />
             </motion.div>
           </div>
         </div>
@@ -216,21 +258,21 @@ export function FounderMessage({
           transition={{ duration: 0.8, delay: 1.2 }}
           className="mt-16 flex items-center justify-center gap-8 lg:mt-20"
         >
-          <div className="h-px w-24 bg-gradient-to-r from-transparent to-[#c9a962]/30" />
+          <div className="h-px w-24 bg-gradient-to-r from-transparent to-[#8f7852]/30" />
           <div className="flex items-center gap-3">
-            <div className="h-1.5 w-1.5 rounded-full bg-[#c9a962]/40" />
+            <div className="h-1.5 w-1.5 rounded-full bg-[#8f7852]/40" />
             <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.3em] text-neutral-600">
               Excellence Since 2001
             </span>
-            <div className="h-1.5 w-1.5 rounded-full bg-[#c9a962]/40" />
+            <div className="h-1.5 w-1.5 rounded-full bg-[#8f7852]/40" />
           </div>
-          <div className="h-px w-24 bg-gradient-to-l from-transparent to-[#c9a962]/30" />
+          <div className="h-px w-24 bg-gradient-to-l from-transparent to-[#8f7852]/30" />
         </motion.div>
       </div>
 
       {/* Top & Bottom Accent Lines */}
-      <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
+      <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#8f7852]/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#8f7852]/20 to-transparent" />
     </section>
   );
 }

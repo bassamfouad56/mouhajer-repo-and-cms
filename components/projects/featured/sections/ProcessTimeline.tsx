@@ -53,7 +53,7 @@ export function ProcessTimeline({
     [0.1, 0.9],
     isRTL
       ? [`-${(totalSteps - 1) * 100}vw`, "0vw"]
-      : ["0vw", `-${(totalSteps - 1) * 100}vw`]
+      : ["0vw", `-${(totalSteps - 1) * 100}vw`],
   );
 
   const labels = {
@@ -97,9 +97,9 @@ export function ProcessTimeline({
               initial={{ width: 0 }}
               animate={isTitleInView ? { width: 48 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="h-px bg-[#c9a962]"
+              className="h-px bg-[#8f7852]"
             />
-            <span className="text-[#c9a962] text-xs tracking-[0.3em] uppercase font-light">
+            <span className="text-[#8f7852] text-xs tracking-[0.3em] uppercase font-light">
               {title || t.title}
             </span>
           </div>
@@ -116,7 +116,7 @@ export function ProcessTimeline({
             </span>
             <div className="w-24 h-1 bg-neutral-200 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-[#c9a962] rounded-full origin-left"
+                className="h-full bg-[#8f7852] rounded-full origin-left"
                 style={{ scaleX: smoothProgress }}
               />
             </div>
@@ -146,7 +146,7 @@ export function ProcessTimeline({
         {/* Timeline Line */}
         <div className="absolute top-1/2 left-0 right-0 h-px bg-neutral-200" />
         <motion.div
-          className="absolute top-1/2 left-0 h-px bg-[#c9a962] origin-left"
+          className="absolute top-1/2 left-0 h-px bg-[#8f7852] origin-left"
           style={{
             scaleX: smoothProgress,
             width: "100%",
@@ -189,14 +189,14 @@ function TimelineStep({
   const stepProgress = useTransform(
     progress,
     [(index - 0.5) / total, (index + 0.5) / total],
-    [0, 1]
+    [0, 1],
   );
 
   const scale = useTransform(stepProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
   const opacity = useTransform(
     stepProgress,
     [0, 0.3, 0.7, 1],
-    [0.5, 1, 1, 0.5]
+    [0.5, 1, 1, 0.5],
   );
 
   return (
@@ -221,8 +221,8 @@ function TimelineStep({
               transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
               className="relative"
             >
-              <div className="w-16 h-16 rounded-full border-2 border-[#c9a962] flex items-center justify-center">
-                <span className="text-[#c9a962] font-SchnyderS text-2xl">
+              <div className="w-16 h-16 rounded-full border-2 border-[#8f7852] flex items-center justify-center">
+                <span className="text-[#8f7852] font-SchnyderS text-2xl">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -230,7 +230,7 @@ function TimelineStep({
                 initial={{ scale: 0 }}
                 animate={isInView ? { scale: 1 } : {}}
                 transition={{ duration: 0.3, delay: 0.5 }}
-                className="absolute -top-1 -right-1 w-6 h-6 bg-[#c9a962] rounded-full flex items-center justify-center"
+                className="absolute -top-1 -right-1 w-6 h-6 bg-[#8f7852] rounded-full flex items-center justify-center"
               >
                 <CheckCircle2 className="w-4 h-4 text-white" />
               </motion.div>
@@ -268,7 +268,7 @@ function TimelineStep({
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-8 h-px w-24 bg-[#c9a962] origin-left"
+            className="mt-8 h-px w-24 bg-[#8f7852] origin-left"
           />
         </motion.div>
 
@@ -293,7 +293,7 @@ function TimelineStep({
 
             {/* Frame Corners */}
             <div className="absolute top-4 left-4 w-12 h-12 border-l-2 border-t-2 border-white/30" />
-            <div className="absolute bottom-4 right-4 w-12 h-12 border-r-2 border-b-2 border-[#c9a962]/50" />
+            <div className="absolute bottom-4 right-4 w-12 h-12 border-r-2 border-b-2 border-[#8f7852]/50" />
           </motion.div>
         )}
       </div>

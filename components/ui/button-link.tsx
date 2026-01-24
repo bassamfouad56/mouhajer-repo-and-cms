@@ -13,8 +13,7 @@ import { cn } from "@/lib/utils";
  * Use for: Back links, Skip, View All, Inline navigation, See More
  */
 
-export interface ButtonLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface ButtonLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   /** External link (opens in new tab) */
   external?: boolean;
@@ -28,9 +27,9 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
       "inline-flex items-center gap-1",
       "font-Satoshi text-xs font-light uppercase tracking-[0.1em]",
       "border-b border-neutral-950 bg-transparent text-neutral-950",
-      "hover:border-[#c9a962] hover:text-[#c9a962]",
+      "hover:border-[#8f7852] hover:text-[#8f7852]",
       "transition-colors duration-300",
-      className
+      className,
     );
 
     if (external) {
@@ -53,7 +52,7 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
         {children}
       </Link>
     );
-  }
+  },
 );
 
 ButtonLink.displayName = "ButtonLink";

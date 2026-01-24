@@ -181,17 +181,17 @@ export function PhasesSectionCinematic() {
             className="text-center"
           >
             <div className="mb-6 flex items-center justify-center gap-4">
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
               <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
                 The MIDC Protocol
               </span>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
             </div>
 
             <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-neutral-900 md:text-6xl lg:text-7xl">
               From Vision to
               <br />
-              <span className="text-[#c9a962]">Reality</span>
+              <span className="text-[#8f7852]">Reality</span>
             </h2>
 
             <p className="mx-auto max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
@@ -243,7 +243,7 @@ function PhaseSection({
       {/* Subtle background gradient */}
       <div className="pointer-events-none absolute inset-0">
         <div
-          className={`absolute ${isEven ? "right-0" : "left-0"} top-0 h-full w-1/2 bg-gradient-to-${isEven ? "l" : "r"} from-[#c9a962]/[0.02] to-transparent`}
+          className={`absolute ${isEven ? "right-0" : "left-0"} top-0 h-full w-1/2 bg-gradient-to-${isEven ? "l" : "r"} from-[#8f7852]/[0.02] to-transparent`}
         />
       </div>
 
@@ -261,14 +261,14 @@ function PhaseSection({
             {/* Phase Number & Icon */}
             <div className="mb-8 flex items-center gap-6">
               <div className="relative flex h-20 w-20 items-center justify-center">
-                <div className="absolute inset-0 rounded-2xl border border-[#c9a962]/20 bg-gradient-to-br from-[#c9a962]/10 to-transparent" />
+                <div className="absolute inset-0 rounded-2xl border border-[#8f7852]/20 bg-gradient-to-br from-[#8f7852]/10 to-transparent" />
                 <Icon
-                  className="relative h-8 w-8 text-[#c9a962]"
+                  className="relative h-8 w-8 text-[#8f7852]"
                   strokeWidth={1.5}
                 />
               </div>
               <div>
-                <div className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
+                <div className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]">
                   Phase {phase.number}
                 </div>
                 <div className="mt-1 flex items-center gap-2 text-neutral-400">
@@ -296,7 +296,7 @@ function PhaseSection({
             <h3 className="mb-3 font-SchnyderS text-4xl font-light leading-tight tracking-tight text-neutral-900 lg:text-5xl">
               {phase.title}
             </h3>
-            <p className="mb-6 font-Satoshi text-lg font-light italic text-[#c9a962]">
+            <p className="mb-6 font-Satoshi text-lg font-light italic text-[#8f7852]">
               {phase.headline}
             </p>
 
@@ -316,10 +316,10 @@ function PhaseSection({
                   className="group relative pl-6"
                 >
                   {/* Vertical line */}
-                  <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[#c9a962] to-[#c9a962]/20" />
+                  <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[#8f7852] to-[#8f7852]/20" />
 
                   {/* Dot */}
-                  <div className="absolute -left-[3px] top-1.5 h-[7px] w-[7px] rounded-full bg-[#c9a962]" />
+                  <div className="absolute -left-[3px] top-1.5 h-[7px] w-[7px] rounded-full bg-[#8f7852]" />
 
                   <h4 className="mb-1 font-Satoshi text-sm font-medium uppercase tracking-wider text-neutral-900">
                     {point.label}
@@ -360,8 +360,8 @@ function PhaseSection({
               />
 
               {/* Decorative corners */}
-              <div className="absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#c9a962]/30" />
-              <div className="absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#c9a962]/30" />
+              <div className="absolute left-6 top-6 h-16 w-16 border-l-2 border-t-2 border-[#8f7852]/30" />
+              <div className="absolute bottom-6 right-6 h-16 w-16 border-b-2 border-r-2 border-[#8f7852]/30" />
 
               {/* Phase number overlay */}
               <div className="absolute bottom-8 right-8">
@@ -375,7 +375,7 @@ function PhaseSection({
       </div>
 
       {/* Section divider */}
-      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/20 to-transparent" />
     </section>
   );
 }
@@ -391,8 +391,8 @@ function CTASection() {
     >
       {/* Background effects */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-[#c9a962]/10 blur-[150px]" />
-        <div className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full bg-[#c9a962]/5 blur-[120px]" />
+        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-[#8f7852]/10 blur-[150px]" />
+        <div className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full bg-[#8f7852]/5 blur-[120px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-12">
@@ -412,7 +412,7 @@ function CTASection() {
           <h2 className="mb-6 font-SchnyderS text-5xl font-light tracking-tight text-white md:text-6xl lg:text-7xl">
             Ready to Begin
             <br />
-            <span className="text-[#c9a962]">Your Journey?</span>
+            <span className="text-[#8f7852]">Your Journey?</span>
           </h2>
 
           <p className="mx-auto mb-12 max-w-2xl font-Satoshi text-lg font-light leading-relaxed text-white/60">
@@ -423,7 +423,7 @@ function CTASection() {
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-[#c9a962]/90"
+              className="group inline-flex items-center gap-3 bg-[#8f7852] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-[#8f7852]/90"
             >
               <span>DISCUSS YOUR PROJECT</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

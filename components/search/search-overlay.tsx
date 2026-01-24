@@ -114,13 +114,13 @@ export function SearchOverlay() {
         case "ArrowDown":
           e.preventDefault();
           setSelectedIndex((prev) =>
-            prev < results.hits.length - 1 ? prev + 1 : 0
+            prev < results.hits.length - 1 ? prev + 1 : 0,
           );
           break;
         case "ArrowUp":
           e.preventDefault();
           setSelectedIndex((prev) =>
-            prev > 0 ? prev - 1 : results.hits.length - 1
+            prev > 0 ? prev - 1 : results.hits.length - 1,
           );
           break;
         case "Enter":
@@ -165,7 +165,7 @@ export function SearchOverlay() {
       acc[hit.type].push(hit);
       return acc;
     },
-    {} as Record<string, SearchHit[]>
+    {} as Record<string, SearchHit[]>,
   );
 
   const typeLabels: Record<string, { en: string; ar: string }> = {
@@ -246,11 +246,11 @@ export function SearchOverlay() {
                           <button
                             key={term}
                             onClick={() => setQuery(term)}
-                            className="rounded-full border border-neutral-800 px-3 py-1 text-sm text-neutral-400 transition-colors hover:border-[#c9a962] hover:text-[#c9a962]"
+                            className="rounded-full border border-neutral-800 px-3 py-1 text-sm text-neutral-400 transition-colors hover:border-[#8f7852] hover:text-[#8f7852]"
                           >
                             {term}
                           </button>
-                        )
+                        ),
                       )}
                     </div>
                   </div>
@@ -285,7 +285,7 @@ export function SearchOverlay() {
                                 key={hit.objectID}
                                 className={
                                   isSelected
-                                    ? "ring-2 ring-[#c9a962] ring-inset rounded-lg"
+                                    ? "ring-2 ring-[#8f7852] ring-inset rounded-lg"
                                     : ""
                                 }
                               >
@@ -358,7 +358,7 @@ export function SearchOverlay() {
                     </span>
                   </span>
                 </div>
-                <span className="text-[#c9a962]">
+                <span className="text-[#8f7852]">
                   {results?.nbHits
                     ? `${results.nbHits} ${locale === "ar" ? "نتيجة" : "results"}`
                     : ""}

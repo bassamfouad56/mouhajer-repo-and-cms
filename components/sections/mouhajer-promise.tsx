@@ -95,7 +95,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
             <div
               className="h-full w-full"
               style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, #c9a962 1px, transparent 0)`,
+                backgroundImage: `radial-gradient(circle at 1px 1px, #8f7852 1px, transparent 0)`,
                 backgroundSize: "40px 40px",
               }}
             />
@@ -113,22 +113,22 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
               className="mb-8 flex items-center justify-center gap-4"
             >
               <motion.div
-                className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]"
+                className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]"
                 initial={{ scaleX: 0, originX: 0 }}
                 animate={headerInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 1, delay: 0.3 }}
               />
               <div className="flex items-center gap-2">
                 <Sparkles
-                  className="h-3.5 w-3.5 text-[#c9a962]"
+                  className="h-3.5 w-3.5 text-[#8f7852]"
                   strokeWidth={1.5}
                 />
-                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
                   The Mouhajer Promise
                 </span>
               </div>
               <motion.div
-                className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]"
+                className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]"
                 initial={{ scaleX: 0, originX: 1 }}
                 animate={headerInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 1, delay: 0.3 }}
@@ -150,7 +150,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
                 The Architect of
                 <br />
                 <motion.span
-                  className="text-[#c9a962]"
+                  className="text-[#8f7852]"
                   initial={{ opacity: 0 }}
                   animate={headerInView ? { opacity: 1 } : {}}
                   transition={{ duration: 1, delay: 0.5 }}
@@ -253,7 +253,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
 
                           {/* Label */}
                           <motion.span
-                            className="mb-3 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]"
+                            className="mb-3 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#8f7852]"
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
@@ -333,9 +333,9 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
                                   delay: 0.6 + i * 0.1,
                                 }}
                               >
-                                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c9a962]/20">
+                                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#8f7852]/20">
                                   <Check
-                                    className="h-3 w-3 text-[#c9a962]"
+                                    className="h-3 w-3 text-[#8f7852]"
                                     strokeWidth={2}
                                   />
                                 </div>
@@ -364,11 +364,11 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
                               whileHover={{ x: 5 }}
                               transition={{ duration: 0.3 }}
                             >
-                              <span className="font-Satoshi text-sm font-light tracking-wide text-white/80 transition-colors group-hover:text-[#c9a962]">
+                              <span className="font-Satoshi text-sm font-light tracking-wide text-white/80 transition-colors group-hover:text-[#8f7852]">
                                 {card.cta}
                               </span>
                               <motion.div
-                                className="flex h-11 w-11 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#c9a962] group-hover:bg-[#c9a962]"
+                                className="flex h-11 w-11 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#8f7852] group-hover:bg-[#8f7852]"
                                 whileHover={{ scale: 1.1 }}
                               >
                                 <ArrowUpRight
@@ -383,7 +383,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
 
                       {/* Accent Line at Bottom */}
                       <motion.div
-                        className="absolute bottom-0 left-0 h-1 bg-[#c9a962]"
+                        className="absolute bottom-0 left-0 h-1 bg-[#8f7852]"
                         initial={{ width: 0 }}
                         animate={{ width: isHovered ? "100%" : "0%" }}
                         transition={{ duration: 0.5 }}
@@ -444,7 +444,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
 
                       {/* Title on Image */}
                       <div className="absolute bottom-5 left-5 right-5">
-                        <span className="mb-2 block font-Satoshi text-[9px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                        <span className="mb-2 block font-Satoshi text-[9px] font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                           {card.label}
                         </span>
                         <h3 className="font-SchnyderS text-2xl font-light text-white sm:text-3xl">
@@ -466,7 +466,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
                             key={feature}
                             className="flex items-center gap-2"
                           >
-                            <div className="h-1 w-1 rounded-full bg-[#c9a962]" />
+                            <div className="h-1 w-1 rounded-full bg-[#8f7852]" />
                             <span className="font-Satoshi text-xs text-neutral-500">
                               {feature.split(" ").slice(0, 2).join(" ")}
                             </span>
@@ -486,10 +486,10 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
                         </div>
 
                         <div className="flex items-center gap-2">
-                          <span className="font-Satoshi text-xs font-medium text-neutral-700 transition-colors group-hover:text-[#c9a962]">
+                          <span className="font-Satoshi text-xs font-medium text-neutral-700 transition-colors group-hover:text-[#8f7852]">
                             Explore
                           </span>
-                          <div className="flex h-8 w-8 items-center justify-center border border-neutral-200 transition-all group-hover:border-[#c9a962] group-hover:bg-[#c9a962]">
+                          <div className="flex h-8 w-8 items-center justify-center border border-neutral-200 transition-all group-hover:border-[#8f7852] group-hover:bg-[#8f7852]">
                             <ArrowRight
                               className="h-3.5 w-3.5 text-neutral-600 transition-colors group-hover:text-white"
                               strokeWidth={1.5}
@@ -500,7 +500,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
                     </div>
 
                     {/* Gold accent line */}
-                    <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#c9a962] transition-all duration-500 group-hover:w-full" />
+                    <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#8f7852] transition-all duration-500 group-hover:w-full" />
                   </div>
                 </Link>
               </motion.div>
@@ -518,12 +518,12 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
         className="bg-[#faf8f5] py-12 text-center lg:py-16"
       >
         <div className="inline-flex items-center gap-3 border border-neutral-200 bg-white px-6 py-3 shadow-sm">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#c9a962]/10">
-            <Sparkles className="h-4 w-4 text-[#c9a962]" strokeWidth={1.5} />
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#8f7852]/10">
+            <Sparkles className="h-4 w-4 text-[#8f7852]" strokeWidth={1.5} />
           </div>
           <span className="font-Satoshi text-sm text-neutral-600">
             We are a{" "}
-            <span className="font-medium text-[#c9a962]">
+            <span className="font-medium text-[#8f7852]">
               Grade-A Licensed Construction Company
             </span>
           </span>
@@ -531,7 +531,7 @@ export function MouhajerPromise({ images }: MouhajerPromiseProps) {
       </motion.div>
 
       {/* Bottom Border */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/20 to-transparent" />
     </section>
   );
 }

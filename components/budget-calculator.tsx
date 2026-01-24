@@ -80,7 +80,7 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
   const [step, setStep] = useState<"input" | "results" | "contact">("input");
   const [projectType, setProjectType] = useState<ProjectType>("residential");
   const [selectedRooms, setSelectedRooms] = useState<Record<string, number>>(
-    {}
+    {},
   );
   const [finishLevel, setFinishLevel] = useState<FinishLevel>("premium");
   const [email, setEmail] = useState("");
@@ -174,8 +174,8 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
     <div className={`rounded-2xl bg-white p-6 shadow-lg sm:p-8 ${className}`}>
       {/* Header */}
       <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#c9a962]/10">
-          <Calculator className="h-6 w-6 text-[#c9a962]" />
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#8f7852]/10">
+          <Calculator className="h-6 w-6 text-[#8f7852]" />
         </div>
         <div>
           <h3 className="text-xl font-medium text-neutral-900">
@@ -210,14 +210,14 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                     }}
                     className={`flex flex-col items-center gap-1 rounded-lg border-2 p-3 transition-all ${
                       projectType === id
-                        ? "border-[#c9a962] bg-[#c9a962]/5"
+                        ? "border-[#8f7852] bg-[#8f7852]/5"
                         : "border-neutral-200 hover:border-neutral-300"
                     }`}
                   >
                     <Icon
                       className={`h-5 w-5 ${
                         projectType === id
-                          ? "text-[#c9a962]"
+                          ? "text-[#8f7852]"
                           : "text-neutral-400"
                       }`}
                     />
@@ -250,7 +250,7 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                         handleRoomChange(room.id, parseInt(e.target.value) || 0)
                       }
                       placeholder="0"
-                      className="w-20 rounded-lg border border-neutral-200 px-3 py-2 text-center text-sm outline-none focus:border-[#c9a962]"
+                      className="w-20 rounded-lg border border-neutral-200 px-3 py-2 text-center text-sm outline-none focus:border-[#8f7852]"
                     />
                     <span className="text-xs text-neutral-400">sqm</span>
                   </div>
@@ -275,14 +275,14 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                     onClick={() => setFinishLevel(level)}
                     className={`flex w-full items-center gap-3 rounded-lg border-2 p-3 text-left transition-all ${
                       finishLevel === level
-                        ? "border-[#c9a962] bg-[#c9a962]/5"
+                        ? "border-[#8f7852] bg-[#8f7852]/5"
                         : "border-neutral-200 hover:border-neutral-300"
                     }`}
                   >
                     <div
                       className={`h-4 w-4 rounded-full border-2 ${
                         finishLevel === level
-                          ? "border-[#c9a962] bg-[#c9a962]"
+                          ? "border-[#8f7852] bg-[#8f7852]"
                           : "border-neutral-300"
                       }`}
                     />
@@ -381,7 +381,7 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
           >
             {!isSubmitted ? (
               <>
-                <div className="mb-6 rounded-xl bg-[#c9a962]/10 p-4">
+                <div className="mb-6 rounded-xl bg-[#8f7852]/10 p-4">
                   <div className="text-sm text-neutral-600">Your Estimate</div>
                   <div className="text-xl font-medium text-neutral-900">
                     AED {calculation.lowEstimate.toLocaleString()} -{" "}
@@ -406,7 +406,7 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="your@email.com"
-                        className="w-full rounded-lg border border-neutral-200 py-3 pl-11 pr-4 outline-none focus:border-[#c9a962]"
+                        className="w-full rounded-lg border border-neutral-200 py-3 pl-11 pr-4 outline-none focus:border-[#8f7852]"
                         required
                       />
                     </div>
@@ -423,7 +423,7 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="+971 XX XXX XXXX"
-                        className="w-full rounded-lg border border-neutral-200 py-3 pl-11 pr-4 outline-none focus:border-[#c9a962]"
+                        className="w-full rounded-lg border border-neutral-200 py-3 pl-11 pr-4 outline-none focus:border-[#8f7852]"
                       />
                     </div>
                   </div>
@@ -470,7 +470,7 @@ export function BudgetCalculator({ className = "" }: BudgetCalculatorProps) {
                 </p>
                 <Link
                   href="/projects"
-                  className="inline-flex items-center gap-2 text-[#c9a962] hover:underline"
+                  className="inline-flex items-center gap-2 text-[#8f7852] hover:underline"
                 >
                   Browse Our Projects
                   <ArrowRight className="h-4 w-4" />

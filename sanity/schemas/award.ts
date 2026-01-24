@@ -129,6 +129,12 @@ export default defineType({
       description: 'Link to certificate or verification page',
     }),
     defineField({
+      name: 'certificatePath',
+      title: 'Certificate File Path',
+      type: 'string',
+      description: 'Path to local PDF file in public/awards (e.g., /awards/certificate.pdf)',
+    }),
+    defineField({
       name: 'featured',
       title: 'Featured',
       type: 'boolean',

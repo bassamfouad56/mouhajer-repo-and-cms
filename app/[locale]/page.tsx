@@ -48,7 +48,8 @@ const homepageFAQs = [
 ];
 
 import { LogoMarquee } from "@/components/logo-marquee";
-import { client } from "@/sanity/lib/client";
+import { draftMode } from "next/headers";
+import { client, clientWithStega } from "@/sanity/lib/client";
 import {
   projectsQuery,
   servicesQuery,
@@ -56,10 +57,14 @@ import {
   siteSettingsQuery,
   clientsQuery,
   featuredTestimonialsQuery,
+  homepageQuery,
+  awardsQuery,
 } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
 
-export const revalidate = 3600; // Revalidate every hour
+// Disable caching to ensure fresh Sanity data
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 async function getProjects(locale: string) {
   try {
@@ -158,6 +163,39 @@ async function getTestimonials(locale: string) {
   }
 }
 
+async function getAwards() {
+  try {
+    const awards = await client.fetch(awardsQuery);
+    return awards || [];
+  } catch (error) {
+    console.error("Error fetching awards from Sanity:", error);
+    return [];
+  }
+}
+
+// Fetch homepage document with all sections for visual editing
+async function getHomepage(locale: string, isDraftMode: boolean = false) {
+  try {
+    // Use stega-enabled client in draft mode for visual editing
+    const sanityClient = isDraftMode ? clientWithStega : client;
+    const homepage = await sanityClient.fetch(
+      homepageQuery,
+      { locale },
+      { next: { revalidate: 0 } } // Force fresh data, no caching
+    );
+    return homepage;
+  } catch (error) {
+    console.error("Error fetching homepage from Sanity:", error);
+    return null;
+  }
+}
+
+// Helper to find a section by type from homepage sections array
+function findSection(sections: any[] | undefined, type: string) {
+  if (!sections) return null;
+  return sections.find((s: any) => s._type === type && s.enabled !== false);
+}
+
 // Fetch site settings from Sanity (section images, founder info, etc.)
 async function getSiteSettings() {
   try {
@@ -203,7 +241,7 @@ async function getSiteSettings() {
       whyChooseUsSecondaryImage: getImageUrl(
         settings.whyChooseUsSecondaryImage,
         600,
-        800
+        800,
       ),
     };
   } catch (error) {
@@ -226,18 +264,49 @@ export default async function Home({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const resolvedParams = await params;
+  const locale = resolvedParams?.locale || 'en';
+
+  // Check if we're in draft mode for visual editing
+  const isDraftMode = (await draftMode()).isEnabled;
 
   // Fetch data from Sanity CMS
-  const [projects, services, industries, siteSettings, clients, testimonials] =
-    await Promise.all([
-      getProjects(locale),
-      getServices(locale),
-      getIndustries(locale),
-      getSiteSettings(),
-      getClients(locale),
-      getTestimonials(locale),
-    ]);
+  const [
+    projects,
+    services,
+    industries,
+    siteSettings,
+    clients,
+    testimonials,
+    homepage,
+    awards,
+  ] = await Promise.all([
+    getProjects(locale),
+    getServices(locale),
+    getIndustries(locale),
+    getSiteSettings(),
+    getClients(locale),
+    getTestimonials(locale),
+    getHomepage(locale, isDraftMode),
+    getAwards(),
+  ]);
+
+  // Extract section data for visual editing
+  const heroSection = findSection(homepage?.sections, "heroSection");
+  const showcaseSection = findSection(homepage?.sections, "showcaseSection");
+  const statsSection = findSection(homepage?.sections, "statsSection");
+  const logoMarqueeSection = findSection(homepage?.sections, "logoMarqueeSection");
+  const founderSection = findSection(homepage?.sections, "founderSection");
+  const capabilitiesSection = findSection(homepage?.sections, "capabilitiesSection");
+  const portfolioSection = findSection(homepage?.sections, "portfolioSection");
+  const industriesSection = findSection(homepage?.sections, "industriesSection");
+  const partnersSection = findSection(homepage?.sections, "partnersSection");
+  const certificationsSection = findSection(homepage?.sections, "certificationsSection");
+  const faqSection = findSection(homepage?.sections, "faqSection");
+  const contactSection = findSection(homepage?.sections, "contactSection");
+
+  // Homepage ID and section keys for visual editing data attributes
+  const homepageId = homepage?._id || "";
 
   return (
     <>
@@ -250,7 +319,11 @@ export default async function Home({
         aria-label="Main content"
       >
         {/* Section 1: Hero with Video */}
-        <HeroVideo />
+        <HeroVideo
+          sanityData={heroSection}
+          homepageId={homepageId}
+          sectionKey={heroSection?._key}
+        />
 
         {/* Section 2 & 3: Unified Showcase - Promise Cards + Who We Are Horizontal Scroll */}
         <UnifiedShowcase
@@ -274,7 +347,11 @@ export default async function Home({
         {/* <LuxuryTransition theme="light" /> */}
 
         {/* Section 4: Stats Banner */}
-        <StatsBanner />
+        <StatsBanner
+          sanityData={statsSection}
+          homepageId={homepageId}
+          sectionKey={statsSection?._key}
+        />
 
         {/* Section 4.5: Trusted Partners Logo Marquee */}
         <LogoMarquee clients={clients} />
@@ -284,10 +361,16 @@ export default async function Home({
 
         {/* Section 5: Founder's Message */}
         <FounderMessage
-          founderImage={siteSettings.founderImage}
-          founderName={siteSettings.founderName}
-          founderTitle={siteSettings.founderTitle}
-          founderQuote={siteSettings.founderQuote}
+          founderImage={
+            founderSection?.founderImage ? undefined : siteSettings.founderImage
+          }
+          founderName={founderSection?.founderName || siteSettings.founderName}
+          founderTitle={
+            founderSection?.founderTitle || siteSettings.founderTitle
+          }
+          sanityData={founderSection}
+          homepageId={homepageId}
+          sectionKey={founderSection?._key}
         />
 
         {/* Transition: Founder to Capabilities */}
@@ -318,17 +401,23 @@ export default async function Home({
         {/* <SectionDivider variant="dots" theme="light" /> */}
 
         {/* Section 10: Certifications & Awards */}
-        <CertificationsAwards />
+        <CertificationsAwards awards={awards} />
 
         {/* Transition: Awards to FAQ */}
         {/* <LuxuryTransition theme="light" /> */}
 
         {/* Section 11: FAQ */}
         <FAQSection
-          title="Clarity Before Commitment"
-          subtitle="Find answers to common questions about our construction and design services."
-          faqs={homepageFAQs}
+          title={faqSection?.sectionTitle || "Clarity Before Commitment"}
+          subtitle={
+            faqSection?.sectionSubtitle ||
+            "Find answers to common questions about our construction and design services."
+          }
+          faqs={faqSection?.faqs?.length ? faqSection.faqs : homepageFAQs}
           variant="light"
+          sanityData={faqSection}
+          homepageId={homepageId}
+          sectionKey={faqSection?._key}
         />
 
         {/* Transition: FAQ to Contact */}

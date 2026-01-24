@@ -194,7 +194,7 @@ export default function UnifiedIndustryTemplate({
           style={{ opacity: heroOpacity, y: heroY }}
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24 lg:px-12"
         >
-          <div className="mx-auto max-w-5xl text-center">
+          <div className="mx-auto container text-center">
             {/* Subtitle */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -202,11 +202,11 @@ export default function UnifiedIndustryTemplate({
               transition={{ duration: 0.8, delay: 0.3 }}
               className="mb-8 flex items-center justify-center gap-4"
             >
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
-              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-[#c9a962]">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]" />
+              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-[#8f7852]">
                 {hero.label}
               </span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]" />
             </motion.div>
 
             {/* Main Title */}
@@ -218,7 +218,7 @@ export default function UnifiedIndustryTemplate({
             >
               {hero.title}
               <br />
-              <span className="text-[#c9a962]">{hero.titleHighlight}</span>
+              <span className="text-[#8f7852]">{hero.titleHighlight}</span>
             </motion.h1>
 
             {/* Subheadline */}
@@ -304,7 +304,7 @@ function ImmersiveSection({ content }: { content: ImmersiveSectionContent }) {
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const index = Math.min(
       content.capabilities.length - 1,
-      Math.floor(latest * content.capabilities.length)
+      Math.floor(latest * content.capabilities.length),
     );
     setActiveCapability(index);
   });
@@ -361,13 +361,13 @@ function ImmersiveSection({ content }: { content: ImmersiveSectionContent }) {
         {/* Corner Decorations */}
         <div className="pointer-events-none absolute left-6 top-8 z-30 hidden h-20 w-20 sm:block lg:left-12">
           <motion.div
-            className="absolute left-0 top-0 w-px bg-[#c9a962]/50"
+            className="absolute left-0 top-0 w-px bg-[#8f7852]/50"
             initial={{ height: 0 }}
             animate={isInView ? { height: 48 } : {}}
             transition={{ duration: 1, delay: 0.5 }}
           />
           <motion.div
-            className="absolute left-0 top-0 h-px bg-[#c9a962]/50"
+            className="absolute left-0 top-0 h-px bg-[#8f7852]/50"
             initial={{ width: 0 }}
             animate={isInView ? { width: 48 } : {}}
             transition={{ duration: 1, delay: 0.5 }}
@@ -375,13 +375,13 @@ function ImmersiveSection({ content }: { content: ImmersiveSectionContent }) {
         </div>
         <div className="pointer-events-none absolute bottom-8 right-6 z-30 hidden h-20 w-20 sm:block lg:right-12">
           <motion.div
-            className="absolute bottom-0 right-0 w-px bg-[#c9a962]/50"
+            className="absolute bottom-0 right-0 w-px bg-[#8f7852]/50"
             initial={{ height: 0 }}
             animate={isInView ? { height: 48 } : {}}
             transition={{ duration: 1, delay: 0.7 }}
           />
           <motion.div
-            className="absolute bottom-0 right-0 h-px bg-[#c9a962]/50"
+            className="absolute bottom-0 right-0 h-px bg-[#8f7852]/50"
             initial={{ width: 0 }}
             animate={isInView ? { width: 48 } : {}}
             transition={{ duration: 1, delay: 0.7 }}
@@ -404,12 +404,12 @@ function ImmersiveSection({ content }: { content: ImmersiveSectionContent }) {
                 className="mb-6 flex items-center gap-4"
               >
                 <motion.div
-                  className="h-px bg-gradient-to-r from-transparent to-[#c9a962]"
+                  className="h-px bg-gradient-to-r from-transparent to-[#8f7852]"
                   initial={{ width: 0 }}
                   animate={isInView ? { width: 64 } : {}}
                   transition={{ duration: 1, delay: 0.4 }}
                 />
-                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
                   {content.label}
                 </span>
               </motion.div>
@@ -438,7 +438,7 @@ function ImmersiveSection({ content }: { content: ImmersiveSectionContent }) {
                     ease: [0.22, 1, 0.36, 1],
                     delay: 0.5,
                   }}
-                  className="font-SchnyderS text-5xl font-light leading-[0.95] tracking-tight text-[#c9a962] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+                  className="font-SchnyderS text-5xl font-light leading-[0.95] tracking-tight text-[#8f7852] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
                 >
                   {content.titleHighlight}
                 </motion.h2>
@@ -472,7 +472,7 @@ function ImmersiveSection({ content }: { content: ImmersiveSectionContent }) {
                   exit={{ opacity: 0, x: 30 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <span className="mb-2 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                  <span className="mb-2 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                     {content.capabilities[activeCapability]?.subtitle}
                   </span>
                   <h3 className="mb-4 font-SchnyderS text-3xl font-light text-white lg:text-4xl xl:text-5xl">
@@ -483,8 +483,8 @@ function ImmersiveSection({ content }: { content: ImmersiveSectionContent }) {
                   </p>
 
                   {/* Method Tag */}
-                  <div className="inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-4 py-3">
-                    <span className="font-Satoshi text-xs font-medium uppercase tracking-wider text-[#c9a962]">
+                  <div className="inline-flex items-center gap-3 border border-[#8f7852]/30 bg-[#8f7852]/5 px-4 py-3">
+                    <span className="font-Satoshi text-xs font-medium uppercase tracking-wider text-[#8f7852]">
                       {content.capabilities[activeCapability]?.methodology}
                     </span>
                     <span className="font-Satoshi text-xs font-light text-white/50">
@@ -506,13 +506,13 @@ function ImmersiveSection({ content }: { content: ImmersiveSectionContent }) {
                       transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
                       className={`group relative overflow-hidden border p-4 text-left transition-all duration-500 sm:p-5 lg:p-6 ${
                         activeCapability === index
-                          ? "border-[#c9a962]/60 bg-white/10"
-                          : "border-white/10 bg-white/5 hover:border-[#c9a962]/30 hover:bg-white/8"
+                          ? "border-[#8f7852]/60 bg-white/10"
+                          : "border-white/10 bg-white/5 hover:border-[#8f7852]/30 hover:bg-white/8"
                       }`}
                     >
                       {/* Active indicator bar */}
                       <motion.div
-                        className="absolute bottom-0 left-0 h-0.5 bg-[#c9a962]"
+                        className="absolute bottom-0 left-0 h-0.5 bg-[#8f7852]"
                         initial={{ width: "0%" }}
                         animate={{
                           width: activeCapability === index ? "100%" : "0%",
@@ -524,23 +524,23 @@ function ImmersiveSection({ content }: { content: ImmersiveSectionContent }) {
                       <div
                         className={`absolute left-0 top-0 h-6 w-px transition-all duration-300 ${
                           activeCapability === index
-                            ? "bg-[#c9a962]"
-                            : "bg-[#c9a962]/30"
+                            ? "bg-[#8f7852]"
+                            : "bg-[#8f7852]/30"
                         }`}
                       />
                       <div
                         className={`absolute left-0 top-0 h-px w-6 transition-all duration-300 ${
                           activeCapability === index
-                            ? "bg-[#c9a962]"
-                            : "bg-[#c9a962]/30"
+                            ? "bg-[#8f7852]"
+                            : "bg-[#8f7852]/30"
                         }`}
                       />
 
                       <span
                         className={`mb-1 block font-Satoshi text-[9px] font-medium uppercase tracking-[0.2em] transition-colors sm:text-[10px] ${
                           activeCapability === index
-                            ? "text-[#c9a962]"
-                            : "text-[#c9a962]/50"
+                            ? "text-[#8f7852]"
+                            : "text-[#8f7852]/50"
                         }`}
                       >
                         {cap.subtitle}
@@ -640,13 +640,13 @@ function CaseStudySectionComponent({
           style={{ opacity: contentOpacity }}
         >
           <motion.div
-            className="absolute left-0 top-0 w-px bg-[#c9a962]/50"
+            className="absolute left-0 top-0 w-px bg-[#8f7852]/50"
             style={{
               height: useTransform(scrollYProgress, [0.2, 0.4], [0, 32]),
             }}
           />
           <motion.div
-            className="absolute left-0 top-0 h-px bg-[#c9a962]/50"
+            className="absolute left-0 top-0 h-px bg-[#8f7852]/50"
             style={{
               width: useTransform(scrollYProgress, [0.2, 0.4], [0, 32]),
             }}
@@ -657,13 +657,13 @@ function CaseStudySectionComponent({
           style={{ opacity: contentOpacity }}
         >
           <motion.div
-            className="absolute right-0 top-0 w-px bg-[#c9a962]/50"
+            className="absolute right-0 top-0 w-px bg-[#8f7852]/50"
             style={{
               height: useTransform(scrollYProgress, [0.25, 0.45], [0, 32]),
             }}
           />
           <motion.div
-            className="absolute right-0 top-0 h-px bg-[#c9a962]/50"
+            className="absolute right-0 top-0 h-px bg-[#8f7852]/50"
             style={{
               width: useTransform(scrollYProgress, [0.25, 0.45], [0, 32]),
             }}
@@ -681,7 +681,7 @@ function CaseStudySectionComponent({
               target="_blank"
               className="group block"
             >
-              <div className="relative overflow-hidden border-4 border-[#c9a962]/80 bg-white p-3 shadow-2xl transition-all duration-300 hover:border-[#c9a962] hover:shadow-[#c9a962]/30">
+              <div className="relative overflow-hidden border-4 border-[#8f7852]/80 bg-white p-3 shadow-2xl transition-all duration-300 hover:border-[#8f7852] hover:shadow-[#8f7852]/30">
                 {/* PDF Certificate Embed */}
                 <div className="relative h-[340px] w-[240px] overflow-hidden bg-white lg:h-[420px] lg:w-[300px] xl:h-[480px] xl:w-[340px]">
                   <object
@@ -692,11 +692,11 @@ function CaseStudySectionComponent({
                   >
                     {/* Fallback for browsers that don't support object */}
                     <div className="flex h-full w-full flex-col items-center justify-center bg-[#faf8f5] p-6 text-center">
-                      <Award className="mb-4 h-16 w-16 text-[#c9a962]" />
+                      <Award className="mb-4 h-16 w-16 text-[#8f7852]" />
                       <div className="mb-2 font-SchnyderS text-xl font-light text-neutral-900">
                         {caseStudy.awardTitle}
                       </div>
-                      <div className="mb-4 font-Satoshi text-sm text-[#c9a962]">
+                      <div className="mb-4 font-Satoshi text-sm text-[#8f7852]">
                         {caseStudy.awardRegion} {caseStudy.awardYear}
                       </div>
                       <div className="font-Satoshi text-xs text-neutral-500">
@@ -712,7 +712,7 @@ function CaseStudySectionComponent({
                     <span className="font-Satoshi text-sm font-medium uppercase tracking-wider text-white">
                       View Full Certificate
                     </span>
-                    <ArrowRight className="h-5 w-5 text-[#c9a962]" />
+                    <ArrowRight className="h-5 w-5 text-[#8f7852]" />
                   </div>
                 </div>
               </div>
@@ -735,12 +735,12 @@ function CaseStudySectionComponent({
                   style={{ x: labelX, opacity: contentOpacity }}
                 >
                   <motion.div
-                    className="h-px bg-gradient-to-r from-transparent to-[#c9a962]"
+                    className="h-px bg-gradient-to-r from-transparent to-[#8f7852]"
                     style={{
                       width: useTransform(scrollYProgress, [0.2, 0.4], [0, 64]),
                     }}
                   />
-                  <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+                  <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
                     Case Study
                   </span>
                 </motion.div>
@@ -750,7 +750,7 @@ function CaseStudySectionComponent({
                   <h2 className="mb-6 font-SchnyderS text-4xl font-light leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
                     {caseStudy.title}
                     <br />
-                    <span className="text-[#c9a962]">
+                    <span className="text-[#8f7852]">
                       {caseStudy.titleHighlight}
                     </span>
                   </h2>
@@ -805,10 +805,10 @@ function CaseStudySectionComponent({
               href="/projects"
               className="group inline-flex items-center gap-4"
             >
-              <span className="font-Satoshi text-sm font-light tracking-wide text-white/70 transition-colors group-hover:text-[#c9a962]">
+              <span className="font-Satoshi text-sm font-light tracking-wide text-white/70 transition-colors group-hover:text-[#8f7852]">
                 View All Projects
               </span>
-              <div className="flex h-12 w-12 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#c9a962] group-hover:bg-[#c9a962]">
+              <div className="flex h-12 w-12 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#8f7852] group-hover:bg-[#8f7852]">
                 <ArrowRight
                   className="h-5 w-5 text-white transition-colors group-hover:text-neutral-950"
                   strokeWidth={1.5}
@@ -853,7 +853,7 @@ function PartnersSectionComponent({
         >
           <h3 className="mb-8 font-SchnyderS text-3xl font-light text-neutral-950">
             {content.title}{" "}
-            <span className="text-[#c9a962]">{content.titleHighlight}</span>
+            <span className="text-[#8f7852]">{content.titleHighlight}</span>
           </h3>
 
           {/* Partner Logos */}
@@ -914,7 +914,7 @@ function PartnersSectionComponent({
                       target="_blank"
                       className="group block"
                     >
-                      <div className="relative overflow-hidden border-2 border-[#c9a962]/40 bg-white p-2 shadow-lg transition-all duration-300 hover:border-[#c9a962] hover:shadow-xl">
+                      <div className="relative overflow-hidden border-2 border-[#8f7852]/40 bg-white p-2 shadow-lg transition-all duration-300 hover:border-[#8f7852] hover:shadow-xl">
                         {/* PDF Certificate Embed */}
                         <div className="relative h-[280px] overflow-hidden bg-white sm:h-[320px]">
                           <object
@@ -925,11 +925,11 @@ function PartnersSectionComponent({
                           >
                             {/* Fallback */}
                             <div className="flex h-full w-full flex-col items-center justify-center bg-[#faf8f5] p-4 text-center">
-                              <Award className="mb-3 h-12 w-12 text-[#c9a962]" />
+                              <Award className="mb-3 h-12 w-12 text-[#8f7852]" />
                               <div className="mb-1 font-SchnyderS text-lg font-light text-neutral-900">
                                 {award.title}
                               </div>
-                              <div className="mb-2 font-Satoshi text-sm text-[#c9a962]">
+                              <div className="mb-2 font-Satoshi text-sm text-[#8f7852]">
                                 {award.region}
                               </div>
                               <div className="font-Satoshi text-xs text-neutral-500">
@@ -944,7 +944,7 @@ function PartnersSectionComponent({
                           <div className="mb-1 font-Satoshi text-xs font-medium text-neutral-900">
                             {award.title}
                           </div>
-                          <div className="font-Satoshi text-[10px] text-[#c9a962]">
+                          <div className="font-Satoshi text-[10px] text-[#8f7852]">
                             {award.region} • {award.year}
                           </div>
                         </div>
@@ -955,7 +955,7 @@ function PartnersSectionComponent({
                             <span className="font-Satoshi text-xs font-medium uppercase tracking-wider text-white">
                               View Certificate
                             </span>
-                            <ArrowRight className="h-4 w-4 text-[#c9a962]" />
+                            <ArrowRight className="h-4 w-4 text-[#8f7852]" />
                           </div>
                         </div>
                       </div>
@@ -972,7 +972,7 @@ function PartnersSectionComponent({
             content.locations.length > 0 && (
               <div className="mt-16">
                 <h3 className="mb-8 font-SchnyderS text-2xl font-light text-neutral-950">
-                  Exclusive <span className="text-[#c9a962]">Locations</span>
+                  Exclusive <span className="text-[#8f7852]">Locations</span>
                 </h3>
 
                 <div className="flex flex-wrap items-center justify-center gap-6">
@@ -1008,8 +1008,8 @@ function CTASectionComponent({ content }: { content: CTAContent }) {
       ref={sectionRef}
       className="relative overflow-hidden bg-neutral-950 py-32 lg:py-40"
     >
-      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
-      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
+      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#8f7852]/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#8f7852]/10 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center lg:px-12">
         <motion.div
@@ -1018,23 +1018,23 @@ function CTASectionComponent({ content }: { content: CTAContent }) {
           transition={{ duration: 0.8 }}
         >
           <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#8f7852]">
               {content.label}
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]" />
           </div>
 
           <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             {content.title}
             <br />
-            <span className="text-[#c9a962]">{content.titleHighlight}</span>
+            <span className="text-[#8f7852]">{content.titleHighlight}</span>
           </h2>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href={content.primaryButtonHref}
-              className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
+              className="group inline-flex items-center gap-3 border border-[#8f7852] bg-[#8f7852] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#8f7852]"
             >
               <span>{content.primaryButtonText}</span>
               <ArrowRight
@@ -1044,7 +1044,7 @@ function CTASectionComponent({ content }: { content: CTAContent }) {
             </Link>
             <Link
               href={content.secondaryButtonHref}
-              className="group inline-flex items-center gap-3 border border-white/30 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+              className="group inline-flex items-center gap-3 border border-white/30 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
             >
               <span>{content.secondaryButtonText}</span>
               <ArrowRight

@@ -53,7 +53,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
         setIsVisible(true);
       }
     },
-    [canShow, isVisible]
+    [canShow, isVisible],
   );
 
   useEffect(() => {
@@ -140,14 +140,14 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
               </button>
 
               {/* Gold accent */}
-              <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#c9a962] via-[#f4d03f] to-[#c9a962]" />
+              <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#8f7852] via-[#f4d03f] to-[#8f7852]" />
 
               <div className="p-6 sm:p-8">
                 {!isSuccess ? (
                   <>
                     {/* Icon */}
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#c9a962]/10">
-                      <Gift className="h-8 w-8 text-[#c9a962]" />
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#8f7852]/10">
+                      <Gift className="h-8 w-8 text-[#8f7852]" />
                     </div>
 
                     {/* Heading */}
@@ -157,7 +157,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
                     <p className="mb-6 text-center text-neutral-600">
                       Get a{" "}
-                      <span className="font-medium text-[#c9a962]">
+                      <span className="font-medium text-[#8f7852]">
                         FREE Design Consultation
                       </span>{" "}
                       with our award-winning team. Plus, receive exclusive
@@ -175,7 +175,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                           key={i}
                           className="flex items-center gap-2 text-sm text-neutral-600"
                         >
-                          <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[#c9a962]" />
+                          <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[#8f7852]" />
                           {benefit}
                         </li>
                       ))}
@@ -189,7 +189,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email address"
-                          className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm outline-none transition-colors focus:border-[#c9a962] focus:ring-2 focus:ring-[#c9a962]/20"
+                          className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm outline-none transition-colors focus:border-[#8f7852] focus:ring-2 focus:ring-[#8f7852]/20"
                           disabled={isSubmitting}
                         />
                         {error && (

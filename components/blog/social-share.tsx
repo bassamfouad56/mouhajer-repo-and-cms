@@ -81,7 +81,7 @@ export default function SocialShare({ title, excerpt, url }: SocialShareProps) {
       >
         <button
           onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-2 rounded-full border border-neutral-200 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-sm transition-all hover:border-[#c9a962] hover:shadow-xl"
+          className="group flex items-center gap-2 rounded-full border border-neutral-200 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-sm transition-all hover:border-[#8f7852] hover:shadow-xl"
         >
           <Share2 size={16} className="text-neutral-600" />
           <span className="font-Satoshi text-xs font-medium text-neutral-600 opacity-0 transition-opacity group-hover:opacity-100">

@@ -143,17 +143,17 @@ export function FeaturedProjectTemplate({
 
   // Categorize gallery images
   const beforeImages = project.gallery.filter(
-    (img) => img.category === "before"
+    (img) => img.category === "before",
   );
   const afterImages = project.gallery.filter((img) => img.category === "after");
   const processImages = project.gallery.filter(
-    (img) => img.category === "process"
+    (img) => img.category === "process",
   );
   const showcaseImages = project.gallery.filter(
     (img) =>
       img.category !== "before" &&
       img.category !== "after" &&
-      img.category !== "process"
+      img.category !== "process",
   );
 
   // Distribute images across sections for visual richness
@@ -166,7 +166,7 @@ export function FeaturedProjectTemplate({
   // Outcome section: 3 images
   const outcomeImages = showcaseImages.slice(
     9 + (project.scope?.length || 0),
-    12 + (project.scope?.length || 0)
+    12 + (project.scope?.length || 0),
   );
   // Remaining for gallery
   const galleryImages = showcaseImages.slice(12 + (project.scope?.length || 0));
@@ -189,7 +189,7 @@ export function FeaturedProjectTemplate({
     <div ref={containerRef} className="relative">
       {/* Global Scroll Progress Indicator */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-[#c9a962] origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-[#8f7852] origin-left z-50"
         style={{ scaleX: scrollYProgress }}
       />
 

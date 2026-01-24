@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { PageTransition } from "@/components/page-transition";
 import {
@@ -174,6 +175,9 @@ export default async function LocaleLayout({
 
               {/* Preview Mode Banner */}
               {isDraftMode && <PreviewBanner />}
+
+              {/* Visual Editing - enables click-to-edit in Sanity Presentation */}
+              {isDraftMode && <VisualEditing />}
             </SearchProvider>
           </CartProvider>
         </NextIntlClientProvider>

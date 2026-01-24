@@ -93,11 +93,11 @@ export function AboutEcosystem() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(201,169,98,0.06)_0%,transparent_50%)]" />
         <motion.div
           style={{ y: bgY }}
-          className="absolute -left-1/3 top-1/4 h-[800px] w-[800px] rounded-full bg-[#c9a962]/[0.04] blur-[200px]"
+          className="absolute -left-1/3 top-1/4 h-[800px] w-[800px] rounded-full bg-[#8f7852]/[0.04] blur-[200px]"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]) }}
-          className="absolute -right-1/4 bottom-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.03] blur-[150px]"
+          className="absolute -right-1/4 bottom-1/4 h-[600px] w-[600px] rounded-full bg-[#8f7852]/[0.03] blur-[150px]"
         />
       </div>
 
@@ -110,11 +110,11 @@ export function AboutEcosystem() {
             transition={{ duration: 0.8 }}
             className="mb-6 flex items-center justify-center gap-6"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]/40" />
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]/40" />
             <span className="font-Satoshi text-[10px] font-light uppercase tracking-[0.5em] text-neutral-500">
               Discover More
             </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]/40" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]/40" />
           </motion.div>
 
           <motion.h2
@@ -156,9 +156,9 @@ export function AboutEcosystem() {
                       {/* Top Row: Icon, Title, Arrow */}
                       <div className="mb-6 flex items-center justify-between">
                         <div className="flex items-center gap-4">
-                          <div className="flex h-12 w-12 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/10 transition-all duration-500 group-hover:border-[#c9a962]/50 group-hover:bg-[#c9a962]/20">
+                          <div className="flex h-12 w-12 items-center justify-center border border-[#8f7852]/30 bg-[#8f7852]/10 transition-all duration-500 group-hover:border-[#8f7852]/50 group-hover:bg-[#8f7852]/20">
                             <Icon
-                              className="h-5 w-5 text-[#c9a962]"
+                              className="h-5 w-5 text-[#8f7852]"
                               strokeWidth={1.5}
                             />
                           </div>
@@ -168,16 +168,16 @@ export function AboutEcosystem() {
                         </div>
 
                         {/* Arrow Button - Clear CTA */}
-                        <div className="flex h-12 w-12 items-center justify-center border border-[#c9a962]/20 bg-[#c9a962]/5 transition-all duration-500 group-hover:border-[#c9a962] group-hover:bg-[#c9a962]">
+                        <div className="flex h-12 w-12 items-center justify-center border border-[#8f7852]/20 bg-[#8f7852]/5 transition-all duration-500 group-hover:border-[#8f7852] group-hover:bg-[#8f7852]">
                           <ArrowUpRight
-                            className="h-5 w-5 text-[#c9a962]/60 transition-all duration-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                            className="h-5 w-5 text-[#8f7852]/60 transition-all duration-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                             strokeWidth={2}
                           />
                         </div>
                       </div>
 
                       {/* Headline */}
-                      <h3 className="mb-3 font-SchnyderS text-2xl font-light text-neutral-900 transition-colors duration-300 group-hover:text-[#c9a962] lg:text-3xl">
+                      <h3 className="mb-3 font-SchnyderS text-2xl font-light text-neutral-900 transition-colors duration-300 group-hover:text-[#8f7852] lg:text-3xl">
                         {item.headline}
                       </h3>
 
@@ -187,14 +187,14 @@ export function AboutEcosystem() {
                       </p>
 
                       {/* Bottom CTA Link */}
-                      <div className="flex items-center justify-between border-t border-[#c9a962]/20 pt-6 transition-colors duration-300 group-hover:border-[#c9a962]/40">
-                        <span className="font-Satoshi text-sm font-medium text-[#c9a962]/80 transition-colors duration-300 group-hover:text-[#c9a962]">
+                      <div className="flex items-center justify-between border-t border-[#8f7852]/20 pt-6 transition-colors duration-300 group-hover:border-[#8f7852]/40">
+                        <span className="font-Satoshi text-sm font-medium text-[#8f7852]/80 transition-colors duration-300 group-hover:text-[#8f7852]">
                           {item.cta}
                         </span>
                         <div className="flex items-center gap-2">
-                          <span className="h-px w-8 bg-[#c9a962]/30 transition-all duration-500 group-hover:w-12 group-hover:bg-[#c9a962]" />
+                          <span className="h-px w-8 bg-[#8f7852]/30 transition-all duration-500 group-hover:w-12 group-hover:bg-[#8f7852]" />
                           <ArrowUpRight
-                            className="h-4 w-4 text-[#c9a962]/50 transition-all duration-300 group-hover:text-[#c9a962]"
+                            className="h-4 w-4 text-[#8f7852]/50 transition-all duration-300 group-hover:text-[#8f7852]"
                             strokeWidth={1.5}
                           />
                         </div>
@@ -202,7 +202,7 @@ export function AboutEcosystem() {
                     </div>
 
                     {/* Hover Border Effect */}
-                    <div className="absolute inset-0 border border-[#c9a962]/10 transition-colors duration-500 group-hover:border-[#c9a962]/30" />
+                    <div className="absolute inset-0 border border-[#8f7852]/10 transition-colors duration-500 group-hover:border-[#8f7852]/30" />
                   </div>
                 </Link>
               </motion.div>

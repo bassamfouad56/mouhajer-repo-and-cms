@@ -72,7 +72,7 @@ export function Preloader() {
 
           {/* Ambient glow */}
           <motion.div
-            className="absolute h-[400px] w-[400px] rounded-full bg-[#c9a962]/[0.05] blur-[150px]"
+            className="absolute h-[400px] w-[400px] rounded-full bg-[#8f7852]/[0.05] blur-[150px]"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.5, 0.3],
@@ -109,7 +109,7 @@ export function Preloader() {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mt-2 h-px w-full origin-left bg-gradient-to-r from-[#c9a962] via-[#c9a962]/50 to-transparent"
+              className="mt-2 h-px w-full origin-left bg-gradient-to-r from-[#8f7852] via-[#8f7852]/50 to-transparent"
             />
           </motion.div>
 
@@ -133,7 +133,7 @@ export function Preloader() {
             className="relative z-10 h-px w-[200px] overflow-hidden bg-white/10 sm:w-[300px]"
           >
             <motion.div
-              className="h-full bg-gradient-to-r from-[#c9a962] to-[#c9a962]/70"
+              className="h-full bg-gradient-to-r from-[#8f7852] to-[#8f7852]/70"
               initial={{ width: "0%" }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.1 }}
@@ -164,7 +164,7 @@ export function Preloader() {
 
           {/* Animated lines */}
           <motion.div
-            className="absolute left-[20%] top-1/2 h-px w-20 bg-gradient-to-r from-transparent via-[#c9a962]/20 to-transparent"
+            className="absolute left-[20%] top-1/2 h-px w-20 bg-gradient-to-r from-transparent via-[#8f7852]/20 to-transparent"
             animate={{ x: [0, 100, 0], opacity: [0, 1, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           />

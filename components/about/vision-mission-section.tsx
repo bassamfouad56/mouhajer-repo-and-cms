@@ -49,17 +49,17 @@ export function VisionMissionSection() {
           className="mb-16 text-center lg:mb-24"
         >
           <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
             <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-neutral-500">
               Our Guiding Principles
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </div>
 
           <h2 className="font-SchnyderS text-4xl font-light leading-[1.1] tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl">
             Vision, Mission &
             <br />
-            <span className="text-[#c9a962]">Commitment</span>
+            <span className="text-[#8f7852]">Commitment</span>
           </h2>
         </motion.div>
 
@@ -73,15 +73,15 @@ export function VisionMissionSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
-                className="relative border-l-2 border-[#c9a962] pl-8 sm:pl-12 lg:pl-16"
+                className="relative border-l-2 border-[#8f7852] pl-8 sm:pl-12 lg:pl-16"
               >
                 {/* Icon */}
-                <div className="absolute -left-[17px] top-0 flex h-8 w-8 items-center justify-center rounded-full bg-[#c9a962]">
+                <div className="absolute -left-[17px] top-0 flex h-8 w-8 items-center justify-center rounded-full bg-[#8f7852]">
                   <Icon className="h-4 w-4 text-white" />
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-4 font-Satoshi text-sm font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                <h3 className="mb-4 font-Satoshi text-sm font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                   {block.title}
                 </h3>
 
@@ -99,7 +99,7 @@ export function VisionMissionSection() {
           initial={{ opacity: 0, scaleX: 0 }}
           animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
           transition={{ duration: 1, delay: 0.8 }}
-          className="mt-16 h-px w-full bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent lg:mt-24"
+          className="mt-16 h-px w-full bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent lg:mt-24"
         />
       </div>
     </section>

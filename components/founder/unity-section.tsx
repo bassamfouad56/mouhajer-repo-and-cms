@@ -60,7 +60,7 @@ export function UnitySection() {
             <h2 className="mb-12 font-SchnyderS text-5xl font-light leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
               Unity is
               <br />
-              <span className="text-[#c9a962]">Strength</span>
+              <span className="text-[#8f7852]">Strength</span>
             </h2>
 
             <div className="max-w-3xl space-y-6 font-Satoshi text-lg font-light leading-relaxed text-white/60 lg:text-xl">
@@ -106,7 +106,7 @@ export function UnitySection() {
               <div className="absolute inset-0 bg-linear-to-t from-neutral-950/60 via-transparent to-transparent" />
 
               {/* Gold accent line */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#c9a962]" />
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#8f7852]" />
             </motion.div>
 
             {/* Caption */}
@@ -134,9 +134,9 @@ export function UnitySection() {
                     delay: 0.3 + index * 0.15,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="group relative border-l border-white/10 pl-8 transition-all duration-500 hover:border-[#c9a962]"
+                  className="group relative border-l border-white/10 pl-8 transition-all duration-500 hover:border-[#8f7852]"
                 >
-                  <h3 className="mb-3 font-SchnyderS text-2xl font-light text-white transition-colors duration-300 group-hover:text-[#c9a962] lg:text-3xl">
+                  <h3 className="mb-3 font-SchnyderS text-2xl font-light text-white transition-colors duration-300 group-hover:text-[#8f7852] lg:text-3xl">
                     {team.title}
                   </h3>
                   <p className="font-Satoshi text-base font-light text-white/60 lg:text-lg">
@@ -157,7 +157,7 @@ export function UnitySection() {
                 "The magic happens when everyone understands they are building
                 something bigger than themselves."
               </p>
-              <div className="mt-6 h-px w-16 bg-[#c9a962]" />
+              <div className="mt-6 h-px w-16 bg-[#8f7852]" />
             </motion.div>
           </div>
         </div>
@@ -182,7 +182,7 @@ export function UnitySection() {
           {/* Overlay content */}
           <div className="absolute inset-y-0 left-0 flex items-center px-12 lg:px-20 xl:px-28">
             <div className="max-w-2xl">
-              <div className="mb-4 h-px w-12 bg-[#c9a962]" />
+              <div className="mb-4 h-px w-12 bg-[#8f7852]" />
               <p className="font-SchnyderS text-3xl font-light leading-tight text-white lg:text-4xl xl:text-5xl">
                 Eng. Maher sits at the head of this table, not to dictate, but
                 to orchestrate this collaboration.
@@ -201,7 +201,7 @@ export function UnitySection() {
         >
           <Link
             href="/about/process"
-            className="group inline-flex items-center gap-4 border border-white/20 bg-white/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
+            className="group inline-flex items-center gap-4 border border-white/20 bg-white/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-300 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10"
           >
             <span>See Our Integrated Process</span>
             <svg

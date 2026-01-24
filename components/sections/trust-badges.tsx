@@ -98,7 +98,7 @@ export function TrustBadgesSection({
             {/* Awards inline */}
             <div className="flex items-center gap-2">
               <Award
-                className={`h-5 w-5 ${isDark ? "text-[#c9a962]" : "text-[#c9a962]"}`}
+                className={`h-5 w-5 ${isDark ? "text-[#8f7852]" : "text-[#8f7852]"}`}
               />
               <span
                 className={`text-sm font-medium ${isDark ? "text-white" : "text-neutral-900"}`}
@@ -110,7 +110,7 @@ export function TrustBadgesSection({
             {/* Certifications inline */}
             <div className="flex items-center gap-2">
               <Shield
-                className={`h-5 w-5 ${isDark ? "text-[#c9a962]" : "text-[#c9a962]"}`}
+                className={`h-5 w-5 ${isDark ? "text-[#8f7852]" : "text-[#8f7852]"}`}
               />
               <span
                 className={`text-sm font-medium ${isDark ? "text-white" : "text-neutral-900"}`}
@@ -124,7 +124,7 @@ export function TrustBadgesSection({
               {stats.slice(0, 2).map((stat, i) => (
                 <div key={i} className="text-center">
                   <div
-                    className={`text-lg font-bold ${isDark ? "text-[#c9a962]" : "text-neutral-900"}`}
+                    className={`text-lg font-bold ${isDark ? "text-[#8f7852]" : "text-neutral-900"}`}
                   >
                     {stat.value}
                   </div>
@@ -155,7 +155,7 @@ export function TrustBadgesSection({
           className="mb-12 text-center"
         >
           <span
-            className={`mb-2 inline-block text-sm font-medium uppercase tracking-wider ${isDark ? "text-[#c9a962]" : "text-[#c9a962]"}`}
+            className={`mb-2 inline-block text-sm font-medium uppercase tracking-wider ${isDark ? "text-[#8f7852]" : "text-[#8f7852]"}`}
           >
             Why Trust Us
           </span>
@@ -185,14 +185,14 @@ export function TrustBadgesSection({
               }`}
             >
               {/* Gold accent */}
-              <div className="absolute left-0 top-0 h-full w-1 bg-[#c9a962]" />
+              <div className="absolute left-0 top-0 h-full w-1 bg-[#8f7852]" />
 
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#c9a962]/10">
-                  <award.icon className="h-6 w-6 text-[#c9a962]" />
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#8f7852]/10">
+                  <award.icon className="h-6 w-6 text-[#8f7852]" />
                 </div>
                 <div>
-                  <span className="mb-1 inline-block rounded-full bg-[#c9a962]/10 px-2 py-0.5 text-xs font-medium text-[#c9a962]">
+                  <span className="mb-1 inline-block rounded-full bg-[#8f7852]/10 px-2 py-0.5 text-xs font-medium text-[#8f7852]">
                     {award.highlight}
                   </span>
                   <h3
@@ -226,7 +226,7 @@ export function TrustBadgesSection({
               className={`rounded-xl p-6 text-center ${isDark ? "bg-white/70" : "bg-neutral-50"}`}
             >
               <stat.icon
-                className={`mx-auto mb-2 h-6 w-6 ${isDark ? "text-[#c9a962]" : "text-[#c9a962]"}`}
+                className={`mx-auto mb-2 h-6 w-6 ${isDark ? "text-[#8f7852]" : "text-[#8f7852]"}`}
               />
               <div
                 className={`text-3xl font-bold ${isDark ? "text-neutral-900" : "text-neutral-900"}`}
@@ -264,7 +264,7 @@ export function TrustBadgesSection({
                   isDark ? "bg-white/70" : "bg-neutral-50"
                 }`}
               >
-                <cert.icon className="h-5 w-5 text-[#c9a962]" />
+                <cert.icon className="h-5 w-5 text-[#8f7852]" />
                 <div>
                   <div
                     className={`text-sm font-medium ${isDark ? "text-neutral-900" : "text-neutral-900"}`}
@@ -334,12 +334,12 @@ export function TrustBadgesInline({ className = "" }: { className?: string }) {
       className={`flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500 ${className}`}
     >
       <span className="flex items-center gap-1">
-        <Award className="h-4 w-4 text-[#c9a962]" />
+        <Award className="h-4 w-4 text-[#8f7852]" />
         5-Star Award Winner
       </span>
       <span className="hidden sm:inline">•</span>
       <span className="flex items-center gap-1">
-        <Shield className="h-4 w-4 text-[#c9a962]" />
+        <Shield className="h-4 w-4 text-[#8f7852]" />
         Triple ISO Certified
       </span>
       <span className="hidden sm:inline">•</span>

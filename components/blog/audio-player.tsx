@@ -84,7 +84,7 @@ export default function AudioPlayer({
     if (isPlaying) {
       localStorage.setItem(
         `audio-position-${postSlug}`,
-        JSON.stringify({ sentence: currentSentence, progress })
+        JSON.stringify({ sentence: currentSentence, progress }),
       );
     }
   }, [currentSentence, progress, isPlaying, postSlug]);
@@ -125,7 +125,7 @@ export default function AudioPlayer({
             v.lang.startsWith("en") &&
             (v.name.includes("Natural") ||
               v.name.includes("Enhanced") ||
-              v.name.includes("Premium"))
+              v.name.includes("Premium")),
         );
         if (preferredVoice) {
           utterance.voice = preferredVoice;
@@ -155,7 +155,7 @@ export default function AudioPlayer({
       setIsPlaying(true);
       setIsPaused(false);
     },
-    [speed, isMuted, postSlug]
+    [speed, isMuted, postSlug],
   );
 
   const togglePlay = () => {
@@ -186,7 +186,7 @@ export default function AudioPlayer({
   const skipForward = () => {
     const newIndex = Math.min(
       currentSentence + 5,
-      sentencesRef.current.length - 1
+      sentencesRef.current.length - 1,
     );
     if (isPlaying) {
       window.speechSynthesis.cancel();
@@ -243,9 +243,9 @@ export default function AudioPlayer({
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-24 right-6 z-40 flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-3 shadow-lg transition-all hover:border-[#c9a962] hover:shadow-xl"
+        className="fixed bottom-24 right-6 z-40 flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-3 shadow-lg transition-all hover:border-[#8f7852] hover:shadow-xl"
       >
-        <Headphones size={18} className="text-[#c9a962]" />
+        <Headphones size={18} className="text-[#8f7852]" />
         <span className="font-Satoshi text-xs font-medium text-neutral-700">
           Listen ({listenTime} min)
         </span>
@@ -295,7 +295,7 @@ export default function AudioPlayer({
 
             <button
               onClick={togglePlay}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-[#c9a962] text-white shadow-lg transition-all hover:bg-[#b8984f]"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-[#8f7852] text-white shadow-lg transition-all hover:bg-[#b8984f]"
             >
               {isPlaying && !isPaused ? (
                 <Pause size={20} />
@@ -335,7 +335,7 @@ export default function AudioPlayer({
         {/* Progress Bar */}
         <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-neutral-200">
           <motion.div
-            className="h-full bg-[#c9a962]"
+            className="h-full bg-[#8f7852]"
             style={{ width: `${progress}%` }}
             transition={{ duration: 0.3 }}
           />

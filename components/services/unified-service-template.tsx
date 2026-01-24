@@ -163,7 +163,7 @@ export default function UnifiedServiceTemplate({
           style={{ opacity: heroOpacity, y: heroY }}
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-24 lg:px-12"
         >
-          <div className="mx-auto max-w-5xl text-center">
+          <div className="mx-auto container text-center">
             {/* Subtitle */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -171,11 +171,11 @@ export default function UnifiedServiceTemplate({
               transition={{ duration: 0.8, delay: 0.3 }}
               className="mb-8 flex items-center justify-center gap-4"
             >
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
-              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-[#c9a962]">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]" />
+              <span className="font-Satoshi text-xs font-light uppercase tracking-[0.4em] text-[#8f7852]">
                 {hero.label}
               </span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a962]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#8f7852]" />
             </motion.div>
 
             {/* Main Title */}
@@ -187,7 +187,7 @@ export default function UnifiedServiceTemplate({
             >
               {hero.title}
               <br />
-              <span className="text-[#c9a962]">{hero.titleHighlight}</span>
+              <span className="text-[#8f7852]">{hero.titleHighlight}</span>
             </motion.h1>
 
             {/* Subheadline */}
@@ -285,7 +285,7 @@ function ImmersiveSection({
   const capabilitiesOpacity = useTransform(
     scrollYProgress,
     [0.05, 0.15, 0.7, 0.8],
-    [0, 1, 1, 0]
+    [0, 1, 1, 0],
   );
   const capabilitiesY = useTransform(scrollYProgress, [0.05, 0.15], [100, 0]);
   const caseStudyOpacity = useTransform(scrollYProgress, [0.7, 0.85], [0, 1]);
@@ -296,7 +296,7 @@ function ImmersiveSection({
     const capabilityProgress = latest * totalSections;
     const capabilityIndex = Math.min(
       content.capabilities.length - 1,
-      Math.floor(capabilityProgress)
+      Math.floor(capabilityProgress),
     );
     setActiveIndex(capabilityIndex);
     setShowCaseStudy(latest > 0.75);
@@ -357,13 +357,13 @@ function ImmersiveSection({
         {/* Corner Decorations */}
         <div className="pointer-events-none absolute left-6 top-8 z-30 hidden h-20 w-20 sm:block lg:left-12">
           <motion.div
-            className="absolute left-0 top-0 w-px bg-[#c9a962]/50"
+            className="absolute left-0 top-0 w-px bg-[#8f7852]/50"
             initial={{ height: 0 }}
             animate={isInView ? { height: 48 } : {}}
             transition={{ duration: 1, delay: 0.5 }}
           />
           <motion.div
-            className="absolute left-0 top-0 h-px bg-[#c9a962]/50"
+            className="absolute left-0 top-0 h-px bg-[#8f7852]/50"
             initial={{ width: 0 }}
             animate={isInView ? { width: 48 } : {}}
             transition={{ duration: 1, delay: 0.5 }}
@@ -371,13 +371,13 @@ function ImmersiveSection({
         </div>
         <div className="pointer-events-none absolute bottom-8 right-6 z-30 hidden h-20 w-20 sm:block lg:right-12">
           <motion.div
-            className="absolute bottom-0 right-0 w-px bg-[#c9a962]/50"
+            className="absolute bottom-0 right-0 w-px bg-[#8f7852]/50"
             initial={{ height: 0 }}
             animate={isInView ? { height: 48 } : {}}
             transition={{ duration: 1, delay: 0.7 }}
           />
           <motion.div
-            className="absolute bottom-0 right-0 h-px bg-[#c9a962]/50"
+            className="absolute bottom-0 right-0 h-px bg-[#8f7852]/50"
             initial={{ width: 0 }}
             animate={isInView ? { width: 48 } : {}}
             transition={{ duration: 1, delay: 0.7 }}
@@ -400,12 +400,12 @@ function ImmersiveSection({
                 className="mb-6 flex items-center gap-4"
               >
                 <motion.div
-                  className="h-px bg-gradient-to-r from-transparent to-[#c9a962]"
+                  className="h-px bg-gradient-to-r from-transparent to-[#8f7852]"
                   initial={{ width: 0 }}
                   animate={isInView ? { width: 64 } : {}}
                   transition={{ duration: 1, delay: 0.4 }}
                 />
-                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+                <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
                   {content.label}
                 </span>
               </motion.div>
@@ -434,7 +434,7 @@ function ImmersiveSection({
                     ease: [0.22, 1, 0.36, 1],
                     delay: 0.5,
                   }}
-                  className="font-SchnyderS text-5xl font-light leading-[0.95] tracking-tight text-[#c9a962] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+                  className="font-SchnyderS text-5xl font-light leading-[0.95] tracking-tight text-[#8f7852] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
                 >
                   {content.titleHighlight}
                 </motion.h2>
@@ -468,7 +468,7 @@ function ImmersiveSection({
                   exit={{ opacity: 0, x: 30 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <span className="mb-2 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+                  <span className="mb-2 block font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#8f7852]">
                     {content.capabilities[activeIndex]?.subtitle}
                   </span>
                   <h3 className="mb-4 font-SchnyderS text-3xl font-light text-white lg:text-4xl xl:text-5xl">
@@ -479,8 +479,8 @@ function ImmersiveSection({
                   </p>
 
                   {/* Method Tag */}
-                  <div className="inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-4 py-3">
-                    <span className="font-Satoshi text-xs font-medium uppercase tracking-wider text-[#c9a962]">
+                  <div className="inline-flex items-center gap-3 border border-[#8f7852]/30 bg-[#8f7852]/5 px-4 py-3">
+                    <span className="font-Satoshi text-xs font-medium uppercase tracking-wider text-[#8f7852]">
                       {content.capabilities[activeIndex]?.methodology}
                     </span>
                     <span className="font-Satoshi text-xs font-light text-white/50">
@@ -502,13 +502,13 @@ function ImmersiveSection({
                       transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
                       className={`group relative overflow-hidden border p-4 text-left transition-all duration-500 sm:p-5 lg:p-6 ${
                         activeIndex === index
-                          ? "border-[#c9a962]/60 bg-white/10"
-                          : "border-white/10 bg-white/5 hover:border-[#c9a962]/30 hover:bg-white/8"
+                          ? "border-[#8f7852]/60 bg-white/10"
+                          : "border-white/10 bg-white/5 hover:border-[#8f7852]/30 hover:bg-white/8"
                       }`}
                     >
                       {/* Active indicator bar */}
                       <motion.div
-                        className="absolute bottom-0 left-0 h-0.5 bg-[#c9a962]"
+                        className="absolute bottom-0 left-0 h-0.5 bg-[#8f7852]"
                         initial={{ width: "0%" }}
                         animate={{
                           width: activeIndex === index ? "100%" : "0%",
@@ -520,23 +520,23 @@ function ImmersiveSection({
                       <div
                         className={`absolute left-0 top-0 h-6 w-px transition-all duration-300 ${
                           activeIndex === index
-                            ? "bg-[#c9a962]"
-                            : "bg-[#c9a962]/30"
+                            ? "bg-[#8f7852]"
+                            : "bg-[#8f7852]/30"
                         }`}
                       />
                       <div
                         className={`absolute left-0 top-0 h-px w-6 transition-all duration-300 ${
                           activeIndex === index
-                            ? "bg-[#c9a962]"
-                            : "bg-[#c9a962]/30"
+                            ? "bg-[#8f7852]"
+                            : "bg-[#8f7852]/30"
                         }`}
                       />
 
                       <span
                         className={`mb-1 block font-Satoshi text-[9px] font-medium uppercase tracking-[0.2em] transition-colors sm:text-[10px] ${
                           activeIndex === index
-                            ? "text-[#c9a962]"
-                            : "text-[#c9a962]/50"
+                            ? "text-[#8f7852]"
+                            : "text-[#8f7852]/50"
                         }`}
                       >
                         {cap.subtitle}
@@ -566,8 +566,8 @@ function ImmersiveSection({
               <div className="max-w-3xl">
                 {/* Case Study Label */}
                 <div className="mb-6 flex items-center gap-4">
-                  <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a962]" />
-                  <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#c9a962]">
+                  <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#8f7852]" />
+                  <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.4em] text-[#8f7852]">
                     Case Study
                   </span>
                 </div>
@@ -576,7 +576,7 @@ function ImmersiveSection({
                 <h2 className="mb-6 font-SchnyderS text-4xl font-light leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
                   {caseStudy.title}
                   <br />
-                  <span className="text-[#c9a962]">
+                  <span className="text-[#8f7852]">
                     {caseStudy.titleHighlight}
                   </span>
                 </h2>
@@ -605,10 +605,10 @@ function ImmersiveSection({
                     href="/projects"
                     className="group inline-flex items-center gap-4"
                   >
-                    <span className="font-Satoshi text-sm font-light tracking-wide text-white/70 transition-colors group-hover:text-[#c9a962]">
+                    <span className="font-Satoshi text-sm font-light tracking-wide text-white/70 transition-colors group-hover:text-[#8f7852]">
                       View All Projects
                     </span>
-                    <div className="flex h-12 w-12 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#c9a962] group-hover:bg-[#c9a962]">
+                    <div className="flex h-12 w-12 items-center justify-center border border-white/20 transition-all duration-300 group-hover:border-[#8f7852] group-hover:bg-[#8f7852]">
                       <ArrowRight
                         className="h-5 w-5 text-white transition-colors group-hover:text-neutral-950"
                         strokeWidth={1.5}
@@ -627,7 +627,7 @@ function ImmersiveSection({
               opacity: useTransform(
                 scrollYProgress,
                 [0, 0.05, 0.9, 1],
-                [1, 1, 1, 0]
+                [1, 1, 1, 0],
               ),
             }}
           >
@@ -642,7 +642,7 @@ function ImmersiveSection({
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="h-10 w-px bg-gradient-to-b from-[#c9a962]/50 to-transparent"
+                className="h-10 w-px bg-gradient-to-b from-[#8f7852]/50 to-transparent"
               />
             </div>
           </motion.div>
@@ -665,8 +665,8 @@ function CTASectionComponent({ content }: { content: CTAContent }) {
       ref={sectionRef}
       className="relative overflow-hidden bg-neutral-950 py-32 lg:py-40"
     >
-      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
-      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#c9a962]/10 blur-[120px]" />
+      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#8f7852]/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#8f7852]/10 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center lg:px-12">
         <motion.div
@@ -675,23 +675,23 @@ function CTASectionComponent({ content }: { content: CTAContent }) {
           transition={{ duration: 0.8 }}
         >
           <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]" />
-            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]" />
+            <span className="font-Satoshi text-[10px] font-medium uppercase tracking-[0.3em] text-[#8f7852]">
               {content.label}
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]" />
           </div>
 
           <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             {content.title}
             <br />
-            <span className="text-[#c9a962]">{content.titleHighlight}</span>
+            <span className="text-[#8f7852]">{content.titleHighlight}</span>
           </h2>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href={content.primaryButtonHref}
-              className="group inline-flex items-center gap-3 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#c9a962]"
+              className="group inline-flex items-center gap-3 border border-[#8f7852] bg-[#8f7852] px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-neutral-950 transition-all hover:bg-transparent hover:text-[#8f7852]"
             >
               <span>{content.primaryButtonText}</span>
               <ArrowRight
@@ -701,7 +701,7 @@ function CTASectionComponent({ content }: { content: CTAContent }) {
             </Link>
             <Link
               href={content.secondaryButtonHref}
-              className="group inline-flex items-center gap-3 border border-white/30 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#c9a962] hover:text-[#c9a962]"
+              className="group inline-flex items-center gap-3 border border-white/30 px-10 py-5 font-Satoshi text-sm font-light tracking-widest text-white transition-all hover:border-[#8f7852] hover:text-[#8f7852]"
             >
               <span>{content.secondaryButtonText}</span>
               <ArrowRight

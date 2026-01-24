@@ -28,7 +28,7 @@ const philosophies = [
     subtitle: "The Heart",
     description:
       'Minimalism can often feel cold. We counter this with the warmth of our heritage. We infuse spaces with the texture, grandeur, and hospitality inherent in Arabic culture. This is the "Baroque" influence. It is a love for richness, gold, and detail, but tamed and polished for the modern executive.',
-    color: "#c9a962",
+    color: "#8f7852",
   },
   {
     id: "immaculate",
@@ -197,7 +197,7 @@ export function DualitiesSectionEnhanced() {
 
       {/* Gradient orbs */}
       <div className="absolute left-0 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#3b82f6]/5 blur-[100px]" />
-      <div className="absolute bottom-1/4 right-0 h-[500px] w-[500px] translate-x-1/2 rounded-full bg-[#c9a962]/5 blur-[100px]" />
+      <div className="absolute bottom-1/4 right-0 h-[500px] w-[500px] translate-x-1/2 rounded-full bg-[#8f7852]/5 blur-[100px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
         {/* Header */}
@@ -211,7 +211,7 @@ export function DualitiesSectionEnhanced() {
             <SVGLineDraw
               width={60}
               height={1}
-              strokeColor="#c9a962"
+              strokeColor="#8f7852"
               duration={1.5}
               delay={0.2}
             />
@@ -221,7 +221,7 @@ export function DualitiesSectionEnhanced() {
             <SVGLineDraw
               width={60}
               height={1}
-              strokeColor="#c9a962"
+              strokeColor="#8f7852"
               duration={1.5}
               delay={0.2}
             />
@@ -314,7 +314,7 @@ export function DualitiesSectionEnhanced() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="mx-auto mt-8 h-1 w-16 origin-center bg-[#c9a962]/50"
+              className="mx-auto mt-8 h-1 w-16 origin-center bg-[#8f7852]/50"
             />
           </div>
         </motion.div>
@@ -330,7 +330,7 @@ export function DualitiesSectionEnhanced() {
           <MagneticButton strength={0.25}>
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-3 border border-[#c9a962]/30 bg-[#c9a962]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all duration-500 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10"
+              className="group inline-flex items-center gap-3 border border-[#8f7852]/30 bg-[#8f7852]/5 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-wider text-neutral-950 transition-all duration-500 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10"
             >
               <span>Explore What We Built Together</span>
               <ArrowRight

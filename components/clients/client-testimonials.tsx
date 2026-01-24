@@ -93,7 +93,7 @@ export function ClientTestimonials({
 
   const prevTestimonial = () => {
     setActiveIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
   };
 
@@ -106,7 +106,7 @@ export function ClientTestimonials({
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a962]/[0.03] blur-[150px]" />
+        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8f7852]/[0.03] blur-[150px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
@@ -146,7 +146,7 @@ export function ClientTestimonials({
         </div>
 
         {/* Testimonial Carousel */}
-        <div className="relative mx-auto max-w-5xl">
+        <div className="relative mx-auto container">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTestimonial.id}
@@ -158,8 +158,8 @@ export function ClientTestimonials({
             >
               {/* Quote Icon */}
               <div className="mb-8 flex justify-center">
-                <div className="flex h-20 w-20 items-center justify-center border border-[#c9a962]/30 bg-[#c9a962]/5">
-                  <Quote className="h-10 w-10 text-[#c9a962]" strokeWidth={1} />
+                <div className="flex h-20 w-20 items-center justify-center border border-[#8f7852]/30 bg-[#8f7852]/5">
+                  <Quote className="h-10 w-10 text-[#8f7852]" strokeWidth={1} />
                 </div>
               </div>
 
@@ -169,9 +169,9 @@ export function ClientTestimonials({
                   (_, i) => (
                     <Star
                       key={i}
-                      className="h-5 w-5 fill-[#c9a962] text-[#c9a962]"
+                      className="h-5 w-5 fill-[#8f7852] text-[#8f7852]"
                     />
-                  )
+                  ),
                 )}
               </div>
 
@@ -191,7 +191,7 @@ export function ClientTestimonials({
                   <div className="mb-1 font-Satoshi text-sm font-light text-neutral-600">
                     {activeTestimonial.position}
                   </div>
-                  <div className="font-Satoshi text-sm font-light uppercase tracking-wider text-[#c9a962]">
+                  <div className="font-Satoshi text-sm font-light uppercase tracking-wider text-[#8f7852]">
                     {activeTestimonial.company}
                   </div>
                 </div>
@@ -203,10 +203,10 @@ export function ClientTestimonials({
           <div className="mt-12 flex items-center justify-center gap-4">
             <button
               onClick={prevTestimonial}
-              className="group flex h-14 w-14 items-center justify-center border border-neutral-200 bg-white transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/5"
+              className="group flex h-14 w-14 items-center justify-center border border-neutral-200 bg-white transition-all duration-300 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/5"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="h-6 w-6 text-neutral-400 transition-colors group-hover:text-[#c9a962]" />
+              <ChevronLeft className="h-6 w-6 text-neutral-400 transition-colors group-hover:text-[#8f7852]" />
             </button>
 
             {/* Dots Indicator */}
@@ -217,7 +217,7 @@ export function ClientTestimonials({
                   onClick={() => setActiveIndex(index)}
                   className={`h-2 w-2 rounded-full transition-all duration-300 ${
                     index === activeIndex
-                      ? "w-8 bg-[#c9a962]"
+                      ? "w-8 bg-[#8f7852]"
                       : "bg-neutral-300 hover:bg-neutral-400"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -227,10 +227,10 @@ export function ClientTestimonials({
 
             <button
               onClick={nextTestimonial}
-              className="group flex h-14 w-14 items-center justify-center border border-neutral-200 bg-white transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/5"
+              className="group flex h-14 w-14 items-center justify-center border border-neutral-200 bg-white transition-all duration-300 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/5"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="h-6 w-6 text-neutral-400 transition-colors group-hover:text-[#c9a962]" />
+              <ChevronRight className="h-6 w-6 text-neutral-400 transition-colors group-hover:text-[#8f7852]" />
             </button>
           </div>
 

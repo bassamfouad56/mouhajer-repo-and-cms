@@ -58,7 +58,7 @@ export function TestFounderLegacy() {
               <h2 className="mb-10 font-SchnyderS text-5xl font-light leading-[1.05] text-white sm:text-6xl lg:text-7xl xl:text-8xl">
                 Building
                 <br />
-                <span className="text-[#c9a962]">a Legacy</span>
+                <span className="text-[#8f7852]">a Legacy</span>
               </h2>
 
               <p className="max-w-3xl font-Satoshi text-xl font-light leading-relaxed text-white/80 lg:text-2xl">
@@ -110,7 +110,7 @@ export function TestFounderLegacy() {
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
-                <div className="mb-4 h-px w-12 bg-[#c9a962]" />
+                <div className="mb-4 h-px w-12 bg-[#8f7852]" />
                 <h3 className="mb-3 font-SchnyderS text-3xl font-light text-white lg:text-4xl">
                   Address Boulevard
                   <br />
@@ -122,8 +122,8 @@ export function TestFounderLegacy() {
               </div>
 
               {/* Award badge */}
-              <div className="absolute right-6 top-6 border border-[#c9a962]/40 bg-[#c9a962]/10 px-4 py-2 backdrop-blur-sm">
-                <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
+              <div className="absolute right-6 top-6 border border-[#8f7852]/40 bg-[#8f7852]/10 px-4 py-2 backdrop-blur-sm">
+                <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#8f7852]">
                   Award Winner
                 </span>
               </div>
@@ -149,7 +149,7 @@ export function TestFounderLegacy() {
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
-                <div className="mb-4 h-px w-12 bg-[#c9a962]" />
+                <div className="mb-4 h-px w-12 bg-[#8f7852]" />
                 <h3 className="mb-3 font-SchnyderS text-3xl font-light text-white lg:text-4xl">
                   Boulevard
                   <br />
@@ -161,8 +161,8 @@ export function TestFounderLegacy() {
               </div>
 
               {/* Award badge */}
-              <div className="absolute right-6 top-6 border border-[#c9a962]/40 bg-[#c9a962]/10 px-4 py-2 backdrop-blur-sm">
-                <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
+              <div className="absolute right-6 top-6 border border-[#8f7852]/40 bg-[#8f7852]/10 px-4 py-2 backdrop-blur-sm">
+                <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#8f7852]">
                   5-Star Winner
                 </span>
               </div>
@@ -188,7 +188,7 @@ export function TestFounderLegacy() {
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
-                <div className="mb-4 h-px w-12 bg-[#c9a962]" />
+                <div className="mb-4 h-px w-12 bg-[#8f7852]" />
                 <h3 className="mb-3 font-SchnyderS text-3xl font-light text-white lg:text-4xl">
                   Sheraton
                   <br />
@@ -200,8 +200,8 @@ export function TestFounderLegacy() {
               </div>
 
               {/* Award badge */}
-              <div className="absolute right-6 top-6 border border-[#c9a962]/40 bg-[#c9a962]/10 px-4 py-2 backdrop-blur-sm">
-                <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
+              <div className="absolute right-6 top-6 border border-[#8f7852]/40 bg-[#8f7852]/10 px-4 py-2 backdrop-blur-sm">
+                <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#8f7852]">
                   5-Star Winner
                 </span>
               </div>
@@ -227,7 +227,7 @@ export function TestFounderLegacy() {
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
-                <div className="mb-4 h-px w-12 bg-[#c9a962]" />
+                <div className="mb-4 h-px w-12 bg-[#8f7852]" />
                 <h3 className="mb-3 font-SchnyderS text-3xl font-light text-white lg:text-4xl">
                   Sofitel
                   <br />
@@ -239,8 +239,8 @@ export function TestFounderLegacy() {
               </div>
 
               {/* Award badge */}
-              <div className="absolute right-6 top-6 border border-[#c9a962]/40 bg-[#c9a962]/10 px-4 py-2 backdrop-blur-sm">
-                <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
+              <div className="absolute right-6 top-6 border border-[#8f7852]/40 bg-[#8f7852]/10 px-4 py-2 backdrop-blur-sm">
+                <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#8f7852]">
                   Award Winner
                 </span>
               </div>
@@ -266,7 +266,7 @@ export function TestFounderLegacy() {
             <div className="flex flex-wrap items-center justify-center gap-6">
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962] px-12 py-6 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-[#c9a962]/90"
+                className="group inline-flex items-center gap-4 border border-[#8f7852] bg-[#8f7852] px-12 py-6 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-[#8f7852]/90"
               >
                 <span>View Full Portfolio</span>
                 <ArrowRight

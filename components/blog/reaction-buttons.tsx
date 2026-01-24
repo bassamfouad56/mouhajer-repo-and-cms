@@ -25,7 +25,7 @@ export default function ReactionButtons({
   initialReactions,
 }: ReactionButtonsProps) {
   const [reactions, setReactions] = useState<Reactions>(
-    initialReactions || { helpful: 0, insightful: 0, loved: 0 }
+    initialReactions || { helpful: 0, insightful: 0, loved: 0 },
   );
   const [userReaction, setUserReaction] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState<string | null>(null);
@@ -59,7 +59,7 @@ export default function ReactionButtons({
           ...prev,
           [userReaction]: Math.max(
             0,
-            prev[userReaction as keyof Reactions] - 1
+            prev[userReaction as keyof Reactions] - 1,
           ),
         }));
       }
@@ -109,7 +109,7 @@ export default function ReactionButtons({
             whileTap={{ scale: 0.95 }}
             className={`group flex flex-col items-center gap-1 rounded-lg border px-4 py-3 transition-all duration-300 ${
               userReaction === key
-                ? "border-[#c9a962] bg-[#c9a962]/10"
+                ? "border-[#8f7852] bg-[#8f7852]/10"
                 : "border-neutral-200 bg-white hover:border-neutral-300"
             }`}
           >
@@ -129,7 +129,7 @@ export default function ReactionButtons({
             </span>
             <span
               className={`font-Satoshi text-xs font-medium ${
-                userReaction === key ? "text-[#c9a962]" : "text-neutral-400"
+                userReaction === key ? "text-[#8f7852]" : "text-neutral-400"
               }`}
             >
               {reactions[key as keyof Reactions]}

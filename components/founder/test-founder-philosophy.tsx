@@ -34,8 +34,8 @@ const principles = [
     subtitle: "The Result",
     description:
       'Where discipline meets warmth, excellence is born. We don\'t do "good enough." We do legendary.',
-    color: "from-[#c9a962]/10 to-[#c9a962]/5",
-    accent: "border-[#c9a962]/30",
+    color: "from-[#8f7852]/10 to-[#8f7852]/5",
+    accent: "border-[#8f7852]/30",
   },
 ];
 
@@ -85,17 +85,17 @@ export function TestFounderPhilosophy() {
           className="mb-24 text-center"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-16 bg-[#c9a962]/30" />
+            <div className="h-px w-16 bg-[#8f7852]/30" />
             <span className="font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-neutral-500">
               Design Philosophy
             </span>
-            <div className="h-px w-16 bg-[#c9a962]/30" />
+            <div className="h-px w-16 bg-[#8f7852]/30" />
           </div>
 
           <h2 className="mb-8 font-SchnyderS text-5xl font-light leading-[1.05] text-neutral-900 sm:text-6xl lg:text-7xl">
             Three Principles.
             <br />
-            <span className="text-[#c9a962]">One Vision.</span>
+            <span className="text-[#8f7852]">One Vision.</span>
           </h2>
 
           <p className="mx-auto max-w-3xl font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
@@ -125,9 +125,9 @@ export function TestFounderPhilosophy() {
                   className={`relative h-full border ${principle.accent} bg-white/70 p-8 backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:bg-white/90 lg:p-10`}
                 >
                   {/* Icon */}
-                  <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#c9a962]/20 bg-[#c9a962]/10">
+                  <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#8f7852]/20 bg-[#8f7852]/10">
                     <Icon
-                      className="h-8 w-8 text-[#c9a962]"
+                      className="h-8 w-8 text-[#8f7852]"
                       strokeWidth={1.5}
                     />
                   </div>
@@ -138,7 +138,7 @@ export function TestFounderPhilosophy() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="mb-6 font-SchnyderS text-3xl font-light text-neutral-900 transition-colors duration-300 group-hover:text-[#c9a962] lg:text-4xl">
+                  <h3 className="mb-6 font-SchnyderS text-3xl font-light text-neutral-900 transition-colors duration-300 group-hover:text-[#8f7852] lg:text-4xl">
                     {principle.title}
                   </h3>
 
@@ -148,7 +148,7 @@ export function TestFounderPhilosophy() {
                   </p>
 
                   {/* Bottom accent */}
-                  <div className="mt-8 h-px w-0 bg-[#c9a962] transition-all duration-500 group-hover:w-full" />
+                  <div className="mt-8 h-px w-0 bg-[#8f7852] transition-all duration-500 group-hover:w-full" />
                 </div>
               </motion.div>
             );
@@ -180,17 +180,17 @@ export function TestFounderPhilosophy() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5]/60 via-transparent to-transparent" />
 
               {/* Gold accent */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#c9a962]" />
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#8f7852]" />
             </motion.div>
 
             {/* Right: Content */}
             <div className="flex flex-col justify-center">
-              <div className="mb-6 h-px w-16 bg-[#c9a962]" />
+              <div className="mb-6 h-px w-16 bg-[#8f7852]" />
 
               <h3 className="mb-8 font-SchnyderS text-4xl font-light text-neutral-900 lg:text-5xl">
                 From Philosophy
                 <br />
-                <span className="text-[#c9a962]">to Reality</span>
+                <span className="text-[#8f7852]">to Reality</span>
               </h3>
 
               <div className="mb-12 space-y-6 font-Satoshi text-lg font-light leading-relaxed text-neutral-600">
@@ -211,7 +211,7 @@ export function TestFounderPhilosophy() {
               </div>
 
               {/* Quote */}
-              <div className="border-l-2 border-[#c9a962] pl-6">
+              <div className="border-l-2 border-[#8f7852] pl-6">
                 <p className="mb-4 font-SchnyderS text-2xl font-light italic text-neutral-900 lg:text-3xl">
                   "Every line, every material, every light fixture must earn its
                   place by serving both beauty and purpose."
@@ -250,13 +250,13 @@ export function TestFounderPhilosophy() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="border border-[#c9a962]/20 bg-white/70 p-8 backdrop-blur-sm lg:p-10"
+                className="border border-[#8f7852]/20 bg-white/70 p-8 backdrop-blur-sm lg:p-10"
               >
                 <p className="mb-8 font-Satoshi text-lg font-light leading-relaxed text-neutral-700">
                   "{testimonial.quote}"
                 </p>
 
-                <div className="border-t border-[#c9a962]/20 pt-6">
+                <div className="border-t border-[#8f7852]/20 pt-6">
                   <div className="font-Satoshi text-sm font-light text-neutral-900">
                     {testimonial.author}
                   </div>
@@ -275,7 +275,7 @@ export function TestFounderPhilosophy() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="border-t border-[#c9a962]/20 pt-20 text-center"
+          className="border-t border-[#8f7852]/20 pt-20 text-center"
         >
           <h3 className="mb-6 font-SchnyderS text-4xl font-light text-neutral-900 lg:text-5xl">
             Experience the MIDC Difference
@@ -288,7 +288,7 @@ export function TestFounderPhilosophy() {
           <div className="flex flex-wrap items-center justify-center gap-6">
             <Link
               href="/about/awards"
-              className="group inline-flex items-center gap-4 border border-[#c9a962] bg-[#c9a962] px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-[#c9a962]/90"
+              className="group inline-flex items-center gap-4 border border-[#8f7852] bg-[#8f7852] px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-950 transition-all duration-300 hover:bg-[#8f7852]/90"
             >
               <span>View Our Awards</span>
               <ArrowRight
@@ -299,7 +299,7 @@ export function TestFounderPhilosophy() {
 
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-4 border border-[#c9a962]/30 bg-white/60 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-900 backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/50 hover:bg-white/80"
+              className="group inline-flex items-center gap-4 border border-[#8f7852]/30 bg-white/60 px-10 py-5 font-Satoshi text-sm font-light uppercase tracking-[0.2em] text-neutral-900 backdrop-blur-sm transition-all duration-300 hover:border-[#8f7852]/50 hover:bg-white/80"
             >
               <span>Explore Our Work</span>
               <ArrowRight

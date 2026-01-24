@@ -1,7 +1,13 @@
 "use client";
 
 import { useRef, useState, useCallback, useEffect } from "react";
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import { SafeImage } from "@/components/safe-image";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
@@ -14,7 +20,9 @@ export function CapabilitiesCarousel() {
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const [displayedIndex, setDisplayedIndex] = useState<number | null>(null);
   // Mobile: expanded card index for tap-to-expand
-  const [mobileExpandedIndex, setMobileExpandedIndex] = useState<number | null>(0);
+  const [mobileExpandedIndex, setMobileExpandedIndex] = useState<number | null>(
+    0,
+  );
   const listRef = useRef<HTMLDivElement>(null);
 
   // Combined active index for both hover and focus
@@ -55,14 +63,14 @@ export function CapabilitiesCarousel() {
           break;
       }
     },
-    []
+    [],
   );
 
   // Focus the appropriate link when focusedIndex changes
   useEffect(() => {
     if (focusedIndex !== null && listRef.current) {
       const links = listRef.current.querySelectorAll<HTMLAnchorElement>(
-        "[data-capability-link]"
+        "[data-capability-link]",
       );
       links[focusedIndex]?.focus();
     }
@@ -170,7 +178,7 @@ export function CapabilitiesCarousel() {
   const backgroundScale = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [1.1, 1, 1.1]
+    [1.1, 1, 1.1],
   );
 
   return (
@@ -199,7 +207,7 @@ export function CapabilitiesCarousel() {
                 alt={capability.title}
                 fallbackSrc={getProjectPlaceholder(
                   capability.title,
-                  "commercial"
+                  "commercial",
                 )}
                 fill
                 className="object-cover"
@@ -210,7 +218,7 @@ export function CapabilitiesCarousel() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/40 to-[#0a0a0a]/10" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/10" />
             {/* Gold tint overlay */}
-            <div className="absolute inset-0 bg-[#c9a962]/5 mix-blend-overlay" />
+            <div className="absolute inset-0 bg-[#8f7852]/5 mix-blend-overlay" />
           </div>
         ))}
 
@@ -234,15 +242,15 @@ export function CapabilitiesCarousel() {
           transition={{ duration: 0.8 }}
           className="mb-10 text-center"
         >
-          <span className="inline-flex items-center justify-center gap-3 font-Satoshi text-[10px] font-semibold uppercase tracking-[0.4em] text-[#c9a962] mb-4">
-            <span className="h-px w-8 bg-[#c9a962]" />
+          <span className="inline-flex items-center justify-center gap-3 font-Satoshi text-[10px] font-semibold uppercase tracking-[0.4em] text-[#8f7852] mb-4">
+            <span className="h-px w-8 bg-[#8f7852]" />
             {t("heading")}
-            <span className="h-px w-8 bg-[#c9a962]" />
+            <span className="h-px w-8 bg-[#8f7852]" />
           </span>
           <h2 className="font-SchnyderS text-4xl font-light tracking-tight text-white leading-[1.1]">
             {t("titleLine1")}
             <br />
-            <span className="text-[#c9a962]">{t("titleLine2")}</span>
+            <span className="text-[#8f7852]">{t("titleLine2")}</span>
           </h2>
         </motion.div>
 
@@ -270,7 +278,7 @@ export function CapabilitiesCarousel() {
                     <div
                       className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                         isExpanded
-                          ? "border-[#c9a962] bg-[#c9a962]"
+                          ? "border-[#8f7852] bg-[#8f7852]"
                           : "border-white/20 bg-transparent"
                       }`}
                     >
@@ -286,7 +294,7 @@ export function CapabilitiesCarousel() {
                     <div>
                       <h3
                         className={`font-SchnyderS text-xl font-light transition-colors duration-300 ${
-                          isExpanded ? "text-[#c9a962]" : "text-white"
+                          isExpanded ? "text-[#8f7852]" : "text-white"
                         }`}
                       >
                         {capability.title}
@@ -298,7 +306,7 @@ export function CapabilitiesCarousel() {
                   </div>
                   {/* Chevron */}
                   <ChevronDown
-                    className={`h-5 w-5 text-[#c9a962] transition-transform duration-300 ${
+                    className={`h-5 w-5 text-[#8f7852] transition-transform duration-300 ${
                       isExpanded ? "rotate-180" : ""
                     }`}
                   />
@@ -320,7 +328,10 @@ export function CapabilitiesCarousel() {
                         <SafeImage
                           src={capability.image}
                           alt={capability.title}
-                          fallbackSrc={getProjectPlaceholder(capability.title, "commercial")}
+                          fallbackSrc={getProjectPlaceholder(
+                            capability.title,
+                            "commercial",
+                          )}
                           fill
                           className="object-cover"
                           sizes="(max-width: 1024px) 100vw"
@@ -338,7 +349,7 @@ export function CapabilitiesCarousel() {
                         {/* CTA Button */}
                         <Link
                           href={capability.link}
-                          className="inline-flex items-center gap-2 rounded-full bg-[#c9a962] px-5 py-3 font-Satoshi text-[11px] font-medium uppercase tracking-wider text-[#0a0a0a] transition-all duration-300 active:scale-95"
+                          className="inline-flex items-center gap-2 rounded-full bg-[#8f7852] px-5 py-3 font-Satoshi text-[11px] font-medium uppercase tracking-wider text-[#0a0a0a] transition-all duration-300 active:scale-95"
                         >
                           {capability.buttonLabel}
                           <ArrowRight className="h-4 w-4" strokeWidth={2} />
@@ -365,7 +376,7 @@ export function CapabilitiesCarousel() {
               onClick={() => setMobileExpandedIndex(index)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 mobileExpandedIndex === index
-                  ? "w-6 bg-[#c9a962]"
+                  ? "w-6 bg-[#8f7852]"
                   : "w-2 bg-white/20"
               }`}
               aria-label={`Go to capability ${index + 1}`}
@@ -407,8 +418,8 @@ export function CapabilitiesCarousel() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="mb-8"
               >
-                <span className="inline-flex items-center gap-4 font-Satoshi text-[11px] font-semibold uppercase tracking-[0.5em] text-[#c9a962]">
-                  <span className="h-px w-12 bg-[#c9a962]" />
+                <span className="inline-flex items-center gap-4 font-Satoshi text-[11px] font-semibold uppercase tracking-[0.5em] text-[#8f7852]">
+                  <span className="h-px w-12 bg-[#8f7852]" />
                   {t("heading")}
                 </span>
               </motion.div>
@@ -421,7 +432,7 @@ export function CapabilitiesCarousel() {
               >
                 {t("titleLine1")}
                 <br />
-                <span className="text-[#c9a962]">{t("titleLine2")}</span>
+                <span className="text-[#8f7852]">{t("titleLine2")}</span>
               </motion.h2>
             </div>
 
@@ -464,7 +475,7 @@ export function CapabilitiesCarousel() {
               >
                 <Link
                   href={capability.link}
-                  className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] rounded"
+                  className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8f7852] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] rounded"
                   data-capability-link
                   aria-label={`${capability.title}: ${capability.description}`}
                   onFocus={() => setFocusedIndex(index)}
@@ -476,7 +487,7 @@ export function CapabilitiesCarousel() {
                   <div
                     className={`relative border-t transition-all duration-500 ease-out ${
                       isActive
-                        ? "border-[#c9a962]/50 bg-[#c9a962]/5"
+                        ? "border-[#8f7852]/50 bg-[#8f7852]/5"
                         : "border-white/10"
                     }`}
                   >
@@ -496,7 +507,7 @@ export function CapabilitiesCarousel() {
                         </h3>
                         {/* Hover title - slides in from below */}
                         <h3
-                          className={`font-SchnyderS text-2xl font-light lg:text-4xl transition-all duration-500 ease-out absolute inset-0 text-[#c9a962] ${
+                          className={`font-SchnyderS text-2xl font-light lg:text-4xl transition-all duration-500 ease-out absolute inset-0 text-[#8f7852] ${
                             isActive
                               ? "opacity-100 translate-y-0"
                               : "opacity-0 translate-y-full"
@@ -521,7 +532,7 @@ export function CapabilitiesCarousel() {
 
                         {/* Badge - Opacity only, no height change */}
                         <span
-                          className={`font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#c9a962]/50 transition-opacity duration-300 ease-out ${
+                          className={`font-Satoshi text-xs font-medium uppercase tracking-[0.3em] text-[#8f7852]/50 transition-opacity duration-300 ease-out ${
                             isActive ? "opacity-0" : "opacity-100"
                           }`}
                         >
@@ -534,7 +545,7 @@ export function CapabilitiesCarousel() {
                         <div
                           className={`relative flex items-center justify-end rounded-full border transition-all duration-500 ease-out overflow-hidden ${
                             isActive
-                              ? "border-[#c9a962] bg-[#c9a962] pl-5 pr-1"
+                              ? "border-[#8f7852] bg-[#8f7852] pl-5 pr-1"
                               : "border-white/20 bg-transparent"
                           }`}
                           style={{
@@ -574,7 +585,7 @@ export function CapabilitiesCarousel() {
 
                     {/* Bottom accent line - CSS transition */}
                     <div
-                      className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#c9a962] via-[#e8d5a3] to-transparent transition-all duration-600 ease-out ${
+                      className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#8f7852] via-[#e8d5a3] to-transparent transition-all duration-600 ease-out ${
                         isActive ? "w-full" : "w-0"
                       }`}
                     />
@@ -601,7 +612,7 @@ export function CapabilitiesCarousel() {
               {/* Progress fill bar - uses displayedIndex to prevent flicker */}
               <div className="absolute inset-y-0 left-0 overflow-hidden rounded-full">
                 <div
-                  className="h-full bg-gradient-to-r from-[#c9a962]/20 via-[#c9a962]/10 to-transparent transition-all duration-700 ease-out"
+                  className="h-full bg-gradient-to-r from-[#8f7852]/20 via-[#8f7852]/10 to-transparent transition-all duration-700 ease-out"
                   style={{
                     width:
                       displayedIndex !== null
@@ -620,7 +631,7 @@ export function CapabilitiesCarousel() {
                 return (
                   <button
                     key={cap.id}
-                    className="group/nav relative z-10 flex flex-col items-center gap-2 px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a962] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] rounded-lg transition-all duration-300 lg:px-4"
+                    className="group/nav relative z-10 flex flex-col items-center gap-2 px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8f7852] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] rounded-lg transition-all duration-300 lg:px-4"
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
                     onFocus={() => setFocusedIndex(index)}
@@ -631,10 +642,10 @@ export function CapabilitiesCarousel() {
                     <div
                       className={`relative flex h-8 w-8 items-center justify-center rounded-full border-2 transition-all duration-500 ease-out lg:h-10 lg:w-10 ${
                         isActive
-                          ? "border-[#c9a962] bg-[#c9a962] shadow-lg shadow-[#c9a962]/30"
+                          ? "border-[#8f7852] bg-[#8f7852] shadow-lg shadow-[#8f7852]/30"
                           : isPast
-                            ? "border-[#c9a962]/60 bg-[#c9a962]/20"
-                            : "border-white/20 bg-transparent group-hover/nav:border-[#c9a962]/40 group-hover/nav:bg-[#c9a962]/10"
+                            ? "border-[#8f7852]/60 bg-[#8f7852]/20"
+                            : "border-white/20 bg-transparent group-hover/nav:border-[#8f7852]/40 group-hover/nav:bg-[#8f7852]/10"
                       }`}
                     >
                       <span
@@ -642,8 +653,8 @@ export function CapabilitiesCarousel() {
                           isActive
                             ? "text-[#0a0a0a]"
                             : isPast
-                              ? "text-[#c9a962]"
-                              : "text-white/50 group-hover/nav:text-[#c9a962]"
+                              ? "text-[#8f7852]"
+                              : "text-white/50 group-hover/nav:text-[#8f7852]"
                         }`}
                       >
                         {String(index + 1).padStart(2, "0")}
@@ -651,7 +662,7 @@ export function CapabilitiesCarousel() {
 
                       {/* Active pulse ring */}
                       {isActive && (
-                        <span className="absolute -inset-1 animate-ping rounded-full border border-[#c9a962]/30" />
+                        <span className="absolute -inset-1 animate-ping rounded-full border border-[#8f7852]/30" />
                       )}
                     </div>
 
@@ -659,9 +670,9 @@ export function CapabilitiesCarousel() {
                     <span
                       className={`hidden font-Satoshi text-[9px] font-medium uppercase tracking-wider transition-all duration-300 lg:block lg:text-[10px] ${
                         isActive
-                          ? "text-[#c9a962] translate-y-0 opacity-100"
+                          ? "text-[#8f7852] translate-y-0 opacity-100"
                           : isPast
-                            ? "text-[#c9a962]/60"
+                            ? "text-[#8f7852]/60"
                             : "text-white/40 group-hover/nav:text-white/60"
                       }`}
                     >
@@ -670,7 +681,7 @@ export function CapabilitiesCarousel() {
 
                     {/* Active indicator dot */}
                     <div
-                      className={`h-1 w-1 rounded-full bg-[#c9a962] transition-all duration-300 ${
+                      className={`h-1 w-1 rounded-full bg-[#8f7852] transition-all duration-300 ${
                         isActive ? "scale-100 opacity-100" : "scale-0 opacity-0"
                       }`}
                     />

@@ -244,18 +244,18 @@ export default async function LocationProjectsPage({ params }: PageProps) {
             <span className="text-white/30">/</span>
             <span className="text-white/50">Location</span>
             <span className="text-white/30">/</span>
-            <span className="text-[#c9a962]">{locationName}</span>
+            <span className="text-[#8f7852]">{locationName}</span>
           </nav>
 
           {/* Page Header */}
           <h1 className="font-SchnyderS text-5xl font-light text-white lg:text-7xl">
-            Projects in <span className="text-[#c9a962]">{locationName}</span>
+            Projects in <span className="text-[#8f7852]">{locationName}</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg font-light text-white/70">
             {getLocalizedValue(
               locationData.description,
               locale,
-              `Explore our interior design and fit-out projects in ${locationName}.`
+              `Explore our interior design and fit-out projects in ${locationName}.`,
             )}
           </p>
 
@@ -263,7 +263,7 @@ export default async function LocationProjectsPage({ params }: PageProps) {
           <div className="mt-10 flex flex-wrap gap-3">
             <a
               href={`/${locale}/projects`}
-              className="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-light text-white/70 transition-all hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 hover:text-white"
+              className="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-light text-white/70 transition-all hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10 hover:text-white"
             >
               All Locations
             </a>
@@ -273,8 +273,8 @@ export default async function LocationProjectsPage({ params }: PageProps) {
                 href={`/${locale}/projects/location/${loc.slug?.current}`}
                 className={`rounded-full border px-5 py-2 text-sm font-light transition-all ${
                   loc.slug?.current === location
-                    ? "border-[#c9a962] bg-[#c9a962] text-neutral-950"
-                    : "border-white/20 bg-white/5 text-white/70 hover:border-[#c9a962]/50 hover:bg-[#c9a962]/10 hover:text-white"
+                    ? "border-[#8f7852] bg-[#8f7852] text-neutral-950"
+                    : "border-white/20 bg-white/5 text-white/70 hover:border-[#8f7852]/50 hover:bg-[#8f7852]/10 hover:text-white"
                 }`}
               >
                 {getLocalizedValue(loc.name, locale, "")}

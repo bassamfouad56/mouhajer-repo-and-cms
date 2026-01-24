@@ -47,16 +47,16 @@ export function TransformationShowcase() {
           className="mb-16 text-center sm:mb-20"
         >
           <div className="mb-6 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a962]/50" />
-            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#c9a962]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#8f7852]/50" />
+            <span className="font-Satoshi text-xs font-light uppercase tracking-[0.3em] text-[#8f7852]">
               Transformation
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a962]/50" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#8f7852]/50" />
           </div>
 
           <h2 className="font-SchnyderM text-4xl font-light text-neutral-900 sm:text-5xl lg:text-6xl">
             Witness the
-            <span className="block text-[#c9a962]">Transformation</span>
+            <span className="block text-[#8f7852]">Transformation</span>
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl font-Satoshi text-base font-light leading-relaxed text-neutral-600 sm:text-lg">
@@ -79,14 +79,14 @@ export function TransformationShowcase() {
               {/* Project Info */}
               <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#c9a962]">
+                  <span className="font-Satoshi text-xs font-light uppercase tracking-wider text-[#8f7852]">
                     {project.category}
                   </span>
                   <h3 className="mt-1 font-SchnyderS text-xl font-light text-neutral-900 sm:text-2xl">
                     {project.title}
                   </h3>
                 </div>
-                <div className="h-8 w-8 rounded-full border border-[#c9a962]/20 bg-[#c9a962]/5 backdrop-blur-sm" />
+                <div className="h-8 w-8 rounded-full border border-[#8f7852]/20 bg-[#8f7852]/5 backdrop-blur-sm" />
               </div>
 
               {/* Before/After Slider */}
@@ -112,7 +112,7 @@ export function TransformationShowcase() {
             Every project tells a story of transformation.{" "}
             <a
               href="/projects"
-              className="text-[#c9a962] transition-colors duration-300 hover:text-[#c9a962]/80"
+              className="text-[#8f7852] transition-colors duration-300 hover:text-[#8f7852]/80"
             >
               View all projects
             </a>
@@ -121,8 +121,8 @@ export function TransformationShowcase() {
       </div>
 
       {/* Decorative elements */}
-      <div className="absolute left-0 top-1/4 h-64 w-64 rounded-full bg-[#c9a962]/5 blur-3xl" />
-      <div className="absolute bottom-1/4 right-0 h-64 w-64 rounded-full bg-[#c9a962]/5 blur-3xl" />
+      <div className="absolute left-0 top-1/4 h-64 w-64 rounded-full bg-[#8f7852]/5 blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 h-64 w-64 rounded-full bg-[#8f7852]/5 blur-3xl" />
     </section>
   );
 }

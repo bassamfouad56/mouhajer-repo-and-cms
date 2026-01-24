@@ -73,7 +73,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
           }
         });
       },
-      { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0 },
     );
 
     headings.forEach((heading) => {
@@ -123,7 +123,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
       >
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative flex items-center gap-3 rounded-full border border-neutral-200 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-sm transition-all hover:border-[#c9a962] hover:shadow-xl"
+          className="group relative flex items-center gap-3 rounded-full border border-neutral-200 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-sm transition-all hover:border-[#8f7852] hover:shadow-xl"
         >
           {/* Progress Ring */}
           <div className="relative">
@@ -141,7 +141,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                 cy="18"
                 r="14"
                 fill="none"
-                stroke="#c9a962"
+                stroke="#8f7852"
                 strokeWidth="3"
                 strokeDasharray="87.96"
                 strokeDashoffset={`${87.96 - (scrollProgress / 100) * 87.96}`}
@@ -198,7 +198,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
               {/* Progress Bar */}
               <div className="h-0.5 bg-neutral-100">
                 <motion.div
-                  className="h-full bg-[#c9a962]"
+                  className="h-full bg-[#8f7852]"
                   animate={{ width: `${scrollProgress}%` }}
                 />
               </div>
@@ -214,7 +214,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                           heading.level === 3 ? "ml-4" : ""
                         } ${
                           activeId === heading.id
-                            ? "bg-[#c9a962]/10"
+                            ? "bg-[#8f7852]/10"
                             : "hover:bg-neutral-50"
                         }`}
                       >
@@ -222,7 +222,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                         <span
                           className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full font-Satoshi text-[10px] font-medium transition-colors ${
                             activeId === heading.id
-                              ? "bg-[#c9a962] text-white"
+                              ? "bg-[#8f7852] text-white"
                               : "bg-neutral-100 text-neutral-400 group-hover:bg-neutral-200"
                           }`}
                         >
@@ -243,7 +243,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                           size={14}
                           className={`flex-shrink-0 transition-all ${
                             activeId === heading.id
-                              ? "text-[#c9a962]"
+                              ? "text-[#8f7852]"
                               : "text-neutral-300 group-hover:text-neutral-400"
                           }`}
                         />

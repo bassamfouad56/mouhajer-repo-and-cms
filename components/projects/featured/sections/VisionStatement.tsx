@@ -41,7 +41,7 @@ export function VisionStatement({
   const contentX = useTransform(
     smoothProgress,
     [0.1, 0.9],
-    ["0%", isRTL ? "20%" : "-20%"]
+    ["0%", isRTL ? "20%" : "-20%"],
   );
 
   // Parallax for background images
@@ -49,7 +49,7 @@ export function VisionStatement({
   const bgOpacity = useTransform(
     smoothProgress,
     [0, 0.3, 0.7, 1],
-    [0.3, 0.6, 0.6, 0.3]
+    [0.3, 0.6, 0.6, 0.3],
   );
 
   // Text reveal animations
@@ -115,7 +115,7 @@ export function VisionStatement({
         {visionStatement && (
           <motion.div className="mb-24" style={{ opacity: textOpacity }}>
             <motion.span
-              className="block text-[#c9a962] text-sm tracking-[0.3em] uppercase mb-6"
+              className="block text-[#8f7852] text-sm tracking-[0.3em] uppercase mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -126,7 +126,7 @@ export function VisionStatement({
             <blockquote className="relative">
               {/* Opening Quote Mark */}
               <motion.span
-                className="absolute -top-4 -left-4 md:-left-8 text-[#c9a962]/20 text-8xl md:text-9xl font-serif leading-none"
+                className="absolute -top-4 -left-4 md:-left-8 text-[#8f7852]/20 text-8xl md:text-9xl font-serif leading-none"
                 initial={{ opacity: 0, scale: 0.5 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -146,7 +146,7 @@ export function VisionStatement({
             </blockquote>
             {/* Animated underline */}
             <motion.div
-              className="mt-8 h-px bg-gradient-to-r from-[#c9a962] via-[#c9a962]/50 to-transparent"
+              className="mt-8 h-px bg-gradient-to-r from-[#8f7852] via-[#8f7852]/50 to-transparent"
               style={{ width: lineWidth }}
             />
           </motion.div>
@@ -164,7 +164,7 @@ export function VisionStatement({
             >
               <div className="flex items-center gap-4 mb-6">
                 <motion.span
-                  className="text-[#c9a962] text-sm tracking-[0.3em] uppercase"
+                  className="text-[#8f7852] text-sm tracking-[0.3em] uppercase"
                   initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -173,7 +173,7 @@ export function VisionStatement({
                   {t.challenge}
                 </motion.span>
                 <motion.div
-                  className="flex-1 h-px bg-[#c9a962]/30"
+                  className="flex-1 h-px bg-[#8f7852]/30"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
                   viewport={{ once: true }}
@@ -197,7 +197,7 @@ export function VisionStatement({
             >
               <div className="flex items-center gap-4 mb-6">
                 <motion.span
-                  className="text-[#c9a962] text-sm tracking-[0.3em] uppercase"
+                  className="text-[#8f7852] text-sm tracking-[0.3em] uppercase"
                   initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -206,7 +206,7 @@ export function VisionStatement({
                   {t.approach}
                 </motion.span>
                 <motion.div
-                  className="flex-1 h-px bg-[#c9a962]/30"
+                  className="flex-1 h-px bg-[#8f7852]/30"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
                   viewport={{ once: true }}
@@ -223,14 +223,14 @@ export function VisionStatement({
 
         {/* Decorative Elements */}
         <motion.div
-          className="absolute top-1/2 left-0 w-px h-32 bg-gradient-to-b from-transparent via-[#c9a962]/30 to-transparent"
+          className="absolute top-1/2 left-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8f7852]/30 to-transparent"
           initial={{ scaleY: 0 }}
           whileInView={{ scaleY: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 1 }}
         />
         <motion.div
-          className="absolute top-1/2 right-0 w-px h-32 bg-gradient-to-b from-transparent via-[#c9a962]/30 to-transparent"
+          className="absolute top-1/2 right-0 w-px h-32 bg-gradient-to-b from-transparent via-[#8f7852]/30 to-transparent"
           initial={{ scaleY: 0 }}
           whileInView={{ scaleY: 1 }}
           viewport={{ once: true }}

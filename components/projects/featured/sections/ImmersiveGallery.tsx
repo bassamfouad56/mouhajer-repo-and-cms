@@ -38,7 +38,7 @@ export function ImmersiveGallery({
   const categories = [
     "all",
     ...new Set(
-      images.filter((img) => img.category).map((img) => img.category!)
+      images.filter((img) => img.category).map((img) => img.category!),
     ),
   ];
 
@@ -117,7 +117,7 @@ export function ImmersiveGallery({
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <span className="text-[#c9a962] text-sm tracking-[0.3em] uppercase block mb-4">
+          <span className="text-[#8f7852] text-sm tracking-[0.3em] uppercase block mb-4">
             {isRTL ? "استكشف المشروع" : "Explore The Project"}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl text-white font-light">
@@ -140,8 +140,8 @@ export function ImmersiveGallery({
                 onClick={() => setActiveCategory(cat)}
                 className={`px-5 py-2 text-sm tracking-wider uppercase transition-all duration-300 ${
                   activeCategory === cat
-                    ? "bg-[#c9a962] text-black"
-                    : "border border-white/20 text-white/60 hover:border-[#c9a962]/50 hover:text-white"
+                    ? "bg-[#8f7852] text-black"
+                    : "border border-white/20 text-white/60 hover:border-[#8f7852]/50 hover:text-white"
                 }`}
               >
                 {isRTL
@@ -187,7 +187,7 @@ export function ImmersiveGallery({
                 )}
                 {/* Zoom Icon */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-12 h-12 rounded-full bg-[#c9a962] flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-[#8f7852] flex items-center justify-center">
                     <svg
                       width="20"
                       height="20"

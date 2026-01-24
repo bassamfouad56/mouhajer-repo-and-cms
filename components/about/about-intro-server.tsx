@@ -64,7 +64,7 @@ function SplitRevealText({
           end: "bottom 40%",
           scrub: 1,
         },
-      }
+      },
     );
 
     return () => {
@@ -78,7 +78,7 @@ function SplitRevealText({
     <p ref={containerRef} className={className}>
       {words.map((word, i) => {
         const isHighlight = highlightWords.some((hw) =>
-          word.toLowerCase().includes(hw.toLowerCase())
+          word.toLowerCase().includes(hw.toLowerCase()),
         );
         return (
           <span
@@ -106,7 +106,7 @@ function StrokeFillText({ text }: { text: string }) {
   const clipPath = useTransform(
     scrollYProgress,
     [0, 1],
-    ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]
+    ["inset(0 100% 0 0)", "inset(0 0% 0 0)"],
   );
 
   return (
@@ -160,7 +160,7 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           style={{ y: bgY }}
-          className="absolute -left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#c9a962]/[0.02] blur-[150px]"
+          className="absolute -left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-[#8f7852]/[0.02] blur-[150px]"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], ["10%", "-20%"]) }}
@@ -258,7 +258,7 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
       </div>
 
       {/* Content Section with scroll text reveal */}
-      <div className="relative z-10 mx-auto max-w-5xl px-6 py-28 lg:px-12 lg:py-40">
+      <div className="relative z-10 mx-auto container px-6 py-28 lg:px-12 lg:py-40">
         {/* First paragraph with word-by-word reveal */}
         <SplitRevealText
           text="In a market often fragmented by disconnected service providers, MIDC stands apart as a unified force. We bridge the critical gap between architectural design and technical execution. Our philosophy is simple: a design is only as good as its buildability. By integrating luxury interior fit-out, structural construction, and complex MEP engineering services under one roof, we eliminate the friction that typically plagues high-stakes projects."
@@ -273,21 +273,21 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
-            className="h-px flex-1 origin-left bg-gradient-to-r from-[#c9a962]/60 to-transparent"
+            className="h-px flex-1 origin-left bg-gradient-to-r from-[#8f7852]/60 to-transparent"
           />
           <motion.div
             initial={{ scale: 0, rotate: 45 }}
             whileInView={{ scale: 1, rotate: 45 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="h-2 w-2 bg-[#c9a962]/40"
+            className="h-2 w-2 bg-[#8f7852]/40"
           />
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
-            className="h-px flex-1 origin-right bg-gradient-to-l from-[#c9a962]/60 to-transparent"
+            className="h-px flex-1 origin-right bg-gradient-to-l from-[#8f7852]/60 to-transparent"
           />
         </div>
 
@@ -307,7 +307,7 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="mb-8 font-SchnyderS text-6xl font-light text-[#c9a962]/20"
+              className="mb-8 font-SchnyderS text-6xl font-light text-[#8f7852]/20"
             >
               &ldquo;
             </motion.div>
@@ -334,7 +334,7 @@ export function AboutIntroServer({ projectImages }: AboutIntroServerProps) {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.5 }}
-              className="mx-auto mt-12 h-0.5 w-24 origin-center bg-gradient-to-r from-transparent via-[#c9a962]/50 to-transparent"
+              className="mx-auto mt-12 h-0.5 w-24 origin-center bg-gradient-to-r from-transparent via-[#8f7852]/50 to-transparent"
             />
           </div>
         </div>

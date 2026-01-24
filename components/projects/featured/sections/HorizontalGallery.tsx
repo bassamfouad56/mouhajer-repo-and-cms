@@ -60,7 +60,7 @@ export function HorizontalGallery({
   const x = useTransform(
     smoothProgress,
     [0.1, 0.9],
-    isRTL ? [containerWidth, 0] : [0, -containerWidth]
+    isRTL ? [containerWidth, 0] : [0, -containerWidth],
   );
 
   // Mouse wheel horizontal scroll (for the sticky section)
@@ -110,8 +110,8 @@ export function HorizontalGallery({
 
         {/* Decorative Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#c9a962]/30 to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#8f7852]/30 to-transparent" />
         </div>
 
         {/* Title */}
@@ -127,9 +127,9 @@ export function HorizontalGallery({
               initial={{ width: 0 }}
               animate={isTitleInView ? { width: 48 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="h-px bg-[#c9a962]"
+              className="h-px bg-[#8f7852]"
             />
-            <span className="text-[#c9a962] text-xs tracking-[0.3em] uppercase font-light">
+            <span className="text-[#8f7852] text-xs tracking-[0.3em] uppercase font-light">
               {title || t.title}
             </span>
           </div>
@@ -187,15 +187,15 @@ export function HorizontalGallery({
                 )}
 
                 {/* Frame Corners */}
-                <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#c9a962]/50 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#c9a962]/50 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#c9a962]/50 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#c9a962]/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#8f7852]/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#8f7852]/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#8f7852]/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#8f7852]/50 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
 
               {/* Image Number */}
               <div className="absolute -bottom-8 left-0 flex items-center gap-2">
-                <span className="text-[#c9a962] text-xs font-light">
+                <span className="text-[#8f7852] text-xs font-light">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div className="w-8 h-px bg-white/20" />
@@ -212,7 +212,7 @@ export function HorizontalGallery({
           <span className="text-white/40 text-xs tracking-wider">SCROLL</span>
           <div className="w-24 h-1 bg-white/10 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-[#c9a962] rounded-full origin-left"
+              className="h-full bg-[#8f7852] rounded-full origin-left"
               style={{ scaleX: smoothProgress }}
             />
           </div>

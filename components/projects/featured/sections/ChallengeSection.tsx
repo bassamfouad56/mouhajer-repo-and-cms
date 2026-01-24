@@ -36,7 +36,7 @@ export function ChallengeSection({
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
-    [0.5, 1, 1, 0.5]
+    [0.5, 1, 1, 0.5],
   );
 
   const labels = {
@@ -87,17 +87,17 @@ export function ChallengeSection({
                 transition={{ duration: 0.6 }}
                 className="flex items-center gap-4 mb-8"
               >
-                <div className="w-12 h-12 rounded-full bg-[#c9a962]/20 flex items-center justify-center">
-                  <Target className="w-6 h-6 text-[#c9a962]" />
+                <div className="w-12 h-12 rounded-full bg-[#8f7852]/20 flex items-center justify-center">
+                  <Target className="w-6 h-6 text-[#8f7852]" />
                 </div>
                 <div>
                   <motion.div
                     initial={{ width: 0 }}
                     animate={isInView ? { width: 48 } : {}}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="h-px bg-[#c9a962] mb-2"
+                    className="h-px bg-[#8f7852] mb-2"
                   />
-                  <span className="text-[#c9a962] text-xs tracking-[0.3em] uppercase font-light">
+                  <span className="text-[#8f7852] text-xs tracking-[0.3em] uppercase font-light">
                     {t.title}
                   </span>
                 </div>
@@ -134,11 +134,11 @@ export function ChallengeSection({
                         initial={{ opacity: 0, y: 30 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}
-                        className="relative pl-6 border-l-2 border-[#c9a962]/40"
+                        className="relative pl-6 border-l-2 border-[#8f7852]/40"
                       >
                         <div className="flex items-center gap-2 mb-2">
-                          <AlertTriangle className="w-4 h-4 text-[#c9a962]" />
-                          <h3 className="text-[#c9a962] text-lg font-medium">
+                          <AlertTriangle className="w-4 h-4 text-[#8f7852]" />
+                          <h3 className="text-[#8f7852] text-lg font-medium">
                             {subtitle}
                           </h3>
                         </div>
@@ -193,8 +193,8 @@ export function ChallengeSection({
                     <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/50 to-transparent" />
 
                     {/* Frame Corners */}
-                    <div className="absolute top-3 left-3 w-6 h-6 border-l-2 border-t-2 border-[#c9a962]/50" />
-                    <div className="absolute bottom-3 right-3 w-6 h-6 border-r-2 border-b-2 border-[#c9a962]/50" />
+                    <div className="absolute top-3 left-3 w-6 h-6 border-l-2 border-t-2 border-[#8f7852]/50" />
+                    <div className="absolute bottom-3 right-3 w-6 h-6 border-r-2 border-b-2 border-[#8f7852]/50" />
                   </motion.div>
                 ))}
 
@@ -203,7 +203,7 @@ export function ChallengeSection({
                   initial={{ opacity: 0, scale: 0 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.6, delay: 0.8 }}
-                  className="absolute -bottom-8 -left-8 text-[200px] font-SchnyderS text-[#c9a962]/10 leading-none select-none"
+                  className="absolute -bottom-8 -left-8 text-[200px] font-SchnyderS text-[#8f7852]/10 leading-none select-none"
                 >
                   01
                 </motion.div>
